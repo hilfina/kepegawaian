@@ -37,6 +37,12 @@
 	box-sizing: border-box;
 }
 
+griddaftar{
+  background-color: #e6ffe6; 
+  margin-right:10px;
+   margin-bottom: 10px;
+}
+
 body, html {
 	height: 100%;
 	font-family: Poppins-Regular, sans-serif;

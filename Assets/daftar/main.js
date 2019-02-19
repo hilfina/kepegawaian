@@ -71,11 +71,3 @@ function fixStepIndicator(n) {
   //... and adds the "active" class to the current step:
   x[n].className += " active";
 }
-
-function emailbisa() {
-  alert("Anda telah berhasil ter registrasi, silahkan cek email anda untuk mengaktifkan akun!!!");
-}
-
-function emailgabisa() {
-  alert("Anda telah berhasil ter registrasi, gagal verifikasi akun!!!");
-}

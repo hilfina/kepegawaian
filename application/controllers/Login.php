@@ -7,16 +7,15 @@ class Login extends CI_Controller {
     {
         parent::__construct();
         //load library form validasi
-        $this->load->library('form_validation');
+        $this->load->library('form_validation','image_lib');
         //load model mdl_login
         $this->load->model('mdl_login');
-        $this->load->library('form_validation','image_lib');
+        $this->load->library('session');
     }
-
+     
 	public function index()
 	{
-		
-			if($this->mdl_login->logged_id())
+		if($this->mdl_login->logged_id())
 			{
 				//jika memang session sudah terdaftar, maka redirect ke halaman dahsboard
 				redirect("home");
@@ -42,20 +41,25 @@ class Login extends CI_Controller {
 	            
 	            //checking data via model
 	            $checking = $this->mdl_login->check_login('login', array('username' => $username), array('password' => $password));
-	            
-	            //jika ditemukan, maka create session
+	            $konek = mysqli_connect("localhost","root","","kepegawaian");
+              	$idk=mysqli_fetch_array(mysqli_query($konek, "select id_karyawan from login where username = '$username'"));
+              	$mid =$idk['id_karyawan'];
+	            $cariData=mysqli_fetch_array(mysqli_query($konek, "select * from karyawan where id_karyawan = '$mid'"));
+	            // jika ditemukan, maka create session
 	            if ($checking != FALSE) {
 	                foreach ($checking as $apps) {
-
 	                    $session_data = array(
-	                        'user_id'   => $apps->id_karyawan,
-	                        'user_name' => $apps->username,
-	                        'user_pass' => $apps->password,
-	                        'user_level'=> $apps->level,
-	                        'user_aktif' => $apps->aktif,
+	                        'myId'   => $apps->id_karyawan,
+	                        'myName' => $apps->username,
+	                        'myLongName' => $cariData['nama'],
+	                        'myEmail' => $cariData['email'],
+	                        'myPass' => $apps->password,
+	                        'myLevel'=> $apps->level,
+	                        'myAktif' => $apps->aktif,
 	                    );
 	                    //set session userdata
 	                    $this->session->set_userdata($session_data);
+	                    
 
 	                    redirect("home");
 
@@ -78,7 +82,7 @@ class Login extends CI_Controller {
 	public function pilihdaftar()
 	{
 		$this->load->model('mdl_login');
-		$this->load->view('pilihdaftar');
+		$this->load->view('pelamar/pilihdaftar');
 	}
 
 	public function viewdaftar($id_profesi)
@@ -87,7 +91,7 @@ class Login extends CI_Controller {
 		$this->load->model('mdl_login');
 		$data['last'] = $this->mdl_login->getlast();
 		$data['profesi'] = $id_profesi;
-		$this->load->view('daftar',$data);
+		$this->load->view('pelamar/daftar',$data);
 	}
 
 	public function viewdaftar2($id_profesi)
@@ -96,7 +100,7 @@ class Login extends CI_Controller {
 		$this->load->model('mdl_login');
 		$data['last'] = $this->mdl_login->getlast();
 		$data['profesi'] = $id_profesi;
-		$this->load->view('daftar2',$data);
+		$this->load->view('pelamar/daftar2',$data);
 	}
 
 	public function daftar()
@@ -227,13 +231,20 @@ class Login extends CI_Controller {
 			site_url("login/verification/$encrypted_id")
 		);
 		
-		// if($this->email->send())
-		// {
-		// 	emailbisa();
-		// }else
-		// {
-		// 	emailgabisa();
-		// }
+		if($this->email->send())
+		{
+			echo '<script language="javascript">';
+			echo 'alert("Berhasil melakukan registrasi, silahkan cek email kamu")';
+			echo '</script>';
+			
+		}else
+		{
+			echo '<script language="javascript">';
+			echo 'alert("Berhasil melakukan registrasi, namu gagal mengirim verifikasi email")';
+			echo '</script>';
+			
+		}
+		
 		
 		redirect(site_url('Login/index'));
 		
@@ -344,13 +355,20 @@ class Login extends CI_Controller {
 			site_url("login/verification/$encrypted_id")
 		);
 		
-		// if($this->email->send())
-		// {
-		// 	emailbisa();
-		// }else
-		// {
-		// 	emailgabisa();
-		// }
+		if($this->email->send())
+		{
+			echo '<script language="javascript">';
+			echo 'alert("Berhasil melakukan registrasi, silahkan cek email kamu")';
+			echo '</script>';
+			
+		}else
+		{
+			echo '<script language="javascript">';
+			echo 'alert("Berhasil melakukan registrasi, namu gagal mengirim verifikasi email")';
+			echo '</script>';
+			
+		}
+		
    		
 	    redirect(site_url('Login/index'));
 		
@@ -361,8 +379,10 @@ class Login extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('mdl_login');
 		$this->mdl_login->changeActiveState($key);
-		echo "Selamat kamu telah memverifikasi akun kamu";
-		echo "<br><br><a href='".site_url("login/index")."'>Kembali ke Menu Login</a>";
+		echo '<script language="javascript">';
+		echo 'alert("Selamat kamu telah memverifikasi akun kamu")';
+		echo '</script>';
+		redirect(site_url('Login/index'));
 	}
 
 

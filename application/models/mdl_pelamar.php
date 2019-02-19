@@ -1,12 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mdl_homepelamar extends CI_Model
+class Mdl_pelamar extends CI_Model
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('mdl_admin');
+        $this->load->model('mdl_home');
+        $this->load->model('mdl_login');
+        $this->load->model('mdl_pelamar');
+        $this->load->helper('url','form','file');
+        $this->load->library('form_validation','image_lib');
+        $this->load->library('session');
+    }
 	//fungsi cek session
     function logged_id()
     {
-        return $this->session->userdata('user_id');
+        return $this->session->userdata('myId');
     }
 
 	//fungsi check login
@@ -23,5 +34,12 @@ class Mdl_homepelamar extends CI_Model
         } else {
             return $query->result();
         }
+    }
+
+    public function getPelamar($id)
+    {
+        
+        $query = $this->db->query("SELECT nik, no_ktp, no_bpjs, nama, alamat, no_telp, email, id_profesi from karyawan where id_karyawan='$id'");
+        return $query->result();
     }
 }

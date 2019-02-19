@@ -64,9 +64,8 @@
                     </div>
 
                     <div class="text-center p-t-115">
-
                         <a class="txt2" href="<?=base_url()?>index.php/login/pilihdaftar">
-                            Masuk Sebagai Pelamar
+                            Daftar Sebagai Pelamar
                         </a>
                     </div>
                 </form>

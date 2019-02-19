@@ -6,7 +6,7 @@ class Mdl_login extends CI_Model
 	//fungsi cek session
     function logged_id()
     {
-        return $this->session->userdata('user_id');
+        return $this->session->userdata('myId');
     }
 
 	//fungsi check login
@@ -33,7 +33,7 @@ class Mdl_login extends CI_Model
 
     function getlast()
     {
-        $query = $this->db->query('select id_karyawan from karyawan order by id_karyawan desc limit 1');
+        $query = $this->db->query('select max(id_karyawan) as id_karyawan from karyawan');
         return $query->result_array();
     }
 
@@ -41,10 +41,10 @@ class Mdl_login extends CI_Model
     {
         $this->load->database();
         $data = array(
-        'active' => 1
+        'aktif' => 1
         );
 
-        $this->db->where('md5(id_karyawan)', $key);
+        $this->db->where('id_karyawan', $key);
         $this->db->update('login', $data);
 
         return true;

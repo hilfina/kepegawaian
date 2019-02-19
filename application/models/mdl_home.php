@@ -6,7 +6,7 @@ class Mdl_home extends CI_Model
 	//fungsi cek session
     function logged_id()
     {
-        return $this->session->userdata('user_id');
+        return $this->session->userdata('myId');
     }
 
 	//fungsi check login

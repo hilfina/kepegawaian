@@ -1,152 +1,402 @@
 <?php 
-  $mylevel=$this->session->userdata("user_level");
-  $myid=$this->session->userdata("user_id");
+  $levelku=$this->session->userdata("myLevel");
+  $namaku=$this->session->userdata("myLongName");
+  $emailku=$this->session->userdata("myEmail");
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Kepegawaian</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	  
-    <title>Sistem Informasi Kepegawaian</title>
-    <link href="<?=base_url()?>Assets/login/images/logo.png" rel="icon">
-    <!-- <link href="<?=base_url()?>assets/images/listrik.jpg" rel="apple-touch-icon">
- -->
-    <!-- Bootstrap -->
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="template/image/x-icon" href="<?php echo base_url()?>Assets/img/favicon.ico">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/owl.carousel.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/owl.theme.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/owl.transitions.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/normalize.css">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/meanmenu.min.css">
+    <!-- main CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/main.css">
+    <!-- educate icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/educate-custon-icon.css">
+    <!-- morrisjs CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/calendar/fullcalendar.print.min.css">
+    <!-- x-editor CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/editor/select2.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/editor/datetimepicker.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/editor/bootstrap-editable.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/editor/x-editor-style.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/data-table/bootstrap-table.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/data-table/bootstrap-editable.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/style.css">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/responsive.css">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
 
-    <link href="<?=base_url()?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="<?=base_url()?>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="<?=base_url()?>assets/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="<?=base_url()?>assets/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- bootstrap-wysiwyg -->
-    <link href="<?=base_url()?>assets/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-    <link href="<?=base_url()?>assets/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-    <!-- Select2 -->
-    <link href="<?=base_url()?>assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
-    <!-- Switchery -->
-    <link href="<?=base_url()?>assets/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
-    <!-- starrr -->
-    <link href="<?=base_url()?>assets/vendors/starrr/dist/starrr.css" rel="stylesheet">
-    <!-- bootstrap-daterangepicker -->
-    <link href="<?=base_url()?>assets/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <link href="<?=base_url()?>assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="<?=base_url()?>assets/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="<?=base_url()?>assets/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="<?=base_url()?>assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="<?=base_url()?>assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="<?=base_url()?>assets/build/css/custom.min.css" rel="stylesheet">
-  </head>
-
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="" class="site_title"><i class="fa fa-building-o"></i> <span>  RSI Aisyiyah</span></a>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Start Header menu area -->
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header">
+                <a href="index.html"><img class="main-logo" src="<?php echo base_url()?>Assets/template/img/logo.png" alt="" width="180px" /></a>
+                <strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong>
             </div>
-
-            <div class="clearfix"></div>
-
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <!-- <img src=<?php echo base_url("assets/upload")."/"."$foto" ?> alt="...." class="img-circle profile_img"> -->
-              </div>
-              <div class="profile_info">
-                <?php
-                  $hasil = mysqli_query( mysqli_connect("localhost","root","","kepegawaian"), "select * from karyawan WHERE id_karyawan = '$myid'");
-                  $data=mysqli_fetch_array($hasil);
-                ?>
-                <span>Selamat Datang, <strong><font color="#fff"><?php echo $data["nama"]; ?></font></strong></span>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
-
-            <br>
-
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>Menu</h3>
-                <ul class="nav side-menu">    
-                              
-                  <?php if ($mylevel == "ADMIN") {?>
-                  <li><a href="<?php echo site_url('monitoring') ?>"><i class="fa fa-edit"></i> Beranda </a></li>
-                    <li><a><i class="fa fa-book"></i>Data Master <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="<?php echo site_url('admin/datapengguna') ?>"><i class="fa fa-user"></i>Data Pengguna</a></li>
-                        <li><a href="<?php echo site_url('admin/datapelanggan') ?>"><i class="fa fa-users"></i>Data Pelanggan</a></li>
-                         <li><a href="<?php echo site_url('admin/datamasalah') ?>"><i class="fa fa-file"></i>Data Permasalahan Pelanggan</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="<?php echo site_url('admin/datapekerjaan') ?>"><i class="fa fa-edit"></i> Pekerjaan</a></li>
-                    <li><a><i class="fa fa-print"></i> Laporan <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                    <li><a href="<?php echo site_url('admin/laporan') ?>"><i class="fa fa-file-pdf-o"></i>Get PDF</a></li>
-                      <li><a href="<?php echo site_url('admin/laporanex') ?>"><i class="fa fa-file-excel-o"></i>Get Excel</a></li>
-
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="active">
+                            <a title="Home" href="#"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>
+                        </li>
+                        <?php if ($levelku == "admin") {?>
+                        <li>
+                            <a title="Data Pelamar" href="<?php echo site_url('admin/pelamar') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Pelamar</span></a>
+                        </li>
+                        <?php } elseif ($levelku == "Pelamar") { ?>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data Saya</span></a>
+                            <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
+                                <li><a title="Data Diri" href="<?php echo site_url('pelamar/datasaya') ?>"><span class="mini-cli">Data Diri</span></a></li>
+                                <li><a title="Data Pendidikan" href="images-cropper.html"><span class="mini-sub-pro">Data Pendidikan</span></a></li>
+                                <li><a title="Data Surat" href="images-cropper.html"><span class="mini-sub-pro">Data Surat</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a title="Kirim Ulang" href="#"><span class="mini-click-non">Password Recovery</span></a>
+                        </li>
+                        <?php } ?>
+                        
+                        <!-- <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Data Tables</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Peity Charts" href="static-table.html"><span class="mini-sub-pro">Static Table</span></a></li>
+                                <li><a title="Data Table" href="data-table.html"><span class="mini-sub-pro">Data Table</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Forms Elements</span></a>
+                            <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
+                                <li><a title="Password Meter" href="password-meter.html"><span class="mini-sub-pro">Password Meter</span></a></li>
+                                <li><a title="Multi Upload" href="multi-upload.html"><span class="mini-sub-pro">Multi Upload</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">App views</span></a>
+                            <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
+                                <li><a title="Notifications" href="notifications.html"><span class="mini-sub-pro">Notifications</span></a></li>
+                                <li><a title="Modals" href="modals.html"><span class="mini-sub-pro">Modals</span></a></li>
+                                <li><a title="Tabs" href="tabs.html"><span class="mini-sub-pro">Tabs</span></a></li>
+                                </li>
+                            </ul>
+                        </li> -->
+                        
                     </ul>
-                  </li>
-                  <?php }elseif ($mylevel == "VENDOR") { ?>
-                  <li><a href="<?php echo site_url('monitoring') ?>"><i class="fa fa-edit"></i> Beranda </a></li>
-                    <li><a href="<?php echo site_url('vendor/dataprogress') ?>"><i class="fa fa-edit"></i> Data Progress</a></li>
-                    <li><a><i class="fa fa-print"></i> Laporan <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('vendor/laporan') ?>"><i class="fa fa-file-pdf-o"></i>Get PDF</a></li>
-                      <li><a href="<?php echo site_url('vendor/laporanex') ?>"><i class="fa fa-file-excel-o"></i>Get Excel</a></li>
-                    </ul>
-                  </li>
-                  <?php }elseif ($mylevel == "PIMPINAN" || $mylevel =="ASISTEN PIMPINAN") {?>
-                  <li><a href="<?php echo site_url('monitoring') ?>"><i class="fa fa-edit"></i> Beranda </a></li>
-                    <li><a href="<?php echo site_url('pimpinanasisten/datapekerjaan') ?>"><i class="fa fa-file"></i> Data Kegiatan Pekerjaan</a></li>
-                    <li><a href="<?php echo site_url('admin/datamasalah') ?>"><i class="fa fa-file"></i>Data Permasalahan Pelanggan</a></li>
-                  <?php }elseif ($mylevel == "PENGAWAS") { ?>
-                  <li><a href="<?php echo site_url('monitoring') ?>"><i class="fa fa-edit"></i> Beranda </a></li>
-                  <li><a href="<?php echo site_url('pengawas/dataprogress') ?>"><i class="fa fa-edit"></i> Data Progress</a></li>
-                  <li><a href="<?php echo site_url('admin/datamasalah') ?>"><i class="fa fa-file"></i>Data Permasalahan Pelanggan</a></li>
-                  <?php }elseif ($mylevel == "ADMIN ULP") { ?>
-                  <li><a href="<?php echo site_url('ulp') ?>"><i class="fa fa-search"></i> Pencarian </a></li>    
-                  <li><a href="<?php echo site_url('adminulp/datapelanggan') ?>"><i class="fa fa-users"></i>Data Pelanggan</a></li>
-                  <li><a href="<?php echo site_url('adminulp/datamasalah') ?>"><i class="fa fa-file"></i>Data Permasalahan Pelanggan</a></li>
-                  <?php } ?>
-                  
-                </ul>
-              </div>
+                </nav>
             </div>
-            <!-- /menu footer buttons -->
-          </div>
+        </nav>
+    </div>
+    <!-- End Header menu area -->
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="header-advance-area">
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-top-wraper">
+                                <div class="row">
+                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+                                        <div class="menu-switcher-pro">
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                                                    <i class="educate-icon educate-nav"></i>
+                                                </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
+                                        <div class="header-top-menu tabl-d-n">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="header-right-info">
+                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
+            
+                                                <li class="nav-item">
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                                            <img src="img/product/pro4.jpg" alt="" />
+                                                            <span class="admin-name"><?php echo $namaku?></span>
+                                                            <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+                                                        </a>
+                                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                        <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Ubah Password</a>
+                                                        </li>
+                                                        <li><a href="<?php echo site_url('admin/logout')?>"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <!-- <li class="nav-item nav-setting-open"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-menu"></i></a> -->
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
+                                                   <!--  <div role="menu" class="admintab-wrap menu-setting-wrap menu-setting-wrap-bg dropdown-menu animated zoomIn">
+                                                        <ul class="nav nav-tabs custon-set-tab">
+                                                            <li class="active"><a data-toggle="tab" href="#Notes">Notes</a>
+                                                            </li>
+                                                            <li><a data-toggle="tab" href="#Projects">Projects</a>
+                                                            </li>
+                                                            <li><a data-toggle="tab" href="#Settings">Settings</a>
+                                                            </li>
+                                                        </ul> -->
 
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                   <!--  <?php echo $nama ?> -->
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="<?php echo site_url('admin/myProfile/') ?>"><i class="fa fa-profile"></i> My Profile</a></li>
-                    <li><a href="<?php echo site_url('home/logout') ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  </ul>
-                </li>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
+                                                
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu start -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    <ul class="mobile-menu-nav">
+                                        <li><a data-toggle="collapse" data-target="#Charts" href="#">Home <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul class="collapse dropdown-header-top">
+                                                <li><a href="index.html">Dashboard v.1</a></li>
+                                                <li><a href="index-1.html">Dashboard v.2</a></li>
+                                                <li><a href="index-3.html">Dashboard v.3</a></li>
+                                                <li><a href="analytics.html">Analytics</a></li>
+                                                <li><a href="widgets.html">Widgets</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="events.html">Event</a></li>
+                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Professors <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demoevent" class="collapse dropdown-header-top">
+                                                <li><a href="all-professors.html">All Professors</a>
+                                                </li>
+                                                <li><a href="add-professor.html">Add Professor</a>
+                                                </li>
+                                                <li><a href="edit-professor.html">Edit Professor</a>
+                                                </li>
+                                                <li><a href="professor-profile.html">Professor Profile</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demopro" href="#">Students <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demopro" class="collapse dropdown-header-top">
+                                                <li><a href="all-students.html">All Students</a>
+                                                </li>
+                                                <li><a href="add-student.html">Add Student</a>
+                                                </li>
+                                                <li><a href="edit-student.html">Edit Student</a>
+                                                </li>
+                                                <li><a href="student-profile.html">Student Profile</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#democrou" href="#">Courses <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="democrou" class="collapse dropdown-header-top">
+                                                <li><a href="all-courses.html">All Courses</a>
+                                                </li>
+                                                <li><a href="add-course.html">Add Course</a>
+                                                </li>
+                                                <li><a href="edit-course.html">Edit Course</a>
+                                                </li>
+                                                <li><a href="course-profile.html">Courses Info</a>
+                                                </li>
+                                                <li><a href="course-payment.html">Courses Payment</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demolibra" href="#">Library <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demolibra" class="collapse dropdown-header-top">
+                                                <li><a href="library-assets.html">Library Assets</a>
+                                                </li>
+                                                <li><a href="add-library-assets.html">Add Library Asset</a>
+                                                </li>
+                                                <li><a href="edit-library-assets.html">Edit Library Asset</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demodepart" href="#">Departments <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demodepart" class="collapse dropdown-header-top">
+                                                <li><a href="departments.html">Departments List</a>
+                                                </li>
+                                                <li><a href="add-department.html">Add Departments</a>
+                                                </li>
+                                                <li><a href="edit-department.html">Edit Departments</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demo" href="#">Mailbox <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demo" class="collapse dropdown-header-top">
+                                                <li><a href="mailbox.html">Inbox</a>
+                                                </li>
+                                                <li><a href="mailbox-view.html">View Mail</a>
+                                                </li>
+                                                <li><a href="mailbox-compose.html">Compose Mail</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">Interface <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="Miscellaneousmob" class="collapse dropdown-header-top">
+                                                <li><a href="google-map.html">Google Map</a>
+                                                </li>
+                                                <li><a href="data-maps.html">Data Maps</a>
+                                                </li>
+                                                <li><a href="pdf-viewer.html">Pdf Viewer</a>
+                                                </li>
+                                                <li><a href="x-editable.html">X-Editable</a>
+                                                </li>
+                                                <li><a href="code-editor.html">Code Editor</a>
+                                                </li>
+                                                <li><a href="tree-view.html">Tree View</a>
+                                                </li>
+                                                <li><a href="preloader.html">Preloader</a>
+                                                </li>
+                                                <li><a href="images-cropper.html">Images Cropper</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#Chartsmob" href="#">Charts <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="Chartsmob" class="collapse dropdown-header-top">
+                                                <li><a href="bar-charts.html">Bar Charts</a>
+                                                </li>
+                                                <li><a href="line-charts.html">Line Charts</a>
+                                                </li>
+                                                <li><a href="area-charts.html">Area Charts</a>
+                                                </li>
+                                                <li><a href="rounded-chart.html">Rounded Charts</a>
+                                                </li>
+                                                <li><a href="c3.html">C3 Charts</a>
+                                                </li>
+                                                <li><a href="sparkline.html">Sparkline Charts</a>
+                                                </li>
+                                                <li><a href="peity.html">Peity Charts</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#Tablesmob" href="#">Tables <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="Tablesmob" class="collapse dropdown-header-top">
+                                                <li><a href="static-table.html">Static Table</a>
+                                                </li>
+                                                <li><a href="data-table.html">Data Table</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#formsmob" href="#">Forms <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="formsmob" class="collapse dropdown-header-top">
+                                                <li><a href="basic-form-element.html">Basic Form Elements</a>
+                                                </li>
+                                                <li><a href="advance-form-element.html">Advanced Form Elements</a>
+                                                </li>
+                                                <li><a href="password-meter.html">Password Meter</a>
+                                                </li>
+                                                <li><a href="multi-upload.html">Multi Upload</a>
+                                                </li>
+                                                <li><a href="tinymc.html">Text Editor</a>
+                                                </li>
+                                                <li><a href="dual-list-box.html">Dual List Box</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#Appviewsmob" href="#">App views <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="Appviewsmob" class="collapse dropdown-header-top">
+                                                <li><a href="basic-form-element.html">Basic Form Elements</a>
+                                                </li>
+                                                <li><a href="advance-form-element.html">Advanced Form Elements</a>
+                                                </li>
+                                                <li><a href="password-meter.html">Password Meter</a>
+                                                </li>
+                                                <li><a href="multi-upload.html">Multi Upload</a>
+                                                </li>
+                                                <li><a href="tinymc.html">Text Editor</a>
+                                                </li>
+                                                <li><a href="dual-list-box.html">Dual List Box</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Pages <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="Pagemob" class="collapse dropdown-header-top">
+                                                <li><a href="login.html">Login</a>
+                                                </li>
+                                                <li><a href="register.html">Register</a>
+                                                </li>
+                                                <li><a href="lock.html">Lock</a>
+                                                </li>
+                                                <li><a href="password-recovery.html">Password Recovery</a>
+                                                </li>
+                                                <li><a href="404.html">404 Page</a></li>
+                                                <li><a href="500.html">500 Page</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu end -->
