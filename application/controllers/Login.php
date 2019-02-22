@@ -19,6 +19,7 @@ class Login extends CI_Controller {
 			{
 				//jika memang session sudah terdaftar, maka redirect ke halaman dahsboard
 				redirect("home");
+				// jejecoba
 
 			}else{
 
