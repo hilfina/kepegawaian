@@ -49,30 +49,30 @@
                                 </div>
                                 <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
                                 data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
-                <thead style="background-color: #fffff0;">
-                  <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>Pilihan Profesi</th>
-                    <th>Pendidikan Terakhir - Tahun</th>
-                    <th>Nilai Akhir</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($array as $key) { ?>
-                    <tr>
-                      <td><?php echo $key->id_karyawan; ?></td>
-                      <td><?php echo $key->nama; ?></td>
-                      <td><?php echo $key->alamat; ?></td>
-                      <td><?php echo $key->id_karyawan; ?></td>
-                      <td><?php echo $key->id_karyawan; ?></td>
-                      <td><?php echo $key->id_karyawan; ?></td>
-                    </tr>
-                  <?php }?>
-                 </tbody>
-              </table>
-            </div>
+                          <thead style="background-color: #fffff0;">
+                            <tr>
+                              <th>ID</th>
+                              <th>Nama</th>
+                              <th>Alamat</th>
+                              <th>Pilihan Profesi</th>
+                              <th>Pendidikan Terakhir - Tahun</th>
+                              <th>Nilai Akhir</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php foreach ($array as $key) { ?>
+                              <tr>
+                                <td><?php echo $key->id_karyawan; ?></td>
+                                <td><?php echo $key->nama; ?></td>
+                                <td><?php echo $key->alamat; ?></td>
+                                <td><?php echo $key->id_karyawan; ?></td>
+                                <td><?php echo $key->id_karyawan; ?></td>
+                                <td><?php echo $key->id_karyawan; ?></td>
+                              </tr>
+                            <?php }?>
+                           </tbody>
+                        </table>
+                      </div>
           <!-- END DATA TABLE-->
         </div>
       </div>

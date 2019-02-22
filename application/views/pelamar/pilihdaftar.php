@@ -62,7 +62,7 @@
             </span>
             <div class="container-fluid" align="center" style="padding-top: 20px">
             <div class="grid-container">
-                <a href="<?=base_url()?>index.php/login/viewdaftar2/Administrasi" ">
+                <a href="<?=base_url()?>index.php/login/viewdaftar/Administrasi" ">
                     <div class="grid-item griddaftarr" style="font-size: 20px;">Administrasi</div>
                 </a>
                 <a href="<?=base_url()?>index.php/login/viewdaftar/AnalisKes" >
@@ -77,10 +77,10 @@
                 <a href="<?=base_url()?>index.php/login/viewdaftar/Fisioterapis";>
                     <div class="grid-item griddaftarr" style="font-size: 20px;" >Fisioterapis</div>
                 </a>
-                <a href="<?=base_url()?>index.php/login/viewdaftar2/Kasir";>
+                <a href="<?=base_url()?>index.php/login/viewdaftar/Kasir";>
                     <div class="grid-item griddaftarr" style="font-size: 20px;" >Kasir</div>
                 </a>
-                <a href="<?=base_url()?>index.php/login/viewdaftar2/Pekarya";>
+                <a href="<?=base_url()?>index.php/login/viewdaftar/Pekarya";>
                     <div class="grid-item griddaftarr" style="font-size: 20px;" >Pekarya</div>
                 </a>
                 <a href="<?=base_url()?>index.php/login/viewdaftar/Perawat";>

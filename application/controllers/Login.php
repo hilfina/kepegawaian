@@ -94,15 +94,6 @@ class Login extends CI_Controller {
 		$this->load->view('pelamar/daftar',$data);
 	}
 
-	public function viewdaftar2($id_profesi)
-	{
-
-		$this->load->model('mdl_login');
-		$data['last'] = $this->mdl_login->getlast();
-		$data['profesi'] = $id_profesi;
-		$this->load->view('pelamar/daftar2',$data);
-	}
-
 	public function daftar()
 	{
 		//kirim gambar
@@ -115,16 +106,12 @@ class Login extends CI_Controller {
 		$this->load->library('upload', $config);
 
 		//DATA KARYAWAN	
-		$no_ktp = $this->input->post('no_ktp');
-	    $no_bpjs = $this->input->post('no_bpjs');
 	    $nama = $this->input->post('nama');
 	    $alamat = $this->input->post('alamat');
 	    $no_telp = $this->input->post('no_telp');
 	    $email = $this->input->post('email');
 	    $id_profesi = $this->input->post('id_profesi');
 	    $data1 = array(
-	            'no_ktp'=>$no_ktp,
-	            'no_bpjs'=>$no_bpjs,
 	            'nama'=>$nama,
 	            'alamat'=>$alamat,
 	            'no_telp'=>$no_telp,
@@ -136,54 +123,12 @@ class Login extends CI_Controller {
 
 	    // DATA LOWONGAN
 	    $id_karyawan = $this->input->post('id_karyawan');
-		$pend_akhir = $this->input->post('pend_akhir');
-	    $nilai_akhir = $this->input->post('nilai_akhir');
 	    $data2 = array(
-	            'pend_akhir'=>$pend_akhir,
-	            'nilai_akhir'=>$nilai_akhir,
+	            'pend_akhir'=>'Pilihan:',
+	            'nilai_akhir'=>0,
 	            'id_karyawan' => $id_karyawan,
 	        );
 
-	    // DATA RIWAYAT PENDIDIKAN
-	    $id_karyawan = $this->input->post('id_karyawan');
-		$pendidikan = $this->input->post('pendidikan');
-	    $mulai = $this->input->post('mulai');
-	    $akhir = $this->input->post('akhir');
-	    $nomor_ijazah = $this->input->post('nomor_ijazah');
-	    $this->upload->do_upload('pendidikanfile');
-		$a = $this->upload->data('file_name');
-	    $data3 = array(
-	            'pendidikan'=>$pendidikan,
-	            'mulai'=>$mulai,
-		        'akhir'=>$akhir,
-		        'nomor_ijazah'=>$nomor_ijazah,
-	            'id_karyawan' => $id_karyawan,
-	            'file'=>$a,
-	            'verifikasi'=> 'Belum Terverifikasi',
-	        );
-
-	    // DATA SIPSTR
-	    $id_karyawan = $this->input->post('id_karyawan');
-	    $xxx = $this->input->post('id_surat');
-	    $konek = mysqli_connect("localhost","root","","kepegawaian");
-              $query = "select id_surat from jenis_surat where nama_surat = '$xxx'";
-              $data=mysqli_fetch_array(mysqli_query($konek, $query));
-
-		$id_surat = $data['id_surat'];
-	    $tgl_mulai = $this->input->post('tgl_mulai');
-	    $tgl_akhir = $this->input->post('tgl_akhir');
-	    $no_surat = $this->input->post('no_surat');
-	    $this->upload->do_upload('suratfile');
-		$b = $this->upload->data('file_name');
-	    $data4 = array(
-		    	'id_karyawan' => $id_karyawan,
-		        'id_surat'=>$id_surat,
-		        'tgl_mulai'=>$tgl_mulai,
-		        'tgl_akhir'=>$tgl_akhir, 
-		        'no_surat'=>$no_surat,  
-		        'file'=>$b,
-		        'aktif'=> 0,
-	        );
 	    // DATA LOGIN		
 	    $id_karyawan = $this->input->post('id_karyawan');
 		$username = $this->input->post('username');
@@ -198,12 +143,10 @@ class Login extends CI_Controller {
 
 	    $insert1 = $this->mdl_login->daftar('karyawan',$data1);
 	    $insert2 = $this->mdl_login->daftar('lowongan',$data2);
-	    $insert3 = $this->mdl_login->daftar('pendidikan',$data3);
-	    $insert4 = $this->mdl_login->daftar('sip_str',$data4);
    		$insert5 = $this->mdl_login->daftar('login',$data5);
 
 	    //enkripsi id
-		$encrypted_id = md5($id_karyawan);
+		$encrypted_id = $id_karyawan;
 		
 		$this->load->library('email');
 		$config = array();
@@ -233,144 +176,19 @@ class Login extends CI_Controller {
 		
 		if($this->email->send())
 		{
-			echo '<script language="javascript">';
+			echo '<script type="text/javascript">';
 			echo 'alert("Berhasil melakukan registrasi, silahkan cek email kamu")';
 			echo '</script>';
 			
 		}else
 		{
-			echo '<script language="javascript">';
-			echo 'alert("Berhasil melakukan registrasi, namu gagal mengirim verifikasi email")';
+			echo '<script type="text/javascript">';
+			echo 'alert("Berhasil melakukan registrasi, namun gagal mengirim verifikasi email")';
 			echo '</script>';
 			
 		}
-		
 		
 		redirect(site_url('Login/index'));
-		
-	}
-
-	public function daftar2()
-	{
-		//kirim gambar
-		$config['upload_path']		= './Assets/gambar/';
-		$config['allowed_types']	= 'gif|jpg|png';
-		$config['max_size']			= 2000000000;
-		$config['max_width']		= 10240;
-		$config['max_height']		= 7680;
-
-		$this->load->library('upload', $config);
-
-		//DATA KARYAWAN	
-		$no_ktp = $this->input->post('no_ktp');
-	    $no_bpjs = $this->input->post('no_bpjs');
-	    $nama = $this->input->post('nama');
-	    $alamat = $this->input->post('alamat');
-	    $no_telp = $this->input->post('no_telp');
-	    $email = $this->input->post('email');
-	    $id_profesi = $this->input->post('id_profesi');
-	    $datah1 = array(
-	            'no_ktp'=>$no_ktp,
-	            'no_bpjs'=>$no_bpjs,
-	            'nama'=>$nama,
-	            'alamat'=>$alamat,
-	            'no_telp'=>$no_telp,
-	            'email'=>$email,
-	            'id_status'=>'Pelamar',
-	            'id_profesi' => $id_profesi,
-	            'id_golongan' => 'Tidak Ada',   
-	        );	
-
-	    // DATA LOWONGAN
-	    $id_karyawan = $this->input->post('id_karyawan');
-		$pend_akhir = $this->input->post('pend_akhir');
-	    $nilai_akhir = $this->input->post('nilai_akhir');
-	    $datah2 = array(
-	            'pend_akhir'=>$pend_akhir,
-	            'nilai_akhir'=>$nilai_akhir,
-	            'id_karyawan' => $id_karyawan,
-	        );
-
-	    // DATA RIWAYAT PENDIDIKAN
-	    $id_karyawan = $this->input->post('id_karyawan');
-		$pendidikan = $this->input->post('pendidikan');
-	    $mulai = $this->input->post('mulai');
-	    $akhir = $this->input->post('akhir');
-	    $nomor_ijazah = $this->input->post('nomor_ijazah');
-	    $this->upload->do_upload('pendidikanfile');
-		$a = $this->upload->data('file_name');
-	    $datah3 = array(
-	            'pendidikan'=>$pendidikan,
-	            'mulai'=>$mulai,
-		        'akhir'=>$akhir,
-		        'nomor_ijazah'=>$nomor_ijazah,
-	            'id_karyawan' => $id_karyawan,
-	            'file'=>$a,
-	            'verifikasi'=> 'Belum Terverifikasi',
-	        );
-
-	    // DATA LOGIN		
-	    $id_karyawan = $this->input->post('id_karyawan');
-		$username = $this->input->post('username');
-	    $password = md5($this->input->post('password'));
-	    $datah5 = array(
-	            'username'=>$username,
-	            'password'=>$password,
-	            'level'=>'Pelamar',
-	            'aktif'=>0,
-	            'id_karyawan' => $id_karyawan,
-	        );
-
-	    $insertt1 = $this->mdl_login->daftar('karyawan',$datah1);
-	    $insertt2 = $this->mdl_login->daftar('lowongan',$datah2);
-	    $insertt3 = $this->mdl_login->daftar('pendidikan',$datah3);
-   		$insertt5 = $this->mdl_login->daftar('login',$datah5);
-
-   		//enkripsi id
-		$encrypted_id = md5($id_karyawan);
-		
-		$this->load->library('email');
-		$config = array();
-		$config['charset'] = 'utf-8';
-		$config['useragent'] = 'CodeIgniter';
-		$config['protocol']= "smtp";
-		$config['mailtype']= "html";
-		$config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
-		$config['smtp_port']= "465";
-		$config['smtp_timeout']= "400";
-		$config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
-		$config['smtp_pass']= "hilfina090798"; // isi dengan password kamu
-		$config['crlf']="\r\n"; 
-		$config['newline']="\r\n"; 
-		$config['wordwrap'] = TRUE;
-		//memanggil library email dan set konfigurasi untuk pengiriman email
-			
-		$this->email->initialize($config);
-		//konfigurasi pengiriman
-		$this->email->from($config['smtp_user']);
-		$this->email->to($email);
-		$this->email->subject("Verifikasi Akun");
-		$this->email->message(
-			"terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tautan dibawah ini<br><br>".
-			site_url("login/verification/$encrypted_id")
-		);
-		
-		if($this->email->send())
-		{
-			echo '<script language="javascript">';
-			echo 'alert("Berhasil melakukan registrasi, silahkan cek email kamu")';
-			echo '</script>';
-			
-		}else
-		{
-			echo '<script language="javascript">';
-			echo 'alert("Berhasil melakukan registrasi, namu gagal mengirim verifikasi email")';
-			echo '</script>';
-			
-		}
-		
-   		
-	    redirect(site_url('Login/index'));
 		
 	}
 
@@ -379,7 +197,7 @@ class Login extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('mdl_login');
 		$this->mdl_login->changeActiveState($key);
-		echo '<script language="javascript">';
+		echo '<script type="text/javascript">';
 		echo 'alert("Selamat kamu telah memverifikasi akun kamu")';
 		echo '</script>';
 		redirect(site_url('Login/index'));

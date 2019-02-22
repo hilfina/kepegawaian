@@ -2,7 +2,7 @@
   $levelku=$this->session->userdata("myLevel");
   $namaku=$this->session->userdata("myLongName");
   $emailku=$this->session->userdata("myEmail");
-
+  $aktifku=$this->session->userdata("myAktif");
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -69,6 +69,9 @@
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/data-table/bootstrap-table.css">
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/data-table/bootstrap-editable.css">
+     <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/form/all-type-forms.css">
     <!-- style CSS
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/style.css">
@@ -101,15 +104,16 @@
                         <li>
                             <a title="Data Pelamar" href="<?php echo site_url('admin/pelamar') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Pelamar</span></a>
                         </li>
-                        <?php } elseif ($levelku == "Pelamar") { ?>
+                        <?php } elseif ($levelku == "Pelamar" && $aktifku == '1') { ?>
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data Saya</span></a>
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
                                 <li><a title="Data Diri" href="<?php echo site_url('pelamar/datasaya') ?>"><span class="mini-cli">Data Diri</span></a></li>
-                                <li><a title="Data Pendidikan" href="images-cropper.html"><span class="mini-sub-pro">Data Pendidikan</span></a></li>
-                                <li><a title="Data Surat" href="images-cropper.html"><span class="mini-sub-pro">Data Surat</span></a></li>
+                                <li><a title="Data Pendidikan" href="<?php echo site_url('pelamar/datapend') ?>"><span class="mini-sub-pro">Data Pendidikan</span></a></li>
+                                <li><a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>"><span class="mini-sub-pro">Data Surat</span></a></li>
                             </ul>
                         </li>
+                        <<?php } elseif ($levelku == "Pelamar" && $aktifku == '0') {?>
                         <li>
                             <a title="Kirim Ulang" href="#"><span class="mini-click-non">Password Recovery</span></a>
                         </li>
@@ -185,25 +189,13 @@
                                                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                         </a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Ubah Password</a>
+                                                        <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Ubah Sandi</a>
                                                         </li>
                                                         <li><a href="<?php echo site_url('admin/logout')?>"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <!-- <li class="nav-item nav-setting-open"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-menu"></i></a> -->
-
-                                                   <!--  <div role="menu" class="admintab-wrap menu-setting-wrap menu-setting-wrap-bg dropdown-menu animated zoomIn">
-                                                        <ul class="nav nav-tabs custon-set-tab">
-                                                            <li class="active"><a data-toggle="tab" href="#Notes">Notes</a>
-                                                            </li>
-                                                            <li><a data-toggle="tab" href="#Projects">Projects</a>
-                                                            </li>
-                                                            <li><a data-toggle="tab" href="#Settings">Settings</a>
-                                                            </li>
-                                                        </ul> -->
-
-                                                
+                                                <li class="nav-item nav-setting-open"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"></a> 
                                                 </li>
                                             </ul>
                                         </div>

@@ -5,6 +5,7 @@
 	$emailku=$this->session->userdata("myEmail");
 	$idku=$this->session->userdata("myId");
  ?>
+ <br>
     <div class="breadcome-area">
       <br>
         <div class="container-fluid">
@@ -16,7 +17,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <ul class="breadcome-menu">
-                                    <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                    <li><a href="#">Data Saya</a> <span class="bread-slash">/</span>
                                     </li>
                                     <li><span class="bread-blod">Data Saya</span>
                                     </li>
@@ -29,57 +30,152 @@
           </div>
       </div>
     </div>
-      <div class="data-table-area mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="sparkline13-list">
-                            <div class="sparkline13-hd">
-                                <div class="main-sparkline13-hd">
-                                <h1>Data <span class="table-project-n">Diri</span></h1>
+    <!-- Single pro tab review Start-->
+    <div class="single-pro-review-area mt-t-30 mg-b-15">
+        <div class="container-fluid">
+        <form action="<?php echo site_url(); ?>/pelamar/updatedatasaya/" enctype="multipart/form-data"method="post">
+            <div class="row">
+            <?php foreach ($datasaya as $key){ ?>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="profile-info-inner">
+                        <div class="profile-img">
+                            <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt="" width="120"/>
+                        </div>
+                        <div class="file-upload-inner ts-forms">
+                          <div class="input prepend-big-btn">
+                              <label class="icon-right" for="prepend-big-btn">
+                                <i class="fa fa-download"></i>
+                              </label>
+                              <div class="file-button">
+                                  Browse
+                                  <input type="file" name="fotosaya" value="<?php echo $key->foto; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                              </div>
+                              <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                          </div>
+                        </div>
+                        <div class="profile-details-hr">
+                            <div class="row">
+                            
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr">
+                                        <h2><b><?php echo $key->nama; ?></b><br /> </h2>
+                                    </div>
+                                </div>
+                              <?php } ?>
                             </div>
                         </div>
-                        <div class="sparkline13-graph">
-                            <div class="datatable-dashv1-list custom-datatable-overright">
-                                
-                                <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
-                                data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
-                              <thead style="background-color: #fffff0;">
-                                <tr>
-                                  <th>NIK</th>
-                                  <th>NO. KTP</th>
-                                  <th>NO. BPJS</th>
-                                  <th>NAMA</th>
-                                  <th>ALAMAT</th>
-                                  <th>NO. TELEPON</th>
-                                  <th>EMAIL</th>
-                                  <th>PROFESI YANG DILAMAR</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              <?php foreach ($datasaya as $key) { ?>
-                                  <tr>
-                                    <td><?php echo $key->nik?></td>
-                                    <td><?php echo $key->no_ktp?></td>
-                                    <td><?php echo $key->no_bpjs?></td>
-                                    <td><?php echo $key->nama?></td>
-                                    <td><?php echo $key->alamat?></td>
-                                    <td><?php echo $key->no_telp?></td>
-                                    <td><?php echo $key->email?></td>
-                                    <td><?php echo $key->id_profesi?></td>
-                                  </tr>
-                                 <?php } ?>
-                               </tbody>
-                            </table>
-                          </div>
-                        <!-- END DATA TABLE-->
-                      </div>
-              	</div>
+                    </div>
+                
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
+                        <div class="row mg-b-15">
+                        <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="skill-title">
+                                    <h2>Data Pribadi</h2>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                        <?php foreach ($datasaya as $key) { ?>
+                        <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
+                            <div class="product-tab-list tab-pane fade active in" id="description">
+                              <div class="row">
+                               
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="review-content-section">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                     <label form-control-label">Nomor NIK</label>
+                                                        <input name="nik" type="text" class="form-control" placeholder="Nomor NIK " value="<?php echo $key->nik; ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                     <label form-control-label">Nomor KTP</label>
+                                                        <input name="no_ktp" type="text" class="form-control" placeholder="Nomor KTP" value="<?php echo $key->no_ktp; ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                     <label form-control-label">Nomor BPJS</label>
+                                                        <input name="no_bpjs" type="text" class="form-control" placeholder="Nomor BPJS" value="<?php echo $key->no_bpjs; ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                     <label form-control-label">Nama Lengkap</label>
+                                                        <input name="nama" type="text" class="form-control" placeholder="Nama Lengkap" value="<?php echo $key->nama; ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label form-control-label">Alamat</label>
+                                                        <input name="alamat" type="text" class="form-control" placeholder="Alamat" value="<?php echo $key->alamat; ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label form-control-label">Nomor Telepon</label>
+                                                        <input name="no_telp" type="number" class="form-control" placeholder="Nama Lengkap" value="<?php echo $key->no_telp; ?>">
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <label form-control-label">Email</label>
+                                                        <input name="email" type="text" class="form-control" placeholder="Email" value="<?php echo $key->email; ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label form-control-label">Profesi Lamaran</label>
+                                                        <input type="text" class="form-control" value="<?php echo $key->nama_profesi?>" disabled>
+                                                    </div>
+                                                    <br>
+                                                    <div class="row mg-b-15">
+                                                    <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="skill-title">
+                                                                <h2>Data Pendidikan</h2>
+                                                                <hr />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label form-control-label">Pendidikan Terakhir</label>
+                                                        <select class="form-control">
+                                                          <option><?php echo $key->pend_akhir; ?></option>
+                                                          <option>Opsi Pilihan :</option>
+                                                          <option>SMA/SMK</option>
+                                                          <option>D1</option>
+                                                          <option>D3</option>
+                                                          <option>D4/S1</option>
+                                                          <option>S2</option>
+                                                          <option>S3</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label form-control-label">Nilai Akhir</label>
+                                                        <input name="nilai_akhir" type="text" class="form-control"  value="<?php echo $key->nilai_akhir; ?>">
+                                                    </div>
+                                                  <div class="form-group row">
+                                                  <div class="col-sm-4 offset-sm-3">
+                                                    <button type="submit" class="btn btn-primary" value="send" >Save changes</button>
+                                                  </div>
+                                                </div>
+                                            <?php } ?>
               </div>
-            </div>
-          </div>  
-        </div>
-  	  </div>  
-</div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </form>
+              </div>
+              </div>
+
+
+              
+              
+
 
 <?php $this->load->view('./footer'); ?>

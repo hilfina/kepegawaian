@@ -39,7 +39,23 @@ class Mdl_pelamar extends CI_Model
     public function getPelamar($id)
     {
         
-        $query = $this->db->query("SELECT nik, no_ktp, no_bpjs, nama, alamat, no_telp, email, id_profesi from karyawan where id_karyawan='$id'");
+        $query = $this->db->query("SELECT k.nik, k.no_ktp, k.no_bpjs, k.nama, k.alamat, k.no_telp, k.email, k.foto, j.nama_profesi, l.pend_akhir, l.nilai_akhir from jenis_profesi as j inner join  karyawan as k on k.id_profesi=j.id_profesi inner join lowongan as l on l.id_karyawan=k.id_karyawan where k.id_karyawan='$id'");
+        return $query->result();
+    }
+
+    function updatedatasaya($where,$data,$table){
+        $this->db->where($where);
+        $this->db->update($table,$data);
+    }
+
+    function tambahdatasaya($table,$data)
+    {
+        $query = $this->db->insert($table, $data);
+        return $this->db->insert_id();// return last insert id
+    }
+
+    public function getPend($id){
+        $query= $this->db->query("SELECT * from pendidikan  where id_karyawan='$id'");
         return $query->result();
     }
 }
