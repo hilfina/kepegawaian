@@ -43,12 +43,12 @@ class Mdl_pelamar extends CI_Model
         return $query->result();
     }
 
-    function updatedatasaya($where,$data,$table){
+    function updatedata($where,$data,$table){
         $this->db->where($where);
         $this->db->update($table,$data);
     }
 
-    function tambahdatasaya($table,$data)
+    function tambahdata($table,$data)
     {
         $query = $this->db->insert($table, $data);
         return $this->db->insert_id();// return last insert id
@@ -58,4 +58,5 @@ class Mdl_pelamar extends CI_Model
         $query= $this->db->query("SELECT * from pendidikan  where id_karyawan='$id'");
         return $query->result();
     }
+
 }

@@ -33,13 +33,19 @@ $this->load->view("header.php");
                         <div class="product-status-wrap">
                             <h4>Daftar Pendidikan</h4>
                             <div class="add-product">
-                                <a href="#">Tambah Dokumen</a>
+                                <a href="<?php echo site_url('pelamar/addpend');?>">Tambah Dokumen</a>
                             </div>
+                             <div class=" container-fluid" id="notif">
+                              <?php if ($this->session->flashdata('msg')) :?>
+                                <div class="alert alert-success"> 
+                                <?php echo $this->session->flashdata('msg')?>
+                                </div>
+                              <?php endif; ?>
+                              </div>
                             <div class="asset-inner">
                                 <table>
                                     <tr>
                                         <th>No</th>
-                                        <th>Gambar</th>
                                         <th>Nomor Ijazah</th>
                                         <th>Nama Pendidikan</th>
                                         <th>Tanggal Mulai</th>
@@ -47,22 +53,31 @@ $this->load->view("header.php");
                                         <th>Verifikasi</th>
                                         <th>Aksi</th>
                                     </tr>
+                                    <?php $no = 1 ?>
                                     <?php foreach ($array as $key){ ?>
                                     <tr>
-                                    <?php $no = 1 ?>
-                                        <td><?php echo $no ?></td>
-                                        <td><img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file; ?>" alt="" /></td>
+                                        <td><?php echo $no++ ?></td>
                                         <td><?php echo $key->nomor_ijazah; ?></td>
                                         <td><?php echo $key->pendidikan; ?></td>
                                         <td><?php echo $key->mulai; ?></td>
                                         <td><?php echo $key->akhir; ?></td>
-                                        <td><?php echo $key->verifikasi; ?></td>
                                         <td>
+                                        <?php if(($key->verifikasi) == 'verifikasi'){ ?>
+                                            <button class="pd-setting"><i class="fa fa-check"></i> Terverifikasi</button> 
+                                          <?php }else{ ?>
+                                            <button class="ds-setting">Belum Terverifikasi</button>
+                                          <?php } ?>
+                                          
+                                        </td>
+                                        <td>
+                                        <?php if(($key->verifikasi) == 'verifikasi'){ ?>
+                                            <button data-toggle="tooltip" title="detail" class="pd-setting-ed"><i class="fa fa-eye"></i>   Detail</button> 
+                                          <?php }else{ ?>
                                             <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                             <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                          <?php } ?>
                                         </td>
                                     </tr>
-                                    <?php $no++ ?>
                                     <?php }  ?>
                                 </table>
                             </div>

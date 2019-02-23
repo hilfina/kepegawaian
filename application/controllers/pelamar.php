@@ -79,8 +79,8 @@ class pelamar extends CI_Controller {
             'id_karyawan' => $id,
         );
 
- 	$update2 = $this->mdl_pelamar->updatedatasaya($where,$data2,'lowongan');
-	$update = $this->mdl_pelamar->updatedatasaya($where,$data,'karyawan');
+ 	$update2 = $this->mdl_pelamar->updatedata($where,$data2,'lowongan');
+	$update = $this->mdl_pelamar->updatedata($where,$data,'karyawan');
 	redirect('pelamar/datasaya');
 	}
 
@@ -91,31 +91,52 @@ class pelamar extends CI_Controller {
 	}
 
 	public function addpend(){
-		$config['upload_path']		= './Assets/gambar/';
-		$config['allowed_types']	= 'gif|jpg|png';
-		$config['max_size']			= 2000000000;
-		$config['max_width']		= 10240;
-		$config['max_height']		= 7680;
+		$this->load->helper('url','form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('pendidikan', 'Nama Pendidikan', 'trim|required' );
+		$this->load->model('mdl_pelamar');
 
-		$this->load->library('upload', $config);
-	    $id=$this->session->userdata('myId');
-		$pendidikan = $this->input->post('pendidikan');
-	    $mulai = $this->input->post('mulai');
-	    $akhir = $this->input->post('akhir');
-	    $nomor_ijazah = $this->input->post('nomor_ijazah');
-	    $this->upload->do_upload('pendidikanfile');
-		$a = $this->upload->data('file_name');
-	    $data3 = array(
-	            'pendidikan'=>$pendidikan,
-	            'mulai'=>$mulai,
-		        'akhir'=>$akhir,
-		        'nomor_ijazah'=>$nomor_ijazah,
-	            'id_karyawan' => $id,
-	            'file'=>$a,
-	            'verifikasi'=> 'Belum Terverifikasi',
-	        );
-	    $insert3 = $this->mdl_login->daftar('pendidikan',$data3);
+		if ($this->form_validation->run()==FALSE) {
+			$this->load->view('pelamar/addpendidikan');
+		}
+		else{
+			$config['upload_path']		= './Assets/gambar/';
+			$config['allowed_types']	= 'gif|jpg|png';
+			$config['max_size']			= 2000000000;
+			$config['max_width']		= 10240;
+			$config['max_height']		= 7680;
+
+			$this->load->library('upload', $config);
+
+		    $id=$this->session->userdata('myId');
+			$pendidikan = $this->input->post('pendidikan');
+		    $mulai = $this->input->post('mulai');
+		    $akhir = $this->input->post('akhir');
+		    $nomor_ijazah = $this->input->post('nomor_ijazah');
+		    $this->upload->do_upload('file');
+			$a = $this->upload->data('file_name');
+		    $data3 = array(
+		            'pendidikan'=>$pendidikan,
+		            'mulai'=>$mulai,
+			        'akhir'=>$akhir,
+			        'nomor_ijazah'=>$nomor_ijazah,
+		            'id_karyawan' => $id,
+		            'file'=>$a,
+		            'verifikasi'=> 0,
+		        );
+		    $insert3 = $this->mdl_pelamar->tambahdata('pendidikan',$data3);
+
+		    $this->session->set_flashdata('msg','Data Sukses di tambahkan');
+		    redirect(site_url('pelamar/datapend'));
+		}
 	}
+
+	public function deletepend($id)
+		{
+			$this->load->model('Modeladmin');
+			$this->Modeladmin->deletedatabooking($id);
+			redirect(base_url(). 'index.php/adminpuskesmas');
+		}
 
 	public function addsurat(){
 		$config['upload_path']		= './Assets/gambar/';

@@ -72,9 +72,18 @@
      <!-- forms CSS
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/form/all-type-forms.css">
+    <!-- datapicker CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/datapicker/datepicker3.css">
+    <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/form/themesaller-forms.css">
     <!-- style CSS
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/style.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/alerts.css">
     <!-- responsive CSS
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/responsive.css">

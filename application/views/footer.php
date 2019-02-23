@@ -76,6 +76,25 @@
     <script src="<?php echo base_url()?>Assets/template/js/editable/bootstrap-datetimepicker.js"></script>
     <script src="<?php echo base_url()?>Assets/template/js/editable/bootstrap-editable.js"></script>
     <script src="<?php echo base_url()?>Assets/template/js/editable/xediable-active.js"></script>
+    <!-- touchspin JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/touchspin/touchspin-active.js"></script>
+    <!-- datapicker JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/datapicker/datepicker-active.js"></script>
+    <!-- input-mask JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/input-mask/jasny-bootstrap.min.js"></script>
+    <!-- chosen JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/chosen/chosen.jquery.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/chosen/chosen-active.js"></script>
+    <!-- select2 JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/select2/select2.full.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/select2/select2-active.js"></script>
     <!-- Chart JS
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/chart/jquery.peity.min.js"></script>

@@ -19,7 +19,7 @@
                                 <ul class="breadcome-menu">
                                     <li><a href="#">Data Saya</a> <span class="bread-slash">/</span>
                                     </li>
-                                    <li><span class="bread-blod">Data Saya</span>
+                                    <li><span class="bread-blod">Data Diri</span>
                                     </li>
                                 </ul>
                             </div>
@@ -32,8 +32,8 @@
     </div>
     <!-- Single pro tab review Start-->
     <div class="single-pro-review-area mt-t-30 mg-b-15">
-        <div class="container-fluid">
-        <form action="<?php echo site_url(); ?>/pelamar/updatedatasaya/" enctype="multipart/form-data"method="post">
+        <div class="container-fluid"> 
+        <form action="<?php echo site_url(); ?>/pelamar/updatedatasaya/" enctype="multipart/form-data" method="post">
             <div class="row">
             <?php foreach ($datasaya as $key){ ?>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -74,7 +74,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="skill-title">
-                                    <h2>Data Pribadi</h2>
+                                    <h2>Data Diri</h2>
                                     <hr />
                                 </div>
                             </div>
@@ -127,14 +127,14 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="skill-title">
-                                                                <h2>Data Pendidikan</h2>
+                                                                <h2>Data Nilai</h2>
                                                                 <hr />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label form-control-label">Pendidikan Terakhir</label>
-                                                        <select class="form-control">
+                                                        <select class="form-control" name="pend_akhir">
                                                           <option><?php echo $key->pend_akhir; ?></option>
                                                           <option>Opsi Pilihan :</option>
                                                           <option>SMA/SMK</option>
@@ -151,7 +151,7 @@
                                                     </div>
                                                   <div class="form-group row">
                                                   <div class="col-sm-4 offset-sm-3">
-                                                    <button type="submit" class="btn btn-primary" value="send" >Save changes</button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
                                                   </div>
                                                 </div>
                                             <?php } ?>
