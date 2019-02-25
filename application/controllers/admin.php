@@ -76,7 +76,7 @@ class Admin extends CI_Controller {
         $this->email->message(
             "Anda telah lolos tahap 1, silakan ........<br><br>".
             site_url("login/verification/$id_karyawan"));
-
+        $this->email->send();
         $this->mdl_admin->PelamarDiterima($id_karyawan);
         $paket['array']=$this->mdl_admin->getPelamar();
 		$this->load->view('admin/pelamar/allPelamar',$paket);
@@ -110,7 +110,7 @@ class Admin extends CI_Controller {
         $this->email->message(
             "Mohon maaf,Anda tidak lolos tahap 1, silakan ........<br><br>".
             site_url("login/verification/$id_karyawan"));
-
+        $this->email->send();
         $this->mdl_admin->PelamarDitolak($id_karyawan);
         $paket['array']=$this->mdl_admin->getPelamar();
 		$this->load->view('admin/pelamar/allPelamar',$paket);

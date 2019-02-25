@@ -119,7 +119,7 @@
                   </div>
                 </div>
                 <br><br>
-                <?php if($key->id_status != "Pelamar Seleksi"){?>
+                <?php if($key->id_status != "Calon Karyawan"){?>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                   <div class="row mg-b-15">
@@ -209,7 +209,7 @@
                 <?php } ?>
                  </div>
                 </div>
-              <?php } else if($key->id_status == "Pelamar Seleksi"){?>
+              <?php } else if($key->id_status == "Calon Karyawan"){?>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                   <div class="row mg-b-15">
@@ -271,9 +271,9 @@
                                 <div class="grid-item griddaftarr" style="font-size: 15px;" >Kembali</div>
                               </a>
                             </td>
-                            <td style="width: 130px;">
+                            <td style="width: 200px;">
                               <a href="<?php echo site_url(); echo "/admin/pelamar/editSeleksi";?>">
-                                <div class="grid-item griddaftarr" style="font-size: 15px;" >Update</div>
+                                <div class="grid-item griddaftarr" style="font-size: 15px;" >Update Data Seleksi</div>
                               </a>
                             </td>
                           </tr>

@@ -70,7 +70,9 @@
                                 <td><?php echo $key->id_profesi; ?></td>
                                 <td><?php echo $key->id_status; ?></td>
                                 <td align="center">
-                                  <form action="<?php echo site_url(); echo "/restotrans/edittrans/"; ?>" method=post><input type="submit" class="btn btn-warning" value="Detail">
+                                  <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                                        <button class="btn btn-primary">Detail Seleksi</button>
+                                      </a>
                                 </td>
                               </tr>
                             <?php }?>

@@ -85,7 +85,7 @@
                                       <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
                                         <button class="btn btn-primary">Detail</button>
                                       </a>
-                                    <?php }else if ($key->id_status == "Pelamar Seleksi") { ?>
+                                    <?php }else if ($key->id_status == "Calon Karyawan") { ?>
                                       <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
                                         <button class="btn btn-primary">Detail Seleksi</button>
                                       </a>

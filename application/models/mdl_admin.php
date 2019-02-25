@@ -31,7 +31,7 @@ class Mdl_admin extends CI_Model
 
     public function getPelamar()
     {
-        $query = $this->db->query("SELECT * from karyawan inner join pendidikan on karyawan.id_karyawan = pendidikan.id_karyawan inner join lowongan on pendidikan.id_karyawan = lowongan.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Pelamar Seleksi'");
+        $query = $this->db->query("SELECT * from karyawan inner join pendidikan on karyawan.id_karyawan = pendidikan.id_karyawan inner join lowongan on pendidikan.id_karyawan = lowongan.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan'");
         return $query->result();
     }
     // data detail pelamar
@@ -45,7 +45,7 @@ class Mdl_admin extends CI_Model
 
      public function getPelamarSeleksi()
     {
-        $query = $this->db->query("SELECT * from karyawan where id_status = 'Pelamar Seleksi'");
+        $query = $this->db->query("SELECT * from karyawan where id_status = 'Calon Karyawan'");
         return $query->result();
     }
     //cari data pelamar berdasarkan ID
@@ -56,7 +56,7 @@ class Mdl_admin extends CI_Model
     }
      public function pelamarDiterima($id)
     {
-        $query = $this->db->query("UPDATE karyawan SET id_status = 'Pelamar Seleksi' where id_karyawan = $id");
+        $query = $this->db->query("UPDATE karyawan SET id_status = 'Calon Karyawan' where id_karyawan = $id");
     }
     public function pelamarDitolak($id)
     {
