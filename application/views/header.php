@@ -90,6 +90,32 @@
     <!-- modernizr JS
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/vendor/modernizr-2.8.3.min.js"></script>
+    <style type="text/css">
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            background-color: #ffffff;
+            padding: 15px;
+        }
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px;
+            border-color:  #000000;
+            padding: 10px;
+            font-size: 30px;
+            text-align: center;
+        }
+        .griddaftar{
+          background-color: #b3d9ff; 
+          margin-right:     10px;
+          margin-bottom:    10px;
+        }
+        .griddaftarr{
+          background-color: #cce6ff ; 
+          margin-right:     10px;
+          margin-bottom:    10px;
+        }
+    </style>
 </head>
 
 <body>
