@@ -17,7 +17,7 @@
                                 <ul class="breadcome-menu">
                                     <li><a href="#">Home</a> <span class="bread-slash">/</span>
                                     </li>
-                                    <li><span class="bread-blod">Data Saya</span>
+                                    <li><span class="bread-blod">Data Pelamar</span>
                                     </li>
                                 </ul>
                             </div>
@@ -35,7 +35,7 @@
                         <div class="sparkline13-list">
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
-                                <h1>Data <span class="table-project-n">Diri</span></h1>
+                                <h1>Data <span class="table-project-n">Pelamar</span></h1>
                             </div>
                         </div>
                         <div class="sparkline13-graph">
@@ -52,22 +52,49 @@
                           <thead style="background-color: #fffff0;">
                             <tr>
                               <th>ID</th>
+                              <th>Foto</th>
                               <th>Nama</th>
-                              <th>Alamat</th>
+                              <th>E-Mail</th>
                               <th>Pilihan Profesi</th>
-                              <th>Pendidikan Terakhir - Tahun</th>
+                              <th>Pendidikan Terakhir</th>
                               <th>Nilai Akhir</th>
+                              <th>Status</th>
+                              <th>Pilihan</th>
                             </tr>
                           </thead>
                           <tbody>
                             <?php foreach ($array as $key) { ?>
                               <tr>
                                 <td><?php echo $key->id_karyawan; ?></td>
+                                <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='100' height='100'>"; ?></td>
                                 <td><?php echo $key->nama; ?></td>
-                                <td><?php echo $key->alamat; ?></td>
-                                <td><?php echo $key->id_karyawan; ?></td>
-                                <td><?php echo $key->id_karyawan; ?></td>
-                                <td><?php echo $key->id_karyawan; ?></td>
+                                <td><?php echo $key->email; ?></td>
+                                <td><?php echo $key->id_profesi; ?></td>
+                                <td><?php echo $key->pend_akhir; echo " - "; echo $key->pendidikan; ?></td>
+                                <td><?php echo $key->nilai_akhir; ?></td>
+                                <td><?php echo $key->id_status; ?></td>
+                                <td align="center">
+                                  <?php 
+                                    if ($key->id_status == "Pelamar") { ?>
+                                      <a href="<?php echo site_url(); echo "/admin/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
+                                        <button class="btn btn-success">v</button>
+                                      </a>
+                                      <a href="<?php echo site_url(); echo "/admin/pelamarDitolak/"; echo $key->id_karyawan ;?>">
+                                        <button class="btn btn-danger">x</button>
+                                      </a>
+                                      <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                                        <button class="btn btn-primary">Detail</button>
+                                      </a>
+                                    <?php }else if ($key->id_status == "Pelamar Seleksi") { ?>
+                                      <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                                        <button class="btn btn-primary">Detail Seleksi</button>
+                                      </a>
+                                      <?php }else if ($key->id_status == "Pelamar Ditolak") { ?>
+                                      <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                                        <button class="btn btn-warning">Detail</button>
+                                      </a>
+                                 <?php } ?>
+                                </td>
                               </tr>
                             <?php }?>
                            </tbody>

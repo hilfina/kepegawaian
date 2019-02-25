@@ -111,7 +111,12 @@
                         </li>
                         <?php if ($levelku == "admin") {?>
                         <li>
-                            <a title="Data Pelamar" href="<?php echo site_url('admin/pelamar') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Pelamar</span></a>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Pelamar</span></a>
+                            <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
+                                <li><a title="Semua Pelamar" href="<?php echo site_url('admin/pelamar') ?>"><span class="mini-cli">Data Pelamar</span></a></li>
+                                <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/pelamarSeleksi') ?>"><span class="mini-sub-pro">Seleksi</span></a></li>
+                                <li><a title="Tambah Pelamar" href="<?php echo site_url('admin/addPelamar') ?>"><span class="mini-sub-pro">Tambah Pelamar</span></a></li>
+                            </ul>
                         </li>
                         <?php } elseif ($levelku == "Pelamar" && $aktifku == '1') { ?>
                         <li>
