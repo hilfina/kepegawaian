@@ -54,6 +54,11 @@ class Mdl_pelamar extends CI_Model
         return $this->db->insert_id();// return last insert id
     }
 
+    function hapusdata($table,$where){
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
+
     public function getPend($id){
         $query= $this->db->query("SELECT * from pendidikan  where id_karyawan='$id'");
         return $query->result();

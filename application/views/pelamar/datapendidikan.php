@@ -73,8 +73,10 @@ $this->load->view("header.php");
                                         <?php if(($key->verifikasi) == 'verifikasi'){ ?>
                                             <button data-toggle="tooltip" title="detail" class="pd-setting-ed"><i class="fa fa-eye"></i>   Detail</button> 
                                           <?php }else{ ?>
-                                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <a href="<?php echo site_url('pelamar/editpend/').$key->id ?>">
+                                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <a href="<?php echo site_url('pelamar/hapuspend/').$key->id ?>" onclick="return confirm('Are you sure you want to delete this item?');">
+                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
                                           <?php } ?>
                                         </td>
                                     </tr>

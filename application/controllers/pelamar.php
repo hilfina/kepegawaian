@@ -36,6 +36,7 @@ class pelamar extends CI_Controller {
 		$paket['datasaya']=$this->mdl_pelamar->getPelamar($id);
 		$this->load->view('pelamar/datapelamar',$paket);
 	}
+
 	public function updatedatasaya(){
 	$config['upload_path']		= './Assets/gambar/';
 	$config['allowed_types']	= 'gif|jpg|png';
@@ -131,12 +132,12 @@ class pelamar extends CI_Controller {
 		}
 	}
 
-	public function deletepend($id)
-		{
-			$this->load->model('Modeladmin');
-			$this->Modeladmin->deletedatabooking($id);
-			redirect(base_url(). 'index.php/adminpuskesmas');
-		}
+	public function hapuspend($id)
+	{
+		$where = array('id' => $id);
+		$this->mdl_pelamar->hapusdata('pendidikan',$where);
+		redirect(site_url('pelamar/datapend'));
+	}
 
 	public function addsurat(){
 		$config['upload_path']		= './Assets/gambar/';

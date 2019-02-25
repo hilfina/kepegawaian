@@ -24,7 +24,7 @@
                   </div>
                 </div>
                 <div class="profile-img">
-                  <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt="" width="120"/>
+                  <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt=""/>
                 </div>
               </div>
             </div>
@@ -116,11 +116,9 @@
                       <?php } ?>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <br><br>
+                    </div>
                 <?php if($key->id_status != "Calon Karyawan"){?>
-                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                
                 <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                   <div class="row mg-b-15">
                     <div class="col-lg-12">
@@ -166,47 +164,36 @@
                                         </td>
                                       </tr>
                                     </table>
-                                    </div>        
+                                    </div> 
+                                     <?php if($key->id_status == "Pelamar"){?>
+                                     <div align="right">
+                                        <a href="<?php echo site_url(); echo "/admin/pelamar";?>">
+                                          <button class="btn btn-primary waves-effect mg-b-15">kembali</button>
+                                        </a>
+                                      
+                                        <a href="<?php echo site_url(); echo "/admin/pelamarDiterima/"; echo $key->id_karyawan ; ?>">
+                                          <button class="btn btn-success waves-effect mg-b-15">Terima</button>
+                                        </a>
+                                      
+                                        <a href="<?php echo site_url(); echo "/admin/pelamarDitolak/"; echo $key->id_karyawan ;?>">
+                                          <button class="btn btn-danger waves-effect mg-b-15">Tolak</button>
+                                        </a> 
+                                            
+                                        <?php } else if($key->id_status == "Pelamar Ditolak"){?>
+                                          <a href="<?php echo site_url(); echo "/admin/pelamar";?>">
+                                            <button class="btn btn-primary waves-effect mg-b-15">kembali</button>
+                                          </a>
+                                     </div>
+                                <?php } ?>       
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
+                        
                         </div>
                       <?php } ?>
                       </div>
                     </div>
-                      <?php if($key->id_status == "Pelamar"){?>
-                        <table>
-                          <tr>
-                            <td style="width: 150px;">
-                              <a href="<?php echo site_url(); echo "/admin/pelamar";?>">
-                                <div class="grid-item griddaftarr" style="font-size: 20px;" >Kembali</div>
-                              </a>
-                            </td>
-                            <td style="width: 150px;">
-                              <a href="<?php echo site_url(); echo "/admin/pelamarDiterima/"; echo $key->id_karyawan ; ?>">
-                                <div class="grid-item griddaftar" style="font-size: 20px;background-color: #00ff00;" >
-                                  <font color="black">Terima</font>
-                                </div>
-                              </a>
-                            </td>
-                            <td style="width: 150px;">
-                              <a href="<?php echo site_url(); echo "/admin/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                                <div class="grid-item griddaftar" style="font-size: 20px;background-color: #ff0000;" >
-                                  <font color="black">Tolak</font>
-                                </div>
-                              </a> 
-                            </td>
-                          </tr>
-                        </table>
-                      
-                    <?php } else if($key->id_status == "Pelamar Ditolak"){?>
-                      <a href="<?php echo site_url(); echo "/admin/pelamar";?>">
-                        <div class="grid-item griddaftarr" style="font-size: 20px;" >Kembali</div>
-                      </a>
-                 
-                <?php } ?>
                  </div>
                 </div>
               <?php } else if($key->id_status == "Calon Karyawan"){?>
@@ -285,7 +272,8 @@
             </form>
           </div>
         </div>
-        <br>
-        <br>
-        <br>
+        </div>
+        </form>
+        </div>
+<br>
 <?php $this->load->view('./footer'); ?>
