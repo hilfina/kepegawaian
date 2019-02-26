@@ -64,4 +64,14 @@ class Mdl_pelamar extends CI_Model
         return $query->result();
     }
 
+    public function getDetailpend($id){
+        $query= $this->db->query("SELECT * from pendidikan  where id='$id'");
+        return $query->result();
+    }
+
+    public function getSurat($id){
+        $query= $this->db->query("SELECT * from sip_str  where id_karyawan='$id'");
+        return $query->result();
+    }
+
 }

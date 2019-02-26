@@ -38,7 +38,8 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
-                    <form action="<?php echo site_url(); ?>/pelamar/addpend/" enctype="multipart/form-data" method="post">
+                    <?php foreach ($array as $key){ ?>
+                    
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
                             <div class="row">
@@ -49,7 +50,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <input type="text" class="form-control" name="pendidikan" placeholder="Cth:Polinema">
+                                        <input type="text" class="form-control" name="pendidikan" value="<?php echo $key->pendidikan;?>">
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +62,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <input type="text" class="form-control" name="nomor_ijazah" placeholder="Cth:123">
+                                        <input type="text" class="form-control" name="nomor_ijazah" value="<?php echo $key->nomor_ijazah;?>">
                                     </div>
                                 </div>
                             </div>
@@ -74,9 +75,9 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-daterange input-group" id="datepicker">
-                                        <input type="text" class="form-control" name="mulai" placeholder="cth:2018" />
+                                        <input type="text" class="form-control" name="mulai" value="<?php echo $key->mulai;?>" />
                                         <span class="input-group-addon">hingga</span>
-                                        <input type="text" class="form-control" name="akhir" placeholder="cth:2019" />
+                                        <input type="text" class="form-control" name="akhir" value="<?php echo $key->akhir;?>" />
                                     </div>
                                 </div>
                               </div>
@@ -89,18 +90,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <div class="file-upload-inner ts-forms">
-                                          <div class="input prepend-big-btn">
-                                              <label class="icon-right" for="prepend-big-btn">
-                                                <i class="fa fa-download"></i>
-                                              </label>
-                                              <div class="file-button">
-                                                  Browse
-                                                  <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
-                                              </div>
-                                              <input type="text" id="prepend-big-btn" placeholder="no file selected">
-                                          </div>
-                                        </div>
+                                        <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file?>" width="400"/>   
                                     </div>
                                 </div>
                             </div>
@@ -113,15 +103,15 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
+                                        <a href="<?php echo site_url('pelamar/datapend/')?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">kembali</button></a>
                                     </div>
                                 </div>
-                            </div>
-
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </form>
+                    
+                    <?php } ?>
                 </div>
             </div>
         </div>

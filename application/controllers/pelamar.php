@@ -132,11 +132,65 @@ class pelamar extends CI_Controller {
 		}
 	}
 
+	public function detailpend($id){
+		$paket['array']=$this->mdl_pelamar->getDetailpend($id);
+		$this->load->view('pelamar/detailpend', $paket);
+	}
+
+	public function editpend($id){
+		$this->load->helper('url','form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('pendidikan', 'Nama Pendidikan', 'trim|required' );
+		$this->load->model('mdl_pelamar');
+
+		if ($this->form_validation->run()==FALSE) {
+			$paket['array']=$this->mdl_pelamar->getDetailpend($id);
+			$this->load->view('pelamar/editpendidikan', $paket);
+		}
+		else{
+			$config['upload_path']		= './Assets/gambar/';
+			$config['allowed_types']	= 'gif|jpg|png';
+			$config['max_size']			= 2000000000;
+			$config['max_width']		= 10240;
+			$config['max_height']		= 7680;
+
+			$this->load->library('upload', $config);
+			$pendidikan = $this->input->post('pendidikan');
+		    $mulai = $this->input->post('mulai');
+		    $akhir = $this->input->post('akhir');
+		    $nomor_ijazah = $this->input->post('nomor_ijazah');
+		    $this->upload->do_upload('file');
+			$a = $this->upload->data('file_name');
+		    $data3 = array(
+		            'pendidikan'=>$pendidikan,
+		            'mulai'=>$mulai,
+			        'akhir'=>$akhir,
+			        'nomor_ijazah'=>$nomor_ijazah,
+		            'file'=>$a,
+		            'verifikasi'=> 0,
+		        );
+		    $where = array(
+				'id' => $id
+			);
+
+		    $update = $this->mdl_pelamar->updatedata($where,$data3,'pendidikan');
+		    $this->session->set_flashdata('msg','Data Sukses di tambahkan');
+		    redirect(site_url('pelamar/datapend'));
+		}
+			
+	}
+
 	public function hapuspend($id)
 	{
 		$where = array('id' => $id);
 		$this->mdl_pelamar->hapusdata('pendidikan',$where);
 		redirect(site_url('pelamar/datapend'));
+	}
+
+	public function datasurat(){
+		$id=$this->session->userdata('myId');
+		$paket['array']=$this->mdl_pelamar->getSurat($id);
+		$this->load->view('pelamar/datasurat',$paket);
 	}
 
 	public function addsurat(){
