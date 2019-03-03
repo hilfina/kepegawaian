@@ -74,4 +74,9 @@ class Mdl_pelamar extends CI_Model
         return $query->result();
     }
 
+    public function getDetailsurat($id){
+        $query= $this->db->query("SELECT * from sip_str  where id_sipstr='$id'");
+        return $query->result();
+    }
+
 }
