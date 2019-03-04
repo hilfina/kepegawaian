@@ -13,6 +13,10 @@
     <title>Kepegawaian</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- notifications CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/notifications/Lobibox.min.css">
+    <link rel="stylesheet" href="css/notifications/notifications.css">
     <!-- favicon
         ============================================ -->
     <link rel="shortcut icon" type="template/image/x-icon" href="<?php echo base_url()?>Assets/img/favicon.ico">
@@ -87,6 +91,9 @@
     <!-- responsive CSS
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/responsive.css">
+    <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/modals.css">
     <!-- modernizr JS
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -140,7 +147,7 @@
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Pelamar</span></a>
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
                                 <li><a title="Semua Pelamar" href="<?php echo site_url('admin/pelamar') ?>"><span class="mini-cli">Data Pelamar</span></a></li>
-                                <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/pelamarSeleksi') ?>"><span class="mini-sub-pro">Seleksi</span></a></li>
+                                <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/dataSeleksi') ?>"><span class="mini-sub-pro">Data Seleksi</span></a></li>
                                 <li><a title="Tambah Pelamar" href="<?php echo site_url('admin/addPelamar') ?>"><span class="mini-sub-pro">Tambah Pelamar</span></a></li>
                             </ul>
                         </li>
