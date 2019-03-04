@@ -9,62 +9,41 @@ class Mdl_admin extends CI_Model
         return $this->session->userdata('myId');
     }
 
-    //fungsi check login
-    function check_login($table, $field1, $field2)
-    {
-        $this->db->select('*');
-        $this->db->from($table);
-        $this->db->where($field1);
-        $this->db->where($field2);
-        $this->db->limit(1);
-        $query = $this->db->get();
-        if ($query->num_rows() == 0) {
-            return FALSE;
-        } else {
-            return $query->result();
-        }
+    //SEMUA DATA PELAMAR
+    public function getPelamar(){
+        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan'"));
+        $hasil=$data['hsl'];
+        $query = $this->db->query("select * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' order by mulai desc limit $hasil");
+        return $query->result();
     }
 
-    //........................................PELAMAR...........................................//
+    function updateData($where,$data,$table){
+        $this->db->where($where);
+        $this->db->update($table,$data);
+    }
 
-    //semua data pelamar
 
-    public function getPelamar()
-    {
-        $query = $this->db->query("SELECT * from karyawan inner join pendidikan on karyawan.id_karyawan = pendidikan.id_karyawan inner join lowongan on pendidikan.id_karyawan = lowongan.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan'");
+    function getData($table,$where){
+        $this->db->select("*");
+        $this->db->from($table);
+        $this->db->where($where);
+        $query = $this->db->get();
         return $query->result();
+    }
+    
+    function addData($table,$data)
+    {
+        $query = $this->db->insert($table, $data);
     }
     // data detail pelamar
-    public function getDetailPelamar($id)
+    public function cariJenisSurat($id)
     {
-        $query = $this->db->query("SELECT * from karyawan inner join pendidikan on karyawan.id_karyawan = pendidikan.id_karyawan inner join lowongan on pendidikan.id_karyawan = lowongan.id_karyawan where karyawan.id_karyawan = $id");
+        $query = $this->db->query("SELECT * from sip_str as s inner join jenis_surat as j on s.id_surat = j.id_surat where s.id_karyawan = $id");
         return $query->result();
     }
 
-    //pelamar masuk seleksi 
-
-     public function getPelamarSeleksi()
-    {
-        $query = $this->db->query("SELECT * from karyawan where id_status = 'Calon Karyawan'");
-        return $query->result();
-    }
-    //cari data pelamar berdasarkan ID
-      public function getEmailPelamar($id)
-    {
-        $query = $this->db->query("SELECT email from karyawan where id_karyawan = $id");
-        return $query->result();
-    }
-     public function pelamarDiterima($id)
-    {
-        $query = $this->db->query("UPDATE karyawan SET id_status = 'Calon Karyawan' where id_karyawan = $id");
-    }
-    public function pelamarDitolak($id)
-    {
-        $query = $this->db->query("UPDATE karyawan SET id_status = 'Pelamar Ditolak' where id_karyawan = $id");
-    }
-     public function getDataSeleksi($id)
-    {
-        $query = $this->db->query("SELECT * from seleksi where id_karyawan = $id");
+    public function getSeleksi($table){
+         $query = $this->db->query("SELECT * from $table as x inner join karyawan where x.id_karyawan = karyawan.id_karyawan");
         return $query->result();
     }
 }

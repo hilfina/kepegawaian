@@ -1,3 +1,3 @@
 <?php
-echo $nama;
+echo $nilai_agama;
 ?>
