@@ -10,6 +10,7 @@ class Login extends CI_Controller {
         $this->load->library('form_validation','image_lib');
         //load model mdl_login
         $this->load->model('mdl_login');
+        $this->load->model('mdl_pelamar');
         $this->load->library('session');
     }
      
@@ -80,6 +81,34 @@ class Login extends CI_Controller {
 		}
 
 	}
+
+	public function ubahpass(){
+
+		$this->form_validation->set_rules('pw_baru','Kata Sandi Baru','required');
+        $this->form_validation->set_rules('cpw_baru','Konfirmasi Kata Sandi Baru','required|matches[pw_baru]');
+        $this->form_validation->set_message('required','%s wajib diisi');
+
+        
+		if ($this->form_validation->run()==FALSE) {
+			$this->load->view('ubahpassword');
+		}
+		else {
+			$id=$this->session->userdata('myId');
+			$password = md5($this->input->post('pw_baru'));
+		    $data = array(
+		        'password' => $password,
+
+		    );
+		    $where = array(
+			'id_karyawan' => $id
+			);
+
+		    $update = $this->mdl_pelamar->updatedata($where,$data,'login');
+			redirect('home');
+		}
+		
+	}
+
 	public function pilihdaftar()
 	{
 		$this->load->model('mdl_login');

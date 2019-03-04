@@ -140,23 +140,23 @@
                                               <tbody>
                                                   <tr>
                                                       <td>
-                                                         <a  href="#" data-toggle="modal" data-target="#gambarIjasah"><?php echo "<img src='".base_url("./assets/gambar/".$key->file)."' width='100' height='100'>"; ?></a>
+                                                         <a  href="" data-toggle="modal" data-target="#gambarIjasah"><?php echo "<img src='".base_url("./assets/gambar/".$key->file)."' width='100' height='100'>"; ?></a>
                                                          <div id="gambarIjasah" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-close-area modal-close-df">
-                                                                          <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                          <div class="profile-info-inner">
-                                                                            <div class="profile-img">
-                                                                              <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file;?>" alt=""/>
-                                                                            </div>
-                                                                          </div>
-                                                                        </div>
+                                                          <div class="modal-dialog">
+                                                              <div class="modal-content">
+                                                                  <div class="modal-close-area modal-close-df">
+                                                                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                                  </div>
+                                                                  <div class="modal-body">
+                                                                    <div class="profile-info-inner">
+                                                                      <div class="profile-img">
+                                                                        <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file;?>" alt=""/>
+                                                                      </div>
                                                                     </div>
-                                                                </div>
+                                                                  </div>
                                                               </div>
+                                                          </div>
+                                                        </div>        
                                                       </td>
                                                       <td><?php echo $key->pendidikan; ?></td>
                                                       <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
@@ -165,10 +165,10 @@
                                                       <td>
                                                         <?php 
                                                       if(($key->verifikasi) == 1){ ?>
-                                                       <i class="educate-icon educate-checked modal-check-pro" style="color: red;"></i>
-                                                      <?php }else{ ?>
+                                                       <a href="#"> Terverifikasi</a>
+                                                       <?php }else{ ?>
                                                         <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                                                          <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i></button>
+                                                          <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i> Verifikasi</button>
                                                         </a>
                                                       <?php } ?>
                                                         

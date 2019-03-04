@@ -77,10 +77,10 @@
                                   <?php 
                                     if ($key->id_status == "Pelamar") { ?>
                                       <a href="<?php echo site_url(); echo "/admin/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
-                                        <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i></button>
+                                        <button class="btn btn-success waves-effect mg-b-15" title="TERIMA"><i class="fa fa-check"></i></button>
                                       </a>
                                       <a href="<?php echo site_url(); echo "/admin/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                                        <button class="btn btn-danger waves-effect mg-b-15"><i class="fa fa-times"></i></button>
+                                        <button class="btn btn-danger waves-effect mg-b-15" title="TOLAK"><i class="fa fa-times"></i></button>
                                       </a>
                                       <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
                                         <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>

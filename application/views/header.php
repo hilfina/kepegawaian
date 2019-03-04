@@ -245,7 +245,7 @@
                                                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                         </a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a title="Ubah Sandi" href="<?php echo site_url('pelamar/ubahpass') ?>"></span>Ubah Sandi</a>
+                                                        <li><a title="Ubah Sandi" href="<?php echo site_url('login/ubahpass') ?>"></span>Ubah Sandi</a>
                                                         </li>
                                                         <li><a href="<?php echo site_url('admin/logout')?>"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                                                         </li>

@@ -39,7 +39,7 @@ $this->load->view("header.php");
                     </div>
                     <br>
                     
-                    <form action="<?php echo site_url(); ?>/pelamar/ubahpass/" method="post">
+                    <form action="<?php echo site_url(); ?>/login/ubahpass/" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
                             <div class="row">

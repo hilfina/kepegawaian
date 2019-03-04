@@ -36,39 +36,71 @@ class pelamar extends CI_Controller {
 		$this->load->view("pelamar/home");
 	}
 
-	public function ubahpass(){
 
-		$this->form_validation->set_rules('pw_baru','Kata Sandi Baru','required');
-        $this->form_validation->set_rules('cpw_baru','Konfirmasi Kata Sandi Baru','required|matches[pw_baru]');
-        $this->form_validation->set_message('required','%s wajib diisi');
-
-        
-		if ($this->form_validation->run()==FALSE) {
-			$this->load->view('pelamar/ubahpassword');
-		}
-		else {
-			$id=$this->session->userdata('myId');
-			$password = md5($this->input->post('pw_baru'));
-		    $data = array(
-		        'password' => $password,
-
-		    );
-		    $where = array(
-			'id_karyawan' => $id
-			);
-
-		    $update = $this->mdl_pelamar->updatedata($where,$data,'login');
-			redirect('pelamar/home');
-		}
-		
-	}
-
-	public function aktivasi(){
+	public function aktivasi()
+	{
 		$this->form_validation->set_rules('email', 'Email', 'required');
+
 		if ($this->form_validation->run()==FALSE) {
 			$this->load->view('pelamar/aktivasi');
+		}else {
+			$id=$this->session->userdata('myId');
+			$email = $this->input->post('email');
+			$data = array(
+	            'email'=>$email,
+	        );
+	        $where = array(
+				'id_karyawan' => $id,
+			);
+			$this->mdl_pelamar->updatedata($where,$data,'karyawan');
+
+			$encrypted_id = $id;
+		
+			$this->load->library('email');
+			$config = array();
+			$config['charset'] = 'utf-8';
+			$config['useragent'] = 'CodeIgniter';
+			$config['protocol']= "smtp";
+			$config['mailtype']= "html";
+			$config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+			$config['smtp_port']= "465";
+			$config['smtp_timeout']= "400";
+			$config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
+			$config['smtp_pass']= "hilfina090798"; // isi dengan password kamu
+			$config['crlf']="\r\n"; 
+			$config['newline']="\r\n"; 
+			$config['wordwrap'] = TRUE;
+			//memanggil library email dan set konfigurasi untuk pengiriman email
+				
+			$this->email->initialize($config);
+			//konfigurasi pengiriman
+			$this->email->from($config['smtp_user']);
+			$this->email->to($email);
+			$this->email->subject("Verifikasi Akun");
+			$this->email->message(
+				"untuk memverifikasi silahkan klik tautan dibawah ini<br><br>".
+				site_url("login/verification/$encrypted_id")
+			);
+			
+			if($this->email->send())
+			{
+				echo '<script type="text/javascript">';
+				echo 'alert("Link Aktivasi sudah terkirim! Silahkan cek email kamu~")';
+				echo '</script>';
+		
+			}
+			else
+
+			{
+				echo '<script type="text/javascript">';
+				echo 'alert("Gagal mengirim link aktivasi!!!")';
+				echo '</script>';		
+			}
+
+			redirect(site_url('pelamar/aktivasi'));
 		}
-	}
+ 	}
+
 	
 	public function datasaya(){
 		$id=$this->session->userdata('myId');

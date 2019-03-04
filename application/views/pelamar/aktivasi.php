@@ -40,10 +40,10 @@ $this->load->view("header.php");
                     </div>
                     <br>
                     
-                    <form action="<?php echo site_url(); ?>/pelamar/aktivasi/" id="loginForm">
+                    <form action="<?php echo site_url(); ?>/pelamar/aktivasi/" id="loginForm" method="POST">
                         <div class="form-group">
                             <label class="control-label" for="email">Email</label>
-                            <input type="text" placeholder="example@gmail.com" required="" value="" name="email" class="form-control">
+                            <input type="email" placeholder="example@gmail.com" required="" name="email" class="form-control">
                             <span class="help-block small">Email yang Anda masukkan akan selalu di gunakan</span>
                         </div>
 
