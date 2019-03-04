@@ -256,7 +256,7 @@ class pelamar extends CI_Controller {
 			$query = "select id_surat from jenis_surat where nama_surat = '$nama_surat'";
 			$data=mysqli_fetch_array(mysqli_query($konek, $query));
 		    $xxx = $data['id_surat'];
-			$id_surat = $this->input->post('$xxx');
+			$id_surat = $xxx;
 		    $tgl_mulai = $this->input->post('tgl_mulai');
 		    $tgl_akhir = $this->input->post('tgl_akhir');
 		    $no_surat = $this->input->post('no_surat');
@@ -305,7 +305,7 @@ class pelamar extends CI_Controller {
 			$query = "select id_surat from jenis_surat where nama_surat = '$nama_surat'";
 			$data=mysqli_fetch_array(mysqli_query($konek, $query));
 		    $xxx = $data['id_surat'];
-			$id_surat = $this->input->post('$xxx');
+			$id_surat = $xxx;
 		    $tgl_mulai = $this->input->post('tgl_mulai');
 		    $tgl_akhir = $this->input->post('tgl_akhir');
 		    $no_surat = $this->input->post('no_surat');
