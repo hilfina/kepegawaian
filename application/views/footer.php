@@ -84,6 +84,15 @@
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/select2/select2.full.min.js"></script>
     <script src="<?php echo base_url()?>Assets/template/js/select2/select2-active.js"></script>
+    <!-- rangle-slider JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/rangle-slider/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/rangle-slider/jquery-ui-touch-punch.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/rangle-slider/rangle-active.js"></script>
+    <!-- knob JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/knob/jquery.knob.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/knob/knob-active.js"></script>
     <!-- Chart JS
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/chart/jquery.peity.min.js"></script>
@@ -97,9 +106,7 @@
     <!-- main JS
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/main.js"></script>
-    <!-- tawk chat JS
-        ============================================ -->
-    <script src="<?php echo base_url()?>Assets/template/js/tawk-chat.js"></script>
+   
 
     
 

@@ -63,6 +63,9 @@
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/calendar/fullcalendar.min.css">
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/calendar/fullcalendar.print.min.css">
+    <!-- touchspin CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/touchspin/jquery.bootstrap-touchspin.min.css">
     <!-- x-editor CSS
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/editor/select2.css">
@@ -85,9 +88,15 @@
     <!-- style CSS
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/style.css">
-    <!-- style CSS
+    <!-- style alert CSS
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/alerts.css">
+    <!-- select2 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/select2/select2.min.css">
+    <!-- chosen CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/chosen/bootstrap-chosen.css">
     <!-- responsive CSS
         ============================================ -->
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/responsive.css">
@@ -140,7 +149,7 @@
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                         <li class="active">
-                            <a title="Home" href="#"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>
+                            <a title="Home" href="<?php echo site_url('pelamar/home') ?>"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>
                         </li>
                         <?php if ($levelku == "admin") {?>
                         <li>
@@ -162,7 +171,7 @@
                         </li>
                         <<?php } elseif ($levelku == "Pelamar" && $aktifku == '0') {?>
                         <li>
-                            <a title="Kirim Ulang" href="#"><span class="mini-click-non">Password Recovery</span></a>
+                            <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>"><span class="mini-click-non">Aktivasi Akun</span></a>
                         </li>
                         <?php } ?>
                         
@@ -236,7 +245,7 @@
                                                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                         </a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Ubah Sandi</a>
+                                                        <li><a title="Ubah Sandi" href="<?php echo site_url('pelamar/ubahpass') ?>"></span>Ubah Sandi</a>
                                                         </li>
                                                         <li><a href="<?php echo site_url('admin/logout')?>"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                                                         </li>

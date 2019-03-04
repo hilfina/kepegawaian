@@ -22,7 +22,7 @@ $this->load->view("header.php");
                         </div>
                         <br>
                         <div class="alert alert-info">
-                            Perhatian! Data surat harus diisi apabila anda mendaftar sebagai perawat, dan apoteker!
+                            Perhatian! Data surat harus diisi apabila anda mendaftar sebagai Apoteker, Fisioterapis dan Perawat!
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@ $this->load->view("header.php");
                         <div class="product-status-wrap">
                             <h4>Daftar Surat</h4>
                             <div class="add-product">
-                                <a href="<?php echo site_url('pelamar/addpend');?>">Tambah Dokumen</a>
+                                <a href="<?php echo site_url('pelamar/addsurat');?>">Tambah Dokumen</a>
                             </div>
                              <div class=" container-fluid" id="notif">
                               <?php if ($this->session->flashdata('msg')) :?>
@@ -75,12 +75,12 @@ $this->load->view("header.php");
                                         </td>
                                         <td>
                                         <?php if(($key->aktif) == 1){ ?>
-                                        <a href="<?php echo site_url('pelamar/detailpend/').$key->id_sipstr ?>">   
+                                        <a href="<?php echo site_url('pelamar/detailsurat/').$key->id_sipstr ?>">   
                                         <button data-toggle="tooltip" title="detail" class="pd-setting-ed"><i class="fa fa-eye"></i>   Detail</button> </a>
                                         <?php }else{ ?>
-                                        <a href="<?php echo site_url('pelamar/editpend/').$key->id_sipstr ?>">
+                                        <a href="<?php echo site_url('pelamar/editsurat/').$key->id_sipstr ?>">
                                         <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                        <a href="<?php echo site_url('pelamar/hapuspend/').$key->id_sipstr ?>" onclick="return confirm('Are you sure you want to delete this item?');">
+                                        <a href="<?php echo site_url('pelamar/hapussurat/').$key->id_sipstr ?>" onclick="return confirm('Are you sure you want to delete this item?');">
                                         <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
                                         <?php } ?>
                                         </td>

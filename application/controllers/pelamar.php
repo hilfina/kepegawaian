@@ -14,6 +14,7 @@ class pelamar extends CI_Controller {
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
 		$this->load->library('session');
+
 	}
 	public function index()
 	{
@@ -29,6 +30,44 @@ class pelamar extends CI_Controller {
 	{
 		$this->session->sess_destroy();
 		redirect('login');
+	}
+
+	public function home(){
+		$this->load->view("pelamar/home");
+	}
+
+	public function ubahpass(){
+
+		$this->form_validation->set_rules('pw_baru','Kata Sandi Baru','required');
+        $this->form_validation->set_rules('cpw_baru','Konfirmasi Kata Sandi Baru','required|matches[pw_baru]');
+        $this->form_validation->set_message('required','%s wajib diisi');
+
+        
+		if ($this->form_validation->run()==FALSE) {
+			$this->load->view('pelamar/ubahpassword');
+		}
+		else {
+			$id=$this->session->userdata('myId');
+			$password = md5($this->input->post('pw_baru'));
+		    $data = array(
+		        'password' => $password,
+
+		    );
+		    $where = array(
+			'id_karyawan' => $id
+			);
+
+		    $update = $this->mdl_pelamar->updatedata($where,$data,'login');
+			redirect('pelamar/home');
+		}
+		
+	}
+
+	public function aktivasi(){
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		if ($this->form_validation->run()==FALSE) {
+			$this->load->view('pelamar/aktivasi');
+		}
 	}
 	
 	public function datasaya(){
@@ -174,7 +213,7 @@ class pelamar extends CI_Controller {
 			);
 
 		    $update = $this->mdl_pelamar->updatedata($where,$data3,'pendidikan');
-		    $this->session->set_flashdata('msg','Data Sukses di tambahkan');
+		    $this->session->set_flashdata('msg','Data Sukses di Update');
 		    redirect(site_url('pelamar/datapend'));
 		}
 			
@@ -184,6 +223,7 @@ class pelamar extends CI_Controller {
 	{
 		$where = array('id' => $id);
 		$this->mdl_pelamar->hapusdata('pendidikan',$where);
+		$this->session->set_flashdata('msg','Data Sukses di Hapus');
 		redirect(site_url('pelamar/datapend'));
 	}
 
@@ -194,35 +234,110 @@ class pelamar extends CI_Controller {
 	}
 
 	public function addsurat(){
-		$config['upload_path']		= './Assets/gambar/';
-		$config['allowed_types']	= 'gif|jpg|png';
-		$config['max_size']			= 2000000000;
-		$config['max_width']		= 10240;
-		$config['max_height']		= 7680;
+		$this->load->helper('url','form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('no_surat', 'Nomor Surat', 'trim|required' );
 
-		$this->load->library('upload', $config);
-	    $id=$this->session->userdata('myId');
-	    $xxx = $this->input->post('id_surat');
-	    $konek = mysqli_connect("localhost","root","","kepegawaian");
-              $query = "select id_surat from jenis_surat where nama_surat = '$xxx'";
-              $data=mysqli_fetch_array(mysqli_query($konek, $query));
+		if ($this->form_validation->run()==FALSE) {
+			$this->load->view('pelamar/addsuratsipstr');
+		}
+		else{
+			$config['upload_path']		= './Assets/gambar/';
+			$config['allowed_types']	= 'gif|jpg|png';
+			$config['max_size']			= 2000000000;
+			$config['max_width']		= 10240;
+			$config['max_height']		= 7680;
 
-		$id_surat = $data['id_surat'];
-	    $tgl_mulai = $this->input->post('tgl_mulai');
-	    $tgl_akhir = $this->input->post('tgl_akhir');
-	    $no_surat = $this->input->post('no_surat');
-	    $this->upload->do_upload('suratfile');
-		$b = $this->upload->data('file_name');
-	    $data4 = array(
-		    	'id_karyawan' => $id,
-		        'id_surat'=>$id_surat,
-		        'tgl_mulai'=>$tgl_mulai,
-		        'tgl_akhir'=>$tgl_akhir, 
-		        'no_surat'=>$no_surat,  
-		        'file'=>$b,
-		        'aktif'=> 0,
-	        );
+			$this->load->library('upload', $config);
+
+		    $id=$this->session->userdata('myId');
+		    $nama_surat = $this->input->post('nama_surat');
+		    $konek = mysqli_connect("localhost","root","","kepegawaian");
+			$query = "select id_surat from jenis_surat where nama_surat = '$nama_surat'";
+			$data=mysqli_fetch_array(mysqli_query($konek, $query));
+		    $xxx = $data['id_surat'];
+			$id_surat = $xxx;
+		    $tgl_mulai = $this->input->post('tgl_mulai');
+		    $tgl_akhir = $this->input->post('tgl_akhir');
+		    $no_surat = $this->input->post('no_surat');
+		    $this->upload->do_upload('file');
+			$b = $this->upload->data('file_name');
+		    $data4 = array(
+			    	'id_karyawan' => $id,
+			        'id_surat'=>$id_surat,
+			        'tgl_mulai'=>$tgl_mulai,
+			        'tgl_akhir'=>$tgl_akhir, 
+			        'no_surat'=>$no_surat,  
+			        'file'=>$b,
+			        'aktif'=> 0,
+		        );
+
+		    $insert = $this->mdl_pelamar->tambahdata('sip_str',$data4);
+		    $this->session->set_flashdata('msg','Data Sukses di tambahkan');
+		    redirect(site_url('pelamar/datasurat'));
+		}
 	}
+
+	public function detailsurat($id){
+		$paket['array']=$this->mdl_pelamar->getDetailsurat($id);
+		$this->load->view('pelamar/detailsurat', $paket);
+	}
+
+	public function editsurat($id){
+		$this->load->helper('url','form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('no_surat', 'Nomor Surat', 'trim|required' );
+
+		if ($this->form_validation->run()==FALSE) {
+			$paket['array']=$this->mdl_pelamar->getDetailsurat($id);
+			$this->load->view('pelamar/editsurat', $paket);;
+		}
+		else{
+			$config['upload_path']		= './Assets/gambar/';
+			$config['allowed_types']	= 'gif|jpg|png';
+			$config['max_size']			= 2000000000;
+			$config['max_width']		= 10240;
+			$config['max_height']		= 7680;
+
+			$this->load->library('upload', $config);
+			$nama_surat = $this->input->post('nama_surat');
+		    $konek = mysqli_connect("localhost","root","","kepegawaian");
+			$query = "select id_surat from jenis_surat where nama_surat = '$nama_surat'";
+			$data=mysqli_fetch_array(mysqli_query($konek, $query));
+		    $xxx = $data['id_surat'];
+			$id_surat = $xxx;
+		    $tgl_mulai = $this->input->post('tgl_mulai');
+		    $tgl_akhir = $this->input->post('tgl_akhir');
+		    $no_surat = $this->input->post('no_surat');
+		    $this->upload->do_upload('file');
+			$b = $this->upload->data('file_name');
+		    $data = array(
+			        'id_surat'=>$id_surat,
+			        'tgl_mulai'=>$tgl_mulai,
+			        'tgl_akhir'=>$tgl_akhir, 
+			        'no_surat'=>$no_surat,  
+			        'file'=>$b,
+			        'aktif'=> 0,
+		        );
+		    $where = array(
+				'id_sipstr' => $id
+			);
+
+		    $update = $this->mdl_pelamar->updatedata($where,$data,'sip_str');
+		    $this->session->set_flashdata('msg','Data Sukses di Update');
+		    redirect(site_url('pelamar/datasurat'));
+		}
+			
+	}
+
+	public function hapussurat($id)
+	{
+		$where = array('id_sipstr' => $id);
+		$this->mdl_pelamar->hapusdata('sip_str',$where);
+		$this->session->set_flashdata('msg','Data Sukses di Hapus');
+		redirect(site_url('pelamar/datapend'));
+	}
+
 }
 
 /* End of file pelamar.php */
