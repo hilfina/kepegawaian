@@ -1,119 +1,446 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!doctype html>
+<html class="no-js" lang="en">
+
 <head>
-    <title>Login Kepegawaian</title>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Kepegawaian</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->  
-    <link rel="icon" type="image/png" href="<?=base_url()?>Assets/login/images/logo.png"/>
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/animate/animate.css">
-<!--===============================================================================================-->  
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/select2/select2.min.css">
-<!--===============================================================================================-->  
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/css/util.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/css/main.css">
-    <style type="text/css">
-        .grid-container {
-            display: grid;
-            grid-template-columns: auto auto auto auto;
-            background-color: #ffffff;
-            padding: 5px;
-        }
-        .grid-item {
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px;
-            border-color:  #000000;
-            padding: 20px;
-            font-size: 30px;
-            text-align: center;
-        }
-        .griddaftar{
-          background-color: #b3d9ff; 
-          margin-right:     10px;
-          margin-bottom:    10px;
-        }
-        .griddaftarr{
-          background-color: #cce6ff ; 
-          margin-right:     10px;
-          margin-bottom:    10px;
-        }
-    </style>
-<!--===============================================================================================-->
-</head>
-<body>
+    <!-- notifications CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/notifications/Lobibox.min.css">
+    <link rel="stylesheet" href="css/notifications/notifications.css">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="template/image/x-icon" href="<?php echo base_url()?>Assets/img/favicon.ico">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/owl.carousel.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/owl.theme.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/owl.transitions.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/normalize.css">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/meanmenu.min.css">
+    <!-- main CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/main.css">
+    <!-- educate icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/educate-custon-icon.css">
+    <!-- morrisjs CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/calendar/fullcalendar.print.min.css">
+    <!-- touchspin CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/touchspin/jquery.bootstrap-touchspin.min.css">
+    <!-- x-editor CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/editor/select2.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/editor/datetimepicker.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/editor/bootstrap-editable.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/editor/x-editor-style.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/data-table/bootstrap-table.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/data-table/bootstrap-editable.css">
+     <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/form/all-type-forms.css">
+    <!-- datapicker CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/datapicker/datepicker3.css">
+    <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/form/themesaller-forms.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/style.css">
+    <!-- style alert CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/alerts.css">
+    <!-- select2 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/select2/select2.min.css">
+    <!-- chosen CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/chosen/bootstrap-chosen.css">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/responsive.css">
+    <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/modals.css">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/vendor/modernizr-2.8.3.min.js"></script>
     
-    <div class="container-login100">
-            <div class="wrap-login100" style="width: 1000px;" >
-            <span class="login100-form-title p-b-10">
-                <h5>Pilihan Profesi:</h5>
-            </span>
-            <div class="container-fluid" align="center" style="padding-top: 20px">
-            <div class="grid-container">
-                <a href="<?=base_url()?>index.php/login/viewdaftar/Administrasi" ">
-                    <div class="grid-item griddaftarr" style="font-size: 20px;">Administrasi</div>
-                </a>
-                <a href="<?=base_url()?>index.php/login/viewdaftar/AnalisKes" >
-                    <div class="grid-item griddaftar" style="font-size: 20px;">Analis Kesehatan</div>
-                </a>
-                <a href="<?=base_url()?>index.php/login/viewdaftar/Perawat";>
-                    <div class="grid-item griddaftarr" style="font-size: 20px;" >Apoteker</div>
-                </a>
-                <a href="<?=base_url()?>index.php/login/viewdaftar/Aspot";>
-                    <div class="grid-item griddaftarr" style="font-size: 20px;" >Asisten Apoteker</div>
-                </a>
-                <a href="<?=base_url()?>index.php/login/viewdaftar/Fisioterapis";>
-                    <div class="grid-item griddaftarr" style="font-size: 20px;" >Fisioterapis</div>
-                </a>
-                <a href="<?=base_url()?>index.php/login/viewdaftar/Kasir";>
-                    <div class="grid-item griddaftarr" style="font-size: 20px;" >Kasir</div>
-                </a>
-                <a href="<?=base_url()?>index.php/login/viewdaftar/Pekarya";>
-                    <div class="grid-item griddaftarr" style="font-size: 20px;" >Pekarya</div>
-                </a>
-                <a href="<?=base_url()?>index.php/login/viewdaftar/Perawat";>
-                    <div class="grid-item griddaftarr" style="font-size: 20px;" >Perawat</div>
-                </a>
+</head>
+
+<body>
+<br>
+    <br>
+    <h3 align="center">PILIHAN PROFESI :</h3>
+   
+        <div class="widget-program-box mg-tb-30">
+            <div class="container-fluid">
+                <div class="row">
+                 <?php foreach ($array as $key){ ?>
+                <?php if ($key->id_profesi == 'Administrasi'){?>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                                    <div class="m icon-box">
+                                        <p><?php echo $key->kuota ?></p>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    </p>
+                                    <?php if ($key->kuota <= 0) { ?>
+                                        <h4>KUOTA PENUH!!</h4>
+                                    <?php } else { ?>
+                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Administrasi" ">
+                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
+                                    </a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+            <?php foreach ($array as $key){ ?>
+                <?php if ($key->id_profesi == 'Analiskes'){?>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                                    <div class="m icon-box">
+                                        <p><?php echo $key->kuota ?></p>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    </p>
+                                    <?php if ($key->kuota <= 0) { ?>
+                                        <h4>KUOTA PENUH!!</h4>
+                                    <?php } else { ?>
+                                    <a href="<?=base_url()?>index.php/login/viewdaftar/AnalisKes" >
+                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
+                                    </a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+            <?php foreach ($array as $key){ ?>
+                <?php if ($key->id_profesi == 'Apoteker'){?>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                                    <div class="m icon-box">
+                                        <p><?php echo $key->kuota ?></p>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    </p>
+                                    <?php if ($key->kuota <= 0) { ?>
+                                        <h4>KUOTA PENUH!!</h4>
+                                    <?php } else { ?>
+                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Apoteker";>
+                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
+                                    </a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+            <?php foreach ($array as $key){ ?>
+                <?php if ($key->id_profesi == 'Aspot'){?>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                                    <div class="m icon-box">
+                                        <p><?php echo $key->kuota ?></p>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    </p>
+                                    <?php if ($key->kuota <= 0) { ?>
+                                        <h4>KUOTA PENUH!!</h4>
+                                    <?php } else { ?>
+                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Aspot";>
+                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
+                                    </a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
             </div>
-            <div class="container-fluid" align="center">
+            <br>
+            <div class="row">
+            <?php foreach ($array as $key){ ?>
+                <?php if ($key->id_profesi == 'Fisioterapis'){?>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                                    <div class="m icon-box">
+                                        <p><?php echo $key->kuota ?></p>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    </p>
+                                    <?php if ($key->kuota <= 0) { ?>
+                                        <h4>KUOTA PENUH!!</h4>
+                                    <?php } else { ?>
+                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Fisioterapis";>
+                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
+                                    </a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+            <?php foreach ($array as $key){ ?>
+                <?php if ($key->id_profesi == 'Kasir'){?>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                                    <div class="m icon-box">
+                                        <p><?php echo $key->kuota ?></p>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    </p>
+                                    <?php if ($key->kuota <= 0) { ?>
+                                        <h4>KUOTA PENUH!!</h4>
+                                    <?php } else { ?>
+                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Kasir";>
+                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
+                                    </a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+            <?php foreach ($array as $key){ ?>
+                <?php if ($key->id_profesi == 'Pekarya'){?>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                                    <div class="m icon-box">
+                                        <p><?php echo $key->kuota ?></p>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    </p>
+                                    <?php if ($key->kuota <= 0) { ?>
+                                        <h4>KUOTA PENUH!!</h4>
+                                    <?php } else { ?>
+                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Pekarya";>
+                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
+                                    </a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+            <?php foreach ($array as $key){ ?>
+                <?php if ($key->id_profesi == 'Perawat'){?>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                                    <div class="m icon-box">
+                                        <p><?php echo $key->kuota ?></p>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    </p>
+                                    <?php if ($key->kuota <= 0) { ?>
+                                        <h4>KUOTA PENUH!!</h4>
+                                    <?php } else { ?>
+                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Perawat";>
+                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
+                                    </a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+            </div>
+        </div>
+    </div>
+        <div class="container-fluid" align="center">
                 <div class="p-t-115">
                     <a class="txt2" href="<?=base_url()?>index.php/login/">
                             Kembali ke Halaman Login
                         </a>
                 </div>  
             </div>
-            </div>
-    </div>
+    </script>
+    <!-- jquery
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/bootstrap.min.js"></script>
+    <!-- wow JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/wow.min.js"></script>
+    <!-- price-slider JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/metisMenu/metisMenu.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/metisMenu/metisMenu-active.js"></script>
+    <!-- morrisjs JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/sparkline/jquery.charts-sparkline.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/sparkline/sparkline-active.js"></script>
+    <!-- calendar JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/calendar/moment.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/calendar/fullcalendar.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/calendar/fullcalendar-active.js"></script>
+    <!-- data table JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/data-table/bootstrap-table.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/data-table/tableExport.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/data-table/data-table-active.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/data-table/bootstrap-table-editable.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/data-table/bootstrap-editable.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/data-table/bootstrap-table-resizable.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/data-table/colResizable-1.5.source.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/data-table/bootstrap-table-export.js"></script>
+    <!--  editable JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/editable/jquery.mockjax.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/editable/mock-active.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/editable/select2.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/editable/moment.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/editable/bootstrap-datetimepicker.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/editable/bootstrap-editable.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/editable/xediable-active.js"></script>
+    <!-- touchspin JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/touchspin/touchspin-active.js"></script>
+    <!-- datapicker JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/datapicker/datepicker-active.js"></script>
+    <!-- input-mask JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/input-mask/jasny-bootstrap.min.js"></script>
+    <!-- chosen JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/chosen/chosen.jquery.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/chosen/chosen-active.js"></script>
+    <!-- select2 JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/select2/select2.full.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/select2/select2-active.js"></script>
+    <!-- rangle-slider JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/rangle-slider/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/rangle-slider/jquery-ui-touch-punch.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/rangle-slider/rangle-active.js"></script>
+    <!-- knob JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/knob/jquery.knob.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/knob/knob-active.js"></script>
+    <!-- Chart JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/chart/jquery.peity.min.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/peity/peity-active.js"></script>
+    <!-- tab JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/tab.js"></script>
+    <!-- plugins JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/plugins.js"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/main.js"></script>
+   
 
-
-<!--===============================================================================================-->
-    <script src="<?=base_url()?>Assets/login/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-    <script src="<?=base_url()?>Assets/login/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-    <script src="<?=base_url()?>Assets/login/vendor/bootstrap/js/popper.js"></script>
-    <script src="<?=base_url()?>Assets/login/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-    <script src="<?=base_url()?>Assets/login/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-    <script src="<?=base_url()?>Assets/login/vendor/daterangepicker/moment.min.js"></script>
-    <script src="<?=base_url()?>Assets/login/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-    <script src="<?=base_url()?>Assets/login/vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-    <script src="<?=base_url()?>Assets/login/js/main.js"></script>
+    
 
 </body>
+
 </html>
+<!-- end document-->

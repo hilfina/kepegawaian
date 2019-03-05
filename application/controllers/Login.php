@@ -111,8 +111,8 @@ class Login extends CI_Controller {
 
 	public function pilihdaftar()
 	{
-		$this->load->model('mdl_login');
-		$this->load->view('pelamar/pilihdaftar');
+		$paket['array'] = $this->mdl_login->getProfesi()->result();
+        $this->load->view('pelamar/pilihdaftar', $paket);
 	}
 
 	public function viewdaftar($id_profesi)

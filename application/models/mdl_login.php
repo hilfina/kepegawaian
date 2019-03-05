@@ -28,7 +28,12 @@ class Mdl_login extends CI_Model
     function daftar($table,$data)
     {
         $query = $this->db->insert($table, $data);
-        return $this->db->insert_id();// return last insert id
+        return $this->db->insert_id();
+
+    }
+
+    function getProfesi(){
+        return $this->db->get('jenis_profesi');
     }
 
     function getlast()
