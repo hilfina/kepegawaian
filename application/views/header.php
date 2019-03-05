@@ -157,7 +157,6 @@
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
                                 <li><a title="Semua Pelamar" href="<?php echo site_url('admin/pelamar') ?>"><span class="mini-cli">Data Pelamar</span></a></li>
                                 <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/dataSeleksi') ?>"><span class="mini-sub-pro">Data Seleksi</span></a></li>
-                                <li><a title="Tambah Pelamar" href="<?php echo site_url('admin/addPelamar') ?>"><span class="mini-sub-pro">Tambah Pelamar</span></a></li>
                             </ul>
                         </li>
                         <?php } elseif ($levelku == "Pelamar" && $aktifku == '1') { ?>

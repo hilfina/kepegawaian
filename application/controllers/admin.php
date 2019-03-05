@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
 	private $filename = "import_data";
-
 	public function __construct()
 	{
 		parent::__construct();
@@ -239,6 +238,92 @@ class Admin extends CI_Controller {
                 }
         }
 
+        else{ redirect("login"); } 
+    }
+        public function addPelamar(){
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('no_ktp','Nomor Kartu Penduduk','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $data['array']=$this->mdl_admin->getProfesi();
+                $this->load->view('admin/pelamar/addPelamar',$data);
+            }else{
+                $nik=$this->input->post('nik');
+                $no_ktp=$this->input->post('no_ktp');
+                $nama=$this->input->post('nama');
+                $alamat=$this->input->post('alamat');
+                $no_telp=$this->input->post('no_telp');
+                $email=$this->input->post('email');
+                $id_status=$this->input->post('id_status');
+                $id_profesi=$this->input->post('id_profesi');
+             
+                $dataKaryawan = array(
+                'nik' => $nik,
+                'no_ktp' => $no_ktp,
+                'no_bpjs' => '-',
+                'nama' => $nama,
+                'alamat' => $alamat,
+                'no_telp' => $no_telp,
+                'email' => $email,
+                'foto' => 'profile.png',
+                'id_status' => 'Pelamar',
+                'id_profesi' => $id_profesi,
+                'id_golongan' => 'Tidak Ada'
+                );
+
+                $this->mdl_admin->addData('karyawan',$dataKaryawan);
+                $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from karyawan where no_ktp = $no_ktp"));
+
+                $dataLowongan = array(
+                'id_karyawan' => $data['id_karyawan'],
+                'pend_akhir' => '-',
+                'nilai_akhir' => '-'
+                );
+
+                $dataLogin = array(
+                'id_karyawan' => $data['id_karyawan'],
+                'username' => $data['no_ktp'],
+                'password' => md5($data['no_ktp']),
+                'level' => 'Pelamar',
+                'aktif' => 0
+                );
+
+                $this->mdl_admin->addData('lowongan',$dataLowongan);
+                $this->mdl_admin->addData('login',$dataLogin);
+                $this->session->set_flashdata('msg','Success');
+                $encrypted_id = $data['id_karyawan'];
+                $this->load->library('email');
+                $config = array();
+                $config['charset'] = 'utf-8';
+                $config['useragent'] = 'CodeIgniter';
+                $config['protocol']= "smtp";
+                $config['mailtype']= "html";
+                $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+                $config['smtp_port']= "465";
+                $config['smtp_timeout']= "400";
+                $config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
+                $config['smtp_pass']= "hilfina090798"; // isi dengan password kamu
+                $config['crlf']="\r\n"; 
+                $config['newline']="\r\n"; 
+                $config['wordwrap'] = TRUE;
+                //memanggil library email dan set konfigurasi untuk pengiriman email
+                    
+                $this->email->initialize($config);
+                //konfigurasi pengiriman
+                $this->email->from($config['smtp_user']);
+                $this->email->to($email);
+                $this->email->subject("Notifikasi");
+                $this->email->message("Mohon lengkapi data lamaran anda di RSI Aisyiyah Malang, karena penseleksian akan segera dilakukan.<br>
+                Klik tombol dibawah ini untuk aktifikasi akun anda.<br>
+                Masukkan username dan password dengan nomor KTP sesuai data lamaran yang telah anda kirim.<br><br>".
+                "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>");
+                $this->email->send();
+
+                redirect("admin/pelamar/allPelamar");
+                }
+        }
+        
         else{ redirect("login"); } 
     }
 

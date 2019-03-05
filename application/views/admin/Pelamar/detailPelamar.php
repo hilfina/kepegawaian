@@ -36,6 +36,16 @@
               <div class="profile-info-inner">
                 <div class="profile-img">
                   <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt=""/>
+                </div><br>
+                <div align="center">
+                  <?php if ($key->id_status == "Pelamar") { ?>
+                        <a href="<?php echo site_url(); echo "/admin/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
+                          <button class="btn btn-success waves-effect mg-b-15" title="TERIMA"><i class="fa fa-check"></i> Terima </button>
+                        </a>
+                        <a href="<?php echo site_url(); echo "/admin/pelamarDitolak/"; echo $key->id_karyawan ;?>">
+                          <button class="btn btn-danger waves-effect mg-b-15" title="TOLAK"><i class="fa fa-times"></i> Tolak</button>
+                        </a>
+                      <?php } else{}?>
                 </div>
               </div>
             </div>

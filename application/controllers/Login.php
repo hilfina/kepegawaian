@@ -200,8 +200,8 @@ class Login extends CI_Controller {
 		$this->email->to($email);
 		$this->email->subject("Verifikasi Akun");
 		$this->email->message(
-			"terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tautan dibawah ini<br><br>".
-			site_url("login/verification/$encrypted_id")
+			"terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
+			"<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
 		);
 		
 		if($this->email->send())

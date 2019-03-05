@@ -13,7 +13,7 @@ class Mdl_admin extends CI_Model
     public function getPelamar(){
         $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan'"));
         $hasil=$data['hsl'];
-        $query = $this->db->query("select * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' order by mulai desc limit $hasil");
+        $query = $this->db->query("select * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan'  group by k.id_karyawan order by mulai desc limit $hasil");
         return $query->result();
     }
 
@@ -44,6 +44,11 @@ class Mdl_admin extends CI_Model
 
     public function getSeleksi($table){
          $query = $this->db->query("SELECT * from $table as x inner join karyawan where x.id_karyawan = karyawan.id_karyawan");
+        return $query->result();
+    }
+
+    public function getProfesi(){
+        $query = $this->db->query("SELECT * from jenis_profesi");
         return $query->result();
     }
 }
