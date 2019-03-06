@@ -58,6 +58,7 @@ class Login extends CI_Controller {
 	                        'myPass' => $apps->password,
 	                        'myLevel'=> $apps->level,
 	                        'myAktif' => $apps->aktif,
+	                        'myStatus' => $apps->id_status,
 	                    );
 	                    //set session userdata
 	                    $this->session->set_userdata($session_data);
@@ -171,9 +172,13 @@ class Login extends CI_Controller {
 	            'id_karyawan' => $id_karyawan,
 	        );
 
+	    //KUOTA
+	    
+
 	    $insert1 = $this->mdl_login->daftar('karyawan',$data1);
 	    $insert2 = $this->mdl_login->daftar('lowongan',$data2);
    		$insert5 = $this->mdl_login->daftar('login',$data5);
+   		$this->mdl_login->updateKuota($id_profesi);
 
 	    //enkripsi id
 		$encrypted_id = $id_karyawan;

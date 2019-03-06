@@ -168,19 +168,16 @@
                                 <li><a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>"><span class="mini-sub-pro">Data Surat</span></a></li>
                             </ul>
                         </li>
-                        <<?php } elseif ($levelku == "Pelamar" && $aktifku == '0') {?>
+                        <?php } elseif ($levelku == "Pelamar" && $aktifku == '0') {?>
                         <li>
                             <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>"><span class="mini-click-non">Aktivasi Akun</span></a>
                         </li>
-                        <?php } ?>
-                        
-                        <!-- <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Data Tables</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Peity Charts" href="static-table.html"><span class="mini-sub-pro">Static Table</span></a></li>
-                                <li><a title="Data Table" href="data-table.html"><span class="mini-sub-pro">Data Table</span></a></li>
-                            </ul>
+                        <?php } elseif ($levelku == "Calon Karyawan") { ?>
+                        <li>
+                            <a class="has-arrow" href="<?php echo site_url('pelamar/nilai') ?>" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Data Tables</span></a>
                         </li>
+                        <?php } ?>
+                        <!-- 
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Forms Elements</span></a>
                             <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">

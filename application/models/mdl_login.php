@@ -29,7 +29,11 @@ class Mdl_login extends CI_Model
     {
         $query = $this->db->insert($table, $data);
         return $this->db->insert_id();
+    }
 
+    function updateKuota($id_profesi){
+        $query = $this->db->query("UPDATE jenis_profesi SET kuota=kuota-1 where id_profesi = '$id_profesi'");
+        return $this->db->affected_rows();
     }
 
     function getProfesi(){
