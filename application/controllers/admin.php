@@ -73,6 +73,10 @@ class Admin extends CI_Controller {
         $data = array( 'id_status' => 'Calon Karyawan' ); 
         $this->mdl_admin->updateData($where,$data,'karyawan');
 
+        $where = array( 'id_karyawan' => $id ); 
+        $data = array( 'level' => 'Pelamar2' ); 
+        $this->mdl_admin->updateData($where,$data,'login');
+
         $dataSel = array(
             'id_karyawan' => $id,
             'tgl_seleksi' => "-",

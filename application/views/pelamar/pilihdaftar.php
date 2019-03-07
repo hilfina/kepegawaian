@@ -110,11 +110,11 @@
     <h3 align="center">PILIHAN PROFESI :</h3>
    
         <div class="widget-program-box mg-tb-30">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                  <?php foreach ($array as $key){ ?>
                 <?php if ($key->id_profesi == 'Administrasi'){?>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="text-center content-box">
@@ -140,7 +140,7 @@
             <?php } ?>
             <?php foreach ($array as $key){ ?>
                 <?php if ($key->id_profesi == 'Analiskes'){?>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="text-center content-box">
@@ -166,7 +166,7 @@
             <?php } ?>
             <?php foreach ($array as $key){ ?>
                 <?php if ($key->id_profesi == 'Apoteker'){?>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="text-center content-box">
@@ -190,9 +190,13 @@
                     </div>
                 <?php } ?>
             <?php } ?>
+            
+            </div>
+            <br>
+            <div class="row">
             <?php foreach ($array as $key){ ?>
                 <?php if ($key->id_profesi == 'Aspot'){?>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="text-center content-box">
@@ -216,12 +220,35 @@
                     </div>
                 <?php } ?>
             <?php } ?>
-            </div>
-            <br>
-            <div class="row">
+            <?php foreach ($array as $key){ ?>
+                <?php if ($key->id_profesi == 'Dokter'){?>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                                    <div class="m icon-box">
+                                        <p><?php echo $key->kuota ?></p>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    </p>
+                                    <?php if ($key->kuota <= 0) { ?>
+                                        <h4>KUOTA PENUH!!</h4>
+                                    <?php } else { ?>
+                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Dokter";>
+                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
+                                    </a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
             <?php foreach ($array as $key){ ?>
                 <?php if ($key->id_profesi == 'Fisioterapis'){?>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="text-center content-box">
@@ -245,9 +272,13 @@
                     </div>
                 <?php } ?>
             <?php } ?>
+            
+            </div>
+            <br>
+            <div class="row">
             <?php foreach ($array as $key){ ?>
                 <?php if ($key->id_profesi == 'Kasir'){?>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="text-center content-box">
@@ -273,7 +304,7 @@
             <?php } ?>
             <?php foreach ($array as $key){ ?>
                 <?php if ($key->id_profesi == 'Pekarya'){?>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="text-center content-box">
@@ -299,7 +330,7 @@
             <?php } ?>
             <?php foreach ($array as $key){ ?>
                 <?php if ($key->id_profesi == 'Perawat'){?>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="text-center content-box">

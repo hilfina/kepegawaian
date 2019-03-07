@@ -3,6 +3,7 @@
   $namaku=$this->session->userdata("myLongName");
   $emailku=$this->session->userdata("myEmail");
   $aktifku=$this->session->userdata("myAktif");
+  $statusku=$this->session->userdata("myStatus");
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -172,9 +173,9 @@
                         <li>
                             <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>"><span class="mini-click-non">Aktivasi Akun</span></a>
                         </li>
-                        <?php } elseif ($levelku == "Calon Karyawan") { ?>
+                        <?php } elseif ($levelku == "Pelamar2") { ?>
                         <li>
-                            <a class="has-arrow" href="<?php echo site_url('pelamar/nilai') ?>" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Data Tables</span></a>
+                            <a title="Nilai" href="<?php echo site_url('pelamar/nilai') ?>"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Hasil Nilai Tes</span></a>
                         </li>
                         <?php } ?>
                         <!-- 

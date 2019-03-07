@@ -79,4 +79,9 @@ class Mdl_pelamar extends CI_Model
         return $query->result();
     }
 
+    public function getNilai($id){
+        $query= $this->db->query("SELECT * from seleksi  where id_karyawan='$id'");
+        return $query->result();
+    }
+
 }
