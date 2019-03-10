@@ -3,6 +3,7 @@
   $namaku=$this->session->userdata("myLongName");
   $emailku=$this->session->userdata("myEmail");
   $aktifku=$this->session->userdata("myAktif");
+  $statusku=$this->session->userdata("myStatus");
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -168,19 +169,16 @@
                                 <li><a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>"><span class="mini-sub-pro">Data Surat</span></a></li>
                             </ul>
                         </li>
-                        <<?php } elseif ($levelku == "Pelamar" && $aktifku == '0') {?>
+                        <?php } elseif ($levelku == "Pelamar" && $aktifku == '0') {?>
                         <li>
                             <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>"><span class="mini-click-non">Aktivasi Akun</span></a>
                         </li>
-                        <?php } ?>
-                        
-                        <!-- <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Data Tables</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Peity Charts" href="static-table.html"><span class="mini-sub-pro">Static Table</span></a></li>
-                                <li><a title="Data Table" href="data-table.html"><span class="mini-sub-pro">Data Table</span></a></li>
-                            </ul>
+                        <?php } elseif ($levelku == "Pelamar2") { ?>
+                        <li>
+                            <a title="Nilai" href="<?php echo site_url('pelamar/nilai') ?>"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Hasil Nilai Tes</span></a>
                         </li>
+                        <?php } ?>
+                        <!-- 
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Forms Elements</span></a>
                             <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">

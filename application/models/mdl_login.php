@@ -28,7 +28,16 @@ class Mdl_login extends CI_Model
     function daftar($table,$data)
     {
         $query = $this->db->insert($table, $data);
-        return $this->db->insert_id();// return last insert id
+        return $this->db->insert_id();
+    }
+
+    function updateKuota($id_profesi){
+        $query = $this->db->query("UPDATE jenis_profesi SET kuota=kuota-1 where id_profesi = '$id_profesi'");
+        return $this->db->affected_rows();
+    }
+
+    function getProfesi(){
+        return $this->db->get('jenis_profesi');
     }
 
     function getlast()

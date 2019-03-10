@@ -370,6 +370,12 @@ class pelamar extends CI_Controller {
 		redirect(site_url('pelamar/datapend'));
 	}
 
+	public function nilai(){
+		$id=$this->session->userdata('myId');
+		$paket['array']=$this->mdl_pelamar->getNilai($id);
+		$this->load->view('pelamar/nilai',$paket);
+	}
+
 }
 
 /* End of file pelamar.php */
