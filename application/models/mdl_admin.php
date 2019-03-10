@@ -51,4 +51,8 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from jenis_profesi");
         return $query->result();
     }
+    public function getJenSur(){
+        $query = $this->db->query("SELECT nama_surat from jenis_Surat");
+        return $query->result();
+    }
 }

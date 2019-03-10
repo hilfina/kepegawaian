@@ -4,7 +4,8 @@
   $namaku=$this->session->userdata("myLongName");
   $emailku=$this->session->userdata("myEmail");
 ?>
-<div class="breadcome-area"><br>
+<br>
+ <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -13,9 +14,10 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                <li><a href="<?php echo site_url('admin/pelamar') ?>">Home</a> 
+                  <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Tambah Data Pelamar</span>
+                <li><a href="<?php echo site_url('admin/pelamar') ?>">Tambah Pelamar</a> 
                 </li>
               </ul>
             </div>
@@ -85,6 +87,14 @@
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="email" type="text" class="form-control" placeholder="Email">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><label form-control-label">Pendidikan Akhir</label></td>
+            <td style="height: 50px">
+              <div class="col-lg-12">
+                <input name="pendidikan" type="text" class="form-control" placeholder="Nama Institusi">
               </div>
             </td>
           </tr>

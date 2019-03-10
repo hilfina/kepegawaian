@@ -4,7 +4,7 @@
 	$namaku=$this->session->userdata("myLongName");
 	$emailku=$this->session->userdata("myEmail");
 	$idku=$this->session->userdata("myId");
- ?>
+ ?><br>
  <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">
@@ -14,9 +14,9 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                <li><a href="<?php echo site_url('admin/pelamar') ?>">Data Pelamar</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Detail Data Pelamar</span>
+                <li><span class="bread-blod">Detail Pelamar</span>
                 </li>
               </ul>
             </div>
@@ -65,13 +65,14 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="review-content-section">
-                                 <?php foreach ($datDir as $key){ ?>
+                                 <form action="<?php echo site_url();?>/admin/editDataPel/<?php echo $key->id_karyawan ;?>" method="POST">
+                                   <?php foreach ($datDir as $key){ ?>
                                   <table width="100%">
                                       <tr>
                                         <td width="20%"><label form-control-label">Nomor Pelamar</label></td>
                                         <td style="height: 50px" width="80%">
                                           <div class="col-lg-12">
-                                            <input type="text" class="form-control" value="<?php echo $key->id_karyawan; ?>" style="width:100%">
+                                            <input name="id_karyawan" type="text" class="form-control" value="<?php echo $key->id_karyawan; ?>" style="width:100%">
                                           </div>
                                         </td>
                                       </tr>
@@ -79,7 +80,7 @@
                                         <td><label form-control-label">Nomor KTP</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input type="text" class="form-control" value="<?php echo $key->no_ktp; ?>">
+                                            <input name="no_ktp" type="text" class="form-control" value="<?php echo $key->no_ktp; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -87,7 +88,7 @@
                                         <td><label form-control-label">Nama Lengkap</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input type="text" class="form-control" value="<?php echo $key->nama;?>">
+                                            <input name="nama" type="text" class="form-control" value="<?php echo $key->nama;?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -95,7 +96,7 @@
                                         <td><label form-control-label">Alamat</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input type="text" class="form-control" value="<?php echo $key->alamat;?>">
+                                            <input name="alamat" type="text" class="form-control" value="<?php echo $key->alamat;?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -103,7 +104,7 @@
                                         <td><label form-control-label">Nomor Telepon</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input type="text" class="form-control" value="<?php echo $key->no_telp; ?>">
+                                            <input name="no_telp" type="text" class="form-control" value="<?php echo $key->no_telp; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -111,7 +112,7 @@
                                         <td><label form-control-label">Email</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input type="text" class="form-control" value="<?php echo $key->email; ?>">
+                                            <input name="email" type="text" class="form-control" value="<?php echo $key->email; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -119,12 +120,23 @@
                                         <td><label form-control-label">Profesi Lamaran</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input type="text" class="form-control" value="<?php echo $key->id_profesi?>">
+                                            <select  class="form-control" name="id_profesi">
+                                              <option><?php echo $key->id_profesi; ?></option>
+                                              <option><strong>Pilihan Lainnya:</strong></option>
+                                              <?php foreach ($array as $key2) { ?>
+
+                                                <option><?php echo $key2->id_profesi; ?></option>
+                                              <?php } ?>
+                                            </select>
                                           </div>
                                         </td>
                                       </tr>
-                                    </table>
+                                    </table><br>
+                                    <div align="center">
+                                      <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
+                                    </div>
                                  <?php } ?>
+                                 </form>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +145,17 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="review-content-section">
-                                  
+                                  <div class="col-lg-12">
+                                    <div class="sparkline13-hd">
+                                      <div class="main-sparkline13-hd">
+                                        <?php foreach ($datDir as $key){?>
+                                        <div align="right"><a href="<?php echo site_url(); echo "/admin/addPend/";  echo $key->id_karyawan ; ?>">
+                                          <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                                        </a></div>
+                                      <?php }?>
+                                      </div>
+                                    </div>
+                                  </div>
                                     <div class="sparkline8-graph">
                                       <div class="static-table-list">
                                           <table class="table">
@@ -198,7 +220,17 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="review-content-section">
-
+                                  <div class="col-lg-12">
+                                    <div class="sparkline13-hd">
+                                      <div class="main-sparkline13-hd">
+                                         <?php foreach ($datDir as $key){?>
+                                        <div align="right"><a href="<?php echo site_url(); echo "/admin/addSurat/";  echo $key->id_karyawan ; ?>">
+                                          <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                                        </a></div>
+                                      <?php }?>
+                                      </div>
+                                    </div>
+                                  </div>
                                   <div class="sparkline8-graph">
                                       <div class="static-table-list">
                                           <table class="table">
