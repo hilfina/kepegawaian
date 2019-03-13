@@ -152,7 +152,23 @@
                         <li class="active">
                             <a title="Home" href="<?php echo site_url('pelamar/home') ?>"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>
                         </li>
+                        
                         <?php if ($levelku == "admin") {?>
+                            <li class="active">
+                            <a title="Home" href="<?php echo site_url('adminLoker') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Lowongan</span></a>
+                        </li>
+                        <li class="active">
+                            <a title="Home" href="<?php echo site_url('adminProfesi') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Profesi</span></a>
+                        </li>
+                        
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Karyawan</span></a>
+                            <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
+                                <li><a title="Semua Pelamar" href="<?php echo site_url('adminKaryawan/') ?>"><span class="mini-cli">Data Karyawan</span></a></li>
+                                <li><a title="Sedang Seleksi" href="<?php echo site_url('adminRiwayat/') ?>"><span class="mini-sub-pro">Riwayat Penugasan</span></a></li>
+                                <li><a title="Sedang Seleksi" href="<?php echo site_url('adminStatus') ?>"><span class="mini-sub-pro">Riwayat Status</span></a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Pelamar</span></a>
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">

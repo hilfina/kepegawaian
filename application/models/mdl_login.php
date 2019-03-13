@@ -31,11 +31,6 @@ class Mdl_login extends CI_Model
         return $this->db->insert_id();
     }
 
-    function updateKuota($id_profesi){
-        $query = $this->db->query("UPDATE jenis_profesi SET kuota=kuota-1 where id_profesi = '$id_profesi'");
-        return $this->db->affected_rows();
-    }
-
     function getProfesi(){
         return $this->db->get('jenis_profesi');
     }
@@ -44,6 +39,11 @@ class Mdl_login extends CI_Model
     {
         $query = $this->db->query('select max(id_karyawan) as id_karyawan from karyawan');
         return $query->result_array();
+    }
+    function getLoker()
+    {
+        $query = $this->db->query('SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi');
+        return $query->result();
     }
 
     function changeActiveState($key)

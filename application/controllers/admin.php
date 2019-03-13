@@ -95,9 +95,9 @@ class Admin extends CI_Controller {
         else{ redirect("login"); } 
     }
 
-    public function pelamarDitolak($id_karyawan){
+    public function pelamarDitolak($id){
         if($this->mdl_admin->logged_id()) {
-        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select email from karyawan where id_karyawan ='$id'")); 
+        $dataa=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select email from karyawan where id_karyawan ='$id'")); 
 
         $this->load->library('email');
         $config = array();
@@ -118,7 +118,7 @@ class Admin extends CI_Controller {
         $this->email->initialize($config);
         //konfigurasi pengiriman
         $this->email->from($config['smtp_user']);
-        $this->email->to($data['email']);
+        $this->email->to($dataa['email']);
         $this->email->subject("Notifikasi");
         $this->email->message("Maaf, anda gagal dalam seleksi di RSIA");
         $this->email->send();
@@ -198,7 +198,7 @@ class Admin extends CI_Controller {
     public function dataSeleksi(){
        if($this->mdl_admin->logged_id())
         {
-            $paket['array']=$this->mdl_admin->getSeleksi('seleksi');
+            $paket['array']=$this->mdl_admin->getSeleksi();
             $this->load->view('admin/pelamar/allSeleksi',$paket);
         }
 
@@ -372,6 +372,28 @@ class Admin extends CI_Controller {
              $where = array('id_karyawan' => $id);
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
              redirect("admin/pelamar/allPelamar");
+        }
+
+        else{ redirect("login"); } 
+    }
+    public function editMagang($id){
+         if($this->mdl_admin->logged_id())
+        {
+            $where = array('id_karyawan' => $id);
+            $dataKaryawan = array(
+                'id_status' => 'Magang'
+                );
+            $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from karyawan where id_karyawan = $id"));
+            $dataRiwayat = array(
+                'id_karyawan' => $id,
+                'ruangan' => '-',
+                'id_profesi' => $data['id_profesi'],
+                'mulai' => date('d-m-y')
+            );
+
+             $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+             $this->mdl_admin->addData('riwayat',$dataRiwayat);
+             redirect("adminKaryawan/karyawanDetail/$id");
         }
 
         else{ redirect("login"); } 

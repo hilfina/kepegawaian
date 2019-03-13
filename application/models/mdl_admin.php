@@ -30,7 +30,12 @@ class Mdl_admin extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-    
+    function delLoker($id){
+        $query = $this->db->query("DELETE FROM loker where id_loker = $id");
+    }
+    function delProfesi($id){
+        $query = $this->db->query("DELETE FROM jenis_profesi where id_profesi = $id");
+    }
     function addData($table,$data)
     {
         $query = $this->db->insert($table, $data);
@@ -42,8 +47,8 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
-    public function getSeleksi($table){
-         $query = $this->db->query("SELECT * from $table as x inner join karyawan where x.id_karyawan = karyawan.id_karyawan");
+    public function getSeleksi(){
+         $query = $this->db->query("SELECT * from seleksi as x inner join karyawan on x.id_karyawan = karyawan.id_karyawan where id_status = 'Pelamar' || id_status = 'Calon Karyawan'");
         return $query->result();
     }
 
@@ -51,8 +56,24 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from jenis_profesi");
         return $query->result();
     }
+    public function getRiwayat(){
+        $query = $this->db->query("SELECT * from riwayat");
+        return $query->result();
+    }
+    public function getKaryawan(){
+        $query = $this->db->query("SELECT * from karyawan where id_status != 'Pelamar' AND id_status!='Calon Karyawan' AND id_status != 'Pelamar Ditolak'");
+        return $query->result();
+    }
+    public function getLoker(){
+        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi");
+        return $query->result();
+    }
     public function getJenSur(){
         $query = $this->db->query("SELECT nama_surat from jenis_Surat");
+        return $query->result();
+    }
+    public function getTempat($id){
+        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan where k.id_karyawan = $id group by r.id_karyawan order by mulai limit 1");
         return $query->result();
     }
 }

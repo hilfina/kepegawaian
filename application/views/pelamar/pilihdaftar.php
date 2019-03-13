@@ -105,266 +105,48 @@
 </head>
 
 <body>
-<br>
-    <br>
-    <h3 align="center">PILIHAN PROFESI :</h3>
-   
-        <div class="widget-program-box mg-tb-30">
-            <div class="container">
-                <div class="row">
-                 <?php foreach ($array as $key){ ?>
-                <?php if ($key->id_profesi == 'Administrasi'){?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="text-center content-box">
-                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
-                                    <div class="m icon-box">
-                                        <p><?php echo $key->kuota ?></p>
-                                    </div>
-                                    <p class="small mg-t-box">
-                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                    </p>
-                                    <?php if ($key->kuota <= 0) { ?>
-                                        <h4>KUOTA PENUH!!</h4>
-                                    <?php } else { ?>
-                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Administrasi" ">
-                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
-                                    </a>
-                                    <?php } ?>
-                                </div>
+<br><br>
+<h3 align="center">PILIHAN PROFESI :</h3>
+<?php
+    $noww =date('d/m/y'); $a=0;
+?>
+<div class="widget-program-box mg-tb-30">
+    <div class="container">
+        <?php foreach ($array as $key){$a++?>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="padding-bottom: 20px">
+                <div class="hpanel widget-int-shape responsive-mg-b-30">
+                    <div class="panel-body">
+                        <div class="text-center content-box">
+                            <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
+                            <div class="m icon-box">
+                                <p><strong>
+                                    <?php 
+                                    $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select count(nama) as total from karyawan as k inner join login as l on k.id_karyawan=l.id_karyawan where id_profesi = '$key->id_profesi' and (id_status ='Pelamar' || id_status= 'Calon Karyawan') and aktif = 1"));
+                                    echo $key->kuota - $data['total']; ?>
+                                     Orang</strong></p>
+                                <br>
+                                <p><?php echo $key->mulai." Sampai ".$key->akhir;?></p>
+                                <strong>Ketentuan :</strong>
+                                <p>IPK Minimal <strong><?php echo $key->ipkmin ?></strong><br>
+                                <strong><?php echo $key->jenkel ?></strong> Degan usia MAX <strong><?php echo $key->usia." Tahun." ?></strong><br>
+                                Jurusan <?php echo $key->jurusan ?><br></p>
+                            </div>
+                            <div class="product-buttons">
+                                <a href="<?php echo site_url(); echo "/login/viewDaftar/"; echo $key->id_profesi ;?>"><button type="button" class="button-default cart-btn">Daftar</button></a>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-            <?php } ?>
-            <?php foreach ($array as $key){ ?>
-                <?php if ($key->id_profesi == 'Analiskes'){?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="text-center content-box">
-                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
-                                    <div class="m icon-box">
-                                        <p><?php echo $key->kuota ?></p>
-                                    </div>
-                                    <p class="small mg-t-box">
-                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                    </p>
-                                    <?php if ($key->kuota <= 0) { ?>
-                                        <h4>KUOTA PENUH!!</h4>
-                                    <?php } else { ?>
-                                    <a href="<?=base_url()?>index.php/login/viewdaftar/AnalisKes" >
-                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
-                                    </a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
-            <?php foreach ($array as $key){ ?>
-                <?php if ($key->id_profesi == 'Apoteker'){?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="text-center content-box">
-                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
-                                    <div class="m icon-box">
-                                        <p><?php echo $key->kuota ?></p>
-                                    </div>
-                                    <p class="small mg-t-box">
-                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                    </p>
-                                    <?php if ($key->kuota <= 0) { ?>
-                                        <h4>KUOTA PENUH!!</h4>
-                                    <?php } else { ?>
-                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Apoteker";>
-                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
-                                    </a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
-            
+                </div>
             </div>
-            <br>
-            <div class="row">
-            <?php foreach ($array as $key){ ?>
-                <?php if ($key->id_profesi == 'Aspot'){?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="text-center content-box">
-                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
-                                    <div class="m icon-box">
-                                        <p><?php echo $key->kuota ?></p>
-                                    </div>
-                                    <p class="small mg-t-box">
-                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                    </p>
-                                    <?php if ($key->kuota <= 0) { ?>
-                                        <h4>KUOTA PENUH!!</h4>
-                                    <?php } else { ?>
-                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Aspot";>
-                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
-                                    </a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
-            <?php foreach ($array as $key){ ?>
-                <?php if ($key->id_profesi == 'Dokter'){?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="text-center content-box">
-                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
-                                    <div class="m icon-box">
-                                        <p><?php echo $key->kuota ?></p>
-                                    </div>
-                                    <p class="small mg-t-box">
-                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                    </p>
-                                    <?php if ($key->kuota <= 0) { ?>
-                                        <h4>KUOTA PENUH!!</h4>
-                                    <?php } else { ?>
-                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Dokter";>
-                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
-                                    </a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
-            <?php foreach ($array as $key){ ?>
-                <?php if ($key->id_profesi == 'Fisioterapis'){?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="text-center content-box">
-                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
-                                    <div class="m icon-box">
-                                        <p><?php echo $key->kuota ?></p>
-                                    </div>
-                                    <p class="small mg-t-box">
-                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                    </p>
-                                    <?php if ($key->kuota <= 0) { ?>
-                                        <h4>KUOTA PENUH!!</h4>
-                                    <?php } else { ?>
-                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Fisioterapis";>
-                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
-                                    </a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
-            
-            </div>
-            <br>
-            <div class="row">
-            <?php foreach ($array as $key){ ?>
-                <?php if ($key->id_profesi == 'Kasir'){?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="text-center content-box">
-                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
-                                    <div class="m icon-box">
-                                        <p><?php echo $key->kuota ?></p>
-                                    </div>
-                                    <p class="small mg-t-box">
-                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                    </p>
-                                    <?php if ($key->kuota <= 0) { ?>
-                                        <h4>KUOTA PENUH!!</h4>
-                                    <?php } else { ?>
-                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Kasir";>
-                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
-                                    </a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
-            <?php foreach ($array as $key){ ?>
-                <?php if ($key->id_profesi == 'Pekarya'){?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="text-center content-box">
-                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
-                                    <div class="m icon-box">
-                                        <p><?php echo $key->kuota ?></p>
-                                    </div>
-                                    <p class="small mg-t-box">
-                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                    </p>
-                                    <?php if ($key->kuota <= 0) { ?>
-                                        <h4>KUOTA PENUH!!</h4>
-                                    <?php } else { ?>
-                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Pekarya";>
-                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
-                                    </a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
-            <?php foreach ($array as $key){ ?>
-                <?php if ($key->id_profesi == 'Perawat'){?>
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="text-center content-box">
-                                    <h2 class="m-b-xs"><?php echo $key->nama_profesi ?></h2>
-                                    <div class="m icon-box">
-                                        <p><?php echo $key->kuota ?></p>
-                                    </div>
-                                    <p class="small mg-t-box">
-                                        Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                    </p>
-                                    <?php if ($key->kuota <= 0) { ?>
-                                        <h4>KUOTA PENUH!!</h4>
-                                    <?php } else { ?>
-                                    <a href="<?=base_url()?>index.php/login/viewdaftar/Perawat";>
-                                    <button class="btn btn-success widget-btn-1 btn-sm">Action button</button>
-                                    </a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
-            </div>
-        </div>
+        <?php } ?>
     </div>
-        <div class="container-fluid" align="center">
-                <div class="p-t-115">
-                    <a class="txt2" href="<?=base_url()?>index.php/login/">
-                            Kembali ke Halaman Login
-                        </a>
-                </div>  
-            </div>
-            <br><br>
+</div>
+<div class="container-fluid" align="center">
+    <div class="p-t-115">
+        <a class="txt2" href="<?=base_url()?>index.php/login/">Kembali ke Halaman Login</a>
+    </div>  
+</div>
+<br><br>
     </script>
     <!-- jquery
         ============================================ -->
