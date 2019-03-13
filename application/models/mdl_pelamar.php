@@ -70,7 +70,7 @@ class Mdl_pelamar extends CI_Model
     }
 
     public function getSurat($id){
-        $query= $this->db->query("SELECT * from sip_str  where id_karyawan='$id'");
+        $query= $this->db->query("SELECT s.id_sipstr, s.no_surat, j.jenis_surat, s.tgl_mulai, s.tgl_akhir, s.aktif  from sip_str as s inner join jenis_surat as j on s.id_surat=j.id_surat where id_karyawan='$id'");
         return $query->result();
     }
 

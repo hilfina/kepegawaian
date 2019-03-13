@@ -22,7 +22,7 @@ $this->load->view("header.php");
                         </div>
                         <br>
                         <div class="alert alert-info">
-                            Perhatian! Data surat harus diisi apabila anda mendaftar sebagai Apoteker, Fisioterapis dan Perawat!
+                            Perhatian! Data surat harus diisi apabila anda mendaftar sebagai Dokter, Apoteker, Fisioterapis dan Perawat!
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ $this->load->view("header.php");
                                     <tr>
                                         <td><?php echo $no++ ?></td>
                                         <td><?php echo $key->no_surat; ?></td>
-                                        <td><?php echo $key->id_surat; ?></td>
+                                        <td><?php echo $key->jenis_surat; ?></td>
                                         <td><?php echo $key->tgl_mulai; ?></td>
                                         <td><?php echo $key->tgl_akhir; ?></td>
                                         <td>
