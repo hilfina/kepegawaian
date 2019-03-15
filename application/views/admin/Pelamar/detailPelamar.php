@@ -163,6 +163,7 @@
                                                   <tr>
                                                     <th>Gambar</th>
                                                     <th>Institusi</th>
+                                                    <th>Jurusan</th>
                                                     <th>Tahun Pendidikan</th>
                                                     <th>No Ijasah</th>
                                                     <th>Verifikasi</th>
@@ -191,6 +192,7 @@
                                                         </div>        
                                                       </td>
                                                       <td><?php echo $key->pendidikan; ?></td>
+                                                      <td><?php echo $key->jurusan; ?></td>
                                                       <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
                                                       <td><?php echo $key->nomor_ijazah; ?></td>
                                                       

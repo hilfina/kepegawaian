@@ -63,7 +63,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <input type="text" class="form-control" name="jurusan" value="<?php echo $key->pendidikan;?>">
+                                        <input type="text" class="form-control" name="jurusan" value="<?php echo $key->jurusan;?>">
                                     </div>
                                 </div>
                             </div>

@@ -76,4 +76,9 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan where k.id_karyawan = $id group by r.id_karyawan order by mulai limit 1");
         return $query->result();
     }
+
+    public function getStatus(){
+        $query = $this->db->query("SELECT * from status");
+        return $query->result();
+    }
 }

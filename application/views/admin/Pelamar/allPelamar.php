@@ -64,6 +64,7 @@
                     <th>E-Mail</th>
                     <th>Pilihan Profesi</th>
                     <th>Pendidikan Terakhir</th>
+                    <th>Jurusan</th>
                     <th>Nilai Akhir</th>
                     <th>Status</th>
                     <th>Pilihan</th>
@@ -77,7 +78,7 @@
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->email; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>
-                    <td><?php echo $key->pend_akhir; echo " - "; echo $key->pendidikan; ?></td>
+                    <td><?php echo $key->pend_akhir; echo " - "; echo $key->pendidikan;  echo $key->jurusan ?></td>
                     <td><?php echo $key->nilai_akhir; ?></td>
                     <td><?php echo $key->id_status; ?></td>
                     <td align="center">
