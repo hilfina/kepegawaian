@@ -33,6 +33,9 @@ class Mdl_admin extends CI_Model
     function delLoker($id){
         $query = $this->db->query("DELETE FROM loker where id_loker = $id");
     }
+    function delRiwayat($id){
+        $query = $this->db->query("DELETE FROM riwayat where id_riwayat = $id");
+    }
     function delProfesi($id){
         $query = $this->db->query("DELETE FROM jenis_profesi where id_profesi = $id");
     }
@@ -56,6 +59,14 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from jenis_profesi");
         return $query->result();
     }
+    public function getStatus(){
+        $query = $this->db->query("SELECT * from status");
+        return $query->result();
+    }
+    public function getJenStatus(){
+        $query = $this->db->query("SELECT * from jenis_status");
+        return $query->result();
+    }
     public function getRiwayat(){
         $query = $this->db->query("SELECT * from riwayat");
         return $query->result();
@@ -73,7 +84,11 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
     public function getTempat($id){
-        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan where k.id_karyawan = $id group by r.id_karyawan order by mulai limit 1");
+        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan where k.id_karyawan = $id order by r.mulai desc limit 1");
+        return $query->result();
+    }
+    public function getEditRi($id){
+        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi where r.id_riwayat = $id");
         return $query->result();
     }
 }

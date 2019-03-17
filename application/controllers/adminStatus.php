@@ -12,6 +12,7 @@ class AdminStatus extends CI_Controller {
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
 	}
+
 	public function index()
 	{
 		if($this->mdl_admin->logged_id())
@@ -25,124 +26,99 @@ class AdminStatus extends CI_Controller {
 		}
 	}
 
-    public function editData($id){
-         if($this->mdl_admin->logged_id())
-        {
-            $nik=$this->input->post('nik');
-            $no_ktp=$this->input->post('no_ktp');
-            $no_bpjs=$this->input->post('no_bpjs');
-            $nama=$this->input->post('nama');
-            $alamat=$this->input->post('alamat');
-            $no_telp=$this->input->post('no_telp');
-            $email=$this->input->post('email');
-            $id_status=$this->input->post('id_status');
-            $id_profesi=$this->input->post('id_profesi');
-            $id_golongan=$this->input->post('id_golongan');
-            $ruangan=$this->input->post('ruangan');
-
-            $dataRiwayat = array(
-                'id_karyawan' => $id,
-                'ruangan' => $ruangan,
-                'id_profesi' => $id_profesi,
-                'mulai' => date('d-m-y')
-                );
-
-             $dataKaryawan = array(
-                'nik' => $nik,
-                'no_ktp' => $no_ktp,
-                'no_bpjs' => $no_bpjs,
-                'nama' => $nama,
-                'alamat' => $alamat,
-                'no_telp' => $no_telp,
-                'email' => $email,
-                'id_status' => $id_status,
-                'id_profesi' => $id_profesi,
-                'id_golongan' => $id_golongan
-                );
-
-            $this->mdl_admin->addData('riwayat',$dataRiwayat);
-            $where = array('id_karyawan' => $id);
-            $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
-            redirect("adminKaryawan/karyawanDetail/$id");
-        }
-
-        else{ redirect("login"); } 
-    }
-        public function addStatus(){
+    public function addStatus(){
        if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('id_profesi','Jenis Profesi Lowongan','trim|required');
+            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){
 
-                $data['array']=$this->mdl_admin->getProfesi();
-                $this->load->view('admin/Karyawan/addKaryawan',$data);
+                $data['array']=$this->mdl_admin->getJenStatus();
+                $this->load->view('admin/Karyawan/addStatus',$data);
             }else{
-                $id_profesi=$this->input->post('id_profesi');
-                $kuota=$this->input->post('kuota');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
-                $ipkmin=$this->input->post('ipkmin');
-                $usia=$this->input->post('usia');
-                $jenkel=$this->input->post('jenkel');
-                $jurusan=$this->input->post('jurusan');
+                $config['upload_path']      = './Assets/gambar/';
+                $config['allowed_types']    = 'gif|jpg|png';
+                $config['max_size']         = 2000000000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
 
-                $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
-                $dataKaryawan= array(
-                'id_profesi' => $data['id_profesi'],
-                'kuota' => $kuota,
+                $this->load->library('upload', $config);
+                $this->upload->do_upload('file');
+                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $a=$this->input->post('nik');
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
+
+                $id_karyawan=$data2['id_karyawan'];
+                $id_status=$this->input->post('id_status');
+                $mulai=$this->input->post('mulai');
+                $nomor_sk=$this->input->post('nomor_sk');
+                $alamat_sk=$this->upload->data('file_name');
+               
+                $dataStatus= array(
+                'id_karyawan' => $id_karyawan,
+                'id_status' => $id_status,
                 'mulai' => $mulai,
-                'akhir' => $akhir,
-                'ipkmin' => $ipkmin,
-                'usia' => $usia,
-                'jenkel' => $jenkel,
-                'jurusan' => $jurusan
+                'alamat_sk' => $alamat_sk,
+                'nomor_sk' => $nomor_sk,
+                'aktif' => 1
                 );
 
-                $this->mdl_admin->addData('Karyawan',$dataKaryawan);
                 
-                redirect("adminKaryawan");
+                $updateStatus= array('akhir' => $mulai, 'aktif' => 0);
+                $whereS = array('id_karyawan' => $id_karyawan, 'aktif' => 1);
+                $this->mdl_admin->updateData($whereS,$updateStatus,'Status');
+                
+                $dataKaryawan= array('id_status' => $id_status);
+                $where = array('id_karyawan' => $id_karyawan);
+
+                $this->mdl_admin->addData('status',$dataStatus);
+                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+
+                redirect("adminRiwayat");
                 }
         }
-        
         else{ redirect("login"); } 
     }
 
     public function edit($id){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('id_profesi','Jenis Profesi Lowongan','trim|required');
+            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $where = array( 'id_Karyawan' => $id ); 
-                $data['datal']=$this->mdl_admin->getData('Karyawan',$where);
+                $where = array('id_riwayat' => $id);
+                $data['datRi']=$this->mdl_admin->getData('riwayat',$where);
                 $data['array']=$this->mdl_admin->getProfesi();
-                $this->load->view('admin/Karyawan/editKaryawan',$data);
+                $this->load->view('admin/Karyawan/editRiwayat',$data);
             }else{
-                $id_profesi=$this->input->post('id_profesi');
-                $kuota=$this->input->post('kuota');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
-                $ipkmin=$this->input->post('ipkmin');
-                $usia=$this->input->post('usia');
-                $jenkel=$this->input->post('jenkel');
-                $jurusan=$this->input->post('jurusan');
+                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $a=$this->input->post('nik');
+                $b =$this->input->post('id_profesi');
+                $data1=mysqli_fetch_array(mysqli_query($konek,"select max(id_riwayat) as last from riwayat"));
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
+                $data3=mysqli_fetch_array(mysqli_query($konek,"select id_profesi from jenis_profesi where nama_profesi = '$b' "));
 
-                $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
-                $dataKaryawan= array(
-                'id_profesi' => $data['id_profesi'],
-                'kuota' => $kuota,
-                'mulai' => $mulai,
-                'akhir' => $akhir,
-                'ipkmin' => $ipkmin,
-                'usia' => $usia,
-                'jenkel' => $jenkel,
-                'jurusan' => $jurusan
+                $id_riwayat = $data1['last']+1;
+                $ruangan=$this->input->post('ruangan');
+                $id_profesi= $data3['id_profesi'];
+                $id_karyawan=$data2['id_karyawan'];
+                $mulai= date('Y-m-d');
+               
+                $dataRiwayat= array(
+                'id_riwayat' => $id_riwayat,
+                'ruangan' => $ruangan,
+                'id_profesi' => $id_profesi,
+                'id_karyawan' => $id_karyawan,
+                'mulai' => $mulai
                 );
-                $where = array( 'id_Karyawan' => $id ); 
-               $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
-                
-                redirect("adminKaryawan");
+
+                $dataKaryawan= array('id_profesi' => $id_profesi);
+                $where = array('id_karyawan' => $id_karyawan);
+
+                $this->mdl_admin->addData('Riwayat',$dataRiwayat);
+                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+
+                redirect("adminRiwayat");
                 }
         }
 
@@ -150,8 +126,8 @@ class AdminStatus extends CI_Controller {
     }
     public function del($id){
        if($this->mdl_admin->logged_id()){
-            $this->mdl_admin->delKaryawan($id);
-            redirect("adminKaryawan");
+            $this->mdl_admin->delRiwayat($id);
+            redirect("adminRiwayat");
         }
         
         else{ redirect("login"); } 

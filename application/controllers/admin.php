@@ -380,16 +380,31 @@ class Admin extends CI_Controller {
             $dataKaryawan = array(
                 'id_status' => 'Magang'
                 );
-            $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from karyawan where id_karyawan = $id"));
+            
+            $konek = mysqli_connect("localhost","root","","kepegawaian");
+            $data=mysqli_fetch_array(mysqli_query($konek, "select * from karyawan where id_karyawan = $id"));
+            $data1=mysqli_fetch_array(mysqli_query($konek,"select max(id_riwayat) as last from riwayat"));
             $dataRiwayat = array(
+                'id_riwayat' => $data1['last']+1,
                 'id_karyawan' => $id,
                 'ruangan' => '-',
                 'id_profesi' => $data['id_profesi'],
                 'mulai' => date('d-m-y')
             );
 
+            $dataStatus = array(
+                'id_karyawan' => $id,
+                'id_status' => 'Magang',
+                'mulai' => date('Y-m-d'),
+                'akhir' => '-',
+                'nomor_sk' => '-',
+                'alamat_sk' => '-',
+                'aktif' => 1
+            );
+
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
              $this->mdl_admin->addData('riwayat',$dataRiwayat);
+             $this->mdl_admin->addData('Status',$dataStatus);
              redirect("adminKaryawan/karyawanDetail/$id");
         }
 

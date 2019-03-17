@@ -48,7 +48,6 @@
                   <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>
                   <li><a href="#dataPendidikan"> Data Pendidikan</a></li>
                   <li><a href="#dataSurat">Data Surat</a></li>
-                  <li><a href="#dataSeleksi">Data Seleksi</a></li>
                 </ul>
                 <div id="myTabContent" class="tab-content custom-product-edit">
                     <div class="product-tab-list tab-pane fade active in" id="dataPribadi">
@@ -63,7 +62,7 @@
                                         <td width="20%"><label form-control-label">Nomor Induk</label></td>
                                         <td style="height: 50px" width="80%">
                                           <div class="col-lg-12">
-                                            <input name="id_karyawan" type="text" class="form-control" value="<?php echo $key->nik; ?>" style="width:100%">
+                                            <input name="nik" type="text" class="form-control" value="<?php echo $key->nik; ?>" style="width:100%">
                                           </div>
                                         </td>
                                       </tr>
@@ -172,7 +171,7 @@
                                     <div class="sparkline13-hd">
                                       <div class="main-sparkline13-hd">
                                         <?php foreach ($datDir as $key){?>
-                                        <div align="right"><a href="<?php echo site_url(); echo "/adminKaryawan/addPend/";  echo $key->id_karyawan ; ?>">
+                                        <div align="right"><a href="<?php echo site_url(); echo "/admin/addPend/";  echo $key->id_karyawan ; ?>">
                                           <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                                         </a></div>
                                       <?php }?>
@@ -222,7 +221,7 @@
                                                       if(($key->verifikasi) == 1){ ?>
                                                        <a href="#"> Terverifikasi</a>
                                                        <?php }else{ ?>
-                                                        <a href="<?php echo site_url(); echo "/adminKaryawan/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
+                                                        <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
                                                           <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i> Verifikasi</button>
                                                         </a>
                                                       <?php } ?>
@@ -247,7 +246,7 @@
                                     <div class="sparkline13-hd">
                                       <div class="main-sparkline13-hd">
                                          <?php foreach ($datDir as $key){?>
-                                        <div align="right"><a href="<?php echo site_url(); echo "/adminKaryawan/addSurat/";  echo $key->id_karyawan ; ?>">
+                                        <div align="right"><a href="<?php echo site_url(); echo "/admin/addSurat/";  echo $key->id_karyawan ; ?>">
                                           <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                                         </a></div>
                                       <?php }?>
@@ -295,86 +294,6 @@
                                           </table>
                                       </div>
                                   </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-tab-list tab-pane fade" id="dataSeleksi">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="review-content-section">
-                                 <form action="<?php echo site_url(); ?>/adminKaryawan/editDataSel/" method="POST">
-                                 <?php foreach ($datSel as $key){ ?>
-                                  <table width="100%">
-                                      <tr>
-                                        <td width="20%"><label form-control-label">ID Seleksi</label></td>
-                                        <td style="height: 50px" width="80%">
-                                          <div class="col-lg-12">
-                                            <input name="idSel" type="text" class="form-control" value="<?php echo $key->id_seleksi; ?>" style="width:100%" disabled>
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td><label form-control-label">Tanggal Seleksi</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input name="tglSel" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      
-                                      <input name="idKSel" type="hidden" class="form-control" value="<?php echo $key->id_karyawan; ?>">
-                                      <tr>
-                                        <td><label form-control-label">Nilai Wawancara</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input name="nwSel" type="text" class="form-control" value="<?php echo $key->nilai_wawancara;?>" >
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td><label form-control-label">Nilai Agama</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input name="naSel" type="text" class="form-control" value="<?php echo $key->nilai_agama;?>">
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td><label form-control-label">Nilai Kompetensi</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input name="nkSel" type="text" class="form-control" value="<?php echo $key->nilai_kompetensi;?>" >
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td><label form-control-label">Tes PPA</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input name="tpSel" type="text" class="form-control" value="<?php echo $key->tes_ppa; ?>" >
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td><label form-control-label">Tes Psikologi</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input name="tpsSel" type="text" class="form-control" value="<?php echo $key->tes_psikologi; ?>" >
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td><label form-control-label">Tes Kesehatan</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input name="tkSel" type="text" class="form-control" value="<?php echo $key->tes_kesehatan?>">
-                                          </div>
-                                        </td>
-                                      </tr>
-                                    </table>
-                                 <?php } ?>
-                                 </form>
                                 </div>
                             </div>
                         </div>

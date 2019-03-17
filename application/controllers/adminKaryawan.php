@@ -32,7 +32,6 @@ class AdminKaryawan extends CI_Controller {
             $paket['array']=$this->mdl_admin->getProfesi();
             $paket['datDir']=$this->mdl_admin->getTempat($id);
             $paket['datPen']=$this->mdl_admin->getData('pendidikan',$where);
-            $paket['datSel']=$this->mdl_admin->getData('Seleksi',$where);
             $paket['datSur']=$this->mdl_admin->cariJenisSurat($id);
             $this->load->view('admin/Karyawan/detailKaryawan',$paket);
         }
@@ -55,11 +54,16 @@ class AdminKaryawan extends CI_Controller {
             $id_golongan=$this->input->post('id_golongan');
             $ruangan=$this->input->post('ruangan');
 
+            $where = array('id_karyawan' => $id);
+
+            $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from riwayat where id_karyawan =$id order by mulai limit 1"));
+
+            $tdy=date('y-m-d');
             $dataRiwayat = array(
                 'id_karyawan' => $id,
                 'ruangan' => $ruangan,
                 'id_profesi' => $id_profesi,
-                'mulai' => date('d-m-y')
+                'mulai' => $tdy
                 );
 
              $dataKaryawan = array(
@@ -75,10 +79,21 @@ class AdminKaryawan extends CI_Controller {
                 'id_golongan' => $id_golongan
                 );
 
-            $this->mdl_admin->addData('riwayat',$dataRiwayat);
-            $where = array('id_karyawan' => $id);
-            $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+            if ($data['ruangan'] == '-') {
+                $this->mdl_admin->updateData($where,$dataRiwayat,'riwayat');
+                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
             redirect("adminKaryawan/karyawanDetail/$id");
+            }else if ( $ruangan == $data['ruangan']) {
+                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+            redirect("adminKaryawan/karyawanDetail/$id");
+            }else{
+                $this->mdl_admin->addData('riwayat',$dataRiwayat);
+                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+            redirect("adminKaryawan/karyawanDetail/$id");
+            }
+            //
+            
+            
         }
 
         else{ redirect("login"); } 

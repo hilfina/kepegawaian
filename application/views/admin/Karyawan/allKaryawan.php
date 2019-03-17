@@ -59,6 +59,7 @@
                 <thead>
                   <tr>
                     <th>ID</th>
+                    <th>NIK</th>
                     <th>Foto</th>
                     <th>Nama</th>
                     <th>E-Mail</th>
@@ -72,7 +73,8 @@
                 <?php foreach ($array as $key) { ?>
                   <tr>
                     <td><?php echo $key->id_karyawan; ?></td>
-                    <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='100' height='100'>"; ?></td>
+                    <td><?php echo $key->nik; ?></td>
+                    <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='100'>"; ?></td>
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->email; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>

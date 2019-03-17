@@ -59,7 +59,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Id Karyawan</th>
+                    <th>NIK</th>
                     <th>Profesi</th>
                     <th>Ruangan</th>
                     <th>Mulai Tanggal</th>
@@ -76,10 +76,10 @@
                     <td><?php echo $key->mulai; ?></td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminRiwayat/edit/"; echo $key->id_riwayat ;?>">
-                          <button class="btn btn-warning waves-effect">edit</button>
+                          <button class="btn btn-warning waves-effect">Edit</button>
                         </a>
                         <a href="<?php echo site_url(); echo "/adminRiwayat/del/"; echo $key->id_riwayat ;?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                          <button class="btn btn-danger waves-effect">hapus</button>
+                          <button class="btn btn-danger waves-effect">Hapus</button>
                         </a>
                     </td>
                   </tr>
