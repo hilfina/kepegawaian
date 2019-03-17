@@ -76,7 +76,7 @@
                       <td>
                         
                         <?php if ($key->nilai_agama != '-'AND $key->nilai_kompetensi != '-'AND $key->nilai_wawancara != '-'AND $key->tes_ppa != '-'AND $key->tes_psikologi != '-'AND $key->tes_kesehatan != '-') {?>
-                          <a href="<?php echo site_url(); echo "/admin/editMagang/"; echo $key->id_karyawan ;?>"><button class="btn btn-success ">tindak lanjut <i class="educate-icon educate-checked modal-check-pro"></button></i></a>
+                          <a href="<?php echo site_url(); echo "/admin/editMagang/"; echo $key->id_karyawan ;?>"><button class="btn btn-success ">tindak lanjut  <i class="educate-icon educate-checked modal-check-pro"></button></i></a>
                           <a href="<?php echo site_url(); echo "/admin/pelamarDitolak/"; echo $key->id_karyawan ;?>">
                           <button class="btn btn-danger" title="TOLAK"><i class="fa fa-times"></i></button>
                         </a>

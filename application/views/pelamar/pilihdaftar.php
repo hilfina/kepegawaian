@@ -125,15 +125,22 @@
                                     echo $key->kuota - $data['total']; ?>
                                      Orang</strong></p>
                                 <br>
+                                <p>Pendaftaran dibuka mulai :</p>
                                 <p><?php echo $key->mulai." Sampai ".$key->akhir;?></p>
                                 <strong>Ketentuan :</strong>
-                                <p>IPK Minimal <strong><?php echo $key->ipkmin ?></strong><br>
-                                <strong><?php echo $key->jenkel ?></strong> Degan usia MAX <strong><?php echo $key->usia." Tahun." ?></strong><br>
-                                Jurusan <?php echo $key->jurusan ?><br></p>
+                                <p> - IPK Minimal <strong><?php echo $key->ipkmin ?></strong><br>
+                                - <strong><?php echo $key->jenkel ?></strong> dengan usia MAX <strong><?php echo $key->usia." Tahun." ?></strong><br>
+                                - Jurusan <?php echo $key->jurusan ?><br></p>
                             </div>
+                            <?php if ($key->kuota == 0){?>
+                            <div >
+                                <b style="color: red;">Sudah Ditutup</b>
+                            </div>
+                                <?php }else{ ?>
                             <div class="product-buttons">
                                 <a href="<?php echo site_url(); echo "/login/viewDaftar/"; echo $key->id_profesi ;?>"><button type="button" class="button-default cart-btn">Daftar</button></a>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

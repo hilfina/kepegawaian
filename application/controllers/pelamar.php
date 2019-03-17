@@ -182,6 +182,7 @@ class pelamar extends CI_Controller {
 
 		    $id=$this->session->userdata('myId');
 			$pendidikan = $this->input->post('pendidikan');
+			$jurusan  = $this->input->post('jurusan');
 		    $mulai = $this->input->post('mulai');
 		    $akhir = $this->input->post('akhir');
 		    $nomor_ijazah = $this->input->post('nomor_ijazah');
@@ -189,6 +190,7 @@ class pelamar extends CI_Controller {
 			$a = $this->upload->data('file_name');
 		    $data3 = array(
 		            'pendidikan'=>$pendidikan,
+		            'jurusan' => $jurusan,
 		            'mulai'=>$mulai,
 			        'akhir'=>$akhir,
 			        'nomor_ijazah'=>$nomor_ijazah,
@@ -227,6 +229,7 @@ class pelamar extends CI_Controller {
 
 			$this->load->library('upload', $config);
 			$pendidikan = $this->input->post('pendidikan');
+			$jurusan  = $this->input->post('jurusan');
 		    $mulai = $this->input->post('mulai');
 		    $akhir = $this->input->post('akhir');
 		    $nomor_ijazah = $this->input->post('nomor_ijazah');
@@ -234,6 +237,7 @@ class pelamar extends CI_Controller {
 			$a = $this->upload->data('file_name');
 		    $data3 = array(
 		            'pendidikan'=>$pendidikan,
+		            'jurusan' => $jurusan,
 		            'mulai'=>$mulai,
 			        'akhir'=>$akhir,
 			        'nomor_ijazah'=>$nomor_ijazah,
@@ -367,7 +371,7 @@ class pelamar extends CI_Controller {
 		$where = array('id_sipstr' => $id);
 		$this->mdl_pelamar->hapusdata('sip_str',$where);
 		$this->session->set_flashdata('msg','Data Sukses di Hapus');
-		redirect(site_url('pelamar/datapend'));
+		redirect(site_url('pelamar/datasurat'));
 	}
 
 	public function nilai(){
