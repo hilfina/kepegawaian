@@ -38,8 +38,7 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
-                    <?php foreach ($array as $key){ ?>
-                    
+                    <form action="<?php echo site_url();?>/pelamar/addsurat/" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
                             <div class="row">
@@ -71,7 +70,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <input type="text" class="form-control" name="no_surat" value="<?php echo $key->no_surat;?>">
+                                        <input type="text" class="form-control" name="no_surat" placeholder="Cth:123">
                                     </div>
                                 </div>
                             </div>
@@ -85,10 +84,9 @@ $this->load->view("header.php");
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                   <div class="form-group data-custon-pick data-custom-mg" id="data_5">
                                     <div class="input-daterange input-group" id="datepicker">
-                                        <input type="text" class="form-control" name="tgl_mulai"
-                                        value="<?php echo $key->tgl_mulai;?>" />
+                                        <input type="text" class="form-control" name="tgl_mulai" />
                                         <span class="input-group-addon">hingga</span>
-                                        <input type="text" class="form-control" name="tgl_akhir" value="<?php echo $key->tgl_akhir;?>"/>
+                                        <input type="text" class="form-control" name="tgl_akhir" />
                                     </div>
                                   </div>
                                 </div>
@@ -102,10 +100,18 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        
-                                        <?php if(($key->file) != NULL){?>
-                                            <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file?>" width="400"/>   
-                                        <?php }?>
+                                        <div class="file-upload-inner ts-forms">
+                                          <div class="input prepend-big-btn">
+                                              <label class="icon-right" for="prepend-big-btn">
+                                                <i class="fa fa-download"></i>
+                                              </label>
+                                              <div class="file-button">
+                                                  Browse
+                                                  <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                              </div>
+                                              <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                                          </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -118,18 +124,18 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                            <a href="<?php echo site_url('pelamar/datasurat/')?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">kembali</button></a>
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
                                     </div>
                                 </div>
                             </div>
-                          </div>
+
+                            </div>
                         </div>
                     </div>
-                
-                <?php } ?>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 <?php $this->load->view("footer.php"); ?>
  

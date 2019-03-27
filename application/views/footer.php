@@ -97,6 +97,10 @@
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/chart/jquery.peity.min.js"></script>
     <script src="<?php echo base_url()?>Assets/template/js/peity/peity-active.js"></script>
+    <!-- pdf JS
+        ============================================ -->
+    <script src="<?php echo base_url()?>Assets/template/js/pdf/jquery.media.js"></script>
+    <script src="<?php echo base_url()?>Assets/template/js/pdf/pdf-active.js"></script>
     <!-- tab JS
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/tab.js"></script>
@@ -106,7 +110,7 @@
     <!-- main JS
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/main.js"></script>
-   
+    
 
     
 

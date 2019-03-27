@@ -92,8 +92,5 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
-    public function getStatus(){
-        $query = $this->db->query("SELECT * from status");
-        return $query->result();
-    }
+    
 }

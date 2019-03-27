@@ -59,6 +59,7 @@ class Login extends CI_Controller {
 	                        'myLevel'=> $apps->level,
 	                        'myAktif' => $apps->aktif,
 	                        'myStatus' => $cariData['id_status'],
+	                        'myProfesi' => $cariData['id_profesi'],
 	                    );
 	                    //set session userdata
 	                    $this->session->set_userdata($session_data);
