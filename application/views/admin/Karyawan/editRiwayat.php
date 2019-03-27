@@ -27,7 +27,7 @@
     </div>
   </div>
 </div>
-    
+
 <div class="data-table-area mg-b-15">
   <div class="container-fluid">
     <div class="row">

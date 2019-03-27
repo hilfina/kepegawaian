@@ -21,8 +21,9 @@ class Mdl_admin extends CI_Model
         $this->db->where($where);
         $this->db->update($table,$data);
     }
-
-
+    function updateDataS($id,$mulai){
+        $query = $this->db->query("UPDATE status SET mulai='$mulai',aktif = 0 where id_karyawan = $id AND aktif = 1");
+    }
     function getData($table,$where){
         $this->db->select("*");
         $this->db->from($table);
@@ -35,6 +36,9 @@ class Mdl_admin extends CI_Model
     }
     function delRiwayat($id){
         $query = $this->db->query("DELETE FROM riwayat where id_riwayat = $id");
+    }
+    function delStatus($id){
+        $query = $this->db->query("DELETE FROM status where id = $id");
     }
     function delProfesi($id){
         $query = $this->db->query("DELETE FROM jenis_profesi where id_profesi = $id");
@@ -59,16 +63,8 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from jenis_profesi");
         return $query->result();
     }
-    public function getStatus(){
-        $query = $this->db->query("SELECT * from status");
-        return $query->result();
-    }
-    public function getJenStatus(){
-        $query = $this->db->query("SELECT * from jenis_status");
-        return $query->result();
-    }
     public function getRiwayat(){
-        $query = $this->db->query("SELECT * from riwayat");
+        $query = $this->db->query("SELECT * from riwayat as r inner join karyawan as k on r.id_karyawan = k.id_karyawan");
         return $query->result();
     }
     public function getKaryawan(){
@@ -93,7 +89,13 @@ class Mdl_admin extends CI_Model
     }
 
     public function getStatus(){
-        $query = $this->db->query("SELECT * from status");
+        $query = $this->db->query("SELECT * from status as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getAllStatus(){
+        $query = $this->db->query("SELECT * from jenis_status where id_status != 'Admin' AND id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND id_status != 'Pelamar Ditolak'");
         return $query->result();
     }
 }
+ 
