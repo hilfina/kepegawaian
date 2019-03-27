@@ -87,14 +87,13 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi where r.id_riwayat = $id");
         return $query->result();
     }
-
     public function getStatus(){
         $query = $this->db->query("SELECT * from status as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
         return $query->result();
     }
 
     public function getAllStatus(){
-        $query = $this->db->query("SELECT * from jenis_status where id_status != 'Admin' AND id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND id_status != 'Pelamar Ditolak'");
+        $query = $this->db->query("    SELECT * from jenis_status where id_status != 'Admin' AND id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND id_status != 'Pelamar Ditolak'");
         return $query->result();
     }
 }
