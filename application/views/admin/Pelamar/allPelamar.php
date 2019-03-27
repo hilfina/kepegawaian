@@ -64,16 +64,16 @@
                     <th>E-Mail</th>
                     <th>Pilihan Profesi</th>
                     <th>Pendidikan Terakhir</th>
-                    <th>Jurusan</th>
                     <th>Nilai Akhir</th>
                     <th>Status</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
                 <tbody>
+                <?php $no = 1;?>
                 <?php foreach ($array as $key) { ?>
                   <tr>
-                    <td><?php echo $key->id_karyawan; ?></td>
+                    <td><?php echo $no++ ?></td>
                     <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='100' height='100'>"; ?></td>
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->email; ?></td>

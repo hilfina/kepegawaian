@@ -4,6 +4,7 @@
   $emailku=$this->session->userdata("myEmail");
   $aktifku=$this->session->userdata("myAktif");
   $statusku=$this->session->userdata("myStatus");
+  $profesiku=$this->session->userdata("myProfesi");
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -181,7 +182,7 @@
                                 <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/dataSeleksi') ?>"><span class="mini-sub-pro">Seleksi Pelamar</span></a></li>
                             </ul>
                         </li>
-                        <?php } elseif ($levelku == "Pelamar" && $aktifku == '1') { ?>
+                        <?php } elseif ($statusku == "Pelamar" && $aktifku == '1') { ?>
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data Saya</span></a>
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
@@ -190,13 +191,29 @@
                                 <li><a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>"><span class="mini-sub-pro">Data Surat</span></a></li>
                             </ul>
                         </li>
-                        <?php } elseif ($levelku == "Pelamar" && $aktifku == '0') {?>
+                        <?php } elseif ($statusku == "Pelamar" && $aktifku == '0') {?>
                         <li>
                             <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>"><span class="mini-click-non">Aktivasi Akun</span></a>
                         </li>
                         <?php } elseif ($statusku == "Calon Karyawan") { ?>
                         <li>
                             <a title="Nilai" href="<?php echo site_url('pelamar/nilai') ?>"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Hasil Nilai Tes</span></a>
+                        </li>
+                        <?php } elseif ($statusku == "Pelamar Ditolak") { ?>
+                        <li>
+                            
+                        </li>
+                        <?php } elseif ($levelku == "Karyawan")  { ?>
+                        <li>
+                            <a title="Data Karyawan" href="<?php echo site_url('karyawan/datasaya') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Profil Saya</span></a>
+                            <a title="Data Pendidikan" href="<?php echo site_url('karyawan/datapend') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Pendidikan</span></a>
+                            <a title="Data Orientasi" href="<?php echo site_url('karyawan/dataori') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Orientasi</span></a>
+                            <a title="Data Diklat" href="<?php echo site_url('karyawan/datadiklat') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Diklat</span></a>
+                            
+                                <a title="Data Kewenangan Klinis" href="<?php echo site_url('karyawan/datakew') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Kewenangan Klinis</span></a>
+                            
+                                <a title="Data Surat" href="<?php echo site_url('karyawan/datasurat') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Surat</span></a>
+                           
                         </li>
                         <?php } ?>
                         <!-- 

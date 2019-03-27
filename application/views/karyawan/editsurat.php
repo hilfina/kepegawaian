@@ -39,7 +39,7 @@ $this->load->view("header.php");
                     </div>
                     <br>
                     <?php foreach ($array as $key){ ?>
-                    
+                    <form action="<?php echo site_url(); ?>/pelamar/editsurat/<?php echo $key->id_sipstr?>" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
                             <div class="row">
@@ -102,7 +102,18 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        
+                                        <div class="file-upload-inner ts-forms">
+                                          <div class="input prepend-big-btn">
+                                              <label class="icon-right" for="prepend-big-btn">
+                                                <i class="fa fa-download"></i>
+                                              </label>
+                                              <div class="file-button">
+                                                  Browse
+                                                  <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                              </div>
+                                              <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                                          </div>
+                                        </div>
                                         <?php if(($key->file) != NULL){?>
                                             <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file?>" width="400"/>   
                                         <?php }?>
@@ -118,14 +129,14 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                            <a href="<?php echo site_url('pelamar/datasurat/')?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">kembali</button></a>
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
                                     </div>
                                 </div>
                             </div>
                           </div>
                         </div>
                     </div>
-                
+                </form>
                 <?php } ?>
             </div>
         </div>

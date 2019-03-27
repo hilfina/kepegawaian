@@ -15,7 +15,7 @@ $this->load->view("header.php");
                                 <ul class="breadcome-menu">
                                     <li><a href="#">Data Pendidikan</a> <span class="bread-slash">/</span>
                                     </li>
-                                    <li><span class="bread-blod">Tambah Dokumen</span>
+                                    <li><span class="bread-blod">Detail Dokumen</span>
                                     </li>
                                 </ul>
                             </div>
@@ -51,6 +51,18 @@ $this->load->view("header.php");
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
                                         <input type="text" class="form-control" name="pendidikan" value="<?php echo $key->pendidikan;?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <div class="input-mask-title">
+                                        <label>Jurusan Pendidikan</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <div class="input-mark-inner">
+                                        <input type="text" class="form-control" name="jurusan" value="<?php echo $key->jurusan;?>">
                                     </div>
                                 </div>
                             </div>
