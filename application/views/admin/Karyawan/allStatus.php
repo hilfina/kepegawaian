@@ -62,7 +62,7 @@
                     <th>Id Karyawan</th>
                     <th>Status</th>
                     <th>Masa Berlaku</th>
-                    <th>Nomor Surat</th>
+                    <th>Nomor SK</th>
                     <th>Surat</th>
                     <th>Aktif</th>
                     <th>Pilihan</th>

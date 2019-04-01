@@ -1,5 +1,6 @@
 <?php 
   $levelku=$this->session->userdata("myLevel");
+  $idku=$this->session->userdata("myId");
   $namaku=$this->session->userdata("myLongName");
   $emailku=$this->session->userdata("myEmail");
   $aktifku=$this->session->userdata("myAktif");
@@ -108,32 +109,7 @@
     <!-- modernizr JS
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/vendor/modernizr-2.8.3.min.js"></script>
-    <style type="text/css">
-        .grid-container {
-            display: grid;
-            grid-template-columns: auto auto auto auto;
-            background-color: #ffffff;
-            padding: 15px;
-        }
-        .grid-item {
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px;
-            border-color:  #000000;
-            padding: 10px;
-            font-size: 30px;
-            text-align: center;
-        }
-        .griddaftar{
-          background-color: #b3d9ff; 
-          margin-right:     10px;
-          margin-bottom:    10px;
-        }
-        .griddaftarr{
-          background-color: #cce6ff ; 
-          margin-right:     10px;
-          margin-bottom:    10px;
-        }
-    </style>
+   
 </head>
 
 <body>
@@ -191,18 +167,21 @@
                                 <li><a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>"><span class="mini-sub-pro">Data Surat</span></a></li>
                             </ul>
                         </li>
-                        <?php } elseif ($statusku == "Pelamar" && $aktifku == '0') {?>
+                        <?php 
+                        if ($profesiku != "Belum") {?>
+                            <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-cli">Proses Lamaran</span></a></li>
+                        <?php }
+                    } elseif ($statusku == "Pelamar" && $aktifku == '0') {?>
                         <li>
                             <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>"><span class="mini-click-non">Aktivasi Akun</span></a>
                         </li>
                         <?php } elseif ($statusku == "Calon Karyawan") { ?>
                         <li>
                             <a title="Nilai" href="<?php echo site_url('pelamar/nilai') ?>"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Hasil Nilai Tes</span></a>
+                            <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-cli">Proses Lamaran</span></a></li>
                         </li>
                         <?php } elseif ($statusku == "Pelamar Ditolak") { ?>
-                        <li>
-                            
-                        </li>
+                       <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-cli">Proses Lamaran</span></a></li>
                         <?php } elseif ($levelku == "Karyawan")  { ?>
                         <li>
                             <a title="Data Karyawan" href="<?php echo site_url('karyawan/datasaya') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Profil Saya</span></a>
@@ -216,24 +195,6 @@
                            
                         </li>
                         <?php } ?>
-                        <!-- 
-                        <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Forms Elements</span></a>
-                            <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Password Meter" href="password-meter.html"><span class="mini-sub-pro">Password Meter</span></a></li>
-                                <li><a title="Multi Upload" href="multi-upload.html"><span class="mini-sub-pro">Multi Upload</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">App views</span></a>
-                            <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Notifications" href="notifications.html"><span class="mini-sub-pro">Notifications</span></a></li>
-                                <li><a title="Modals" href="modals.html"><span class="mini-sub-pro">Modals</span></a></li>
-                                <li><a title="Tabs" href="tabs.html"><span class="mini-sub-pro">Tabs</span></a></li>
-                                </li>
-                            </ul>
-                        </li> -->
-                        
                     </ul>
                 </nav>
             </div>

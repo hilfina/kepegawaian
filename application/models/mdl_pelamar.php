@@ -64,11 +64,14 @@ class Mdl_pelamar extends CI_Model
         return $query->result();
     }
 
+    public function getSeleksi($id){
+        $query= $this->db->query("SELECT * from karyawan as k inner join seleksi as s on k.id_karyawan = s.id_karyawan where k.id_karyawan ='$id'");
+        return $query->result();
+    }
     public function getDetailpend($id){
         $query= $this->db->query("SELECT * from pendidikan  where id='$id'");
         return $query->result();
     }
-
     public function getSurat($id){
         $query= $this->db->query("SELECT s.id_sipstr, s.no_surat, j.jenis_surat, s.tgl_mulai, s.tgl_akhir, s.aktif  from sip_str as s inner join jenis_surat as j on s.id_surat=j.id_surat where id_karyawan='$id'");
         return $query->result();

@@ -33,7 +33,9 @@ class pelamar extends CI_Controller {
 	}
 
 	public function home(){
-		$this->load->view("pelamar/home");
+
+	    $data['loker']=$this->mdl_admin->getLoker();
+		$this->load->view("pelamar/home",$data);
 	}
 
 
@@ -380,6 +382,26 @@ class pelamar extends CI_Controller {
 		$this->load->view('pelamar/nilai',$paket);
 	}
 
+	public function lamar($id,$id_profesi){
+		$data = array(
+	        'id_profesi'=>$id_profesi
+        );
+		$where = array(
+			'id_karyawan' => $id
+		);
+		$this->mdl_pelamar->updatedata($where,$data,'karyawan');
+	}
+	public function prosesLamar($id)
+	{
+		$where = array( 'id_karyawan' => $id ); 
+		$paket['datDir']=$this->mdl_admin->getData('karyawan',$where);
+		if ($paket['lengkap']=$this->mdl_pelamar->getSeleksi($id)) {
+
+			$this->load->view('pelamar/prosesLamaran2', $paket);
+		}
+		else
+			$this->load->view('pelamar/prosesLamaran', $paket);
+	}
 }
 
 /* End of file pelamar.php */

@@ -20,8 +20,6 @@ class Login extends CI_Controller {
 			{
 				//jika memang session sudah terdaftar, maka redirect ke halaman dahsboard
 				redirect("home");
-				// jejecoba
-
 			}else{
 
 				//jika session belum terdaftar
@@ -63,10 +61,13 @@ class Login extends CI_Controller {
 	                    );
 	                    //set session userdata
 	                    $this->session->set_userdata($session_data);
+	                   foreach ($checking as $key) {
+	                   	if ($key->level == "Pelamar" && $cariData['id_profesi'] == "Belum") {
+	                    	redirect('pelamar/datasaya');
+	                    }else{
+	                    redirect("home");}
+	                   }
 	                    
-
-	                    redirect("home");
-
 	                }
 	            }else{
 
@@ -76,8 +77,8 @@ class Login extends CI_Controller {
 	            }
 
 	        }else{
-
-	            $this->load->view('login');
+	        	$data['loker']=$this->mdl_admin->getLoker();
+	            $this->load->view('login',$data);
 	        }
 
 		}
@@ -117,54 +118,45 @@ class Login extends CI_Controller {
         $this->load->view('pelamar/pilihdaftar', $paket);
 	}
 
-	public function viewdaftar($id_profesi)
+	public function viewdaftar()
 	{
 
 		$this->load->model('mdl_login');
 		$data['last'] = $this->mdl_login->getlast();
-		$data['profesi'] = $id_profesi;
 		$this->load->view('pelamar/daftar',$data);
 	}
 
 	public function daftar()
-	{
-		//kirim gambar
-		$config['upload_path']		= './Assets/gambar/';
-		$config['allowed_types']	= 'gif|jpg|png';
-		$config['max_size']			= 2000000000;
-		$config['max_width']		= 10240;
-		$config['max_height']		= 7680;
-
-		$this->load->library('upload', $config);
-
-		//DATA KARYAWAN	
+	{				
 	    $nama = $this->input->post('nama');
-	    $alamat = $this->input->post('alamat');
-	    $no_telp = $this->input->post('no_telp');
+	    $pend_akhir = $this->input->post('pend_akhir');
+	    $no_ktp = $this->input->post('no_ktp');
 	    $email = $this->input->post('email');
-	    $id_profesi = $this->input->post('id_profesi');
+	    $jurusan = $this->input->post('jurusan');
+	    $id_karyawan = $this->input->post('id_karyawan');
+		$username = $this->input->post('username');
+	    $password = md5($this->input->post('password'));
+	    $ipk = $this->input->post('ipk');
+
+	    //DATA KARYAWAN	
 	    $data1 = array(
 	            'nama'=>$nama,
-	            'alamat'=>$alamat,
-	            'no_telp'=>$no_telp,
+	            'no_ktp'=>$no_ktp,
 	            'email'=>$email,
 	            'id_status'=>'Pelamar',
-	            'id_profesi' => $id_profesi,
+	            'id_profesi' => 'Belum',
 	            'id_golongan' => 'Tidak Ada',   
 	        );	
 
 	    // DATA LOWONGAN
-	    $id_karyawan = $this->input->post('id_karyawan');
 	    $data2 = array(
-	            'pend_akhir'=>'Pilihan:',
-	            'nilai_akhir'=>0,
+	            'pend_akhir'=>$pend_akhir,
+	            'nilai_akhir'=>$ipk,
+	            'jurusan'=>$jurusan,
 	            'id_karyawan' => $id_karyawan,
 	        );
 
 	    // DATA LOGIN		
-	    $id_karyawan = $this->input->post('id_karyawan');
-		$username = $this->input->post('username');
-	    $password = md5($this->input->post('password'));
 	    $data5 = array(
 	            'username'=>$username,
 	            'password'=>$password,
@@ -172,9 +164,6 @@ class Login extends CI_Controller {
 	            'aktif'=>0,
 	            'id_karyawan' => $id_karyawan,
 	        );
-
-	    //KUOTA
-	    
 
 	    $insert1 = $this->mdl_login->daftar('karyawan',$data1);
 	    $insert2 = $this->mdl_login->daftar('lowongan',$data2);
@@ -189,16 +178,15 @@ class Login extends CI_Controller {
 		$config['useragent'] = 'CodeIgniter';
 		$config['protocol']= "smtp";
 		$config['mailtype']= "html";
-		$config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+		$config['smtp_host']= "ssl://smtp.gmail.com";
 		$config['smtp_port']= "465";
 		$config['smtp_timeout']= "400";
-		$config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
-		$config['smtp_pass']= "hilfina090798"; // isi dengan password kamu
+		$config['smtp_user']= "hilfinaamaris09@gmail.com";
+		$config['smtp_pass']= "hilfina090798";
 		$config['crlf']="\r\n"; 
 		$config['newline']="\r\n"; 
 		$config['wordwrap'] = TRUE;
-		//memanggil library email dan set konfigurasi untuk pengiriman email
-			
+		
 		$this->email->initialize($config);
 		//konfigurasi pengiriman
 		$this->email->from($config['smtp_user']);

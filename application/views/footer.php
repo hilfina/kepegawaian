@@ -4,6 +4,11 @@
       $('#kepegawaian').DataTable();
     });
      </script>
+
+    <script src="<?=base_url()?>asset/js/owl.carousel.min.js"></script>
+    <script src="<?=base_url()?>asset/js/wow.min.js"></script>
+    <script src="<?=base_url()?>asset/js/typewriter.js"></script>
+    <script src="<?=base_url()?>asset/js/jquery.onepagenav.js"></script>
     <!-- jquery
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/vendor/jquery-1.12.4.min.js"></script>

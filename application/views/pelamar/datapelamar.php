@@ -41,7 +41,8 @@
                         <div class="profile-img">
                             <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt="" width="120"/>
                         </div>
-                        <div class="file-upload-inner ts-forms">
+                        <?php if ($key->foto == "") { ?>
+                          <div class="file-upload-inner ts-forms">
                           <div class="input prepend-big-btn">
                               <label class="icon-right" for="prepend-big-btn">
                                 <i class="fa fa-download"></i>
@@ -50,9 +51,10 @@
                                   Browse
                                   <input type="file" name="fotosaya" value="<?php echo $key->foto; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                               </div>
-                              <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                              <input type="text" id="prepend-big-btn" placeholder="no file selected"value="<?php echo $key->foto; ?>" >
                           </div>
                         </div>
+                        <?php } ?>
                         <div class="profile-details-hr">
                             <div class="row">
                             
@@ -89,10 +91,6 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
-                                                     <label form-control-label">Nomor NIK</label>
-                                                        <input name="nik" type="text" class="form-control" placeholder="Nomor NIK " value="<?php echo $key->nik; ?>">
-                                                    </div>
-                                                    <div class="form-group">
                                                      <label form-control-label">Nomor KTP</label>
                                                         <input name="no_ktp" type="text" class="form-control" placeholder="Nomor KTP" value="<?php echo $key->no_ktp; ?>">
                                                     </div>
@@ -116,10 +114,6 @@
                                                     <div class="form-group">
                                                         <label form-control-label">Email</label>
                                                         <input name="email" type="text" class="form-control" placeholder="Email" value="<?php echo $key->email; ?>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label form-control-label">Profesi Lamaran</label>
-                                                        <input type="text" class="form-control" value="<?php echo $key->nama_profesi?>" disabled>
                                                     </div>
                                                     <br>
                                                     <div class="row mg-b-15">

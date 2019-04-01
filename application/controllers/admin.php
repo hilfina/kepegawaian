@@ -76,13 +76,13 @@ class Admin extends CI_Controller {
 
         $dataSel = array(
             'id_karyawan' => $id,
-            'tgl_seleksi' => "-",
-            'nilai_agama' => "-",
-            'nilai_kompetensi' => "-",
-            'tes_ppa' => "-",
-            'tes_psikologi' => "-",
-            'tes_kesehatan' => "-",
-            'nilai_wawancara' => "-"
+            'tgl_seleksi' => " ",
+            'nilai_agama' => "0",
+            'nilai_kompetensi' => "0",
+            'tes_ppa' => "",
+            'tes_psikologi' => " ",
+            'tes_kesehatan' => " ",
+            'nilai_wawancara' => " "
         );
         $this->mdl_admin->addData('seleksi',$dataSel);
         $paket['array']=$this->mdl_admin->getPelamar();
@@ -351,24 +351,17 @@ class Admin extends CI_Controller {
             $no_telp=$this->input->post('no_telp');
             $email=$this->input->post('email');
             $id_status=$this->input->post('id_status');
-            $id_profesi=$this->input->post('id_profesi');
 
              $dataKaryawan = array(
-                // 'nik' => $nik,
                 'no_ktp' => $no_ktp,
-                // 'no_bpjs' => '-',
                 'nama' => $nama,
                 'alamat' => $alamat,
                 'no_telp' => $no_telp,
-                'email' => $email,
-                // 'foto' => 'profile.png',
-                // 'id_status' => 'Pelamar',
-                'id_profesi' => $id_profesi
-                // 'id_golongan' => 'Tidak Ada'
+                'email' => $email
                 );
              $where = array('id_karyawan' => $id);
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
-             redirect("admin/pelamar/allPelamar");
+             redirect("admin/pelamarDetail/$id");
         }
 
         else{ redirect("login"); } 

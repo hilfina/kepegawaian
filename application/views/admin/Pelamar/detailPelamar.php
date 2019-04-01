@@ -38,7 +38,7 @@
                   <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt=""/>
                 </div><br>
                 <div align="center">
-                  <?php if ($key->id_status == "Pelamar") { ?>
+                  <?php if ($key->id_status == "Pelamar" && $key->id_profesi != "Belum") { ?>
                         <a href="<?php echo site_url(); echo "/admin/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
                           <button class="btn btn-success waves-effect mg-b-15" title="TERIMA"><i class="fa fa-check"></i> Terima </button>
                         </a>
@@ -57,8 +57,14 @@
                 <ul id="myTabedu1" class="tab-review-design">
                   <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>
                   <li><a href="#dataPendidikan"> Data Pendidikan</a></li>
-                  <li><a href="#dataSurat">Data Surat</a></li>
-                  <li><a href="#dataSeleksi">Data Seleksi</a></li>
+                  <?php foreach ($datDir as $dd) {
+                    if ($dd->id_profesi == "Dokter" || $dd->id_profesi == "Fisioterapis" || $dd->id_profesi == "Apoteker" || $dd->id_profesi == "Perawat") {
+                     echo "<li><a href='#dataSurat'>Data Surat</a></li>";
+                    }if ($dd->id_status == "Calon Karyawan") {
+                      echo "<li><a href='#dataSeleksi'>Data Seleksi</a></li>";
+                    }
+                  } ?>
+                  
                 </ul>
                 <div id="myTabContent" class="tab-content custom-product-edit">
                     <div class="product-tab-list tab-pane fade active in" id="dataPribadi">
@@ -113,21 +119,6 @@
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input name="email" type="text" class="form-control" value="<?php echo $key->email; ?>">
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td><label form-control-label">Profesi Lamaran</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <select  class="form-control" name="id_profesi">
-                                              <option><?php echo $key->id_profesi; ?></option>
-                                              <option><strong>Pilihan Lainnya:</strong></option>
-                                              <?php foreach ($array as $key2) { ?>
-
-                                                <option><?php echo $key2->id_profesi; ?></option>
-                                              <?php } ?>
-                                            </select>
                                           </div>
                                         </td>
                                       </tr>
@@ -285,6 +276,16 @@
                                  <form action="<?php echo site_url(); ?>/admin/editDataSel/" method="POST">
                                  <?php foreach ($datSel as $key){ ?>
                                   <table width="100%">
+                                    <?php foreach ($datDir as $dir) { ?>
+                                      <tr>
+                                        <td width="20%"><label form-control-label">Profesi yang dipilih</label></td>
+                                        <td style="height: 50px" width="80%">
+                                          <div class="col-lg-12">
+                                            <input name="idSel" type="text" class="form-control" value="<?php echo $dir->id_profesi; ?>" style="width:100%" disabled>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    <?php } ?>
                                       <tr>
                                         <td width="20%"><label form-control-label">ID Seleksi</label></td>
                                         <td style="height: 50px" width="80%">
@@ -294,24 +295,51 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Tanggal Seleksi</label></td>
+                                        <td><label form-control-label">Tanggal Wawancara</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input name="tglSel" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
                                           </div>
                                         </td>
-                                      </tr>
-                                      
+                                      </tr>                                      
                                       <input name="idKSel" type="hidden" class="form-control" value="<?php echo $key->id_karyawan; ?>">
-                                      <tr>
+                                      <?php if ($key->tgl_seleksi != "0000-00-00"){ ?>
+                                       <tr>
                                         <td><label form-control-label">Nilai Wawancara</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="nwSel" type="text" class="form-control" value="<?php echo $key->nilai_wawancara;?>" >
+                                            <?php if ($key->nilai_wawancara == "") { ?>
+                                              <select name="nwSel" type="text" class="form-control">
+                                              <option>-- Pilihan --</option>
+                                              <option>Lulus</option>
+                                              <option>Tidak Lulus</option>
+                                            </select>
+                                            <?php } else { ?>
+                                              <input name="nwSel" type="text" class="form-control" value="<?php echo $key->nilai_wawancara;?>" >
+                                            <?php } ?>
                                           </div>
                                         </td>
                                       </tr>
-                                      <tr>
+                                      <?php if ($key->nilai_wawancara == "Lulus") { ?>
+                                        <tr>
+                                          <td><label form-control-label">Tes Psikologi</label></td>
+                                          <td style="height: 50px">
+                                            <div class="col-lg-12">
+                                              <?php if ($key->tes_psikologi == "") { ?>
+                                                <select name="tpsSel" type="text" class="form-control">
+                                                <option>-- Pilihan --</option>
+                                                <option>Lulus</option>
+                                                <option>Tidak Lulus</option>
+                                              </select>
+                                              <?php } else { ?>
+                                                <input name="tpsSel" type="text" class="form-control" value="<?php echo $key->tes_psikologi;?>" >
+                                              <?php } ?>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      <?php } else {} ?>
+                                      <?php if ($key->tes_psikologi == "Lulus") { ?>
+                                        <tr>
                                         <td><label form-control-label">Nilai Agama</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
@@ -328,6 +356,22 @@
                                         </td>
                                       </tr>
                                       <tr>
+                                        <td><label form-control-label">Tes Kesehatan</label></td>
+                                        <td style="height: 50px">
+                                          <div class="col-lg-12">
+                                            <?php if ($key->tes_kesehatan == "") { ?>
+                                                <select name="tkSel" type="text" class="form-control">
+                                                <option>-- Pilihan --</option>
+                                                <option>Lulus</option>
+                                                <option>Tidak Lulus</option>
+                                              </select>
+                                              <?php } else { ?>
+                                                <input name="tkSel" type="text" class="form-control" value="<?php echo $key->tes_kesehatan;?>" >
+                                              <?php } ?>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
                                         <td><label form-control-label">Tes PPA</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
@@ -335,22 +379,7 @@
                                           </div>
                                         </td>
                                       </tr>
-                                      <tr>
-                                        <td><label form-control-label">Tes Psikologi</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input name="tpsSel" type="text" class="form-control" value="<?php echo $key->tes_psikologi; ?>" >
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td><label form-control-label">Tes Kesehatan</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input name="tkSel" type="text" class="form-control" value="<?php echo $key->tes_kesehatan?>">
-                                          </div>
-                                        </td>
-                                      </tr>
+                                      <?php } else {} }?>
                                     </table>
                                     <input name="" type="submit" class="form-control" value="Update">
                                  <?php } ?>

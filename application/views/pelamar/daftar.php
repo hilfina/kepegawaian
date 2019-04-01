@@ -7,54 +7,69 @@
 <!--===============================================================================================-->  
     <link rel="icon" type="image/png" href="<?=base_url()?>Assets/login/images/logo.png"/>
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/css/main.css"> 
 <!--===============================================================================================-->
 
 </head>
 <body>
-<div class="container-login100">
-<div class="wrap-login100" style="width: 800px;" >
+  <div class="container-login100">
+    <div class="wrap-login100" style="width: 800px; margin-top: -50px" >
 
-
-<!-- multistep form -->
-<form id="regForm" action="<?php echo site_url(); ?>/login/daftar" enctype="multipart/form-data" method="post">
+      <!-- multistep form -->
+      <form action="<?php echo site_url(); ?>/login/daftar" enctype="multipart/form-data" method="post">
     
-      <span><h4 align="center"><b>REGISTRASI PELAMAR</b></h4></span>
-      <br>
-      <div class="form-group row">
-      <label class="col-sm-3 form-control-label">Nama Lengkap </label>
-          <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" required>
-      </div> 
-      <div class="form-group row">
-      <label class="col-sm-3 form-control-label">Alamat </label>      
-          <input type="text" class="form-control" name="alamat"  placeholder="Alamat" required>
-      </div> 
-      <div class="form-group row">
-      <label class="col-sm-3 form-control-label">Nomor Telepon </label>
-          <input type="text" class="form-control" name="no_telp"  placeholder="Nomor Telepon" required>
-      </div>  
-      <div class="form-group row">
-      <label class="col-sm-3 form-control-label">Email </label>
-          <input type="text" class="form-control" name="email"  placeholder="Email" required>
-      </div>
-      <input type="text" name="id_profesi"  value="<?php echo $profesi ?>" hidden> 
-      <?php foreach ($last as $key) { ?>
-      <input type="hidden" name="id_karyawan" value="<?php echo $key['id_karyawan']+1?>">
-      <?php } ?>
-      <div class="form-group row">
-        <label class="col-sm-3 form-control-label">Username</label>  
-          <input class="form-control" type="text" name="username"  placeholder="username" required>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-3 form-control-label">Password</label>
-          <input class="form-control" type="password" name="password"  placeholder="password" required>
-      </div>
-      <div class="text-center">
-          <button class="btn btn-primary loginbtn">Register</button>
-          <button class="btn btn-default"><a href="<?=base_url()?>index.php/login/pilihdaftar">Cancel</a></button>
-      </div>
+        <div align="center">
+          <span><h4 align="center"><b>DAFTAR PELAMAR</b></h4></span>
+          <hr style="border: solid 2px; width: 250px">
+          <hr style="border: solid 1px; width: 200px">
+          <?php foreach ($last as $key) { ?>
+            <input type="hidden" name="id_karyawan" value="<?php echo $key['id_karyawan']+1?>">
+          <?php } ?>
+          <table width="100%" style="margin-top: -100px">
+            <tr style="height: 50px"><div class="form-group row">
+              <td style="width: 30%"><strong>Nama Lengkap :</strong></td>
+              <td><input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" required></td>
+            </tr></div>
+            <tr style="height: 50px"><div class="form-group row">
+              <td><strong>Nomor KTP :</strong></td>
+              <td><input type="text" class="form-control" name="no_ktp" placeholder="Nomor KTP" required></td>
+            </tr></div>
+            <tr style="height: 50px"><div class="form-group row">
+              <td><strong>Alamat Email :</strong></td>
+              <td><input type="text" class="form-control" name="email"  placeholder="Email" required></td>
+            </tr></div>
+            <tr style="height: 50px"><div class="form-group row">
+              <td> <strong>Username :</strong> </td>
+              <td><input class="form-control" type="text" name="username"  placeholder="username" required></td>
+            </tr></div>
+            <tr style="height: 50px"><div class="form-group row">
+              <td><strong>Password :</strong></td>
+              <td><input class="form-control" type="password" name="password"  placeholder="password" required></td>
+            </tr></div>
+            <tr style="height: 50px"><div class="form-group row">
+              <td><strong>Jenjang Pendidikan :</strong></td>
+              <td><select class="form-control" name="pend_akhir">
+                <option>-- Pilihan --</option>
+                <option>SMA/SMK</option>
+                <option>D-III</option>
+                <option>D-IV</option>
+                <option>S1</option>
+                <option>S2</option>
+              </select></td>
+            </tr></div>
+            <tr style="height: 50px"><div class="form-group row">
+              <td><strong>Jurusan :</strong></td>
+              <td><input class="form-control" type="text" name="jurusan"  placeholder="Jurusan" required></td>
+            </tr></div>
+            <tr style="height: 50px"><div class="form-group row">
+              <td><strong>NEM/IPK :</strong></td>
+              <td><input class="form-control" type="text" name="ipk"  placeholder="NEM/IPK" required></td>
+            </tr></div>
+          </table><br>
+          <div class="text-center">
+              <button class="btn btn-primary loginbtn">Daftar</button>
+              <button class="btn btn-default"><a href="<?=base_url()?>index.php/login/">Batal</a></button>
+          </div>
 </form>
 </div>
 </div>
