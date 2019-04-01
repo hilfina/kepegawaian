@@ -20,6 +20,9 @@ $this->load->view("header.php");
                                 </ul>
                             </div>
                         </div>
+                        <br><div class="alert alert-info">
+                            Menu data pendidikan berisi data pendidikan yang karyawan tempuh dan disertai scan gambar ijazah.
+                        </div>
                     </div>
                 </div>
             </div>

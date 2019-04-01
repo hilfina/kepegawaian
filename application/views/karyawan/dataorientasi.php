@@ -15,13 +15,13 @@ $this->load->view("header.php");
                                 <ul class="breadcome-menu">
                                     <li><a href="#">Karyawan</a> <span class="bread-slash">/</span>
                                     </li>
-                                    <li><span class="bread-blod">Data Surat</span>
+                                    <li><span class="bread-blod">Data Orientasi</span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <br><div class="alert alert-info">
-                            Menu data surat berisi data surat izin karyawan medis dan disertai scan gambar surat.
+                            Menu data orientasi berisi data orientasi yang karyawan tempuh dan disertai dokumen kehadiran.
                         </div>
                     </div>
                 </div>
@@ -34,9 +34,9 @@ $this->load->view("header.php");
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap">
-                            <h4>Daftar Surat</h4>
+                            <h4>Data Orientasi</h4>
                             <div class="add-product">
-                                <a href="<?php echo site_url('karyawan/addsurat');?>">Tambah Dokumen</a>
+                                <a href="<?php echo site_url('karyawan/addori');?>">Tambah Dokumen</a>
                             </div>
                              <div class=" container-fluid" id="notif">
                               <?php if ($this->session->flashdata('msg')) :?>
@@ -49,39 +49,24 @@ $this->load->view("header.php");
                                 <table>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nomor Surat</th>
-                                        <th>Jenis Surat</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th>Tanggal Berakhir</th>
-                                        <th>Aktif</th>
+                                        <th>Tanggal Mulai Orientasi</th>
+                                        <th>Tanggal Berakhir Orientasi</th>
+                                        <th>Dokumen Kehadiran</th>
                                         <th>Aksi</th>
                                     </tr>
                                     <?php $no = 1 ?>
                                     <?php foreach ($array as $key){ ?>
                                     <tr>
                                         <td><?php echo $no++ ?></td>
-                                        <td><?php echo $key->no_surat; ?></td>
-                                        <td><?php echo $key->jenis_surat; ?></td>
                                         <td><?php echo $key->tgl_mulai; ?></td>
                                         <td><?php echo $key->tgl_akhir; ?></td>
+                                        <td><?php echo $key->doku_hadir; ?></td>
                                         <td>
-                                        <?php if(($key->aktif) == 1){ ?>
-                                            <button class="pd-setting"><i class="fa fa-check"></i> Surat Aktif</button> 
-                                          <?php }else{ ?>
-                                            <button class="ds-setting">Surat Kadaluarsa</button>
-                                          <?php } ?>
-                                          
-                                        </td>
-                                        <td>
-                                        <?php if(($key->aktif) == 1){ ?>
-                                        <a href="<?php echo site_url('karyawan/detailsurat/').$key->id_sipstr ?>">   
-                                        <button data-toggle="tooltip" title="detail" class="pd-setting-ed"><i class="fa fa-eye"></i>   Detail</button> </a>
-                                        <?php }else{ ?>
-                                        <a href="<?php echo site_url('karyawan/editsurat/').$key->id_sipstr ?>">
+                                        
+                                        <a href="<?php echo site_url('karyawan/editori/').$key->id_orientasi ?>">
                                         <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                        <a href="<?php echo site_url('karyawan/hapussurat/').$key->id_sipstr ?>" onclick="return confirm('Are you sure you want to delete this item?');">
+                                        <a href="<?php echo site_url('karyawan/hapusori/').$key->id_orientasi ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?');">
                                         <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
-                                        <?php } ?>
                                         </td>
                                     </tr>
                                     <?php }  ?>

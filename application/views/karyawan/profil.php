@@ -30,9 +30,10 @@
   <!-- Single pro tab review Start-->
   <div class="single-pro-review-area mt-t-30 mg-b-15">
     <div class="container-fluid">
-      <form action="<?php echo site_url();?>/karyawan/updatedatasaya/;?>" enctype="multipart/form-data"  method="POST">
+      <form action="<?php echo site_url();?>/karyawan/updatedatasaya/" enctype="multipart/form-data"  method="POST">
         <div class="row">
             <?php foreach ($datDir as $key){ ?>
+            <input type="hidden" name="gambar_old" value="<?php echo $key->foto; ?>">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="profile-info-inner">
                         <div class="profile-img">
@@ -68,7 +69,9 @@
                 <ul id="myTabedu1" class="tab-review-design">
                   <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>
                   <li><a href="#dataRiwayat"> Data Riwayat</a></li>
+                  <li><a href="#dataMou"> Data MOU</a></li>
                   <li><a href="#dataUraian"> Uraian Tugas</a></li>
+                  <li>
                 </ul>
                 <div id="myTabContent" class="tab-content custom-product-edit">
                     <div class="product-tab-list tab-pane fade active in" id="dataPribadi">
@@ -334,173 +337,213 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                                  <!-- <div class="row mg-b-15">
-                                      <div class="col-lg-12">
-                                          <div class="row">
-                                              <div class="col-lg-12">
-                                                  <div class="skill-title">
-                                                      <h2>Riwayat Penempatan</h2>
-                                                      <p>Berisi daftar riwayat unit yang pernah anda.</p>
-                                                      <hr />
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="ex-pro">
-                                            <div class="sparkline8-graph">
-                                              <div class="static-table-list">
+                                <!-- <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                                         Riwayat MOU</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse5" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar riwayat mou anda.</p>
+                                            <div class="static-table-list">
                                                   <table class="table">
                                                       <thead>
                                                           <tr>
                                                             <th>No.</th>
-                                                            <th>Nama Ruangan</th>
-                                                            <th>Tanggal Bertugas</th>
-                                                          </tr>
-                                                      </thead>
-                                                      <?php  ?>
-                                                      <?php $no=0; ?>
-                                                      <tbody>
-                                                          <tr>
-                                                              <td><?php echo $no++;?></td>
-                                                              <td></td>
-                                                              <td></td>  
-                                                          </tr>
-                                                      </tbody>
-                                                      <?php  ?>
-                                                  </table>
-                                              </div>
-                                            </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="row mg-b-15">
-                                      <div class="col-lg-12">
-                                          <div class="row">
-                                              <div class="col-lg-12">
-                                                  <div class="skill-title">
-                                                      <h2>Riwayat Status</h2>
-                                                      <p>Berisi daftar riwayat status pekerjaan anda</p>
-                                                      <hr />
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="ex-pro">
-                                            <div class="sparkline8-graph">
-                                              <div class="static-table-list">
-                                                  <table class="table">
-                                                      <thead>
-                                                          <tr>
-                                                            <th>No.</th>
-                                                            <th>No. Surat Keterangan</th>
-                                                            <th>Status Karyawan</th>
+                                                            <th>Nomor MOU</th>
                                                             <th>Tanggal Mulai</th>
                                                             <th>Tanggal Berakhir</th>
+                                                            <th>Nominal</th>
+                                                            <th>Keterangan</th>
                                                             <th>Status Keaktifan</th>
                                                           </tr>
                                                       </thead>
-                                                      <?php  ?>
-                                                      <?php $no=0; ?>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($mou as $key){?>
                                                       <tbody>
                                                           <tr>
                                                               <td><?php echo $no++;?></td>
-                                                              <td></td>
-                                                              <td></td>  
+                                                              <td><?php echo $key->no_sekolah; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->beasiswa;?></td>
+                                                              <td><?php echo $key->ket?></td>
+                                                              <td> 
+                                                              <?php if(($key->aktif) != 1){ ?>
+                                                                <b><i class="fa fa-check"></i> Aktif</b> 
+                                                              <?php }else{ ?>
+                                                                <b style="color: red">Belum Aktif</b>
+                                                              <?php } ?>  
+                                                              </td>
                                                           </tr>
                                                       </tbody>
-                                                      <?php  ?>
+                                                      <?php } ?>
                                                   </table>
                                               </div>
-                                            </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                      <div class="col-lg-12">
-                                          <div class="row">
-                                              <div class="col-lg-12">
-                                                  <div class="skill-title">
-                                                      <h2>Riwayat Golongan</h2>
-                                                      <p>Berisi daftar riwayat golongan karyawan anda.</p>
-                                                      <hr />
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="ex-pro">
-                                            <div class="sparkline8-graph">
-                                              <div class="static-table-list">
-                                                  <table class="table">
-                                                      <thead>
-                                                          <tr>
-                                                            <th>No.</th>
-                                                            <th>No. Surat Keterangan</th>
-                                                            <th>Status Golongan</th>
-                                                            <th>Tanggal Mulai</th>
-                                                            <th>Tanggal Berakhir</th>
-                                                            <th>Status Keaktifan</th>
-                                                          </tr>
-                                                      </thead>
-                                                      <?php  ?>
-                                                      <?php $no=0; ?>
-                                                      <tbody>
-                                                          <tr>
-                                                              <td><?php echo $no++;?></td>
-                                                              <td></td>
-                                                              <td></td>  
-                                                          </tr>
-                                                      </tbody>
-                                                      <?php  ?>
-                                                  </table>
-                                              </div>
-                                            </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                      <div class="col-lg-12">
-                                          <div class="row">
-                                              <div class="col-lg-12">
-                                                  <div class="skill-title">
-                                                      <h2>Riwayat Berkala</h2>
-                                                      <p>Berisi daftar riwayat berkala karyawan anda.</p>
-                                                      <hr />
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="ex-pro">
-                                            <div class="sparkline8-graph">
-                                              <div class="static-table-list">
-                                                  <table class="table">
-                                                      <thead>
-                                                          <tr>
-                                                            <th>No.</th>
-                                                            <th>No. Surat Keterangan</th>
-                                                            <th>Berkala</th>
-                                                            <th>Tanggal Mulai</th>
-                                                            <th>Tanggal Berakhir</th>
-                                                            <th>Status Keaktifan</th>
-                                                          </tr>
-                                                      </thead>
-                                                      <?php  ?>
-                                                      <?php $no=0; ?>
-                                                      <tbody>
-                                                          <tr>
-                                                              <td><?php echo $no++;?></td>
-                                                              <td></td>
-                                                              <td></td>  
-                                                          </tr>
-                                                      </tbody>
-                                                      <?php  ?>
-                                                  </table>
-                                              </div>
-                                            </div>
-                                          </div>
-                                      </div>
-                                  </div> -->
-
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>   
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="product-tab-list tab-pane fade" id="dataMou">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="review-content-section">
+                                <div class="panel-group edu-custon-design" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#1">MOU Sekolah
+                                          </a>
+                                        </h4>
+                                    </div>
+                                    <div id="1" class="panel-collapse panel-ic collapse in">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Sekolah anda.</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Nominal</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Status Keaktifan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($mous as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_sekolah; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->beasiswa;?></td>
+                                                              <td><?php echo $key->ket?></td>
+                                                              <td> 
+                                                              <?php if(($key->aktif) != 1){ ?>
+                                                                <b><i class="fa fa-check"></i> Aktif</b> 
+                                                              <?php }else{ ?>
+                                                                <b style="color: red">Belum Aktif</b>
+                                                              <?php } ?>  
+                                                              </td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#2">
+                                            MOU Kontrak</a>
+                                        </h4>
+                                    </div>
+                                    <div id="2" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Kontrak kerja anda</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Nominal</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Status Keaktifan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($mouk as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->gaji;?></td>
+                                                              <td><?php echo $key->ket?></td>
+                                                              <td> 
+                                                              <?php if(($key->aktif) != 1){ ?>
+                                                                <b><i class="fa fa-check"></i> Aktif</b> 
+                                                              <?php }else{ ?>
+                                                                <b style="color: red">Belum Aktif</b>
+                                                              <?php } ?>  
+                                                              </td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#3">
+                                         MOU Piutang</a>
+                                        </h4>
+                                    </div>
+                                    <div id="3" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Piutang anda.</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Nominal</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Status Keaktifan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($mouh as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_piutang; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->nominal;?></td>
+                                                              <td><?php echo $key->ket?></td>
+                                                              <td> 
+                                                              <?php if(($key->aktif) != 1){ ?>
+                                                                <b><i class="fa fa-check"></i> Aktif</b> 
+                                                              <?php }else{ ?>
+                                                                <b style="color: red">Belum Aktif</b>
+                                                              <?php } ?>  
+                                                              </td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                                </div>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
                     <div class="product-tab-list tab-pane fade" id="dataUraian">
                         <div class="pdf-viewer-area mg-b-15">
                             <div class="container-fluid">

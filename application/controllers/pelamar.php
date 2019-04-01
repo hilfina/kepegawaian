@@ -127,8 +127,13 @@ class pelamar extends CI_Controller {
 	$alamat = $this->input->post('alamat');
 	$no_telp = $this->input->post('no_telp');
 	$email = $this->input->post('email');
-	$this->upload->do_upload('fotosaya');
-	$fotosaya = $this->upload->data('file_name');
+	
+	if($_FILES['fotosaya']['name'] != '') {
+		$this->upload->do_upload('fotosaya');
+		$fotosaya = $this->upload->data('file_name');
+	} else {
+		$fotosaya = $this->input->post('gambar_old');
+	}
  
 	$data = array(
 		'nik' => $nik,

@@ -32,6 +32,7 @@ class Karyawan extends CI_Controller {
 		$this->load->view("pelamar/home");
 	}
 
+	////////////////DATA PROFIL/////////////////////// 
     public function datasaya(){
         $id=$this->session->userdata('myId');
 		$paket['array']=$this->mdl_karyawan->getKaryawan($id);
@@ -41,6 +42,9 @@ class Karyawan extends CI_Controller {
         $paket['stat']=$this->mdl_karyawan->getStatus($id);
         $paket['gol']=$this->mdl_karyawan->getGol($id);
         $paket['ber']=$this->mdl_karyawan->getBerkala($id);
+        $paket['mous']=$this->mdl_karyawan->getMous($id);
+        $paket['mouk']=$this->mdl_karyawan->getMouk($id);
+        $paket['mouh']=$this->mdl_karyawan->getMouh($id);
 		$this->load->view('karyawan/profil',$paket);
         
     }
@@ -62,9 +66,15 @@ class Karyawan extends CI_Controller {
 	$alamat = $this->input->post('alamat');
 	$no_telp = $this->input->post('no_telp');
 	$email = $this->input->post('email');
-	$this->upload->do_upload('fotosaya');
-	$fotosaya = $this->upload->data('file_name');
- 
+
+	if($_FILES['fotosaya']['name'] != '') {
+		$this->upload->do_upload('fotosaya');
+		$fotosaya = $this->upload->data('file_name');
+	} else {
+		$fotosaya = $this->input->post('gambar_old');
+	}
+
+	
 	$data = array(
 		'nik' => $nik,
 		'no_ktp' => $no_ktp,
@@ -84,6 +94,7 @@ class Karyawan extends CI_Controller {
 	redirect('karyawan/datasaya');
 	}
 
+	//////////////DATA PENDIDIKAN/////////////////////////
     public function datapend(){
 		$id=$this->session->userdata('myId');
 		$paket['array']=$this->mdl_pelamar->getPend($id);
@@ -191,6 +202,8 @@ class Karyawan extends CI_Controller {
 		redirect(site_url('karyawan/datapend'));
 	}
 
+
+	///////////////// DATA SURAT //////////////////////////
 	public function datasurat(){
 		$id=$this->session->userdata('myId');
 		$paket['array']=$this->mdl_pelamar->getSurat($id);
@@ -302,10 +315,44 @@ class Karyawan extends CI_Controller {
 		redirect(site_url('karyawan/datasurat'));
 	}
 
-	public function nilai(){
+	///////////// DATA ORIENTASI ///////////////
+
+	public function dataori(){
 		$id=$this->session->userdata('myId');
-		$paket['array']=$this->mdl_pelamar->getNilai($id);
-		$this->load->view('pelamar/nilai',$paket);
+		$paket['array']=$this->mdl_karyawan->getOri($id);
+		$this->load->view('karyawan/dataorientasi',$paket);
+	}
+
+	public function hapusori($id)
+	{
+		$where = array('id_orientasi' => $id);
+		$this->mdl_kar->hapusdata('orientasi',$where);
+		$this->session->set_flashdata('msg','Data Sukses di Hapus');
+		redirect(site_url('karyawan/dataorientasi'));
+	}
+
+	////////////  DATA DIKLAT /////////////////
+
+	public function datadiklat(){
+		$id=$this->session->userdata('myId');
+		$paket['array']=$this->mdl_karyawan->getDiklat($id);
+		$this->load->view('karyawan/datadiklat',$paket);
+	}
+
+	public function hapusdiklat($id)
+	{
+		$where = array('id_diklat' => $id);
+		$this->mdl_pelamar->hapusdata('diklat',$where);
+		$this->session->set_flashdata('msg','Data Sukses di Hapus');
+		redirect(site_url('karyawan/datadiklat'));
+	}
+
+	////////////   DATA KEWENANGAN KLINIS DOKTER  /////////////////////
+
+	public function datakew(){
+		$id=$this->session->userdata('myId');
+		$paket['array']=$this->mdl_karyawan->getKew($id);
+		$this->load->view('karyawan/dataklinis',$paket);
 	}
 
 }

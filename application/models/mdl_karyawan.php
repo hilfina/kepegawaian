@@ -36,22 +36,52 @@ class Mdl_karyawan extends CI_Model
         }
     }
     public function getKaryawan($id){
-        $query = $this->db->query("SELECT * FROM karyawan");
+        $query = $this->db->query("SELECT * FROM karyawan where id_karyawan = $id");
         return $query->result();
     }
 
     public function getStatus($id){
-        $query = $this->db->query("SELECT * FROM status");
+        $query = $this->db->query("SELECT * FROM status where id_karyawan = $id");
         return $query->result();
     }
 
     public function getGol($id){
-        $query = $this->db->query("SELECT * FROM golongan");
+        $query = $this->db->query("SELECT * FROM golongan where id_karyawan = $id");
         return $query->result();
     }
 
     public function getBerkala($id){
-        $query = $this->db->query("SELECT * FROM berkala");
+        $query = $this->db->query("SELECT * FROM berkala where id_karyawan = $id");
+        return $query->result();
+    }
+
+    public function getMous($id){
+         $query = $this->db->query("SELECT * from mou_sekolah where id_karyawan = $id");
+         return $query->result();
+    }
+
+    public function getMouk($id){
+        $query = $this->db->query("SELECT * from  mou_kontrak where id_karyawan = $id");
+        return $query->result();
+    }
+
+    public function getMouh($id){
+        $query = $this->db->query("SELECT * from  mou_hutang where id_karyawan = $id");
+        return $query->result();
+    }
+
+    public function getOri($id){
+        $query = $this->db->query("SELECT * from  orientasi where id_karyawan = $id");
+        return $query->result();
+    }
+
+    public function getDiklat($id){
+        $query = $this->db->query("SELECT * from diklat where id_karyawan = $id");
+        return $query->result();
+    }
+
+    public function getKew($id){
+        $query = $this->db->query("SELECT * from kewenangan_klinis where id_karyawan = $id");
         return $query->result();
     }
 }

@@ -36,6 +36,7 @@
         <form action="<?php echo site_url(); ?>/pelamar/updatedatasaya/" enctype="multipart/form-data" method="post">
             <div class="row">
             <?php foreach ($datasaya as $key){ ?>
+            <input type="hidden" name="gambar_old" value="<?php echo $key->foto; ?>">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="profile-info-inner">
                         <div class="profile-img">
