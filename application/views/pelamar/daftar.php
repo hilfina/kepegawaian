@@ -58,10 +58,6 @@
               </select></td>
             </tr></div>
             <tr style="height: 50px"><div class="form-group row">
-              <td><strong>Jurusan :</strong></td>
-              <td><input class="form-control" type="text" name="jurusan"  placeholder="Jurusan" required></td>
-            </tr></div>
-            <tr style="height: 50px"><div class="form-group row">
               <td><strong>NEM/IPK :</strong></td>
               <td><input class="form-control" type="text" name="ipk"  placeholder="NEM/IPK" required></td>
             </tr></div>

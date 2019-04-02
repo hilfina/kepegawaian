@@ -70,14 +70,14 @@
             </div>
         </div>
     </header>
-    <section class="section" id="satu"style="background-color: #D3D3D3">
-        <div class="container-login100"  style="background-color: #D3D3D3">
-                <div class="container" style="width: 500px; background-color: #D3D3D3" >
+    <section class="section" id="satu" style="background-color: white">
+        <div class="container-login100"  style="background-color: white">
+                <div class="container" style="width: 500px; background-color: white" >
                     <div align="center">
                         <span><h3 align="center"><b>LOGIN</b></h3></span>
                         <hr style="border: solid 2px; width: 250px">
-                        <hr style="border: solid 1px; width: 200px">
                     </div><br>
+                
                 <form class="login100-form validate-form"method="POST" action="<?php echo base_url() ?>index.php/login">
                     <?php if(isset($error)) { echo $error; }; ?>
                     <strong>
@@ -103,19 +103,22 @@
                             </button>
                         </div>
                     </div>
-                </form><br>
+                <br>
+                </form>
                 <div align="center">
-                        <a href="<?=base_url()?>index.php/login/viewdaftar">
-                           <div class="container-login100-form-btn" style="width: 150px">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">
-                                Daftar
-                            </button>
+                    <a href="<?=base_url()?>index.php/login/viewdaftar" >
+                       <div class="container-login100-form-btn" style="width: 250px">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn">
+                                    Daftar
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                        </a>
-                    </div>
+                    </a>
+                </div>
+                
+            </div>
         </div>
     </section>
     <section id="dua" class="section section-padded" >
@@ -123,11 +126,10 @@
             <div class="row text-center title">
                 <div align="center"><span><h3 align="center"><b>PELUANG KARIR</b></h3></span>
                 <hr style="border: solid 2px; width: 250px">
-                        <hr style="border: solid 1px; width: 200px"></div>
             </div>
                 <?php foreach ($loker as $key) {?>
                     <div class="col-md-4" >
-                    <div class="service"style="height: 400px">
+                    <div class="service" style="height: 400px">
                         <div class="icon-holder">
                             <img src="<?=base_url()?>asset/img/icons/heart-blue.png" alt="" class="icon">
                         </div>
@@ -152,7 +154,7 @@
                 </div>
                 <?php } ?>
         </div>
-        <div class="cut cut-bottom"></div>
+        <!-- <div class="cut cut-bottom"></div> -->
     </section>
 
     <footer id="tiga">

@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/metisMenu/metisMenu-vertical.css">
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/form/themesaller-forms.css">
     <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/style.css"> 
-    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/responsive.css">   
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/responsive.css"> 
+    <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/font-awesome.min.css">  
     <!-- BODY  -->
     <link rel="icon" type="image/png" href="<?=base_url()?>Assets/login/images/logo.png"/>
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>asset/css/normalize.css">

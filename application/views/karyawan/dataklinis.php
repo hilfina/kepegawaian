@@ -21,7 +21,7 @@ $this->load->view("header.php");
                             </div>
                         </div>
                         <br><div class="alert alert-info">
-                            Menu data diklat berisi data diklat yang karyawan tempuh dan disertai scan sertifikat diklat.
+                            Menu data kewenangan klinis berisi data pengajuan data klinis berisi dokumen data-data klinis.
                         </div>
                     </div>
                 </div>
@@ -50,10 +50,10 @@ $this->load->view("header.php");
                                     <tr>
                                         <th>No</th>
                                         <th>Tanggal Pengajuan</th>
+                                        <th>Penilaian</th>
                                         <th>Tanggal Penilaian</th>
-                                        <th>Tahun Diklat</th>
-                                        <th>Waktu /jam</th>
-                                        <th>Sertifikat Diklat</th>
+                                        <th>Finalisasi</th>
+                                        <th>Tanggal Finalisasi</th>
                                         <th>Aksi</th>
                                     </tr>
                                     <?php $no = 1 ?>
@@ -61,9 +61,10 @@ $this->load->view("header.php");
                                     <tr>
                                         <td><?php echo $no++ ?></td>
                                         <td><?php echo $key->tgl_pengajuan; ?></td>
-                                        <td><?php echo $key->tgl_akhir; ?></td>
-                                        <td><?php echo $key->tahun; ?></td>
-                                        <td><?php echo $key->jam; ?></td>
+                                        <td><?php echo $key->penilaian; ?></td>
+                                        <td><?php echo $key->tgl_penilaian; ?></td>
+                                        <td><?php echo $key->finalisasi; ?></td>
+                                        <td><?php echo $key->tgl_finalisasi; ?></td>
                                         <td>
                                         
                                         <a href="<?php echo site_url('karyawan/editdiklat/').$key->id_diklat ?>">

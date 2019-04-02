@@ -152,7 +152,6 @@ class Login extends CI_Controller {
 	    $data2 = array(
 	            'pend_akhir'=>$pend_akhir,
 	            'nilai_akhir'=>$ipk,
-	            'jurusan'=>$jurusan,
 	            'id_karyawan' => $id_karyawan,
 	        );
 
@@ -201,17 +200,19 @@ class Login extends CI_Controller {
 		{
 			echo '<script type="text/javascript">';
 			echo 'alert("Berhasil melakukan registrasi, silahkan cek email kamu")';
+			echo 'document.location.href = "login/index" ';
 			echo '</script>';
 			
 		}else
 		{
 			echo '<script type="text/javascript">';
 			echo 'alert("Berhasil melakukan registrasi, namun gagal mengirim verifikasi email")';
+			echo 'document.location.href = "login/index" ';
 			echo '</script>';
 			
 		}
 		
-		redirect(site_url('Login/index'));
+
 		
 	}
 

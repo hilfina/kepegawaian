@@ -184,15 +184,16 @@
                        <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-cli">Proses Lamaran</span></a></li>
                         <?php } elseif ($levelku == "Karyawan")  { ?>
                         <li>
-                            <a title="Data Karyawan" href="<?php echo site_url('karyawan/datasaya') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Profil Saya</span></a>
-                            <a title="Data Pendidikan" href="<?php echo site_url('karyawan/datapend') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Pendidikan</span></a>
+                            <a title="Data Karyawan" href="<?php echo site_url('karyawan/datasaya') ?>"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Profil Saya</span></a>
+                            <a title="Data Pendidikan" href="<?php echo site_url('karyawan/datapend') ?>"><span class="educate-icon educate-library icon-wrap"></span><span class="mini-click-non">Data Pendidikan</span></a>
                             <a title="Data Orientasi" href="<?php echo site_url('karyawan/dataori') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Orientasi</span></a>
-                            <a title="Data Diklat" href="<?php echo site_url('karyawan/datadiklat') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Diklat</span></a>
+                            <a title="Data Diklat" href="<?php echo site_url('karyawan/datadiklat') ?>"><span class="educate-icon educate-department icon-wrap"></span><span class="mini-click-non">Data Diklat</span></a>
                             
                                 <a title="Data Kewenangan Klinis" href="<?php echo site_url('karyawan/datakew') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Kewenangan Klinis</span></a>
                             
-                                <a title="Data Surat" href="<?php echo site_url('karyawan/datasurat') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Surat</span></a>
-                           
+                            <?php if($statusku != "Kasir" || $statusku != "Administrasi" || $statusku != "Pekarya"){?>
+                                <a title="Data Surat" href="<?php echo site_url('karyawan/datasurat') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Surat</span></a>
+                            <?php }?>
                         </li>
                         <?php } ?>
                     </ul>
