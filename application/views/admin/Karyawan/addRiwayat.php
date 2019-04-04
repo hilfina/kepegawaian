@@ -54,10 +54,10 @@
             <td><label form-control-label">Jenis Profesi</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <font color="red" size="2">*tambahkan jenis profesi terlebih dahulu jika pilihan jenis profesi lowongan tidak ada</font>
+                <font color="red" size="2">*tambahkan jenis profesi sesuai profesi karyawan</font>
                 <select name="id_profesi" class="form-control">
                   <?php foreach ($array as $key) {?>
-                    <option><?php echo $key->nama_profesi;; ?></option>
+                    <option><?php echo $key->nama_profesi; ?></option>
                   <?php } ?>
                 </select>
               </div>

@@ -37,6 +37,15 @@
                 <div class="profile-img">
                   <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt=""/>
                 </div><br>
+                <div class="profile-details-hr">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                            <div class="address-hr">
+                                <h2><b><?php echo $key->nama; ?></b><br /> </h2>
+                            </div>
+                        </div>                            
+                    </div>
+                </div>
                 <div align="center">
                   <?php if ($key->id_status == "Pelamar" && $key->id_profesi != "Belum") { ?>
                         <a href="<?php echo site_url(); echo "/admin/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
@@ -56,6 +65,7 @@
               <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                 <ul id="myTabedu1" class="tab-review-design">
                   <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>
+                  <li><a href="#cv"> Curiculum Vitae</a></li>
                   <li><a href="#dataPendidikan"> Data Pendidikan</a></li>
                   <?php foreach ($datDir as $dd) {
                     if ($dd->id_profesi == "Dokter" || $dd->id_profesi == "Fisioterapis" || $dd->id_profesi == "Apoteker" || $dd->id_profesi == "Perawat") {
@@ -122,12 +132,37 @@
                                           </div>
                                         </td>
                                       </tr>
+                                      <tr>
+                                        <td><label form-control-label">Posisi Lamaran</label></td>
+                                        <td style="height: 50px">
+                                          <div class="col-lg-12">
+                                            <input name="id_profesi" type="text" class="form-control" value="<?php echo $key->id_profesi; ?>">
+                                          </div>
+                                        </td>
+                                      </tr>
                                     </table><br>
                                     <div align="center">
                                       <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
                                     </div>
                                  <?php } ?>
                                  </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-tab-list tab-pane fade" id="cv">
+                        <div class="pdf-viewer-area mg-b-15">
+                            <div class="container-fluid">
+                                <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                </div>
+                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                        <div class="pdf-single-pro">
+                                        <?php foreach ($datLo as $key){?>
+                                          <a class="media" href="<?php echo base_url()?>Assets/gambar/<?php $key->cv; ?>>"></a>
+                                        <?php }?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -139,11 +174,6 @@
                                   <div class="col-lg-12">
                                     <div class="sparkline13-hd">
                                       <div class="main-sparkline13-hd">
-                                        <?php foreach ($datDir as $key){?>
-                                        <div align="right"><a href="<?php echo site_url(); echo "/admin/addPend/";  echo $key->id_karyawan ; ?>">
-                                          <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                                        </a></div>
-                                      <?php }?>
                                       </div>
                                     </div>
                                   </div>
@@ -153,10 +183,11 @@
                                               <thead>
                                                   <tr>
                                                     <th>Gambar</th>
+                                                    <th>No Ijasah</th>
                                                     <th>Institusi</th>
                                                     <th>Jurusan</th>
                                                     <th>Tahun Pendidikan</th>
-                                                    <th>No Ijasah</th>
+                                                    <th>Nilai Akhir</th>
                                                     <th>Verifikasi</th>
                                                   </tr>
                                               </thead>
@@ -182,10 +213,12 @@
                                                           </div>
                                                         </div>        
                                                       </td>
+                                                      <td><?php echo $key->nomor_ijazah; ?></td>
                                                       <td><?php echo $key->pendidikan; ?></td>
                                                       <td><?php echo $key->jurusan; ?></td>
                                                       <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
-                                                      <td><?php echo $key->nomor_ijazah; ?></td>
+                                                      <td><?php echo $key->nilai;?></td>
+                                                      
                                                       
                                                       <td>
                                                         <?php 
@@ -193,11 +226,10 @@
                                                        <a href="#"> Terverifikasi</a>
                                                        <?php }else{ ?>
                                                         <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                                                          <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i> Verifikasi</button>
+                                                          <button class="btn btn-danger waves-effect mg-b-15"><i class="fa fa-check" ></i> Verifikasi</button>
                                                         </a>
                                                       <?php } ?>
-                                                        
-                                                      </td>   
+                                                      </td> 
                                                   </tr>
                                               </tbody>
                                               <?php } ?>
@@ -217,7 +249,7 @@
                                     <div class="sparkline13-hd">
                                       <div class="main-sparkline13-hd">
                                          <?php foreach ($datDir as $key){?>
-                                        <div align="right"><a href="<?php echo site_url(); echo "/admin/addSurat/";  echo $key->id_karyawan ; ?>">
+                                         <div align="right"><a href="<?php echo site_url(); echo "/admin/addSurat/";  echo $key->id_karyawan ; ?>">
                                           <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                                         </a></div>
                                       <?php }?>

@@ -39,7 +39,7 @@ class Mdl_pelamar extends CI_Model
     public function getPelamar($id)
     {
         
-        $query = $this->db->query("SELECT k.nik, k.no_ktp, k.no_bpjs, k.nama, k.alamat, k.no_telp, k.email, k.foto, j.nama_profesi, l.pend_akhir, l.nilai_akhir from jenis_profesi as j inner join  karyawan as k on k.id_profesi=j.id_profesi inner join lowongan as l on l.id_karyawan=k.id_karyawan where k.id_karyawan='$id'");
+        $query = $this->db->query("SELECT k.nik, k.no_ktp, k.no_bpjs, k.nama, k.alamat, k.no_telp, k.email, k.foto, j.nama_profesi, l.pend_akhir, l.nilai_akhir, l.cv from jenis_profesi as j inner join  karyawan as k on k.id_profesi=j.id_profesi inner join lowongan as l on l.id_karyawan=k.id_karyawan where k.id_karyawan='$id'");
         return $query->result();
     }
 

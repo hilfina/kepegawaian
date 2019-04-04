@@ -2,12 +2,11 @@
 $this->load->view("header.php");
 $idku=$this->session->userdata("myId");
 ?>
-<br><br><br>
-        <div class="container">
+<br><br><br><br>
+        <div class="container-fluid">
             <div class="row text-center title">
-                <div align="center"><span><h3 align="center"><b>PELUANG KARIR</b></h3></span>
-                <hr style="border: solid 2px; width: 250px">
-                </div>
+                <div align="center"><span><h3 align="center"><b>PELUANG KARIR</b></h3></span></div>
+                <br><br>
             </div>
                 <?php foreach ($loker as $key) {?>
                     <div class="col-md-4" >

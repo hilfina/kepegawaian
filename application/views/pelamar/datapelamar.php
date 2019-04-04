@@ -42,7 +42,6 @@
                         <div class="profile-img">
                             <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt="" width="120"/>
                         </div>
-                        <?php if ($key->foto == "") { ?>
                           <div class="file-upload-inner ts-forms">
                           <div class="input prepend-big-btn">
                               <label class="icon-right" for="prepend-big-btn">
@@ -52,10 +51,9 @@
                                   Browse
                                   <input type="file" name="fotosaya" value="<?php echo $key->foto; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                               </div>
-                              <input type="text" id="prepend-big-btn" placeholder="no file selected"value="<?php echo $key->foto; ?>" >
+                              <input type="text" id="prepend-big-btn" placeholder="no file selected">
                           </div>
                         </div>
-                        <?php } ?>
                         <div class="profile-details-hr">
                             <div class="row">
                             
@@ -72,21 +70,14 @@
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
-                        <div class="row mg-b-15">
-                        <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="skill-title">
-                                    <h2>Data Diri</h2>
-                                    <hr />
-                                </div>
-                            </div>
-                        </div>
+                      <ul id="myTabedu1" class="tab-review-design">
+                        <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>
+                        <li><a href="#cv"> Curiculum Vitae</a></li>
+                      </ul>
                         <?php foreach ($datasaya as $key) { ?>
                         <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
-                            <div class="product-tab-list tab-pane fade active in" id="description">
+                            <div class="product-tab-list tab-pane fade active in" id="dataPribadi">
                               <div class="row">
-                               
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="review-content-section">
                                             <div class="row">
@@ -150,27 +141,53 @@
                                                   </div>
                                                 </div>
                                             <?php } ?>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </form>
-              </div>
-              </div>
-
-
-              
-              
-
-
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="product-tab-list tab-pane fade" id="cv">
+                              <div class="pdf-viewer-area mg-b-15">
+                                  <div class="container-fluid">
+                                      <div class="row">
+                                      <br>
+                                      <p style="color: red;">Perhatian! file yang diupload berisi surat lamaran pekerjaan dan cv dalam bentuk pdf</p>
+                                      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                      </div>
+                                      <?php foreach ($datasaya as $key) { ?>
+                                                  <div class="file-upload-inner ts-forms">
+                                                  <div class="input prepend-big-btn">
+                                                      <label class="icon-right" for="prepend-big-btn">
+                                                        <i class="fa fa-download"></i>
+                                                      </label>
+                                                      <div class="file-button">
+                                                          Browse
+                                                          <input type="file" name="cvsaya" value="<?php echo $key->cv; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                                      </div>
+                                                      <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                                                  </div>
+                                                </div>
+                                                <br><br>
+                                                <div class="pdf-single-pro">
+                                                  <a class="media" href="<?php echo base_url()?>Assets/gambar/<?php $key->cv; ?>"></a>
+                                              </div>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <?php $this->load->view('./footer'); ?>

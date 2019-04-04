@@ -70,6 +70,18 @@ $this->load->view("header.php");
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
+                                        <label>Nilai Akhir</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <div class="input-mark-inner">
+                                        <input type="text" class="form-control" name="nilai" value="<?php echo $key->nilai;?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <div class="input-mask-title">
                                         <label>Nomor Ijazah</label>
                                     </div>
                                 </div>
@@ -120,6 +132,7 @@ $this->load->view("header.php");
                                         <?php }?>
                                     </div>
                                 </div>
+                                <font size="2">Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 mb </font>
                             </div>
                             <br>
                             <div class="row">

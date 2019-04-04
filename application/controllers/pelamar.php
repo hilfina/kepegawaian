@@ -112,8 +112,8 @@ class pelamar extends CI_Controller {
 
 	public function updatedatasaya(){
 	$config['upload_path']		= './Assets/gambar/';
-	$config['allowed_types']	= 'gif|jpg|png';
-	$config['max_size']			= 2000000000;
+	$config['allowed_types']	= 'jpg|docx|pdf|png';
+	$config['max_size']			= 2000;
 	$config['max_width']		= 10240;
 	$config['max_height']		= 7680;
 
@@ -152,10 +152,18 @@ class pelamar extends CI_Controller {
 
 	$pend_akhir = $this->input->post('pend_akhir');
     $nilai_akhir = $this->input->post('nilai_akhir');
+
+    if($_FILES['cvsaya']['name'] != '') {
+		$this->upload->do_upload('cvsaya');
+		$cvsaya = $this->upload->data('file_name');
+	} else {
+		$cvsaya = $this->input->post('cv_old');
+	}
     $data2 = array(
             'pend_akhir'=>$pend_akhir,
             'nilai_akhir'=>$nilai_akhir,
             'id_karyawan' => $id,
+            'cv' => $cvsaya
         );
 
  	$update2 = $this->mdl_pelamar->updatedata($where,$data2,'lowongan');
@@ -179,9 +187,9 @@ class pelamar extends CI_Controller {
 			$this->load->view('pelamar/addpendidikan');
 		}
 		else{
-			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']			= 2000000000;
+			$config['upload_path']		= './Assets/dokumen/';
+			$config['allowed_types']	= 'jpg|docx|pdf|png';
+			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
 
@@ -190,6 +198,7 @@ class pelamar extends CI_Controller {
 		    $id=$this->session->userdata('myId');
 			$pendidikan = $this->input->post('pendidikan');
 			$jurusan  = $this->input->post('jurusan');
+			$nilai = $this->input->post('nilai');
 		    $mulai = $this->input->post('mulai');
 		    $akhir = $this->input->post('akhir');
 		    $nomor_ijazah = $this->input->post('nomor_ijazah');
@@ -198,6 +207,7 @@ class pelamar extends CI_Controller {
 		    $data3 = array(
 		            'pendidikan'=>$pendidikan,
 		            'jurusan' => $jurusan,
+		            'nilai' => $nilai,
 		            'mulai'=>$mulai,
 			        'akhir'=>$akhir,
 			        'nomor_ijazah'=>$nomor_ijazah,
@@ -228,15 +238,16 @@ class pelamar extends CI_Controller {
 			$this->load->view('pelamar/editpendidikan', $paket);
 		}
 		else{
-			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']			= 2000000000;
+			$config['upload_path']		= './Assets/dokumen/';
+			$config['allowed_types']	= 'jpg|docx|pdf|png';
+			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
 
 			$this->load->library('upload', $config);
 			$pendidikan = $this->input->post('pendidikan');
 			$jurusan  = $this->input->post('jurusan');
+			$nilai = $this->input->post('nilai');
 		    $mulai = $this->input->post('mulai');
 		    $akhir = $this->input->post('akhir');
 		    $nomor_ijazah = $this->input->post('nomor_ijazah');
@@ -245,6 +256,7 @@ class pelamar extends CI_Controller {
 		    $data3 = array(
 		            'pendidikan'=>$pendidikan,
 		            'jurusan' => $jurusan,
+		            'nilai' => $nilai,
 		            'mulai'=>$mulai,
 			        'akhir'=>$akhir,
 			        'nomor_ijazah'=>$nomor_ijazah,
@@ -285,9 +297,9 @@ class pelamar extends CI_Controller {
 			$this->load->view('pelamar/addsuratsipstr');
 		}
 		else{
-			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']			= 2000000000;
+			$config['upload_path']		= './Assets/dokumen/';
+			$config['allowed_types']	= 'jpg|docx|pdf|png';
+			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
 
@@ -336,9 +348,9 @@ class pelamar extends CI_Controller {
 			$this->load->view('pelamar/editsurat', $paket);;
 		}
 		else{
-			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']			= 2000000000;
+			$config['upload_path']		= './Assets/dokumen/';
+			$config['allowed_types']	= 'jpg|docx|pdf|png';
+			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
 

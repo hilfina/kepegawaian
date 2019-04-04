@@ -30,6 +30,8 @@ class AdminKaryawan extends CI_Controller {
         {
             $where = array( 'id_karyawan' => $id ); 
             $paket['array']=$this->mdl_admin->getProfesi();
+            $paket['datSta']=$this->mdl_admin->getAlldata('jenis_status');
+            $paket['datGol']=$this->mdl_admin->getAlldata('jenis_golongan');
             $paket['datDir']=$this->mdl_admin->getTempat($id);
             $paket['datPen']=$this->mdl_admin->getData('pendidikan',$where);
             $paket['datSur']=$this->mdl_admin->cariJenisSurat($id);

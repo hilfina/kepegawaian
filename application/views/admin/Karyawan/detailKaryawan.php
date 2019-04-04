@@ -133,7 +133,13 @@
                                         <td><label form-control-label">Status Kepegawaian</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="id_status" type="text" class="form-control" value="<?php echo $key->id_status; ?>">
+                                            <select  class="form-control" name="id_status">
+                                              <option><?php echo $key->id_status; ?></option>
+                                              <option><strong>Pilihan Lainnya:</strong></option>
+                                              <?php foreach ($datSta as $key3) { ?>
+                                                <option><?php echo $key3->id_status; ?></option>
+                                              <?php } ?>
+                                            </select>
                                           </div>
                                         </td>
                                       </tr>
@@ -141,7 +147,13 @@
                                         <td><label form-control-label">Golongan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="id_golongan" type="text" class="form-control" value="<?php echo $key->id_golongan; ?>">
+                                            <select  class="form-control" name="id_golongan">
+                                              <option><?php echo $key->id_golongan; ?></option>
+                                              <option><strong>Pilihan Lainnya:</strong></option>
+                                              <?php foreach ($datGol as $key4) { ?>
+                                                <option><?php echo $key4->id_golongan; ?></option>
+                                              <?php } ?>
+                                            </select>
                                           </div>
                                         </td>
                                       </tr>
@@ -221,7 +233,7 @@
                                                       if(($key->verifikasi) == 1){ ?>
                                                        <a href="#"> Terverifikasi</a>
                                                        <?php }else{ ?>
-                                                        <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
+                                                        <a href="<?php echo site_url(); echo "/admin/verPend2/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
                                                           <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i> Verifikasi</button>
                                                         </a>
                                                       <?php } ?>

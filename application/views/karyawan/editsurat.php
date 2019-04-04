@@ -114,11 +114,10 @@ $this->load->view("header.php");
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected">
                                           </div>
                                         </div>
-                                        <?php if(($key->file) != NULL){?>
-                                            <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file?>" width="400"/>   
-                                        <?php }?>
+                                            <?php echo $key->file?>  
                                     </div>
                                 </div>
+                                <font size="2">Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 mb </font>
                             </div>
                             <br>
                             <div class="row">

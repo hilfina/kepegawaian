@@ -15,7 +15,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Riwayat Penempatan Karyawan</span>
+                <li><span class="bread-blod">Data Status Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -33,15 +33,15 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Riwayat Penempatan Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Status Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminRiwayat/addRiwayat')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Riwayat</button>
+                <div align="right"><a href="<?php echo site_url('adminstatus/addstatus')?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
               </div>
             </div>
@@ -61,30 +61,38 @@
                     <th>No</th>
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
-                    <th>Profesi</th>
                     <th>Status</th>
-                    <th>Ruangan</th>
-                    <th>Mulai Tanggal</th>
+                    <th>Masa Berlaku</th>
+                    <th>Nomor SK</th>
+                    <th>Surat</th>
+                    <th>Aktif</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
                 <tbody>
-                <?php $no=1; ?> 
+                <?php $no=1;?>
                 <?php foreach ($array as $key) { ?>
                   <tr>
-                    <td><?php echo $no++; ?></td>
+                    <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_profesi; ?></td>
                     <td><?php echo $key->id_status; ?></td>
-                    <td><?php echo $key->ruangan; ?></td>
-                    <td><?php echo $key->mulai; ?></td>
+                    <td><?php echo $key->mulai." Sampai ".$key->akhir; ?></td>
+                    <td><?php echo $key->nomor_sk; ?></td>
+                    <td><?php echo "<img src='".base_url("./assets/gambar/".$key->alamat_sk)."' width='100' height='100'>"; ?></td>
+                    <td>
+                    <?php if(($key->aktif) == 1){ ?>
+                      <i class="fa fa-check"></i> Surat Aktif 
+                    <?php }else{ ?>
+                      <i class="fa fa-check"></i> Kadaluarsa 
+                    <?php } ?>
+                    </td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminRiwayat/edit/"; echo $key->id_riwayat ;?>">
-                          <button class="btn btn-warning waves-effect">Edit</button>
+                      <a href="<?php echo site_url(); echo "/adminGol/edit/"; echo $key->id ;?>">
+                          <button class="btn btn-warning waves-effect">edit</button>
                         </a>
-                        <a href="<?php echo site_url(); echo "/adminRiwayat/del/"; echo $key->id_riwayat ;?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                          <button class="btn btn-danger waves-effect">Hapus</button>
+                        <a href="<?php echo site_url(); echo "/adminGol/del/"; echo $key->id ;?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                          <button class="btn btn-danger waves-effect">hapus</button>
                         </a>
                     </td>
                   </tr>

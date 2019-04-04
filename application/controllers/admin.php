@@ -140,12 +140,19 @@ class Admin extends CI_Controller {
             $paket['datPen']=$this->mdl_admin->getData('pendidikan',$where);
             $paket['datSel']=$this->mdl_admin->getData('Seleksi',$where);
             $paket['datSur']=$this->mdl_admin->cariJenisSurat($id);
+            $paket['datLo']=$this->mdl_admin->getData('Lowongan',$where);
             $this->load->view('admin/Pelamar/detailPelamar',$paket);
         }
 
         else{ redirect("login"); } 
         
     }
+
+    public function datapend(){
+        $paket['pen']=$this->mdl_admin->getPendidikan();
+        $this->load->view('admin/pendidikan/allpendidikan',$paket);
+    }
+
 	//VERIFIKASI IJASAH
     public function verPend($id,$idk){
        if($this->mdl_admin->logged_id())
@@ -154,6 +161,18 @@ class Admin extends CI_Controller {
             $data = array( 'verifikasi' => 1 ); 
             $this->mdl_admin->updateData($where,$data,'pendidikan');
             redirect("admin/pelamarDetail/$idk");
+        }
+
+        else{ redirect("login"); } 
+    }
+
+    public function verPend2($id,$idk){
+       if($this->mdl_admin->logged_id())
+        {
+            $where = array( 'id' => $id ); 
+            $data = array( 'verifikasi' => 1 ); 
+            $this->mdl_admin->updateData($where,$data,'pendidikan');
+            redirect("adminKaryawan/karyawanDetail/$idk");
         }
 
         else{ redirect("login"); } 
@@ -350,14 +369,15 @@ class Admin extends CI_Controller {
             $alamat=$this->input->post('alamat');
             $no_telp=$this->input->post('no_telp');
             $email=$this->input->post('email');
-            $id_status=$this->input->post('id_status');
+            $id_profesi=$this->input->post('id_profesi');
 
              $dataKaryawan = array(
                 'no_ktp' => $no_ktp,
                 'nama' => $nama,
                 'alamat' => $alamat,
                 'no_telp' => $no_telp,
-                'email' => $email
+                'email' => $email,
+                'id_profesi' => $id_profesi
                 );
              $where = array('id_karyawan' => $id);
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
@@ -388,16 +408,21 @@ class Admin extends CI_Controller {
             $dataStatus = array(
                 'id_karyawan' => $id,
                 'id_status' => 'Magang',
-                'mulai' => date('Y-m-d'),
+                'mulai' => '-',
                 'akhir' => '-',
                 'nomor_sk' => '-',
                 'alamat_sk' => '-',
                 'aktif' => 1
             );
 
+            $datalogin = array(
+                'level' => 'Karyawan',
+            );
+
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
              $this->mdl_admin->addData('riwayat',$dataRiwayat);
              $this->mdl_admin->addData('Status',$dataStatus);
+             $this->mdl_admin->updateData($where,$datalogin,'login');
              redirect("adminKaryawan/karyawanDetail/$id");
         }
 
@@ -413,7 +438,7 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/pelamar/addPend',$data);
             }else{
                 $config['upload_path']      = './Assets/gambar/';
-                $config['allowed_types']    = 'gif|jpg|png';
+                $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
                 $config['max_size']         = 2000000000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
@@ -422,6 +447,7 @@ class Admin extends CI_Controller {
 
                 $id=$this->input->post('id_karyawan');
                 $pendidikan = $this->input->post('pendidikan');
+                $nilai = $this->input->post('nilai');
                 $mulai = $this->input->post('mulai');
                 $akhir = $this->input->post('akhir');
                 $nomor_ijazah = $this->input->post('nomor_ijazah');
@@ -435,6 +461,7 @@ class Admin extends CI_Controller {
                         'id_karyawan' => $id,
                         'file'=>$a,
                         'verifikasi'=> 0,
+                        'nilai' => $nilai,
                     );
                 $this->mdl_admin->addData('pendidikan',$data3);
                 redirect("admin/pelamarDetail/$id");
@@ -455,7 +482,7 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/pelamar/addSurat',$data);
             }else{
                 $config['upload_path']      = './Assets/gambar/';
-                $config['allowed_types']    = 'gif|jpg|png';
+                $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
                 $config['max_size']         = 2000000000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;

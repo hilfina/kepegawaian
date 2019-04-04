@@ -39,6 +39,7 @@
                         <div class="profile-img">
                             <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt="" width="120"/>
                         </div>
+                        
                         <div class="file-upload-inner ts-forms">
                           <div class="input prepend-big-btn">
                               <label class="icon-right" for="prepend-big-btn">
@@ -93,7 +94,7 @@
                                         <td><label form-control-label">Nomor KTP</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="no_ktp" type="text" class="form-control" value="<?php echo $key->no_ktp; ?>" disabled>
+                                            <input name="no_ktp" type="text" class="form-control" value="<?php echo $key->no_ktp; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -203,7 +204,7 @@
                                                           </tr>
                                                       </thead>
                                                       <?php $no=1; ?>
-                                                      <?php foreach($array as $key){ ?>
+                                                      <?php foreach($datRi as $key){ ?>
                                                       <tbody>
                                                           <tr>
                                                               <td><?php echo $no++;?></td>

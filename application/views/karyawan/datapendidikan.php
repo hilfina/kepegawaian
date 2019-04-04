@@ -52,6 +52,7 @@ $this->load->view("header.php");
                                         <th>Nomor Ijazah</th>
                                         <th>Nama Pendidikan</th>
                                         <th>Jurusan</th>
+                                        <th>Nilai</th>
                                         <th>Tahun Masuk</th>
                                         <th>Tahun Lulus</th>
                                         <th>Verifikasi</th>
@@ -64,6 +65,7 @@ $this->load->view("header.php");
                                         <td><?php echo $key->nomor_ijazah; ?></td>
                                         <td><?php echo $key->pendidikan; ?></td>
                                         <td><?php echo $key->jurusan; ?></td>
+                                        <td><?php echo $key->nilai; ?></td>
                                         <td><?php echo $key->mulai; ?></td>
                                         <td><?php echo $key->akhir; ?></td>
                                         <td>

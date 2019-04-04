@@ -12,8 +12,9 @@
 
 </head>
 <body>
+
   <div class="container-login100">
-    <div class="wrap-login100" style="width: 800px; margin-top: -50px" >
+    <div class="wrap-login100" style="width: 800px; margin-top: 10px" >
 
       <!-- multistep form -->
       <form action="<?php echo site_url(); ?>/login/daftar" enctype="multipart/form-data" method="post">
@@ -35,7 +36,7 @@
               <td><input type="text" class="form-control" name="no_ktp" placeholder="Nomor KTP" required></td>
             </tr></div>
             <tr style="height: 50px"><div class="form-group row">
-              <td><strong>Alamat Email :</strong></td>
+              <td><strong>Email :</strong></td>
               <td><input type="text" class="form-control" name="email"  placeholder="Email" required></td>
             </tr></div>
             <tr style="height: 50px"><div class="form-group row">
@@ -55,6 +56,7 @@
                 <option>D-IV</option>
                 <option>S1</option>
                 <option>S2</option>
+                <option>S3</option>
               </select></td>
             </tr></div>
             <tr style="height: 50px"><div class="form-group row">

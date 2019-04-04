@@ -6,6 +6,7 @@ class Karyawan extends CI_Controller {
 	{
 		parent::__construct();
         $this->load->model('mdl_login');
+        $this->load->model('mdl_admin');
 		$this->load->model('mdl_karyawan');
 		$this->load->model('mdl_pelamar');
 		$this->load->model('mdl_home');
@@ -38,7 +39,7 @@ class Karyawan extends CI_Controller {
 		$paket['array']=$this->mdl_karyawan->getKaryawan($id);
 		$paket['array']=$this->mdl_admin->getProfesi();
         $paket['datDir']=$this->mdl_admin->getTempat($id);
-        $paket['array']=$this->mdl_admin->getRiwayat($id);
+        $paket['datRi']=$this->mdl_karyawan->getRiwayat($id);
         $paket['stat']=$this->mdl_karyawan->getStatus($id);
         $paket['gol']=$this->mdl_karyawan->getGol($id);
         $paket['ber']=$this->mdl_karyawan->getBerkala($id);
@@ -51,8 +52,8 @@ class Karyawan extends CI_Controller {
 
     public function updatedatasaya(){
 	$config['upload_path']		= './Assets/gambar/';
-	$config['allowed_types']	= 'gif|jpg|png';
-	$config['max_size']			= 2000000000;
+	$config['allowed_types']	= 'jpg|pdf|docx';
+	$config['max_size']			= 2000;
 	$config['max_width']		= 10240;
 	$config['max_height']		= 7680;
 
@@ -111,9 +112,9 @@ class Karyawan extends CI_Controller {
 			$this->load->view('karyawan/addpendidikan');
 		}
 		else{
-			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']			= 2000000000;
+			$config['upload_path']		= './Assets/dokumen/';
+			$config['allowed_types']	= 'jpg|png';
+			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
 
@@ -122,6 +123,7 @@ class Karyawan extends CI_Controller {
 		    $id=$this->session->userdata('myId');
 			$pendidikan = $this->input->post('pendidikan');
 			$jurusan  = $this->input->post('jurusan');
+			$nilai = $this->input->post('nilai');
 		    $mulai = $this->input->post('mulai');
 		    $akhir = $this->input->post('akhir');
 		    $nomor_ijazah = $this->input->post('nomor_ijazah');
@@ -130,6 +132,7 @@ class Karyawan extends CI_Controller {
 		    $data3 = array(
 		            'pendidikan'=>$pendidikan,
 		            'jurusan' => $jurusan,
+		            'nilai' => $nilai,
 		            'mulai'=>$mulai,
 			        'akhir'=>$akhir,
 			        'nomor_ijazah'=>$nomor_ijazah,
@@ -160,15 +163,16 @@ class Karyawan extends CI_Controller {
 			$this->load->view('karyawan/editpendidikan', $paket);
 		}
 		else{
-			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']			= 2000000000;
+			$config['upload_path']		= './Assets/dokumen/';
+			$config['allowed_types']	= 'jpg|png';
+			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
 
 			$this->load->library('upload', $config);
 			$pendidikan = $this->input->post('pendidikan');
 			$jurusan  = $this->input->post('jurusan');
+			$nilai = $this->input->post('nilai');
 		    $mulai = $this->input->post('mulai');
 		    $akhir = $this->input->post('akhir');
 		    $nomor_ijazah = $this->input->post('nomor_ijazah');
@@ -177,6 +181,7 @@ class Karyawan extends CI_Controller {
 		    $data3 = array(
 		            'pendidikan'=>$pendidikan,
 		            'jurusan' => $jurusan,
+		            'nilai' => $nilai,
 		            'mulai'=>$mulai,
 			        'akhir'=>$akhir,
 			        'nomor_ijazah'=>$nomor_ijazah,
@@ -219,9 +224,9 @@ class Karyawan extends CI_Controller {
 			$this->load->view('karyawan/addsuratsipstr');
 		}
 		else{
-			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']			= 2000000000;
+			$config['upload_path']		= './Assets/dokumen/';
+			$config['allowed_types']	= 'jpg|png';
+			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
 
@@ -270,9 +275,9 @@ class Karyawan extends CI_Controller {
 			$this->load->view('karyawan/editsurat', $paket);;
 		}
 		else{
-			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']			= 2000000000;
+			$config['upload_path']		= './Assets/dokumen/';
+			$config['allowed_types']	= 'jpg|pdf|docx';
+			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
 
@@ -321,6 +326,43 @@ class Karyawan extends CI_Controller {
 		$id=$this->session->userdata('myId');
 		$paket['array']=$this->mdl_karyawan->getOri($id);
 		$this->load->view('karyawan/dataorientasi',$paket);
+	}
+
+	public function addori(){
+		$this->load->helper('url','form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('tgl_mulai', 'Tanggal Orientasi', 'trim|required' );
+
+		if ($this->form_validation->run()==FALSE) {
+			$this->load->view('karyawan/addori');
+		}
+		else{
+			$config['upload_path']		= './Assets/gambar/';
+			$config['allowed_types']	= 'jpg|pdf|docx';
+			$config['max_size']			= 2000;
+			$config['max_width']		= 10240;
+			$config['max_height']		= 7680;
+
+			$this->load->library('upload', $config);
+
+		    $id=$this->session->userdata('myId');
+		    
+		    $tgl_mulai = $this->input->post('tgl_mulai');
+		    $tgl_akhir = $this->input->post('tgl_akhir');
+		    $no_surat = $this->input->post('no_surat');
+		    $this->upload->do_upload('doku_hadir');
+			$doku_hadir = $this->upload->data('file_name');
+		    $data = array(
+			    	'id_karyawan' => $id,
+			        'tgl_mulai'=>$tgl_mulai,
+			        'tgl_akhir'=>$tgl_akhir,  
+			        'doku_hadir'=>$doku_hadir,
+		        );
+
+		    $insert = $this->mdl_pelamar->tambahdata('orientasi',$data);
+		    $this->session->set_flashdata('msg','Data Sukses di tambahkan');
+		    redirect(site_url('karyawan/dataori'));
+		}
 	}
 
 	public function hapusori($id)

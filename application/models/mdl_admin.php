@@ -31,6 +31,19 @@ class Mdl_admin extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+
+    function getAlldata($table){
+        $this->db->select("*");
+        $this->db->from($table);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function getPendidikan(){
+        $query = $this->db->query("SELECT * FROM pendidikan as p INNER JOIN karyawan as k on k.id_karyawan=p.id_karyawan ORDER by verifikasi  ASC ");
+        return $query->result();
+    }
+
     function delLoker($id){
         $query = $this->db->query("DELETE FROM loker where id_loker = $id");
     }
@@ -68,9 +81,10 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
     public function getKaryawan(){
-        $query = $this->db->query("SELECT * from karyawan where id_status != 'Pelamar' AND id_status!='Calon Karyawan' AND id_status != 'Pelamar Ditolak'");
+        $query = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan=l.id_karyawan where k.id_status != 'Pelamar' AND k.id_status!='Calon Karyawan' AND k.id_status != 'Pelamar Ditolak' AND l.level != 'admin'");
         return $query->result();
     }
+
     public function getLoker(){
         $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi");
         return $query->result();
@@ -87,14 +101,25 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi where r.id_riwayat = $id");
         return $query->result();
     }
-    public function getStatus(){
+    public function getAllStatus(){
         $query = $this->db->query("SELECT * from status as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
         return $query->result();
     }
 
-    public function getAllStatus(){
-        $query = $this->db->query("    SELECT * from jenis_status where id_status != 'Admin' AND id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND id_status != 'Pelamar Ditolak'");
+    public function getStatus($id){
+        $query = $this->db->query("SELECT * from karyawan as k inner join status as r on k.id_karyawan = r.id_karyawan inner join jenis_status as j on r.id_status = j.id_status where r.id = $id");
         return $query->result();
     }
+
+    public function getJenStatus(){
+        $query = $this->db->query("SELECT * from jenis_status where id_status != 'Admin' AND id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND id_status != 'Pelamar Ditolak'");
+        return $query->result();
+    }
+
+    public function getGol(){
+        $query = $this->db->query("SELECT * from golongan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
 }
  

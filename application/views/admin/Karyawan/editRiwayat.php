@@ -14,10 +14,10 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="<?php echo site_url('admin/pelamar') ?>">Home</a> 
+                <li><a href="#">Home</a> 
                   <span class="bread-slash">/</span>
                 </li>
-                <li><a href="<?php echo site_url('admin/pelamar') ?>">Edit Data Riwayat</a> 
+                <li><a href="#">Edit Data Riwayat</a> 
                 </li>
               </ul>
             </div>
@@ -47,7 +47,15 @@
             <td><label form-control-label">NIK</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="nik" type="text" class="form-control" value="<?php echo $key->nik ?>">
+                <input name="nik" type="text" class="form-control" value="<?php echo $key->nik ?>" disabled>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><label form-control-label">Nama Karyawan</label></td>
+            <td style="height: 50px">
+              <div class="col-lg-12">
+                <input name="nama" type="text" class="form-control" value="<?php echo $key->nama ?>" disabled>
               </div>
             </td>
           </tr>
@@ -77,7 +85,11 @@
             <td><label form-control-label">Mulai Tanggal</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="mulai" type="date" class="form-control" value="<?php echo $key->mulai ?>">
+              <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+              <div class="input-daterange input-group" id="datepicker">
+                <input name="mulai" type="text" class="form-control" value="<?php echo $key->mulai ?>">
+                </div>
+                </div>
               </div>
             </td>
           </tr>
