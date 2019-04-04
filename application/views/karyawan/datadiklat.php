@@ -71,6 +71,13 @@ $this->load->view("header.php");
                                         <td><?php echo $key->tahun; ?></td>
                                         <td><?php echo $key->jam; ?></td>
                                         <td>
+                                            <?php if(($key->file) != NULL) {?>
+                                             <font style="color: blue">File Tersedia</font>
+                                            <?php }else{ ?>
+                                              <font style="color: red">Tidak Ada file</font>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
                                         
                                         <a href="<?php echo site_url('karyawan/editdiklat/').$key->id_diklat ?>">
                                         <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>

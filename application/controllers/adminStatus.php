@@ -37,7 +37,7 @@ class AdminStatus extends CI_Controller {
                 $data['array']=$this->mdl_admin->getJenStatus();
                 $this->load->view('admin/Karyawan/addStatus',$data);
             }else{
-                $config['upload_path']      = './Assets/pdf/';
+                $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx';
                 $config['max_size']         = 2000000000;
                 $config['max_width']        = 10240;
@@ -93,7 +93,7 @@ class AdminStatus extends CI_Controller {
                 $data['array2']=$this->mdl_admin->getJenStatus();
                 $this->load->view('admin/Karyawan/editStatus',$data);
             }else{
-                $config['upload_path']      = './Assets/pdf/';
+                $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;

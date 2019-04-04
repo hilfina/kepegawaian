@@ -38,7 +38,7 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
-                    <form action="<?php echo site_url();?>/pelamar/addsurat/" enctype="multipart/form-data" method="post">
+                    <form action="<?php echo site_url();?>/karyawan/addsurat/" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
                             <div class="row">
@@ -112,7 +112,7 @@ $this->load->view("header.php");
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected">
                                           </div>
                                         </div>
-                                        <font size="2">Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 mb </font>
+                                        <font size="2">Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
                                 </div>
                             </div>

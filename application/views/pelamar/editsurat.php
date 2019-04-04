@@ -119,7 +119,7 @@ $this->load->view("header.php");
                                         <?php }?>
                                     </div>
                                 </div>
-                                <font size="2">Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 mb </font>
+                                <font size="2">Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2 mb </font>
                             </div>
                             <br>
                             <div class="row">

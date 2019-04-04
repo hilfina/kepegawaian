@@ -63,7 +63,7 @@ $this->load->view("header.php");
                                         <td><?php echo $key->doku_hadir; ?></td>
                                         <td>
                                         
-                                        <a href="<?php echo site_url('karyawan/editori/').$key->id_orientasi ?>">
+                                        <a href="<?php echo site_url('karyawan/editori/').$key->id_orientasi?>">
                                         <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                         <a href="<?php echo site_url('karyawan/hapusori/').$key->id_orientasi ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?');">
                                         <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
