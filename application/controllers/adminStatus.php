@@ -38,13 +38,13 @@ class AdminStatus extends CI_Controller {
                 $this->load->view('admin/Karyawan/addStatus',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx';
-                $config['max_size']         = 2000000000;
+                $config['allowed_types']    = 'pdf|jpg|docx}png';
+                $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
-                $this->upload->do_upload('file');
+                
                 $konek = mysqli_connect("localhost","root","","kepegawaian");
                 $a=$this->input->post('nik');
                 $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
@@ -54,6 +54,7 @@ class AdminStatus extends CI_Controller {
                 $mulai=$this->input->post('mulai');
                 $akhir=$this->input->post('akhir');
                 $nomor_sk=$this->input->post('nomor_sk');
+                $this->upload->do_upload('alamat_sk');
                 $alamat_sk=$this->upload->data('file_name');
                
                 $dataStatus= array(
@@ -94,7 +95,7 @@ class AdminStatus extends CI_Controller {
                 $this->load->view('admin/Karyawan/editStatus',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx';
+                $config['allowed_types']    = 'pdf|jpg|docx|png';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;

@@ -15,7 +15,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Status Karyawan</span>
+                <li><span class="bread-blod">Data Golongan Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -33,16 +33,23 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Status Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Golongan Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminstatus/addstatus')?>">
+                <div align="right"><a href="<?php echo site_url('adminGol/addGol')?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
+                <div class=" container-fluid" id="notif">
+                    <?php if ($this->session->flashdata('msg')) :?>
+                        <div class="alert alert-success"> 
+                    <?php echo $this->session->flashdata('msg')?>
+                        </div>
+                    <?php endif; ?>
+                </div>
               </div>
             </div>
           </div>
@@ -61,9 +68,9 @@
                     <th>No</th>
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
-                    <th>Status</th>
-                    <th>Masa Berlaku</th>
+                    <th>Golongan</th>
                     <th>Nomor SK</th>
+                    <th>Masa Berlaku</th>
                     <th>Surat</th>
                     <th>Aktif</th>
                     <th>Pilihan</th>
@@ -76,10 +83,16 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_status; ?></td>
-                    <td><?php echo $key->mulai." Sampai ".$key->akhir; ?></td>
+                    <td><?php echo $key->id_golongan; ?></td>
                     <td><?php echo $key->nomor_sk; ?></td>
-                    <td><?php echo "<img src='".base_url("./assets/gambar/".$key->alamat_sk)."' width='100' height='100'>"; ?></td>
+                    <td><?php echo $key->mulai." Sampai ".$key->akhir; ?></td>
+                    <td>
+                    <?php if(($key->alamat_sk) != NULL){ ?>
+                      <font style="color: blue">File Tersedia</font>
+                    <?php }else{ ?>
+                      <font style="color: red">Tidak Ada file</font>
+                    <?php } ?>
+                    </td>
                     <td>
                     <?php if(($key->aktif) == 1){ ?>
                       <i class="fa fa-check"></i> Surat Aktif 
@@ -89,11 +102,11 @@
                     </td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminGol/edit/"; echo $key->id ;?>">
-                          <button class="btn btn-warning waves-effect">edit</button>
-                        </a>
-                        <a href="<?php echo site_url(); echo "/adminGol/del/"; echo $key->id ;?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                          <button class="btn btn-danger waves-effect">hapus</button>
-                        </a>
+                        <button class="btn btn-warning waves-effect">edit</button>
+                      </a>
+                      <a href="<?php echo site_url(); echo "/adminGol/del/"; echo $key->id;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                        <button class="btn btn-danger waves-effect">hapus</button>
+                      </a>
                     </td>
                   </tr>
                 <?php }?>

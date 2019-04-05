@@ -121,5 +121,20 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
+    public function getGoledit($id){
+        $query = $this->db->query("SELECT * from golongan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
+    public function getBerkala(){
+        $query = $this->db->query("SELECT * from berkala as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getBerkalaedit($id){
+        $query = $this->db->query("SELECT * from berkala as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
 }
  

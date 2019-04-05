@@ -40,18 +40,21 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url(); echo "/admin/addPend/";?>">
+                <div align="right"><a href="<?php echo site_url(); echo "/admin/addPendidikan/";?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                </a></div>
+                </a>
+                </div>
               </div>
             </div>
           </div>
+          <div class="col-lg-12">
           <div class=" container-fluid" id="notif">
           <?php if ($this->session->flashdata('msg')) :?>
             <div class="alert alert-success"> 
             <?php echo $this->session->flashdata('msg')?>
             </div>
           <?php endif; ?>
+          </div>
           </div>
           <div class="sparkline13-graph">
             <div class="datatable-dashv1-list custom-datatable-overright">
@@ -65,21 +68,25 @@
               <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
+                    <th  data-field="state" data-checkbox="true">Pilih</th>
                     <th>No</th>
                     <th>Gambar Ijazah</th>
                     <th>Nama Karyawan</th>
+                    <th>Profesi</th>
+                    <th>Status</th>
                     <th>Nomor Ijazah</th>
-                    <th>Nama Pendidikan</th>
+                    <th>Nama Institusi</th>
                     <th>Jurusan</th>
                     <th>Nilai</th>
-                    <th>Tahun Pendidikan</th>
-                    <th>Verifikasi</th>
+                    <th>Periode</th>
+                    <th>Verifikasi  </th>
                   </tr>
                 </thead>
                 <tbody>
                 <?php $no = 1 ?>
                 <?php foreach ($pen as $key) { ?>
                     <tr>
+                        <td></td>
                         <td><?php echo $no++ ?></td>
                         <td>
                         <a  href="" data-toggle="modal" data-target="#gambarIjasah"><?php echo "<img src='".base_url("./assets/gambar/".$key->file)."' width='100' height='100'>"; ?></a>
@@ -101,6 +108,8 @@
                             </div>        
                         </td>
                         <td><?php echo $key->nama; ?></td>
+                        <td><?php echo $key->id_profesi; ?></td>
+                        <td><?php echo $key->id_status; ?></td>
                         <td><?php echo $key->nomor_ijazah; ?></td>
                         <td><?php echo $key->pendidikan; ?></td>
                         <td><?php echo $key->jurusan; ?></td>
@@ -112,7 +121,7 @@
                            <a href="#"> Terverifikasi</a>
                            <?php }else{ ?>
                             <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                              <button class="btn btn-danger waves-effect mg-b-15"><i class="fa fa-check" ></i> Verifikasi</button>
+                              <button class="btn btn-danger waves-effect mg-b-15">Verifikasi</button>
                             </a>
                           <?php } ?>
                         </td>

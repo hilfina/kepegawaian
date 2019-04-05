@@ -14,10 +14,10 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="<?php echo site_url('admin/pelamar') ?>">Home</a> 
+                <li><a href="#">data Golongan Karyawan</a> 
                   <span class="bread-slash">/</span>
                 </li>
-                <li><a href="<?php echo site_url('admin/pelamar') ?>">Tambah Data Status</a> 
+                <li><a href="#">Tambah Data Golongan</a> 
                 </li>
               </ul>
             </div>
@@ -36,11 +36,11 @@
           <br>
           <div class="sparkline13-hd">
               <div class="main-sparkline13-hd" align="center">
-                <h1> Tambah Data Status Status Karyawan</h1><br>
+                <h1> Tambah Data Golongan Karyawan</h1><br>
               </div>
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
-          <form action="<?php echo site_url();?>/adminStatus/addStatus/" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminGol/addGol/" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
             <td><label form-control-label">NIK</label></td>
@@ -59,12 +59,13 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Jenis Status</label></td>
+            <td><label form-control-label">Jenis Golongan</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <select name="id_status" class="form-control">
+                <select name="id_golongan" class="form-control">
+                <option>---Pilih---</option>
                   <?php foreach ($array as $key) {?>
-                    <option><?php echo $key->id_status; ?></option>
+                    <option><?php echo $key->id_golongan; ?></option>
                   <?php } ?>
                 </select>
               </div>
@@ -95,7 +96,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Foto Scan SK</label></td>
+            <td><label form-control-label">Upload Dokumen SK</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <div class="input-mark-inner">

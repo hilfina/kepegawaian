@@ -15,7 +15,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Status Karyawan</span>
+                <li><span class="bread-blod">Data Berkala Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -33,14 +33,14 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Status Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Berkala Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminstatus/addstatus')?>">
+                <div align="right"><a href="<?php echo site_url('adminBerkala/addBerkala')?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
                 <div class=" container-fluid" id="notif">
@@ -68,7 +68,6 @@
                     <th>No</th>
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
-                    <th>Status</th>
                     <th>Nomor SK</th>
                     <th>Masa Berlaku</th>
                     <th>Surat</th>
@@ -83,7 +82,6 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_status; ?></td>
                     <td><?php echo $key->nomor_sk; ?></td>
                     <td><?php echo $key->mulai." Sampai ".$key->akhir; ?></td>
                     <td>
@@ -101,12 +99,12 @@
                     <?php } ?>
                     </td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminStatus/edit/"; echo $key->id ;?>">
-                          <button class="btn btn-warning waves-effect">edit</button>
-                        </a>
-                        <a href="<?php echo site_url(); echo "/adminStatus/del/"; echo $key->id;?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                          <button class="btn btn-danger waves-effect">hapus</button>
-                        </a>
+                      <a href="<?php echo site_url(); echo "/adminBerkala/edit/"; echo $key->id ;?>">
+                        <button class="btn btn-warning waves-effect">edit</button>
+                      </a>
+                      <a href="<?php echo site_url(); echo "/adminBerkala/del/"; echo $key->id;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                        <button class="btn btn-danger waves-effect">hapus</button>
+                      </a>
                     </td>
                   </tr>
                 <?php }?>

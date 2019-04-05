@@ -148,11 +148,6 @@ class Admin extends CI_Controller {
         
     }
 
-    public function datapend(){
-        $paket['pen']=$this->mdl_admin->getPendidikan();
-        $this->load->view('admin/pendidikan/allpendidikan',$paket);
-    }
-
 	//VERIFIKASI IJASAH
     public function verPend($id,$idk){
        if($this->mdl_admin->logged_id())
@@ -428,6 +423,8 @@ class Admin extends CI_Controller {
 
         else{ redirect("login"); } 
     }
+
+    //Add pendidikan pada karyawan
     public function addPend($id){
        if($this->mdl_admin->logged_id()){
 
@@ -467,10 +464,68 @@ class Admin extends CI_Controller {
                 redirect("admin/pelamarDetail/$id");
                 
                 }
-        }
-        
-        else{ redirect("login"); } 
+        }else{ redirect("login"); } 
     }
+
+
+    public function datapend(){
+        $paket['pen']=$this->mdl_admin->getPendidikan();
+        $this->load->view('admin/pendidikan/allpendidikan',$paket);
+    }
+    //add pendidikan pada semua tabel pendidikan
+    public function addPendidikan(){
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $this->load->view('admin/pendidikan/addPendidikan');
+            }else{
+                $config['upload_path']      = './Assets/gambar/';
+                $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+
+                $this->load->library('upload', $config);
+                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $nik=$this->input->post('nik');
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+
+                $id=$data2['id_karyawan'];
+                $pendidikan = $this->input->post('pendidikan');
+                $nilai = $this->input->post('nilai');
+                $mulai = $this->input->post('mulai');
+                $akhir = $this->input->post('akhir');
+                $nomor_ijazah = $this->input->post('nomor_ijazah');
+                $this->upload->do_upload('file');
+                $file = $this->upload->data('file_name');
+                $data3 = array(
+                        'pendidikan'=>$pendidikan,
+                        'mulai'=>$mulai,
+                        'akhir'=>$akhir,
+                        'nomor_ijazah'=>$nomor_ijazah,
+                        'id_karyawan' => $id,
+                        'file'=>$file,
+                        'verifikasi'=> 0,
+                        'nilai' => $nilai,
+                    );
+                $this->session->set_flashdata('msg','Data Sukses di tambahkan');
+                $this->mdl_admin->addData('pendidikan',$data3);
+                redirect("admin/dataPend");
+                
+                }
+        }else{ redirect("login"); } 
+    }
+
+    public function hapuspend($id)
+    {
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata('pendidikan',$where);
+        $this->session->set_flashdata('msg','Data Sukses di Hapus');
+        redirect(site_url('karyawan/datapend'));
+    }
+    
     public function addSurat($id){
        if($this->mdl_admin->logged_id()){
 
