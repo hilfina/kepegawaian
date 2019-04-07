@@ -44,6 +44,11 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
+    function getSurat(){
+        $query = $this->db->query("SELECT * FROM karyawan as k INNER JOIN sip_str as p on k.id_karyawan=p.id_karyawan inner join jenis_surat as s ON p.id_surat=s.id_surat ORDER by p.tgl_akhir asc ");
+        return $query->result();
+    }
+
     function delLoker($id){
         $query = $this->db->query("DELETE FROM loker where id_loker = $id");
     }
@@ -133,6 +138,41 @@ class Mdl_admin extends CI_Model
 
     public function getBerkalaedit($id){
         $query = $this->db->query("SELECT * from berkala as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
+    public function getHutang(){
+        $query = $this->db->query("SELECT * from mou_hutang as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getHutangedit($id){
+        $query = $this->db->query("SELECT * from mou_hutang as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
+    public function getKontrak(){
+        $query = $this->db->query("SELECT * from mou_kontrak as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getKontrakedit($id){
+        $query = $this->db->query("SELECT * from mou_kontrak as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
+    public function getSekolah(){
+        $query = $this->db->query("SELECT * from mou_sekolah as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getSekolahedit($id){
+        $query = $this->db->query("SELECT * from mou_sekolah as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
+    public function getOri(){
+        $query = $this->db->query("SELECT * from orientasi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
         return $query->result();
     }
 

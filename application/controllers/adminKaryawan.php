@@ -11,6 +11,7 @@ class AdminKaryawan extends CI_Controller {
 		$this->load->model('mdl_home');
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
+        $this->load->helper(array('url','download'));
 	}
 	public function index()
 	{

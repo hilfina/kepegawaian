@@ -63,6 +63,7 @@
             <td style="height: 50px">
               <div class="col-lg-12">
                 <select name="id_status" class="form-control">
+                <option>---Pilih---</option>
                   <?php foreach ($array as $key) {?>
                     <option><?php echo $key->id_status; ?></option>
                   <?php } ?>

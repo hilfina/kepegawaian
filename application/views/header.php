@@ -137,7 +137,7 @@
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
                                 <li><a title="Karyawan" href="<?php echo site_url('adminKaryawan/') ?>"><span class="mini-cli">Karyawan</span></a></li>
                                 <li><a title="Diklat" href="<?php echo site_url('adminDiklat/') ?>"><span class="mini-cli">Diklat</span></a></li>
-                                <li><a title="Orientasi" href="<?php echo site_url('adminOrientasi/') ?>"><span class="mini-cli">Orientasi</span></a></li>
+                                <li><a title="Orientasi" href="<?php echo site_url('adminOri/') ?>"><span class="mini-cli">Orientasi</span></a></li>
                                 <li><a title="Uraian Tugas" href="<?php echo site_url('adminUraianTugas/') ?>"><span class="mini-cli">Uraian Tugas</span></a></li>
                             </ul>
                         </li>
@@ -160,9 +160,9 @@
                         </li>
                         <li><a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data MOU</span></a>
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Sedang Seleksi" href="<?php echo site_url('adminHutang/') ?>"><span class="mini-sub-pro">Hutang</span></a></li>
-                                <li><a title="Sedang Seleksi" href="<?php echo site_url('adminKontrak') ?>"><span class="mini-sub-pro">Kontrak</span></a></li>
-                                <li><a title="Sedang Seleksi" href="<?php echo site_url('adminSekolah') ?>"><span class="mini-sub-pro">Sekolah</span></a></li>
+                                <li><a title="MOU Hutang" href="<?php echo site_url('adminHutang/') ?>"><span class="mini-sub-pro">Hutang</span></a></li>
+                                <li><a title="MOU Kontrak" href="<?php echo site_url('adminKontrak') ?>"><span class="mini-sub-pro">Kontrak</span></a></li>
+                                <li><a title="MOU Sekolah" href="<?php echo site_url('adminSekolah') ?>"><span class="mini-sub-pro">Sekolah</span></a></li>
                             </ul>
                         </li>
                         <li>

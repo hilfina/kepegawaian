@@ -12,6 +12,8 @@ class AdminStatus extends CI_Controller {
 		$this->load->model('mdl_home');
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
+        $this->load->helper(array('url','download'));
+        $this->load->helper('download');
 	}
 
 	public function index()
@@ -135,6 +137,13 @@ class AdminStatus extends CI_Controller {
     public function del($id){
         $this->mdl_pelamar->hapusdata('status',$id);
         redirect("adminStatus");
+    }
+
+    public function download($id){    
+        $konek = mysqli_connect("localhost","root","","kepegawaian");
+        $data=mysqli_fetch_array(mysqli_query($konek,"select alamat_sk from status where id = $id; "));         
+        force_download('Assets/dokumen/$data',NULL);
+        
     }
 }
 

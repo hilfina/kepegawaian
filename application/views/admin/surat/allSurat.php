@@ -15,7 +15,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Pendidikan</span>
+                <li><span class="bread-blod">Data Surat</span>
                 </li>
               </ul>
             </div>
@@ -33,14 +33,14 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Pendidikan</span></h1>
+                <h1>Data <span class="table-project-n">Surat Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url(); echo "/admin/addPendidikan/";?>">
+                <div align="right"><a href="<?php echo site_url(); echo "/admin/addsipstr/";?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a>
                 </div>
@@ -70,26 +70,25 @@
                   <tr>
                     <th  data-field="state" data-checkbox="true">Pilih</th>
                     <th>No</th>
-                    <th>Gambar Ijazah</th>
+                    <th>Gambar</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
                     <th>Status</th>
-                    <th>Nomor Ijazah</th>
-                    <th>Nama Institusi</th>
-                    <th>Jurusan</th>
-                    <th>Nilai</th>
-                    <th>Periode</th>
-                    <th>Verifikasi  </th>
+                    <th>Nomor Surat</th>
+                    <th>Jenis Surat</th>
+                    <th>Tanggal Berlaku</th>
+                    <th>Keaktifan</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                 <?php $no = 1 ?>
-                <?php foreach ($pen as $key) { ?>
+                <?php foreach ($array as $key) { ?>
                     <tr>
                         <td></td>
                         <td><?php echo $no++ ?></td>
                         <td>
-                        <a  href="" data-toggle="modal" data-target="#gambarIjasah"><?php echo "<img src='".base_url("./assets/dokumen/".$key->file)."' width='100' height='100'>"; ?></a>
+                        <a  href="" data-toggle="modal" data-target="gambarIjasah"><?php echo "<img src='".base_url("./assets/dokumen/".$key->file)."' width='100' height='100'>"; ?></a>
                             <div id="gambarIjasah" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                               <div class="modal-dialog">
                                   <div class="modal-content">
@@ -110,21 +109,19 @@
                         <td><?php echo $key->nama; ?></td>
                         <td><?php echo $key->id_profesi; ?></td>
                         <td><?php echo $key->id_status; ?></td>
-                        <td><?php echo $key->nomor_ijazah; ?></td>
-                        <td><?php echo $key->pendidikan; ?></td>
-                        <td><?php echo $key->jurusan; ?></td>
-                        <td><?php echo $key->nilai; ?></td>
-                        <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
+                        <td><?php echo $key->no_surat; ?></td>
+                        <td><?php echo $key->nama_surat; ?></td>
+                        <td><?php echo $key->tgl_mulai; echo " - "; echo $key->tgl_akhir; ?></td>
                         <td>
-                        <?php 
-                          if(($key->verifikasi) == 1){ ?>
-                           <a href="#"> Terverifikasi</a>
-                           <?php }else{ ?>
-                            <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                              <button class="btn btn-danger waves-effect mg-b-15">Verifikasi</button>
-                            </a>
-                          <?php } ?>
+                        <?php if(($key->aktif) == 1){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }else{ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                        <?php } ?>
                         </td>
+                        <td><a href="<?php echo site_url(); echo "/admin/delsurat/"; echo $key->id_sipstr;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                        <button class="btn btn-danger waves-effect">hapus</button>
+                      </a></td>
                     </tr>
                 <?php }?>
                 </tbody>

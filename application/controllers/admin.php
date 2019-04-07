@@ -434,9 +434,9 @@ class Admin extends CI_Controller {
                 $data['id']=$id;
                 $this->load->view('admin/pelamar/addPend',$data);
             }else{
-                $config['upload_path']      = './Assets/gambar/';
+                $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
-                $config['max_size']         = 2000000000;
+                $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
 
@@ -481,7 +481,7 @@ class Admin extends CI_Controller {
             if($this->form_validation->run()==FALSE){
                 $this->load->view('admin/pendidikan/addPendidikan');
             }else{
-                $config['upload_path']      = './Assets/gambar/';
+                $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
@@ -526,6 +526,11 @@ class Admin extends CI_Controller {
         redirect(site_url('karyawan/datapend'));
     }
     
+    public function datasurat(){
+        $paket['array']=$this->mdl_admin->getSurat();
+        $this->load->view('admin/surat/allSurat',$paket);
+    }
+
     public function addSurat($id){
        if($this->mdl_admin->logged_id()){
 
@@ -536,9 +541,9 @@ class Admin extends CI_Controller {
                 $data['surat']=$this->mdl_admin->getJenSur();
                 $this->load->view('admin/pelamar/addSurat',$data);
             }else{
-                $config['upload_path']      = './Assets/gambar/';
+                $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
-                $config['max_size']         = 2000000000;
+                $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
 
@@ -547,8 +552,7 @@ class Admin extends CI_Controller {
                 $id=$this->input->post('id_karyawan');
                 $nama_surat = $this->input->post('nama_surat');
                 $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_surat from jenis_surat where nama_surat = '$nama_surat'"));
-                $xxx = $data['id_surat'];
-                $id_surat = $xxx;
+                $id_surat = $data['id_surat'];
                 $tgl_mulai = $this->input->post('tgl_mulai');
                 $tgl_akhir = $this->input->post('tgl_akhir');
                 $no_surat = $this->input->post('no_surat');
@@ -571,6 +575,59 @@ class Admin extends CI_Controller {
         }
         
         else{ redirect("login"); } 
+    }
+
+    public function addsipstr(){
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('id_karyawan','Id Karyawan','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $data['surat']=$this->mdl_admin->getJenSur();
+                $this->load->view('admin/surat/addSurat',$data);
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'jpg|png';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+
+                $this->load->library('upload', $config);
+                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $nik=$this->input->post('nik');
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+
+                $id=$data2['id_karyawan'];
+                $nama_surat = $this->input->post('nama_surat');
+                $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_surat from jenis_surat where nama_surat = '$nama_surat'"));
+                $id_surat = $data['id_surat'];
+                $tgl_mulai = $this->input->post('tgl_mulai');
+                $tgl_akhir = $this->input->post('tgl_akhir');
+                $no_surat = $this->input->post('no_surat');
+                $this->upload->do_upload('file');
+                $b = $this->upload->data('file_name');
+                $data4 = array(
+                    'id_karyawan' => $id,
+                    'id_surat'=>$id_surat,
+                    'tgl_mulai'=>$tgl_mulai,
+                    'tgl_akhir'=>$tgl_akhir, 
+                    'no_surat'=>$no_surat,  
+                    'file'=>$b,
+                    'aktif'=> 0,
+                );
+
+                $this->mdl_admin->addData('sip_str',$data4);
+                redirect("admin/datasurat");
+                
+                }
+        }
+        
+        else{ redirect("login"); } 
+    }
+
+    public function delsurat($id){
+        $this->mdl_pelamar->hapusdata('sip_str',$id);
+        redirect("datasurat");
     }
 }
 

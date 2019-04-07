@@ -73,6 +73,7 @@
               <div class="col-lg-12">
                 <select name="id_golongan" class="form-control">
                 <option><?php echo $key->id_golongan ?></option>
+                <option>---Pilih---</option>
                   <?php foreach ($array2 as $key2) {?>
                     <option><?php echo $key2->id_golongan; ?></option>
                   <?php } ?>

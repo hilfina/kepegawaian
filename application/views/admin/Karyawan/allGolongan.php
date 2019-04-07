@@ -68,6 +68,7 @@
                     <th>No</th>
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
+                    <th>Profesi</th>
                     <th>Golongan</th>
                     <th>Nomor SK</th>
                     <th>Masa Berlaku</th>
@@ -83,9 +84,10 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
+                    <td><?php echo $key->id_profesi; ?></td>
                     <td><?php echo $key->id_golongan; ?></td>
                     <td><?php echo $key->nomor_sk; ?></td>
-                    <td><?php echo $key->mulai." Sampai ".$key->akhir; ?></td>
+                    <td><?php echo $key->mulai." - ".$key->akhir; ?></td>
                     <td>
                     <?php if(($key->alamat_sk) != NULL){ ?>
                       <font style="color: blue">File Tersedia</font>

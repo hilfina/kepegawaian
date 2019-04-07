@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AdminBerkala extends CI_Controller {
+class AdminSekolah extends CI_Controller {
 	private $filename = "import_data";
 	public function __construct()
 	{
@@ -19,21 +19,21 @@ class AdminBerkala extends CI_Controller {
 	{
 		if($this->mdl_admin->logged_id())
 		{
-			$paket['array']=$this->mdl_admin->getBerkala();
-            $this->load->view('admin/Karyawan/allBerkala',$paket);
+			$paket['array']=$this->mdl_admin->getSekolah();
+            $this->load->view('admin/Karyawan/allSekolah',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
 		}
 	}
 
-    public function addBerkala(){
+    public function addSekolah(){
        if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
+            $this->form_validation->set_rules('no_mou','Nomor Surat MOU','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/addBerkala');
+                $this->load->view('admin/Karyawan/addSekolah');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx}png';
@@ -48,31 +48,28 @@ class AdminBerkala extends CI_Controller {
                 $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
                 $id_karyawan=$data2['id_karyawan'];
-                $berkala=$this->input->post('berkala');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
-                $nomor_sk=$this->input->post('nomor_sk');
-                $this->upload->do_upload('alamat_sk');
-                $alamat_sk=$this->upload->data('file_name');
+                $beasiswa=$this->input->post('beasiswa');
+                $ket=$this->input->post('ket');
+                $tgl_mulai=$this->input->post('tgl_mulai');
+                $tgl_akhir=$this->input->post('tgl_akhir');
+                $no_mou=$this->input->post('no_mou');
+                $this->upload->do_upload('file');
+                $file=$this->upload->data('file_name');
                
                 $data= array(
                 'id_karyawan' => $id_karyawan,
-                'berkala' => $berkala,
-                'mulai' => $mulai,
-                'akhir' => $akhir,
-                'alamat_sk' => $alamat_sk,
-                'nomor_sk' => $nomor_sk,
+                'beasiswa' => $beasiswa,
+                'tgl_mulai' => $tgl_mulai,
+                'tgl_akhir' => $tgl_akhir,
+                'ket' => $ket,
+                'file' => $file,
+                'no_mou' => $no_mou,
                 'aktif' => 1
                 );
 
-                
-                $updateberkala= array('akhir' => $mulai, 'aktif' => 0);
-                $whereS = array('id_karyawan' => $id_karyawan, 'aktif' => 1);
-                $this->mdl_admin->updateData($whereS,$updateberkala,'berkala');
+                $this->mdl_admin->addData('mou_sekolah',$data);
 
-                $this->mdl_admin->addData('berkala',$data);
-
-                redirect("AdminBerkala");
+                redirect("AdminSekolah");
                 }
         }
         else{ redirect("login"); } 
@@ -81,11 +78,11 @@ class AdminBerkala extends CI_Controller {
     public function edit($id){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
+            $this->form_validation->set_rules('no_mou','Nomor Surat Keputusan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $data['array']=$this->mdl_admin->getBerkalaedit($id);
-                $this->load->view('admin/Karyawan/editBerkala',$data);
+                $data['array']=$this->mdl_admin->getSekolahedit($id);
+                $this->load->view('admin/Karyawan/editSekolah',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -95,39 +92,42 @@ class AdminBerkala extends CI_Controller {
 
                 $this->load->library('upload', $config);
                 
-                $berkala=$this->input->post('berkala');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
-                $nomor_sk=$this->input->post('nomor_sk');
-                if($_FILES['alamat_sk']['name'] != '') {
-                    $this->upload->do_upload('alamat_sk');
-                    $alamat_sk = $this->upload->data('file_name');
+                $beasiswa=$this->input->post('beasiswa');
+                $ket=$this->input->post('ket');
+                $tgl_mulai=$this->input->post('tgl_mulai');
+                $tgl_akhir=$this->input->post('tgl_akhir');
+                $no_mou=$this->input->post('no_mou');
+                if($_FILES['file']['name'] != '') {
+                    $this->upload->do_upload('file');
+                    $file = $this->upload->data('file_name');
                 } else {
-                    $alamat_sk = $this->input->post('file_old');
+                    $file = $this->input->post('file_old');
                 }
-                // $s = $akhir;
+                // $s = $tgl_akhir;
                 // $date = strtotime($s);
                 // $exp = date('d/m/Y', strtotime('+1 day', $date));
 
-                $databerkala= array(
-                'berkala' => $berkala,
-                'mulai' => $mulai,
-                'akhir' => $akhir,
-                'alamat_sk' => $alamat_sk,
-                'nomor_sk' => $nomor_sk,
+                $data= array(
+                'beasiswa' => $beasiswa,
+                'tgl_mulai' => $tgl_mulai,
+                'tgl_akhir' => $tgl_akhir,
+                'ket' => $ket,
+                'file' => $file,
+                'no_mou' => $no_mou,
+                'aktif' => 1
                 );
 
                 $where = array('id' => $id);
-                $this->mdl_admin->updateData($where,$databerkala,'berkala');
-                redirect("AdminBerkala");
+                $this->mdl_admin->updateData($where,$data,'mou_sekolah');
+                redirect("AdminSekolah");
                 }
         }
 
         else{ redirect("login"); } 
     }
     public function del($id){
-        $this->mdl_pelamar->hapusdata('berkala',$id);
-        redirect("AdminBerkala");
+        $this->mdl_pelamar->hapusdata('mou_sekolah',$id);
+        redirect("AdminSekolah");
     }
 }
 

@@ -56,6 +56,7 @@
               <div class="col-lg-12">
                 <font color="red" size="2">*tambahkan jenis profesi sesuai profesi karyawan</font>
                 <select name="id_profesi" class="form-control">
+                <option>---Pilih---</option>
                   <?php foreach ($array as $key) {?>
                     <option><?php echo $key->nama_profesi; ?></option>
                   <?php } ?>
