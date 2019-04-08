@@ -139,10 +139,7 @@
                         </li>
                         
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data Karyawan</span></a>
-                            <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Karyawan" href="<?php echo site_url('adminKaryawan/') ?>"><span class="mini-cli">Karyawan</span></a></li>
-                            </ul>
+                            <a title="Karyawan" href="<?php echo site_url('adminKaryawan/') ?>"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data Karyawan</span></a>
                         </li>
                         <li>
                             <a title="Pendidikan" href="<?php echo site_url('admin/datapend') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Pendidikan</span></a>

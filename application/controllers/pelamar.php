@@ -18,9 +18,9 @@ class pelamar extends CI_Controller {
 	}
 	public function index()
 	{
-		if($this->admin_model->logged_id())
+		if($this->mdl_admin->logged_id())
 		{
-			$this->load->view("dashboard");
+			redirect("home");
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -38,25 +38,17 @@ class pelamar extends CI_Controller {
 		$this->load->view("pelamar/home",$data);
 	}
 
-
 	public function aktivasi()
 	{
 		$this->form_validation->set_rules('email', 'Email', 'required');
-
 		if ($this->form_validation->run()==FALSE) {
 			$this->load->view('pelamar/aktivasi');
 		}else {
 			$id=$this->session->userdata('myId');
 			$email = $this->input->post('email');
-			$data = array(
-	            'email'=>$email,
-	        );
-	        $where = array(
-				'id_karyawan' => $id,
-			);
+			$data = array( 'email'=>$email);
+	        $where = array('id_karyawan' => $id);
 			$this->mdl_pelamar->updatedata($where,$data,'karyawan');
-
-			$encrypted_id = $id;
 		
 			$this->load->library('email');
 			$config = array();
@@ -81,24 +73,19 @@ class pelamar extends CI_Controller {
 			$this->email->subject("Verifikasi Akun");
 			$this->email->message(
 				"untuk memverifikasi silahkan klik tautan dibawah ini<br><br>".
-				site_url("login/verification/$encrypted_id")
+				site_url("login/verification/$id")
 			);
 			
-			if($this->email->send())
-			{
+			if($this->email->send()){
 				echo '<script type="text/javascript">';
 				echo 'alert("Link Aktivasi sudah terkirim! Silahkan cek email kamu~")';
-				echo '</script>';
-		
+				echo '</script>';		
 			}
-			else
-
-			{
+			else{
 				echo '<script type="text/javascript">';
 				echo 'alert("Gagal mengirim link aktivasi!!!")';
 				echo '</script>';		
 			}
-
 			redirect(site_url('pelamar/aktivasi'));
 		}
  	}
@@ -220,11 +207,6 @@ class pelamar extends CI_Controller {
 		    $this->session->set_flashdata('msg','Data Sukses di tambahkan');
 		    redirect(site_url('pelamar/datapend'));
 		}
-	}
-
-	public function detailpend($id){
-		$paket['array']=$this->mdl_pelamar->getDetailpend($id);
-		$this->load->view('pelamar/detailpend', $paket);
 	}
 
 	public function editpend($id){

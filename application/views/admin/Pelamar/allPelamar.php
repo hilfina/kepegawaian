@@ -58,8 +58,7 @@
               <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Foto</th>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>Pilihan Profesi</th>
                     <th>Pendidikan Terakhir</th>
@@ -73,7 +72,6 @@
                 <?php foreach ($array as $key) { ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
-                    <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='100' height='100'>"; ?></td>
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>
                     <td><?php echo $key->pend_akhir; echo " - "; echo $key->pendidikan;  echo $key->jurusan ?></td>
@@ -83,27 +81,27 @@
                       <?php if ($key->id_status == "Pelamar") {
                         if ($key->id_profesi == "Belum") { ?>
                         <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
+                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
                         </a>
                          <?php } else{ ?>
                           <a href="<?php echo site_url(); echo "/admin/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
-                          <button class="btn btn-success waves-effect mg-b-15" title="TERIMA"><i class="fa fa-check"></i></button>
+                          <button class="btn btn-success waves-effect" title="TERIMA"><i class="fa fa-check"></i></button>
                         </a>
                         <a href="<?php echo site_url(); echo "/admin/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-danger waves-effect mg-b-15" title="TOLAK"><i class="fa fa-times"></i></button>
+                          <button class="btn btn-danger waves-effect" title="TOLAK"><i class="fa fa-times"></i></button>
                         </a>
                         <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
+                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
                         </a>
                         <?php } ?>
                         
                       <?php }else if ($key->id_status == "Calon Karyawan") { ?>
                         <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
+                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
                         </a>
                       <?php }else if ($key->id_status == "Pelamar Ditolak") { ?>
                         <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-warning waves-effect waves-light mg-b-15">Detail</button>
+                          <button class="btn btn-warning waves-effect waves-light">Detail</button>
                         </a>
                       <?php } ?>
                     </td>

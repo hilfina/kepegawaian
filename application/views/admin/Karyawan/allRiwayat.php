@@ -62,7 +62,6 @@
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
-                    <th>Status</th>
                     <th>Ruangan</th>
                     <th>Mulai Tanggal</th>
                     <th>Pilihan</th>
@@ -75,8 +74,7 @@
                     <td><?php echo $no++; ?></td>
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_profesi; ?></td>
-                    <td><?php echo $key->id_status; ?></td>
+                    <td><?php echo $key->nama_profesi; ?></td>
                     <td><?php echo $key->ruangan; ?></td>
                     <td><?php echo $key->mulai; ?></td>
                     <td align="center">

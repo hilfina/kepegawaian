@@ -376,16 +376,16 @@ class Karyawan extends CI_Controller {
 	public function editori($id){
 		$this->load->helper('url','form');
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('doku_hadir', 'Dokumen Kehadiran', 'trim|required' );
+		$this->form_validation->set_rules('tgl_mulai', 'Tanggal', 'trim|required' );
 
 		if ($this->form_validation->run()==FALSE) {
-			$where = array('id_orientasi'=>$id);
-			$paket['dato']=$this->mdl_admin->getData('orientasi',$where);
+			$where = array('id_orientasi' => $id);
+			$paket['dato']=$this->mdl_admin->getData('orientasi', $where);
 			$this->load->view('karyawan/editori', $paket);
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx';
+			$config['allowed_types']	= 'jpg|pdf|docx|png';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -410,7 +410,7 @@ class Karyawan extends CI_Controller {
 
 		    $update = $this->mdl_pelamar->updatedata($where,$data,'orientasi');
 		    $this->session->set_flashdata('msg','Data Sukses di tambahkan');
-		    redirect(site_url('karyawan/dataori'));
+		    redirect('karyawan/dataori');
 		}
 	}
 
@@ -419,7 +419,7 @@ class Karyawan extends CI_Controller {
 		$where = array('id_orientasi' => $id);
 		$this->mdl_pelamar->hapusdata('orientasi',$where);
 		$this->session->set_flashdata('msg','Data Sukses di Hapus');
-		redirect(site_url('karyawan/dataorientasi'));
+		redirect('karyawan/dataori');
 	}
 
 	////////////  DATA DIKLAT /////////////////

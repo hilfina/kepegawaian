@@ -40,50 +40,50 @@ $this->load->view("header.php");
                     <br>
                     <form action="<?php echo site_url(); ?>/karyawan/addpend/" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
-                        <div class="input-knob-dial-wrap">
+                        <div class="input-knob-dial-wrap" style="margin-right: 15%;">
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="input-mask-title">
                                         <label>Nama Pendidikan</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="input-mark-inner">
                                         <input type="text" class="form-control" name="pendidikan" placeholder="Cth:Polinema">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="input-mask-title">
                                         <label>Jurusan Pendidikan</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="input-mark-inner">
                                         <input type="text" class="form-control" name="jurusan" placeholder="Cth:Teknik Kimia">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="input-mask-title">
                                         <label>Nilai Akhir</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="input-mark-inner">
                                         <input type="text" class="form-control" name="nilai" placeholder="Cth:4.00">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="input-mask-title">
                                         <label>Nomor Ijazah</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="input-mark-inner">
                                         <input type="text" class="form-control" name="nomor_ijazah" placeholder="Cth:123">
                                     </div>
@@ -91,12 +91,12 @@ $this->load->view("header.php");
                             </div>
                             <div class="row">
                               <div class="date-picker-inner">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="input-mask-title">
                                         <label>Tahun Pendidikan</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="input-daterange input-group" id="datepicker">
                                         <input type="text" class="form-control" name="mulai" placeholder="cth:2018" />
                                         <span class="input-group-addon">hingga</span>
@@ -106,12 +106,12 @@ $this->load->view("header.php");
                               </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="input-mask-title">
                                         <label>Upload Dokumen</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="input-mark-inner">
                                         <div class="file-upload-inner ts-forms">
                                           <div class="input prepend-big-btn">
@@ -131,12 +131,12 @@ $this->load->view("header.php");
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="input-mask-title">
                                         
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="input-mark-inner">
                                             <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
                                     </div>
