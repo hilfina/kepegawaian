@@ -15,7 +15,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Golongan Karyawan</span>
+                <li><span class="bread-blod">Data Berkala Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -33,14 +33,14 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Golongan Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Berkala Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminGol/addGol')?>">
+                <div align="right"><a href="<?php echo site_url('adminOri/addOri')?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
                 <div class=" container-fluid" id="notif">
@@ -69,11 +69,8 @@
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
-                    <th>Golongan</th>
-                    <th>Nomor SK</th>
-                    <th>Masa Berlaku</th>
-                    <th>Surat</th>
-                    <th>Aktif</th>
+                    <th>Periode</th>
+                    <th>File</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -85,28 +82,19 @@
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>
-                    <td><?php echo $key->id_golongan; ?></td>
-                    <td><?php echo $key->nomor_sk; ?></td>
-                    <td><?php echo $key->mulai." - ".$key->akhir; ?></td>
+                    <td><?php echo $key->tgl_mulai." - ".$key->tgl_akhir; ?></td>
                     <td>
-                    <?php if(($key->alamat_sk) != NULL){ ?>
+                    <?php if(($key->doku_hadir) != NULL){ ?>
                       <font style="color: blue">File Tersedia</font>
                     <?php }else{ ?>
                       <font style="color: red">Tidak Ada file</font>
                     <?php } ?>
                     </td>
-                    <td>
-                    <?php if(($key->aktif) == 1){ ?>
-                      <i class="fa fa-check"></i> Surat Aktif 
-                    <?php }else{ ?>
-                      <i class="fa fa-check"></i> Kadaluarsa 
-                    <?php } ?>
-                    </td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminGol/edit/"; echo $key->id ;?>">
+                      <a href="<?php echo site_url(); echo "/adminOri/edit/"; echo $key->id_orientasi ;?>">
                         <button class="btn btn-warning waves-effect">edit</button>
                       </a>
-                      <a href="<?php echo site_url(); echo "/adminGol/del/"; echo $key->id;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                      <a href="<?php echo site_url(); echo "/adminOri/del/"; echo $key->id_orientasi;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                         <button class="btn btn-danger waves-effect">hapus</button>
                       </a>
                     </td>

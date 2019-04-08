@@ -159,7 +159,7 @@
                                     <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                                         <div class="pdf-single-pro">
                                         <?php foreach ($datLo as $key){?>
-                                          <a class="media" href="<?php echo base_url()?>Assets/gambar/<?php $key->cv; ?>>"></a>
+                                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php $key->cv; ?>>"></a>
                                         <?php }?>
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@
                                               <tbody>
                                                   <tr>
                                                       <td>
-                                                         <a  href="" data-toggle="modal" data-target="#gambarIjasah"><?php echo "<img src='".base_url("./assets/gambar/".$key->file)."' width='100' height='100'>"; ?></a>
+                                                         <a  href="" data-toggle="modal" data-target="#gambarIjasah"><?php echo "<img src='".base_url("./assets/dokumen/".$key->file)."' width='100' height='100'>"; ?></a>
                                                          <div id="gambarIjasah" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                                                           <div class="modal-dialog">
                                                               <div class="modal-content">
@@ -205,7 +205,7 @@
                                                                   <div class="modal-body">
                                                                     <div class="profile-info-inner">
                                                                       <div class="profile-img">
-                                                                        <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file;?>" alt=""/>
+                                                                        <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file;?>" alt=""/>
                                                                       </div>
                                                                     </div>
                                                                   </div>
@@ -271,7 +271,7 @@
                                               <tbody>
                                                   <tr>
                                                     <td>
-                                                      <a  href="#" data-toggle="modal" data-target="#gambarSurat"><?php echo "<img src='".base_url("./assets/gambar/".$key->file)."' width='100' height='100'>"; ?></a>
+                                                      <a  href="#" data-toggle="modal" data-target="#gambarSurat"><?php echo "<img src='".base_url("./assets/dokumen/".$key->file)."' width='100' height='100'>"; ?></a>
                                                          <div id="gambarSurat" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
@@ -281,7 +281,7 @@
                                                                         <div class="modal-body">
                                                                           <div class="profile-info-inner">
                                                                             <div class="profile-img">
-                                                                              <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file;?>" alt=""/>
+                                                                              <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file;?>" alt=""/>
                                                                             </div>
                                                                           </div>
                                                                         </div>

@@ -38,13 +38,13 @@ $this->load->view("header.php");
                             <div class="add-product">
                                 <a href="<?php echo site_url('karyawan/addpend');?>">Tambah Dokumen</a>
                             </div>
-                             <div class=" container-fluid" id="notif">
-                              <?php if ($this->session->flashdata('msg')) :?>
-                                <div class="alert alert-success"> 
+                            <div class=" container-fluid" id="notif">
+                                <?php if ($this->session->flashdata('msg')) :?>
+                                    <div class="alert alert-success"> 
                                 <?php echo $this->session->flashdata('msg')?>
-                                </div>
-                              <?php endif; ?>
-                              </div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                             <div class="asset-inner">
                                 <table>
                                     <tr>

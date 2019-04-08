@@ -424,7 +424,7 @@
                                                       <tbody>
                                                           <tr>
                                                               <td><?php echo $no++;?></td>
-                                                              <td><?php echo $key->no_sekolah; ?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
                                                               <td><?php echo $key->tgl_mulai?></td>  
                                                               <td><?php echo $key->tgl_akhir?></td>
                                                               <td><?php echo $key->beasiswa;?></td>
@@ -520,7 +520,7 @@
                                                       <tbody>
                                                           <tr>
                                                               <td><?php echo $no++;?></td>
-                                                              <td><?php echo $key->no_piutang; ?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
                                                               <td><?php echo $key->tgl_mulai?></td>  
                                                               <td><?php echo $key->tgl_akhir?></td>
                                                               <td><?php echo $key->nominal;?></td>

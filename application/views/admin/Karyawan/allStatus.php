@@ -43,6 +43,13 @@
                 <div align="right"><a href="<?php echo site_url('adminstatus/addstatus')?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
+                <div class=" container-fluid" id="notif">
+                    <?php if ($this->session->flashdata('msg')) :?>
+                        <div class="alert alert-success"> 
+                    <?php echo $this->session->flashdata('msg')?>
+                        </div>
+                    <?php endif; ?>
+                </div>
               </div>
             </div>
           </div>
@@ -61,9 +68,10 @@
                     <th>No</th>
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
+                    <th>Profesi</th>
                     <th>Status</th>
-                    <th>Masa Berlaku</th>
                     <th>Nomor SK</th>
+                    <th>Masa Berlaku</th>
                     <th>Surat</th>
                     <th>Aktif</th>
                     <th>Pilihan</th>
@@ -76,9 +84,10 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
+                    <td><?php echo $key->id_profesi; ?></td>
                     <td><?php echo $key->id_status; ?></td>
-                    <td><?php echo $key->mulai." Sampai ".$key->akhir; ?></td>
                     <td><?php echo $key->nomor_sk; ?></td>
+                    <td><?php echo $key->mulai." - ".$key->akhir; ?></td>
                     <td>
                     <?php if(($key->alamat_sk) != NULL){ ?>
                       <font style="color: blue">File Tersedia</font>
@@ -95,11 +104,16 @@
                     </td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminStatus/edit/"; echo $key->id ;?>">
-                          <button class="btn btn-warning waves-effect">edit</button>
-                        </a>
-                        <a href="<?php echo site_url(); echo "/adminStatus/del/"; echo $key->id;?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                          <button class="btn btn-danger waves-effect">hapus</button>
-                        </a>
+                        <button class="btn btn-warning waves-effect">edit</button>
+                      </a>
+                      <a href="<?php echo site_url(); echo "/adminStatus/del/"; echo $key->id;?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                        <button class="btn btn-danger waves-effect">hapus</button>
+                      </a>
+                      
+                      <a href="<?php echo site_url().'/adminStatus/download/'.$key->id; ?>">
+                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh</button>
+                      </a>
+
                     </td>
                   </tr>
                 <?php }?>

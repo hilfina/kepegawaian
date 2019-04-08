@@ -15,7 +15,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Pendidikan</span>
+                <li><span class="bread-blod">Data Surat</span>
                 </li>
               </ul>
             </div>
@@ -33,14 +33,14 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Pendidikan</span></h1>
+                <h1>Data <span class="table-project-n">Surat Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url(); echo "/admin/addPendidikan/";?>">
+                <div align="right"><a href="<?php echo site_url(); echo "/admin/addsipstr/";?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a>
                 </div>
@@ -48,20 +48,12 @@
             </div>
           </div>
           <div class="col-lg-12">
-<<<<<<< HEAD:application/views/admin/pendidikan/all.php
-            <div class=" container-fluid" id="notif">
-              <?php if ($this->session->flashdata('msg')) :?>
-                <div class="alert alert-success"> 
-                <?php echo $this->session->flashdata('msg')?>
-                </div>
-              <?php endif; ?>
-=======
           <div class=" container-fluid" id="notif">
           <?php if ($this->session->flashdata('msg')) :?>
             <div class="alert alert-success"> 
             <?php echo $this->session->flashdata('msg')?>
->>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf:application/views/admin/pendidikan/allpendidikan.php
             </div>
+          <?php endif; ?>
           </div>
           </div>
           <div class="sparkline13-graph">
@@ -76,42 +68,27 @@
               <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
-<<<<<<< HEAD:application/views/admin/pendidikan/all.php
-                    <th>No</th> 
-                    <th>Nama Karyawan</th>
-                    <th>Nama Institusi</th>
-                    <th>Jurusan</th>
-                    <th>Tahun</th>
-                    <th>Nomor Ijazah</th>
-                    <th>N A</th>
-                    <th>Setting</th>
-=======
                     <th  data-field="state" data-checkbox="true">Pilih</th>
                     <th>No</th>
-                    <th>Gambar Ijazah</th>
+                    <th>Gambar</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
                     <th>Status</th>
-                    <th>Nomor Ijazah</th>
-                    <th>Nama Institusi</th>
-                    <th>Jurusan</th>
-                    <th>Nilai</th>
-                    <th>Periode</th>
-                    <th>Verifikasi  </th>
->>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf:application/views/admin/pendidikan/allpendidikan.php
+                    <th>Nomor Surat</th>
+                    <th>Jenis Surat</th>
+                    <th>Tanggal Berlaku</th>
+                    <th>Keaktifan</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                 <?php $no = 1 ?>
-                <?php foreach ($pen as $key) { ?>
+                <?php foreach ($array as $key) { ?>
                     <tr>
                         <td></td>
                         <td><?php echo $no++ ?></td>
-<<<<<<< HEAD:application/views/admin/pendidikan/all.php
-                        <td><?php echo $key->nama; ?></td>
-=======
                         <td>
-                        <a  href="" data-toggle="modal" data-target="#gambarIjasah"><?php echo "<img src='".base_url("./assets/dokumen/".$key->file)."' width='100' height='100'>"; ?></a>
+                        <a  href="" data-toggle="modal" data-target="gambarIjasah"><?php echo "<img src='".base_url("./assets/dokumen/".$key->file)."' width='100' height='100'>"; ?></a>
                             <div id="gambarIjasah" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                               <div class="modal-dialog">
                                   <div class="modal-content">
@@ -132,30 +109,19 @@
                         <td><?php echo $key->nama; ?></td>
                         <td><?php echo $key->id_profesi; ?></td>
                         <td><?php echo $key->id_status; ?></td>
-                        <td><?php echo $key->nomor_ijazah; ?></td>
->>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf:application/views/admin/pendidikan/allpendidikan.php
-                        <td><?php echo $key->pendidikan; ?></td>
-                        <td><?php echo $key->jurusan; ?></td>
-                        <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
-                        <td><?php echo $key->nomor_ijazah; ?></td>
-                        <td><?php echo $key->nilai; ?></td>
-                        <td><a href="<?php echo site_url(); echo "/admin/editPend/";  echo $key->id ; ?>">
-                        <button title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                        <a href="<?php echo site_url(); echo "/admin/delPend/";  echo $key->id ; ?>"  onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button title="Hapus Data" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                      </a>
-                        <?php 
-                          if(($key->verifikasi) == 1){ ?>
-                            <i class="fa fa-check" style="color: RED" title="TELAH TERVERIVIKASI"></i>
-                           <?php }else{ ?>                            
-                            <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-<<<<<<< HEAD:application/views/admin/pendidikan/all.php
-                              <button class="btn btn-success waves-effect" title="VERIFIKASI DATA" ><i class="fa fa-check" ></i></button>
-=======
-                              <button class="btn btn-danger waves-effect mg-b-15">Verifikasi</button>
->>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf:application/views/admin/pendidikan/allpendidikan.php
-                            </a>
-                          <?php } ?></td>
+                        <td><?php echo $key->no_surat; ?></td>
+                        <td><?php echo $key->nama_surat; ?></td>
+                        <td><?php echo $key->tgl_mulai; echo " - "; echo $key->tgl_akhir; ?></td>
+                        <td>
+                        <?php if(($key->aktif) == 1){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }else{ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                        <?php } ?>
+                        </td>
+                        <td><a href="<?php echo site_url(); echo "/admin/delsurat/"; echo $key->id_sipstr;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                        <button class="btn btn-danger waves-effect">hapus</button>
+                      </a></td>
                     </tr>
                 <?php }?>
                 </tbody>

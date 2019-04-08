@@ -106,6 +106,21 @@ $this->load->view("header.php");
                                 </div>
                               </div>
                             </div>
+<<<<<<< HEAD
+=======
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <div class="input-mask-title">
+                                        <label>Foto Scan Dokumen</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <div class="input-mark-inner">
+                                        <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file?>" width="400"/>   
+                                    </div>
+                                </div>
+                            </div>
+>>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
                             <br>
                             <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

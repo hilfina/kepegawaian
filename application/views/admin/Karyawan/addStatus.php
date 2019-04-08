@@ -63,6 +63,7 @@
             <td style="height: 50px">
               <div class="col-lg-12">
                 <select name="id_status" class="form-control">
+                <option>---Pilih---</option>
                   <?php foreach ($array as $key) {?>
                     <option><?php echo $key->id_status; ?></option>
                   <?php } ?>
@@ -105,7 +106,7 @@
                             <i class="fa fa-download"></i>
                           </label>
                           <div class="file-button"> Browse
-                            <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                            <input type="file" name="alamat_sk" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                           </div>
                           <input type="text" id="prepend-big-btn" placeholder="no file selected">
                           <font size="2">Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 mb </font>

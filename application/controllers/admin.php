@@ -149,6 +149,34 @@ class Admin extends CI_Controller {
         
     }
 
+<<<<<<< HEAD
+=======
+	//VERIFIKASI IJASAH
+    public function verPend($id,$idk){
+       if($this->mdl_admin->logged_id())
+        {
+            $where = array( 'id' => $id ); 
+            $data = array( 'verifikasi' => 1 ); 
+            $this->mdl_admin->updateData($where,$data,'pendidikan');
+            redirect("admin/pelamarDetail/$idk");
+        }
+
+        else{ redirect("login"); } 
+    }
+
+    public function verPend2($id,$idk){
+       if($this->mdl_admin->logged_id())
+        {
+            $where = array( 'id' => $id ); 
+            $data = array( 'verifikasi' => 1 ); 
+            $this->mdl_admin->updateData($where,$data,'pendidikan');
+            redirect("adminKaryawan/karyawanDetail/$idk");
+        }
+
+        else{ redirect("login"); } 
+    }
+
+>>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
     //EDIT DATA SELEKSI
     public function editDataSel(){
         if($this->mdl_admin->logged_id())
@@ -399,6 +427,7 @@ class Admin extends CI_Controller {
 
         else{ redirect("login"); } 
     }
+<<<<<<< HEAD
     
     public function datapend(){
         if($this->mdl_admin->logged_id())
@@ -406,10 +435,17 @@ class Admin extends CI_Controller {
             $paket['pen']=$this->mdl_admin->getPendidikan();
             $this->load->view('admin/pendidikan/all',$paket);
         }
+=======
+
+    //Add pendidikan pada karyawan
+    public function addPend($id){
+       if($this->mdl_admin->logged_id()){
+>>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
 
         else{ redirect("login"); } 
     }
 
+<<<<<<< HEAD
     //VERIFIKASI IJASAH
     public function verPend($id,$idk){
        if($this->mdl_admin->logged_id())
@@ -419,10 +455,22 @@ class Admin extends CI_Controller {
             $this->mdl_admin->updateData($where,$data,'pendidikan');
             redirect("admin/dataPend");
         }
+=======
+            if($this->form_validation->run()==FALSE){
+                $data['id']=$id;
+                $this->load->view('admin/pelamar/addPend',$data);
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+>>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
 
         else{ redirect("login"); } 
     }
 
+<<<<<<< HEAD
     public function verPend2($id,$idk){
        if($this->mdl_admin->logged_id())
         {
@@ -543,7 +591,97 @@ class Admin extends CI_Controller {
         }
         
         else{ redirect("login"); } 
+=======
+                $id=$this->input->post('id_karyawan');
+                $pendidikan = $this->input->post('pendidikan');
+                $nilai = $this->input->post('nilai');
+                $mulai = $this->input->post('mulai');
+                $akhir = $this->input->post('akhir');
+                $nomor_ijazah = $this->input->post('nomor_ijazah');
+                $this->upload->do_upload('file');
+                $a = $this->upload->data('file_name');
+                $data3 = array(
+                        'pendidikan'=>$pendidikan,
+                        'mulai'=>$mulai,
+                        'akhir'=>$akhir,
+                        'nomor_ijazah'=>$nomor_ijazah,
+                        'id_karyawan' => $id,
+                        'file'=>$a,
+                        'verifikasi'=> 0,
+                        'nilai' => $nilai,
+                    );
+                $this->mdl_admin->addData('pendidikan',$data3);
+                redirect("admin/pelamarDetail/$id");
+                
+                }
+        }else{ redirect("login"); } 
     }
+
+
+    public function datapend(){
+        $paket['pen']=$this->mdl_admin->getPendidikan();
+        $this->load->view('admin/pendidikan/allpendidikan',$paket);
+    }
+    //add pendidikan pada semua tabel pendidikan
+    public function addPendidikan(){
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $this->load->view('admin/pendidikan/addPendidikan');
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+
+                $this->load->library('upload', $config);
+                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $nik=$this->input->post('nik');
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+
+                $id=$data2['id_karyawan'];
+                $pendidikan = $this->input->post('pendidikan');
+                $nilai = $this->input->post('nilai');
+                $mulai = $this->input->post('mulai');
+                $akhir = $this->input->post('akhir');
+                $nomor_ijazah = $this->input->post('nomor_ijazah');
+                $this->upload->do_upload('file');
+                $file = $this->upload->data('file_name');
+                $data3 = array(
+                        'pendidikan'=>$pendidikan,
+                        'mulai'=>$mulai,
+                        'akhir'=>$akhir,
+                        'nomor_ijazah'=>$nomor_ijazah,
+                        'id_karyawan' => $id,
+                        'file'=>$file,
+                        'verifikasi'=> 0,
+                        'nilai' => $nilai,
+                    );
+                $this->session->set_flashdata('msg','Data Sukses di tambahkan');
+                $this->mdl_admin->addData('pendidikan',$data3);
+                redirect("admin/dataPend");
+                
+                }
+        }else{ redirect("login"); } 
+    }
+
+    public function hapuspend($id)
+    {
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata('pendidikan',$where);
+        $this->session->set_flashdata('msg','Data Sukses di Hapus');
+        redirect(site_url('karyawan/datapend'));
+>>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
+    }
+    
+    public function datasurat(){
+        $paket['array']=$this->mdl_admin->getSurat();
+        $this->load->view('admin/surat/allSurat',$paket);
+    }
+
     public function addSurat($id){
        if($this->mdl_admin->logged_id()){
 
@@ -554,9 +692,9 @@ class Admin extends CI_Controller {
                 $data['surat']=$this->mdl_admin->getJenSur();
                 $this->load->view('admin/pelamar/addSurat',$data);
             }else{
-                $config['upload_path']      = './Assets/gambar/';
+                $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
-                $config['max_size']         = 2000000000;
+                $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
 
@@ -565,8 +703,7 @@ class Admin extends CI_Controller {
                 $id=$this->input->post('id_karyawan');
                 $nama_surat = $this->input->post('nama_surat');
                 $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_surat from jenis_surat where nama_surat = '$nama_surat'"));
-                $xxx = $data['id_surat'];
-                $id_surat = $xxx;
+                $id_surat = $data['id_surat'];
                 $tgl_mulai = $this->input->post('tgl_mulai');
                 $tgl_akhir = $this->input->post('tgl_akhir');
                 $no_surat = $this->input->post('no_surat');
@@ -589,6 +726,59 @@ class Admin extends CI_Controller {
         }
         
         else{ redirect("login"); } 
+    }
+
+    public function addsipstr(){
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('id_karyawan','Id Karyawan','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $data['surat']=$this->mdl_admin->getJenSur();
+                $this->load->view('admin/surat/addSurat',$data);
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'jpg|png';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+
+                $this->load->library('upload', $config);
+                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $nik=$this->input->post('nik');
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+
+                $id=$data2['id_karyawan'];
+                $nama_surat = $this->input->post('nama_surat');
+                $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_surat from jenis_surat where nama_surat = '$nama_surat'"));
+                $id_surat = $data['id_surat'];
+                $tgl_mulai = $this->input->post('tgl_mulai');
+                $tgl_akhir = $this->input->post('tgl_akhir');
+                $no_surat = $this->input->post('no_surat');
+                $this->upload->do_upload('file');
+                $b = $this->upload->data('file_name');
+                $data4 = array(
+                    'id_karyawan' => $id,
+                    'id_surat'=>$id_surat,
+                    'tgl_mulai'=>$tgl_mulai,
+                    'tgl_akhir'=>$tgl_akhir, 
+                    'no_surat'=>$no_surat,  
+                    'file'=>$b,
+                    'aktif'=> 0,
+                );
+
+                $this->mdl_admin->addData('sip_str',$data4);
+                redirect("admin/datasurat");
+                
+                }
+        }
+        
+        else{ redirect("login"); } 
+    }
+
+    public function delsurat($id){
+        $this->mdl_pelamar->hapusdata('sip_str',$id);
+        redirect("datasurat");
     }
 }
 
