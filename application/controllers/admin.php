@@ -149,6 +149,8 @@ class Admin extends CI_Controller {
         
     }
 
+<<<<<<< HEAD
+=======
 	//VERIFIKASI IJASAH
     public function verPend($id,$idk){
        if($this->mdl_admin->logged_id())
@@ -174,6 +176,7 @@ class Admin extends CI_Controller {
         else{ redirect("login"); } 
     }
 
+>>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
     //EDIT DATA SELEKSI
     public function editDataSel(){
         if($this->mdl_admin->logged_id())
@@ -424,23 +427,25 @@ class Admin extends CI_Controller {
 
         else{ redirect("login"); } 
     }
+<<<<<<< HEAD
     
     public function datapend(){
         if($this->mdl_admin->logged_id())
         {
             $paket['pen']=$this->mdl_admin->getPendidikan();
             $this->load->view('admin/pendidikan/all',$paket);
-        }else{redirect("login");}
-    }
-        
+        }
+=======
 
     //Add pendidikan pada karyawan
     public function addPend($id){
        if($this->mdl_admin->logged_id()){
+>>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
 
         else{ redirect("login"); } 
     }
 
+<<<<<<< HEAD
     //VERIFIKASI IJASAH
     public function verPend($id,$idk){
        if($this->mdl_admin->logged_id())
@@ -450,6 +455,7 @@ class Admin extends CI_Controller {
             $this->mdl_admin->updateData($where,$data,'pendidikan');
             redirect("admin/dataPend");
         }
+=======
             if($this->form_validation->run()==FALSE){
                 $data['id']=$id;
                 $this->load->view('admin/pelamar/addPend',$data);
@@ -459,10 +465,12 @@ class Admin extends CI_Controller {
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
+>>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
 
         else{ redirect("login"); } 
     }
 
+<<<<<<< HEAD
     public function verPend2($id,$idk){
        if($this->mdl_admin->logged_id())
         {
@@ -583,6 +591,7 @@ class Admin extends CI_Controller {
         }
         
         else{ redirect("login"); } 
+=======
                 $id=$this->input->post('id_karyawan');
                 $pendidikan = $this->input->post('pendidikan');
                 $nilai = $this->input->post('nilai');
@@ -665,6 +674,7 @@ class Admin extends CI_Controller {
         $this->mdl_pelamar->hapusdata('pendidikan',$where);
         $this->session->set_flashdata('msg','Data Sukses di Hapus');
         redirect(site_url('karyawan/datapend'));
+>>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
     }
     
     public function datasurat(){
