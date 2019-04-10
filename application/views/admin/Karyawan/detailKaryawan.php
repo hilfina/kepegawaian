@@ -32,7 +32,7 @@
     <div class="container-fluid">
         <div class="row">
           <?php foreach ($datDir as $key){ ?>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
               <div class="profile-info-inner">
                 <div class="profile-img">
                   <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt=""/>
@@ -42,7 +42,7 @@
           <?php } ?>
             
 
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
               <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                 <ul id="myTabedu1" class="tab-review-design">
                   <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>
@@ -120,10 +120,10 @@
                                           <font color="red" size="2">*data profesi, status kepegawaian, golongan dan penempatan dapat diubah sesuai kehendak HRD</font>
                                           <div class="col-lg-12">
                                             <select  class="form-control" name="id_profesi">
-                                              <option><?php echo $key->id_profesi; ?></option>
+                                              <option><?php echo $key->nama_profesi; ?></option>
                                               <option><strong>Pilihan Lainnya:</strong></option>
                                               <?php foreach ($array as $key2) { ?>
-                                                <option><?php echo $key2->id_profesi; ?></option>
+                                                <option><?php echo $key2->nama_profesi; ?></option>
                                               <?php } ?>
                                             </select>
                                           </div>
@@ -183,7 +183,7 @@
                                     <div class="sparkline13-hd">
                                       <div class="main-sparkline13-hd">
                                         <?php foreach ($datDir as $key){?>
-                                        <div align="right"><a href="<?php echo site_url(); echo "/admin/addPend/";  echo $key->id_karyawan ; ?>">
+                                        <div align="right"><a href="<?php echo site_url(); echo "/adminKaryawan/addPend/";  echo $key->id_karyawan ; ?>">
                                           <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                                         </a></div>
                                       <?php }?>
@@ -195,50 +195,43 @@
                                           <table class="table">
                                               <thead>
                                                   <tr>
-                                                    <th>Gambar</th>
                                                     <th>Institusi</th>
-                                                    <th>Tahun Pendidikan</th>
+                                                    <th>Jurusan</th>
+                                                    <th>N A</th>
+                                                    <th>Tahun</th>
                                                     <th>No Ijasah</th>
-                                                    <th>Verifikasi</th>
+                                                    <th>Ver</th>
+                                                    <th>Setting</th>
                                                   </tr>
                                               </thead>
                                               <?php foreach ($datPen as $key){ ?>
                                               <tbody>
                                                   <tr>
-                                                      <td>
-                                                         <a  href="" data-toggle="modal" data-target="#gambarIjasah"><?php echo "<img src='".base_url("./assets/gambar/".$key->file)."' width='100' height='100'>"; ?></a>
-                                                         <div id="gambarIjasah" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                                                          <div class="modal-dialog">
-                                                              <div class="modal-content">
-                                                                  <div class="modal-close-area modal-close-df">
-                                                                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                                                  </div>
-                                                                  <div class="modal-body">
-                                                                    <div class="profile-info-inner">
-                                                                      <div class="profile-img">
-                                                                        <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file;?>" alt=""/>
-                                                                      </div>
-                                                                    </div>
-                                                                  </div>
-                                                              </div>
-                                                          </div>
-                                                        </div>        
-                                                      </td>
                                                       <td><?php echo $key->pendidikan; ?></td>
+                                                      <td><?php echo $key->jurusan; ?></td>
+                                                      <td><?php echo $key->nilai; ?></td>
                                                       <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
                                                       <td><?php echo $key->nomor_ijazah; ?></td>
                                                       
                                                       <td>
                                                         <?php 
                                                       if(($key->verifikasi) == 1){ ?>
-                                                       <a href="#"> Terverifikasi</a>
+                                                       <i class="fa fa-check" style="color: red" title="TELAH TERVERIFIKASI"></i>
                                                        <?php }else{ ?>
-                                                        <a href="<?php echo site_url(); echo "/admin/verPend2/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                                                          <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i> Verifikasi</button>
+                                                        <a href="<?php echo site_url(); echo "/adminKaryawan/verPend/"; echo $key->id;echo "/";echo $key->id_karyawan; ?>">
+                                                          <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i></i></button>
                                                         </a>
                                                       <?php } ?>
                                                         
                                                       </td>   
+                                                      <td>
+                                                        <a href="<?php echo site_url('adminKaryawan/editpend/').$key->id ?>">
+                                                          <button data-toggle="tooltip" title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                                        </a>
+                                                        <a href="<?php echo site_url('adminKaryawan/delpend/').$key->id; echo "/";echo $key->id_karyawan; ?>" onclick="return confirm('Are you sure you want to delete this item?');">
+                                                          <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                                        </a>
+                                                      </td>
                                                   </tr>
                                               </tbody>
                                               <?php } ?>

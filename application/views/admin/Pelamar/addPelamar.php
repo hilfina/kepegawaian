@@ -40,19 +40,12 @@
               </div>
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
-          <form action="<?php echo site_url();?>/admin/addPelamar/" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminPelamar/addPelamar/" enctype="multipart/form-data" method="POST">
           <table width="100%">
-            <tr>
-              <td width="30%"><label form-control-label">Nomor Induk Karyawan</label></td>
-              <td style="height: 50px" width="70%">
-                <div class="col-lg-12">
-                  <input name="nik" type="text" class="form-control" placeholder="Nomor Induk Karyawan" style="width:100%">
-                </div>
-              </td>
-            </tr>
+            
           <tr>
             <td><label form-control-label">Nomor KTP</label></td>
-            <td style="height: 50px">
+            <td style="height: 50px" width="70%">
               <div class="col-lg-12">
                 <input name="no_ktp" type="text" class="form-control" placeholder="Nomor KTP (Kartu Tanda Penduduk)">
               </div>
@@ -103,6 +96,7 @@
             <td style="height: 50px">
               <div class="col-lg-12">
                 <select  class="form-control" name="id_profesi">
+                  <option>-- Pilihan --</option>
                   <?php foreach ($array as $key) { ?>
                     <option><?php echo $key->id_profesi; ?></option>
                   <?php } ?>

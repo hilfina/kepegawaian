@@ -40,7 +40,7 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url(); echo "/admin/addPendidikan/";?>">
+                <div align="right"><a href="<?php echo site_url(); echo "/admin/addPend/";?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a>
                 </div>
@@ -48,13 +48,13 @@
             </div>
           </div>
           <div class="col-lg-12">
-          <div class=" container-fluid" id="notif">
-          <?php if ($this->session->flashdata('msg')) :?>
-            <div class="alert alert-success"> 
-            <?php echo $this->session->flashdata('msg')?>
+            <div class=" container-fluid" id="notif">
+            <?php if ($this->session->flashdata('msg')) :?>
+              <div class="alert alert-success"> 
+              <?php echo $this->session->flashdata('msg')?>
+              </div>
+            <?php endif; ?>
             </div>
-          <?php endif; ?>
-          </div>
           </div>
           <div class="sparkline13-graph">
             <div class="datatable-dashv1-list custom-datatable-overright">
@@ -70,16 +70,13 @@
                   <tr>
                     <th  data-field="state" data-checkbox="true">Pilih</th>
                     <th>No</th>
-                    <th>Gambar Ijazah</th>
                     <th>Nama Karyawan</th>
-                    <th>Profesi</th>
-                    <th>Status</th>
-                    <th>Nomor Ijazah</th>
                     <th>Nama Institusi</th>
                     <th>Jurusan</th>
-                    <th>Nilai</th>
                     <th>Periode</th>
-                    <th>Verifikasi  </th>
+                    <th>Nilai</th>
+                    <th>Nomor Ijazah</th>
+                    <th>Setting</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -88,40 +85,23 @@
                     <tr>
                         <td></td>
                         <td><?php echo $no++ ?></td>
-                        <td>
-                        <a  href="" data-toggle="modal" data-target="#gambarIjasah"><?php echo "<img src='".base_url("./assets/dokumen/".$key->file)."' width='100' height='100'>"; ?></a>
-                            <div id="gambarIjasah" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                              <div class="modal-dialog">
-                                  <div class="modal-content">
-                                      <div class="modal-close-area modal-close-df">
-                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="profile-info-inner">
-                                          <div class="profile-img">
-                                            <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file;?>" alt=""/>
-                                          </div>
-                                        </div>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>        
-                        </td>
                         <td><?php echo $key->nama; ?></td>
-                        <td><?php echo $key->id_profesi; ?></td>
-                        <td><?php echo $key->id_status; ?></td>
-                        <td><?php echo $key->nomor_ijazah; ?></td>
                         <td><?php echo $key->pendidikan; ?></td>
                         <td><?php echo $key->jurusan; ?></td>
-                        <td><?php echo $key->nilai; ?></td>
                         <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
-                        <td>
+                        <td><?php echo $key->nilai; ?></td>
+                        <td><?php echo $key->nomor_ijazah; ?></td>
+                        <td><a href="<?php echo site_url(); echo "/adminPendidikan/editPend/";  echo $key->id ; ?>">
+                        <button title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        <a href="<?php echo site_url(); echo "/adminPendidikan/delPend/";  echo $key->id ; ?>"  onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                        <button title="Hapus Data" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                      </a>
                         <?php 
                           if(($key->verifikasi) == 1){ ?>
-                           <a href="#"> Terverifikasi</a>
+                           <i class="fa fa-check" style="color: RED" title="TELAH TERVERIVIKASI"></i>
                            <?php }else{ ?>
                             <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                              <button class="btn btn-danger waves-effect mg-b-15">Verifikasi</button>
+                              <button class="btn btn-success waves-effect" title="VERIFIKASI DATA" ><i class="fa fa-check" ></i></button>
                             </a>
                           <?php } ?>
                         </td>

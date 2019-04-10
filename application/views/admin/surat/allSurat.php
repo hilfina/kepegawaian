@@ -70,7 +70,6 @@
                   <tr>
                     <th  data-field="state" data-checkbox="true">Pilih</th>
                     <th>No</th>
-                    <th>Gambar</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
                     <th>Status</th>
@@ -87,25 +86,6 @@
                     <tr>
                         <td></td>
                         <td><?php echo $no++ ?></td>
-                        <td>
-                        <a  href="" data-toggle="modal" data-target="gambarIjasah"><?php echo "<img src='".base_url("./assets/dokumen/".$key->file)."' width='100' height='100'>"; ?></a>
-                            <div id="gambarIjasah" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                              <div class="modal-dialog">
-                                  <div class="modal-content">
-                                      <div class="modal-close-area modal-close-df">
-                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="profile-info-inner">
-                                          <div class="profile-img">
-                                            <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file;?>" alt=""/>
-                                          </div>
-                                        </div>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>        
-                        </td>
                         <td><?php echo $key->nama; ?></td>
                         <td><?php echo $key->id_profesi; ?></td>
                         <td><?php echo $key->id_status; ?></td>

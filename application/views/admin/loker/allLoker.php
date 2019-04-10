@@ -41,7 +41,7 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right"><a href="<?php echo site_url('adminLoker/addLoker')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Lowongan Pekerjaan</button>
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Profesi</button>
                 </a></div>
               </div>
             </div>
@@ -76,18 +76,18 @@
                     <td><?php echo $key->id_loker; ?></td>
                     <td><?php echo $key->nama_profesi; ?></td>
                     <td><?php echo $key->kuota; ?></td>
-                    <td><?php echo $key->mulai; ?></td>
-                    <td><?php echo $key->akhir; ?></td>
+                    <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
+                    <td><?php echo date('d M Y', strtotime($key->akhir)); ?></td>
                     <td><?php echo $key->ipkmin; ?></td>
                     <td><?php echo $key->usia; ?></td>
                     <td><?php echo $key->jenkel; ?></td>
                     <td><?php echo $key->jurusan; ?></td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminLoker/edit/";  echo $key->id_loker ; ?>">
-                        <button class="btn btn-success" title="EDIT DATA">edit</button>
+                        <button title="EDIT DATA" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                       </a>
                       <a href="<?php echo site_url(); echo '/adminLoker/del/'; echo $key->id_loker ;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button class="btn btn-danger" title="HAPUS DATA">hapus</button>
+                        <button title="HAPUS DATA" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                       </a>
                     </td>
                   </tr>

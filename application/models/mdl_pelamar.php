@@ -69,7 +69,7 @@ class Mdl_pelamar extends CI_Model
         return $query->result();
     }
     public function getDetailpend($id){
-        $query= $this->db->query("SELECT * from pendidikan  where id='$id'");
+       $query= $this->db->query("SELECT * from pendidikan as p inner join karyawan as k on p.id_karyawan = k.id_karyawan where p.id='$id'");
         return $query->result();
     }
     public function getSurat($id){
