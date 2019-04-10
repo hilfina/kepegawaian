@@ -176,5 +176,20 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
+    public function getOriedit($id){
+        $query = $this->db->query("SELECT * from orientasi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
+    public function getKew(){
+        $query = $this->db->query("SELECT * from kewenangan_klinis as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getKewedit($id){
+        $query = $this->db->query("SELECT * from kewenangan_klinis as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
 }
  

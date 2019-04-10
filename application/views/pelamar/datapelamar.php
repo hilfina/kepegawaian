@@ -149,7 +149,9 @@
                               </div>
                             </div>
                           </div>
+                          </form>
                           <div class="product-tab-list tab-pane fade" id="cv">
+                          <form action="<?php echo site_url(); ?>/pelamar/updatecv/" enctype="multipart/form-data" method="post">
                               <div class="pdf-viewer-area mg-b-15">
                                   <div class="container-fluid">
                                       <div class="row">
@@ -157,6 +159,7 @@
                                       <p style="color: red;">Perhatian! file yang diupload berisi surat lamaran pekerjaan dan cv dalam bentuk pdf</p>
                                       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                       </div>
+                                       <?php echo $this->session->flashdata('msg_error'); ?>
                                       <?php foreach ($datasaya as $key) { ?>
                                                   <div class="file-upload-inner ts-forms">
                                                   <div class="input prepend-big-btn">
@@ -165,19 +168,27 @@
                                                       </label>
                                                       <div class="file-button">
                                                           Browse
-                                                          <input type="file" name="cvsaya" value="<?php echo $key->cv; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                                          <input type="hidden" name="cv_old" value="<?php echo $key->cv; ?>">
+                                                          <input type="file" name="cvsaya" value="<?php echo $key->cv; ?>" onchange="document.getElementById('prepend-big-btn2').value = this.value;">
                                                       </div>
-                                                      <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                                                      <input type="text" id="prepend-big-btn2" placeholder="no file selected">
+                                                  </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                  <div class="col-sm-4 offset-sm-3">
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
                                                   </div>
                                                 </div>
                                                 <br><br>
                                                 <div class="pdf-single-pro">
-                                                  <a class="media" href="<?php echo base_url()?>Assets/gambar/<?php $key->cv; ?>"></a>
+                                                  <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->cv; ?>"> lihat</a>
                                               </div>
                                             </div>
                                         <?php } ?>
                                         </div>
                                       </div>
+                                      </form>
                                   </div>
                               </div>
                             </div>
@@ -187,7 +198,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+        
     </div>
 </div>
 <?php $this->load->view('./footer'); ?>

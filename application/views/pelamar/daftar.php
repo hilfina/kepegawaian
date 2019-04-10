@@ -45,7 +45,7 @@
             </tr></div>
             <tr style="height: 50px"><div class="form-group row">
               <td><strong>Password :</strong></td>
-              <td><input class="form-control" type="password" name="password"  placeholder="password" required></td>
+              <td><input class="form-control" type="password" name="password"  placeholder="password" required minlength="8"></td>
             </tr></div>
             <tr style="height: 50px"><div class="form-group row">
               <td><strong>Jenjang Pendidikan :</strong></td>

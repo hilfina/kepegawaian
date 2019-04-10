@@ -110,7 +110,7 @@
                         <button class="btn btn-danger waves-effect">hapus</button>
                       </a>
                       
-                      <a href="<?php echo site_url().'/adminStatus/download/'.$key->id; ?>">
+                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
                         <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh</button>
                       </a>
 

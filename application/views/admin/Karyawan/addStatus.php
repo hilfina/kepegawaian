@@ -39,6 +39,7 @@
                 <h1> Tambah Data Status Status Karyawan</h1><br>
               </div>
           </div>
+          <?php echo $this->session->flashdata('msg_error'); ?>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <form action="<?php echo site_url();?>/adminStatus/addStatus/" enctype="multipart/form-data" method="POST">
           <table width="100%">

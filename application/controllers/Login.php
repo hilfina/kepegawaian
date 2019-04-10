@@ -198,17 +198,11 @@ class Login extends CI_Controller {
 		
 		if($this->email->send())
 		{
-			echo '<script type="text/javascript">';
-			echo 'alert("Berhasil melakukan registrasi, silahkan cek email kamu")';
-			echo 'document.location.href = "login/index" ';
-			echo '</script>';
+			echo "<script>alert('Email berhasil terkirim. Cek email anda untuk verifikasi akun!'); document.location.href = '" . site_url('login') . "';</script>";
 			
 		}else
 		{
-			echo '<script type="text/javascript">';
-			echo 'alert("Berhasil melakukan registrasi, namun gagal mengirim verifikasi email")';
-			echo 'document.location.href = "login/index" ';
-			echo '</script>';
+			echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('login') . "';</script>";
 			
 		}
 		

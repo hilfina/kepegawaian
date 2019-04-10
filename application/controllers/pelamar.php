@@ -110,6 +110,37 @@ class pelamar extends CI_Controller {
 		$this->load->view('pelamar/datapelamar',$paket);
 	}
 
+	public function updatecv(){
+	$config['upload_path']		= './Assets/dokumen/';
+	$config['allowed_types']	= 'pdf';
+	$config['max_size']			= 2000;
+
+	$this->load->library('upload', $config);
+
+	$id=$this->session->userdata('myId');
+
+	if(!$this->upload->do_upload('cvsaya')) {
+	    $error = $this->upload->display_errors();
+
+	    $this->session->set_flashdata('msg_error', $error);
+
+	    redirect('pelamar/datasaya');
+	} else {
+	    $cvsaya = $this->upload->data('file_name');
+	}
+
+    $data2 = array(
+            'cv' => $cvsaya,
+        );
+
+    $where = array(
+		'id_karyawan' => $id
+	);
+
+ 	$update = $this->mdl_pelamar->updatedata($where,$data2,'lowongan');
+	redirect('pelamar/datasaya');
+	}
+
 	public function updatedatasaya(){
 	$config['upload_path']		= './Assets/gambar/';
 	$config['allowed_types']	= 'jpg|docx|pdf|png';
