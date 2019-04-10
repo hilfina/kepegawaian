@@ -1,5 +1,5 @@
 <?php 
-$this->load->view("pelamar/headerhome.php");
+$this->load->view("header.php");
 $idku=$this->session->userdata("myId");
 ?>
 <div class="breadcome-area"><br>

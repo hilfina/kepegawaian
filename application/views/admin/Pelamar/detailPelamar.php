@@ -146,7 +146,7 @@
                     <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                       <div class="pdf-single-pro">
                         <?php foreach ($datLo as $key){?>
-                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php $key->cv; ?>>"></a>
+                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->cv; ?>>"></a>
                         <?php }?>
                       </div>
                     </div>
