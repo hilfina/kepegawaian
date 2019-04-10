@@ -183,7 +183,7 @@
                                     <div class="sparkline13-hd">
                                       <div class="main-sparkline13-hd">
                                         <?php foreach ($datDir as $key){?>
-                                        <div align="right"><a href="<?php echo site_url(); echo "/admin/addPend/";  echo $key->id_karyawan ; ?>">
+                                        <div align="right"><a href="<?php echo site_url(); echo "/adminKaryawan/addPend/";  echo $key->id_karyawan ; ?>">
                                           <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                                         </a></div>
                                       <?php }?>
@@ -218,20 +218,20 @@
                                                       if(($key->verifikasi) == 1){ ?>
                                                        <i class="fa fa-check" style="color: red" title="TELAH TERVERIFIKASI"></i>
                                                        <?php }else{ ?>
-                                                        <a href="<?php echo site_url(); echo "/admin/verPend2/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                                                          <button class="btn btn-success waves-effect mg-b-15"></i></button>
+                                                        <a href="<?php echo site_url(); echo "/adminKaryawan/verPend/"; echo $key->id;echo "/";echo $key->id_karyawan; ?>">
+                                                          <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i></i></button>
                                                         </a>
                                                       <?php } ?>
                                                         
-                                                      </td> 
+                                                      </td>   
                                                       <td>
                                                         <a href="<?php echo site_url('adminKaryawan/editpend/').$key->id ?>">
                                                           <button data-toggle="tooltip" title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                                         </a>
-                                                        <a href="<?php echo site_url('adminKaryawan/hapuspend/').$key->id ?>" onclick="return confirm('Are you sure you want to delete this item?');">
+                                                        <a href="<?php echo site_url('adminKaryawan/delpend/').$key->id; echo "/";echo $key->id_karyawan; ?>" onclick="return confirm('Are you sure you want to delete this item?');">
                                                           <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                                         </a>
-                                                      </td>  
+                                                      </td>
                                                   </tr>
                                               </tbody>
                                               <?php } ?>

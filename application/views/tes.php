@@ -1,3 +1,3 @@
 <?php
-echo $tgl;
+echo $q;
 ?>

@@ -11,7 +11,7 @@ $this->load->view("header.php");
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
                                 <ul class="breadcome-menu">
                                     <li><a href="#">Data Pendidikan</a> <span class="bread-slash">/</span>
                                     </li>
@@ -38,21 +38,9 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
-                    <form action="<?php echo site_url(); ?>/admin/addpend/" enctype="multipart/form-data" method="post">
+                    <form action="<?php echo site_url(); ?>/adminPelamar/addpend/5" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap" style="margin-right: 15%;">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="input-mask-title">
-                                        <label>NIK</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="input-mark-inner">
-                                        <input type="text" class="form-control" name="nik" placeholder="Nomor Induk Karyawan">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="input-mask-title">
@@ -62,6 +50,7 @@ $this->load->view("header.php");
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="input-mark-inner">
                                         <input type="text" class="form-control" name="pendidikan" placeholder="Cth:Polinema">
+                                        <input type="hidden" class="form-control" name="id_karyawan" value="<?php echo $id ?>">
                                     </div>
                                 </div>
                             </div>

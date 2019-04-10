@@ -13,7 +13,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
+                <li><a href="<?php echo site_url('adminPelamar/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
                 <li><span class="bread-blod">Data Pelamar</span>
                 </li>
@@ -25,7 +25,7 @@
     </div>
   </div>
 </div>
-<div class="data-table-area mg-b-15">
+<div class="data-table-area">
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -40,8 +40,8 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('admin/addPelamar')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Pelamar</button>
+                <div align="right"><a href="<?php echo site_url('adminPelamar/addPelamar')?>">
+                  <button class="btn btn-primary waves-effect waves-light">Tambah Pelamar</button>
                 </a></div>
               </div>
             </div>
@@ -58,7 +58,7 @@
               <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
-                    <th>No</th>
+                    <th>ID</th>
                     <th>Nama</th>
                     <th>Pilihan Profesi</th>
                     <th>Pendidikan Terakhir</th>
@@ -74,33 +74,33 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>
-                    <td><?php echo $key->pend_akhir; echo " - "; echo $key->pendidikan;  echo $key->jurusan ?></td>
-                    <td><?php echo $key->nilai_akhir; ?></td>
+                    <td><?php echo $key->pendidikan;   echo " - "; echo $key->jurusan ?></td>
+                    <td><?php echo $key->nilai; ?></td>
                     <td><?php echo $key->id_status; ?></td>
                     <td align="center">
                       <?php if ($key->id_status == "Pelamar") {
                         if ($key->id_profesi == "Belum") { ?>
-                        <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
                           <button class="btn btn-primary waves-effect waves-light">Detail</button>
                         </a>
                          <?php } else{ ?>
-                          <a href="<?php echo site_url(); echo "/admin/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
+                          <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
                           <button class="btn btn-success waves-effect" title="TERIMA"><i class="fa fa-check"></i></button>
                         </a>
-                        <a href="<?php echo site_url(); echo "/admin/pelamarDitolak/"; echo $key->id_karyawan ;?>">
+                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
                           <button class="btn btn-danger waves-effect" title="TOLAK"><i class="fa fa-times"></i></button>
                         </a>
-                        <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
                           <button class="btn btn-primary waves-effect waves-light">Detail</button>
                         </a>
                         <?php } ?>
                         
                       <?php }else if ($key->id_status == "Calon Karyawan") { ?>
-                        <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
                           <button class="btn btn-primary waves-effect waves-light">Detail</button>
                         </a>
                       <?php }else if ($key->id_status == "Pelamar Ditolak") { ?>
-                        <a href="<?php echo site_url(); echo "/admin/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
                           <button class="btn btn-warning waves-effect waves-light">Detail</button>
                         </a>
                       <?php } ?>

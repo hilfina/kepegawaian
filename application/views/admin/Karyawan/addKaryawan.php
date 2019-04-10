@@ -46,7 +46,7 @@
           <form action="<?php echo site_url();?>/adminKaryawan/addKaryawan/" enctype="multipart/form-data" method="POST">
           <table width="100%">
             <tr>
-              <td width="30%"><label form-control-label">Nomor Induk Karyawan</label></td>
+              <td width="30%"><label form-control-label>Nomor Induk Karyawan</label></td>
               <td style="height: 50px" width="70%">
                 <div class="col-lg-12">
                   <input name="nik" type="text" class="form-control" placeholder="Nomor Induk Karyawan" style="width:100%">
@@ -54,7 +54,7 @@
               </td>
             </tr>
           <tr>
-            <td><label form-control-label">Nomor KTP</label></td>
+            <td><label form-control-label>Nomor KTP</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="no_ktp" type="text" class="form-control" placeholder="Nomor KTP (Kartu Tanda Penduduk)">
@@ -62,15 +62,15 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Nama Lengkap</label></td>
+            <td><label form-control-label>Nama Lengkap</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="nama" type="text" class="form-control" placeholder="Nama Pelamar">
+                <input name="nama" type="text" class="form-control" placeholder="Nama Karyawan">
               </div>
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Alamat</label></td>
+            <td><label form-control-label>Alamat</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="alamat" type="text" class="form-control" placeholder="Alamat Lengkap">
@@ -78,7 +78,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Nomor Telepon</label></td>
+            <td><label form-control-label>Nomor Telepon</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="no_telp" type="text" class="form-control" placeholder="Nomor Telepon">
@@ -86,7 +86,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Email</label></td>
+            <td><label form-control-label>Email</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="email" type="text" class="form-control" placeholder="Email">
@@ -94,10 +94,10 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Status Karyawan</label></td>
+            <td><label form-control-label>Status Karyawan</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <select  class="form-control" name="id_staus">
+                <select  class="form-control" name="id_status">
                   <option>-- Pilihan --</option>  
                   <?php foreach ($status as $key) { ?>
                     <option><?php echo $key->id_status; ?></option>
@@ -107,7 +107,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Profesi Karyawan</label></td>
+            <td><label form-control-label>Profesi Karyawan</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <select  class="form-control" name="id_profesi">
@@ -120,10 +120,10 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Golongan Karyawan</label></td>
+            <td><label form-control-label>Golongan Karyawan</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <select  class="form-control" name="id_golongan ">
+                <select  class="form-control" name="id_golongan">
                   <option>-- Pilihan --</option>
                   <?php foreach ($golongan as $key) { ?>
                     <option><?php echo $key->id_golongan; ?></option>

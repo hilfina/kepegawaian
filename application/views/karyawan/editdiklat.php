@@ -27,7 +27,7 @@ $this->load->view("header.php");
       </div>
     </div>
      <div class="product-status mg-b-15">
-            <div class="container-fluid" style="margin-right: 10%; margin-left: 10%">
+            <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="sparkline12-list mt-b-30">

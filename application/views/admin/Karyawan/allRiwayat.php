@@ -76,7 +76,7 @@
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->nama_profesi; ?></td>
                     <td><?php echo $key->ruangan; ?></td>
-                    <td><?php echo $key->mulai; ?></td>
+                    <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminRiwayat/edit/"; echo $key->id_riwayat ;?>">
                           <button class="btn btn-warning waves-effect">Edit</button>

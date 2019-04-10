@@ -92,7 +92,7 @@ class Mdl_admin extends CI_Model
     }
 
     public function getProfesi(){
-        $query = $this->db->query("SELECT * from jenis_profesi where id_profesi != 'Belum'");
+        $query = $this->db->query("SELECT * from jenis_profesi  where id_profesi != 'Belum'");
         return $query->result();
     }
     public function getRiwayat(){
@@ -131,7 +131,7 @@ class Mdl_admin extends CI_Model
     }
 
     public function getJenStatus(){
-        $query = $this->db->query("SELECT * from jenis_status where id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND id_status != 'Pelamar Ditolak'");
+        $query = $this->db->query("SELECT * from jenis_status where id_status != 'Admin' AND id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND id_status != 'Pelamar Ditolak'");
         return $query->result();
     }
 
@@ -139,12 +139,6 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from golongan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
         return $query->result();
     }
-<<<<<<< HEAD
-    public function getGolongan(){
-        $query = $this->db->query("SELECT * from jenis_golongan where id_golongan != 'Tidak Ada'");
-        return $query->result();
-    }
-=======
 
     public function getGoledit($id){
         $query = $this->db->query("SELECT * from golongan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
@@ -195,7 +189,10 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from orientasi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
         return $query->result();
     }
+    public function getGolongan(){
+        $query = $this->db->query("SELECT * from jenis_golongan where id_golongan != 'Tidak Ada'");
+        return $query->result();
+    }
 
->>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
 }
  

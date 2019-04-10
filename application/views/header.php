@@ -133,9 +133,6 @@
                         </li>
                         
                         <li>
-<<<<<<< HEAD
-                            <a title="Karyawan" href="<?php echo site_url('adminKaryawan/') ?>"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data Karyawan</span></a>
-=======
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data Karyawan</span></a>
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
                                 <li><a title="Karyawan" href="<?php echo site_url('adminKaryawan/') ?>"><span class="mini-cli">Karyawan</span></a></li>
@@ -143,7 +140,6 @@
                                 <li><a title="Orientasi" href="<?php echo site_url('adminOri/') ?>"><span class="mini-cli">Orientasi</span></a></li>
                                 <li><a title="Uraian Tugas" href="<?php echo site_url('adminUraianTugas/') ?>"><span class="mini-cli">Uraian Tugas</span></a></li>
                             </ul>
->>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
                         </li>
                         <li>
                             <a title="Pendidikan" href="<?php echo site_url('admin/datapend') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Pendidikan</span></a>
@@ -172,7 +168,7 @@
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data Pelamar</span></a>
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Semua Pelamar" href="<?php echo site_url('admin/pelamar') ?>"><span class="mini-cli">Pelamar</span></a></li>
+                                <li><a title="Semua Pelamar" href="<?php echo site_url('adminPelamar') ?>"><span class="mini-cli">Pelamar</span></a></li>
                                 <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/dataSeleksi') ?>"><span class="mini-sub-pro">Seleksi Pelamar</span></a></li>
                                 <li><a title="Report" href="<?php echo site_url('admin/report') ?>"><span class="mini-sub-pro">Data Report</span></a></li>
                             </ul>

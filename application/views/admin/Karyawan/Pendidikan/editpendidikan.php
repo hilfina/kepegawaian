@@ -1,3 +1,4 @@
+
 <?php 
 $this->load->view("header.php");
 ?>
@@ -31,7 +32,7 @@ $this->load->view("header.php");
             </div>
           </div><br>
           <?php foreach ($array as $key){ ?>
-            <form action="<?php echo site_url(); ?>/admin/editpend/<?php echo $key->id?>" enctype="multipart/form-data" method="post">
+            <form action="<?php echo site_url(); ?>/adminKaryawan/editpend/<?php echo $key->id?>" enctype="multipart/form-data" method="post">
               <div class="sparkline12-graph">
                 <div class="input-knob-dial-wrap">
                   <div class="row">

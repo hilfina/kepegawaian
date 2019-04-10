@@ -41,7 +41,7 @@ $this->load->view("header.php");
                     <?php foreach ($array as $key){ ?>
                     
                     <div class="sparkline12-graph">
-                        <div class="input-knob-dial-wrap" style="margin-right: 10%; margin-left: 10%">
+                        <div class="input-knob-dial-wrap">
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
@@ -106,8 +106,6 @@ $this->load->view("header.php");
                                 </div>
                               </div>
                             </div>
-<<<<<<< HEAD
-=======
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
@@ -120,18 +118,7 @@ $this->load->view("header.php");
                                     </div>
                                 </div>
                             </div>
->>>>>>> 89cda8f5f5bb6f3af6f25daebc6214f4ba2de8bf
                             <br>
-                            <div class="row">
-                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <br>
-                                <?php if($key->file != ""){?>
-                                  <table style="width: 100%;">
-                                      <tr><td style="width: 100%; background-color: #e6f2ff; padding-left: 3%; padding-top: 3%; padding-bottom: 3%; padding-right: 3%;"><img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file?>" width="100%"/>   </td></tr>
-                                  </table>
-                                <?php }else{}?>
-                              </div>
-                            </div><br>
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
