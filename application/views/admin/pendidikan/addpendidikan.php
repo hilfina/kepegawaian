@@ -38,7 +38,7 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
-                    <form action="<?php echo site_url(); ?>/admin/addpend/" enctype="multipart/form-data" method="post">
+                    <form action="<?php echo site_url(); ?>/adminPendidikan/addpend/" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap" style="margin-right: 15%;">
                             <div class="row">

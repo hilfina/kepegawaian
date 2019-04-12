@@ -132,41 +132,6 @@ class Home extends CI_Controller {
 					$this->db->update('sip_str', array('aktif' => 1), array('id_sipstr' => $sip->id_sipstr));
 				} else {
 					$this->db->update('sip_str', array('aktif' => 0), array('id_sipstr' => $sip->id_sipstr));
-
-
-					// Kirim email
-					// $this->load->library('email');
-					// $config = array();
-					// $config['charset'] = 'utf-8';
-					// $config['useragent'] = 'CodeIgniter';
-					// $config['protocol']= "smtp";
-					// $config['mailtype']= "html";
-					// $config['smtp_host']= "ssl://smtp.gmail.com";
-					// $config['smtp_port']= "465";
-					// $config['smtp_timeout']= "400";
-					// $config['smtp_user']= "hilfinaamaris09@gmail.com";
-					// $config['smtp_pass']= "hilfina090798";
-					// $config['crlf']="\r\n"; 
-					// $config['newline']="\r\n"; 
-					// $config['wordwrap'] = TRUE;
-					
-					// $this->email->initialize($config);
-					// //konfigurasi pengiriman
-					// $this->email->from($config['smtp_user']);
-					// $this->email->to("");
-					// $this->email->subject("Kadaluarso");
-					// $this->email->message(
-					// 	"Bayar"
-					// );
-					
-					// if($this->email->send())
-					// {
-					// 	echo "<script>alert('Email berhasil terkirim. Cek email anda untuk verifikasi akun!');</script>";
-					// }else
-					// {
-					// 	echo "<script>alert('Email gagal terkirim');</script>";
-						
-					// }
 				}
 			}
 

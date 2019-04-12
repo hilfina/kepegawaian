@@ -49,40 +49,25 @@
               <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true"data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
-                    <th>No</th>
+                    <th>Id Seleksi</th>
                     <th>Nama</th>
-                    <th>Tanggal</th>
-                    <th>Agama</th>
-                    <th>Kompetensi</th>
-                    <th>Wawancara</th>
-                    <th>PPA</th>
-                    <th>Psikologi</th>
-                    <th>Kesehatan</th>
+                    <th>Tanggal Seleksi Terakhir</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($array as $key){?>
+                  <?php foreach ($array as $key){ ?>
                     <tr>
-                      <td><?php echo $key->id_karyawan;?></td>
+                      <td><?php echo $key->id_seleksi;?></td>
                       <td><?php echo $key->nama;?></td>
-                      <td><?php echo $key->tgl_seleksi;?></td>
-                      <td><?php echo $key->nilai_agama;?></td>
-                      <td><?php echo $key->nilai_kompetensi;?></td>
-                      <td><?php echo $key->nilai_wawancara;?></td>
-                      <td><?php echo $key->tes_ppa;?></td>
-                      <td><?php echo $key->tes_psikologi;?></td>
-                      <td><?php echo $key->tes_kesehatan;?></td>
+                      <td><?php echo date('d M Y', strtotime($key->tgl_seleksi)); ?></td>
                       <td>
                         
-                        <?php if ($key->nilai_agama != '-'AND $key->nilai_kompetensi != '-'AND $key->nilai_wawancara != '-'AND $key->tes_ppa != '-'AND $key->tes_psikologi != '-'AND $key->tes_kesehatan != '-') {?>
-                          <a href="<?php echo site_url(); echo "/admin/editMagang/"; echo $key->id_karyawan ;?>"><button class="btn btn-success ">tindak lanjut  <i class="educate-icon educate-checked modal-check-pro"></button></i></a>
-                          <a href="<?php echo site_url(); echo "/admin/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-danger" title="TOLAK"><i class="fa fa-times"></i></button>
+                        <?php if ($key->nilai_agama != "-" AND $key->nilai_kompetensi != "-" AND $key->nilai_wawancara != "-" AND $key->tes_psikologi != "-" AND $key->tes_kesehatan != "-" ) {?>
+                          <a href="<?php echo site_url(); echo "/admin/detSeleksi/"; echo $key->id_karyawan ;?>"><button class="btn btn-primary ">Detail</button></i></a>
                         </a>
                        <?php } else { ?>
-                         <a href="<?php echo site_url(); echo "/admin/editSeleksi/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-light">Edit</button>
+                        <a href="<?php echo site_url(); echo "/admin/detSeleksi/"; echo $key->id_karyawan ;?>"><button class="btn btn-primary ">Detail</button></i></a>
                         </a>
                        <?php } ?>
                       

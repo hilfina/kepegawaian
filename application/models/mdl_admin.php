@@ -85,9 +85,13 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from sip_str as s inner join jenis_surat as j on s.id_surat = j.id_surat where s.id_karyawan = $id");
         return $query->result();
     }
-
+    
     public function getSeleksi(){
          $query = $this->db->query("SELECT * from seleksi as x inner join karyawan on x.id_karyawan = karyawan.id_karyawan where id_status = 'Pelamar' || id_status = 'Calon Karyawan'");
+        return $query->result();
+    }
+    public function detSeleksi($id){
+         $query = $this->db->query("SELECT k.id_karyawan as id_karyawan, k.foto as foto, k.id_status as id_status, k.id_profesi as id_profesi, k.id_golongan as id_golongan, x.id_seleksi as id_seleksi, x.tgl_seleksi as tgl_seleksi, x.nilai_agama as nilai_agama, x.nilai_kompetensi as nilai_kompetensi, x.tes_ppa as tes_ppa, x.tes_psikologi as tes_psikologi, x.tes_kesehatan as tes_kesehatan, x.nilai_wawancara as nilai_wawancara from seleksi as x inner join karyawan as k on x.id_karyawan = k.id_karyawan where k.id_karyawan = '$id'");
         return $query->result();
     }
 
@@ -207,6 +211,10 @@ class Mdl_admin extends CI_Model
     public function getKewedit($id){
         $query = $this->db->query("SELECT * from kewenangan_klinis as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
         return $query->result();
+    }
+
+    public function editRSel($idS,$nama,$hasil){
+        $this->db->query("UPDATE riwayat_seleksi SET hasil='$hasil' where id_seleksi = $idS AND nama_tes = '$nama'");
     }
 
 }

@@ -87,13 +87,61 @@ class AdminPendidikan extends CI_Controller {
         }else{ redirect("login"); } 
     }
 
+    public function editpend($id){
+        if($this->mdl_admin->logged_id()){
+            $this->load->helper('url','form');
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('pendidikan', 'Nama Pendidikan', 'trim|required' );
+            $this->load->model('mdl_pelamar');
 
-    public function datapend(){
-        $paket['pen']=$this->mdl_admin->getPendidikan();
-        $this->load->view('admin/pendidikan/allpendidikan',$paket);
+            if ($this->form_validation->run()==FALSE) {
+                $paket['array']=$this->mdl_pelamar->getDetailpend($id);
+                $this->load->view('admin/pendidikan/editpendidikan', $paket);
+            }
+            else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'jpg|png';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+
+                $this->load->library('upload', $config);
+                $pendidikan = $this->input->post('pendidikan');
+                $jurusan  = $this->input->post('jurusan');
+                $nik = $this->input->post('nik');
+                $nilai = $this->input->post('nilai');
+                $mulai = $this->input->post('mulai');
+                $akhir = $this->input->post('akhir');
+                $nomor_ijazah = $this->input->post('nomor_ijazah');
+
+                $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from pendidikan where id = $id"));
+                $datax=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_karyawan from karyawan where nik = '$nik'"));
+                $id_karyawan = $datax['id_karyawan'];
+                if ($this->upload->do_upload('file')) {
+                    $file = $this->upload->data('file_name');
+                }else {
+                    $file = $s['file'];
+                }
+                $data3 = array(
+                        'pendidikan'=>$pendidikan,
+                        'jurusan' => $jurusan,
+                        'nilai' => $nilai,
+                        'id_karyawan' => $id_karyawan,
+                        'mulai'=>$mulai,
+                        'akhir'=>$akhir,
+                        'nomor_ijazah'=>$nomor_ijazah,
+                        'file'=>$file
+                    );
+                $where = array(
+                    'id' => $id
+                );
+
+                $update = $this->mdl_pelamar->updatedata($where,$data3,'pendidikan');
+                $this->session->set_flashdata('msg','Data Sukses di Update');
+                redirect("AdminPendidikan");
+            }
+        }else{ redirect("login"); }         
     }
-    //add pendidikan pada semua tabel pendidikan
-   
     public function hapuspend($id)
     {
         $where = array('id' => $id);
@@ -101,5 +149,6 @@ class AdminPendidikan extends CI_Controller {
         $this->session->set_flashdata('msg','Data Sukses di Hapus');
         redirect(site_url('karyawan/datapend'));
     }
+}
 /* End of file admin.php */
 /* Location: ./application/controllers/admin.php */

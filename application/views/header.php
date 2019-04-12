@@ -109,17 +109,39 @@
     <!-- modernizr JS
         ============================================ -->
     <script src="<?php echo base_url()?>Assets/template/js/vendor/modernizr-2.8.3.min.js"></script>
-   
+   <style type="text/css">
+    .lulus {
+      background-color: #b3ffb3;
+      width:45%;
+      height: 120px;
+      border-radius: 10px;
+   }
+   .gagal {
+      background-color: #ff8080;
+      width:45%;
+      height: 120px;
+      border-radius: 10px;
+   }
+   .belom {
+      background-color: #e6f2ff;
+      width:45%;
+      height: 120px;
+      border-radius: 10px;
+   }
+   .masih {
+      background-color: #ffff80;
+      width:45%;
+      height: 120px;
+      border-radius: 10px;
+   }
+   </style>
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <!-- Start Header menu area -->
-    <div class="left-sidebar-pro">
-        <nav id="sidebar" class="">
-            <div class="sidebar-header">
+  <!-- Start Header menu area -->
+  <div class="left-sidebar-pro">
+    <nav id="sidebar" class="">
+      <div class="sidebar-header">
                 <a href="index.html"><img class="main-logo" src="<?php echo base_url()?>Assets/template/img/logo.png" alt="" width="180px" /></a>
                 <strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong>
             </div>
@@ -184,7 +206,7 @@
                             <?php 
                             if ($profesiku == "Belum") {?>
                                 <li>
-                                    <a title="Home" href="<?php echo site_url('pelamar/home') ?>"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>
+                                    <a title="Home" href="<?php echo site_url('pelamar/home') ?>"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Peluang Karir</span></a>
                                 </li>
                             <?php } else {?>
                                 <li>
@@ -208,8 +230,17 @@
                         </li>
                         <?php } elseif ($statusku == "Calon Karyawan") { ?>
                         <li>
-                            <a title="Nilai" href="<?php echo site_url('pelamar/nilai') ?>"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Hasil Nilai Tes</span></a>
-                            <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-cli">Proses Lamaran</span></a></li>
+                            
+                                <li>
+                                    <a title="Home" href="#"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>
+                                </li>
+                            
+                                <li><a title="Data Diri" href="<?php echo site_url('pelamar/datasaya') ?>"><span class="educate-icon educate-professor icon-wrap"></span><span class="mini-click-non">Profil Saya</span></a></li>
+                                <li><a title="Data Pendidikan" href="<?php echo site_url('pelamar/datapend') ?>"><span class="educate-icon educate-library icon-wrap"></span><span class="mini-click-non">Data Pendidikan</span></a></li>
+                                <?php if($profesiku != "Kasir" || $profesiku != "Administrasi" || $profesiku != "Pekarya"){?>
+                                <li><a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Surat</span></a></li>
+                                <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
+                            <?php } ?>
                         </li>
                         <?php } elseif ($statusku == "Pelamar Ditolak") { ?>
                        <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-cli">Proses Lamaran</span></a></li>

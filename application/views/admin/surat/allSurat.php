@@ -91,10 +91,12 @@
                         <td><?php echo $key->id_status; ?></td>
                         <td><?php echo $key->no_surat; ?></td>
                         <td><?php echo $key->nama_surat; ?></td>
-                        <td><?php echo $key->tgl_mulai; echo " - "; echo $key->tgl_akhir; ?></td>
+                        <td><?php echo date('d M Y', strtotime($key->tgl_mulai)); echo " - "; echo date('d M Y', strtotime($key->tgl_akhir)); ?></td>
                         <td>
-                        <?php if(($key->aktif) == 1){ ?>
+                        <?php if(date('d-m-y') <= date('d-m-y', strtotime($key->tgl_akhir)) && date('d-m-y') >= date('d-m-y', strtotime($key->tgl_mulai))){ ?>
                           <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }elseif(date('d-m-y') <= date('d-m-y', strtotime($key->tgl_mulai))){ ?>
+                          <i class="fa fa-check"></i> Belum Aktif
                         <?php }else{ ?>
                           <i class="fa fa-times"></i> Kadaluarsa 
                         <?php } ?>

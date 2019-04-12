@@ -143,7 +143,7 @@
 
                         <br>
                         <font color="red">
-                            <?php if ( date('y-m-d') <= $key->akhir) {
+                            <?php if ( date('y-m-d') <= date('y-m-d', strtotime($key->akhir))) {
                                 echo "Sedang Dibuka";
                             }else{
                                 echo "Sudah Ditutup";

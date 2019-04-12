@@ -63,7 +63,14 @@ class Mdl_pelamar extends CI_Model
         $query= $this->db->query("SELECT * from pendidikan  where id_karyawan='$id'");
         return $query->result();
     }
-
+    public function caricari($nama, $idsel){
+        $query= $this->db->query("SELECT * from riwayat_seleksi where nama_tes = '$nama' && id_seleksi = $idsel");
+        return $query->result();
+    }
+    public function carii($nama, $idsel){
+        $query= $this->db->query("SELECT * from riwayat_seleksi where nama_tes = '$nama' && id_seleksi = $idsel");
+        return $query->row();
+    }
     public function getSeleksi($id){
         $query= $this->db->query("SELECT * from karyawan as k inner join seleksi as s on k.id_karyawan = s.id_karyawan where k.id_karyawan ='$id'");
         return $query->result();

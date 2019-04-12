@@ -41,7 +41,7 @@
               <span><h4 align="center">DATA RIWAYAT PENDIDIKAN</h4></span>
             </div>
           </div><br>
-          <form action="<?php echo site_url(); ?>/admin/addSurat/<?php echo $id ?>" enctype="multipart/form-data" method="post">
+          <form action="<?php echo site_url(); ?>/adminPelamar/addSurat/<?php echo $id ?>" enctype="multipart/form-data" method="post">
             <input type="hidden" name="id_karyawan" value="<?php echo $id ?>">
             <div class="sparkline12-graph">
               <div class="input-knob-dial-wrap">

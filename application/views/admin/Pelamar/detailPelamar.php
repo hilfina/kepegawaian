@@ -31,13 +31,16 @@
 <div class="single-pro-review-area mt-t-30 mg-b-15">
   <div class="container-fluid">
     <div class="row">
-      <?php foreach ($datDir as $key){ ?>
+      
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
           <div class="profile-info-inner">
             <div class="profile-img">
-              <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt=""/>
+              <?php foreach ($datDir as $key){ ?>
+                <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt=""/>
             </div><br>
+            <?php } ?>
             <div align="center">
+              <?php foreach ($datDir as $key){ ?>
               <?php if ($key->id_status == "Pelamar" && $key->id_profesi != "Belum") { ?>
                 <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
                   <button class="btn btn-success waves-effect mg-b-15" title="TERIMA"><i class="fa fa-check"></i></button>
@@ -46,10 +49,21 @@
                   <button class="btn btn-danger waves-effect mg-b-15" title="TOLAK"><i class="fa fa-times"></i></button>
                 </a>
               <?php } else{}?>
+              <?php } ?>
+              <?php foreach ($datSel as $a){ ?>
+              <?php if ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-") { ?>
+                <a href="<?php echo site_url(); echo "/adminPelamar/editMagang/";  echo $key->id_karyawan ; ?>">
+                  <button class="btn btn-success waves-effect mg-b-15" title="Lulus tahap finalisasi"><i class="fa fa-check"></i></button>
+                </a>
+                <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
+                  <button class="btn btn-danger waves-effect mg-b-15" title="Gagal tahap finalisasi"><i class="fa fa-times"></i></button>
+                </a>
+              <?php } else{}?>
+              <?php } ?>
             </div>
           </div>
         </div>
-      <?php } ?>
+      
       <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
           <ul id="myTabedu1" class="tab-review-design">
@@ -69,8 +83,8 @@
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="review-content-section">
-                   <form action="<?php echo site_url();?>/adminPelamar/editData/<?php echo $key->id_karyawan ;?>" method="POST">
-                    <?php foreach ($datDir as $key){ ?>
+                  <?php foreach ($datDir as $key){ ?>
+                    <form action="<?php echo site_url();?>/adminPelamar/editData/<?php echo $key->id_karyawan ;?>" method="POST">
                       <table width="100%">
                         <tr>
                           <td width="20%"><label form-control-label>Nomor Pelamar</label></td>
@@ -146,7 +160,7 @@
                     <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                       <div class="pdf-single-pro">
                         <?php foreach ($datLo as $key){?>
-                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php $key->cv; ?>>"></a>
+                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->cv; ?>>"></a>
                         <?php }?>
                       </div>
                     </div>
@@ -243,17 +257,35 @@
                         <table class="table">
                           <thead>
                             <tr>
-                              <th>Jenis Surat</th>
                               <th>Nomor Surat</th>
+                              <th>Jenis Surat</th>
                               <th>Masa Berlaku</th>
+                              <th>File</th>
+                              <th>Keterangan</th>
                             </tr>
                           </thead>
                           <?php foreach ($datSur as $key){ ?>
                           <tbody>
                             <tr>
-                              <td><?php echo $key->nama_surat; ?></td>
                               <td><?php echo $key->no_surat; ?></td>
-                              <td><?php echo $key->tgl_mulai." Sampai ".$key->tgl_akhir; ?></td>
+                              <td><?php echo $key->nama_surat; ?></td>
+                              <td><?php echo date('d M Y', strtotime($key->tgl_mulai)); echo " - "; echo date('d M Y', strtotime($key->tgl_akhir)); ?></td>
+                              <td>
+                              <?php if(date('d-m-y') <= date('d-m-y', strtotime($key->tgl_akhir)) && date('d-m-y') >= date('d-m-y', strtotime($key->tgl_mulai))){ ?>
+                                <i class="fa fa-check"></i> Surat Aktif 
+                              <?php }elseif(date('d-m-y') <= date('d-m-y', strtotime($key->tgl_mulai))){ ?>
+                                <i class="fa fa-check"></i> Belum Aktif
+                              <?php }else{ ?>
+                                <i class="fa fa-times"></i> Kadaluarsa 
+                              <?php } ?>
+                              </td>
+                              <td>
+                              <?php if($key->file != ""){ ?>
+                                <i class="fa fa-check"></i> File Ada
+                              <?php }else{ ?>
+                                <i class="fa fa-times"></i> File Kosong 
+                              <?php } ?>
+                              </td>
                             </tr>
                           </tbody>
                           <?php } ?>
@@ -271,156 +303,217 @@
                     <form action="<?php echo site_url(); ?>/adminPelamar/editDataSel/" method="POST" enctype="multipart/form-data" >
                       <?php foreach ($datSel as $key){ ?>
                       <table width="100%">
-                        <?php foreach ($datDir as $dir) { ?>
+                        
                         <tr>
                           <td width="20%"><label form-control-label>Profesi yang dipilih</label></td>
                           <td style="height: 50px" width="80%">
                             <div class="col-lg-12">
-                              <input name="idSel" type="text" class="form-control" value="<?php echo $dir->id_profesi; ?>" style="width:100%" disabled>
+                              <input type="text" class="form-control" value="<?php echo $key->id_profesi; ?>" style="width:100%" disabled>
                             </div>
                           </td>
                         </tr>
-                        <?php } ?>
+
                         <tr>
                           <td width="20%"><label form-control-label>ID Seleksi</label></td>
                           <td style="height: 50px" width="80%">
                             <div class="col-lg-12">
                               <input name="idSel" type="text" class="form-control" value="<?php echo $key->id_seleksi; ?>" style="width:100%" disabled>
+                              <input name="idSel" type="hidden" class="form-control" value="<?php echo $key->id_seleksi; ?>" style="width:100%">
                             </div>
                           </td>
                         </tr>
+
                         <tr>
                           <td><label form-control-label>Tanggal</label></td>
                           <td style="height: 50px">
                             <div class="col-lg-12">
-                              <?php if ($key->tgl_seleksi == " "){ ?>
+                              <?php if ($key->tgl_seleksi == "-"){ ?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes tulis dan wawancara</font>
-                              <?php } elseif ($key->tgl_seleksi != " " && $key->nilai_wawancara == " " && $key->nilai_kompetensi == " ") {?>
-                                <font color="red" size="2">*tanggal untuk tes tulis dan wawancara</font>
-                              <?php } elseif ($key->tgl_seleksi != " " && $key->nilai_wawancara == "Lulus" && $key->nilai_kompetensi == "Lulus") {?>
+
+                              <?php } elseif (($key->nilai_wawancara == "Lulus" || $key->nilai_kompetensi == "Lulus") && $wawa->tanggal == $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes psikologi</font>
+                              <?php } elseif (($key->nilai_wawancara == "Lulus" || $key->nilai_kompetensi == "Lulus") && $wawa->tanggal != $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
+                              <?php } elseif ($key->tes_psikologi == "Lulus" && $psiko->tanggal == $key->tgl_seleksi) {?>
+                                <font color="red" size="2">*Masukkan tanggal untuk tes agama dan kesehatan</font>
+                              <?php } elseif ($key->tes_psikologi == "Lulus" && $psiko->tanggal != $key->tgl_seleksi && $key->nilai_agama == "-" ) {?>
                               <?php } ?>
                               <input name="tglSel" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
                             </div>
                           </td>
-                        </tr>                                     
+                        </tr>
+
                         <input name="idKSel" type="hidden" class="form-control" value="<?php echo $key->id_karyawan; ?>">
-                        <?php if ($key->tgl_seleksi != " "){ ?>
-                        <tr>
-                          <td><label form-control-label>Tes Tulis</label></td>
-                          <td style="height: 50px">
-                            <div class="col-lg-12">
-                              <?php if ($key->nilai_wawancara == " ") { ?>
-                                <select name="nkSel" type="text" class="form-control">
-                                <option>-- Pilihan --</option>
-                                <option>Lulus</option>
-                                <option>Tidak Lulus</option>
-                              </select>
-                              <?php } else { ?>
-                                <input name="nkSel" type="text" class="form-control" value="<?php echo $key->nilai_kompetensi;?>" >
-                              <?php } ?>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><label form-control-label>Nilai Wawancara</label></td>
-                          <td style="height: 50px">
-                            <div class="col-lg-12">
-                              <?php if ($key->nilai_wawancara == " ") { ?>
-                                <select name="nwSel" type="text" class="form-control">
-                                <option>-- Pilihan --</option>
-                                <option>Lulus</option>
-                                <option>Tidak Lulus</option>
-                              </select>
-                              <?php } else { ?>
-                                <input name="nwSel" type="text" class="form-control" value="<?php echo $key->nilai_wawancara;?>" >
-                              <?php } ?>
-                            </div>
-                          </td>
-                        </tr>
-                        <?php if ($key->nilai_wawancara == "Lulus") { ?>
-                        <tr>
-                          <td><label form-control-label>Tes Psikologi</label></td>
-                          <td style="height: 50px">
-                            <div class="col-lg-12">
-                              <?php if ($key->tes_psikologi == "") { ?>
-                                <select name="tpsSel" type="text" class="form-control">
-                                <option>-- Pilihan --</option>
-                                <option>Lulus</option>
-                                <option>Tidak Lulus</option>
-                              </select>
-                              <?php } else { ?>
-                                <input name="tpsSel" type="text" class="form-control" value="<?php echo $key->tes_psikologi;?>" >
-                              <?php } ?>
-                            </div>
-                          </td>
-                        </tr>
-                        <?php } else {} ?>
-                        <?php if ($key->tes_psikologi == "Lulus") { ?>
-                        <tr>
-                          <td><label form-control-label>Nilai Agama</label></td>
-                          <td style="height: 50px">
-                            <div class="col-lg-12">
-                              <?php if ($key->tes_kesehatan == "") { ?>
-                                  <select name="naSel" type="text" class="form-control">
+
+                        <?php if ($key->tgl_seleksi != "-"){ ?>
+
+                          <tr>
+                            <td><label form-control-label>Tes Tulis</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                                <?php if ($key->nilai_kompetensi == "-") { ?>
+                                  <select name="nkSel" type="text" class="form-control">
                                   <option>-- Pilihan --</option>
                                   <option>Lulus</option>
                                   <option>Tidak Lulus</option>
                                 </select>
                                 <?php } else { ?>
-                                  <input name="naSel" type="text" class="form-control" value="<?php echo $key->nilai_agama;?>" >
+                                  <input name="nkSel" type="text" class="form-control" value="<?php echo $key->nilai_kompetensi;?>" >
                                 <?php } ?>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><label form-control-label>Tes Kesehatan</label></td>
-                          <td style="height: 50px">
-                            <div class="col-lg-12">
-                              <?php if ($key->tes_kesehatan == "") { ?>
-                                  <select name="tkSel" type="text" class="form-control">
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><label form-control-label>Nilai Wawancara</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                                <?php if ($key->nilai_wawancara == "-") { ?>
+                                  <select name="nwSel" type="text" class="form-control">
                                   <option>-- Pilihan --</option>
                                   <option>Lulus</option>
                                   <option>Tidak Lulus</option>
                                 </select>
                                 <?php } else { ?>
-                                  <input name="tkSel" type="text" class="form-control" value="<?php echo $key->tes_kesehatan;?>" >
+                                  <input name="nwSel" type="text" class="form-control" value="<?php echo $key->nilai_wawancara;?>" >
                                 <?php } ?>
-                            </div>
-                          </td>
-                        </tr>                        
-                        <tr>
-                          <td><label form-control-label>Dokumen ppa</label></td>
-                          <td style="height: 50px">
-                            <div class="col-lg-12">
-                              <font color="red" size="2">*Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2MB </font>
-                              <div class="input-mark-inner">
-                                <div class="file-upload-inner ts-forms">
-                                  <div class="input prepend-big-btn">
-                                    <label class="icon-right" for="prepend-big-btn"> <i class="fa fa-download"></i> </label>
-                                      <div class="file-button">  Browse
-                                        <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                              </div>
+                            </td>
+                          </tr>
+                        <?php }elseif ($key->tgl_seleksi == "-") { ?>
+                          <tr>
+                            <td><label form-control-label>Tes Tulis</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                                <input name="nkSel" type="text" class="form-control" value="<?php echo $key->nilai_kompetensi;?>" readonly>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><label form-control-label>Nilai Wawancara</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                                <input name="nwSel" type="text" class="form-control" value="<?php echo $key->nilai_wawancara;?>" readonly>
+                              </div>
+                            </td>
+                          </tr>
+                        <?php } ?> 
+                          <?php if (($key->nilai_wawancara == "Lulus" || $key->nilai_kompetensi == "Lulus") && $wawa->tanggal != $key->tgl_seleksi) { ?>
+                            <tr>
+                              <td><label form-control-label>Tes Psikologi</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($key->tes_psikologi == "-") { ?>
+                                    <select name="tpsSel" type="text" class="form-control">
+                                    <option>-- Pilihan --</option>
+                                    <option>Lulus</option>
+                                    <option>Tidak Lulus</option>
+                                  </select>
+                                  <?php } else { ?>
+                                    <input name="tpsSel" type="text" class="form-control" value="<?php echo $key->tes_psikologi;?>" >
+                                  <?php } ?>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php } else { ?>
+                            <tr>
+                              <td><label form-control-label>Tes Psikologi</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <input name="tpsSel" type="text" class="form-control" value="<?php echo $key->tes_psikologi;?>" readonly>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php } ?> 
+                          <?php if ($key->tes_psikologi == "Lulus" && $psiko->tanggal != $key->tgl_seleksi) { ?>
+                            <tr>
+                              <td><label form-control-label>Nilai Agama</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($key->nilai_agama == "-") { ?>
+                                      <select name="naSel" type="text" class="form-control">
+                                      <option>-- Pilihan --</option>
+                                      <option>Lulus</option>
+                                      <option>Tidak Lulus</option>
+                                    </select>
+                                    <?php } else { ?>
+                                      <input name="naSel" type="text" class="form-control" value="<?php echo $key->nilai_agama;?>" >
+                                    <?php } ?>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><label form-control-label>Tes Kesehatan</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($key->tes_kesehatan == "-") { ?>
+                                      <select name="tkSel" type="text" class="form-control">
+                                      <option>-- Pilihan --</option>
+                                      <option>Lulus</option>
+                                      <option>Tidak Lulus</option>
+                                    </select>
+                                    <?php } else { ?>
+                                      <input name="tkSel" type="text" class="form-control" value="<?php echo $key->tes_kesehatan;?>" >
+                                    <?php } ?>
+                                </div>
+                              </td>
+                            </tr>  
+                          <?php }else{?>
+                            <tr>
+                              <td><label form-control-label>Nilai Agama</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <input name="naSel" type="text" class="form-control" value="<?php echo $key->nilai_agama;?>" readonly>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><label form-control-label>Tes Kesehatan</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <input name="tkSel" type="text" class="form-control" value="<?php echo $key->tes_kesehatan;?>" readonly>
+                                </div>
+                              </td>
+                            </tr>  
+                          <?php } ?>
+                          <?php if ($key->nilai_agama == "Lulus" || $key->tes_kesehatan == "Lulus") { ?>
+                                                  
+                            <tr>
+                              <td><label form-control-label>Dokumen ppa</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <font color="red" size="2">*Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2MB </font>
+                                  <div class="input-mark-inner">
+                                    <div class="file-upload-inner ts-forms">
+                                      <div class="input prepend-big-btn">
+                                        <label class="icon-right" for="prepend-big-btn"> <i class="fa fa-download"></i> </label>
+                                          <div class="file-button">  Browse
+                                            <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                          </div>
+                                        <input type="text" id="prepend-big-btn" placeholder="no file selected">
                                       </div>
-                                    <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                                    </div>
                                   </div>
                                 </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><br>
+                                <?php if ($key->tes_ppa != "-") { ?>
+                              <div align="center">
+                                <img width="80%" src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->tes_ppa;?>" alt="" />
                               </div>
-                            </div>
-                          </td>
-                        </tr>
+                            <?php }?>
+                              </td>
+                            </tr>
+                          <?php }?>
+                          
                       </table>
-                      <br>
-                      <?php if ($key->tes_ppa != " " ) {?>
-                          <div align="center">
-                            <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->tes_ppa?>" width="80%"/>
-                          </div>
-                        <?php } ?>
-                        <?php } else {} }?>
-                        <br>
-                      <input name="" type="submit" class="form-control" value="Update">
-                    <?php } ?>
-                    </form>
-                  </div>
+                    <?php }?><br>
+                    <div align="center">
+                      <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Update">
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

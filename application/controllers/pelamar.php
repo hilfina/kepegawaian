@@ -444,8 +444,7 @@ class pelamar extends CI_Controller {
 		$where = array( 'id_karyawan' => $id ); 
 		$paket['datDir']=$this->mdl_admin->getData('karyawan',$where);
 		if ($paket['lengkap']=$this->mdl_pelamar->getSeleksi($id)) {
-
-			$this->load->view('pelamar/prosesLamaran2', $paket);
+			$this->load->view('pelamar/prosesLamaran', $paket);
 		}
 		else
 			$this->load->view('pelamar/prosesLamaran', $paket);

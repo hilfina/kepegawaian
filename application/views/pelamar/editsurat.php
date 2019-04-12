@@ -25,7 +25,6 @@ $this->load->view("header.php");
             </div>
           </div>
       </div>
-    </div>
      <div class="product-status mg-b-15">
             <div class="container-fluid">
         <div class="row">
