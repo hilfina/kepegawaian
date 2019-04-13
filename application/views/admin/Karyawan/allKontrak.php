@@ -99,9 +99,9 @@
                     </td>
                     <td>
                     <?php if(($key->aktif) == 1){ ?>
-                      <i class="fa fa-check"></i> Surat Aktif 
+                      <i class="fa fa-check"></i> file Aktif 
                     <?php }else{ ?>
-                      <i class="fa fa-check"></i> Kadaluarsa 
+                      </i> Kadaluarsa 
                     <?php } ?>
                     </td>
                     <td align="center">
