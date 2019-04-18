@@ -14,6 +14,7 @@ $idku=$this->session->userdata("myId");
               <hr style="border: solid 1px; width: 200px; background-color: black">
             </div>            
           </div><br>          
+
           <?php foreach ($datDir as $key) { 
             if ($key->id_status == "Calon Karyawan") { ?>
               <div class="lulus container-fluid" align="center">
@@ -25,14 +26,14 @@ $idku=$this->session->userdata("myId");
               </div>
             <?php }else { ?>
               <div class="belom container-fluid" align="center">
-                <br><b><font size="2">SELEKSI ADMINISTRASI</font></b><hr style="width: 90%">SEDANG DIPROSES
+                <br><b><font size="2">SELEKSI ADMINISTRASI</font></b><hr style="width: 90%"><?php foreach ($lengkap as $key) { echo $key->tgl_seleksi;  } ?>
               </div> 
             <?php }
           } ?><br>
           <?php foreach ($lengkap as $a) { 
-            if ($a->nilai_kompetensi == "" && $a->id_status == "Calon Karyawan") { ?>
+            if ($a->nilai_kompetensi == "-" && $a->id_status == "Calon Karyawan") { ?>
               <div class="masih container-fluid" align="center">
-                <br><b><font size="2">TES TULIS</font></b><hr style="width: 90%">SEDANG DIPROSES
+                <br><b><font size="2">TES TULIS</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { echo $key->tgl_seleksi;  } ?>
               </div>
             <?php }elseif ($a->nilai_kompetensi == "Lulus") { ?>
               <div class="lulus container-fluid" align="center">
@@ -50,9 +51,9 @@ $idku=$this->session->userdata("myId");
           } ?>          
           <br>
           <?php foreach ($lengkap as $a) { 
-            if ($a->nilai_wawancara == "" && $a->nilai_kompetensi == "Lulus") { ?>
+            if ($a->nilai_wawancara == "-" && $a->nilai_kompetensi == "Lulus") { ?>
               <div class="masih container-fluid" align="center">
-                <br><b><font size="2">TES WAWANCARA</font></b><hr style="width: 90%">SEDANG DIPROSES
+                <br><b><font size="2">TES WAWANCARA</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { echo $key->tgl_seleksi;  } ?>
               </div>
             <?php }elseif ($a->nilai_wawancara == "Lulus") { ?>
               <div class="lulus container-fluid" align="center">
@@ -70,9 +71,9 @@ $idku=$this->session->userdata("myId");
           } ?>          
           <br>
           <?php foreach ($lengkap as $a) { 
-            if ($a->tes_psikologi == "" && $a->nilai_wawancara == "Lulus") { ?>
+            if ($a->tes_psikologi == "-" && $a->nilai_wawancara == "Lulus") { ?>
               <div class="masih container-fluid" align="center">
-                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">SEDANG DIPROSES
+                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { echo $key->tgl_seleksi;  } ?>
               </div>
             <?php }elseif ($a->tes_psikologi == "Lulus") { ?>
               <div class="lulus container-fluid" align="center">
@@ -90,9 +91,9 @@ $idku=$this->session->userdata("myId");
           } ?>          
           <br>
           <?php foreach ($lengkap as $a) { 
-            if ($a->nilai_agama == "" && $a->tes_kesehatan == "" && $a->tes_psikologi == "Lulus") { ?>
+            if ($a->nilai_agama == "-" && $a->tes_kesehatan == "-" && $a->tes_psikologi == "Lulus") { ?>
               <div class="masih container-fluid" align="center">
-                <br><b><font size="2">TES AGAMA DAN KESEHATAN</font></b><hr style="width: 90%">SEDANG DIPROSES
+                <br><b><font size="2">TES AGAMA DAN KESEHATAN</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { echo $key->tgl_seleksi;  } ?>
               </div>
             <?php }elseif ($a->nilai_agama == "Lulus" || $a->tes_kesehatan == "Lulus") { ?>
               <div class="lulus container-fluid" align="center">
@@ -110,21 +111,21 @@ $idku=$this->session->userdata("myId");
           } ?>          
           <br> 
           <?php foreach ($lengkap as $a) { 
-            if ($a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->id_status == "Calon Karyawan") { ?>
+            if ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->id_status == "Calon Karyawan") { ?>
               <div class="masih container-fluid" align="center">
-                <br><b><font size="2">FINALISASI</font></b><hr style="width: 90%">SEDANG DIPROSES
+                <br><b><font size="2">FINALISASI AKHIR</font></b><hr style="width: 90%">SEDANG DIPROSES
               </div>
-            <?php }elseif ($a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->id_status == "Magang") { ?>
+            <?php }elseif ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->id_status == "Magang") { ?>
               <div class="lulus container-fluid" align="center">
-                <br><b><font size="2">FINALISASI</font></b><hr style="width: 90%">LULUS
+                <br><b><font size="2">FINALISASI AKHIR</font></b><hr style="width: 90%">LULUS
               </div>
-            <?php }elseif ($a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->id_status == "Pelamar") { ?>
+            <?php }elseif ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->id_status == "Pelamar") { ?>
               <div class="gagal container-fluid" align="center">
-                <br><b><font size="2">FINALISASI</font></b><hr style="width: 90%">TIDAK LULUS
+                <br><b><font size="2">FINALISASI AKHIR</font></b><hr style="width: 90%">TIDAK LULUS
               </div>
             <?php }else { ?>
               <div class="belom container-fluid" align="center">
-                <br><b><font size="2">FINALISASI</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
+                <br><b><font size="2">FINALISASI AKHIR</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
               </div> 
             <?php }
           } ?>          

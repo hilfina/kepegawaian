@@ -27,10 +27,10 @@ class AdminOri extends CI_Controller {
 		}
 	}
 
-    public function addKontrak(){
+    public function addOri(){
        if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('file','File Orientasi','trim|required');
+            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){
                 $this->load->view('admin/Karyawan/addOri');
@@ -48,28 +48,21 @@ class AdminOri extends CI_Controller {
                 $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
                 $id_karyawan=$data2['id_karyawan'];
-                $gaji=$this->input->post('gaji');
-                $ket=$this->input->post('ket');
                 $tgl_mulai=$this->input->post('tgl_mulai');
                 $tgl_akhir=$this->input->post('tgl_akhir');
-                $no_mou=$this->input->post('no_mou');
-                $this->upload->do_upload('file');
-                $file=$this->upload->data('file_name');
+                $this->upload->do_upload('doku_hadir');
+                $doku_hadir=$this->upload->data('file_name');
                
                 $data= array(
                 'id_karyawan' => $id_karyawan,
-                'gaji' => $gaji,
                 'tgl_mulai' => $tgl_mulai,
                 'tgl_akhir' => $tgl_akhir,
-                'ket' => $ket,
-                'file' => $file,
-                'no_mou' => $no_mou,
-                'aktif' => 1
+                'doku_hadir' => $doku_hadir,
                 );
 
-                $this->mdl_admin->addData('mou_kontrak',$data);
+                $this->mdl_admin->addData('orientasi',$data);
 
-                redirect("AdminKontrak");
+                redirect("adminOri");
                 }
         }
         else{ redirect("login"); } 
@@ -78,56 +71,43 @@ class AdminOri extends CI_Controller {
     public function edit($id){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('no_mou','Nomor Surat Keputusan','trim|required');
+            $this->form_validation->set_rules('tgl_mulai','Tanggal orientasi','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $data['array']=$this->mdl_admin->getKontrakedit($id);
-                $this->load->view('admin/Karyawan/editKontrak',$data);
+                $data['array']=$this->mdl_admin->getOriedit($id);
+                $this->load->view('admin/Karyawan/editOri',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
-                
-                $gaji=$this->input->post('gaji');
-                $ket=$this->input->post('ket');
                 $tgl_mulai=$this->input->post('tgl_mulai');
                 $tgl_akhir=$this->input->post('tgl_akhir');
-                $no_mou=$this->input->post('no_mou');
-                if($_FILES['file']['name'] != '') {
-                    $this->upload->do_upload('file');
-                    $file = $this->upload->data('file_name');
+                if($_FILES['doku_hadir']['name'] != '') {
+                    $this->upload->do_upload('doku_hadir');
+                    $doku_hadir = $this->upload->data('file_name');
                 } else {
-                    $file = $this->input->post('file_old');
+                    $doku_hadir = $this->input->post('file_old');
                 }
-                // $s = $tgl_akhir;
-                // $date = strtotime($s);
-                // $exp = date('d/m/Y', strtotime('+1 day', $date));
 
                 $data= array(
-                'gaji' => $gaji,
                 'tgl_mulai' => $tgl_mulai,
                 'tgl_akhir' => $tgl_akhir,
-                'ket' => $ket,
-                'file' => $file,
-                'no_mou' => $no_mou,
-                'aktif' => 1
+                'doku_hadir' => $doku_hadir,
                 );
 
-                $where = array('id' => $id);
-                $this->mdl_admin->updateData($where,$data,'mou_kontrak');
-                redirect("AdminKontrak");
+                $where = array('id_orientasi' => $id);
+                $this->mdl_admin->updateData($where,$data,'orientasi');
+                redirect("adminOri");
                 }
         }
 
         else{ redirect("login"); } 
     }
     public function del($id){
-        $this->mdl_pelamar->hapusdata('mou_kontrak',$id);
-        redirect("AdminKontrak");
+        $this->mdl_pelamar->hapusdata('orientasi',$id);
+        redirect("adminOri");
     }
 }
 

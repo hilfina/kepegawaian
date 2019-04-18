@@ -6,6 +6,7 @@
   $aktifku=$this->session->userdata("myAktif");
   $statusku=$this->session->userdata("myStatus");
   $profesiku=$this->session->userdata("myProfesi");
+  $finalku=$this->session->userdata("myFinalisasi");
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -201,7 +202,12 @@
                         <li>
                             <a title="Profesi" href="<?php echo site_url('adminProfesi') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Profesi</span></a>
                         </li>
-                        <?php } elseif ($statusku == "Pelamar" && $aktifku == '1') { ?>
+
+
+                        <!--  ADMIN SELESAI -->
+
+
+                        <?php } elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '0') { ?>
                         <li>
                             <?php 
                             if ($profesiku == "Belum") {?>
@@ -215,35 +221,37 @@
                             <?php } ?>
                                 <li><a title="Data Diri" href="<?php echo site_url('pelamar/datasaya') ?>"><span class="educate-icon educate-professor icon-wrap"></span><span class="mini-click-non">Profil Saya</span></a></li>
                                 <li><a title="Data Pendidikan" href="<?php echo site_url('pelamar/datapend') ?>"><span class="educate-icon educate-library icon-wrap"></span><span class="mini-click-non">Data Pendidikan</span></a></li>
-                                <?php if($profesiku != "Kasir" || $profesiku != "Administrasi" || $profesiku != "Pekarya"){?>
-                                <li><a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Surat</span></a></li>
+                                <?php if($profesiku != "Kasir" 
+                                || $profesiku != "Administrasi" 
+                                || $profesiku != "Pekarya"
+                                ){?>
+                                    <li><a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Surat</span></a></li>
                                 <?php } ?>
                             <?php 
-                            if ($profesiku != "Belum") {?>
-                                <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
+                            if ($profesiku != "Belum" ) {?>
+                                <li><a title="Finalisasi" href="<?php echo site_url('pelamar/finalisasi')?>"><span class="fa fa-check-square-o" ></span><span class="mini-click-non"> Finalisasi Data</span></a></li>
                             <?php } ?>
                         </li>
                         
-                    <?php } elseif ($statusku == "Pelamar" && $aktifku == '0') {?>
-                        <li>
-                            <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>"><span class="mini-click-non">Aktivasi Akun</span></a>
-                        </li>
-                        <?php } elseif ($statusku == "Calon Karyawan") { ?>
+
+                        <?php } elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '1') { ?>
+                            <li>
+                                <a title="Home" href="#"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>
+                            </li>
+                        <?php } elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '0') {?>
+                            <li>
+                                <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>"><span class="mini-click-non">Aktivasi Akun</span></a>
+                            </li>
+                        <?php } elseif ($levelku == "Pelamar" && $statusku == "Calon Karyawan") { ?>
                         <li>
                             
                                 <li>
                                     <a title="Home" href="#"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>
                                 </li>
                             
-                                <li><a title="Data Diri" href="<?php echo site_url('pelamar/datasaya') ?>"><span class="educate-icon educate-professor icon-wrap"></span><span class="mini-click-non">Profil Saya</span></a></li>
-                                <li><a title="Data Pendidikan" href="<?php echo site_url('pelamar/datapend') ?>"><span class="educate-icon educate-library icon-wrap"></span><span class="mini-click-non">Data Pendidikan</span></a></li>
-                                <?php if($profesiku != "Kasir" || $profesiku != "Administrasi" || $profesiku != "Pekarya"){?>
-                                <li><a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Surat</span></a></li>
+                                <li><a title="Data Diri" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
                                 <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
-                            <?php } ?>
                         </li>
-                        <?php } elseif ($statusku == "Pelamar Ditolak") { ?>
-                       <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-cli">Proses Lamaran</span></a></li>
                         <?php } elseif ($levelku == "Karyawan")  { ?>
                         <li>
                             <a title="Home" href="#"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>

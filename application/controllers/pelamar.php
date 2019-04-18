@@ -439,6 +439,7 @@ class pelamar extends CI_Controller {
 		);
 		$this->mdl_pelamar->updatedata($where,$data,'karyawan');
 	}
+
 	public function prosesLamar($id)
 	{
 		$where = array( 'id_karyawan' => $id ); 
@@ -448,6 +449,24 @@ class pelamar extends CI_Controller {
 		}
 		else
 			$this->load->view('pelamar/prosesLamaran', $paket);
+	}
+
+	public function finalisasi(){
+		$this->load->view('pelamar/finalisasi');;
+	}
+
+	public function finalisasi2(){
+		$data = array(
+        'finalisasi' => 1,
+        );
+		$id=$this->session->userdata('myId');
+	    $where = array(
+			'id_karyawan' => $id
+		);
+
+	 	$update = $this->mdl_pelamar->updatedata($where,$data,'lowongan');
+	 	$this->session->sess_destroy();
+		redirect('login');
 	}
 }
 

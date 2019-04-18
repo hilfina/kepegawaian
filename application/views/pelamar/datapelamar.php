@@ -182,7 +182,7 @@
                                                 </div>
                                                 <br><br>
                                                 <div class="pdf-single-pro">
-                                                  <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->cv; ?>"> lihat</a>
+                                                  <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->cv; ?>"></a>
                                               </div>
                                             </div>
                                         <?php } ?>

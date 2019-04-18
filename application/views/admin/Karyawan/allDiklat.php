@@ -15,7 +15,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Orientasi Karyawan</span>
+                <li><span class="bread-blod">Data Diklat Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -33,14 +33,14 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Orientasi Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Diklat Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminOri/addOri')?>">
+                <div align="right"><a href="<?php echo site_url('adminGol/addGol')?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
                 <div class=" container-fluid" id="notif">
@@ -69,9 +69,8 @@
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
-                    <th>Status</th>
-                    <th>Periode</th>
-                    <th>File</th>
+                    <th>Golongan</th>
+                    <th>Jam</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -83,24 +82,12 @@
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>
-                    <td><?php echo $key->id_status; ?></td>
-                    <td><?php echo $key->tgl_mulai." - ".$key->tgl_akhir; ?></td>
-                    <td>
-                    <?php if(($key->doku_hadir) != NULL){ ?>
-                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->doku_hadir; ?>" download>
-                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
-                      </a>
-                    <?php }else{ ?>
-                      <font style="color: red">Tidak Ada file</font>
-                    <?php } ?>
-                    </td>
+                    <td><?php echo $key->id_golongan; ?></td>
+                    <td><?php echo substr($key->jam, 0, 2)."/40 jam" ?></td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminOri/edit/"; echo $key->id_orientasi ;?>">
-                        <button class="btn btn-warning waves-effect">edit</button>
-                      </a>
-                      <a href="<?php echo site_url(); echo "/adminOri/del/"; echo $key->id_orientasi;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button class="btn btn-danger waves-effect">hapus</button>
-                      </a>
+                      <a href="<?php echo site_url(); echo "/adminDiklat/diklatDetail/"; echo $key->id_karyawan ;?>">
+                          <button class="btn btn-warning waves-effect waves-light mg-b-15">Detail</button>
+                        </a>
                     </td>
                   </tr>
                 <?php }?>

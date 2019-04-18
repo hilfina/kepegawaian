@@ -41,22 +41,24 @@
             <?php } ?>
             <div align="center">
               <?php foreach ($datDir as $key){ ?>
-              <?php if ($key->id_status == "Pelamar" && $key->id_profesi != "Belum") { ?>
-                <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
-                  <button class="btn btn-success waves-effect mg-b-15" title="TERIMA"><i class="fa fa-check"></i></button>
-                </a>
-                <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                  <button class="btn btn-danger waves-effect mg-b-15" title="TOLAK"><i class="fa fa-times"></i></button>
-                </a>
-              <?php } else{}?>
+                <?php foreach ($datLo as $lo){ ?>
+                <?php if ($key->id_status == "Pelamar" && $key->id_profesi != "Belum" && $lo->finalisasi == '1' ) { ?>
+                  <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
+                    <button class="btn btn-success waves-effect mg-b-15" title="Panggil untuk maju ke tahap tes"><i class="fa fa-check"></i>  Panggil</button>
+                  </a>
+                  <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
+                    <button class="btn btn-danger waves-effect mg-b-15"><i class="fa fa-times"></i> Tolak</button>
+                  </a>
+                <?php }?>
+                <?php } ?>
               <?php } ?>
               <?php foreach ($datSel as $a){ ?>
               <?php if ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-") { ?>
                 <a href="<?php echo site_url(); echo "/adminPelamar/editMagang/";  echo $key->id_karyawan ; ?>">
-                  <button class="btn btn-success waves-effect mg-b-15" title="Lulus tahap finalisasi"><i class="fa fa-check"></i></button>
+                  <button class="btn btn-success waves-effect mg-b-15" title="Terima untuk menjadi karyawan magang"><i class="fa fa-check"></i> Terima</button>
                 </a>
                 <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                  <button class="btn btn-danger waves-effect mg-b-15" title="Gagal tahap finalisasi"><i class="fa fa-times"></i></button>
+                  <button class="btn btn-danger waves-effect mg-b-15"><i class="fa fa-times"></i> Gagal</button>
                 </a>
               <?php } else{}?>
               <?php } ?>
@@ -160,7 +162,7 @@
                     <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                       <div class="pdf-single-pro">
                         <?php foreach ($datLo as $key){?>
-                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->cv; ?>>"></a>
+                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->cv; ?>"></a>
                         <?php }?>
                       </div>
                     </div>
@@ -192,7 +194,7 @@
                                 <th>N A</th>
                                 <th>Tahun</th>
                                 <th>No Ijasah</th>
-                                <th>Ver</th>
+                                <th>Verifikasi</th>
                                 <th>Setting</th>
                               </tr>
                             </thead>
@@ -208,10 +210,10 @@
                                 <td>
                                   <?php 
                                 if(($key->verifikasi) == 1){ ?>
-                                 <i class="fa fa-check" style="color: red" title="TELAH TERVERIFIKASI"></i>
+                                 <i class="fa fa-check"></i> Terverifikasi
                                  <?php }else{ ?>
                                   <a href="<?php echo site_url(); echo "/adminPelamar/verPend/"; echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                                    <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i></i></button>
+                                    <button class="btn btn-success waves-effect mg-b-15" title="Klik untuk memverifikasi"><i class="fa fa-check"></i></i></button>
                                   </a>
                                 <?php } ?>
                                   

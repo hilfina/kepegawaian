@@ -15,7 +15,7 @@ $this->load->view("header.php");
                                 <ul class="breadcome-menu">
                                     <li><a href="#">Data Saya</a> <span class="bread-slash">/</span>
                                     </li>
-                                    <li><span class="bread-blod">Data Surat</span>
+                                    <li><span class="bread-blod">Nilai</span>
                                     </li>
                                 </ul>
                             </div>
@@ -23,8 +23,7 @@ $this->load->view("header.php");
                         <br>
                         <?php foreach ($array as $key){ ?>
                         <div class="alert alert-info">
-                            Selamat ! Anda telah melewati tahap pertama! Tahap berikutnya adalah tahap interview~ 
-                            <br>Tanggal interview Anda adalah sebagai berikut: <b><?php echo $key->tgl_seleksi?></b>
+                            Tanggal tes selanjutnya akan diupdate setiap hari. <br>Berikut tanggal tes anda selanjutnya:  <b><?php echo $key->tgl_seleksi?></b>
                         </div>
                         <?php } ?>
                     </div>

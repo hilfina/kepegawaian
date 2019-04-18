@@ -193,13 +193,19 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from orientasi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
         return $query->result();
     }
-    public function getGolongan(){
-        $query = $this->db->query("SELECT * from jenis_golongan where id_golongan != 'Tidak Ada'");
+
+    public function getOriedit($id){
+        $query = $this->db->query("SELECT * from orientasi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_orientasi = $id");
         return $query->result();
     }
 
-    public function getOriedit($id){
-        $query = $this->db->query("SELECT * from orientasi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+    public function getDiklat(){
+        $query = $this->db->query("SELECT d.id_diklat, k.id_karyawan, k.nik, k.nama, k.id_status, k.id_profesi, k.id_golongan, sum(d.jam) as jam from diklat as d INNER JOIN karyawan as k on k.id_karyawan=d.id_karyawan GROUP by d.id_karyawan");
+        return $query->result();
+    }
+
+    public function getGolongan(){
+        $query = $this->db->query("SELECT * from jenis_golongan where id_golongan != 'Tidak Ada'");
         return $query->result();
     }
 

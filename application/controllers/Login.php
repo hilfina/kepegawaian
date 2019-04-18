@@ -45,6 +45,7 @@ class Login extends CI_Controller {
               	$idk=mysqli_fetch_array(mysqli_query($konek, "select id_karyawan from login where username = '$username'"));
               	$mid =$idk['id_karyawan'];
 	            $cariData=mysqli_fetch_array(mysqli_query($konek, "select * from karyawan where id_karyawan = '$mid'"));
+	            $cariData2=mysqli_fetch_array(mysqli_query($konek, "select * from lowongan where id_karyawan = '$mid'"));
 	            // jika ditemukan, maka create session
 	            if ($checking != FALSE) {
 	                foreach ($checking as $apps) {
@@ -58,6 +59,7 @@ class Login extends CI_Controller {
 	                        'myAktif' => $apps->aktif,
 	                        'myStatus' => $cariData['id_status'],
 	                        'myProfesi' => $cariData['id_profesi'],
+	                        'myFinalisasi' => $cariData2['finalisasi'],
 	                    );
 	                    //set session userdata
 	                    $this->session->set_userdata($session_data);

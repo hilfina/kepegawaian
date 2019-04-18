@@ -188,7 +188,7 @@ class AdminPelamar extends CI_Controller {
         $this->email->from($config['smtp_user']);
         $this->email->to($dataa['email']);
         $this->email->subject("Notifikasi");
-        $this->email->message("Maaf, anda gagal dalam seleksi di RSIA");
+        $this->email->message("Maaf, anda gagal dalam seleksi di RSIA, silahkan mencoba pada peluang karir selanjutnya");
         $this->email->send();
         
         $where = array( 'id_karyawan' => $id ); 

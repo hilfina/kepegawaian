@@ -92,7 +92,9 @@
                     <td><?php echo $key->ket; ?></td>
                     <td>
                     <?php if(($key->file) != NULL){ ?>
-                      <font style="color: blue">File Tersedia</font>
+                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                      </a>
                     <?php }else{ ?>
                       <font style="color: red">Tidak Ada file</font>
                     <?php } ?>

@@ -88,7 +88,9 @@
                     <td><?php echo $key->mulai." - ".$key->akhir; ?></td>
                     <td>
                     <?php if(($key->alamat_sk) != NULL){ ?>
-                      <font style="color: blue">File Tersedia</font>
+                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
+                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                      </a>
                     <?php }else{ ?>
                       <font style="color: red">Tidak Ada file</font>
                     <?php } ?>
@@ -106,10 +108,6 @@
                       </a>
                       <a href="<?php echo site_url(); echo "/adminStatus/del/"; echo $key->id;?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                         <button class="btn btn-danger waves-effect">hapus</button>
-                      </a>
-                      
-                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
-                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh</button>
                       </a>
 
                     </td>

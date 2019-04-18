@@ -15,7 +15,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Orientasi Karyawan</span>
+                <li><span class="bread-blod">Data Diklat Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -33,14 +33,14 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Orientasi Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Diklat Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminOri/addOri')?>">
+                <div align="right"><a href="<?php echo site_url('adminBerkala/addBerkala')?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
                 <div class=" container-fluid" id="notif">
@@ -66,11 +66,12 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>NIK</th>
-                    <th>Nama Karyawan</th>
-                    <th>Profesi</th>
-                    <th>Status</th>
-                    <th>Periode</th>
+                    <th>Nomor Sertifikat</th>
+                    <th>Nama Diklat</th>
+                    <th>Jenis Diklat</th>
+                    <th>Masa Berlaku</th>
+                    <th>Tahun</th>
+                    <th>Jam</th>
                     <th>File</th>
                     <th>Pilihan</th>
                   </tr>
@@ -80,14 +81,15 @@
                 <?php foreach ($array as $key) { ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
-                    <td><?php echo $key->nik;?></td>
-                    <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_profesi; ?></td>
-                    <td><?php echo $key->id_status; ?></td>
+                    <td><?php echo $key->nomor_sertif;?></td>
+                    <td><?php echo $key->nama_diklat; ?></td>
+                    <td><?php echo $key->jenis_diklat; ?></td>
                     <td><?php echo $key->tgl_mulai." - ".$key->tgl_akhir; ?></td>
+                    <td><?php echo $key->tahun; ?></td>
+                    <td><?php echo $key->jam; ?></td>
                     <td>
-                    <?php if(($key->doku_hadir) != NULL){ ?>
-                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->doku_hadir; ?>" download>
+                    <?php if(($key->file) != NULL){ ?>
+                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
                         <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
                       </a>
                     <?php }else{ ?>
@@ -95,10 +97,10 @@
                     <?php } ?>
                     </td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminOri/edit/"; echo $key->id_orientasi ;?>">
+                      <a href="<?php echo site_url(); echo "/adminDiklat/edit/"; echo $key->id_diklat ;?>">
                         <button class="btn btn-warning waves-effect">edit</button>
                       </a>
-                      <a href="<?php echo site_url(); echo "/adminOri/del/"; echo $key->id_orientasi;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                      <a href="<?php echo site_url(); echo "/adminDiklat/del/"; echo $key->id_diklat;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                         <button class="btn btn-danger waves-effect">hapus</button>
                       </a>
                     </td>
