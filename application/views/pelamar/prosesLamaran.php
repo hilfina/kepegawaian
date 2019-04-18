@@ -30,7 +30,7 @@ $idku=$this->session->userdata("myId");
             <?php }
           } ?><br>
           <?php foreach ($lengkap as $a) { 
-            if ($a->nilai_kompetensi == "" && $a->id_status == "Calon Karyawan") { ?>
+            if ($a->nilai_kompetensi == "-" && $a->id_status == "Calon Karyawan") { ?>
               <div class="masih container-fluid" align="center">
                 <br><b><font size="2">TES TULIS</font></b><hr style="width: 90%">SEDANG DIPROSES
               </div>
@@ -50,7 +50,7 @@ $idku=$this->session->userdata("myId");
           } ?>          
           <br>
           <?php foreach ($lengkap as $a) { 
-            if ($a->nilai_wawancara == "" && $a->nilai_kompetensi == "Lulus") { ?>
+            if ($a->nilai_wawancara == "-" && $a->nilai_kompetensi == "Lulus") { ?>
               <div class="masih container-fluid" align="center">
                 <br><b><font size="2">TES WAWANCARA</font></b><hr style="width: 90%">SEDANG DIPROSES
               </div>
@@ -70,7 +70,7 @@ $idku=$this->session->userdata("myId");
           } ?>          
           <br>
           <?php foreach ($lengkap as $a) { 
-            if ($a->tes_psikologi == "" && $a->nilai_wawancara == "Lulus") { ?>
+            if ($a->tes_psikologi == "-" && $a->nilai_wawancara == "Lulus") { ?>
               <div class="masih container-fluid" align="center">
                 <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">SEDANG DIPROSES
               </div>
@@ -90,7 +90,7 @@ $idku=$this->session->userdata("myId");
           } ?>          
           <br>
           <?php foreach ($lengkap as $a) { 
-            if ($a->nilai_agama == "" && $a->tes_kesehatan == "" && $a->tes_psikologi == "Lulus") { ?>
+            if ($a->nilai_agama == "-" && $a->tes_kesehatan == "-" && $a->tes_psikologi == "Lulus") { ?>
               <div class="masih container-fluid" align="center">
                 <br><b><font size="2">TES AGAMA DAN KESEHATAN</font></b><hr style="width: 90%">SEDANG DIPROSES
               </div>
@@ -110,15 +110,15 @@ $idku=$this->session->userdata("myId");
           } ?>          
           <br> 
           <?php foreach ($lengkap as $a) { 
-            if ($a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->id_status == "Calon Karyawan") { ?>
+            if ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->id_status == "Calon Karyawan") { ?>
               <div class="masih container-fluid" align="center">
                 <br><b><font size="2">FINALISASI</font></b><hr style="width: 90%">SEDANG DIPROSES
               </div>
-            <?php }elseif ($a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->id_status == "Magang") { ?>
+            <?php }elseif ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->id_status == "Magang") { ?>
               <div class="lulus container-fluid" align="center">
                 <br><b><font size="2">FINALISASI</font></b><hr style="width: 90%">LULUS
               </div>
-            <?php }elseif ($a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->nilai_agama != "" && $a->id_status == "Pelamar") { ?>
+            <?php }elseif ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->id_status == "Pelamar") { ?>
               <div class="gagal container-fluid" align="center">
                 <br><b><font size="2">FINALISASI</font></b><hr style="width: 90%">TIDAK LULUS
               </div>

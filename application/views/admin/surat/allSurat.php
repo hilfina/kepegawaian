@@ -75,6 +75,7 @@
                     <th>Status</th>
                     <th>Nomor Surat</th>
                     <th>Jenis Surat</th>
+                    <th>skrg</th>
                     <th>Tanggal Berlaku</th>
                     <th>Keaktifan</th>
                     <th>Aksi</th>
@@ -93,11 +94,11 @@
                         <td><?php echo $key->nama_surat; ?></td>
                         <td><?php echo date('d M Y', strtotime($key->tgl_mulai)); echo " - "; echo date('d M Y', strtotime($key->tgl_akhir)); ?></td>
                         <td>
-                        <?php if(date('d-m-y') <= date('d-m-y', strtotime($key->tgl_akhir)) && date('d-m-y') >= date('d-m-y', strtotime($key->tgl_mulai))){ ?>
+                        <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
                           <i class="fa fa-check"></i> Surat Aktif 
-                        <?php }elseif(date('d-m-y') <= date('d-m-y', strtotime($key->tgl_mulai))){ ?>
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
                           <i class="fa fa-check"></i> Belum Aktif
-                        <?php }else{ ?>
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) <= strtotime(date('Y-m-d'))){ ?>
                           <i class="fa fa-times"></i> Kadaluarsa 
                         <?php } ?>
                         </td>
