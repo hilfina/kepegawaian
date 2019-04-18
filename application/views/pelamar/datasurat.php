@@ -21,9 +21,6 @@ $this->load->view("header.php");
                             </div>
                         </div>
                         <br>
-                        <div class="alert alert-info">
-                            Perhatian! Data surat harus diisi apabila anda mendaftar sebagai Dokter, Apoteker, Fisioterapis dan Perawat!
-                        </div>
                     </div>
                 </div>
             </div>
