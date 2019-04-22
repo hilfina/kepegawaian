@@ -15,7 +15,7 @@ $this->load->view("header.php");
                                 <ul class="breadcome-menu">
                                     <li><a href="#">Karyawan</a> <span class="bread-slash">/</span>
                                     </li>
-                                    <li><span class="bread-blod">Data Diklat</span>
+                                    <li><span class="bread-blod">Data Kredensial</span>
                                     </li>
                                 </ul>
                             </div>
@@ -34,7 +34,7 @@ $this->load->view("header.php");
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap">
-                            <h4>Data Diklat</h4>
+                            <h4>Data Kredensial</h4>
                             <div class="add-product">
                                 <a href="<?php echo site_url('karyawan/addkew');?>">Tambah Dokumen</a>
                             </div>
@@ -51,11 +51,10 @@ $this->load->view("header.php");
                                         <th>No</th>
                                         <th>Tanggal Pengajuan</th>
                                         <th>File Pengajuan</th>
-                                        <th>Penilaian</th>
-                                        <th>Tanggal Penilaian</th>
-                                        <th>File Penilaian</th>
-                                        <th>Finalisasi</th>
-                                        <th>Tanggal Finalisasi</th>
+                                        <th>Kredensial</th>
+                                        <th>Tanggal Penugasan Klinis</th>
+                                        <th>Tanggal Berakhir</th>
+                                        <th>File Penugasan Klinis</th>
                                         <th>Aksi</th>
                                     </tr>
                                     <?php $no = 1 ?>
@@ -72,6 +71,7 @@ $this->load->view("header.php");
                                         </td>
                                         <td><?php echo $key->penilaian; ?></td>
                                         <td><?php echo $key->tgl_penilaian; ?></td>
+                                        <td><?php echo $key->tgl_finalisasi; ?></td>
                                         <td>
                                             <?php if(($key->doku_penilaian) != NULL) {?>
                                              <font style="color: blue">File Tersedia</font>
@@ -79,8 +79,6 @@ $this->load->view("header.php");
                                               <font style="color: red">Tidak Ada file</font>
                                             <?php } ?>
                                         </td>
-                                        <td><?php echo $key->finalisasi; ?></td>
-                                        <td><?php echo $key->tgl_finalisasi; ?></td>
                                         <td>
                                         
                                         <a href="<?php echo site_url('karyawan/editkew/').$key->id_kewenangan ?>">
