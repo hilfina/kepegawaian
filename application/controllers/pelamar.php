@@ -15,7 +15,10 @@ class pelamar extends CI_Controller {
 		$this->load->library('form_validation','image_lib');
 		$this->load->library('session');
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 49576eb... Revert "SubhanAllah"
 		$this->load->library('pdf');
 
 >>>>>>> parent of 49576eb... Revert "SubhanAllah"
@@ -560,8 +563,11 @@ class pelamar extends CI_Controller {
 		}else{redirect("login");}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 =======
+=======
+>>>>>>> parent of 49576eb... Revert "SubhanAllah"
 
 	public function menucetak(){
 		$this->load->view('pelamar/cetak');;
@@ -594,6 +600,9 @@ class pelamar extends CI_Controller {
         }
         $pdf->Output();
     }
+<<<<<<< HEAD
+>>>>>>> parent of 49576eb... Revert "SubhanAllah"
+=======
 >>>>>>> parent of 49576eb... Revert "SubhanAllah"
 }
 
