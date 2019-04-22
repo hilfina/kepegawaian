@@ -40,7 +40,7 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url(); echo "/admin/addsipstr/";?>">
+                <div align="right"><a href="<?php echo site_url(); echo "/admin/addsurat/";?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a>
                 </div>
@@ -75,7 +75,6 @@
                     <th>Status</th>
                     <th>Nomor Surat</th>
                     <th>Jenis Surat</th>
-                    <th>skrg</th>
                     <th>Tanggal Berlaku</th>
                     <th>Keaktifan</th>
                     <th>Aksi</th>
@@ -102,9 +101,14 @@
                           <i class="fa fa-times"></i> Kadaluarsa 
                         <?php } ?>
                         </td>
-                        <td><a href="<?php echo site_url(); echo "/admin/delsurat/"; echo $key->id_sipstr;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button class="btn btn-danger waves-effect">hapus</button>
-                      </a></td>
+                        <td>
+                          <a href="<?php echo site_url(); echo "/admin/editsurat/"; echo $key->id_sipstr;?>">
+                            <button class="btn btn-success waves-effect">Edit</button>
+                          </a>
+                          <a href="<?php echo site_url(); echo "/admin/delsurat/"; echo $key->id_sipstr;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                            <button class="btn btn-warning waves-effect">Hapus</button>
+                          </a>
+                        </td>
                     </tr>
                 <?php }?>
                 </tbody>

@@ -19,7 +19,7 @@ class AdminRiwayat extends CI_Controller {
 		{
             
 			$paket['array']=$this->mdl_admin->getRiwayat();
-            $this->load->view('admin/Karyawan/allRiwayat',$paket);
+            $this->load->view('admin/Karyawan/Riwayat/Penempatan/allRiwayat',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -34,7 +34,7 @@ class AdminRiwayat extends CI_Controller {
             if($this->form_validation->run()==FALSE){
 
                 $data['array']=$this->mdl_admin->getProfesi();
-                $this->load->view('admin/Karyawan/addRiwayat',$data);
+                $this->load->view('admin/Karyawan/Riwayat/Penempatan/addRiwayat',$data);
             }else{
                 $konek = mysqli_connect("localhost","root","","kepegawaian");
                 $a=$this->input->post('nik');
@@ -72,12 +72,12 @@ class AdminRiwayat extends CI_Controller {
     public function edit($id){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('ruangan','Penempatan','trim|required');
+            $this->form_validation->set_rules('nik','nomor Induk Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){
                 $data['datRi']=$this->mdl_admin->getEditRi($id);
                 $data['array']=$this->mdl_admin->getProfesi();
-                $this->load->view('admin/Karyawan/editRiwayat',$data);
+                $this->load->view('admin/Karyawan/Riwayat/Penempatan/editRiwayat',$data);
             }else{
                 $konek = mysqli_connect("localhost","root","","kepegawaian");
                 $this->input->post('nik');

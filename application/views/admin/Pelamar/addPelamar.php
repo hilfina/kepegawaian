@@ -1,10 +1,4 @@
-<?php 
-  $this->load->view('./header');
-  $levelku=$this->session->userdata("myLevel");
-  $namaku=$this->session->userdata("myLongName");
-  $emailku=$this->session->userdata("myEmail");
-?>
-<br>
+<?php  $this->load->view('./header'); ?><<br>
  <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">
@@ -44,7 +38,7 @@
           <table width="100%">
             
           <tr>
-            <td><label form-control-label">Nomor KTP</label></td>
+            <td><label form-control-label>Nomor KTP</label></td>
             <td style="height: 50px" width="70%">
               <div class="col-lg-12">
                 <input name="no_ktp" type="text" class="form-control" placeholder="Nomor KTP (Kartu Tanda Penduduk)">
@@ -52,7 +46,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Nama Pelamar</label></td>
+            <td><label form-control-label>Nama Pelamar</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="nama" type="text" class="form-control" placeholder="Nama Pelamar">
@@ -60,7 +54,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Alamat Lengkap</label></td>
+            <td><label form-control-label>Alamat Lengkap</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="alamat" type="text" class="form-control" placeholder="Alamat Lengkap">
@@ -68,7 +62,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Nomor Telepon</label></td>
+            <td><label form-control-label>Nomor Telepon</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="no_telp" type="text" class="form-control" placeholder="Nomor Telepon">
@@ -76,7 +70,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Email</label></td>
+            <td><label form-control-label>Email</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="email" type="text" class="form-control" placeholder="Email">
@@ -84,7 +78,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Pendidikan Akhir</label></td>
+            <td><label form-control-label>Pendidikan Akhir</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="pendidikan" type="text" class="form-control" placeholder="Nama Institusi">
@@ -92,7 +86,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Profesi Yang Dipilih</label></td>
+            <td><label form-control-label>Profesi Yang Dipilih</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <select  class="form-control" name="id_profesi">

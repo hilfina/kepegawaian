@@ -1,9 +1,4 @@
-<?php 
-  $this->load->view('./header');
-  $levelku=$this->session->userdata("myLevel");
-  $namaku=$this->session->userdata("myLongName");
-  $emailku=$this->session->userdata("myEmail");
-?><br>
+<?php  $this->load->view('./header'); ?><br>
  <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">
@@ -82,8 +77,8 @@
                     <td><?php echo $key->id_golongan; ?></td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminKaryawan/karyawanDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-warning waves-effect waves-light mg-b-15">Detail</button>
-                        </a>
+                        <button class="btn btn-warning waves-effect waves-light mg-b-15">Detail</button>
+                      </a>
                     </td>
                   </tr>
                 <?php }?>

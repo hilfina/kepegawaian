@@ -1,8 +1,4 @@
-
-<?php 
-$this->load->view("header.php");
-?>
-<br>
+<?php  $this->load->view('./header'); ?><<br>
 <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">

@@ -19,7 +19,7 @@ class AdminGol extends CI_Controller {
 		if($this->mdl_admin->logged_id())
 		{
 			$paket['array']=$this->mdl_admin->getGol();
-            $this->load->view('admin/Karyawan/allGolongan',$paket);
+            $this->load->view('admin/Karyawan/riwayat/golongan/allGolongan',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -34,7 +34,7 @@ class AdminGol extends CI_Controller {
             if($this->form_validation->run()==FALSE){
 
                 $data['array']=$this->mdl_admin->getAlldata('jenis_golongan');
-                $this->load->view('admin/Karyawan/addGol',$data);
+                $this->load->view('admin/Karyawan/riwayat/golongan/addGol',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx}png';
@@ -91,7 +91,7 @@ class AdminGol extends CI_Controller {
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getGoledit($id);
                 $data['array2']=$this->mdl_admin->getAlldata('golongan');
-                $this->load->view('admin/Karyawan/editGol',$data);
+                $this->load->view('admin/Karyawan/riwayat/golongan/editGol',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -131,9 +131,13 @@ class AdminGol extends CI_Controller {
 
         else{ redirect("login"); } 
     }
-    public function del($id){
-        $this->mdl_pelamar->hapusdata('golongan',$id);
-        redirect("adminGol");
+    public function del($id)
+    {
+        if($this->mdl_admin->logged_id()){
+            $where = array('id' => $id);
+            $this->mdl_pelamar->hapusdata('golongan',$where);
+            redirect("adminGol");
+        }else{ redirect("login"); } 
     }
 }
 

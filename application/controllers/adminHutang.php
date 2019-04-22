@@ -20,7 +20,7 @@ class AdminHutang extends CI_Controller {
 		if($this->mdl_admin->logged_id())
 		{
 			$paket['array']=$this->mdl_admin->getHutang();
-            $this->load->view('admin/Karyawan/allHutang',$paket);
+            $this->load->view('admin/Karyawan/mou/hutang/allHutang',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -33,7 +33,7 @@ class AdminHutang extends CI_Controller {
             $this->form_validation->set_rules('no_mou','Nomor Surat MOU','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/addhutang');
+                $this->load->view('admin/Karyawan/mou/hutang/addhutang');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx}png';
@@ -82,7 +82,7 @@ class AdminHutang extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getHutangedit($id);
-                $this->load->view('admin/Karyawan/editHutang',$data);
+                $this->load->view('admin/Karyawan/mou/hutang/editHutang',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';

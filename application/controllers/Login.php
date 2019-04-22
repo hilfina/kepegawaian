@@ -142,6 +142,7 @@ class Login extends CI_Controller {
 
 	    //DATA KARYAWAN	
 	    $data1 = array(
+	    		'id_karyawan'=>$id_karyawan,
 	            'nama'=>$nama,
 	            'no_ktp'=>$no_ktp,
 	            'email'=>$email,

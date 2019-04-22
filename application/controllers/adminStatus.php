@@ -22,7 +22,7 @@ class AdminStatus extends CI_Controller {
 		{
             
 			$paket['array']=$this->mdl_admin->getAllStatus();
-            $this->load->view('admin/Karyawan/allStatus',$paket);
+            $this->load->view('admin/Karyawan/riwayat/status/allStatus',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -37,7 +37,7 @@ class AdminStatus extends CI_Controller {
             if($this->form_validation->run()==FALSE){
 
                 $data['array']=$this->mdl_admin->getJenStatus();
-                $this->load->view('admin/Karyawan/addStatus',$data);
+                $this->load->view('admin/Karyawan/riwayat/status/addStatus',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx}png';
@@ -105,7 +105,7 @@ class AdminStatus extends CI_Controller {
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getStatus($id);
                 $data['array2']=$this->mdl_admin->getJenStatus();
-                $this->load->view('admin/Karyawan/editStatus',$data);
+                $this->load->view('admin/Karyawan/riwayat/status/editStatus',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -153,10 +153,12 @@ class AdminStatus extends CI_Controller {
         else{ redirect("login"); } 
     }
     public function del($id){
-        $this->mdl_pelamar->hapusdata('status',$id);
-        redirect("adminStatus");
+        if($this->mdl_admin->logged_id()){
+            $where = array('id'=>$id);
+           $this->mdl_pelamar->hapusdata('status',$where);
+            redirect("adminStatus");
+        }else{ redirect("login"); } 
     }
-
 }
 
 /* End of file admin.php */

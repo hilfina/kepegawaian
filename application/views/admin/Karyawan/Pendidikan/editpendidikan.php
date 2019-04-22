@@ -1,8 +1,4 @@
-
-<?php 
-$this->load->view("header.php");
-?>
-<br>
+<?php  $this->load->view('./header'); ?><br>
 <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">
@@ -116,9 +112,9 @@ $this->load->view("header.php");
                       </div>
                       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <div class="input-daterange input-group" id="datepicker">
-                          <input type="text" class="form-control" name="mulai" value="<?php echo $key->mulai;?>" />
+                          <input type="text" class="form-control" name="mulai" value="<?php echo $key->tgl_mulai;?>" />
                           <span class="input-group-addon">hingga</span>
-                          <input type="text" class="form-control" name="akhir" value="<?php echo $key->akhir;?>" />
+                          <input type="text" class="form-control" name="akhir" value="<?php echo $key->tgl_akhir;?>" />
                         </div>
                       </div>
                     </div>

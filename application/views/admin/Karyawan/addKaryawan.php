@@ -1,10 +1,4 @@
-<?php 
-  $this->load->view('./header');
-  $levelku=$this->session->userdata("myLevel");
-  $namaku=$this->session->userdata("myLongName");
-  $emailku=$this->session->userdata("myEmail");
-?>
-<br>
+<?php  $this->load->view('./header'); ?><br>
  <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">
@@ -32,17 +26,16 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="sparkline13-list">
-          <br>
+        <div class="sparkline13-list"> <br>
           <div class="sparkline13-hd">
-              <div class="main-sparkline13-hd" align="center">
-                <h1> Tambah Data <span class="table-project-n">Karyawan</span></h1>
-              </div>
-              <br>
-                <div class="container-fluid" style="padding-right: 20%; padding-left: 10%;"><?php echo validation_errors('<div class="alert alert-danger fade-show">','</div>'); ?></div>
-              </div>
-          
-        <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
+            <div class="main-sparkline13-hd" align="center">
+              <h1> Tambah Data <span class="table-project-n">Karyawan</span></h1>
+            </div> <br>
+            <div class="container-fluid" style="padding-right: 20%; padding-left: 10%;">
+              <?php echo validation_errors('<div class="alert alert-danger fade-show">','</div>'); ?>
+            </div>
+          </div>
+          <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <form action="<?php echo site_url();?>/adminKaryawan/addKaryawan/" enctype="multipart/form-data" method="POST">
           <table width="100%">
             <tr>
@@ -143,6 +136,5 @@
     </div>
   </div>
 </div>
-
 
 <?php $this->load->view('./footer'); ?>

@@ -17,14 +17,10 @@ class AdminOri extends CI_Controller {
 
 	public function index()
 	{
-		if($this->mdl_admin->logged_id())
-		{
+		if($this->mdl_admin->logged_id()) {
 			$paket['array']=$this->mdl_admin->getOri();
-            $this->load->view('admin/Karyawan/allOri',$paket);
-		}else{
-			//jika session belum terdaftar, maka redirect ke halaman login
-			redirect("login");
-		}
+            $this->load->view('admin/Karyawan/Orientasi/allOri',$paket);
+		}else{ redirect("login"); }
 	}
 
     public function addOri(){
@@ -33,7 +29,7 @@ class AdminOri extends CI_Controller {
             $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/addOri');
+                $this->load->view('admin/Karyawan/Orientasi/addOri');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -75,7 +71,7 @@ class AdminOri extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getOriedit($id);
-                $this->load->view('admin/Karyawan/editOri',$data);
+                $this->load->view('admin/Karyawan/Orientasi/editOri',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';

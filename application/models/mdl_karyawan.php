@@ -3,39 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mdl_karyawan extends CI_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('mdl_admin');
-        $this->load->model('mdl_home');
-        $this->load->model('mdl_login');
-        $this->load->model('mdl_pelamar');
-        $this->load->helper('url','form','file');
-        $this->load->library('form_validation','image_lib');
-        $this->load->library('session');
-    }
-	//fungsi cek session
-    function logged_id()
-    {
-        return $this->session->userdata('myId');
-    }
-
-	//fungsi check login
-    function check_login($table, $field1, $field2)
-    {
-        $this->db->select('*');
-        $this->db->from($table);
-        $this->db->where($field1);
-        $this->db->where($field2);
-        $this->db->limit(1);
-        $query = $this->db->get();
-        if ($query->num_rows() == 0) {
-            return FALSE;
-        } else {
-            return $query->result();
-        }
-    }
-
     function updateData($where,$data,$table){
         $this->db->where($where);
         $this->db->update($table,$data);
@@ -55,7 +22,14 @@ class Mdl_karyawan extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+    function delSurat($id){
+        $this->db->query("DELETE FROM sip_str where id_sipstr = '$id'");
+    }
 
+    function getDetailSur($id){
+        $query = $this->db->query("SELECT * FROM karyawan as k inner join sip_str as s on k.id_karyawan = s.id_karyawan inner join jenis_surat as j on s.id_surat = j.id_surat where id_sipstr = '$id'");
+        return $query->result();
+    }
 
     public function getKaryawan($id){
         $query = $this->db->query("SELECT * FROM karyawan where id_karyawan = '$id'");
@@ -109,6 +83,14 @@ class Mdl_karyawan extends CI_Model
 
     public function getKew($id){
         $query = $this->db->query("SELECT * from kewenangan_klinis where id_karyawan = '$id'");
+        return $query->result();
+    }
+    public function getaDiklat(){//untuk menampilkan data diklat di admin
+        $query = $this->db->query("SELECT * from diklat as d INNER JOIN karyawan as k on k.id_karyawan=d.id_karyawan GROUP by d.id_karyawan");
+        return $query->result();
+    }
+    public function detDiklat($id){//untuk menampilkan data detail diklat di admin
+        $query = $this->db->query("SELECT * from diklat as d INNER JOIN karyawan as k on k.id_karyawan=d.id_karyawan WHERE id_diklat = '$id'");
         return $query->result();
     }
 }

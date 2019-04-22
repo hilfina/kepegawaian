@@ -1,10 +1,12 @@
-<?php 
-	$this->load->view('./header.php');
-	$levelku=$this->session->userdata("myLevel");
-	$namaku=$this->session->userdata("myLongName");
-	$emailku=$this->session->userdata("myEmail");
-	$idku=$this->session->userdata("myId");
- ?>
+<?php $this->load->view('./header.php');
+  $levelku=$this->session->userdata("myLevel");
+  $idku=$this->session->userdata("myId");
+  $namaku=$this->session->userdata("myLongName");
+  $emailku=$this->session->userdata("myEmail");
+  $aktifku=$this->session->userdata("myAktif");
+  $statusku=$this->session->userdata("myStatus");
+  $profesiku=$this->session->userdata("myProfesi");
+  $finalku=$this->session->userdata("myFinalisasi");?>
  <br>
     <div class="breadcome-area">
       <br>
@@ -19,7 +21,7 @@
                                 <ul class="breadcome-menu">
                                     <li><a href="#">Data Saya</a> <span class="bread-slash">/</span>
                                     </li>
-                                    <li><span class="bread-blod">Data Diri</span>
+                                    <li><span class="bread-blod"><?php echo $levelku;?></span>
                                     </li>
                                 </ul>
                             </div>
@@ -83,28 +85,28 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
-                                                     <label form-control-label">Nomor KTP</label>
+                                                     <label form-control-label>Nomor KTP</label>
                                                         <input name="no_ktp" type="text" class="form-control" placeholder="Nomor KTP" value="<?php echo $key->no_ktp; ?>">
                                                     </div>
                                                     <div class="form-group">
-                                                     <label form-control-label">Nomor BPJS</label>
+                                                     <label form-control-label>Nomor BPJS</label>
                                                         <input name="no_bpjs" type="text" class="form-control" placeholder="Nomor BPJS" value="<?php echo $key->no_bpjs; ?>">
                                                     </div>
                                                     <div class="form-group">
-                                                     <label form-control-label">Nama Lengkap</label>
+                                                     <label form-control-label>Nama Lengkap</label>
                                                         <input name="nama" type="text" class="form-control" placeholder="Nama Lengkap" value="<?php echo $key->nama; ?>">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label form-control-label">Alamat</label>
+                                                        <label form-control-label>Alamat</label>
                                                         <input name="alamat" type="text" class="form-control" placeholder="Alamat" value="<?php echo $key->alamat; ?>">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label form-control-label">Nomor Telepon</label>
+                                                        <label form-control-label>Nomor Telepon</label>
                                                         <input name="no_telp" type="number" class="form-control" placeholder="Nama Lengkap" value="<?php echo $key->no_telp; ?>">
                                                     </div>
                                                     
                                                     <div class="form-group">
-                                                        <label form-control-label">Email</label>
+                                                        <label form-control-label>Email</label>
                                                         <input name="email" type="text" class="form-control" placeholder="Email" value="<?php echo $key->email; ?>">
                                                     </div>
                                                     <br>
@@ -119,7 +121,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label form-control-label">Pendidikan Terakhir</label>
+                                                        <label form-control-label>Pendidikan Terakhir</label>
                                                         <select class="form-control" name="pend_akhir">
                                                           <option><?php echo $key->pend_akhir; ?></option>
                                                           <option>Opsi Pilihan :</option>
@@ -132,7 +134,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label form-control-label">Nilai Akhir</label>
+                                                        <label form-control-label>Nilai Akhir</label>
                                                         <input name="nilai_akhir" type="text" class="form-control"  value="<?php echo $key->nilai_akhir; ?>">
                                                     </div>
                                                   <div class="form-group row">
