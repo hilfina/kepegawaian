@@ -131,6 +131,7 @@ class AdminGol extends CI_Controller {
 
         else{ redirect("login"); } 
     }
+<<<<<<< HEAD
     public function del($id)
     {
         if($this->mdl_admin->logged_id()){
@@ -138,6 +139,12 @@ class AdminGol extends CI_Controller {
             $this->mdl_pelamar->hapusdata('golongan',$where);
             redirect("adminGol");
         }else{ redirect("login"); } 
+=======
+    public function del($id){
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata('golongan',$where);
+        redirect("adminGol");
+>>>>>>> parent of 49576eb... Revert "SubhanAllah"
     }
 }
 

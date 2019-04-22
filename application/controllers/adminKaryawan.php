@@ -60,13 +60,12 @@ class AdminKaryawan extends CI_Controller {
                 'no_ktp' => $no_ktp,
                 'no_telp' => $no_telp,
                 'email' => $email,
-                'foto' => 'profile.png',
                 'alamat' => $alamat
                 );
 
                 $this->mdl_admin->addData('karyawan',$dataKaryawan);
                  $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where no_ktp = '$no_ktp'"));
-                $dataLogin=array('username'=>$email, 'password'=>md5($no_ktp), 'level'=>'Karyawan', 'aktif'=>1, 'id_karyawan'=>$cariId['id_karyawan']);
+                $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=>'Karyawan', 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
                 $dataRiwayat=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
                 $dataStatus=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
                 $dataGolongan=array('id_karyawan'=>$cariId['id_karyawan'], 'id_golongan'=>$id_golongan, 'mulai' => $tgl);
@@ -116,6 +115,7 @@ class AdminKaryawan extends CI_Controller {
             $paket['datSta']=$this->mdl_admin->getJenStatus();
             $paket['datPen']=$this->mdl_admin->getData('pendidikan',$where);
             $paket['datSur']=$this->mdl_admin->cariJenisSurat($id);
+            $paket['log']=$this->mdl_admin->getData('login',$id);
             $this->load->view('admin/Karyawan/detailKaryawan',$paket);
         }else{ redirect("login"); } 
     }
@@ -130,6 +130,8 @@ class AdminKaryawan extends CI_Controller {
             $alamat=$this->input->post('alamat');
             $no_telp=$this->input->post('no_telp');
             $email=$this->input->post('email');
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
             $id_status=$this->input->post('id_status');
             $id_profesi=$this->input->post('id_profesi');
             $id_golongan=$this->input->post('id_golongan');
@@ -167,7 +169,10 @@ class AdminKaryawan extends CI_Controller {
                 'id_profesi' => $idPro['id_profesi'],
                 'id_golongan' => $id_golongan
                 );
-
+             $datalogin = array(
+                'username' => $username,
+                'password' => $password,
+                );
              //jika profesi yg dipilih berubah atau ruangan penempatannya berubah
             if ($riwayatm['id_profesi'] != $idPro['id_profesi'] || $riwayatm['ruangan'] != $ruangan) {
                 //jika tanggal di riwayat berbeda dengan hari waktu perubahab
@@ -212,6 +217,7 @@ class AdminKaryawan extends CI_Controller {
             }else{}
             // update data karyawan
             $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+            $this->mdl_admin->updateData($where,$dataLogin,'login');
             redirect("adminKaryawan/karyawanDetail/$id");
         }else{ redirect("login");} 
     }

@@ -86,7 +86,7 @@
                                         <td width="20%"><label form-control-label">Nomor Induk</label></td>
                                         <td style="height: 50px" width="80%">
                                           <div class="col-lg-12">
-                                            <input name="nik" type="text" class="form-control" value="<?php echo $key->nik; ?>" style="width:100%" disabled>
+                                            <input name="nik" type="text" class="form-control" value="<?php echo $key->nik; ?>" readonly style="background-color: white ">
                                           </div>
                                         </td>
                                       </tr>
@@ -94,7 +94,7 @@
                                         <td><label form-control-label">Nomor KTP</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="no_ktp" type="text" class="form-control" value="<?php echo $key->no_ktp; ?>">
+                                            <input name="no_ktp" type="text" class="form-control" value="<?php echo $key->no_ktp; ?>" readonly style="background-color: white ">
                                           </div>
                                         </td>
                                       </tr>
@@ -102,7 +102,7 @@
                                         <td><label form-control-label">Nomor BPJS</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="no_bpjs" type="text" class="form-control" value="<?php echo $key->no_bpjs; ?>">
+                                            <input name="no_bpjs" type="text" class="form-control" value="<?php echo $key->no_bpjs; ?>" readonly style="background-color: white ">
                                           </div>
                                         </td>
                                       </tr>
@@ -110,7 +110,23 @@
                                         <td><label form-control-label">Nama Lengkap</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="nama" type="text" class="form-control" value="<?php echo $key->nama;?>">
+                                            <input readonly style="background-color: white " name="nama" type="text" class="form-control" value="<?php echo $key->nama;?>">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td><label form-control-label">Tempat Tanggal Lahir</label></td>
+                                        <td style="height: 50px">
+                                          <div class="col-lg-12">
+                                            <input readonly style="background-color: white " name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td><label form-control-label">Jenis kelamin</label></td>
+                                        <td style="height: 50px">
+                                          <div class="col-lg-12">
+                                            <input readonly style="background-color: white " name="jenkel" type="text" class="form-control" value="<?php echo $key->jenkel;?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -118,7 +134,7 @@
                                         <td><label form-control-label">Alamat</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="alamat" type="text" class="form-control" value="<?php echo $key->alamat;?>">
+                                            <input readonly style="background-color: white " name="alamat" type="text" class="form-control" value="<?php echo $key->alamat;?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -126,7 +142,7 @@
                                         <td><label form-control-label">Nomor Telepon</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="no_telp" type="text" class="form-control" value="<?php echo $key->no_telp; ?>">
+                                            <input readonly style="background-color: white " name="no_telp" type="text" class="form-control" value="<?php echo $key->no_telp; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -134,7 +150,7 @@
                                         <td><label form-control-label">Email</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="email" type="text" class="form-control" value="<?php echo $key->email; ?>">
+                                            <input readonly style="background-color: white " name="email" type="text" class="form-control" value="<?php echo $key->email; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -142,7 +158,7 @@
                                         <td><label form-control-label">Profesi</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="email" type="text" class="form-control" value="<?php echo $key->id_profesi; ?>" disabled>
+                                            <input readonly style="background-color: white " name="email" type="text" class="form-control" value="<?php echo $key->id_profesi; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -150,7 +166,7 @@
                                         <td><label form-control-label">Status Kepegawaian</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="id_status" type="text" class="form-control" value="<?php echo $key->id_status; ?>" disabled>
+                                            <input readonly style="background-color: white " name="id_status" type="text" class="form-control" value="<?php echo $key->id_status; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -158,7 +174,7 @@
                                         <td><label form-control-label">Golongan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="id_golongan" type="text" class="form-control" value="<?php echo $key->id_golongan; ?>" disabled>
+                                            <input readonly style="background-color: white " name="id_golongan" type="text" class="form-control" value="<?php echo $key->id_golongan; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -166,7 +182,7 @@
                                         <td><label form-control-label">Penempatan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input name="ruangan" type="text" class="form-control" value="<?php echo $key->ruangan; ?>" disabled>
+                                            <input readonly style="background-color: white " name="ruangan" type="text" class="form-control" value="<?php echo $key->ruangan; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -338,55 +354,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="panel panel-default">
-                                    <div class="panel-heading accordion-head">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-                                         Riwayat MOU</a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse5" class="panel-collapse panel-ic collapse">
-                                        <div class="panel-body admin-panel-content ">
-                                        <p>Berisi daftar riwayat mou anda.</p>
-                                            <div class="static-table-list">
-                                                  <table class="table">
-                                                      <thead>
-                                                          <tr>
-                                                            <th>No.</th>
-                                                            <th>Nomor MOU</th>
-                                                            <th>Tanggal Mulai</th>
-                                                            <th>Tanggal Berakhir</th>
-                                                            <th>Nominal</th>
-                                                            <th>Keterangan</th>
-                                                            <th>Status Keaktifan</th>
-                                                          </tr>
-                                                      </thead>
-                                                      <?php $no=1; ?>
-                                                      <?php foreach($mou as $key){?>
-                                                      <tbody>
-                                                          <tr>
-                                                              <td><?php echo $no++;?></td>
-                                                              <td><?php echo $key->no_sekolah; ?></td>
-                                                              <td><?php echo $key->tgl_mulai?></td>  
-                                                              <td><?php echo $key->tgl_akhir?></td>
-                                                              <td><?php echo $key->beasiswa;?></td>
-                                                              <td><?php echo $key->ket?></td>
-                                                              <td> 
-                                                              <?php if(($key->aktif) != 1){ ?>
-                                                                <b><i class="fa fa-check"></i> Aktif</b> 
-                                                              <?php }else{ ?>
-                                                                <b style="color: red">Belum Aktif</b>
-                                                              <?php } ?>  
-                                                              </td>
-                                                          </tr>
-                                                      </tbody>
-                                                      <?php } ?>
-                                                  </table>
-                                              </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>   
+                                </div>   
                                 </div>
                             </div>
                         </div>
@@ -539,7 +507,53 @@
                                               </div>
                                         </div>
                                     </div>
-                                </div>   
+                                </div>  
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#4">
+                                            MOU Klinis</a>
+                                        </h4>
+                                    </div>
+                                    <div id="4" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Klinis anda</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Status Keaktifan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($moui as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->ket?></td>
+                                                              <td> 
+                                                              <?php if(($key->aktif) != 1){ ?>
+                                                                <b><i class="fa fa-check"></i> Aktif</b> 
+                                                              <?php }else{ ?>
+                                                                <b style="color: red">Belum Aktif</b>
+                                                              <?php } ?>  
+                                                              </td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div> 
                                 </div>   
                                 </div>
                             </div>
@@ -551,11 +565,13 @@
                                 <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                 </div>
+                                <?php foreach($urai as $uraii){?>
                                     <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                                         <div class="pdf-single-pro">
-                                            <a class="media" href="<?php echo base_url()?>Assets/template/pdf/mamunur.pdf"></a>
+                                            <a class="media" href="<?php echo base_url()?>Assets/pdf/<?php echo $uraii->file_urgas ?>"></a>
                                         </div>
                                     </div>
+                                <?php } ?>
                                 </div>
                             </div>
                         </div>
