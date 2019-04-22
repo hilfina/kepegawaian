@@ -82,30 +82,30 @@
                 <tbody>
                 <?php $no = 1 ?>
                 <?php foreach ($pen as $key) { ?>
-                    <tr>
-                        <td></td>
-                        <td><?php echo $no++ ?></td>
-                        <td><?php echo $key->nama; ?></td>
-                        <td><?php echo $key->pendidikan; ?></td>
-                        <td><?php echo $key->jurusan; ?></td>
-                        <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
-                        <td><?php echo $key->nilai; ?></td>
-                        <td><?php echo $key->nomor_ijazah; ?></td>
-                        <td><a href="<?php echo site_url(); echo "/adminPendidikan/editPend/";  echo $key->id ; ?>">
-                        <button title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                        <a href="<?php echo site_url(); echo "/adminPendidikan/delPend/";  echo $key->id ; ?>"  onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button title="Hapus Data" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                      </a>
-                        <?php 
-                          if(($key->verifikasi) == 1){ ?>
-                           <i class="fa fa-check" style="color: RED" title="TELAH TERVERIVIKASI"></i>
-                           <?php }else{ ?>
-                            <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                              <button class="btn btn-success waves-effect" title="VERIFIKASI DATA" ><i class="fa fa-check" ></i></button>
-                            </a>
-                          <?php } ?>
-                        </td>
-                    </tr>
+                  <tr>
+                      <td></td>
+                      <td><?php echo $no++ ?></td>
+                      <td><?php echo $key->nama; ?></td>
+                      <td><?php echo $key->pendidikan; ?></td>
+                      <td><?php echo $key->jurusan; ?></td>
+                      <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
+                      <td><?php echo $key->nilai; ?></td>
+                      <td><?php echo $key->nomor_ijazah; ?></td>
+                      <td><a href="<?php echo site_url(); echo "/adminPendidikan/editPend/";  echo $key->id ; ?>">
+                      <button title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                      <a href="<?php echo site_url(); echo "/adminPendidikan/delPend/";  echo $key->id ; ?>"  onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                      <button title="Hapus Data" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    </a>
+                      <?php 
+                        if(($key->verifikasi) == 1){ ?>
+                         <i class="fa fa-check" style="color: RED" title="TELAH TERVERIVIKASI"></i>
+                         <?php }else{ ?>
+                          <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
+                            <button class="btn btn-success waves-effect" title="VERIFIKASI DATA" ><i class="fa fa-check" ></i></button>
+                          </a>
+                        <?php } ?>
+                      </td>
+                  </tr>
                 <?php }?>
                 </tbody>
               </table>

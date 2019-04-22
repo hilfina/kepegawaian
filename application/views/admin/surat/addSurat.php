@@ -132,7 +132,7 @@
                   </div>
                   <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                     <div class="input-mark-inner">
-                      <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
+                      <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Simpan File Kepegawaian</button>
                     </div>
                   </div>
                 </div>

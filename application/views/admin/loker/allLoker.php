@@ -1,9 +1,4 @@
-<?php 
-  $this->load->view('./header');
-  $levelku=$this->session->userdata("myLevel");
-  $namaku=$this->session->userdata("myLongName");
-  $emailku=$this->session->userdata("myEmail");
-?><br>
+<?php  $this->load->view('./header'); ?><br>
  <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">

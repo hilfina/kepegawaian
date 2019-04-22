@@ -1,10 +1,4 @@
-<?php 
-  $this->load->view('./header');
-  $levelku=$this->session->userdata("myLevel");
-  $namaku=$this->session->userdata("myLongName");
-  $emailku=$this->session->userdata("myEmail");
-?>
-<br>
+<?php  $this->load->view('./header'); ?><br>
  <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">
@@ -43,7 +37,7 @@
           <form action="<?php echo site_url();?>/adminLoker/addLoker/" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
-            <td><label form-control-label">Jenis Profesi</label></td>
+            <td><label form-control-label>Jenis Profesi</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <font color="red" size="2">*tambahkan jenis profesi terlebih dahulu jika pilihan jenis profesi lowongan tidak ada</font>
@@ -56,7 +50,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Kuota</label></td>
+            <td><label form-control-label>Kuota</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="kuota" type="text" class="form-control" placeholder="Banyak Maksimal Pelamar">
@@ -64,7 +58,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Tanggal Dibuka</label></td>
+            <td><label form-control-label>Tanggal Dibuka</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="mulai" type="date" class="form-control">
@@ -72,7 +66,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Tanggal Ditutup</label></td>
+            <td><label form-control-label>Tanggal Ditutup</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="akhir" type="date" class="form-control">
@@ -80,7 +74,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">IPK Minimal</label></td>
+            <td><label form-control-label>IPK Minimal</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="ipkmin" type="text" class="form-control" placeholder="Ketentuan Minimal IPK pelamar">
@@ -88,7 +82,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Usia Maksimal</label></td>
+            <td><label form-control-label>Usia Maksimal</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="usia" type="text" class="form-control" placeholder="Ketentuan maksimal usia pelamar">
@@ -97,7 +91,7 @@
           </tr>
           
           <tr>
-            <td><label form-control-label">Jenis Kelamin</label></td>
+            <td><label form-control-label>Jenis Kelamin</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <select name="jenkel" class="form-control">
@@ -109,7 +103,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">jurusan</label></td>
+            <td><label form-control-label>jurusan</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="jurusan" type="text" class="form-control" placeholder="Jurusan yang ditentukan">

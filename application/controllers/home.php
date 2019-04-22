@@ -110,20 +110,24 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		if($this->mdl_home->logged_id())
-		{
-
-			$this->load->view("home");
-
+		if($this->mdl_home->logged_id()){
+			$tanggal = date('m/d/Y');
+			$data['karyawan'] = $this->mdl_home->karyawan();
+			$data['pelamar'] = $this->mdl_home->pelamar();
+			$data['calon'] = $this->mdl_home->calon();
+			$data['sipstr'] = $this->mdl_home->sipstr($tanggal);
+			$data['mou_h'] = $this->mdl_home->mou_h($tanggal);
+			$data['mou_s'] = $this->mdl_home->mou_s($tanggal);
+			$data['mou_k'] = $this->mdl_home->mou_k($tanggal);
+			$data['loker'] = $this->mdl_home->loker($tanggal);
+			$this->load->view("home",$data);
 			$this->cariKadaluarsa();
 
 			// Cek email
 			$tgl_sekarang = date('m/d/Y', time());	
-
 			$semua_sip = $this->db->get('sip_str')->result();
 
 			////////////////////////////SK///////////////////////////////////
-
 			foreach($semua_sip as $sip) {
 				$tgl_mulai = $sip->tgl_mulai;
 				$tgl_akhir = $sip->tgl_akhir;
@@ -134,13 +138,7 @@ class Home extends CI_Controller {
 					$this->db->update('sip_str', array('aktif' => 0), array('id_sipstr' => $sip->id_sipstr));
 				}
 			}
-
-		}else{
-
-			//jika session belum terdaftar, maka redirect ke halaman login
-			redirect("login");
-
-		}
+		}else{redirect("login");}
 	}
 	public function logout()
 	{

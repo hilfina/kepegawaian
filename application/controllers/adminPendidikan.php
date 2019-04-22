@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminPendidikan extends CI_Controller {
 	private $filename = "import_data";
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
         $this->load->model('mdl_login');
         $this->load->model('mdl_admin');
@@ -13,24 +12,15 @@ class AdminPendidikan extends CI_Controller {
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
 	}
-	public function index()
-	{
-		if($this->mdl_admin->logged_id())
-		{
+
+	public function index(){
+		if($this->mdl_admin->logged_id()){
         $paket['pen']=$this->mdl_admin->getPendidikan();
         $this->load->view('admin/pendidikan/allpendidikan',$paket);
-		}else{
-			//jika session belum terdaftar, maka redirect ke halaman login
-			redirect("login");
 		}
+        else{redirect("login");}
 	}
-	public function logout()
-	{
-		$this->session->sess_destroy();
-		redirect('login');
-	}
-	
-
+    
 	//VERIFIKASI IJASAH
     public function verPend($id,$idk){
        if($this->mdl_admin->logged_id())
@@ -40,14 +30,13 @@ class AdminPendidikan extends CI_Controller {
             $this->mdl_admin->updateData($where,$data,'pendidikan');
             redirect("admin/pelamarDetail/$idk");
         }
-
         else{ redirect("login"); } 
     }
 
     //Add pendidikan pada karyawan
     public function addPend($id){
        if($this->mdl_admin->logged_id()){
-
+        
             $this->form_validation->set_rules('id_karyawan','Id Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){

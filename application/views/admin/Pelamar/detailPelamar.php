@@ -273,13 +273,13 @@
                               <td><?php echo $key->nama_surat; ?></td>
                               <td><?php echo date('d M Y', strtotime($key->tgl_mulai)); echo " - "; echo date('d M Y', strtotime($key->tgl_akhir)); ?></td>
                               <td>
-                              <?php if(date('d-m-y') <= date('d-m-y', strtotime($key->tgl_akhir)) && date('d-m-y') >= date('d-m-y', strtotime($key->tgl_mulai))){ ?>
-                                <i class="fa fa-check"></i> Surat Aktif 
-                              <?php }elseif(date('d-m-y') <= date('d-m-y', strtotime($key->tgl_mulai))){ ?>
-                                <i class="fa fa-check"></i> Belum Aktif
-                              <?php }else{ ?>
-                                <i class="fa fa-times"></i> Kadaluarsa 
-                              <?php } ?>
+                              <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-check"></i> Belum Aktif
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) <= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                        <?php } ?>
                               </td>
                               <td>
                               <?php if($key->file != ""){ ?>

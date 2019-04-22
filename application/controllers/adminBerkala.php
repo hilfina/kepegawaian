@@ -20,7 +20,7 @@ class AdminBerkala extends CI_Controller {
 		if($this->mdl_admin->logged_id())
 		{
 			$paket['array']=$this->mdl_admin->getBerkala();
-            $this->load->view('admin/Karyawan/allBerkala',$paket);
+            $this->load->view('admin/Karyawan/riwayat/berkala/allBerkala',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -33,7 +33,7 @@ class AdminBerkala extends CI_Controller {
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/addBerkala');
+                $this->load->view('admin/Karyawan/riwayat/berkala/addBerkala');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx}png';
@@ -85,7 +85,7 @@ class AdminBerkala extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getBerkalaedit($id);
-                $this->load->view('admin/Karyawan/editBerkala',$data);
+                $this->load->view('admin/Karyawan/riwayat/berkala/editBerkala',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';

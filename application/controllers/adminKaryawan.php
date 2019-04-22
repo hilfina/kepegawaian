@@ -8,6 +8,7 @@ class AdminKaryawan extends CI_Controller {
 		parent::__construct();
         $this->load->model('mdl_login');
         $this->load->model('mdl_pelamar');
+        $this->load->model('mdl_karyawan');
 		$this->load->model('mdl_admin');
 		$this->load->model('mdl_home');
 		$this->load->helper('url','form','file');
@@ -15,15 +16,15 @@ class AdminKaryawan extends CI_Controller {
         $this->load->helper(array('url','download'));
         $this->load->library('email');
 	}
-    //MENAMPILKAN DATA TABEL BERISI DATA KARYAWAN
-	public function index(){
+    
+	public function index(){//MENAMPILKAN DATA TABEL BERISI DATA KARYAWAN
 		if($this->mdl_admin->logged_id()){            
 			$paket['array']=$this->mdl_admin->getKaryawan();
             $this->load->view('admin/Karyawan/allKaryawan',$paket);
 		}else{redirect("login");}
 	}
-    //MENAMPILKAN FORM TAMBAH KARYAWAN DAN PROSES PENYIMPANANNYA
-    public function addKaryawan(){
+    
+    public function addKaryawan(){//MENAMPILKAN FORM TAMBAH KARYAWAN DAN PROSES PENYIMPANANNYA
         if($this->mdl_admin->logged_id()){
             $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
             $this->form_validation->set_rules('nama','Nama Karyawan','trim|required');
@@ -104,8 +105,8 @@ class AdminKaryawan extends CI_Controller {
             }
         }else{ redirect("login"); } 
     }
-    //LIHAT DETAIL KARYAWAN
-    public function karyawanDetail($id){
+    
+    public function karyawanDetail($id){//LIHAT DETAIL KARYAWAN
         if($this->mdl_admin->logged_id()){
             $where = array( 'id_karyawan' => $id ); 
             $paket['array']=$this->mdl_admin->getProfesi();
@@ -118,8 +119,8 @@ class AdminKaryawan extends CI_Controller {
             $this->load->view('admin/Karyawan/detailKaryawan',$paket);
         }else{ redirect("login"); } 
     }
-    // SIMPAN DATA YANG DIUBAH DI DETAIL KARYAWAN
-    public function editData($id){
+    
+    public function editData($id){// SIMPAN DATA YANG DIUBAH DI DETAIL KARYAWAN
         if($this->mdl_admin->logged_id()){
 
             $nik=$this->input->post('nik');
@@ -163,7 +164,7 @@ class AdminKaryawan extends CI_Controller {
                 'no_telp' => $no_telp,
                 'email' => $email,
                 'id_status' => $id_status,
-                'id_profesi' => $id_profesi,
+                'id_profesi' => $idPro['id_profesi'],
                 'id_golongan' => $id_golongan
                 );
 
@@ -214,11 +215,9 @@ class AdminKaryawan extends CI_Controller {
             redirect("adminKaryawan/karyawanDetail/$id");
         }else{ redirect("login");} 
     }
-    // MENAMPILKAN FORM TAMBAH PENDIDIKAN MELALUI HALAMAN DETAIL
-   public function addpend($id){
+    
+   public function addpend($id){// MENAMPILKAN FORM TAMBAH PENDIDIKAN MELALUI HALAMAN DETAIL
     if($this->mdl_admin->logged_id()){
-        $this->load->helper('url','form');
-        $this->load->library('form_validation');
         $this->form_validation->set_rules('pendidikan', 'Nama Pendidikan', 'trim|required' );
 
         if ($this->form_validation->run()==FALSE) {
@@ -259,18 +258,12 @@ class AdminKaryawan extends CI_Controller {
             $this->session->set_flashdata('msg','Data Sukses di tambahkan');
             redirect("adminKaryawan/karyawanDetail/$id_karyawan");
         }
-        
-        }
-        else{ redirect("login"); }
-        
+      } else{ redirect("login"); }
     }
 
-    public function editpend($id){
+    public function editpend($id){//edit pendidikan dari detail karyawan
         if($this->mdl_admin->logged_id()){
-            $this->load->helper('url','form');
-            $this->load->library('form_validation');
             $this->form_validation->set_rules('pendidikan', 'Nama Pendidikan', 'trim|required' );
-            $this->load->model('mdl_pelamar');
 
             if ($this->form_validation->run()==FALSE) {
                 $paket['array']=$this->mdl_pelamar->getDetailpend($id);
@@ -291,9 +284,9 @@ class AdminKaryawan extends CI_Controller {
                 $mulai = $this->input->post('mulai');
                 $akhir = $this->input->post('akhir');
                 $nomor_ijazah = $this->input->post('nomor_ijazah');
-
-                $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from pendidikan where id = $id"));
-                $datax=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_karyawan from karyawan where nik = '$nik'"));
+                $konek=mysqli_connect("localhost","root","","kepegawaian");
+                $s=mysqli_fetch_array(mysqli_query($konek, "select * from pendidikan where id = $id"));
+                $datax=mysqli_fetch_array(mysqli_query($konek, "select id_karyawan from karyawan where nik = '$nik'"));
                 $id_karyawan = $datax['id_karyawan'];
                 if ($this->upload->do_upload('file')) {
                     $file = $this->upload->data('file_name');
@@ -342,14 +335,108 @@ class AdminKaryawan extends CI_Controller {
 
         else{ redirect("login"); } 
     }
-    
-    public function del($id){
+
+    public function addSurat($id){//tambah data surat dari detail karyawan
        if($this->mdl_admin->logged_id()){
-            $this->mdl_admin->delKaryawan($id);
-            redirect("adminKaryawan");
-        }
-        
-        else{ redirect("login"); } 
+
+            $this->form_validation->set_rules('id_karyawan','Id Karyawan','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $data['id']=$id;
+                $data['surat']=$this->mdl_admin->getJenSur();
+                $this->load->view('admin/karyawan/surat/addSurat',$data);
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+
+                $this->load->library('upload', $config);
+
+                $id=$this->input->post('id_karyawan');
+                $nama_surat = $this->input->post('nama_surat');
+                $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_surat from jenis_surat where nama_surat = '$nama_surat'"));
+                $id_surat = $data['id_surat'];
+                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
+                $no_surat = $this->input->post('no_surat');
+                $this->upload->do_upload('file');
+                $b = $this->upload->data('file_name');
+                $data4 = array(
+                    'id_karyawan' => $id,
+                    'id_surat'=>$id_surat,
+                    'tgl_mulai'=>$tgl_mulai,
+                    'tgl_akhir'=>$tgl_akhir, 
+                    'no_surat'=>$no_surat,  
+                    'file'=>$b,
+                    'aktif'=> 0,
+                );
+
+                $this->mdl_admin->addData('sip_str',$data4);
+                redirect("adminKaryawan/karyawanDetail/$id");
+            }
+        }else{ redirect("login"); } 
+    }
+     public function editsurat($id){//edit surat dari detail karyawan
+        if($this->mdl_admin->logged_id()){
+            $this->form_validation->set_rules('no_surat', 'Nomor Surat', 'trim|required' );
+
+            if ($this->form_validation->run()==FALSE) {
+                $paket['data']=$this->mdl_karyawan->getDetailSur($id);
+                $this->load->view('admin/Karyawan/surat/editsurat', $paket);
+            }
+            else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'jpg|png';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+                $this->load->library('upload', $config);
+
+                $konek =mysqli_connect("localhost","root","","kepegawaian");
+
+                $nama_surat = $this->input->post('nama_surat');
+                $nik = $this->input->post('nik');
+
+                $a=mysqli_fetch_array(mysqli_query($konek, "select * from jenis_surat where nama_surat = '$nama_surat'"));
+                $b=mysqli_fetch_array(mysqli_query($konek, "select * from karyawan where nik = '$nik'"));
+                $id_karyawan = $b['id_karyawan'];
+                $id_sipstr = $this->input->post('id_sipstr');
+
+                $c=mysqli_fetch_array(mysqli_query($konek, "select * from sip_str where id_sipstr = '$id_sipstr'"));
+
+                $id_surat = $a['id_surat'];
+                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
+                $no_surat = $this->input->post('no_surat');
+
+                if ($this->upload->do_upload('file')) {
+                    $file = $this->upload->data('file_name');
+                }else {
+                    $file=$c['file'];
+                }
+                $data4 = array(
+                    'id_surat'=>$id_surat,
+                    'tgl_mulai'=>$tgl_mulai,
+                    'tgl_akhir'=>$tgl_akhir, 
+                    'no_surat'=>$no_surat,  
+                    'file'=>$file
+                );
+                $where = array(
+                    'id_sipstr' => $id
+                );
+
+                $update = $this->mdl_pelamar->updatedata($where,$data4,'sip_str');
+                $this->session->set_flashdata('msg','Data Sukses di Update');
+                redirect("adminKaryawan/karyawanDetail/$id_karyawan");
+            }
+        }else{ redirect("login"); }         
+    }
+    
+    public function delsurat($id,$idk){
+        $this->mdl_karyawan->delsurat($id);
+        redirect("adminKaryawan/karyawanDetail/$idk");
     }
 }
 

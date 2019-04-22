@@ -572,7 +572,7 @@ class AdminPelamar extends CI_Controller {
             $dataStatus = array(
                 'id_karyawan' => $id,
                 'id_status' => 'Magang',
-                'mulai' => date('d/m/y'),
+                'mulai' => date('d-m-y'),
                 'akhir' => '-',
                 'nomor_sk' => '-',
                 'alamat_sk' => '-',
