@@ -35,6 +35,9 @@ $this->load->view("header.php");
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap">
                             <h4>Data Orientasi</h4>
+                            <div class="add-product">
+                                <a href="<?php echo site_url('karyawan/addori');?>">Tambah Dokumen</a>
+                            </div>
                              <div class=" container-fluid" id="notif">
                               <?php if ($this->session->flashdata('msg')) :?>
                                 <div class="alert alert-success"> 
@@ -49,6 +52,7 @@ $this->load->view("header.php");
                                         <th>Tanggal Mulai Orientasi</th>
                                         <th>Tanggal Berakhir Orientasi</th>
                                         <th>Dokumen Kehadiran</th>
+                                        <th>Aksi</th>
                                     </tr>
                                     <?php $no = 1 ?>
                                     <?php foreach ($array as $key){ ?>
@@ -56,14 +60,13 @@ $this->load->view("header.php");
                                         <td><?php echo $no++ ?></td>
                                         <td><?php echo $key->tgl_mulai; ?></td>
                                         <td><?php echo $key->tgl_akhir; ?></td>
+                                        <td><?php echo $key->doku_hadir; ?></td>
                                         <td>
-                                        <?php if(($key->doku_hadir) != NULL){ ?>
-                                          <a href="<?php echo base_url().'/Assets/dokumen/'.$key->doku_hadir; ?>" download>
-                                            <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
-                                          </a>
-                                        <?php }else{ ?>
-                                          <font style="color: red">Tidak Ada file</font>
-                                        <?php } ?>
+                                        
+                                        <a href="<?php echo site_url('karyawan/editori/').$key->id_orientasi?>">
+                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                        <a href="<?php echo site_url('karyawan/hapusori/').$key->id_orientasi ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?');">
+                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
                                         </td>
                                     </tr>
                                     <?php }  ?>
