@@ -171,7 +171,7 @@
                             <a title="Surat" href="<?php echo site_url('admin/datasurat') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Surat</span></a>
                         </li>
                         <li>
-                            <a title="Data Kredensial" href="<?php echo site_url('adminKew/') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Kredensial</span></a>
+                            <a title="Kewenangan Klinis" href="<?php echo site_url('adminKew/') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Kewenangan Klinis</span></a>
                         </li>
                         <li><a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Data Riwayat</span></a>
                             <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
@@ -186,7 +186,6 @@
                                 <li><a title="MOU Hutang" href="<?php echo site_url('adminHutang/') ?>"><span class="mini-sub-pro">Hutang</span></a></li>
                                 <li><a title="MOU Kontrak" href="<?php echo site_url('adminKontrak') ?>"><span class="mini-sub-pro">Kontrak</span></a></li>
                                 <li><a title="MOU Sekolah" href="<?php echo site_url('adminSekolah') ?>"><span class="mini-sub-pro">Sekolah</span></a></li>
-                                <li><a title="MOU Klinis" href="<?php echo site_url('adminKlinis') ?>"><span class="mini-sub-pro">Klinis</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -250,12 +249,8 @@
                                     <a title="Home" href="#"><span class="educate-icon educate-home icon-wrap"></span><span class="mini-click-non">Home</span></a>
                                 </li>
                             
-                                <li><a title="Data Diri" href="<?php echo site_url('pelamar/menucetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
+                                <li><a title="Data Diri" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
                                 <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
-                        </li>
-                        <?php } elseif ($levelku == "Karyawan" && $aktifku == '0')  { ?>
-                        <li>
-                            <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>"><span class="mini-click-non">Aktivasi Akun</span></a>
                         </li>
                         <?php } elseif ($levelku == "Karyawan")  { ?>
                         <li>
@@ -264,10 +259,12 @@
                             <a title="Data Pendidikan" href="<?php echo site_url('karyawan/datapend') ?>"><span class="educate-icon educate-library icon-wrap"></span><span class="mini-click-non">Data Pendidikan</span></a>
                             <a title="Data Orientasi" href="<?php echo site_url('karyawan/dataori') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Data Orientasi</span></a>
                             <a title="Data Diklat" href="<?php echo site_url('karyawan/datadiklat') ?>"><span class="educate-icon educate-department icon-wrap"></span><span class="mini-click-non">Data Diklat</span></a>
+                            
+                                <a title="Data Kewenangan Klinis" href="<?php echo site_url('karyawan/datakew') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Kewenangan Klinis</span></a>
+                            
                             <?php if($profesiku != "Kasir" || $profesiku != "Administrasi" || $profesiku != "Pekarya"){?>
                                 <a title="Data Surat" href="<?php echo site_url('karyawan/datasurat') ?>"><span class="educate-icon educate-message icon-wrap"></span><span class="mini-click-non">Data Surat</span></a>
                             <?php }?>
-                            <a title="Data Kredensial" href="<?php echo site_url('karyawan/datakew') ?>"><span class="educate-icon educate-course icon-wrap"></span><span class="mini-click-non">Proses Kredensial</span></a>
                         </li>
                         <?php } ?>
                     </ul>

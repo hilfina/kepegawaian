@@ -34,60 +34,72 @@ class AdminDiklat extends CI_Controller {
 
     }
 
-    public function addDiklat($id, $idk){
+    public function addGol(){
        if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('nama_diklat','Nama Diklat','trim|required');
+            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $data['array']=$this->mdl_admin->getAlldata('diklat');
-                $this->load->view('admin/Karyawan/addDiklat',$data);
+
+                $data['array']=$this->mdl_admin->getAlldata('jenis_golongan');
+                $this->load->view('admin/Karyawan/addGol',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'jpg|pdf|docx|png';
+                $config['allowed_types']    = 'pdf|jpg|docx}png';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
-                $tgl_mulai = $this->input->post('tgl_mulai');
-                $tgl_akhir = $this->input->post('tgl_akhir');
-                $nomor_sertif = $this->input->post('nomor_sertif');
-                $nama_diklat = $this->input->post('nama_diklat');
-                $jenis_diklat = $this->input->post('jenis_diklat');
-                $jam = $this->input->post('jam');
-                $tahun = $this->input->post('tahun');
-                $this->upload->do_upload('file');
-                $file = $this->upload->data('file_name');
-                $data = array(
-                        'id_karyawan' => $id,
-                        'nomor_sertif'=>$nomor_sertif,
-                        'nama_diklat'=>$nama_diklat,
-                        'jenis_diklat'=>$jenis_diklat,
-                        'tgl_mulai'=>$tgl_mulai,
-                        'tgl_akhir'=>$tgl_akhir, 
-                        'jam'=>$jam, 
-                        'tahun'=>$tahun,
-                        'file'=>$file,
-                    );
+                
+                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $a=$this->input->post('nik');
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
-                $insert = $this->mdl_pelamar->tambahdata('diklat',$data);
-                $this->session->set_flashdata('msg','Data Sukses di tambahkan');
-                redirect(site_url('AdminDiklat/diklatDetail/$idk'));
+                $id_karyawan=$data2['id_karyawan'];
+                $id_golongan=$this->input->post('id_golongan');
+                $mulai=$this->input->post('mulai');
+                $akhir=$this->input->post('akhir');
+                $nomor_sk=$this->input->post('nomor_sk');
+                $this->upload->do_upload('alamat_sk');
+                $alamat_sk=$this->upload->data('file_name');
+               
+                $datagolongan= array(
+                'id_karyawan' => $id_karyawan,
+                'id_golongan' => $id_golongan,
+                'mulai' => $mulai,
+                'akhir' => $akhir,
+                'alamat_sk' => $alamat_sk,
+                'nomor_sk' => $nomor_sk,
+                'aktif' => 1
+                );
+
+                
+                $updategolongan= array('akhir' => $mulai, 'aktif' => 0);
+                $whereS = array('id_karyawan' => $id_karyawan, 'aktif' => 1);
+                $this->mdl_admin->updateData($whereS,$updategolongan,'golongan');
+                
+                $dataKaryawan= array('id_golongan' => $id_golongan);
+                $where = array('id_karyawan' => $id_karyawan);
+
+                $this->mdl_admin->addData('golongan',$datagolongan);
+                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+
+                redirect("adminGol");
                 }
         }
         else{ redirect("login"); } 
     }
 
-    public function edit($id, $idk){
+    public function edit($id){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('nama_diklat','Nama Diklat','trim|required');
+            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $where=array('id_diklat' => $id);
-                $paket['array']=$this->mdl_admin->getData('diklat',$where);
-                $this->load->view('admin/Karyawan/editDIklat',$paket);
+                $data['array']=$this->mdl_admin->getGoledit($id);
+                $data['array2']=$this->mdl_admin->getAlldata('golongan');
+                $this->load->view('admin/Karyawan/editGol',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -97,43 +109,39 @@ class AdminDiklat extends CI_Controller {
 
                 $this->load->library('upload', $config);
                 
-                if($_FILES['file']['name'] != '') {
-                    $this->upload->do_upload('file');
-                    $file = $this->upload->data('file_name');
+                $id_golongan=$this->input->post('id_golongan');
+                $mulai=$this->input->post('mulai');
+                $akhir=$this->input->post('akhir');
+                $nomor_sk=$this->input->post('nomor_sk');
+                if($_FILES['alamat_sk']['name'] != '') {
+                    $this->upload->do_upload('alamat_sk');
+                    $alamat_sk = $this->upload->data('file_name');
                 } else {
-                    $file = $this->input->post('file_old');
+                    $alamat_sk = $this->input->post('file_old');
                 }
-                $tgl_mulai = $this->input->post('tgl_mulai');
-                $tgl_akhir = $this->input->post('tgl_akhir');
-                $nomor_sertif = $this->input->post('nomor_sertif');
-                $nama_diklat = $this->input->post('nama_diklat');
-                $jenis_diklat = $this->input->post('jenis_diklat');
-                $jam = $this->input->post('jam');
-                $tahun = $this->input->post('tahun');
+                // $s = $akhir;
+                // $date = strtotime($s);
+                // $exp = date('d/m/Y', strtotime('+1 day', $date));
 
-                $data = array(
-                    'nomor_sertif'=>$nomor_sertif,
-                    'nama_diklat'=>$nama_diklat,
-                    'jenis_diklat'=>$jenis_diklat,
-                    'tgl_mulai'=>$tgl_mulai,
-                    'tgl_akhir'=>$tgl_akhir, 
-                    'jam'=>$jam, 
-                    'tahun'=>$tahun,
-                    'file'=>$file,
+                $datagolongan= array(
+                'id_golongan' => $id_golongan,
+                'mulai' => $mulai,
+                'akhir' => $akhir,
+                'alamat_sk' => $alamat_sk,
+                'nomor_sk' => $nomor_sk,
                 );
 
                 $where = array('id' => $id);
-                $this->mdl_admin->updateData($where,$data,'diklat');
-                redirect(site_url('AdminDiklat/diklatDetail/$idk'));
+                $this->mdl_admin->updateData($where,$datagolongan,'golongan');
+                redirect("adminGol");
                 }
         }
 
         else{ redirect("login"); } 
     }
-    public function del($id, $idk){
-        $where = array('id_diklat' => $id);
-        $this->mdl_pelamar->hapusdata('diklat',$where);
-        redirect("adminDiklat/diklatDetail/$idk");
+    public function del($id){
+        $this->mdl_pelamar->hapusdata('golongan',$id);
+        redirect("adminGol");
     }
 }
 

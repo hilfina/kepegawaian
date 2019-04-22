@@ -46,8 +46,6 @@ class Karyawan extends CI_Controller {
         $paket['mous']=$this->mdl_karyawan->getMous($id);
         $paket['mouk']=$this->mdl_karyawan->getMouk($id);
         $paket['mouh']=$this->mdl_karyawan->getMouh($id);
-        $paket['moui']=$this->mdl_karyawan->getData('mou_klinis', $id);
-        $paket['urai']=$this->mdl_karyawan->getData('uraian_tugas',$id);
 		$this->load->view('karyawan/profil',$paket);
         
     }
@@ -62,13 +60,13 @@ class Karyawan extends CI_Controller {
 	$this->load->library('upload', $config);
 
 	$id=$this->session->userdata('myId');
-	// $nik = $this->input->post('nik');
-	// $no_ktp = $this->input->post('no_ktp');
-	// $no_bpjs = $this->input->post('no_bpjs');
-	// $nama = $this->input->post('nama');
-	// $alamat = $this->input->post('alamat');
-	// $no_telp = $this->input->post('no_telp');
-	// $email = $this->input->post('email');
+	$nik = $this->input->post('nik');
+	$no_ktp = $this->input->post('no_ktp');
+	$no_bpjs = $this->input->post('no_bpjs');
+	$nama = $this->input->post('nama');
+	$alamat = $this->input->post('alamat');
+	$no_telp = $this->input->post('no_telp');
+	$email = $this->input->post('email');
 
 	if($_FILES['fotosaya']['name'] != '') {
 		$this->upload->do_upload('fotosaya');
@@ -79,13 +77,13 @@ class Karyawan extends CI_Controller {
 
 	
 	$data = array(
-		// 'nik' => $nik,
-		// 'no_ktp' => $no_ktp,
-		// 'no_bpjs' => $no_bpjs,
-		// 'nama' => $nama,
-		// 'alamat' => $alamat,
-		// 'no_telp' => $no_telp,
-		// 'email' => $email,
+		'nik' => $nik,
+		'no_ktp' => $no_ktp,
+		'no_bpjs' => $no_bpjs,
+		'nama' => $nama,
+		'alamat' => $alamat,
+		'no_telp' => $no_telp,
+		'email' => $email,
 		'foto' => $fotosaya
 	);
  
@@ -563,12 +561,23 @@ class Karyawan extends CI_Controller {
 		    $id=$this->session->userdata('myId');
 		    
 		    $tgl_pengajuan = $this->input->post('tgl_pengajuan');
+		    $tgl_penilaian = $this->input->post('tgl_penilaian');
+		    $tgl_finalisasi = $this->input->post('tgl_finalisasi');
+		    $penilaian = $this->input->post('penilaian');
+		    $finalisasi = $this->input->post('finalisasi');
 		    $this->upload->do_upload('doku_pengajuan');
 			$doku_pengajuan = $this->upload->data('file_name');
+			$this->upload->do_upload('doku_penilaian');
+			$doku_penilaian = $this->upload->data('file_name');
 		    $data = array(
 			    	'id_karyawan' => $id,
 			    	'tgl_pengajuan'=>$tgl_pengajuan,
 			    	'doku_pengajuan'=>$doku_pengajuan,
+			        'penilaian'=>$penilaian,
+			        'tgl_penilaian'=>$tgl_penilaian, 
+			        'doku_penilaian'=>$doku_penilaian, 
+			        'finalisasi'=>$finalisasi,
+			        'tgl_finalisasi'=>$tgl_finalisasi,
 		        );
 
 		    $insert = $this->mdl_pelamar->tambahdata('kewenangan_klinis',$data);
@@ -597,15 +606,31 @@ class Karyawan extends CI_Controller {
 			$this->load->library('upload', $config);
 		    
 		    $tgl_pengajuan = $this->input->post('tgl_pengajuan');
+		    $tgl_penilaian = $this->input->post('tgl_penilaian');
+		    $tgl_finalisasi = $this->input->post('tgl_finalisasi');
+		    $penilaian = $this->input->post('penilaian');
+		    $finalisasi = $this->input->post('finalisasi');
 		    if($_FILES['doku_pengajuan']['name'] != '') {
 				$this->upload->do_upload('doku_pengajuan');
 				$doku_pengajuan = $this->upload->data('file_name');
 			} else {
 				$doku_pengajuan = $this->input->post('file_old');
 			}
+		    if($_FILES['doku_penilaian']['name'] != '') {
+				$this->upload->do_upload('doku_penilaian');
+				$doku_penilaian = $this->upload->data('file_name');
+			} else {
+				$doku_penilaian = $this->input->post('file_old');
+			}
 		    $data = array(
+			    	'id_karyawan' => $id,
 			    	'tgl_pengajuan'=>$tgl_pengajuan,
 			    	'doku_pengajuan'=>$doku_pengajuan,
+			        'penilaian'=>$penilaian,
+			        'tgl_penilaian'=>$tgl_penilaian, 
+			        'doku_penilaian'=>$doku_penilaian, 
+			        'finalisasi'=>$finalisasi,
+			        'tgl_finalisasi'=>$tgl_finalisasi,
 		        );
 
 		    $where = array('id_kewenangan'=> $id);

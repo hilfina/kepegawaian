@@ -40,13 +40,9 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right">
-                <?php foreach ($array as $key) { ?>
-                <a href="<?php echo site_url(); echo "/adminDiklat/addDiklat/";  echo $key->id_karyawan; echo "/";echo $key->id_karyawan; ?>">
-                <?php } ?>
+                <div align="right"><a href="<?php echo site_url('adminBerkala/addBerkala')?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                </a>
-                </div>
+                </a></div>
                 <div class=" container-fluid" id="notif">
                     <?php if ($this->session->flashdata('msg')) :?>
                         <div class="alert alert-success"> 
@@ -101,10 +97,10 @@
                     <?php } ?>
                     </td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminDiklat/edit/"; echo $key->id_diklat; echo "/";echo $key->id_karyawan; ?>">
+                      <a href="<?php echo site_url(); echo "/adminDiklat/edit/"; echo $key->id_diklat ;?>">
                         <button class="btn btn-warning waves-effect">edit</button>
                       </a>
-                      <a href="<?php echo site_url(); echo "/adminDiklat/del/"; echo $key->id_diklat; echo "/";echo $key->id_karyawan; ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                      <a href="<?php echo site_url(); echo "/adminDiklat/del/"; echo $key->id_diklat;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                         <button class="btn btn-danger waves-effect">hapus</button>
                       </a>
                     </td>

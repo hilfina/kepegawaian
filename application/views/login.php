@@ -45,9 +45,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right main-nav">
                     <li><a href="#intro">Home</a></li>
+                    <li><a href="#satu">Login/Daftar</a></li>
                     <li><a href="#dua">Peluang Karir</a></li>
                     <li><a href="#tiga">Contact</a></li>
-                    <li><a href="#satu">Login/Daftar</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

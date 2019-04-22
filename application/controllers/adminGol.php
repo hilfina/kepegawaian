@@ -132,8 +132,7 @@ class AdminGol extends CI_Controller {
         else{ redirect("login"); } 
     }
     public function del($id){
-        $where = array('id' => $id);
-        $this->mdl_pelamar->hapusdata('golongan',$where);
+        $this->mdl_pelamar->hapusdata('golongan',$id);
         redirect("adminGol");
     }
 }
