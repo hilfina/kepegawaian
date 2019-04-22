@@ -114,6 +114,24 @@
                                           </div>
                                         </td>
                                       </tr>
+                                      <?php foreach ($log as $key) {?>
+                                      <tr>
+                                        <td><label form-control-label">Email</label></td>
+                                        <td style="height: 50px">
+                                          <div class="col-lg-12">
+                                            <input name="username" type="text" class="form-control" value="<?php echo $key->username; ?>">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td><label form-control-label">Email</label></td>
+                                        <td style="height: 50px">
+                                          <div class="col-lg-12">
+                                            <input name="password" type="text" class="form-control" value="<?php echo $key->password; ?>">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <?php } ?>
                                       <tr>
                                         <td><label form-control-label">Profesi</label></td>
                                         <td style="height: 50px">
