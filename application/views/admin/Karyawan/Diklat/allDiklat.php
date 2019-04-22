@@ -35,17 +35,9 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-<<<<<<< HEAD:application/views/admin/Karyawan/Diklat/allDiklat.php
                 <div align="right"><a href="<?php echo site_url('adminDiklat/addDiklat')?>">
-=======
-                <div align="right">
-                <?php foreach ($array as $key) { ?>
-                <a href="<?php echo site_url(); echo "/adminDiklat/addDiklat/";  echo $key->id_karyawan; echo "/";echo $key->id_karyawan; ?>">
-                <?php } ?>
->>>>>>> parent of 49576eb... Revert "SubhanAllah":application/views/admin/Karyawan/detailDiklat.php
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                </a>
-                </div>
+                </a></div>
                 <div class=" container-fluid" id="notif">
                     <?php if ($this->session->flashdata('msg')) :?>
                         <div class="alert alert-success"> 
@@ -97,21 +89,11 @@
                         <font style="color: red">Tidak Ada file</font>
                       <?php } ?>
                     </td>
-<<<<<<< HEAD:application/views/admin/Karyawan/Diklat/allDiklat.php
                     <td>
                     <a href="<?php echo site_url('adminDiklat/editdiklat/').$key->id_diklat ?>">
                     <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                     <a href="<?php echo site_url('adminDiklat/hapusdiklat/').$key->id_diklat ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?');">
                     <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
-=======
-                    <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminDiklat/edit/"; echo $key->id_diklat; echo "/";echo $key->id_karyawan; ?>">
-                        <button class="btn btn-warning waves-effect">edit</button>
-                      </a>
-                      <a href="<?php echo site_url(); echo "/adminDiklat/del/"; echo $key->id_diklat; echo "/";echo $key->id_karyawan; ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button class="btn btn-danger waves-effect">hapus</button>
-                      </a>
->>>>>>> parent of 49576eb... Revert "SubhanAllah":application/views/admin/Karyawan/detailDiklat.php
                     </td>
                   </tr>
                 <?php }?>
