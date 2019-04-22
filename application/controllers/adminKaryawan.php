@@ -127,6 +127,8 @@ class AdminKaryawan extends CI_Controller {
             $no_ktp=$this->input->post('no_ktp');
             $no_bpjs=$this->input->post('no_bpjs');
             $nama=$this->input->post('nama');
+            $ttl=$this->input->post('ttl');
+            $jenkel=$this->input->post('jenkel');
             $alamat=$this->input->post('alamat');
             $no_telp=$this->input->post('no_telp');
             $email=$this->input->post('email');
