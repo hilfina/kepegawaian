@@ -36,18 +36,12 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
 <<<<<<< HEAD:application/views/admin/Karyawan/Diklat/allDiklat.php
-<<<<<<< HEAD:application/views/admin/Karyawan/Diklat/allDiklat.php
                 <div align="right"><a href="<?php echo site_url('adminDiklat/addDiklat')?>">
 =======
-=======
->>>>>>> parent of 49576eb... Revert "SubhanAllah":application/views/admin/Karyawan/detailDiklat.php
                 <div align="right">
                 <?php foreach ($array as $key) { ?>
                 <a href="<?php echo site_url(); echo "/adminDiklat/addDiklat/";  echo $key->id_karyawan; echo "/";echo $key->id_karyawan; ?>">
                 <?php } ?>
-<<<<<<< HEAD:application/views/admin/Karyawan/Diklat/allDiklat.php
->>>>>>> parent of 49576eb... Revert "SubhanAllah":application/views/admin/Karyawan/detailDiklat.php
-=======
 >>>>>>> parent of 49576eb... Revert "SubhanAllah":application/views/admin/Karyawan/detailDiklat.php
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a>

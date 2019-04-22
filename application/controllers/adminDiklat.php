@@ -33,7 +33,6 @@ class AdminDiklat extends CI_Controller {
     }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
     public function addDiklat(){
        if($this->mdl_admin->logged_id()){
 
@@ -53,16 +52,6 @@ class AdminDiklat extends CI_Controller {
                 $data['array']=$this->mdl_admin->getAlldata('diklat');
                 $this->load->view('admin/Karyawan/addDiklat',$data);
 >>>>>>> parent of 49576eb... Revert "SubhanAllah"
-=======
-    public function addDiklat($id, $idk){
-       if($this->mdl_admin->logged_id()){
-
-            $this->form_validation->set_rules('nama_diklat','Nama Diklat','trim|required');
-
-            if($this->form_validation->run()==FALSE){
-                $data['array']=$this->mdl_admin->getAlldata('diklat');
-                $this->load->view('admin/Karyawan/addDiklat',$data);
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'jpg|pdf|docx|png';
@@ -71,7 +60,6 @@ class AdminDiklat extends CI_Controller {
                 $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
-<<<<<<< HEAD
 <<<<<<< HEAD
                 
                 $konek = mysqli_connect("localhost","root","","kepegawaian");
@@ -106,8 +94,6 @@ class AdminDiklat extends CI_Controller {
 
                 redirect("adminDiklat");
 =======
-=======
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
                 $tgl_mulai = $this->input->post('tgl_mulai');
                 $tgl_akhir = $this->input->post('tgl_akhir');
                 $nomor_sertif = $this->input->post('nomor_sertif');
@@ -132,16 +118,12 @@ class AdminDiklat extends CI_Controller {
                 $insert = $this->mdl_pelamar->tambahdata('diklat',$data);
                 $this->session->set_flashdata('msg','Data Sukses di tambahkan');
                 redirect(site_url('AdminDiklat/diklatDetail/$idk'));
-<<<<<<< HEAD
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
-=======
 >>>>>>> parent of 49576eb... Revert "SubhanAllah"
                 }
         }
         else{ redirect("login"); } 
     }
 
-<<<<<<< HEAD
 <<<<<<< HEAD
     public function editDiklat($id){
          if($this->mdl_admin->logged_id()){
@@ -152,8 +134,6 @@ class AdminDiklat extends CI_Controller {
                 $data['array']=$this->mdl_karyawan->detDiklat($id);
                 $this->load->view('admin/Karyawan/Diklat/editDiklat',$data);
 =======
-=======
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
     public function edit($id, $idk){
          if($this->mdl_admin->logged_id()){
 
@@ -163,9 +143,6 @@ class AdminDiklat extends CI_Controller {
                 $where=array('id_diklat' => $id);
                 $paket['array']=$this->mdl_admin->getData('diklat',$where);
                 $this->load->view('admin/Karyawan/editDIklat',$paket);
-<<<<<<< HEAD
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
-=======
 >>>>>>> parent of 49576eb... Revert "SubhanAllah"
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
@@ -176,7 +153,6 @@ class AdminDiklat extends CI_Controller {
 
                 $this->load->library('upload', $config);
                 
-<<<<<<< HEAD
 <<<<<<< HEAD
                 $konek = mysqli_connect("localhost","root","","kepegawaian");
                 $a=$this->input->post('nik');
@@ -208,8 +184,6 @@ class AdminDiklat extends CI_Controller {
                     'file ' => $file
                 );
 =======
-=======
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
                 if($_FILES['file']['name'] != '') {
                     $this->upload->do_upload('file');
                     $file = $this->upload->data('file_name');
@@ -249,7 +223,6 @@ class AdminDiklat extends CI_Controller {
         }else{ redirect("login"); } 
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 
     public function delDiklat($id){
         if($this->mdl_admin->logged_id()){
@@ -257,15 +230,10 @@ class AdminDiklat extends CI_Controller {
             redirect("adminDiklat");
         }else{ redirect("login"); } 
 =======
-=======
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
     public function del($id, $idk){
         $where = array('id_diklat' => $id);
         $this->mdl_pelamar->hapusdata('diklat',$where);
         redirect("adminDiklat/diklatDetail/$idk");
-<<<<<<< HEAD
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
-=======
 >>>>>>> parent of 49576eb... Revert "SubhanAllah"
     }
 }
