@@ -14,11 +14,8 @@ class pelamar extends CI_Controller {
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
 		$this->load->library('session');
-<<<<<<< HEAD
-=======
 		$this->load->library('pdf');
 
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
 	}
 
 	public function index()
@@ -559,9 +556,6 @@ class pelamar extends CI_Controller {
 	        redirect("pelamar/prosesLamar/$id");
 		}else{redirect("login");}
 	}
-<<<<<<< HEAD
-		
-=======
 
 	public function menucetak(){
 		$this->load->view('pelamar/cetak');;
@@ -594,7 +588,6 @@ class pelamar extends CI_Controller {
         }
         $pdf->Output();
     }
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
 }
 
 /* End of file pelamar.php */
