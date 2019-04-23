@@ -184,7 +184,7 @@ class Login extends CI_Controller {
 		$config['smtp_port']= "465";
 		$config['smtp_timeout']= "400";
 		$config['smtp_user']= "hilfinaamaris09@gmail.com";
-		$config['smtp_pass']= "hilfina090798";
+		$config['smtp_pass']= "hilfano090798";
 		$config['crlf']="\r\n"; 
 		$config['newline']="\r\n"; 
 		$config['wordwrap'] = TRUE;

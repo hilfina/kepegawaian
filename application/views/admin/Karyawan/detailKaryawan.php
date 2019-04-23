@@ -125,12 +125,14 @@
                               </div>
                             </td>
                           </tr>
-                          <?php foreach($log as $login) {?>
+                          
                           <tr>
                             <td><label form-control-label>Username</label></td>
                             <td style="height: 50px">
                               <div class="col-lg-12">
-                                <input name="username" type="text" class="form-control" value="<?php echo $login->username; ?>">
+                              <?php foreach ($log as $key123) {?>
+                                <input name="username" type="text" class="form-control" value="<?php echo $key123->username; ?>">
+                              <?php } ?>
                               </div>
                             </td>
                           </tr>
@@ -138,11 +140,13 @@
                             <td><label form-control-label>Password</label></td>
                             <td style="height: 50px">
                               <div class="col-lg-12">
-                                <input name="password" type="text" class="form-control" value="<?php echo $login->password; ?>">
+                              <?php foreach ($log as $key123) {?>
+                                <input name="password" type="password" class="form-control" value="<?php echo $key123->password; ?>">
+                              <?php } ?>
                               </div>
                             </td>
                           </tr>
-                          <?php } ?>
+                        
                           <tr>
                             <td><label form-control-label>Profesi</label></td>
                             <td style="height: 50px">

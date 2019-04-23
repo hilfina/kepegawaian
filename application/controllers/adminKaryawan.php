@@ -115,7 +115,7 @@ class AdminKaryawan extends CI_Controller {
             $paket['datSta']=$this->mdl_admin->getJenStatus();
             $paket['datPen']=$this->mdl_admin->getData('pendidikan',$where);
             $paket['datSur']=$this->mdl_admin->cariJenisSurat($id);
-            $paket['log']=$this->mdl_admin->getData('login',$id);
+            $paket['log']=$this->mdl_admin->getData('login',$where);
             $this->load->view('admin/Karyawan/detailKaryawan',$paket);
         }else{ redirect("login"); } 
     }
@@ -164,6 +164,8 @@ class AdminKaryawan extends CI_Controller {
                 'no_ktp' => $no_ktp,
                 'no_bpjs' => $no_bpjs,
                 'nama' => $nama,
+                'ttl' => $ttl,
+                'jenkel' => $jenkel,
                 'alamat' => $alamat,
                 'no_telp' => $no_telp,
                 'email' => $email,
@@ -219,7 +221,7 @@ class AdminKaryawan extends CI_Controller {
             }else{}
             // update data karyawan
             $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
-            $this->mdl_admin->updateData($where,$dataLogin,'login');
+            $this->mdl_admin->updateData($where,$datalogin,'login');
             redirect("adminKaryawan/karyawanDetail/$id");
         }else{ redirect("login");} 
     }

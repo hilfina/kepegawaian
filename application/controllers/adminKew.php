@@ -26,7 +26,7 @@ class AdminKew extends CI_Controller {
 		}
 	}
 
-    public function addGol(){
+    public function addKew(){
        if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
@@ -132,6 +132,7 @@ class AdminKew extends CI_Controller {
         else{ redirect("login"); } 
     }
     public function del($id){
+        $where = array('id_kewenangan' => $id);
         $this->mdl_pelamar->hapusdata('golongan',$id);
         redirect("adminGol");
     }

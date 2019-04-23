@@ -179,8 +179,8 @@
                   <li><a title="Diklat" href="<?php echo site_url('adminDiklat/') ?>">Diklat</a></li>
                   <li><a title="Orientasi" href="<?php echo site_url('adminOri/') ?>">Orientasi</a></li>
                   <li><a title="Uraian Tugas" href="<?php echo site_url('adminUraianTugas/') ?>">Uraian Tugas</a></li>
-                  <li><a title="Uraian Tugas" href="<?php echo site_url('adminKew/') ?>">Kewenangan Klinis</a></li>
-                  <li><a title="Uraian Tugas" href="<?php echo site_url('adminProfesi/') ?>">Data profesi</a></li>
+                  <li><a title="Proses Kredensial" href="<?php echo site_url('adminKew/') ?>">Proses Kredensial</a></li>
+                  <li><a title="Data Profesi" href="<?php echo site_url('adminProfesi/') ?>">Data profesi</a></li>
                 </ul>
               </li>
               <li>
@@ -193,6 +193,7 @@
                   <li><a title="MOU Hutang" href="<?php echo site_url('adminHutang/') ?>">MOU Hutang</a></li>
                   <li><a title="MOU Kontrak" href="<?php echo site_url('adminKontrak') ?>">MOU Kontrak</a></li>
                   <li><a title="MOU Sekolah" href="<?php echo site_url('adminSekolah') ?>">MOU Sekolah</a></li>
+                  <li><a title="MOU Klinis" href="<?php echo site_url('adminKlinis') ?>">MOU Klinis</a></li>
                 </ul>
               </li>
               <li><a class="has-arrow" href="#" aria-expanded="false">
@@ -214,7 +215,7 @@
                   <li><a title="Semua Pelamar" href="<?php echo site_url('adminPelamar') ?>">Pelamar</a></li>
                   <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/dataSeleksi') ?>">Seleksi Pelamar</a></li>
                   <li><a title="Report" href="<?php echo site_url('admin/report') ?>">Data Report</a></li>
-                  <li><a title="Report" href="<?php echo site_url('adminLoker') ?>">Lowongan Pekerjaan</a></li>
+                  <li><a title="Loker" href="<?php echo site_url('adminLoker') ?>">Lowongan Pekerjaan</a></li>
                 </ul>
               </li>
             <?php }elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '0') { ?>
@@ -294,7 +295,13 @@
               <li><a title="Data Diri" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
               <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
             </li>
-            <?php } elseif ($levelku == "Karyawan")  { ?>
+            <?php } elseif ($levelku == "Karyawan" && $aktifku == '0')  { ?>
+            <li>
+              <a title="Aktivasi Akun" href="<?php echo site_url('pelamar/aktivasi') ?>">
+                <span class="mini-click-non">Aktivasi Akun</span>
+              </a>
+            </li>
+            <?php } elseif ($levelku == "Karyawan" && $aktifku == '1')  { ?>
             <li>
               <a title="Home" href="#">
                 <span class="educate-icon educate-home icon-wrap"></span>
@@ -316,9 +323,9 @@
                 <span class="educate-icon educate-department icon-wrap"></span>
                 <span class="mini-click-non">Data Diklat</span>
               </a>
-              <a title="Data Kewenangan Klinis" href="<?php echo site_url('karyawan/datakew') ?>">
+              <a title="Data Kredensial Klinis" href="<?php echo site_url('karyawan/datakew') ?>">
                 <span class="educate-icon educate-course icon-wrap"></span>
-                <span class="mini-click-non">Kewenangan Klinis</span>
+                <span class="mini-click-non">Proses Kredensial</span>
               </a>
                 <?php if($profesiku != "Kasir" || $profesiku != "Administrasi" || $profesiku != "Pekarya"){?>
                   <a title="Data Surat" href="<?php echo site_url('karyawan/datasurat') ?>">
