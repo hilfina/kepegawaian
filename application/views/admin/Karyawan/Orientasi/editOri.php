@@ -94,17 +94,7 @@
                       </div>
                     </div>
                   </div>
-                  <br>
-                  <div class="row">
-                    <div class="date-picker-inner">
-                      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"> </div>
-                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                        <?php if(($key->doku_hadir) != NULL){?>
-                          <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->doku_hadir?>" width="100%"/>   
-                        <?php }?>
-                      </div>
-                    </div>
-                  </div><br><br>
+                  <br><br>
                   <div class="row"align="center">
                     <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Simpan</button>
                   <div>

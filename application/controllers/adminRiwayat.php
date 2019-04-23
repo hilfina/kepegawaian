@@ -47,7 +47,7 @@ class AdminRiwayat extends CI_Controller {
                 $ruangan=$this->input->post('ruangan');
                 $id_profesi= $data3['id_profesi'];
                 $id_karyawan=$data2['id_karyawan'];
-                $mulai= date('m/d/Y');
+                $mulai= date('Y-m-d');
                
                 $dataRiwayat= array(
                 'id_riwayat' => $id_riwayat,
@@ -72,7 +72,7 @@ class AdminRiwayat extends CI_Controller {
     public function edit($id){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('nik','nomor Induk Karyawan','trim|required');
+            $this->form_validation->set_rules('mulai','Tanggal Mulai Penempatan','trim|required');
 
             if($this->form_validation->run()==FALSE){
                 $data['datRi']=$this->mdl_admin->getEditRi($id);
@@ -87,12 +87,14 @@ class AdminRiwayat extends CI_Controller {
 
                 $ruangan=$this->input->post('ruangan');
                 $id_profesi= $data3['id_profesi'];
-                $mulai=$this->input->post('mulai');
+                $mulai = date('Y-m-d',strtotime($this->input->post('mulai')));
+                $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
                
                 $dataRiwayat= array(
                 'ruangan' => $ruangan,
                 'id_profesi' => $id_profesi,
                 'mulai' => $mulai,
+                'akhir' => $akhir,
                 );
 
                 $dataKaryawan= array('id_profesi' => $id_profesi);

@@ -361,8 +361,8 @@ class pelamar extends CI_Controller {
 				$data=mysqli_fetch_array(mysqli_query($konek, $query));
 			    $xxx = $data['id_surat'];
 				$id_surat = $xxx;
-			    $tgl_mulai = $this->input->post('tgl_mulai');
-			    $tgl_akhir = $this->input->post('tgl_akhir');
+			    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+			    $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 			    $no_surat = $this->input->post('no_surat');
 			    $this->upload->do_upload('file');
 				$b = $this->upload->data('file_name');
@@ -418,8 +418,8 @@ class pelamar extends CI_Controller {
 				$data=mysqli_fetch_array(mysqli_query($konek, $query));
 			    $xxx = $data['id_surat'];
 				$id_surat = $xxx;
-			    $tgl_mulai = $this->input->post('tgl_mulai');
-			    $tgl_akhir = $this->input->post('tgl_akhir');
+			    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+			    $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 			    $no_surat = $this->input->post('no_surat');
 			    $this->upload->do_upload('file');
 				$b = $this->upload->data('file_name');

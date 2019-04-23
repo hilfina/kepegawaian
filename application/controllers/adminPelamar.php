@@ -385,8 +385,8 @@ class AdminPelamar extends CI_Controller {
                 $nama_surat = $this->input->post('nama_surat');
                 $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_surat from jenis_surat where nama_surat = '$nama_surat'"));
                 $id_surat = $data['id_surat'];
-                $tgl_mulai = $this->input->post('tgl_mulai');
-                $tgl_akhir = $this->input->post('tgl_akhir');
+                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $no_surat = $this->input->post('no_surat');
                 $this->upload->do_upload('file');
                 $b = $this->upload->data('file_name');

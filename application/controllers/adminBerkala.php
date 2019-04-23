@@ -49,8 +49,8 @@ class AdminBerkala extends CI_Controller {
 
                 $id_karyawan=$data2['id_karyawan'];
                 $berkala=$this->input->post('berkala');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
+                $mulai= date('Y-m-d',strtotime($this->input->post('mulai')));
+                $akhir= date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 $this->upload->do_upload('alamat_sk');
                 $alamat_sk=$this->upload->data('file_name');
@@ -96,8 +96,8 @@ class AdminBerkala extends CI_Controller {
                 $this->load->library('upload', $config);
                 
                 $berkala=$this->input->post('berkala');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
+                $mulai=date('Y-m-d',strtotime($this->input->post('mulai')));
+                $akhir=date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 if($_FILES['alamat_sk']['name'] != '') {
                     $this->upload->do_upload('alamat_sk');
@@ -105,10 +105,6 @@ class AdminBerkala extends CI_Controller {
                 } else {
                     $alamat_sk = $this->input->post('file_old');
                 }
-                // $s = $akhir;
-                // $date = strtotime($s);
-                // $exp = date('d/m/Y', strtotime('+1 day', $date));
-
                 $databerkala= array(
                 'berkala' => $berkala,
                 'mulai' => $mulai,

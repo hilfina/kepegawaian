@@ -53,7 +53,7 @@ $this->load->view("header.php");
                                         <th>File Pengajuan</th>
                                         <th>Kredensial</th>
                                         <th>Tanggal Penugasan Klinis</th>
-                                        <th>Tanggal Berakhir</th>
+                                        <th>Tanggal Berakhir Penugasan</th>
                                         <th>File Penugasan Klinis</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -70,8 +70,8 @@ $this->load->view("header.php");
                                             <?php } ?>
                                         </td>
                                         <td><?php echo $key->penilaian; ?></td>
-                                        <td><?php echo $key->tgl_penilaian; ?></td>
-                                        <td><?php echo $key->tgl_finalisasi; ?></td>
+                                        <td><?php echo $key->tgl_mulai; ?></td>
+                                        <td><?php echo $key->tgl_akhir; ?></td>
                                         <td>
                                             <?php if(($key->doku_penilaian) != NULL) {?>
                                              <font style="color: blue">File Tersedia</font>

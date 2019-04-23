@@ -89,6 +89,18 @@
               </div>
             </td>
           </tr>
+          <tr>
+            <td><label form-control-label>Berkahir Tanggal</label></td>
+            <td style="height: 50px">
+              <div class="col-lg-12">
+              <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+              <div class="input-daterange input-group" id="datepicker">
+                <input name="akhir" type="text" class="form-control" value="<?php echo $key->akhir ?>">
+                </div>
+                </div>
+              </div>
+            </td>
+          </tr>
         </table><br>
         <div align="center">
           <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">

@@ -50,8 +50,8 @@ class AdminGol extends CI_Controller {
 
                 $id_karyawan=$data2['id_karyawan'];
                 $id_golongan=$this->input->post('id_golongan');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
+                $mulai = date('Y-m-d',strtotime($this->input->post('mulai')));
+                $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 $this->upload->do_upload('alamat_sk');
                 $alamat_sk=$this->upload->data('file_name');
@@ -102,8 +102,8 @@ class AdminGol extends CI_Controller {
                 $this->load->library('upload', $config);
                 
                 $id_golongan=$this->input->post('id_golongan');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
+                $mulai = date('Y-m-d',strtotime($this->input->post('mulai')));
+                $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 if($_FILES['alamat_sk']['name'] != '') {
                     $this->upload->do_upload('alamat_sk');
@@ -111,9 +111,7 @@ class AdminGol extends CI_Controller {
                 } else {
                     $alamat_sk = $this->input->post('file_old');
                 }
-                // $s = $akhir;
-                // $date = strtotime($s);
-                // $exp = date('d/m/Y', strtotime('+1 day', $date));
+
 
                 $datagolongan= array(
                 'id_golongan' => $id_golongan,
@@ -131,7 +129,7 @@ class AdminGol extends CI_Controller {
 
         else{ redirect("login"); } 
     }
-<<<<<<< HEAD
+
     public function del($id)
     {
         if($this->mdl_admin->logged_id()){
@@ -139,12 +137,7 @@ class AdminGol extends CI_Controller {
             $this->mdl_pelamar->hapusdata('golongan',$where);
             redirect("adminGol");
         }else{ redirect("login"); } 
-=======
-    public function del($id){
-        $where = array('id' => $id);
-        $this->mdl_pelamar->hapusdata('golongan',$where);
-        redirect("adminGol");
->>>>>>> parent of 49576eb... Revert "SubhanAllah"
+
     }
 }
 

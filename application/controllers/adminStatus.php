@@ -53,8 +53,8 @@ class AdminStatus extends CI_Controller {
 
                 $id_karyawan=$data2['id_karyawan'];
                 $id_status=$this->input->post('id_status');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
+                $mulai = date('Y-m-d',strtotime($this->input->post('mulai')));
+                $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 // $this->upload->do_upload('alamat_sk');
 
@@ -116,8 +116,8 @@ class AdminStatus extends CI_Controller {
                 $this->load->library('upload', $config);
                 
                 $id_status=$this->input->post('id_status');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
+                $mulai = date('Y-m-d',strtotime($this->input->post('mulai')));
+                $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 if($_FILES['alamat_sk']['name'] != '') {
                     if(!$this->upload->do_upload('alamat_sk')) {

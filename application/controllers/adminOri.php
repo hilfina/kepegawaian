@@ -44,8 +44,8 @@ class AdminOri extends CI_Controller {
                 $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
                 $id_karyawan=$data2['id_karyawan'];
-                $tgl_mulai=$this->input->post('tgl_mulai');
-                $tgl_akhir=$this->input->post('tgl_akhir');
+                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $this->upload->do_upload('doku_hadir');
                 $doku_hadir=$this->upload->data('file_name');
                
@@ -78,8 +78,8 @@ class AdminOri extends CI_Controller {
                 $config['max_size']         = 2000;
 
                 $this->load->library('upload', $config);
-                $tgl_mulai=$this->input->post('tgl_mulai');
-                $tgl_akhir=$this->input->post('tgl_akhir');
+                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 if($_FILES['doku_hadir']['name'] != '') {
                     $this->upload->do_upload('doku_hadir');
                     $doku_hadir = $this->upload->data('file_name');

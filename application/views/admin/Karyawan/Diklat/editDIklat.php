@@ -133,13 +133,6 @@
               </div>
             </td>
           </tr>
-          <tr>
-            <td colspan="2" align="center"><br>
-              <?php if(($key->file) != NULL){?>
-                <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file?>" width="80%"/>   
-              <?php }?>
-            </td>
-          </tr>
         </table><br>
         <div align="center">
           <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Tambahkan">

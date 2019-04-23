@@ -245,8 +245,8 @@ class Karyawan extends CI_Controller {
 			$data=mysqli_fetch_array(mysqli_query($konek, $query));
 		    $xxx = $data['id_surat'];
 			$id_surat = $xxx;
-		    $tgl_mulai = $this->input->post('tgl_mulai');
-		    $tgl_akhir = $this->input->post('tgl_akhir');
+		    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $no_surat = $this->input->post('no_surat');
 		    $this->upload->do_upload('file');
 			$b = $this->upload->data('file_name');
@@ -294,8 +294,8 @@ class Karyawan extends CI_Controller {
 			$data=mysqli_fetch_array(mysqli_query($konek, $query));
 		    $xxx = $data['id_surat'];
 			$id_surat = $xxx;
-		    $tgl_mulai = $this->input->post('tgl_mulai');
-		    $tgl_akhir = $this->input->post('tgl_akhir');
+		    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $no_surat = $this->input->post('no_surat');
 		    if($_FILES['file']['name'] != '') {
 				$this->upload->do_upload('file');
@@ -357,8 +357,8 @@ class Karyawan extends CI_Controller {
 
 		    $id=$this->session->userdata('myId');
 		    
-		    $tgl_mulai = $this->input->post('tgl_mulai');
-		    $tgl_akhir = $this->input->post('tgl_akhir');
+		    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $no_surat = $this->input->post('no_surat');
 		    $this->upload->do_upload('doku_hadir');
 			$doku_hadir = $this->upload->data('file_name');
@@ -394,8 +394,8 @@ class Karyawan extends CI_Controller {
 
 			$this->load->library('upload', $config);
 		    
-		    $tgl_mulai = $this->input->post('tgl_mulai');
-		    $tgl_akhir = $this->input->post('tgl_akhir');
+		    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $no_surat = $this->input->post('no_surat');
 		    if($_FILES['doku_hadir']['name'] != '') {
 				$this->upload->do_upload('doku_hadir');
@@ -451,8 +451,8 @@ class Karyawan extends CI_Controller {
 
 		    $id=$this->session->userdata('myId');
 		    
-		    $tgl_mulai = $this->input->post('tgl_mulai');
-		    $tgl_akhir = $this->input->post('tgl_akhir');
+		    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $nomor_sertif = $this->input->post('nomor_sertif');
 		    $nama_diklat = $this->input->post('nama_diklat');
 		    $jenis_diklat = $this->input->post('jenis_diklat');
@@ -497,8 +497,8 @@ class Karyawan extends CI_Controller {
 
 			$this->load->library('upload', $config);
 		    
-		    $tgl_mulai = $this->input->post('tgl_mulai');
-		    $tgl_akhir = $this->input->post('tgl_akhir');
+		    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $nomor_sertif = $this->input->post('nomor_sertif');
 		    $nama_diklat = $this->input->post('nama_diklat');
 		    $jenis_diklat = $this->input->post('jenis_diklat');

@@ -94,7 +94,7 @@
                     <?php if(($key->aktif) == 1){ ?>
                       <i class="fa fa-check"></i> Surat Aktif 
                     <?php }else{ ?>
-                      <i class="fa fa-check"></i> Kadaluarsa 
+                       Kadaluarsa 
                     <?php } ?>
                     </td>
                     <td align="center">

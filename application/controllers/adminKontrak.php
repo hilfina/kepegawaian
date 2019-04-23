@@ -50,8 +50,8 @@ class AdminKontrak extends CI_Controller {
                 $id_karyawan=$data2['id_karyawan'];
                 $gaji=$this->input->post('gaji');
                 $ket=$this->input->post('ket');
-                $tgl_mulai=$this->input->post('tgl_mulai');
-                $tgl_akhir=$this->input->post('tgl_akhir');
+                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $no_mou=$this->input->post('no_mou');
                 $this->upload->do_upload('file');
                 $file=$this->upload->data('file_name');
@@ -94,8 +94,8 @@ class AdminKontrak extends CI_Controller {
                 
                 $gaji=$this->input->post('gaji');
                 $ket=$this->input->post('ket');
-                $tgl_mulai=$this->input->post('tgl_mulai');
-                $tgl_akhir=$this->input->post('tgl_akhir');
+                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $no_mou=$this->input->post('no_mou');
                 if($_FILES['file']['name'] != '') {
                     $this->upload->do_upload('file');

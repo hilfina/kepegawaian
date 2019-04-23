@@ -50,8 +50,8 @@ class AdminKew extends CI_Controller {
 
                 $id_karyawan=$data2['id_karyawan'];
                 $id_golongan=$this->input->post('id_golongan');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
+                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 $this->upload->do_upload('alamat_sk');
                 $alamat_sk=$this->upload->data('file_name');
@@ -102,8 +102,8 @@ class AdminKew extends CI_Controller {
                 $this->load->library('upload', $config);
                 
                 $id_golongan=$this->input->post('id_golongan');
-                $mulai=$this->input->post('mulai');
-                $akhir=$this->input->post('akhir');
+                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 if($_FILES['alamat_sk']['name'] != '') {
                     $this->upload->do_upload('alamat_sk');

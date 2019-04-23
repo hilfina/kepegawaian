@@ -10,8 +10,9 @@ class Home extends CI_Controller {
         $this->load->model('mdl_home');
     }
 
-    public function cariKadaluarsa(){ //fungsi untuk cari kadaluarsa surat tanpa notif email
-		$tgl_sekarang = date('m/d/Y', time());	
+    public function cariKadaluarsa(){ 
+    //fungsi untuk cari kadaluarsa surat tanpa notif email
+		$tgl_sekarang = date('Y-m-d', time());	
 
 		$semua_status = $this->db->get('status')->result();
 		$semua_golongan = $this->db->get('golongan')->result();
