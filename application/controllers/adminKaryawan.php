@@ -171,7 +171,7 @@ class AdminKaryawan extends CI_Controller {
                 );
              $datalogin = array(
                 'username' => $username,
-                'password' => $password,
+                'password' => $password
                 );
              //jika profesi yg dipilih berubah atau ruangan penempatannya berubah
             if ($riwayatm['id_profesi'] != $idPro['id_profesi'] || $riwayatm['ruangan'] != $ruangan) {
