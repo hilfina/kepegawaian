@@ -50,6 +50,8 @@ $this->load->view("header.php");
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
                                         <select type="text" class="chosen-select" name="nama_surat">
+                                        <option><?php echo $key->nama_surat; ?></option>
+                                        <option>---Pilih----</option>
                                          <?php
                                             $konek = mysqli_connect("localhost","root","","kepegawaian");
                                             $query = "select nama_surat from jenis_surat";
@@ -108,17 +110,14 @@ $this->load->view("header.php");
                                               </label>
                                               <div class="file-button">
                                                   Browse
-                                                  <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                                  <input type="file" name="file" value="<?php echo $key->file?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                                               </div>
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected">
                                           </div>
                                         </div>
-                                        <?php if(($key->file) != NULL){?>
-                                            <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file?>" width="400"/>   
-                                        <?php }?>
+                                    <font size="2">Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
                                 </div>
-                                <font size="2">Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2 mb </font>
                             </div>
                             <br>
                             <div class="row">

@@ -38,6 +38,18 @@ $this->load->view("header.php");
                   <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                       <div class="input-mask-title" style="align-self: left;">
+                        <label>N I K</label>
+                      </div>
+                    </div>
+                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <div class="input-mark-inner">
+                        <input type="text" class="form-control" name="nik" value="<?php echo $key->nik;?>" readonly>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="input-mask-title" style="align-self: left;">
                         <label>Nama Karyawan</label>
                       </div>
                     </div>
@@ -47,18 +59,7 @@ $this->load->view("header.php");
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                      <div class="input-mask-title" style="align-self: left;">
-                        <label>N I K</label>
-                      </div>
-                    </div>
-                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                      <div class="input-mark-inner">
-                        <input type="text" class="form-control" name="nik" value="<?php echo $key->nik;?>">
-                      </div>
-                    </div>
-                  </div>
+                  
                   <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                       <div class="input-mask-title" style="align-self: left;">
@@ -147,16 +148,6 @@ $this->load->view("header.php");
                       </div>
                     </div>
                   </div> <br>
-                  <div class="row">
-                    <div class="date-picker-inner">
-                      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"> </div>
-                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                        <?php if(($key->file) != NULL){?>
-                          <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file?>" width="100%"/>   
-                        <?php }?>
-                      </div>
-                    </div>
-                  </div><br><br>
                   <div class="row"align="center">
                     <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Simpan</button>
                   <div>

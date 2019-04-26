@@ -24,7 +24,7 @@ class AdminDiklat extends CI_Controller {
         }else{ redirect("login"); }
     }
 
-    public function diklatDetail($id)
+    public function detailDiklat($id)
     {
         $where=array('id_karyawan' => $id);
         $paket['array']=$this->mdl_admin->getData('diklat',$where);
@@ -32,14 +32,14 @@ class AdminDiklat extends CI_Controller {
 
     }
 
-    public function addDiklat(){
+    public function addDiklat($id){
        if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sertif','Nomor Sertifikat','trim|required');
 
             if($this->form_validation->run()==FALSE){
-
-                $data['array']=$this->mdl_admin->getAlldata('jenis_golongan');
+                $where=array('id_karyawan' => $id);
+                $data['array']=$this->mdl_admin->getData('diklat', $where);
                 $this->load->view('admin/Karyawan/Diklat/addDiklat',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
@@ -49,12 +49,8 @@ class AdminDiklat extends CI_Controller {
                 $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
-                
-                $konek = mysqli_connect("localhost","root","","kepegawaian");
-                $a=$this->input->post('nik');
-                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
-                $id_karyawan=$data2['id_karyawan'];
+                $id_karyawan=$id;
                 $nama_diklat=$this->input->post('nama_diklat');
                 $jenis_diklat=$this->input->post('jenis_diklat');
                 $tahun=$this->input->post('tahun');
@@ -80,13 +76,13 @@ class AdminDiklat extends CI_Controller {
 
                 $this->mdl_admin->addData('Diklat',$dataDiklat);
 
-                redirect("adminDiklat");
+                redirect("adminDiklat/detailDiklat/$id");
                 }
         }
         else{ redirect("login"); } 
     }
 
-    public function editDiklat($id){
+    public function editDiklat($id, $idk){
          if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sertif','Nomor Sertifikat','trim|required');
@@ -102,11 +98,7 @@ class AdminDiklat extends CI_Controller {
                 $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
-                
-                $konek = mysqli_connect("localhost","root","","kepegawaian");
-                $a=$this->input->post('nik');
-                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
-                $id_karyawan=$data2['id_karyawan'];
+
                 $nama_diklat=$this->input->post('nama_diklat');
                 $jenis_diklat=$this->input->post('jenis_diklat');
                 $tahun=$this->input->post('tahun');
@@ -122,7 +114,6 @@ class AdminDiklat extends CI_Controller {
                 }
 
                 $dataDiklat= array(
-                    'id_karyawan' => $id_karyawan,
                     'nama_diklat' => $nama_diklat,
                     'jenis_diklat' => $jenis_diklat,
                     'tgl_mulai' => $tgl_mulai,
@@ -135,15 +126,15 @@ class AdminDiklat extends CI_Controller {
 
                 $where = array('id_diklat' => $id);
                 $this->mdl_admin->updateData($where,$dataDiklat,'diklat');
-                redirect("adminDiklat");
+                redirect("adminDiklat/detailDiklat/$idk");
             }
         }else{ redirect("login"); } 
     }
 
-    public function delDiklat($id){
+    public function delDiklat($id, $idk){
         if($this->mdl_admin->logged_id()){
             $this->mdl_pelamar->hapusdata('diklat',$id);
-            redirect("adminDiklat");
+            redirect("adminDiklat/detailDiklat/$idk");
         }else{ redirect("login"); } 
     }
 }

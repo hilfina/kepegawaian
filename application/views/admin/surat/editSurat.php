@@ -43,7 +43,7 @@
             <td><label form-control-label>Nama Karyawan</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="nama" type="text" class="form-control" value="<?php echo $key->nama ?>" disabled>
+                <input name="nik" type="text" class="form-control" value="<?php echo $key->nik ?>" disabled>
               </div>
             </td>
           </tr>
@@ -60,7 +60,13 @@
             <td><label form-control-label>Jenis Surat</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="nama_surat" type="text" class="form-control" value="<?php echo $key->nama_surat ?>">
+                <select name="nama_surat" type="text" class="form-control">
+                  <option> <?php echo $key->nama_surat ?></option>
+                  <option>---Pilih---</option>
+                  <?php foreach ($surat as $key2) { ?>
+                  <option><?php echo $key2->nama_surat; ?></option>
+                  <?php } ?>
+                </select>
               </div>
             </td>
           </tr>
@@ -70,7 +76,7 @@
               <div class="col-lg-12">
               <div class="form-group data-custon-pick data-custom-mg" id="data_5">
               <div class="input-daterange input-group" id="datepicker">
-                <input name="tgl_mulai" type="text" class="form-control" value="<?php echo $key->tgl_mulai ?>">
+                <input name="tgl_mulai" type="text" class="form-control" value="<?php echo $key->tgl_mulai; ?>">
               </div>
               </div>
               </div>
@@ -82,7 +88,7 @@
               <div class="col-lg-12">
               <div class="form-group data-custon-pick data-custom-mg" id="data_5">
               <div class="input-daterange input-group" id="datepicker">
-                <input name="tgl_akhir" type="text" class="form-control" value="<?php echo $key->tgl_akhir ?>">
+                <input name="tgl_akhir" type="text" class="form-control" value="<?php echo $key->tgl_akhir; ?>">
               </div>
               </div>
               </div>
@@ -99,7 +105,8 @@
                         <i class="fa fa-download"></i>
                       </label>
                       <div class="file-button">Browse 
-                        <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                        <input type="hidden" name="file_old" value="<?php echo $key->file; ?>">
+                        <input type="file" name="file" value="<?php echo $key->file;?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                       </div>
                       <input type="text" id="prepend-big-btn" placeholder="no file selected">
                     </div>
@@ -107,13 +114,6 @@
                   </div>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2" align="center"><br>
-              <?php if(($key->file) != NULL){?>
-                <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file?>" width="90%"/>   
-              <?php }?>
             </td>
           </tr>
         </table><br>

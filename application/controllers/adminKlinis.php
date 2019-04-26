@@ -1,42 +1,42 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AdminKontrak extends CI_Controller {
-	private $filename = "import_data";
-	public function __construct()
-	{
-		parent::__construct();
+class AdminKlinis extends CI_Controller {
+    private $filename = "import_data";
+    public function __construct()
+    {
+        parent::__construct();
         $this->load->model('mdl_login');
         $this->load->model('mdl_pelamar');
-		$this->load->model('mdl_admin');
-		$this->load->model('mdl_home');
-		$this->load->helper('url','form','file');
-		$this->load->library('form_validation','image_lib');
+        $this->load->model('mdl_admin');
+        $this->load->model('mdl_home');
+        $this->load->helper('url','form','file');
+        $this->load->library('form_validation','image_lib');
         $this->load->helper(array('url','download'));
-	}
+    }
 
-	public function index()
-	{
-		if($this->mdl_admin->logged_id())
-		{
-			$paket['array']=$this->mdl_admin->getKontrak();
-            $this->load->view('admin/Karyawan/mou/Kontrak/allKontrak',$paket);
-		}else{
-			//jika session belum terdaftar, maka redirect ke halaman login
-			redirect("login");
-		}
-	}
+    public function index()
+    {
+        if($this->mdl_admin->logged_id())
+        {
+            $paket['array']=$this->mdl_admin->getKlinis();
+            $this->load->view('admin/Karyawan/mou/Klinis/allKlinis',$paket);
+        }else{
+            //jika session belum terdaftar, maka redirect ke halaman login
+            redirect("login");
+        }
+    }
 
-    public function addKontrak(){
+    public function addKlinis(){
        if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('no_mou','Nomor Surat MOU','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/mou/Kontrak/addKontrak');
+                $this->load->view('admin/Karyawan/mou/Klinis/addKlinis');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx|png';
+                $config['allowed_types']    = 'pdf|jpg|docx}png';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
@@ -48,7 +48,6 @@ class AdminKontrak extends CI_Controller {
                 $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
                 $id_karyawan=$data2['id_karyawan'];
-                $gaji=$this->input->post('gaji');
                 $ket=$this->input->post('ket');
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
@@ -58,7 +57,6 @@ class AdminKontrak extends CI_Controller {
                
                 $data= array(
                 'id_karyawan' => $id_karyawan,
-                'gaji' => $gaji,
                 'tgl_mulai' => $tgl_mulai,
                 'tgl_akhir' => $tgl_akhir,
                 'ket' => $ket,
@@ -67,9 +65,9 @@ class AdminKontrak extends CI_Controller {
                 'aktif' => 1
                 );
 
-                $this->mdl_admin->addData('mou_kontrak',$data);
+                $this->mdl_admin->addData('mou_klinis',$data);
 
-                redirect("AdminKontrak");
+                redirect("AdminKlinis");
                 }
         }
         else{ redirect("login"); } 
@@ -81,8 +79,8 @@ class AdminKontrak extends CI_Controller {
             $this->form_validation->set_rules('no_mou','Nomor Surat Keputusan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $data['array']=$this->mdl_admin->getKontrakedit($id);
-                $this->load->view('admin/Karyawan/mou/Kontrak/editKontrak',$data);
+                $data['array']=$this->mdl_admin->getklinisedit($id);
+                $this->load->view('admin/Karyawan/mou/Klinis/editKlinis',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -91,8 +89,6 @@ class AdminKontrak extends CI_Controller {
                 $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
-                
-                $gaji=$this->input->post('gaji');
                 $ket=$this->input->post('ket');
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
@@ -103,12 +99,7 @@ class AdminKontrak extends CI_Controller {
                 } else {
                     $file = $this->input->post('file_old');
                 }
-                // $s = $tgl_akhir;
-                // $date = strtotime($s);
-                // $exp = date('d/m/Y', strtotime('+1 day', $date));
-
                 $data= array(
-                'gaji' => $gaji,
                 'tgl_mulai' => $tgl_mulai,
                 'tgl_akhir' => $tgl_akhir,
                 'ket' => $ket,
@@ -118,16 +109,16 @@ class AdminKontrak extends CI_Controller {
                 );
 
                 $where = array('id' => $id);
-                $this->mdl_admin->updateData($where,$data,'mou_kontrak');
-                redirect("AdminKontrak");
+                $this->mdl_admin->updateData($where,$data,'mou_klinis');
+                redirect("AdminKlinis");
                 }
         }
 
         else{ redirect("login"); } 
     }
     public function del($id){
-        $this->mdl_pelamar->hapusdata('mou_kontrak',$id);
-        redirect("AdminKontrak");
+        $this->mdl_pelamar->hapusdata('mou_klinis',$id);
+        redirect("AdminKlinis");
     }
 }
 

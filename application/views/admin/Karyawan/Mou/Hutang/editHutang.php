@@ -67,7 +67,7 @@
               <div class="col-lg-12">
               <div class="form-group data-custon-pick data-custom-mg" id="data_5">
               <div class="input-daterange input-group" id="datepicker">
-                <input name="tgl_mulai" type="text" class="form-control" value="<?php echo $key->tgl_mulai ?>">
+                <input name="tgl_mulai" type="text" class="form-control" value="<?php echo $key->tgl_mulai; ?>">
               </div>
               </div>
               </div>
@@ -79,7 +79,7 @@
               <div class="col-lg-12">
               <div class="form-group data-custon-pick data-custom-mg" id="data_5">
               <div class="input-daterange input-group" id="datepicker">
-                <input name="tgl_akhir" type="text" class="form-control" value="<?php echo $key->tgl_akhir ?>">
+                <input name="tgl_akhir" type="text" class="form-control" value="<?php echo$key->tgl_akhir; ?>">
               </div>
               </div>
               </div>

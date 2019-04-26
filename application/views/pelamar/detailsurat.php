@@ -50,16 +50,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <select type="text" class="chosen-select" name="nama_surat">
-                                         <?php
-                                            $konek = mysqli_connect("localhost","root","","kepegawaian");
-                                            $query = "select nama_surat from jenis_surat";
-                                            $hasil = mysqli_query($konek, $query);
-                                            while ($data=mysqli_fetch_array($hasil)) {?>
-                                            ?>
-                                              <option> <?php echo $data['nama_surat']?> </option>
-                                          <?php }?>
-                                        </select>
+                                        <input type="text" class="form-control" name="nama_surat" value="<?php echo $key->nama_surat;?> ">
                                     </div>
                                 </div>
                             </div>
@@ -97,14 +88,15 @@ $this->load->view("header.php");
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
-                                        <label>Foto Scan Dokumen</label>
+                                        <label>Unduh Dokumen</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        
                                         <?php if(($key->file) != NULL){?>
-                                            <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file?>" width="400"/>   
+                                            <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                                <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                            </a>   
                                         <?php }?>
                                     </div>
                                 </div>

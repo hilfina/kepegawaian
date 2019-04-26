@@ -19,7 +19,7 @@ class AdminKew extends CI_Controller {
 		if($this->mdl_admin->logged_id())
 		{
 			$paket['array']=$this->mdl_admin->getKew();
-            $this->load->view('admin/Karyawan/allKew',$paket);
+            $this->load->view('admin/Karyawan/Kredensial/allKew',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -29,18 +29,14 @@ class AdminKew extends CI_Controller {
     public function addKew(){
        if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
+            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-
-                $data['array']=$this->mdl_admin->getAlldata('jenis_golongan');
-                $this->load->view('admin/Karyawan/addGol',$data);
+                $this->load->view('admin/Karyawan/Kredensial/add');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx}png';
+                $config['allowed_types']    = 'pdf|docx';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
                 
@@ -49,35 +45,29 @@ class AdminKew extends CI_Controller {
                 $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
                 $id_karyawan=$data2['id_karyawan'];
-                $id_golongan=$this->input->post('id_golongan');
+                $tgl_pengajuan=date('Y-m-d',strtotime($this->input->post('tgl_pengajuan')));
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
-                $nomor_sk=$this->input->post('nomor_sk');
-                $this->upload->do_upload('alamat_sk');
-                $alamat_sk=$this->upload->data('file_name');
+                $penilaian=$this->input->post('penilaian');
+
+                $this->upload->do_upload('doku_pengajuan');
+                $doku_pengajuan=$this->upload->data('file_name');
+
+                $this->upload->do_upload('file2');
+                $file2=$this->upload->data('file_name');
                
-                $datagolongan= array(
+                $data= array(
                 'id_karyawan' => $id_karyawan,
-                'id_golongan' => $id_golongan,
-                'mulai' => $mulai,
-                'akhir' => $akhir,
-                'alamat_sk' => $alamat_sk,
-                'nomor_sk' => $nomor_sk,
-                'aktif' => 1
+                'tgl_pengajuan' => $tgl_pengajuan,
+                'penilaian' => $penilaian,
+                'tgl_mulai' => $tgl_mulai,
+                'tgl_akhir' => $tgl_akhir,
+                'doku_pengajuan' => $doku_pengajuan,
+                'doku_penilaian' => $file2,
                 );
 
-                
-                $updategolongan= array('akhir' => $mulai, 'aktif' => 0);
-                $whereS = array('id_karyawan' => $id_karyawan, 'aktif' => 1);
-                $this->mdl_admin->updateData($whereS,$updategolongan,'golongan');
-                
-                $dataKaryawan= array('id_golongan' => $id_golongan);
-                $where = array('id_karyawan' => $id_karyawan);
-
-                $this->mdl_admin->addData('golongan',$datagolongan);
-                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
-
-                redirect("adminGol");
+                $this->mdl_admin->addData('kewenangan_klinis',$data);
+                redirect("adminKew");
                 }
         }
         else{ redirect("login"); } 
@@ -86,46 +76,49 @@ class AdminKew extends CI_Controller {
     public function edit($id){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
+            $this->form_validation->set_rules('penilaian','penilaian','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $data['array']=$this->mdl_admin->getGoledit($id);
-                $data['array2']=$this->mdl_admin->getAlldata('golongan');
-                $this->load->view('admin/Karyawan/editGol',$data);
+                $data['array']=$this->mdl_admin->getKewedit($id);
+                $this->load->view('admin/Karyawan/Kredensial/edit',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx|png';
+                $config['allowed_types']    = 'pdf|docx';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
-                
-                $id_golongan=$this->input->post('id_golongan');
+
+                if($_FILES['doku_pengajuan']['name'] != '') {
+                    $this->upload->do_upload('doku_pengajuan');
+                    $doku_pengajuan = $this->upload->data('file_name');
+                } else {
+                    $doku_pengajuan = $this->input->post('file_old');
+                }
+
+                if($_FILES['doku_penilaian']['name'] != '') {
+                    $this->upload->do_upload('doku_penilaian');
+                    $doku_penilaian = $this->upload->data('file_name');
+                } else {
+                    $doku_penilaian = $this->input->post('file_old2');
+                }
+
+                $tgl_pengajuan=date('Y-m-d',strtotime($this->input->post('tgl_pengajuan')));
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
-                $nomor_sk=$this->input->post('nomor_sk');
-                if($_FILES['alamat_sk']['name'] != '') {
-                    $this->upload->do_upload('alamat_sk');
-                    $alamat_sk = $this->upload->data('file_name');
-                } else {
-                    $alamat_sk = $this->input->post('file_old');
-                }
-                // $s = $akhir;
-                // $date = strtotime($s);
-                // $exp = date('d/m/Y', strtotime('+1 day', $date));
-
-                $datagolongan= array(
-                'id_golongan' => $id_golongan,
-                'mulai' => $mulai,
-                'akhir' => $akhir,
-                'alamat_sk' => $alamat_sk,
-                'nomor_sk' => $nomor_sk,
+                $penilaian=$this->input->post('penilaian');
+               
+                $data= array(
+                'penilaian' => $penilaian,
+                'tgl_pengajuan' => $tgl_pengajuan,
+                'tgl_mulai' => $tgl_mulai,
+                'tgl_akhir' => $tgl_akhir,
+                'doku_pengajuan' => $doku_pengajuan,
+                'doku_penilaian' => $doku_penilaian,
                 );
 
-                $where = array('id' => $id);
-                $this->mdl_admin->updateData($where,$datagolongan,'golongan');
-                redirect("adminGol");
+                $where = array('id_kewenangan' => $id);
+                $this->mdl_admin->updateData($where,$data,'kewenangan_klinis');
+                redirect("AdminKew");
                 }
         }
 
@@ -133,8 +126,8 @@ class AdminKew extends CI_Controller {
     }
     public function del($id){
         $where = array('id_kewenangan' => $id);
-        $this->mdl_pelamar->hapusdata('golongan',$id);
-        redirect("adminGol");
+        $this->mdl_pelamar->hapusdata('kewenangan_klinis',$where);
+        redirect("adminKew");
     }
 }
 

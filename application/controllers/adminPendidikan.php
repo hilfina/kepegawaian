@@ -89,7 +89,7 @@ class AdminPendidikan extends CI_Controller {
             }
             else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'jpg|png';
+                $config['allowed_types']    = 'jpg|png|pdf|docx';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
@@ -131,12 +131,12 @@ class AdminPendidikan extends CI_Controller {
             }
         }else{ redirect("login"); }         
     }
-    public function hapuspend($id)
+    public function delpend($id)
     {
         $where = array('id' => $id);
         $this->mdl_pelamar->hapusdata('pendidikan',$where);
         $this->session->set_flashdata('msg','Data Sukses di Hapus');
-        redirect(site_url('karyawan/datapend'));
+        redirect("AdminPendidikan");
     }
 }
 /* End of file admin.php */

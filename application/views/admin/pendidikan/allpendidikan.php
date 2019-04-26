@@ -68,42 +68,54 @@
               <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
-                    <th  data-field="state" data-checkbox="true">Pilih</th>
                     <th>No</th>
                     <th>Nama Karyawan</th>
+                    <th>Nomor Ijazah</th>
                     <th>Nama Institusi</th>
                     <th>Jurusan</th>
                     <th>Periode</th>
                     <th>Nilai</th>
-                    <th>Nomor Ijazah</th>
-                    <th>Setting</th>
+                    <th>File</th>
+                    <th>Status</th>
+                    <th>Pilihan</th>
                   </tr>
                 </thead>
                 <tbody>
                 <?php $no = 1 ?>
                 <?php foreach ($pen as $key) { ?>
                   <tr>
-                      <td></td>
                       <td><?php echo $no++ ?></td>
                       <td><?php echo $key->nama; ?></td>
+                      <td><?php echo $key->nomor_ijazah; ?></td>
                       <td><?php echo $key->pendidikan; ?></td>
                       <td><?php echo $key->jurusan; ?></td>
                       <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
                       <td><?php echo $key->nilai; ?></td>
-                      <td><?php echo $key->nomor_ijazah; ?></td>
-                      <td><a href="<?php echo site_url(); echo "/adminPendidikan/editPend/";  echo $key->id ; ?>">
-                      <button title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                      <a href="<?php echo site_url(); echo "/adminPendidikan/delPend/";  echo $key->id ; ?>"  onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                      <button title="Hapus Data" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                    </a>
-                      <?php 
+                      <td>
+                        <?php if(($key->file) != NULL){ ?>
+                          <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                            <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                          </a>
+                        <?php }else{ ?>
+                          <font style="color: red">Tidak Ada file</font>
+                        <?php } ?>
+                      </td>
+                      <td>
+                        <?php 
                         if(($key->verifikasi) == 1){ ?>
-                         <i class="fa fa-check" style="color: RED" title="TELAH TERVERIVIKASI"></i>
+                         <p style="color: blue"> terverifikasi</p> 
                          <?php }else{ ?>
                           <a href="<?php echo site_url(); echo "/admin/verPend/";  echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                            <button class="btn btn-success waves-effect" title="VERIFIKASI DATA" ><i class="fa fa-check" ></i></button>
+                            <button class="btn btn-danger waves-effect" title="VERIFIKASI DATA" ><i class="fa fa-check" ></i></button>
                           </a>
                         <?php } ?>
+                      </td>
+                      <td><a href="<?php echo site_url(); echo "/adminPendidikan/editPend/";  echo $key->id ; ?>">
+                      <button title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                      <a href="<?php echo site_url(); echo "/adminPendidikan/delPend/";  echo $key->id ; ?>"  onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                      <button title="Hapus Data" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</button>
+                      </a>
+                
                       </td>
                   </tr>
                 <?php }?>

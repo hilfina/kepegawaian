@@ -215,12 +215,32 @@ class Mdl_admin extends CI_Model
     }
 
     public function getKewedit($id){
-        $query = $this->db->query("SELECT * from kewenangan_klinis as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        $query = $this->db->query("SELECT * from kewenangan_klinis as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_kewenangan = $id");
         return $query->result();
     }
 
     public function editRSel($idS,$nama,$hasil){
         $this->db->query("UPDATE riwayat_seleksi SET hasil='$hasil' where id_seleksi = $idS AND nama_tes = '$nama'");
+    }
+
+    public function getKlinis(){
+        $query = $this->db->query("SELECT * from mou_klinis as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getKlinisedit($id){
+        $query = $this->db->query("SELECT * from mou_klinis as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
+    public function getUrgas(){
+        $query = $this->db->query("SELECT * from uraian_tugas as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getUrgasedit($id){
+        $query = $this->db->query("SELECT * from uraian_tugas as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_uraian = $id");
+        return $query->result();
     }
 
 }

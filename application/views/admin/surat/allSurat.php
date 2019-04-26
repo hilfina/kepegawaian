@@ -68,7 +68,6 @@
               <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
-                    <th  data-field="state" data-checkbox="true">Pilih</th>
                     <th>No</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
@@ -76,6 +75,7 @@
                     <th>Nomor Surat</th>
                     <th>Jenis Surat</th>
                     <th>Tanggal Berlaku</th>
+                    <th>File</th>
                     <th>Keaktifan</th>
                     <th>Aksi</th>
                   </tr>
@@ -84,14 +84,22 @@
                 <?php $no = 1 ?>
                 <?php foreach ($array as $key) { ?>
                     <tr>
-                        <td></td>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $key->nama; ?></td>
                         <td><?php echo $key->id_profesi; ?></td>
                         <td><?php echo $key->id_status; ?></td>
                         <td><?php echo $key->no_surat; ?></td>
-                        <td><?php echo $key->nama_surat; ?></td>
+                        <td><?php echo $key->jenis_surat; ?></td>
                         <td><?php echo date('d M Y', strtotime($key->tgl_mulai)); echo " - "; echo date('d M Y', strtotime($key->tgl_akhir)); ?></td>
+                        <td>
+                          <?php if(($key->file) != NULL){ ?>
+                            <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                              <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                            </a>
+                          <?php }else{ ?>
+                            <font style="color: red">Tidak Ada file</font>
+                          <?php } ?>
+                        </td>
                         <td>
                         <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
                           <i class="fa fa-check"></i> Surat Aktif 
@@ -103,10 +111,10 @@
                         </td>
                         <td>
                           <a href="<?php echo site_url(); echo "/admin/editsurat/"; echo $key->id_sipstr;?>">
-                            <button class="btn btn-success waves-effect">Edit</button>
+                            <button class="btn btn-warning waves-effect">Edit</button>
                           </a>
                           <a href="<?php echo site_url(); echo "/admin/delsurat/"; echo $key->id_sipstr;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                            <button class="btn btn-warning waves-effect">Hapus</button>
+                            <button class="btn btn-danger waves-effect">Hapus</button>
                           </a>
                         </td>
                     </tr>

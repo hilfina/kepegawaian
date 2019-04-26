@@ -178,7 +178,7 @@
                   <li><a title="Karyawan" href="<?php echo site_url('admin/datapend') ?>">Pendidikan</a></li>
                   <li><a title="Diklat" href="<?php echo site_url('adminDiklat/') ?>">Diklat</a></li>
                   <li><a title="Orientasi" href="<?php echo site_url('adminOri/') ?>">Orientasi</a></li>
-                  <li><a title="Uraian Tugas" href="<?php echo site_url('adminUraianTugas/') ?>">Uraian Tugas</a></li>
+                  <li><a title="Uraian Tugas" href="<?php echo site_url('adminUrgas/') ?>">Uraian Tugas</a></li>
                   <li><a title="Proses Kredensial" href="<?php echo site_url('adminKew/') ?>">Proses Kredensial</a></li>
                   <li><a title="Data Profesi" href="<?php echo site_url('adminProfesi/') ?>">Data profesi</a></li>
                 </ul>
