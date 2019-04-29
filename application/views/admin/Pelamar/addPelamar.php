@@ -54,6 +54,30 @@
             </td>
           </tr>
           <tr>
+            <td><label form-control-label>Jenis Kelamin</label></td>
+            <td style="height: 50px">
+              <div class="col-lg-12">
+                <select class="form-control" name="jenkel">
+                  <option>-- Pilihan --</option>
+                  <option>Laki - Laki</option>
+                  <option>Perempuan</option>
+                </select>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><label form-control-label>Tanggal Lahir</label></td>
+            <td style="height: 50px">
+              <div class="col-lg-12">
+                <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                  <div class="input-daterange input-group" id="datepicker">
+                    <input type="text" class="form-control" name="ttl" placeholder="Tanggal Lahir Pelamar" />
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
             <td><label form-control-label>Alamat Lengkap</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">

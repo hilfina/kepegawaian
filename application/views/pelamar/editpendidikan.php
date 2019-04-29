@@ -128,7 +128,7 @@ $this->load->view("header.php");
                                               </div>
                                             </div>
                                         <?php if(($key->file) != NULL){?>
-                                            <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file?>" width="400"/>   
+                                            <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file?>" width="400"/>   
                                         <?php }?>
                                     </div>
                                 </div>

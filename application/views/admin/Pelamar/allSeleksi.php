@@ -51,7 +51,9 @@
                   <tr>
                     <th>Id Seleksi</th>
                     <th>Nama</th>
-                    <th>Tanggal Seleksi Terakhir</th>
+                    <th>Tanggal Tes Terakhir</th>
+                    <th>Jenis Tes</th>
+                    <th>Hasil</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -61,9 +63,25 @@
                       <td><?php echo $key->id_seleksi;?></td>
                       <td><?php echo $key->nama;?></td>
                       <td><?php echo date('d M Y', strtotime($key->tgl_seleksi)); ?></td>
+                      <td><?php echo $key->nama_tes;?></td>
+                      <td><?php echo $key->hasil;?></td>
                       <td>
-                        
-                        <?php if ($key->nilai_agama != "-" AND $key->nilai_kompetensi != "-" AND $key->nilai_wawancara != "-" AND $key->tes_psikologi != "-" AND $key->tes_kesehatan != "-" ) {?>
+                        <?php if ($key->hasil != "-" ) {?>
+                          <?php if ($key->nama_tes == "Wawancara") {
+                            $tes = "Wawancara";
+                          }elseif ($key->nama_tes == "Tes Tulis") {
+                            $tes = "Tulis";
+                          }elseif ($key->nama_tes == "Tes Psikologi") {
+                            $tes = "Psikologi";
+                          }elseif ($key->nama_tes == "Tes Kesehatan") {
+                            $tes = "Kesehatan";
+                          }elseif ($key->nama_tes == "Baca Al-Quran") {
+                            $tes = "Baca";
+                          } ?>
+                          <a href="<?php echo site_url('admin/lanjutt/').$tes."/lulus/".$key->hasil."/".$key->id_seleksi ?>"><input type="submit" class="btn btn-success" value="Lanjut"></a>
+                          <a href="<?php echo site_url('admin/lanjutt/').$tes."/stop/".$key->hasil."/".$key->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
+                        </a>
+                        <?php }elseif ($key->nilai_agama != "-" AND $key->nilai_kompetensi != "-" AND $key->nilai_wawancara != "-" AND $key->tes_psikologi != "-" AND $key->tes_kesehatan != "-" ) {?>
                           <a href="<?php echo site_url(); echo "/admin/detSeleksi/"; echo $key->id_karyawan ;?>"><button class="btn btn-primary ">Detail</button></i></a>
                         </a>
                        <?php } else { ?>

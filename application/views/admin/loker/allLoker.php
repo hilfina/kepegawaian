@@ -36,7 +36,7 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right"><a href="<?php echo site_url('adminLoker/addLoker')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Profesi</button>
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
               </div>
             </div>
