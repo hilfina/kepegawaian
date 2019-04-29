@@ -115,9 +115,9 @@
                         <i class="fa fa-download"></i>
                       </label>
                       <div class="file-button"> Browse
-                        <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                        <input type="file" name="file" value="<?php echo $key->file; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                       </div>
-                      <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                      <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->file; ?>">
                     </div>
                   </div>
                 </div>

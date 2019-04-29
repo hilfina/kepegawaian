@@ -133,7 +133,7 @@ class AdminKaryawan extends CI_Controller {
             $no_telp=$this->input->post('no_telp');
             $email=$this->input->post('email');
             $username=$this->input->post('username');
-            $password=$this->input->post('password');
+            $password=md5($this->input->post('password'));
             $id_status=$this->input->post('id_status');
             $id_profesi=$this->input->post('id_profesi');
             $id_golongan=$this->input->post('id_golongan');
