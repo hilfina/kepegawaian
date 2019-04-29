@@ -20,7 +20,6 @@ $this->load->view("header.php");
                                 </ul>
                             </div>
                         </div>
-                        <br>
                     </div>
                 </div>
             </div>
@@ -63,15 +62,18 @@ $this->load->view("header.php");
                                         <td><?php echo $key->tgl_mulai; ?></td>
                                         <td><?php echo $key->tgl_akhir; ?></td>
                                         <td>
-                                        <?php if(($key->aktif) == 1){ ?>
-                                            <button class="pd-setting"><i class="fa fa-check"></i> Surat Aktif</button> 
-                                          <?php }else{ ?>
-                                            <button class="ds-setting">Surat Kadaluarsa</button>
-                                          <?php } ?>
-                                          
+                                        <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                                          <i class="fa fa-check"></i> Surat Aktif 
+                                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                                          <i class="fa fa-check"></i> Belum Aktif
+                                        <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                                          <i class="fa fa-times"></i> Kadaluarsa 
+                                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                                          <font color="red">Edit tanggal akhir</font>
+                                        <?php } ?>
                                         </td>
                                         <td>
-                                        <?php if(($key->aktif) == 1){ ?>
+                                        <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) && $key->file != NULL){ ?>
                                         <a href="<?php echo site_url('pelamar/detailsurat/').$key->id_sipstr ?>">   
                                         <button data-toggle="tooltip" title="detail" class="pd-setting-ed"><i class="fa fa-eye"></i>   Detail</button> </a>
                                         <?php }else{ ?>

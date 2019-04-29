@@ -115,7 +115,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|png';
+			$config['allowed_types']	= 'pdf/docx';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -166,7 +166,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|png';
+			$config['allowed_types']	= 'pdf/docx';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;

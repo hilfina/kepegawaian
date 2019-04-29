@@ -10,7 +10,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data karyawan</span>
+                <li><span class="bread-blod">Data Uraian Tugas Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -28,16 +28,23 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Uraian Tugas Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminKaryawan/addKaryawan')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah karyawan</button>
+                <div align="right"><a href="<?php echo site_url('adminUrgas/addUrgas')?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
+                <div class=" container-fluid" id="notif">
+                    <?php if ($this->session->flashdata('msg')) :?>
+                        <div class="alert alert-success"> 
+                    <?php echo $this->session->flashdata('msg')?>
+                        </div>
+                    <?php endif; ?>
+                </div>
               </div>
             </div>
           </div>
@@ -55,34 +62,36 @@
                   <tr>
                     <th>No</th>
                     <th>NIK</th>
-                    <th>Foto</th>
-                    <th>Nama</th>
-                    <th>TTL</th>
-                    <th>Gender</th>
-                    <th>E-Mail</th>
+                    <th>Nama Karyawan</th>
                     <th>Profesi</th>
                     <th>Status</th>
-                    <th>Golongan</th>
+                    <th>File</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
                 <tbody>
+                <?php $no=1;?>
                 <?php foreach ($array as $key) { ?>
                   <tr>
-                    <td><?php echo $key->id_karyawan; ?></td>
-                    <td><?php echo $key->nik; ?></td>
-                    <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='100'>"; ?></td>
+                    <td><?php echo $no++ ?></td>
+                    <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->ttl; ?></td>
-                    <td><?php echo $key->jenkel; ?></td>
-                    <td><?php echo $key->email; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>
                     <td><?php echo $key->id_status; ?></td>
-                    <td><?php echo $key->id_golongan; ?></td>
-                    <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminKaryawan/karyawanDetail/"; echo $key->id_karyawan ;?>">
-                        <button class="btn btn-warning waves-effect waves-light mg-b-15">Detail</button>
+                    <td>
+                    <?php if(($key->file_urgas) != NULL){ ?>
+                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file_urgas; ?>" download>
+                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
                       </a>
+                    <?php }else{ ?>
+                      <font style="color: red">Tidak Ada file</font>
+                    <?php } ?>
+                    </td>
+                    <td align="center">
+                      <a href="<?php echo site_url(); echo "/adminUrgas/edit/"; echo $key->id_uraian ;?>">
+                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                      <a href="<?php echo site_url(); echo "/adminUrgas/del/"; echo $key->id_uraian;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                        <button data-toggle="tooltip" title="Hapus" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</button></a>
                     </td>
                   </tr>
                 <?php }?>

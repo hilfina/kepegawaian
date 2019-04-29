@@ -80,12 +80,12 @@ class Mdl_pelamar extends CI_Model
         return $query->result();
     }
     public function getSurat($id){
-        $query= $this->db->query("SELECT s.id_sipstr, s.no_surat, j.jenis_surat, s.tgl_mulai, s.tgl_akhir, s.aktif  from sip_str as s inner join jenis_surat as j on s.id_surat=j.id_surat where id_karyawan='$id'");
+        $query= $this->db->query("SELECT s.id_sipstr, s.no_surat, j.jenis_surat, s.tgl_mulai, s.tgl_akhir, s.aktif, s.file from sip_str as s inner join jenis_surat as j on s.id_surat=j.id_surat where id_karyawan='$id'");
         return $query->result();
     }
 
     public function getDetailsurat($id){
-        $query= $this->db->query("SELECT * from sip_str  where id_sipstr='$id'");
+        $query= $this->db->query("SELECT s.id_sipstr, j.nama_surat, j.jenis_surat, s.no_surat, s.tgl_mulai, s.tgl_akhir, s.file  from sip_str as s inner join jenis_surat as j on s.id_surat=j.id_surat where s.id_sipstr='$id'");
         return $query->result();
     }
 

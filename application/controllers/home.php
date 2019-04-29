@@ -21,6 +21,7 @@ class Home extends CI_Controller {
 		$semua_hutang = $this->db->get('mou_hutang')->result();
 		$semua_kontrak = $this->db->get('mou_kontrak')->result();
 		$semua_sekolah = $this->db->get('mou_sekolah')->result();
+		$semua_klinis = $this->db->get('mou_klinis')->result();
 
 		$semua_surat = $this->db->get('sip_str')->result();
 
@@ -91,6 +92,17 @@ class Home extends CI_Controller {
 				$this->db->update('mou_sekolah', array('aktif' => 1), array('id' => $sekolah->id));
 			} else {
 				$this->db->update('mou_sekolah', array('aktif' => 0), array('id' => $sekolah->id));
+			}
+		}
+
+		foreach($semua_klinis as $klinis) {
+			$tgl_mulai = $klinis->tgl_mulai;
+			$tgl_akhir = $klinis->tgl_akhir;
+
+			if(($tgl_sekarang > $tgl_mulai) && ($tgl_sekarang < $tgl_akhir)) {
+				$this->db->update('mou_klinis', array('aktif' => 1), array('id' => $klinis->id));
+			} else {
+				$this->db->update('mou_klinis', array('aktif' => 0), array('id' => $klinis->id));
 			}
 		}
 

@@ -80,7 +80,7 @@
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>
                     <td><?php echo $key->nomor_sk; ?></td>
-                    <td><?php echo $key->mulai." - ".$key->akhir; ?></td>
+                    <td><?php echo date('d M Y', strtotime($key->mulai))." - ".date('d M Y', strtotime($key->akhir)); ?></td>
                     <td>
                     <?php if(($key->alamat_sk) != NULL){ ?>
                       <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>

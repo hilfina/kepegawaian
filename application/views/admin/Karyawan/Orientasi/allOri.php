@@ -91,11 +91,9 @@
                     </td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminOri/edit/"; echo $key->id_orientasi ;?>">
-                        <button class="btn btn-warning waves-effect">edit</button>
-                      </a>
+                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                       <a href="<?php echo site_url(); echo "/adminOri/del/"; echo $key->id_orientasi;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button class="btn btn-danger waves-effect">hapus</button>
-                      </a>
+                        <button data-toggle="tooltip" title="Hapus" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</button></a>
                     </td>
                   </tr>
                 <?php }?>

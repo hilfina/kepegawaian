@@ -82,7 +82,7 @@
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>
                     <td><?php echo $key->no_mou; ?></td>
-                    <td><?php echo $key->tgl_mulai." - ".$key->tgl_akhir; ?></td>
+                    <td><?php echo date('d M Y', strtotime($key->tgl_mulai))." - ".date('d M Y', strtotime($key->tgl_akhir)); ?></td>
                     <td><?php echo $key->nominal; ?></td>
                     <td><?php echo $key->ket; ?></td>
                     <td>

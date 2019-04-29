@@ -452,8 +452,9 @@ class Admin extends CI_Controller {
             $this->form_validation->set_rules('no_surat', 'Nomor Surat', 'trim|required' );
 
             if ($this->form_validation->run()==FALSE) {
-                $paket['data']=$this->mdl_karyawan->getDetailSur($id);
-                $this->load->view('admin/surat/editsurat', $paket);
+                $data['surat']=$this->mdl_admin->getJenSur();
+                $data['data']=$this->mdl_karyawan->getDetailSur($id);
+                $this->load->view('admin/surat/editsurat', $data);
             }
             else{
                 $config['upload_path']      = './Assets/dokumen/';
@@ -504,8 +505,9 @@ class Admin extends CI_Controller {
     }
 
     public function delsurat($id){
-        $this->mdl_pelamar->hapusdata('sip_str',$id);
-        redirect("datasurat");
+        $where = array('id_sipstr' => $id);
+        $this->mdl_pelamar->hapusdata('sip_str',$where);
+        redirect("admin/datasurat");
     }
 }
 

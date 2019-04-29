@@ -8,7 +8,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="#">Data Orientasi</a> <span class="bread-slash">/</span> </li>
+                <li><a href="#">Data Uraian Tugas</a> <span class="bread-slash">/</span> </li>
                 <li><span class="bread-blod">Edit Dokumen</span> </li>
               </ul>
             </div>
@@ -25,11 +25,11 @@
         <div class="sparkline12-list mt-b-30">
           <div class="sparkline12-hd">  <br>
             <div class="main-sparkline12-hd">
-              <span><h4 align="center">EDIT DATA ORIENTASI KARYAWAN</h4></span>
+              <span><h4 align="center">EDIT DATA URAIAN TUGAS KARYAWAN</h4></span>
             </div>
           </div><br>
           <?php foreach ($array as $key) { ?>
-            <form action="<?php echo site_url(); ?>/adminOri/edit/<?php echo $key->id_orientasi?>" enctype="multipart/form-data" method="post">
+            <form action="<?php echo site_url(); ?>/adminUrgas/edit/<?php echo $key->id_uraian?>" enctype="multipart/form-data" method="post">
               <div class="sparkline12-graph">
                 <div class="input-knob-dial-wrap">
                   <div class="row">
@@ -45,35 +45,7 @@
                   <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                       <div class="input-mask-title">
-                        <label>Nama Karyawan</label>
-                      </div>
-                    </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                      <input name="nama" type="text" class="form-control" value="<?php echo $key->nama ?>" disabled>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="date-picker-inner">
-                      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="input-mask-title">
-                          <label>Tanggal Orientasi</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                        <div class="form-group data-custon-pick data-custom-mg" id="data_5">
-                          <div class="input-daterange input-group" id="datepicker">
-                            <input type="text" class="form-control" name="tgl_mulai" value="<?php echo $key->tgl_mulai; ?>" />
-                            <span class="input-group-addon">hingga</span>
-                            <input type="text" class="form-control" name="tgl_akhir" value="<?php echo$key->tgl_akhir; ?>" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                      <div class="input-mask-title">
-                        <label>Upload Dokumen Kehadiran</label>
+                        <label>Upload Dokumen Uraian Tugas</label>
                       </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -84,10 +56,10 @@
                               <i class="fa fa-download"></i>
                             </label>
                             <div class="file-button"> Browse
-                              <input type="hidden" name="file_old" value="<?php echo $key->doku_hadir; ?>">
-                              <input type="file" name="doku_hadir" value="<?php echo $key->doku_hadir; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                              <input type="hidden" name="file_old" value="<?php echo $key->file_urgas; ?>">
+                              <input type="file" name="file_urgas" value="<?php echo $key->file_urgas; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                             </div>
-                            <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->doku_hadir; ?>">
+                            <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->file_urgas; ?>">
                             <font size="2" color="red"> *Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 MB </font>
                           </div>
                         </div>

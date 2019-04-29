@@ -28,7 +28,7 @@
               <span><h4 align="center">DATA RIWAYAT PENDIDIKAN</h4></span>
             </div>
           </div> <br>
-          <form action="<?php echo site_url(); ?>/adminKaryawan/addpend/5"<?php echo "$id"; ?> enctype="multipart/form-data" method="post">
+          <form action="<?php echo site_url(); ?>/adminKaryawan/addpend/"<?php echo "$id"; ?> enctype="multipart/form-data" method="post">
             <div class="sparkline12-graph">
               <div class="input-knob-dial-wrap" style="margin-right: 15%;">
                 <div class="row">

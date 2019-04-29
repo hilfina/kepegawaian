@@ -13,7 +13,7 @@ $this->load->view("header.php");
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <ul class="breadcome-menu">
-                                    <li><a href="#">Data Pengajuan Kewenangan Klinis</a> <span class="bread-slash">/</span>
+                                    <li><a href="#">Proses Kredensial</a> <span class="bread-slash">/</span>
                                     </li>
                                     <li><span class="bread-blod">Tambah Dokumen</span>
                                     </li>
@@ -34,13 +34,25 @@ $this->load->view("header.php");
                     <div class="sparkline12-hd">
                     <br>
                         <div class="main-sparkline12-hd">
-                            <span><h4 align="center">DATA PENGAJUAN KEWENAGAN KLINIS</h4></span>
+                            <span><h4 align="center">Tambah Proses Kredensial</h4></span>
                         </div>
                     </div>
                     <br>
-                    <form action="<?php echo site_url();?>/karyawan/addkew/" enctype="multipart/form-data" method="post">
+                    <form action="<?php echo site_url();?>/adminKew/addKew/" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <div class="input-mask-title">
+                                        <label>NIK</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <div class="input-mark-inner">
+                                        <input type="text" name="nik" placeholder="Nomor Induk Karyawan" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
@@ -77,33 +89,40 @@ $this->load->view("header.php");
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected">
                                           </div>
                                         </div>
-                                        <font size="2">Format dokumen harus dalam bentuk jpg/png/docx/pdf. Ukuran file maksimal adalah 2 mb </font>
+                                        <font size="2">Format dokumen harus dalam bentuk docx/pdf. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
-                                        <label>Penilaian</label>
+                                        <label>Kredensial</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <input type="text" class="form-control" name="penilaian" placeholder="contoh: Lulus">
+                                        <Select type="text" class="form-control" name="penilaian">
+                                            <option>---Pilih---</option>
+                                            <option>Belum</option>
+                                            <option>Proses</option>
+                                            <option>Selesai</option>
+                                        </Select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                               <div class="date-picker-inner">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <div class="input-mask-title">
-                                        <label>Tanggal Penilaian</label>
-                                    </div>
+                                  <div class="input-mask-title">
+                                    <label>Tanggal Berlaku</label>
+                                  </div>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                   <div class="form-group data-custon-pick data-custom-mg" id="data_5">
                                     <div class="input-daterange input-group" id="datepicker">
-                                        <input type="text" class="form-control" name="tgl_penilaian" />
+                                      <input type="text" class="form-control" name="tgl_mulai" />
+                                      <span class="input-group-addon">hingga</span>
+                                      <input type="text" class="form-control" name="tgl_akhir" />
                                     </div>
                                   </div>
                                 </div>
@@ -112,7 +131,7 @@ $this->load->view("header.php");
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
-                                        <label>Upload Dokumen Penilaian</label>
+                                        <label>Upload Dokumen Kredensial</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
@@ -124,47 +143,16 @@ $this->load->view("header.php");
                                               </label>
                                               <div class="file-button">
                                                   Browse
-                                                  <input type="file" name="doku_penilaian" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                                  <input type="file" name="file2" value="" onchange="document.getElementById('prepend-big-btn2').value = this.value;">
                                               </div>
-                                              <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                                              <input type="text" id="prepend-big-btn2" placeholder="no file selected">
                                           </div>
                                         </div>
-                                        <font size="2">Format dokumen harus dalam bentuk jpg/png/docx/pdf. Ukuran file maksimal adalah 2 mb </font>
+                                        <font size="2">Format dokumen harus dalam bentuk docx/pdf. Ukuran file maksimal adalah 2 mb </font>
                                         <br>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                              <div class="date-picker-inner">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <div class="input-mask-title">
-                                        <label>Finalisasi</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <div class="input-daterange input-group" id="datepicker">
-                                        <input type="text" class="form-control" name="finalisasi"><p></p>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="date-picker-inner">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <div class="input-mask-title">
-                                        <label>Tanggal Finalisasi</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                  <div class="form-group data-custon-pick data-custom-mg" id="data_5">
-                                    <div class="input-daterange input-group" id="datepicker">
-                                        <input type="text" class="form-control" name="tgl_finalisasi" />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            
                             <br>
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">

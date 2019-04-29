@@ -356,7 +356,7 @@ class pelamar extends CI_Controller {
 				$config['max_width']		= 10240;
 				$config['max_height']		= 7680;
 
-		$this->load->library('upload', $config);
+				$this->load->library('upload', $config);
 
 			    $id=$this->session->userdata('myId');
 			    $nama_surat = $this->input->post('nama_surat');
@@ -414,7 +414,7 @@ class pelamar extends CI_Controller {
 				$config['max_size']			= 2000;
 				$config['max_width']		= 10240;
 				$config['max_height']		= 7680;
-		$this->load->library('upload', $config);
+				$this->load->library('upload', $config);
 
 				$nama_surat = $this->input->post('nama_surat');
 			    $konek = mysqli_connect("localhost","root","","kepegawaian");

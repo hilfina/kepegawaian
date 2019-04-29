@@ -36,17 +36,8 @@
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <?php foreach ($array as $key) { ?>
-          <form action="<?php echo site_url();?>/adminDiklat/editdiklat/<?php echo $key->id_diklat; ?>" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminDiklat/editdiklat/<?php echo $key->id_diklat; ?>/<?php echo $key->id_karyawan; ?>" enctype="multipart/form-data" method="POST">
           <table width="100%">
-          <tr>
-            <td><label form-control-label>NIK</label></td>
-            <td style="height: 50px">
-              <div class="col-lg-12">
-                <input name="nik" type="text" class="form-control" value="<?php echo $key->nik; ?>">
-              </div>
-            </td>
-          </tr>
-          <tr>
             <td><label form-control-label>Nama Acara Diklat</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
@@ -88,7 +79,7 @@
               <div class="col-lg-12">
               <div class="form-group data-custon-pick data-custom-mg" id="data_5">
               <div class="input-daterange input-group" id="datepicker">
-                <input name="tgl_akhir" type="text" class="form-control" value="<?php echo $key->tgl_akhir; ?>">
+                <input name="tgl_akhir" type="text" class="form-control" value="<?php echo$key->tgl_akhir; ?>">
               </div>
               </div>
               </div>

@@ -112,9 +112,9 @@
                       </div>
                       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <div class="input-daterange input-group" id="datepicker">
-                          <input type="text" class="form-control" name="mulai" value="<?php echo $key->tgl_mulai;?>" />
+                          <input type="text" class="form-control" name="mulai" value="<?php echo $key->mulai;?>" />
                           <span class="input-group-addon">hingga</span>
-                          <input type="text" class="form-control" name="akhir" value="<?php echo $key->tgl_akhir;?>" />
+                          <input type="text" class="form-control" name="akhir" value="<?php echo $key->akhir;?>" />
                         </div>
                       </div>
                     </div>
