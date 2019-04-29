@@ -41,7 +41,7 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right"><a href="<?php echo site_url('adminPelamar/addPelamar')?>">
-                  <button class="btn btn-primary waves-effect waves-light">Tambah Pelamar</button>
+                  <button class="btn btn-primary waves-effect waves-light">Tambah Data</button>
                 </a></div>
               </div>
             </div>

@@ -52,7 +52,8 @@ $idku=$this->session->userdata("myId");
           <?php foreach ($lengkap as $a) { 
             if ($a->nilai_kompetensi == "-" && $a->id_status == "Calon Karyawan") { ?>
               <div class="masih container-fluid" align="center">
-                <br><b><font size="2">TES TULIS</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { echo date('d M Y', strtotime($key->tgl_seleksi));  } ?>
+                <br><b><font size="2">TES TULIS</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { 
+                if ($a->tgl_seleksi == "0000-00-00") {echo "Belum Ditentukan";}else{echo date('d M Y', strtotime($key->tgl_seleksi));}} ?>
               </div>
             <?php }elseif ($a->nilai_kompetensi == "Lulus") { ?>
               <div class="lulus container-fluid" align="center">

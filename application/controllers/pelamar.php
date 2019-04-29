@@ -158,6 +158,8 @@ class pelamar extends CI_Controller {
 			$alamat = $this->input->post('alamat');
 			$no_telp = $this->input->post('no_telp');
 			$email = $this->input->post('email');
+			$ttl = $this->input->post('ttl');
+			$jenkel = $this->input->post('jenkel');
 			
 			if($_FILES['fotosaya']['name'] != '') {
 				$this->upload->do_upload('fotosaya');
@@ -173,6 +175,8 @@ class pelamar extends CI_Controller {
 				'alamat' => $alamat,
 				'no_telp' => $no_telp,
 				'email' => $email,
+				'ttl' => $ttl,
+				'jenkel' => $jenkel,
 				'foto' => $fotosaya
 			);
 			$where = array( 'id_karyawan' => $id );

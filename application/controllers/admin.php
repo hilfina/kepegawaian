@@ -53,23 +53,33 @@ class Admin extends CI_Controller {
        if($this->mdl_admin->logged_id())
         {       
             $where = array( 'id_karyawan' => $id_karyawan);
-            $data['datDir']=$this->mdl_admin->getData('karyawan',$where);//nama,id,profesi pelamar
+            $paket['datDir']=$this->mdl_admin->getData('karyawan',$where);//nama,id,profesi pelamar
+            $paket['datSel']=$this->mdl_admin->detSeleksi($id_karyawan);
             
             $konek = mysqli_connect("localhost","root","","kepegawaian");
-            if ($this->mdl_admin->detSeleksi($id_karyawan)) { //jika pelamar sudah punya data seleksi
-                $s=mysqli_fetch_array(mysqli_query($konek, "select * from seleksi where id_karyawan = $id_karyawan"));
-                $data['wawa']=$this->mdl_pelamar->carii('Wawancara',$s['id_seleksi']);
-                $data['psiko']=$this->mdl_pelamar->carii('Tes Psikologi',$s['id_seleksi']);
-                $data['agam']=$this->mdl_pelamar->carii('Tes Agama',$s['id_seleksi']);
+            if ($this->mdl_admin->detSeleksi($id_karyawan)) {
+                $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from seleksi where id_karyawan = $id_karyawan"));
+                
+                //DATA SELEKSI YANG ADA DI RIWAYAT SELEKSI
+                $paket['wawa']=$this->mdl_pelamar->carii('Wawancara',$s['id_seleksi']);
+                $paket['psiko']=$this->mdl_pelamar->carii('Tes Psikologi',$s['id_seleksi']);
+                $paket['tulis']=$this->mdl_pelamar->carii('Tes Tulis',$s['id_seleksi']);
+                $paket['sehat']=$this->mdl_pelamar->carii('Tes Kesehatan',$s['id_seleksi']);
+                $paket['shalat']=$this->mdl_pelamar->carii('Tes Shalat',$s['id_seleksi']);
+                $paket['doa']=$this->mdl_pelamar->carii('Doa Sehari-hari',$s['id_seleksi']);
+                $paket['bimbing']=$this->mdl_pelamar->carii('Tes Membimbing Pasien',$s['id_seleksi']);
+                $paket['baca']=$this->mdl_pelamar->carii('Baca Al-Quran',$s['id_seleksi']);
+                $paket['semua']=$this->mdl_pelamar->semuaSeleksi($s['id_seleksi']);
                 $where2 = array( 'id_seleksi' => $s['id_seleksi']);
             }else{$where2 = array( 'id_seleksi' => '0');}
             
-            $data['datSel']=$this->mdl_admin->getData('seleksi',$where);
-            $data['datRSel']=$this->mdl_admin->getData('riwayat_seleksi',$where2);
-            $this->load->view('admin/pelamar/detailSeleksi',$data);
+            $paket['datSel']=$this->mdl_admin->getData('seleksi',$where);
+            $paket['datRSel']=$this->mdl_admin->getData('riwayat_seleksi',$where2);
+            $this->load->view('admin/pelamar/detailSeleksi',$paket);
         }else{ redirect("login"); } 
     } 
 
+    //EDIT DATA SELEKSI
     public function editDataSel(){
         if($this->mdl_admin->logged_id()) {   
             $idk=$this->input->post('idKSel');
@@ -86,128 +96,210 @@ class Admin extends CI_Controller {
             }else {
                 $a = $s['tes_ppa'];
             }   
+
             $tp_sel = $a;   
-            $id_sel = $this->input->post('idSel');     
-            $tgl_sel = $this->input->post('tglSel');
-            if ($this->input->post('nwSel') == "-- Pilihan --") {
-                $nw_sel = "-";
-            }else{
-                $nw_sel = $this->input->post('nwSel');
-            }if ($this->input->post('nkSel') == "-- Pilihan --") {
-                $nk_sel = "-";
-            }else{
-                $nk_sel = $this->input->post('nkSel');
-            }if ($this->input->post('naSel') == "-- Pilihan --") {
-                $na_sel = "-";
-            }else{
-                $na_sel = $this->input->post('naSel');
-            }if ($this->input->post('tpsSel') == "-- Pilihan --") {
-                $tps_sel = "-";
-            }else{
-                $tps_sel = $this->input->post('tpsSel');
-            }if ($this->input->post('tkSel') == "-- Pilihan --") {
-                $tk_sel = "-";
-            }else{
-                $tk_sel = $this->input->post('tkSel');
-            }
-            $dataSel = array(
-            'id_karyawan' => $idk,
-            'tgl_seleksi' => $tgl_sel,
-            'nilai_agama' => $na_sel,
-            'nilai_kompetensi' => $nk_sel,
-            'tes_ppa' => $tp_sel,
-            'tes_psikologi' => $tps_sel,
-            'tes_kesehatan' => $tk_sel,
-            'nilai_wawancara' => $nw_sel
-            );
+            $idSel = $this->input->post('idSel');     
+            $tgl = $this->input->post('tgl');
+            $wawancara = $this->input->post('wawancara');
+            $tulis = $this->input->post('tulis');
+            $psikologi = $this->input->post('psikologi');
+            $kesehatan = $this->input->post('kesehatan');
+            $doa = $this->input->post('doa');
+            $shalat = $this->input->post('shalat');
+            $bimbing = $this->input->post('bimbing');
+            $baca = $this->input->post('baca');
 
-            // jika tanggal sudah di isi untuk tanggal tes tulis & wawancara
-            if ($this->mdl_pelamar->caricari('Tes Tulis',$id_sel)) {
-                $this->mdl_admin->editRSel($id_sel,'Tes Tulis', $nk_sel);
+            if ($this->mdl_pelamar->caricari('Tes Tulis',$idSel)) {//jika di riwayat sudah ada tes tulis
+                $this->mdl_admin->editRSel($idSel,'Tes Tulis', $tulis);//maka edit hasil tes tulis
             }
-            elseif ($tgl_sel != "-" && $nk_sel == "-") {
-                //data Riwayat Seleksi
+            elseif ($tgl != "0000-00-00" && $tulis == "-") { //jika tanggal sudah diisi dan tes tulis masih kosong
                 $dataRSel = array(
-                    'id_seleksi' => $id_sel,
+                    'id_seleksi' => $idSel,
                     'nama_tes' => 'Tes Tulis',
-                    'hasil' => $nk_sel,
-                    'tanggal' => $tgl_sel
+                    'hasil' => $tulis, //nilai masih -
+                    'tanggal' => $tgl
                 );
-                $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
-            }elseif ($tgl_sel != "-" && $nk_sel != "-") {
-                $this->mdl_admin->editRSel($id_sel,'Tes Tulis', $nk_sel);
+                $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);//tambah data riwayat seleksi tes tulis 
+            }elseif ($tgl != "0000-00-00" && $tulis != "-") { //jika tanggal dan nilai tulis sudah diisi
+                $this->mdl_admin->editRSel($idSel,'Tes Tulis', $tulis); //edit hasil tes tulis di riwayat seleksi
             }
 
-            if ($this->mdl_pelamar->caricari('Wawancara',$id_sel)) {
-                $this->mdl_admin->editRSel($id_sel,'Wawancara', $nw_sel);
+            if ($this->mdl_pelamar->caricari('Wawancara',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Wawancara', $wawancara);
             }
-            elseif ($tgl_sel != "-" && $nw_sel == "-") {
+            elseif ($tgl != "0000-00-00" && $tulis != "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
-                    'id_seleksi' => $id_sel,
+                    'id_seleksi' => $idSel,
                     'nama_tes' => 'Wawancara',
-                    'hasil' => $nw_sel,
-                    'tanggal' => $tgl_sel
+                    'hasil' => $wawancara,
+                    'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
-            }elseif ($tgl_sel != "-" && $nw_sel != "-") {
-                $this->mdl_admin->editRSel($id_sel,'Wawancara', $nw_sel);
+            }elseif ($tgl != "0000-00-00" && $wawancara != "-") {
+                $this->mdl_admin->editRSel($idSel,'Wawancara',$wawancara);
             }
+
             $konek = mysqli_connect("localhost","root","","kepegawaian");
-            $b = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $id_sel && nama_tes = 'Wawancara'")); 
+            $b = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $idSel && nama_tes = 'Wawancara'")); 
 
-            if ($this->mdl_pelamar->caricari('Tes Psikologi',$id_sel)) {
-                $this->mdl_admin->editRSel($id_sel,'Tes Psikologi', $tps_sel);
+            if ($this->mdl_pelamar->caricari('Tes Psikologi',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Tes Psikologi', $psikologi);
             }
-            elseif ($tgl_sel != $b['tanggal'] && $b['hasil'] == "Lulus" && $tps_sel == "-") {
+            elseif ($tgl != $b['tanggal'] && $wawancara >= 60 && $psikologi == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
-                    'id_seleksi' => $id_sel,
+                    'id_seleksi' => $idSel,
                     'nama_tes' => 'Tes Psikologi',
-                    'hasil' => $tps_sel,
-                    'tanggal' => $tgl_sel
+                    'hasil' => $psikologi,
+                    'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
-            }elseif ($tps_sel != "-") {
-                $this->mdl_admin->editRSel($id_sel,'Tes Psikologi', $tps_sel);
+            }elseif ($psikologi != "-") {
+                $this->mdl_admin->editRSel($idSel,'Tes Psikologi', $psikologi);
             }
-            $c = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $id_sel && nama_tes = 'Tes Psikologi'"));
+            $c = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $idSel && nama_tes = 'Tes Psikologi'"));
 
-            if ($this->mdl_pelamar->caricari('Tes Agama',$id_sel)) {
-                $this->mdl_admin->editRSel($id_sel,'Tes Agama', $na_sel);
+            if ($this->mdl_pelamar->caricari('Tes Shalat',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Tes Shalat', $shalat);
             }
-            elseif ($tgl_sel != $c['tanggal'] && $c['hasil'] == "Lulus" && $na_sel == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $shalat == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
-                    'id_seleksi' => $id_sel,
-                    'nama_tes' => 'Tes Agama',
-                    'hasil' => $na_sel,
-                    'tanggal' => $tgl_sel
+                    'id_seleksi' => $idSel,
+                    'nama_tes' => 'Tes Shalat',
+                    'hasil' => $shalat,
+                    'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
-            }elseif ($na_sel != "-") {
-                $this->mdl_admin->editRSel($id_sel,'Tes Agama', $na_sel);
+            }elseif ($shalat != "-") {
+                $this->mdl_admin->editRSel($idSel,'Tes Shalat', $shalat);
             } 
 
-            if ($this->mdl_pelamar->caricari('Tes Kesehatan',$id_sel)) {
-                $this->mdl_admin->editRSel($id_sel,'Tes Kesehatan', $tk_sel);
+            if ($this->mdl_pelamar->caricari('Doa Sehari-hari',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Doa Sehari-hari', $doa);
             }
-            elseif ($tgl_sel != $c['tanggal'] && $c['hasil'] == "Lulus" && $tk_sel == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $doa == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
-                    'id_seleksi' => $id_sel,
+                    'id_seleksi' => $idSel,
+                    'nama_tes' => 'Doa Sehari-hari',
+                    'hasil' => $doa,
+                    'tanggal' => $tgl
+                );
+                $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
+            }elseif ($doa != "-") {
+                $this->mdl_admin->editRSel($idSel,'Doa Sehari-hari', $doa);
+            }
+
+            if ($this->mdl_pelamar->caricari('Tes Membimbing Pasien',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Tes Membimbing Pasien', $bimbing);
+            }
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $bimbing == "-") {
+                //data Riwayat Seleksi
+                $dataRSel = array(
+                    'id_seleksi' => $idSel,
+                    'nama_tes' => 'Tes Membimbing Pasien',
+                    'hasil' => $bimbing,
+                    'tanggal' => $tgl
+                );
+                $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
+            }elseif ($bimbing != "-") {
+                $this->mdl_admin->editRSel($idSel,'Tes Membimbing Pasien', $bimbing);
+            }
+
+            if ($this->mdl_pelamar->caricari('Baca Al-Quran',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $shalat);
+            }
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $baca == "-") {
+                //data Riwayat Seleksi
+                $dataRSel = array(
+                    'id_seleksi' => $idSel,
+                    'nama_tes' => 'Baca Al-Quran',
+                    'hasil' => $baca,
+                    'tanggal' => $tgl
+                );
+                $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
+            }elseif ($shalat != "-") {
+                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $shalat);
+            }
+            $d = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $idSel && nama_tes = 'Baca Al-Quran'"));
+            if ($this->mdl_pelamar->caricari('Tes Kesehatan',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Tes Kesehatan', $kesehatan);
+            }
+            elseif ($tgl != $d['tanggal'] && $d['hasil'] >= 60 && $kesehatan == "-") {
+                //data Riwayat Seleksi
+                $dataRSel = array(
+                    'id_seleksi' => $idSel,
                     'nama_tes' => 'Tes Kesehatan',
-                    'hasil' => $tk_sel,
-                    'tanggal' => $tgl_sel
+                    'hasil' => $kesehatan,
+                    'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
-            }elseif ($tk != "-") {
-                $this->mdl_admin->editRSel($id_sel,'Tes Kesehatan', $tk_sel);
+            }elseif ($kesehatan != "-") {
+                $this->mdl_admin->editRSel($idSel,'Tes Kesehatan', $kesehatan);
             } 
-
-            $where = array( 'id_karyawan' => $idk);
+            $dataSel = array('tgl_seleksi' => $tgl, 'tes_ppa' => $a);
+            $where = array( 'id_seleksi' => $idSel);
             $this->mdl_admin->updateData($where,$dataSel,'seleksi');
             redirect("admin/detSeleksi/$idk");
+
+        }else{ redirect("login"); } 
+    }
+
+    public function lanjutt($jenisTes,$ket,$hasil,$idSel){
+        if($this->mdl_admin->logged_id()){ 
+                $semua = $this->mdl_pelamar->semuaSeleksi($idSel);
+
+            if ($ket =="lulus") {
+                if($jenisTes == "Tulis") {
+                    $dataSel = array('nilai_kompetensi' => $hasil);
+                }elseif ($jenisTes == "Wawancara") {
+                    $dataSel = array('nilai_wawancara' => $hasil);
+                }elseif ($jenisTes == "Psikologi") {
+                    $dataSel = array('tes_psikologi' => $hasil);
+                }elseif ($jenisTes == "Kesehatan") {
+                    $dataSel = array('tes_kesehatan' => $hasil);
+                }elseif ($jenisTes == "Baca") {
+                    $dataSel = array('nilai_agama' => $hasil);
+                }
+                $where = array('id_seleksi' => $idSel);
+                $this->mdl_admin->updateData($where,$dataSel,'seleksi');
+            }else{
+                $dataPel = array('id_profesi' => "Belum", id_status => "Pelamar");
+                $where2 = array( 'id_karyawan' => $semua->id_karyawan);
+                $this->mdl_admin->updateData($where2,$dataPel,'karyawan');
+                $where = array('id_seleksi' => $idSel);
+                $this->mdl_pelamar->hapusdata('riwayat_seleksi',$where);
+                $this->mdl_pelamar->hapusdata('seleksi',$where);
+
+                $this->load->library('email');
+                $config = array();
+                $config['charset'] = 'utf-8';
+                $config['useragent'] = 'CodeIgniter';
+                $config['protocol']= "smtp";
+                $config['mailtype']= "html";
+                $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+                $config['smtp_port']= "465";
+                $config['smtp_timeout']= "400";
+                $config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
+                $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
+                $config['crlf']="\r\n"; 
+                $config['newline']="\r\n"; 
+                $config['wordwrap'] = TRUE;
+                //memanggil library email dan set konfigurasi untuk pengiriman email
+                    
+                $this->email->initialize($config);
+                //konfigurasi pengiriman
+                $this->email->from($config['smtp_user']);
+                $this->email->to($semua->email);
+                $this->email->subject("Notifikasi");
+                $this->email->message("Maaf, anda gagal dalam seleksi tahap $jenisTes di RSIA, silahkan mencoba pada peluang karir selanjutnya");
+                $this->email->send();
+                redirect("adminPelamar/pelamarDetail/$semua->id_karyawan");
+            }
+
+            redirect("admin/detSeleksi/$semua->id_karyawan");
         }else{ redirect("login"); } 
     }
     

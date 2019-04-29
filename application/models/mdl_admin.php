@@ -87,7 +87,7 @@ class Mdl_admin extends CI_Model
     }
     
     public function getSeleksi(){
-         $query = $this->db->query("SELECT * from seleksi as x inner join karyawan on x.id_karyawan = karyawan.id_karyawan where id_status = 'Pelamar' || id_status = 'Calon Karyawan'");
+         $query = $this->db->query(" select k.id_karyawan, r.id_seleksi, nama, nama_tes, tgl_seleksi, hasil, nilai_agama, nilai_kompetensi, nilai_wawancara, tes_psikologi, tes_kesehatan from karyawan as k inner join seleksi as s on k.id_karyawan = s.id_karyawan inner join riwayat_seleksi as r on s.id_seleksi = r.id_seleksi where (id_status='Pelamar' OR id_status ='Calon Karyawan') AND tanggal = tgl_seleksi group by r.id_seleksi order by r.id desc");
         return $query->result();
     }
     public function detSeleksi($id){

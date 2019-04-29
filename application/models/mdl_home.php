@@ -26,7 +26,7 @@ class Mdl_home extends CI_Model
     }
 
     function karyawan(){
-        $query= $this->db->query("SELECT count(id_karyawan) as banyak from karyawan where id_status != 'Calon Karyawan' || id_status != 'Pelamar' || id_status != 'PelamarDitolak'");
+        $query= $this->db->query("SELECT count(k.id_karyawan) as banyak from karyawan as k inner join login as l on k.id_karyawan = l.id_karyawan where id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND level != 'admin'");
         return $query->row();
     }
     function pelamar(){
@@ -34,7 +34,15 @@ class Mdl_home extends CI_Model
         return $query->row();
     }
     function calon(){
-        $query= $this->db->query("SELECT count(id_karyawan) as banyak from karyawan where id_status != 'Calon Karyawan'");
+        $query= $this->db->query("SELECT count(id_karyawan) as banyak from karyawan where id_status = 'Calon Karyawan'");
+        return $query->row();
+    }
+    function loker($tanggal){
+        $query= $this->db->query("SELECT count(id_loker) as banyak from loker where akhir > '$tanggal' AND mulai < '$tanggal'");
+        return $query->row();
+    }
+    function seleksi(){
+        $query= $this->db->query("select count(banyak) as banyak from (SELECT count(id_seleksi) as banyak from riwayat_seleksi where hasil = '-' group by id_seleksi) as jumblah");
         return $query->row();
     }
     function sipstr($tanggal){
@@ -51,10 +59,6 @@ class Mdl_home extends CI_Model
     }
     function mou_k($tanggal){
         $query= $this->db->query("SELECT count(id) as banyak from mou_kontrak where tgl_akhir >= $tanggal");
-        return $query->row();
-    }
-    function loker($tanggal){
-        $query= $this->db->query("SELECT count(id_loker) as banyak from loker where akhir >= $tanggal");
         return $query->row();
     }
 }

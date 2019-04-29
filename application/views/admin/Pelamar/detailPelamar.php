@@ -113,6 +113,26 @@
                           </td>
                         </tr>
                         <tr>
+                          <td><label form-control-label>Jenis Kelamin</label></td>
+                          <td style="height: 50px; width: 80%">
+                            <div class="col-lg-12">
+                              <input name="jenkel" type="text" class="form-control" value="<?php echo $key->jenkel;?>">
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><label form-control-label>Tanggal Lahir</label></td>
+                          <td style="height: 50px; width: 80%">
+                            <div class="col-lg-12">
+                              <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                <div class="input-daterange input-group" id="datepicker">
+                                  <input type="text" class="form-control" name="ttl" placeholder="Tanggal Lahir Pelamar" value="<?php echo date('Y/m/d',strtotime($key->ttl)); ?>"  style="align: left">
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
                           <td><label form-control-label>Alamat</label></td>
                           <td style="height: 50px">
                             <div class="col-lg-12">
@@ -329,157 +349,158 @@
                           <td><label form-control-label>Tanggal</label></td>
                           <td style="height: 50px">
                             <div class="col-lg-12">
-                              <?php if ($key->tgl_seleksi == "-"){ ?>
+                              <?php if ($key->tgl_seleksi == "0000-00-00"){ ?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes tulis dan wawancara</font>
-
-                              <?php } elseif (($key->nilai_wawancara == "Lulus" || $key->nilai_kompetensi == "Lulus") && $wawa->tanggal == $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
+                              <?php } elseif (($key->nilai_wawancara >=60 && $key->nilai_kompetensi >=60) && $wawa->tanggal == $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes psikologi</font>
-                              <?php } elseif (($key->nilai_wawancara == "Lulus" || $key->nilai_kompetensi == "Lulus") && $wawa->tanggal != $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
-                              <?php } elseif ($key->tes_psikologi == "Lulus" && $psiko->tanggal == $key->tgl_seleksi) {?>
-                                <font color="red" size="2">*Masukkan tanggal untuk tes agama dan kesehatan</font>
-                              <?php } elseif ($key->tes_psikologi == "Lulus" && $psiko->tanggal != $key->tgl_seleksi && $key->nilai_agama == "-" ) {?>
+                              <?php } elseif (($key->nilai_wawancara >=60 && $key->nilai_kompetensi >= 60) && $wawa->tanggal != $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
+                              <?php } elseif ($key->tes_psikologi >=60 && $psiko->tanggal == $key->tgl_seleksi) {?>
+                                <font color="red" size="2">*Masukkan tanggal untuk tes agama</font>
+                              <?php } elseif ($key->nilai_agama >=60 && $baca->tanggal == $key->tgl_seleksi) {?>
+                                <font color="red" size="2">*Masukkan tanggal untuk tes kesehatan</font>
                               <?php } ?>
-                              <input name="tglSel" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
+                              <input name="tgl" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
                             </div>
                           </td>
                         </tr>
 
                         <input name="idKSel" type="hidden" class="form-control" value="<?php echo $key->id_karyawan; ?>">
 
-                        <?php if ($key->tgl_seleksi != "-"){ ?>
-
+                        <?php if (isset($tulis->hasil)){ ?>
                           <tr>
                             <td><label form-control-label>Tes Tulis</label></td>
                             <td style="height: 50px">
                               <div class="col-lg-12">
-                                <?php if ($key->nilai_kompetensi == "-") { ?>
-                                  <select name="nkSel" type="text" class="form-control">
-                                  <option>-- Pilihan --</option>
-                                  <option>Lulus</option>
-                                  <option>Tidak Lulus</option>
-                                </select>
+                                <?php if ($tulis->hasil == "-") { ?>
+                                  <input name="tulis" type="text" class="form-control" placeholder="Persentase hasil tes tulis" >
                                 <?php } else { ?>
-                                  <input name="nkSel" type="text" class="form-control" value="<?php echo $key->nilai_kompetensi;?>" >
+                                  <input name="tulis" type="text" class="form-control" value="<?php echo $tulis->hasil;?>" >
                                 <?php } ?>
                               </div>
                             </td>
                           </tr>
-
+                        <?php }else{?>
+                          <input name="tulis" type="hidden" class="form-control" value="<?php echo $semua->nilai_kompetensi;?>" >
+                        <?php }?>
+                        <?php if ($key->nilai_kompetensi >= 60) { ?>
                           <tr>
                             <td><label form-control-label>Nilai Wawancara</label></td>
                             <td style="height: 50px">
                               <div class="col-lg-12">
-                                <?php if ($key->nilai_wawancara == "-") { ?>
-                                  <select name="nwSel" type="text" class="form-control">
-                                  <option>-- Pilihan --</option>
-                                  <option>Lulus</option>
-                                  <option>Tidak Lulus</option>
-                                </select>
+                                <?php if ($wawa->hasil == "-") { ?>
+                                  <input name="wawancara" type="text" class="form-control" placeholder="Persentase hasil tes wawancara" >
                                 <?php } else { ?>
-                                  <input name="nwSel" type="text" class="form-control" value="<?php echo $key->nilai_wawancara;?>" >
+                                  <input name="wawancara" type="text" class="form-control" value="<?php echo $wawa->hasil;?>" >
                                 <?php } ?>
                               </div>
                             </td>
                           </tr>
-                        <?php }elseif ($key->tgl_seleksi == "-") { ?>
-                          <tr>
-                            <td><label form-control-label>Tes Tulis</label></td>
-                            <td style="height: 50px">
-                              <div class="col-lg-12">
-                                <input name="nkSel" type="text" class="form-control" value="<?php echo $key->nilai_kompetensi;?>" readonly>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td><label form-control-label>Nilai Wawancara</label></td>
-                            <td style="height: 50px">
-                              <div class="col-lg-12">
-                                <input name="nwSel" type="text" class="form-control" value="<?php echo $key->nilai_wawancara;?>" readonly>
-                              </div>
-                            </td>
-                          </tr>
-                        <?php } ?> 
-                          <?php if (($key->nilai_wawancara == "Lulus" || $key->nilai_kompetensi == "Lulus") && $wawa->tanggal != $key->tgl_seleksi) { ?>
+                          <?php } else {?>
+                            <input name="wawancara" type="hidden" class="form-control" value="<?php echo $semua->nilai_wawancara;?>" >
+                          <?php }?>
+                          <?php if (isset($psiko->hasil)) { ?>
                             <tr>
                               <td><label form-control-label>Tes Psikologi</label></td>
                               <td style="height: 50px">
                                 <div class="col-lg-12">
-                                  <?php if ($key->tes_psikologi == "-") { ?>
-                                    <select name="tpsSel" type="text" class="form-control">
-                                    <option>-- Pilihan --</option>
-                                    <option>Lulus</option>
-                                    <option>Tidak Lulus</option>
-                                  </select>
+                                  <?php if ($psiko->hasil == "-") { ?>
+                                    <input name="psikologi" type="text" class="form-control" placeholder="Persentase hasil tes Psikologi" >
                                   <?php } else { ?>
-                                    <input name="tpsSel" type="text" class="form-control" value="<?php echo $key->tes_psikologi;?>" >
+                                    <input name="psikologi" type="text" class="form-control" value="<?php echo $psiko->hasil;?>" >
                                   <?php } ?>
                                 </div>
                               </td>
                             </tr>
                           <?php } else { ?>
-                            <tr>
-                              <td><label form-control-label>Tes Psikologi</label></td>
-                              <td style="height: 50px">
-                                <div class="col-lg-12">
-                                  <input name="tpsSel" type="text" class="form-control" value="<?php echo $key->tes_psikologi;?>" readonly>
-                                </div>
-                              </td>
-                            </tr>
-                          <?php } ?> 
-                          <?php if ($key->tes_psikologi == "Lulus" && $psiko->tanggal != $key->tgl_seleksi) { ?>
-                            <tr>
-                              <td><label form-control-label>Nilai Agama</label></td>
-                              <td style="height: 50px">
-                                <div class="col-lg-12">
-                                  <?php if ($key->nilai_agama == "-") { ?>
-                                      <select name="naSel" type="text" class="form-control">
-                                      <option>-- Pilihan --</option>
-                                      <option>Lulus</option>
-                                      <option>Tidak Lulus</option>
-                                    </select>
-                                    <?php } else { ?>
-                                      <input name="naSel" type="text" class="form-control" value="<?php echo $key->nilai_agama;?>" >
-                                    <?php } ?>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><label form-control-label>Tes Kesehatan</label></td>
-                              <td style="height: 50px">
-                                <div class="col-lg-12">
-                                  <?php if ($key->tes_kesehatan == "-") { ?>
-                                      <select name="tkSel" type="text" class="form-control">
-                                      <option>-- Pilihan --</option>
-                                      <option>Lulus</option>
-                                      <option>Tidak Lulus</option>
-                                    </select>
-                                    <?php } else { ?>
-                                      <input name="tkSel" type="text" class="form-control" value="<?php echo $key->tes_kesehatan;?>" >
-                                    <?php } ?>
-                                </div>
-                              </td>
-                            </tr>  
-                          <?php }else{?>
-                            <tr>
-                              <td><label form-control-label>Nilai Agama</label></td>
-                              <td style="height: 50px">
-                                <div class="col-lg-12">
-                                  <input name="naSel" type="text" class="form-control" value="<?php echo $key->nilai_agama;?>" readonly>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><label form-control-label>Tes Kesehatan</label></td>
-                              <td style="height: 50px">
-                                <div class="col-lg-12">
-                                  <input name="tkSel" type="text" class="form-control" value="<?php echo $key->tes_kesehatan;?>" readonly>
-                                </div>
-                              </td>
-                            </tr>  
+                            <input name="psikologi" type="hidden" class="form-control" value="<?php echo $key->tes_psikologi;?>" >
                           <?php } ?>
-                          <?php if ($key->nilai_agama == "Lulus" || $key->tes_kesehatan == "Lulus") { ?>
-                                                  
+
+                          <?php if (isset($shalat->hasil)) { ?>
+                            <tr>
+                              <td><label form-control-label>Tes Shalat</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($shalat->hasil == "-") { ?>
+                                    <input name="shalat" type="text" class="form-control" placeholder="Persentase hasil tes Shalat" >
+                                  <?php } else { ?>
+                                    <input name="shalat" type="text" class="form-control" value="<?php echo $shalat->hasil;?>" >
+                                  <?php } ?>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php } else { ?>
+                            <input name="shalat" type="hidden" class="form-control" value="<?php echo $key->nilai_agama;?>" >
+                          <?php } ?>
+
+                          <?php if (isset($baca->hasil)) { ?>
+                            <tr>
+                              <td><label form-control-label>Tes Baca Al-Qur'an</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($baca->hasil == "-") { ?>
+                                    <input name="baca" type="text" class="form-control" placeholder="Persentase hasil tes Baca Al-Qur'an" >
+                                  <?php } else { ?>
+                                    <input name="baca" type="text" class="form-control" value="<?php echo $baca->hasil;?>" >
+                                  <?php } ?>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php } else { ?>
+                            <input name="baca" type="hidden" class="form-control" value="<?php echo $key->nilai_agama;?>" >
+                          <?php } ?>
+
+                          <?php if (isset($doa->hasil)) { ?>
+                            <tr>
+                              <td><label form-control-label>Tes Doa Sehari-hari</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($doa->hasil == "-") { ?>
+                                    <input name="doa" type="text" class="form-control" placeholder="Persentase hasil tes Doa Sehari-hari" >
+                                  <?php } else { ?>
+                                    <input name="doa" type="text" class="form-control" value="<?php echo $doa->hasil;?>" >
+                                  <?php } ?>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php } else { ?>
+                            <input name="doa" type="hidden" class="form-control" value="<?php echo $key->nilai_agama;?>" >
+                          <?php } ?>
+
+                          <?php if (isset($bimbing->hasil)) { ?>
+                            <tr>
+                              <td><label form-control-label>Tes Membimbing Pasien</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($bimbing->hasil == "-") { ?>
+                                    <input name="bimbing" type="text" class="form-control" placeholder="Persentase hasil tes Membimbing Pasien" >
+                                  <?php } else { ?>
+                                    <input name="bimbing" type="text" class="form-control" value="<?php echo $bimbing->hasil;?>" >
+                                  <?php } ?>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php } else { ?>
+                            <input name="bimbing" type="hidden" class="form-control" value="<?php echo $key->nilai_agama;?>" >
+                          <?php } ?>
+
+                          <?php if (isset($sehat->hasil)) { ?>
+                            <tr>
+                              <td><label form-control-label>Tes Kesehatan</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($sehat->hasil == "-") { ?>
+                                    <input name="kesehatan" type="text" class="form-control" placeholder="Persentase hasil tes Kesehatan" >
+                                  <?php } else { ?>
+                                    <input name="kesehatan" type="text" class="form-control" value="<?php echo $sehat->hasil;?>" >
+                                  <?php } ?>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php } else { ?>
+                            <input name="kesehatan" type="hidden" class="form-control" value="<?php echo $key->tes_kesehatan;?>" >
+                          <?php } ?>
+                          
+                          <?php if ($key->nilai_agama >= 60 || $key->tes_kesehatan >= 60) { ?>                                                  
                             <tr>
                               <td><label form-control-label>Dokumen ppa</label></td>
                               <td style="height: 50px">
@@ -508,14 +529,100 @@
                             <?php }?>
                               </td>
                             </tr>
-                          <?php }?>
-                          
+                          <?php }?>                          
                       </table>
                     <?php }?><br>
+                    <?php if ($semua->tgl_seleksi == "0000-00-00") { ?>
+                      <div align="center">
+                      <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Update">
+                    </div>
+                  </form>
+                  <?php }if (isset($tulis->hasil)) {
+                    if ($tulis->hasil != "-" && $semua->nilai_kompetensi == "-"){
+                      $hasilnya = $tulis->hasil; ?>
+                  </form>
+                  <div align="center">
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Tulis/lulus/').$hasilnya."/".$wawa->id_seleksi ?>"><input type="submit" class="btn btn-success" value="Lanjut"></a>
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Tulis/stop/').$hasilnya."/".$wawa->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
+                  </div>
+
+
+                  <?php }elseif (isset($wawa->hasil)) {
+                    if ($wawa->hasil != "-" && $semua->nilai_wawancara == "-"){
+                      $hasilnya = $wawa->hasil; ?>
+                  </form>
+                  <div align="center">
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Wawancara/lulus/').$hasilnya."/".$tulis->id_seleksi ?>"><input type="submit" class="btn btn-success" value="Lanjut"></a>
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Wawancara/stop/').$hasilnya."/".$tulis->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
+                  </div>
+
+
+                  <?php }elseif (isset($psiko->hasil)) {
+                    if ($psiko->hasil != "-" && $semua->tes_psikologi == "-"){
+                      $hasilnya = $psiko->hasil; ?>
+                  </form>
+                  <div align="center">
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Psikologi/lulus/').$hasilnya."/".$psiko->id_seleksi ?>"><input type="submit" class="btn btn-success" value="Lanjut"></a>
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Psikologi/stop/').$hasilnya."/".$psiko->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
+                  </div>
+
+
+                  <?php }elseif (isset($baca->hasil)) {
+                    if ($baca->hasil != "-" && $semua->nilai_agama == "-"){
+                      $hasilnya = $baca->hasil; ?>
+                  </form>
+                  <div align="center">
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Baca/lulus/').$hasilnya."/".$baca->id_seleksi ?>"><input type="submit" class="btn btn-success" value="Lanjut"></a>
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Baca/stop/').$hasilnya."/".$baca->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
+                  </div>
+
+
+                  <?php }elseif (isset($sehat->hasil)) {
+                    if ($sehat->hasil != "-" && $semua->tes_kesehatan == "-"){
+                      $hasilnya = $sehat->hasil; ?>
+                  </form>
+                  <div align="center">
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Kesehatan/lulus/').$hasilnya."/".$sehat->id_seleksi ?>"><input type="submit" class="btn btn-success" value="Lanjut"></a>
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Kesehatan/stop/').$hasilnya."/".$sehat->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
+                  </div>
+                  <?php }else{ ?>
                     <div align="center">
                       <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Update">
                     </div>
                   </form>
+                  <?php } ?>
+
+
+                  <?php }else{ ?>
+                    <div align="center">
+                      <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Update">
+                    </div>
+                  </form>
+                  <?php } ?>
+
+
+                  <?php }else{ ?>
+                    <div align="center">
+                      <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Update">
+                    </div>
+                  </form>
+                  <?php } ?>
+
+
+                  <?php }else{ ?>
+                    <div align="center">
+                      <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Update">
+                    </div>
+                  </form>
+                  <?php } ?>
+
+
+                  <?php }else{ ?>
+                    <div align="center">
+                      <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Update">
+                    </div>
+                  </form>
+                  <?php }} ?>
                 </div>
               </div>
             </div>

@@ -112,10 +112,11 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		if($this->mdl_home->logged_id()){
-			$tanggal = date('m/d/Y');
+			$tanggal = date('Y-m-d');
 			$data['karyawan'] = $this->mdl_home->karyawan();
 			$data['pelamar'] = $this->mdl_home->pelamar();
 			$data['calon'] = $this->mdl_home->calon();
+			$data['seleksi'] = $this->mdl_home->seleksi();
 			$data['sipstr'] = $this->mdl_home->sipstr($tanggal);
 			$data['mou_h'] = $this->mdl_home->mou_h($tanggal);
 			$data['mou_s'] = $this->mdl_home->mou_s($tanggal);
