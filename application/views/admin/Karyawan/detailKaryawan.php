@@ -93,10 +93,10 @@
                             <td style="height: 50px">
                               <div class="col-lg-12">
                               <select  class="form-control" name="jenkel">
+                              <option><?php echo $key->jenkel;?></option>
                                 <option>---Pilih: -----</option>
                                 <option>Laki-laki</option>
                                 <option>Perempuan</option>
-                                 <option name="jenkel" type="text" class="form-control" value="<?php echo $key->jenkel;?>"></option>
                               </select>
                               </div>
                             </td>

@@ -139,7 +139,7 @@ class Mdl_admin extends CI_Model
     }
 
     public function getGol(){
-        $query = $this->db->query("SELECT * from golongan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        $query = $this->db->query("SELECT k.nik, k.nama, k.id_profesi, s.id_golongan, s.nomor_sk, s.alamat_sk, s.mulai, s.akhir, s.id from golongan as s inner join karyawan as k on k.id_karyawan = s.id_karyawan where s.id_golongan != 'Tidak Ada'");
         return $query->result();
     }
 
@@ -239,6 +239,11 @@ class Mdl_admin extends CI_Model
 
     public function getUrgasedit($id){
         $query = $this->db->query("SELECT * from uraian_tugas as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_uraian = $id");
+        return $query->result();
+    }
+
+    public function getaBerkala(){
+        $query = $this->db->query("SELECT k.id_karyawan, k.nik, k.nama, k.id_status, k.id_profesi,  from berkala as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
         return $query->result();
     }
 

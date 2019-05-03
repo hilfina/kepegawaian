@@ -27,7 +27,15 @@ class AdminBerkala extends CI_Controller {
 		}
 	}
 
-    public function addBerkala(){
+    public function detailDiklat($id)
+    {
+        $where=array('id_karyawan' => $id);
+        $paket['array']=$this->mdl_admin->getData('berkala',$where);
+        $this->load->view('admin/Karyawan/riwayat/berkala/detailBerkala',$paket);
+
+    }
+
+    public function addBerkala($id){
        if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
@@ -78,7 +86,7 @@ class AdminBerkala extends CI_Controller {
         else{ redirect("login"); } 
     }
 
-    public function edit($id){
+    public function edit($id, $idk){
          if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
@@ -121,7 +129,7 @@ class AdminBerkala extends CI_Controller {
 
         else{ redirect("login"); } 
     }
-    public function del($id){
+    public function del($id, $idk){
         $this->mdl_pelamar->hapusdata('berkala',$id);
         redirect("AdminBerkala");
     }
