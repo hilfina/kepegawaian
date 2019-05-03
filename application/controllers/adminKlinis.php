@@ -117,7 +117,8 @@ class AdminKlinis extends CI_Controller {
         else{ redirect("login"); } 
     }
     public function del($id){
-        $this->mdl_pelamar->hapusdata('mou_klinis',$id);
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata('mou_klinis',$where);
         redirect("AdminKlinis");
     }
 }
