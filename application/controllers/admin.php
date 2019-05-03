@@ -43,7 +43,7 @@ class Admin extends CI_Controller {
     public function dataSeleksi(){//data seleksi pelamar yang sedang dalam proses
        if($this->mdl_admin->logged_id())
         {
-            $paket['array']=$this->mdl_admin->getSeleksi();
+            $paket['array']= $this->mdl_admin->getSeleksi();
             $this->load->view('admin/pelamar/allSeleksi',$paket);
         }
         else{ redirect("login"); } 
@@ -209,7 +209,7 @@ class Admin extends CI_Controller {
             }
 
             if ($this->mdl_pelamar->caricari('Baca Al-Quran',$idSel)) {
-                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $shalat);
+                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $baca);
             }
             elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $baca == "-") {
                 //data Riwayat Seleksi
@@ -220,8 +220,8 @@ class Admin extends CI_Controller {
                     'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
-            }elseif ($shalat != "-") {
-                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $shalat);
+            }elseif ($baca != "-") {
+                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $baca);
             }
             $d = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $idSel && nama_tes = 'Baca Al-Quran'"));
             if ($this->mdl_pelamar->caricari('Tes Kesehatan',$idSel)) {
