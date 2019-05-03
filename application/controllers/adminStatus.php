@@ -21,7 +21,7 @@ class AdminStatus extends CI_Controller {
 		if($this->mdl_admin->logged_id())
 		{
             
-			$paket['array']=$this->mdl_admin->getAllStatus();
+			$paket['array']=$this->mdl_admin->getKaryawan();
             $this->load->view('admin/Karyawan/riwayat/status/allStatus',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
@@ -29,7 +29,15 @@ class AdminStatus extends CI_Controller {
 		}
 	}
 
-    public function addStatus(){
+    public function detailStatus($id)
+    {
+        $paket['id']=$id;
+        $paket['array']=$this->mdl_admin->getAllStatus($id);
+        $this->load->view('admin/Karyawan/riwayat/status/detailStatus',$paket);
+
+    }
+
+    public function add(){
        if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
@@ -97,7 +105,72 @@ class AdminStatus extends CI_Controller {
         else{ redirect("login"); } 
     }
 
-    public function edit($id){
+    public function addStatus($id){
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $where=array('id_karyawan' => $id);
+                $data['array']=$this->mdl_admin->getJenStatus();
+                $data['array2']=$this->mdl_admin->getData('status', $where);
+                $this->load->view('admin/Karyawan/riwayat/status/addStatus2',$data);
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'pdf|jpg|docx}png';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+
+                $this->load->library('upload', $config);
+
+                $id_karyawan=$id;
+                $id_status=$this->input->post('id_status');
+                $mulai = date('Y-m-d',strtotime($this->input->post('mulai')));
+                $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
+                $nomor_sk=$this->input->post('nomor_sk');
+                // $this->upload->do_upload('alamat_sk');
+
+                if(!$this->upload->do_upload('alamat_sk')) {
+                    $error = $this->upload->display_errors();
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("adminStatus/addStatus/$id");
+                } else {
+                    $alamat_sk = $this->upload->data('file_name');
+                }
+                    
+                // $alamat_sk=$this->upload->data('file_name');
+               
+                $dataStatus= array(
+                'id_karyawan' => $id_karyawan,
+                'id_status' => $id_status,
+                'mulai' => $mulai,
+                'akhir' => $akhir,
+                'alamat_sk' => $alamat_sk,
+                'nomor_sk' => $nomor_sk,
+                'aktif' => 1
+                );
+
+                
+                $updateStatus= array('akhir' => $mulai, 'aktif' => 0);
+                $whereS = array('id_karyawan' => $id_karyawan, 'aktif' => 1);
+                $this->mdl_admin->updateData($whereS,$updateStatus,'Status');
+                
+                $dataKaryawan= array('id_status' => $id_status);
+                $where = array('id_karyawan' => $id_karyawan);
+
+                $this->mdl_admin->addData('status',$dataStatus);
+                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+
+                redirect("adminStatus/detailStatus/$id");
+                }
+        }
+        else{ redirect("login"); } 
+    }
+
+    public function edit($id, $idk){
          if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
@@ -125,16 +198,13 @@ class AdminStatus extends CI_Controller {
 
                         $this->session->set_flashdata('msg_error', $error);
 
-                        redirect('adminstatus/addstatus');
+                        redirect('adminStatus/edit/$id/$idk');
                     } else {
                         $alamat_sk = $this->upload->data('file_name');
                     }
                 } else {
                     $alamat_sk = $this->input->post('file_old');
                 }
-                // $s = $akhir;
-                // $date = strtotime($s);
-                // $exp = date('d/m/Y', strtotime('+1 day', $date));
 
                 $dataStatus= array(
                 'id_status' => $id_status,
@@ -146,17 +216,17 @@ class AdminStatus extends CI_Controller {
 
                 $where = array('id' => $id);
                 $this->mdl_admin->updateData($where,$dataStatus,'status');
-                redirect("adminStatus");
+                redirect("adminStatus/detailStatus/$idk");
                 }
         }
 
         else{ redirect("login"); } 
     }
-    public function del($id){
+    public function del($id, $idk){
         if($this->mdl_admin->logged_id()){
             $where = array('id'=>$id);
            $this->mdl_pelamar->hapusdata('status',$where);
-            redirect("adminStatus");
+            redirect("adminStatus/detailStatus/$idk");
         }else{ redirect("login"); } 
     }
 }

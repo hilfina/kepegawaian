@@ -99,12 +99,12 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from jenis_profesi  where id_profesi != 'Belum'");
         return $query->result();
     }
-    public function getRiwayat(){
-        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi");
+    public function getRiwayat($id){
+        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi where r.id_karyawan = '$id'");
         return $query->result();
     }
     public function getKaryawan(){
-        $query = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan=l.id_karyawan where k.id_status != 'Pelamar' AND k.id_status!='Calon Karyawan' AND k.id_status != 'Pelamar Ditolak' AND l.level != 'admin'");
+        $query = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan=l.id_karyawan inner join jenis_profesi as j on k.id_profesi = j.id_profesi where k.id_status != 'Pelamar' AND k.id_status!='Calon Karyawan' AND k.id_status != 'Pelamar Ditolak' AND l.level != 'admin'");
         return $query->result();
     }
 
@@ -124,8 +124,8 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi where r.id_riwayat = $id");
         return $query->result();
     }
-    public function getAllStatus(){
-        $query = $this->db->query("SELECT * from karyawan as k inner join status as s on k.id_karyawan = s.id_karyawan");
+    public function getAllStatus($id){
+        $query = $this->db->query("SELECT * from karyawan as k inner join status as r on k.id_karyawan = r.id_karyawan inner join jenis_status as j on r.id_status = j.id_status where r.id_karyawan = '$id'");
         return $query->result();
     }
 
@@ -139,8 +139,8 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
-    public function getGol(){
-        $query = $this->db->query("SELECT k.nik, k.nama, k.id_profesi, s.id_golongan, s.nomor_sk, s.alamat_sk, s.mulai, s.akhir, s.id from golongan as s inner join karyawan as k on k.id_karyawan = s.id_karyawan where s.id_golongan != 'Tidak Ada'");
+    public function getGol($id){
+        $query = $this->db->query("SELECT s.id_karyawan, k.nik, k.nama, k.id_profesi, s.id_golongan, s.nomor_sk, s.alamat_sk, s.mulai, s.akhir, s.id from golongan as s inner join karyawan as k on k.id_karyawan = s.id_karyawan where s.id_golongan != 'Tidak Ada' && s.id_karyawan = '$id'");
         return $query->result();
     }
 
@@ -149,8 +149,8 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
-    public function getBerkala(){
-        $query = $this->db->query("SELECT * from berkala as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+    public function getBerkala($id){
+        $query = $this->db->query("SELECT * from berkala as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_karyawan = '$id'");
         return $query->result();
     }
 
@@ -244,8 +244,18 @@ class Mdl_admin extends CI_Model
     }
 
     public function getaBerkala(){
-        $query = $this->db->query("SELECT k.id_karyawan, k.nik, k.nama, k.id_status, k.id_profesi,  from berkala as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        $query = $this->db->query("SELECT k.id_karyawan, k.nik, k.nama, k.id_status, k.id_profesi from berkala as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
         return $query->result();
+    }
+
+    public function getPenilaian($id){
+        $query = $this->db->query("SELECT * from penilaian_karyawan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_karyawan = $id");
+        return $query->result();
+    }
+
+    public function getPenilaianedit($id){
+        $query = $this->db->query("SELECT * from penilaian_karyawan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->row();
     }
 
 }

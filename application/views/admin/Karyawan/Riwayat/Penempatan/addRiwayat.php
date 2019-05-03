@@ -34,16 +34,8 @@
               </div>
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
-          <form action="<?php echo site_url();?>/adminRiwayat/addRiwayat/" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminRiwayat/addRiwayat/<?php echo $id?>" enctype="multipart/form-data" method="POST">
           <table width="100%">
-          <tr>
-            <td><label form-control-label>NIK</label></td>
-            <td style="height: 50px">
-              <div class="col-lg-12">
-                <input name="nik" type="text" class="form-control" placeholder="Nomor Induk Karyawan">
-              </div>
-            </td>
-          </tr>
           <tr>
             <td><label form-control-label>Jenis Profesi</label></td>
             <td style="height: 50px">

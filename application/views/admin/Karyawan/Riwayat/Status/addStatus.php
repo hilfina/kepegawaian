@@ -30,10 +30,12 @@
           <br>
           <div class="sparkline13-hd">
               <div class="main-sparkline13-hd" align="center">
-                <h1> Tambah Data Status Status Karyawan</h1><br>
+                <h1> Tambah Data Status Karyawan</h1><br>
               </div>
           </div>
-          <?php echo $this->session->flashdata('msg_error'); ?>
+          <div class="container-fluid" style="color: red; padding-left: 10%"" >
+            <?php echo $this->session->flashdata('msg_error'); ?>
+          </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <form action="<?php echo site_url();?>/adminStatus/addStatus/" enctype="multipart/form-data" method="POST">
           <table width="100%">

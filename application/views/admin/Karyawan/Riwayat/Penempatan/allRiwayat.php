@@ -35,8 +35,8 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminRiwayat/addRiwayat')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Riwayat</button>
+                <div align="right"><a href="#">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
                 </a></div>
               </div>
             </div>
@@ -57,9 +57,7 @@
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
-                    <th>Ruangan</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Berakhir</th>
+                    <th>Status</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -71,16 +69,11 @@
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->nama_profesi; ?></td>
-                    <td><?php echo $key->ruangan; ?></td>
-                    <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
-                    <td><?php echo date('d M Y', strtotime($key->akhir)); ?></td>
+                    <td><?php echo $key->id_status; ?></td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminRiwayat/edit/"; echo $key->id_riwayat ;?>">
-                          <button class="btn btn-warning waves-effect">Edit</button>
-                        </a>
-                        <a href="<?php echo site_url(); echo "/adminRiwayat/del/"; echo $key->id_riwayat ;?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                          <button class="btn btn-danger waves-effect">Hapus</button>
-                        </a>
+                      <a href="<?php echo site_url(); echo "/adminRiwayat/detailRiwayat/"; echo $key->id_karyawan ;?>">
+                        <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
+                      </a>
                     </td>
                   </tr>
                 <?php }?>

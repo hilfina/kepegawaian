@@ -10,7 +10,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Golongan Karyawan</span>
+                <li><span class="bread-blod">Data Riwayat Penempatan Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -28,23 +28,16 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Golongan Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Riwayat Penempatan Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminGol/addGol')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                <div align="right"><a href="<?php echo site_url(); ?>/adminRiwayat/addRiwayat/<?php echo $id?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Riwayat</button>
                 </a></div>
-                <div class=" container-fluid" id="notif">
-                    <?php if ($this->session->flashdata('msg')) :?>
-                        <div class="alert alert-success"> 
-                    <?php echo $this->session->flashdata('msg')?>
-                        </div>
-                    <?php endif; ?>
-                </div>
               </div>
             </div>
           </div>
@@ -52,7 +45,7 @@
             <div class="datatable-dashv1-list custom-datatable-overright">
               <div id="toolbar">
                 <select class="form-control dt-tb">
-                  <option value="">Export Basic</option> 
+                  <option value="">Export Basic</option>
                   <option value="all">Export All</option>
                   <option value="selected">Export Selected</option>
                 </select>
@@ -61,28 +54,27 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>NIK</th>
-                    <th>Nama Karyawan</th>
-                    <th>Profesi</th>
-                    <th>Status</th>
-                    <th>Golongan</th>
+                    <th>Ruangan</th>
+                    <th>Tanggal Mulai Bertugas</th>
+                    <th>Tanggal Berakhir</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
                 <tbody>
-                <?php $no=1;?>
+                <?php $no=1; ?> 
                 <?php foreach ($array as $key) { ?>
                   <tr>
-                    <td><?php echo $no++ ?></td>
-                    <td><?php echo $key->nik;?></td>
-                    <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->nama_profesi; ?></td>
-                    <td><?php echo $key->id_status; ?></td>
-                    <td><?php echo $key->id_golongan; ?></td>
+                    <td><?php echo $no++; ?></td>
+                    <td><?php echo $key->ruangan; ?></td>
+                    <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
+                    <td><?php echo date('d M Y', strtotime($key->akhir)); ?></td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminGol/detailGol/"; echo $key->id_karyawan ;?>">
-                        <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
-                      </a>
+                      <a href="<?php echo site_url(); echo "/adminRiwayat/edit/"; echo $key->id_riwayat ; echo "/"; echo $key->id_karyawan; ?>">
+                          <button class="btn btn-warning waves-effect">Edit</button>
+                        </a>
+                        <a href="<?php echo site_url(); echo "/adminRiwayat/del/"; echo $key->id_riwayat ; echo "/"; echo $key->id_karyawan; ?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                          <button class="btn btn-danger waves-effect">Hapus</button>
+                        </a>
                     </td>
                   </tr>
                 <?php }?>

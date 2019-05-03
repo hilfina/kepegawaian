@@ -37,8 +37,9 @@
         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
           <ul id="myTabedu1" class="tab-review-design">
             <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>
-            <li><a href="#dataPendidikan"> Data Pendidikan</a></li>
-            <li><a href="#dataSurat">Data Surat</a></li>
+            <li><a href="#penilaian">Penilaian</a></li>
+            <li><a href="#karir">Jenjang Karir</a></li>
+            <li><a href="#absensi">Absensi</a></li>
           </ul>
           <div id="myTabContent" class="tab-content custom-product-edit">
             <div class="product-tab-list tab-pane fade active in" id="dataPribadi">
@@ -208,80 +209,116 @@
                 </div>
               </div>
             </div>
-            <div class="product-tab-list tab-pane fade" id="dataPendidikan">
+            <div class="product-tab-list tab-pane fade" id="penilaian">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="review-content-section">
+                  <div class="row mg-b-15">
+                    <div class="col-lg-12">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <div class="skill-title">
+                                  <h2>Penilaian Karyawan</h2>
+                                  <hr />
+                                  <br>
+                              </div>
+                          </div>
+                      </div>
                     <div class="col-lg-12">
                       <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                          <?php foreach ($datDir as $key){?>
-                            <div align="right">
-                              <a href="<?php echo site_url(); echo "/adminKaryawan/addPend/";  echo $key->id_karyawan ; ?>">
-                                <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                              </a></div>
-                          <?php }?>
+                        <div align="right">
+                        <a href="<?php echo site_url(); echo "/adminKaryawan/addnilai/";  echo $id ; ?>">
+                            <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                          </a>
+                        </div>
                         </div>
                       </div>
                     </div>
                     <div class="sparkline8-graph">
                       <div class="static-table-list">
                         <table class="table">
-                          <tr>
-                            <th>Institusi</th>
-                            <th>Jurusan</th>
-                            <th>N A</th>
-                            <th>Tahun</th>
-                            <th>No Ijasah</th>
-                            <th>Ver</th>
-                            <th>Setting</th>
-                          </tr>
-                          <?php foreach ($datPen as $key){ ?>
+                          <thead>
+                              <tr>
+                                <th>No</th>
+                                <th>Tanggal Penilaian</th>
+                                <th>Penilai</th>
+                                <th>Hasil Penilaian</th>
+                                <th>File Penilaian</th>
+                                <th>Pilihan</th>
+                              </tr>
+                          </thead>
+                          <?php $no=1;?>
+                          <?php foreach ($datNil as $nilai){ ?>
+                          <tbody>
                             <tr>
-                              <td><?php echo $key->pendidikan; ?></td>
-                              <td><?php echo $key->jurusan; ?></td>
-                              <td><?php echo $key->nilai; ?></td>
-                              <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
-                              <td><?php echo $key->nomor_ijazah; ?></td>
-                                
+                              <td><?php echo $no++ ; ?></td>
+                              <td><?php echo date('d M Y', strtotime($nilai->tanggal));?></td>
+                              <td><?php echo $nilai->id_penilai;?></td>
+                              <td><?php echo $nilai->hasil;?></td>
                               <td>
-                                <?php if(($key->verifikasi) == 1){ ?>
-                                  <i class="fa fa-check" style="color: red" title="TELAH TERVERIFIKASI"></i>
-                                <?php }else{ ?>
-                                  <a href="<?php echo site_url(); echo "/adminKaryawan/verPend/"; echo $key->id;echo "/";echo $key->id_karyawan; ?>">
-                                    <button class="btn btn-success waves-effect mg-b-15"><i class="fa fa-check"></i></i></button>
-                                  </a>
-                                <?php } ?>
-                              </td>   
+                                  <?php if(($nilai->file) != NULL){ ?>
+                                    <a href="<?php echo base_url().'/Assets/dokumen/'.$nilai->file; ?>" download>
+                                      <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                    </a>
+                                  <?php }else{ ?>
+                                    <font style="color: red">Tidak Ada file</font>
+                                  <?php } ?>
+                              </td>
                               <td>
-                                <a href="<?php echo site_url('adminKaryawan/editpend/').$key->id ?>">
-                                  <button data-toggle="tooltip" title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                <a href="<?php echo site_url('adminKaryawan/editnilai/').$nilai->id; echo "/";echo $nilai->id_karyawan;?>">
+                                  <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                 </a>
-                                <a href="<?php echo site_url('adminKaryawan/delpend/').$key->id; echo "/";echo $key->id_karyawan; ?>" onclick="return confirm('Are you sure you want to delete this item?');">
+                                <a href="<?php echo site_url('adminKaryawan/delnilai/').$nilai->id; echo "/";echo $nilai->id_karyawan; ?>" onclick="return confirm('Are you sure you want to delete this item?');">
                                   <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                 </a>
                               </td>
                             </tr>
+                          </tbody>
                           <?php } ?>
                         </table>
                       </div>
                     </div>
                   </div>
                 </div>
+                <div class="row mg-b-15">
+                  <div class="col-lg-12">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <div class="skill-title">
+                              <br>
+                                  <h2>Penilaian Agama</h2>
+                                  <hr />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="ex-pro">
+                          <ul>
+                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                          </ul>
+                      </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="product-tab-list tab-pane fade" id="dataSurat">
+            </div>
+            </div>
+            <div class="product-tab-list tab-pane fade" id="karir">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="review-content-section">
                     <div class="col-lg-12">
                       <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                          <?php foreach ($datDir as $key){?>
-                          <div align="right"><a href="<?php echo site_url(); echo "/adminKaryawan/addSurat/";  echo $key->id_karyawan ; ?>">
+                          
+                          <div align="right"><a href="<?php echo site_url(); echo "/adminKaryawan/addSurat/";  ?>">
                             <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                           </a></div>
-                        <?php }?>
+    
                         </div>
                       </div>
                     </div>
@@ -298,37 +335,12 @@
                                 <th>Setting</th>
                               </tr>
                           </thead>
-                          <?php foreach ($datSur as $key){ ?>
                           <tbody>
                             <tr>
-                              <td><?php echo $key->nama_surat; ?></td>
-                              <td><?php echo $key->no_surat; ?></td>
-                              <td align="left">
-                                <div class="zoomimage">
-                                  <?php echo "<img src='".base_url("./assets/dokumen/".$key->file)."' width='75' height='75'>"; ?>
-                                </div>
-                              </td>
-                              <td><?php echo date('d M Y', strtotime($key->tgl_mulai))." <b> - </b> ".date('d M Y', strtotime($key->tgl_akhir)); ?></td>
-                              <td>
-                              <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
-                                <i class="fa fa-check"></i> Surat Aktif 
-                              <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
-                                <i class="fa fa-times"></i> Belum Aktif
-                              <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) <= strtotime(date('Y-m-d'))){ ?>
-                                <i class="fa fa-times"></i> Kadaluarsa 
-                              <?php } ?>
-                              </td>
-                              <td>
-                                <a href="<?php echo site_url('adminKaryawan/editsurat/').$key->id_sipstr ?>">
-                                  <button data-toggle="tooltip" title="Edit / Detail" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                </a>
-                                <a href="<?php echo site_url('adminKaryawan/delsurat/').$key->id_sipstr; echo "/";echo $key->id_karyawan; ?>" onclick="return confirm('Are you sure you want to delete this item?');">
-                                  <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                </a>
-                              </td>
+                              
                             </tr>
                           </tbody>
-                          <?php } ?>
+                          
                         </table>
                       </div>
                     </div>
@@ -336,6 +348,8 @@
                 </div>
               </div>
             </div>
+            
+
           </div>
         </div>
       </div>

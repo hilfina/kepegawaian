@@ -22,7 +22,6 @@
     </div>
   </div>
 </div>
-    
 <div class="data-table-area mg-b-15">
   <div class="container-fluid">
     <div class="row">
@@ -34,8 +33,11 @@
                 <h1> Tambah Data Berkala Karyawan</h1><br>
               </div>
           </div>
+          <div class="container-fluid" style="color: red; padding-left: 10%"" >
+            <?php echo $this->session->flashdata('msg_error'); ?>
+          </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
-          <form action="<?php echo site_url();?>/adminBerkala/addBerkala/" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminBerkala/add/" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
             <td><label form-control-label>NIK</label></td>

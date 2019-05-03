@@ -9,10 +9,10 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="#">Data Golongan Karyawan</a> 
+                <li><a href="#">Data Berkala Karyawan</a> 
                   <span class="bread-slash">/</span>
                 </li>
-                <li><a href="#">Tambah Data Golongan</a> 
+                <li><a href="#">Tambah Data Berkala</a> 
                 </li>
               </ul>
             </div>
@@ -22,7 +22,6 @@
     </div>
   </div>
 </div>
-    
 <div class="data-table-area mg-b-15">
   <div class="container-fluid">
     <div class="row">
@@ -31,14 +30,16 @@
           <br>
           <div class="sparkline13-hd">
               <div class="main-sparkline13-hd" align="center">
-                <h1> Tambah Data Golongan Karyawan</h1><br>
+                <h1> Tambah Data Berkala Karyawan</h1><br>
               </div>
           </div>
-        <div class="container-fluid" style="color: red; padding-left: 10%"" >
-          <?php echo $this->session->flashdata('msg_error'); ?>
-        </div>
+          <div class="container-fluid" style="color: red; padding-left: 10%"" >
+            <?php echo $this->session->flashdata('msg_error'); ?>
+          </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
-          <form action="<?php echo site_url();?>/adminGol/addGol/<?php echo $idkaka; ?>" enctype="multipart/form-data" method="POST">
+        
+          <form action=" <?php echo site_url();?>/adminBerkala/addBerkala/<?php echo $id;?>" enctype="multipart/form-data" method="POST">
+          
           <table width="100%">
           <tr>
             <td><label form-control-label>Nomor Surat</label></td>
@@ -49,15 +50,10 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label>Jenis Golongan</label></td>
+            <td><label form-control-label>Berkala</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <select name="id_golongan" class="form-control">
-                <option>---Pilih---</option>
-                  <?php foreach ($array as $key) {?>
-                    <option><?php echo $key->id_golongan; ?></option>
-                  <?php } ?>
-                </select>
+                <input name="berkala" type="text" class="form-control" placeholder="Berkala">
               </div>
             </td>
           </tr>

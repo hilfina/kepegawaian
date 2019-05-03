@@ -36,7 +36,7 @@
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <?php foreach ($datRi as $key) { ?>
-           <form action="<?php echo site_url();?>/adminRiwayat/edit/<?php echo $key->id_riwayat ?>" enctype="multipart/form-data" method="POST">
+           <form action="<?php echo site_url();?>/adminRiwayat/edit/<?php echo $key->id_riwayat;?>/<?php echo $key->id_karyawan; ?>" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
             <td><label form-control-label>NIK</label></td>

@@ -35,9 +35,11 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminBerkala/addBerkala')?>">
+                <div align="right">
+                <a href="<?php echo site_url(); ?>/adminBerkala/addBerkala/<?php echo $id?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                </a></div>
+                </a>
+                </div>
                 <div class=" container-fluid" id="notif">
                     <?php if ($this->session->flashdata('msg')) :?>
                         <div class="alert alert-success"> 
@@ -62,8 +64,9 @@
                   <tr>
                     <th>No</th>
                     <th>Nomor SK</th>
+                    <th>Berkala</th>
                     <th>Masa Berlaku</th>
-                    <th>Surat</th>
+                    <th>File</th>
                     <th>Aktif</th>
                     <th>Pilihan</th>
                   </tr>
@@ -74,6 +77,7 @@
                   <tr>
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nomor_sk; ?></td>
+                    <td><?php echo $key->berkala; ?></td>
                     <td><?php echo date('d M Y', strtotime($key->mulai))." - ".date('d M Y', strtotime($key->akhir)); ?></td>
                     <td>
                     <?php if(($key->alamat_sk) != NULL){ ?>
@@ -92,10 +96,10 @@
                     <?php } ?>
                     </td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminBerkala/edit/"; echo $key->id ;?>">
+                      <a href="<?php echo site_url(); echo "/adminBerkala/edit/"; echo $key->id ; echo "/"; echo $key->id_karyawan; ?>">
                         <button class="btn btn-warning waves-effect">edit</button>
                       </a>
-                      <a href="<?php echo site_url(); echo "/adminBerkala/del/"; echo $key->id;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                      <a href="<?php echo site_url(); echo "/adminBerkala/del/"; echo $key->id; echo "/"; echo $key->id_karyawan; ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                         <button class="btn btn-danger waves-effect">hapus</button>
                       </a>
                     </td>
@@ -110,5 +114,6 @@
     </div>
   </div>
 </div>
+
 
 <?php $this->load->view('./footer'); ?>

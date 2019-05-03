@@ -10,7 +10,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Golongan Karyawan</span>
+                <li><span class="bread-blod">Data Status Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -28,16 +28,18 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Golongan Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Status Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminGol/addGol')?>">
+                <div align="right">
+                <a href="<?php echo site_url(); ?>/adminStatus/addStatus/<?php echo $id?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                </a></div>
+                </a>
+                </div>
                 <div class=" container-fluid" id="notif">
                     <?php if ($this->session->flashdata('msg')) :?>
                         <div class="alert alert-success"> 
@@ -52,7 +54,7 @@
             <div class="datatable-dashv1-list custom-datatable-overright">
               <div id="toolbar">
                 <select class="form-control dt-tb">
-                  <option value="">Export Basic</option> 
+                  <option value="">Export Basic</option>
                   <option value="all">Export All</option>
                   <option value="selected">Export Selected</option>
                 </select>
@@ -61,11 +63,11 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>NIK</th>
-                    <th>Nama Karyawan</th>
-                    <th>Profesi</th>
+                    <th>Nomor SK</th>
                     <th>Status</th>
-                    <th>Golongan</th>
+                    <th>Masa Berlaku</th>
+                    <th>Surat</th>
+                    <th>Aktif</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -74,15 +76,39 @@
                 <?php foreach ($array as $key) { ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
-                    <td><?php echo $key->nik;?></td>
-                    <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->nama_profesi; ?></td>
+                    <td><?php echo $key->nomor_sk; ?></td>
                     <td><?php echo $key->id_status; ?></td>
-                    <td><?php echo $key->id_golongan; ?></td>
-                    <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminGol/detailGol/"; echo $key->id_karyawan ;?>">
-                        <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
+                    <td><?php 
+                    echo date('d M Y', strtotime($key->mulai))." - ";
+                    if($key->akhir == ""){echo "Belum Ditentukan";}else{echo date('d M Y', strtotime($key->akhir));} ?></td>
+                    <td>
+                    <?php if(($key->alamat_sk) != NULL){ ?>
+                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
+                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
                       </a>
+                    <?php }else{ ?>
+                      <font style="color: red">Tidak Ada file</font>
+                    <?php } ?>
+                    </td>
+                   <td>
+                        <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->mulai)))){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-check"></i> Belum Aktif
+                        <?php }elseif($key->akhir != "" && date('Y-m-d', strtotime($key->akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                      <?php }elseif($key->akhir == "" && date('Y-m-d', strtotime($key->akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <font color="red">Edit tanggal akhir</font>
+                        <?php } ?>
+                        </td>
+                    <td align="center">
+                      <a href="<?php echo site_url(); echo "/adminStatus/edit/"; echo $key->id ;  echo "/"; echo $key->id_karyawan; ?>">
+                        <button class="btn btn-warning waves-effect">edit</button>
+                      </a>
+                      <a href="<?php echo site_url(); echo "/adminStatus/del/"; echo $key->id;  echo "/"; echo $key->id_karyawan; ?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                        <button class="btn btn-danger waves-effect">hapus</button>
+                      </a>
+
                     </td>
                   </tr>
                 <?php }?>

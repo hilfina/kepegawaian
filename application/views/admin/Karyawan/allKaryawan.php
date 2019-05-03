@@ -76,7 +76,7 @@
                     <td><?php echo $key->ttl; ?></td>
                     <td><?php echo $key->jenkel; ?></td>
                     <td><?php echo $key->email; ?></td>
-                    <td><?php echo $key->id_profesi; ?></td>
+                    <td><?php echo $key->nama_profesi; ?></td>
                     <td><?php echo $key->id_status; ?></td>
                     <td><?php echo $key->id_golongan; ?></td>
                     <td align="center">
