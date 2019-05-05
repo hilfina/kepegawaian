@@ -254,7 +254,9 @@
                             <tr>
                               <td><?php echo $no++ ; ?></td>
                               <td><?php echo date('d M Y', strtotime($nilai->tanggal));?></td>
-                              <td><?php echo $nilai->id_penilai;?></td>
+                              <?php $konek=mysqli_connect("localhost","root","","kepegawaian");
+                              $x=mysqli_fetch_array(mysqli_query($konek, "select nama from karyawan where id_karyawan = $nilai->id_penilai")); ?>
+                              <td><?php echo $x['nama'];?></td>
                               <td><?php echo $nilai->hasil;?></td>
                               <td>
                                   <?php if(($nilai->file) != NULL){ ?>
@@ -314,11 +316,6 @@
                     <div class="col-lg-12">
                       <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                          
-                          <div align="right"><a href="<?php echo site_url(); echo "/adminKaryawan/addSurat/";  ?>">
-                            <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                          </a></div>
-    
                         </div>
                       </div>
                     </div>
@@ -327,20 +324,14 @@
                         <table class="table">
                           <thead>
                               <tr>
-                                <th>Jenis Surat</th>
-                                <th>Nomor Surat</th>
-                                <th>Gambar</th>
-                                <th>Masa Berlaku</th>
-                                <th>Keterangan</th>
-                                <th>Setting</th>
+                                <th>Tanggal</th>
+                                <th>Aktivitas</th>
                               </tr>
                           </thead>
-                          <tbody>
-                            <tr>
-                              
-                            </tr>
-                          </tbody>
                           
+                          <tbody>
+                          
+                          </tbody>
                         </table>
                       </div>
                     </div>

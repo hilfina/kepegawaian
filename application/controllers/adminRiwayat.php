@@ -127,6 +127,12 @@ class AdminRiwayat extends CI_Controller {
         
         else{ redirect("login"); } 
     }
+
+    public function laporan($id){
+        $this->load->library('Mypdf');
+        $data['data'] = $this->mdl_admin->getRiwayat($id);
+        $this->mypdf->generate('Laporan/penempatan', $data, 'laporan-riwayat-penempatan', 'A4', 'portrait');
+    }
 }
 
 /* End of file admin.php */

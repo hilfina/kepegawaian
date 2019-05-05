@@ -104,25 +104,26 @@
                               </td>
                             </tr>
                             <tr>
-                              <td><label form-control-label>Jenis Kelamin</label></td>
-                              <td style="height: 50px; width: 80%">
-                                <div class="col-lg-12">
-                                  <input name="jenkel" type="text" class="form-control" value="<?php echo $key->jenkel;?>">
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><label form-control-label>Tanggal Lahir</label></td>
-                              <td style="height: 50px; width: 80%">
-                                <div class="col-lg-12">
-                                  <div class="form-group data-custon-pick data-custom-mg" id="data_5">
-                                    <div class="input-daterange input-group" id="datepicker">
-                                      <input type="text" class="form-control" name="ttl" placeholder="Tanggal Lahir Pelamar" value="<?php echo date('Y/m/d',strtotime($key->ttl)); ?>"  style="align: left">
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
+                            <td><label form-control-label>TTL</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                                <input name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>" placeholder="Kota, Tanggal Bulan Tahun" >
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><label form-control-label>Jenis Kelamin</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                              <select  class="form-control" name="jenkel">
+                              <option><?php echo $key->jenkel;?></option>
+                                <option>---Pilih: -----</option>
+                                <option>Laki-laki</option>
+                                <option>Perempuan</option>
+                              </select>
+                              </div>
+                            </td>
+                          </tr>
                             <tr>
                               <td><label form-control-label>Alamat</label></td>
                               <td style="height: 50px; width: 80%">
@@ -179,7 +180,7 @@
                                   <td><label form-control-label>Nilai Akhir</label></td>
                                   <td style="height: 50px; width: 80%">
                                     <div class="col-lg-12">
-                                      <input name="email" type="text" class="form-control" value="<?php echo $key->email; ?>">
+                                      <input name="nilai_akhir" type="text" class="form-control" value="<?php echo $key->nilai_akhir; ?>">
                                     </div>
                                   </td>
                                 </tr>

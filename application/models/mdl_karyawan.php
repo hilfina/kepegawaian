@@ -47,7 +47,7 @@ class Mdl_karyawan extends CI_Model
     }
 
     public function getGol($id){
-        $query = $this->db->query("SELECT * FROM golongan where id_karyawan = '$id'");
+        $query = $this->db->query("SELECT * FROM golongan where id_golongan != 'Tidak Ada' && id_karyawan = '$id'  ");
         return $query->result();
     }
 

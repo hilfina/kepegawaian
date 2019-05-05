@@ -103,7 +103,7 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
     public function getKaryawan(){
-        $query = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan=l.id_karyawan inner join jenis_profesi as j on k.id_profesi = j.id_profesi where k.id_status != 'Pelamar' AND k.id_status!='Calon Karyawan' AND k.id_status != 'Pelamar Ditolak' AND l.level != 'admin'");
+        $query = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan=l.id_karyawan inner join jenis_profesi as j on k.id_profesi = j.id_profesi where k.id_status != 'Pelamar' AND k.id_status!='Calon Karyawan' AND k.id_status != 'Pelamar Ditolak' AND l.level != 'admin'  order by k.nama asc");
         return $query->result();
     }
 
@@ -255,6 +255,15 @@ class Mdl_admin extends CI_Model
     public function getPenilaianedit($id){
         $query = $this->db->query("SELECT * from penilaian_karyawan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
         return $query->row();
+    }
+
+    public function karir($id){
+        $query = $this->db->query("SELECT mulai, ruangan from riwayat where id_karyawan = $id;
+        SELECT mulai, id_status from status where id_karyawan = $id;
+        SELECT mulai, id_golongan from golongan where id_karyawan = $id;
+        SELECT mulai, berkala from berkala where id_karyawan = $id;
+        GROUP BY mulai order by mulai");
+        return $query->result();
     }
 
 }

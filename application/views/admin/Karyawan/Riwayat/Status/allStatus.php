@@ -83,6 +83,9 @@
                       <a href="<?php echo site_url(); echo "/adminStatus/detailStatus/"; echo $key->id_karyawan ;?>">
                         <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
                       </a>
+                      <a href="<?php echo site_url(); echo "/adminStatus/laporan/"; echo $key->id_karyawan ;?>">
+                        <button class="btn btn-default waves-effect mg-b-15"><i class="fa fa-print" aria-hidden="true"></i> Cetak</button>
+                      </a>
                     </td>
                   </tr>
                 <?php }?>

@@ -204,6 +204,12 @@ class AdminBerkala extends CI_Controller {
         $this->mdl_pelamar->hapusdata('berkala',$where);
         redirect("adminBerkala/detailBerkala/$idk");
     }
+
+    public function laporan($id){
+        $this->load->library('Mypdf');
+        $data['data'] = $this->mdl_admin->getBerkala($id);
+        $this->mypdf->generate('Laporan/berkala', $data, 'laporan-riwayat-berkala', 'A4', 'portrait');
+    }
 }
 
 

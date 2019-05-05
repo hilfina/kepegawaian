@@ -35,7 +35,11 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminKontrak/addKontrak')?>">
+                <div align="right">
+                <a href="#">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
+                </a>
+                <a href="<?php echo site_url('adminKontrak/addKontrak')?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a></div>
                 <div class=" container-fluid" id="notif">

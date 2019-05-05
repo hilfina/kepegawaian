@@ -229,6 +229,14 @@ class AdminStatus extends CI_Controller {
             redirect("adminStatus/detailStatus/$idk");
         }else{ redirect("login"); } 
     }
+
+    public function laporan($id){
+        $this->load->library('Mypdf');
+        $where = array('id_karyawan'=>$id);
+        $data['array']=$this->mdl_admin->getData('karyawan',$where);
+        $data['data']=$this->mdl_admin->getAllStatus($id);
+        $this->mypdf->generate('Laporan/status', $data, 'laporan-riwayat-status', 'A4', 'portrait');
+    }
 }
 
 /* End of file admin.php */

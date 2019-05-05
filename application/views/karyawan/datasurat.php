@@ -21,7 +21,7 @@ $this->load->view("header.php");
                             </div>
                         </div>
                         <br><div class="alert alert-info">
-                            Menu data surat berisi data surat izin karyawan medis dan disertai scan gambar surat.
+                            Menu data surat berisi data SIP STR karyawan medis dan disertai scan file surat.
                         </div>
                     </div>
                 </div>

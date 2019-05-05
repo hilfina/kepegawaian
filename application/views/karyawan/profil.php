@@ -217,6 +217,7 @@
                                                             <th>No.</th>
                                                             <th>Nama Ruangan</th>
                                                             <th>Tanggal Bertugas</th>
+                                                            <th>Tanggal Akhir Bertugas</th>
                                                           </tr>
                                                       </thead>
                                                       <?php $no=1; ?>
@@ -225,7 +226,8 @@
                                                           <tr>
                                                               <td><?php echo $no++;?></td>
                                                               <td><?php echo $key->ruangan; ?></td>
-                                                              <td><?php echo $key->mulai; ?></td>  
+                                                              <td><?php echo $key->mulai; ?></td> 
+                                                              <td><?php echo $key->akhir; ?></td> 
                                                           </tr>
                                                       </tbody>
                                                       <?php } ?>
@@ -265,7 +267,13 @@
                                                               <td><?php echo $key->id_status?></td>
                                                               <td><?php echo $key->mulai?></td>  
                                                               <td><?php echo $key->akhir?></td>
-                                                              <td><?php echo $key->aktif?></td>
+                                                              <td>
+                                                              <?php if(($key->aktif) != 1){ ?>
+                                                                <b><i class="fa fa-check"></i> Aktif</b> 
+                                                              <?php }else{ ?>
+                                                                <b style="color: red">Belum Aktif</b>
+                                                              <?php } ?> 
+                                                              </td>
                                                           </tr>
                                                       </tbody>
                                                       <?php } ?>
@@ -305,7 +313,13 @@
                                                               <td><?php echo $key->id_golongan?></td>
                                                               <td><?php echo $key->mulai?></td>  
                                                               <td><?php echo $key->akhir?></td>
-                                                              <td><?php echo $key->aktif?></td>  
+                                                              <td>
+                                                              <?php if(($key->aktif) != 1){ ?>
+                                                                <b><i class="fa fa-check"></i> Aktif</b> 
+                                                              <?php }else{ ?>
+                                                                <b style="color: red">Belum Aktif</b>
+                                                              <?php } ?> 
+                                                              </td>  
                                                           </tr>
                                                       </tbody>
                                                       <?php } ?>
@@ -345,7 +359,13 @@
                                                               <td><?php echo $key->berkala?></td>
                                                               <td><?php echo $key->mulai?></td>  
                                                               <td><?php echo $key->akhir?></td>
-                                                              <td><?php echo $key->aktif?></td>  
+                                                              <td>
+                                                                <?php if(($key->aktif) != 1){ ?>
+                                                                <b><i class="fa fa-check"></i> Aktif</b> 
+                                                                <?php }else{ ?>
+                                                                  <b style="color: red">Belum Aktif</b>
+                                                                <?php } ?> 
+                                                              </td>  
                                                           </tr>
                                                       </tbody>
                                                       <?php } ?>

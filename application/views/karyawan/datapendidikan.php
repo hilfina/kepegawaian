@@ -21,7 +21,7 @@ $this->load->view("header.php");
                             </div>
                         </div>
                         <br><div class="alert alert-info">
-                            Menu data pendidikan berisi data pendidikan yang karyawan tempuh dan disertai scan gambar ijazah.
+                            Menu data pendidikan berisi data pendidikan yang karyawan tempuh dan disertai scan ijazah.
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ $this->load->view("header.php");
                                     <tr>
                                         <th>No</th>
                                         <th>Nomor Ijazah</th>
-                                        <th>Nama Pendidikan</th>
+                                        <th>Nama Institusi</th>
                                         <th>Jurusan</th>
                                         <th>Nilai</th>
                                         <th>Tahun Masuk</th>

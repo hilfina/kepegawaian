@@ -158,6 +158,13 @@ class AdminGol extends CI_Controller {
 
     }
 
+    public function laporan($id){
+        $this->load->library('Mypdf');
+        $where = array('id_karyawan'=>$id);
+        $data['array']=$this->mdl_admin->getData('karyawan',$where);
+        $data['data']=$this->mdl_admin->getGol($id);
+        $this->mypdf->generate('Laporan/golongan', $data, 'laporan-riwayat-golongan', 'A4', 'portrait');
+    }
 }
 
 /* End of file admin.php */
