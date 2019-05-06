@@ -42,6 +42,13 @@ class Mdl_admin extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+     function getData2($table,$where){
+        $this->db->select("*");
+        $this->db->from($table);
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->row();
+    }
 
     function getAlldata($table){
         $this->db->select("*");

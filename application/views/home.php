@@ -81,10 +81,10 @@ $idku=$this->session->userdata("myId");
                         <div class="student-dtl">                          
                           <h2>File Kadaluarsa</h2><hr>
                           <br>                         
-                          <?php if ($calon->banyak == 0) {
+                          <?php if ($sipstr->banyak+$mou_h->banyak+$mou_s->banyak+$mou_k->banyak+$kreden->banyak+$mou_kl->banyak == 0) {
                             echo "Tidak ada calon karyawan.";
                           }else{
-                            echo $calon->banyak." Orang"; ?>
+                            echo $sipstr->banyak+$mou_h->banyak+$mou_s->banyak+$mou_k->banyak+$kreden->banyak+$mou_kl->banyak." File"; ?>
                             <div align="center"><br>
                               <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary">Lihat Data</button></a>
                             </div>

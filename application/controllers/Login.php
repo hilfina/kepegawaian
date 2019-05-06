@@ -11,6 +11,7 @@ class Login extends CI_Controller {
         //load model mdl_login
         $this->load->model('mdl_login');
         $this->load->model('mdl_pelamar');
+        $this->load->model('mdl_admin');
         $this->load->library('session');
     }
      
@@ -72,7 +73,7 @@ class Login extends CI_Controller {
 	                    
 	                }
 	            }else{
-
+	            	$data['loker']=$this->mdl_admin->getLoker();
 	            	$data['error'] = '<div class="alert alert-danger" style="margin-top: 3px">
 	                	<div class="header"><b><i class="fa fa-exclamation-circle"></i> ERROR</b> username atau password salah!</div></div>';
 	            	$this->load->view('login', $data);

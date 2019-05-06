@@ -15,7 +15,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Profesi Karyawan</span>
+                <li><span class="bread-blod">Data Status Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -33,15 +33,15 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Profesi Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Status Karyawan</span></h1>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminProfesi/add')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Profesi</button>
+                <div align="right"><a href="<?php echo site_url('adminJenStatus/add')?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Status</button>
                 </a></div>
               </div>
             </div>
@@ -58,19 +58,24 @@
               <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
-                    <th>Kode Profesi</th>
-                    <th>Nama Profesi</th>
+                    <th>No</th>
+                    <th>Jenis Status</th>
+                    <th>Kuota Cuti</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($array as $key) { ?>
+                <?php $no = 1; foreach ($array as $key) { ?>
                   <tr>
-                    <td><?php echo $key->id_profesi; ?></td>
-                    <td><?php echo $key->nama_profesi; ?></td>
+                    <td><?php echo $no++; ?></td>
+                    <td><?php echo $key->id_status; ?></td>
+                    <td><?php echo $key->kuota_cuti; ?></td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminProfesi/editProfesi/";  echo $key->id_profesi ; ?>">
+                      <a href="<?php echo site_url(); echo "/adminJenStatus/edit/";  echo $key->id; ?>">
                         <button class="btn btn-success" title="TERIMA">edit</button>
+                      </a>
+                      <a href="<?php echo site_url(); echo "/adminJenStatus/del/";  echo $key->id; ?>">
+                        <button class="btn btn-danger" title="TERIMA">delete</button>
                       </a>
                     </td>
                   </tr>
