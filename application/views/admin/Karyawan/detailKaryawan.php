@@ -178,6 +178,20 @@
                             </td>
                           </tr>
                           <tr>
+                            <td><label form-control-label>Jabatan</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                              <select  class="form-control" name="jabatan">
+                              <option><?php echo $key->jabatan;?></option>
+                                <option>---Pilih: -----</option>
+                                <option>Koordinator</option>
+                                <option>Kepala Ruangan</option>
+                                <option>Kepala Bidang</option>
+                              </select>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
                             <td><label form-control-label>Golongan</label></td>
                             <td style="height: 50px">
                               <div class="col-lg-12">
