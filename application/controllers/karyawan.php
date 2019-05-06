@@ -12,6 +12,11 @@ class Karyawan extends CI_Controller {
 		$this->load->model('mdl_home');
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
+
+		if($this->mdl_admin->logged_id() == null)
+		{
+			redirect("login");
+		}
 	}
 	public function index()
 	{
@@ -621,4 +626,62 @@ class Karyawan extends CI_Controller {
 		redirect(site_url('karyawan/datakew'));
 	}
 
+	//=============aksi jika notifikasi ditekan===========//
+	public function Nsurat($id)
+	{
+		$where = array('id_sipstr' => $id);
+		$data = array('notif_k' => 1 );
+		$this->mdl_pelamar->updatedata($where,$data,'sip_str');
+		redirect("karyawan/editsurat/$id");
+	}
+	public function Nkontrak($id)
+	{
+		$where = array('id' => $id);
+		$data = array('notif_k' => 1 );
+		$this->mdl_pelamar->updatedata($where,$data,'mou_kontrak');
+		redirect("karyawan/Dmou_k/$id");
+	}
+	public function Nsekolah($id)
+	{
+		$where = array('id' => $id);
+		$data = array('notif_k' => 1 );
+		$this->mdl_pelamar->updatedata($where,$data,'mou_sekolah');
+		redirect("karyawan/Dmou_s/$id");
+	}
+	public function Nklinis($id)
+	{
+		$where = array('id' => $id);
+		$data = array('notif_k' => 1 );
+		$this->mdl_pelamar->updatedata($where,$data,'mou_klinis');
+		redirect("karyawan/Dmou_kl/$id");
+	}
+	public function Nhutang($id)
+	{
+		$where = array('id' => $id);
+		$data = array('notif_k' => 1 );
+		$this->mdl_pelamar->updatedata($where,$data,'mou_hutang');
+		redirect("karyawan/Dmou_h/$id");
+	}
+
+	//========cari detail data mou yang akan ditampilkan ketika klik notifikaso===========//
+	public function Dmou_k($id)
+	{
+		$data['array'] = $this->mdl_home->Dmou_k($id);
+		$this->load->view('karyawan/detailmou', $data);
+	}
+	public function Dmou_kl($id)
+	{
+		$data['array'] = $this->mdl_home->Dmou_kl($id);
+		$this->load->view('karyawan/detailmou', $data);
+	}
+	public function Dmou_s($id)
+	{
+		$data['array'] = $this->mdl_home->Dmou_s($id);
+		$this->load->view('karyawan/detailmou', $data);
+	}
+	public function Dmou_h($id)
+	{
+		$data['array'] = $this->mdl_home->Dmou_h($id);
+		$this->load->view('karyawan/detailmou', $data);
+	}
 }

@@ -133,6 +133,8 @@ class Home extends CI_Controller {
 			$data['mou_h'] = $this->mdl_home->mou_h($tanggal);
 			$data['mou_s'] = $this->mdl_home->mou_s($tanggal);
 			$data['mou_k'] = $this->mdl_home->mou_k($tanggal);
+			$data['mou_kl'] = $this->mdl_home->mou_kl($tanggal);
+			$data['kreden'] = $this->mdl_home->kreden($tanggal);
 			$data['loker'] = $this->mdl_home->loker($tanggal);
 			$this->load->view("home",$data);
 			$this->cariKadaluarsa();

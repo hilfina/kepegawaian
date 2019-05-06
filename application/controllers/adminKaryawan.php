@@ -59,6 +59,7 @@ class AdminKaryawan extends CI_Controller {
                 'nama' => $nama,
                 'no_ktp' => $no_ktp,
                 'no_telp' => $no_telp,
+                'foto' => 'profile.png',
                 'email' => $email,
                 'alamat' => $alamat
                 );
