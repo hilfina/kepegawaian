@@ -126,7 +126,8 @@ class AdminKontrak extends CI_Controller {
         else{ redirect("login"); } 
     }
     public function del($id){
-        $this->mdl_pelamar->hapusdata('mou_kontrak',$id);
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata('mou_kontrak',$where);
         redirect("AdminKontrak");
     }
 }

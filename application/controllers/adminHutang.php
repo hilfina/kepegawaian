@@ -126,7 +126,8 @@ class AdminHutang extends CI_Controller {
         else{ redirect("login"); } 
     }
     public function del($id){
-        $this->mdl_pelamar->hapusdata('mou_hutang',$id);
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata('mou_hutang',$where);
         redirect("AdminHutang");
     }
 }

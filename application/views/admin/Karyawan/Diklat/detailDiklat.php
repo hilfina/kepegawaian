@@ -98,9 +98,9 @@
                     </td>
                     <td>
                     <a href="<?php echo site_url('adminDiklat/editdiklat/').$key->id_diklat; echo "/"; echo $key->id_karyawan; ?>">
-                    <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                    <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                     <a href="<?php echo site_url('adminDiklat/hapusdiklat/').$key->id_diklat; echo "/"; echo $key->id_karyawan; ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?');">
-                    <button data-toggle="tooltip" title="Hapus" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
+                    <button data-toggle="tooltip" title="Hapus" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</button></a>
                     </td>
                   </tr>
                 <?php }?>

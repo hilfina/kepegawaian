@@ -52,7 +52,7 @@
             <div class="datatable-dashv1-list custom-datatable-overright">
               <div id="toolbar">
                 <select class="form-control dt-tb">
-                  <option value="">Export Basic</option>
+                  <option value="">Export Basic</option> 
                   <option value="all">Export All</option>
                   <option value="selected">Export Selected</option>
                 </select>
@@ -64,11 +64,8 @@
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
+                    <th>Status</th>
                     <th>Golongan</th>
-                    <th>Nomor SK</th>
-                    <th>Masa Berlaku</th>
-                    <th>Surat</th>
-                    <th>Aktif</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -79,38 +76,15 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_profesi; ?></td>
+                    <td><?php echo $key->nama_profesi; ?></td>
+                    <td><?php echo $key->id_status; ?></td>
                     <td><?php echo $key->id_golongan; ?></td>
-                    <td><?php echo $key->nomor_sk; ?></td>
-                    <td><?php 
-                    echo date('d M Y', strtotime($key->mulai))." - ";
-                    if($key->akhir == ""){echo "Belum Ditentukan";}else{echo date('d M Y', strtotime($key->akhir));} ?></td>
-                    <td>
-                    <?php if(($key->alamat_sk) != NULL){ ?>
-                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
-                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
-                      </a>
-                    <?php }else{ ?>
-                      <font style="color: red">Tidak Ada file</font>
-                    <?php } ?>
-                    </td>
-                   <td>
-                      <?php if(strtotime(date('Y-m-d')) <= strtotime(date('Y-m-d', strtotime($key->akhir))) && strtotime(date('Y-m-d')) >= strtotime(date('Y-m-d', strtotime($key->mulai)))){ ?>
-                        <i class="fa fa-check"></i> Surat Aktif 
-                      <?php }elseif(strtotime(date('Y-m-d', strtotime($key->mulai))) > strtotime(date('Y-m-d'))){ ?>
-                        <i class="fa fa-check"></i> Belum Aktif
-                      <?php }elseif($key->akhir != "" && date('Y-m-d', strtotime($key->akhir)) <= strtotime(date('Y-m-d'))){ ?>
-                        <i class="fa fa-times"></i> Kadaluarsa 
-                    <?php }elseif($key->akhir == "" && date('Y-m-d', strtotime($key->akhir)) <= strtotime(date('Y-m-d'))){ ?>
-                        <font color="red">Edit tanggal akhir</font>
-                      <?php } ?>
-                      </td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminGol/edit/"; echo $key->id ;?>">
-                        <button class="btn btn-warning waves-effect">edit</button>
+                      <a href="<?php echo site_url(); echo "/adminGol/detailGol/"; echo $key->id_karyawan ;?>">
+                        <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
                       </a>
-                      <a href="<?php echo site_url(); echo "/adminGol/del/"; echo $key->id;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button class="btn btn-danger waves-effect">hapus</button>
+                      <a href="<?php echo site_url(); echo "/adminGol/Laporan/"; echo $key->id_karyawan ;?>">
+                        <button class="btn btn-default waves-effect mg-b-15"><i class="fa fa-print" aria-hidden="true"></i> Cetak</button>
                       </a>
                     </td>
                   </tr>

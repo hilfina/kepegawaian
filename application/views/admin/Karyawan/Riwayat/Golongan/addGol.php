@@ -9,7 +9,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="#">data Golongan Karyawan</a> 
+                <li><a href="#">Data Golongan Karyawan</a> 
                   <span class="bread-slash">/</span>
                 </li>
                 <li><a href="#">Tambah Data Golongan</a> 
@@ -34,17 +34,12 @@
                 <h1> Tambah Data Golongan Karyawan</h1><br>
               </div>
           </div>
+        <div class="container-fluid" style="color: red; padding-left: 10%"" >
+          <?php echo $this->session->flashdata('msg_error'); ?>
+        </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
-          <form action="<?php echo site_url();?>/adminGol/addGol/" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminGol/addGol/<?php echo $idkaka; ?>" enctype="multipart/form-data" method="POST">
           <table width="100%">
-          <tr>
-            <td><label form-control-label>NIK</label></td>
-            <td style="height: 50px">
-              <div class="col-lg-12">
-                <input name="nik" type="text" class="form-control" placeholder="Nomor Induk Karyawan">
-              </div>
-            </td>
-          </tr>
           <tr>
             <td><label form-control-label>Nomor Surat</label></td>
             <td style="height: 50px">

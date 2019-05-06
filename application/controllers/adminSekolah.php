@@ -126,7 +126,8 @@ class AdminSekolah extends CI_Controller {
         else{ redirect("login"); } 
     }
     public function del($id){
-        $this->mdl_pelamar->hapusdata('mou_sekolah',$id);
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata('mou_sekolah',$where);
         redirect("AdminSekolah");
     }
 }

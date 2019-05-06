@@ -34,9 +34,12 @@
                 <h1> Edit Data Berkala Karyawan</h1><br>
               </div>
           </div>
+          <div class="container-fluid" style="color: red; padding-left: 10%"" >
+            <?php echo $this->session->flashdata('msg_error'); ?>
+          </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
         <?php foreach ($array as $key) { ?>
-          <form action="<?php echo site_url();?>/adminBerkala/edit/<?php echo $key->id?>" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminBerkala/edit/<?php echo $key->id; ?>/<?php echo $key->id_karyawan; ?>" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
             <td><label form-control-label>NIK</label></td>

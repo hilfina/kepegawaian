@@ -35,8 +35,8 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminBerkala/addBerkala')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                <div align="right"><a href="#">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
                 </a></div>
                 <div class=" container-fluid" id="notif">
                     <?php if ($this->session->flashdata('msg')) :?>
@@ -64,10 +64,8 @@
                     <th>NIK</th>
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
-                    <th>Nomor SK</th>
-                    <th>Masa Berlaku</th>
-                    <th>Surat</th>
-                    <th>Aktif</th>
+                    <th>Status</th>
+                    <th>Golongan</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -78,31 +76,15 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nik;?></td>
                     <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_profesi; ?></td>
-                    <td><?php echo $key->nomor_sk; ?></td>
-                    <td><?php echo date('d M Y', strtotime($key->mulai))." - ".date('d M Y', strtotime($key->akhir)); ?></td>
-                    <td>
-                    <?php if(($key->alamat_sk) != NULL){ ?>
-                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
-                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
-                      </a>
-                    <?php }else{ ?>
-                      <font style="color: red">Tidak Ada file</font>
-                    <?php } ?>
-                    </td>
-                    <td>
-                    <?php if(($key->aktif) == 1){ ?>
-                      <i class="fa fa-check"></i> Surat Aktif 
-                    <?php }else{ ?>
-                       Kadaluarsa 
-                    <?php } ?>
-                    </td>
+                    <td><?php echo $key->nama_profesi; ?></td>
+                    <td><?php echo $key->id_status; ?></td>
+                    <td><?php echo $key->id_golongan; ?></td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminBerkala/edit/"; echo $key->id ;?>">
-                        <button class="btn btn-warning waves-effect">edit</button>
+                      <a href="<?php echo site_url(); echo "/adminBerkala/detailBerkala/"; echo $key->id_karyawan ;?>">
+                        <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
                       </a>
-                      <a href="<?php echo site_url(); echo "/adminBerkala/del/"; echo $key->id;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button class="btn btn-danger waves-effect">hapus</button>
+                      <a href="<?php echo site_url(); echo "/adminBerkala/Laporan/"; echo $key->id_karyawan ;?>">
+                        <button class="btn btn-default waves-effect mg-b-15"><i class="fa fa-print" aria-hidden="true"></i> Cetak</button>
                       </a>
                     </td>
                   </tr>

@@ -146,8 +146,8 @@ class pelamar extends CI_Controller {
 			$config['upload_path']		= './Assets/gambar/';
 			$config['allowed_types']	= 'jpg|docx|pdf|png';
 			$config['max_size']			= 2000;
-			$config['max_width']		= 10240;
-			$config['max_height']		= 7680;
+			$config['max_width']		= 300;
+			$config['max_height']		= 400;
 		$this->load->library('upload', $config);
 
 			$id=$this->session->userdata('myId');
@@ -561,11 +561,11 @@ class pelamar extends CI_Controller {
 		}else{redirect("login");}
 	}
 
-	public function menucetak(){
+	public function cetak(){
 		$this->load->view('pelamar/cetak');;
 	}
 
-	public function cetak($id){
+	public function cetak2($id){
         $pdf = new FPDF('l','mm','A5');
         // membuat halaman baru
         $pdf->AddPage();
@@ -579,8 +579,8 @@ class pelamar extends CI_Controller {
         $pdf->Cell(10,7,'',0,1);
         $pdf->SetFont('Arial','B',10);
         $pdf->Cell(20,6,'NIM',1,0);
-        $pdf->Cell(85,6,'NAMA MAHASISWA',1,0);
-        $pdf->Cell(27,6,'NO HP',1,0);
+        $pdf->Cell(85,6,'Nama ',1,0);
+        $pdf->Cell(27,6,'No Seleksi',1,0);
         $pdf->Cell(25,6,'TANGGAL LHR',1,1);
         $pdf->SetFont('Arial','',10);
         $mahasiswa = $this->db->get('mahasiswa')->result();

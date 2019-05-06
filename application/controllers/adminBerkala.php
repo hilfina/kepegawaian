@@ -19,7 +19,7 @@ class AdminBerkala extends CI_Controller {
 	{
 		if($this->mdl_admin->logged_id())
 		{
-			$paket['array']=$this->mdl_admin->getBerkala();
+			$paket['array']=$this->mdl_admin->getKaryawan();
             $this->load->view('admin/Karyawan/riwayat/berkala/allBerkala',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
@@ -27,15 +27,15 @@ class AdminBerkala extends CI_Controller {
 		}
 	}
 
-    public function detailDiklat($id)
+    public function detailBerkala($id)
     {
-        $where=array('id_karyawan' => $id);
-        $paket['array']=$this->mdl_admin->getData('berkala',$where);
+        $paket['array']=$this->mdl_admin->getBerkala($id);
+        $paket['id']=$id;
         $this->load->view('admin/Karyawan/riwayat/berkala/detailBerkala',$paket);
 
     }
 
-    public function addBerkala($id){
+    public function add(){
        if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
@@ -60,8 +60,15 @@ class AdminBerkala extends CI_Controller {
                 $mulai= date('Y-m-d',strtotime($this->input->post('mulai')));
                 $akhir= date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
-                $this->upload->do_upload('alamat_sk');
-                $alamat_sk=$this->upload->data('file_name');
+                if(!$this->upload->do_upload('alamat_sk')) {
+                    $error = $this->upload->display_errors();
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("adminBerkala/addBerkala");
+                } else {
+                    $alamat_sk = $this->upload->data('file_name');
+                }
                
                 $data= array(
                 'id_karyawan' => $id_karyawan,
@@ -81,6 +88,60 @@ class AdminBerkala extends CI_Controller {
                 $this->mdl_admin->addData('berkala',$data);
 
                 redirect("AdminBerkala");
+                }
+        }
+        else{ redirect("login"); } 
+    }
+
+    public function addBerkala($id){
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $data['id']=$id;
+                $this->load->view('admin/Karyawan/riwayat/berkala/addBerkala2', $data);
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'pdf|jpg|docx}png';
+                $config['max_size']         = 2000;
+                $config['max_width']        = 10240;
+                $config['max_height']       = 7680;
+
+                $this->load->library('upload', $config);
+                $id_karyawan=$id;
+                $berkala=$this->input->post('berkala');
+                $mulai= date('Y-m-d',strtotime($this->input->post('mulai')));
+                $akhir= date('Y-m-d',strtotime($this->input->post('akhir')));
+                $nomor_sk=$this->input->post('nomor_sk');
+                if(!$this->upload->do_upload('alamat_sk')) {
+                    $error = $this->upload->display_errors();
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("adminBerkala/addBerkala/$id");
+                } else {
+                    $alamat_sk = $this->upload->data('file_name');
+                }
+               
+                $data= array(
+                'id_karyawan' => $id_karyawan,
+                'berkala' => $berkala,
+                'mulai' => $mulai,
+                'akhir' => $akhir,
+                'alamat_sk' => $alamat_sk,
+                'nomor_sk' => $nomor_sk,
+                'aktif' => 1
+                );
+
+                
+                $updateberkala= array('akhir' => $mulai, 'aktif' => 0);
+                $whereS = array('id_karyawan' => $id_karyawan, 'aktif' => 1);
+                $this->mdl_admin->updateData($whereS,$updateberkala,'berkala');
+
+                $this->mdl_admin->addData('berkala',$data);
+
+                redirect("adminBerkala/detailBerkala/$id");
                 }
         }
         else{ redirect("login"); } 
@@ -107,12 +168,21 @@ class AdminBerkala extends CI_Controller {
                 $mulai=date('Y-m-d',strtotime($this->input->post('mulai')));
                 $akhir=date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
+
                 if($_FILES['alamat_sk']['name'] != '') {
-                    $this->upload->do_upload('alamat_sk');
-                    $alamat_sk = $this->upload->data('file_name');
+                    if(!$this->upload->do_upload('alamat_sk')) {
+                        $error = $this->upload->display_errors();
+
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("adminStatus/edit/$id/$idk");
+                    } else {
+                        $alamat_sk = $this->upload->data('file_name');
+                    }
                 } else {
                     $alamat_sk = $this->input->post('file_old');
                 }
+
                 $databerkala= array(
                 'berkala' => $berkala,
                 'mulai' => $mulai,
@@ -123,17 +193,25 @@ class AdminBerkala extends CI_Controller {
 
                 $where = array('id' => $id);
                 $this->mdl_admin->updateData($where,$databerkala,'berkala');
-                redirect("AdminBerkala");
+                redirect("adminBerkala/detailBerkala/$idk");
                 }
         }
 
         else{ redirect("login"); } 
     }
     public function del($id, $idk){
-        $this->mdl_pelamar->hapusdata('berkala',$id);
-        redirect("AdminBerkala");
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata('berkala',$where);
+        redirect("adminBerkala/detailBerkala/$idk");
+    }
+
+    public function laporan($id){
+        $this->load->library('Mypdf');
+        $data['data'] = $this->mdl_admin->getBerkala($id);
+        $this->mypdf->generate('Laporan/berkala', $data, 'laporan-riwayat-berkala', 'A4', 'portrait');
     }
 }
+
 
 /* End of file admin.php */
 /* Location: ./application/controllers/admin.php */

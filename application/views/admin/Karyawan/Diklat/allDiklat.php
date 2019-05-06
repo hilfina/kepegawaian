@@ -22,14 +22,34 @@
 </div>
 <div class="data-table-area mg-b-15">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="sparkline13-list">
-                  <div class="sparkline13-hd">
-                      <div class="main-sparkline13-hd">
-                          <h1>Data <span class="table-project-n">Diklat</span> Karyawan</h1>
-                      </div>
-                  </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="sparkline13-list">
+          <div class="col-lg-6">
+            <div class="sparkline13-hd">
+              <div class="main-sparkline13-hd">
+                <h1>Data <span class="table-project-n">Diklat Karyawan</span></h1>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="sparkline13-hd">
+              <div class="main-sparkline13-hd">
+                <div align="right">
+                <a href="#">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
+                </a>
+                <div class=" container-fluid" id="notif">
+                    <?php if ($this->session->flashdata('msg')) :?>
+                        <div class="alert alert-success"> 
+                    <?php echo $this->session->flashdata('msg')?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
               <div class="sparkline13-graph">
                   <div class="datatable-dashv1-list custom-datatable-overright">
                       <div id="toolbar">

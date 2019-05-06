@@ -18,7 +18,7 @@ class AdminGol extends CI_Controller {
 	{
 		if($this->mdl_admin->logged_id())
 		{
-			$paket['array']=$this->mdl_admin->getGol();
+			$paket['array']=$this->mdl_admin->getKaryawan();
             $this->load->view('admin/Karyawan/riwayat/golongan/allGolongan',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
@@ -26,35 +26,46 @@ class AdminGol extends CI_Controller {
 		}
 	}
 
-    public function addGol(){
+    public function detailGol($id)
+    {
+        $paket['idkar']=$id;
+        $paket['array']=$this->mdl_admin->getGol($id);
+        $this->load->view('admin/Karyawan/riwayat/Golongan/detailGol',$paket);
+
+    }
+
+    public function addGol($id){
        if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-
+                $data['idkaka']=$id;
                 $data['array']=$this->mdl_admin->getAlldata('jenis_golongan');
-                $this->load->view('admin/Karyawan/riwayat/golongan/addGol',$data);
+                $this->load->view('admin/Karyawan/riwayat/Golongan/addGol',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx}png';
+                $config['allowed_types']    = 'pdf|jpg|docx|png';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
-                
-                $konek = mysqli_connect("localhost","root","","kepegawaian");
-                $a=$this->input->post('nik');
-                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
-
-                $id_karyawan=$data2['id_karyawan'];
+            
+                $id_karyawan=$id;
                 $id_golongan=$this->input->post('id_golongan');
                 $mulai = date('Y-m-d',strtotime($this->input->post('mulai')));
                 $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
-                $this->upload->do_upload('alamat_sk');
-                $alamat_sk=$this->upload->data('file_name');
+                if(!$this->upload->do_upload('alamat_sk')) {
+                    $error = $this->upload->display_errors();
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("adminGol/addGol/$id");
+                } else {
+                    $alamat_sk = $this->upload->data('file_name');
+                }
                
                 $datagolongan= array(
                 'id_karyawan' => $id_karyawan,
@@ -77,13 +88,13 @@ class AdminGol extends CI_Controller {
                 $this->mdl_admin->addData('golongan',$datagolongan);
                 $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
 
-                redirect("adminGol");
+                redirect("adminGol/detailGol/$id");
                 }
         }
         else{ redirect("login"); } 
     }
 
-    public function edit($id){
+    public function edit($id, $idk){
          if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
@@ -106,8 +117,15 @@ class AdminGol extends CI_Controller {
                 $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 if($_FILES['alamat_sk']['name'] != '') {
-                    $this->upload->do_upload('alamat_sk');
-                    $alamat_sk = $this->upload->data('file_name');
+                    if(!$this->upload->do_upload('alamat_sk')) {
+                        $error = $this->upload->display_errors();
+
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("adminStatus/addStatus/$id");
+                    } else {
+                        $alamat_sk = $this->upload->data('file_name');
+                    }
                 } else {
                     $alamat_sk = $this->input->post('file_old');
                 }
@@ -123,21 +141,29 @@ class AdminGol extends CI_Controller {
 
                 $where = array('id' => $id);
                 $this->mdl_admin->updateData($where,$datagolongan,'golongan');
-                redirect("adminGol");
+                redirect("adminGol/detailGol/$idk");
                 }
         }
 
         else{ redirect("login"); } 
     }
 
-    public function del($id)
+    public function del($id, $idk)
     {
         if($this->mdl_admin->logged_id()){
             $where = array('id' => $id);
             $this->mdl_pelamar->hapusdata('golongan',$where);
-            redirect("adminGol");
+            redirect("adminGol/detailGol/$idk");
         }else{ redirect("login"); } 
 
+    }
+
+    public function laporan($id){
+        $this->load->library('Mypdf');
+        $where = array('id_karyawan'=>$id);
+        $data['array']=$this->mdl_admin->getData('karyawan',$where);
+        $data['data']=$this->mdl_admin->getGol($id);
+        $this->mypdf->generate('Laporan/golongan', $data, 'laporan-riwayat-golongan', 'A4', 'portrait');
     }
 }
 

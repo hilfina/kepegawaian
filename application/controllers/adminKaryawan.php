@@ -114,8 +114,8 @@ class AdminKaryawan extends CI_Controller {
             $paket['datGol']=$this->mdl_admin->getAlldata('jenis_golongan');
             $paket['datDir']=$this->mdl_admin->getTempat($id);
             $paket['datSta']=$this->mdl_admin->getJenStatus();
-            $paket['datPen']=$this->mdl_admin->getData('pendidikan',$where);
-            $paket['datSur']=$this->mdl_admin->cariJenisSurat($id);
+            $paket['datNil']=$this->mdl_admin->getPenilaian($id);
+            $paket['id']=$id;
             $paket['log']=$this->mdl_admin->getData('login',$where);
             $this->load->view('admin/Karyawan/detailKaryawan',$paket);
         }else{ redirect("login"); } 
@@ -447,6 +447,107 @@ class AdminKaryawan extends CI_Controller {
     
     public function delsurat($id,$idk){
         $this->mdl_karyawan->delsurat($id);
+        redirect("adminKaryawan/karyawanDetail/$idk");
+    }
+
+    public function addNilai($id){//tambah data surat dari detail karyawan
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('id_penilai','Id Penilai','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $data['id']=$id;
+                $this->load->view('admin/karyawan/penilaian/addNilai', $data);
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'jpg|png|docx|pdf';
+                $config['max_size']         = 2000;
+                $this->load->library('upload', $config);
+
+                $konek =mysqli_connect("localhost","root","","kepegawaian");
+                $nik=$this->input->post('id_penilai');
+                $id_karyawan=$this->input->post('id_karyawan');
+                $b=mysqli_fetch_array(mysqli_query($konek, "select * from karyawan where nik = '$nik'"));
+                $id_penilai = $b['id_karyawan'];
+                $tanggal = date('Y-m-d',strtotime($this->input->post('tanggal')));
+                $hasil = $this->input->post('hasil');
+                if(!$this->upload->do_upload('file')) {
+                    $error = $this->upload->display_errors();
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("adminKaryawan/addNilai/$id");
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+                $data4 = array(
+                    'id_karyawan' => $id,
+                    'id_penilai'=>$id_penilai,
+                    'tanggal'=>$tanggal, 
+                    'hasil'=>$hasil,  
+                    'file'=>$file,
+                );
+
+                $this->mdl_admin->addData('penilaian_karyawan',$data4);
+                redirect("adminKaryawan/karyawanDetail/$id");
+            }
+        }else{ redirect("login"); } 
+    }
+
+    public function editNilai($id, $idk){//tambah data surat dari detail karyawan
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('id_penilai','Id Penilai','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $data['array']=$this->mdl_admin->getPenilaianedit($id);
+                $this->load->view('admin/karyawan/penilaian/editNilai', $data);
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'jpg|png|docx|pdf';
+                $config['max_size']         = 2000;
+                $this->load->library('upload', $config);
+
+                $konek =mysqli_connect("localhost","root","","kepegawaian");
+                $nik=$this->input->post('id_penilai');
+                $b=mysqli_fetch_array(mysqli_query($konek, "select * from karyawan where nik = '$nik'"));
+                $id_penilai = $b['id_karyawan'];
+                $tanggal = date('Y-m-d',strtotime($this->input->post('tanggal')));
+                $hasil = $this->input->post('hasil');
+                if($_FILES['file']['name'] != '') {
+                    if(!$this->upload->do_upload('file')) {
+                        $error = $this->upload->display_errors();
+
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("adminKaryawan/editNilai/$idk");
+                    } else {
+                        $file = $this->upload->data('file_name');
+                    }
+                } else {
+                    $file = $this->input->post('file_old');
+                }
+                $data4 = array(
+                    'id_penilai'=>$id_penilai,
+                    'tanggal'=> $tanggal, 
+                    'hasil'=> $hasil,  
+                    'file'=> $file,
+                );
+
+                $where = array(
+                    'id' => $id
+                );
+
+                $update = $this->mdl_pelamar->updatedata($where,$data4,'penilaian_karyawan');
+                $this->session->set_flashdata('msg','Data Sukses di Update');
+                redirect("adminKaryawan/karyawanDetail/$idk");
+            }
+        }else{ redirect("login"); } 
+    }
+
+    public function delNilai($id,$idk){
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata($where);
         redirect("adminKaryawan/karyawanDetail/$idk");
     }
 }

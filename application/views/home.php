@@ -28,7 +28,7 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $karyawan->banyak." Orang"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminKaryawan/') ?>"><button class="btn btn-primary">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminKaryawan/') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>
@@ -44,7 +44,7 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $pelamar->banyak." Orang"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>
@@ -60,7 +60,7 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $calon->banyak." Orang"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>
@@ -86,7 +86,7 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $sipstr->banyak+$mou_h->banyak+$mou_s->banyak+$mou_k->banyak+$kreden->banyak+$mou_kl->banyak." File"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>
@@ -102,7 +102,7 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $seleksi->banyak." Orang"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('admin/dataSeleksi') ?>"><button class="btn btn-primary">Lihat Data</button></a>
+                              <a href="<?php echo site_url('admin/dataSeleksi') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>
@@ -118,7 +118,7 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $loker->banyak." Lowongan"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminLoker/') ?>"><button class="btn btn-primary">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminLoker/') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>

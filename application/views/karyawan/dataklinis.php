@@ -21,7 +21,7 @@ $this->load->view("header.php");
                             </div>
                         </div>
                         <br><div class="alert alert-info">
-                            Menu data kewenangan klinis berisi data pengajuan data klinis berisi dokumen data-data klinis.
+                            Berisi data pengajuan proses kredensial. Karyawan hanya bisa mengisi tanggal dan dokumen pengajuan.
                         </div>
                     </div>
                 </div>

@@ -209,7 +209,7 @@
                 </ul>
               </li>
               <li>
-                <a class="has-arrow" aria-expanded="false">
+                <a class="has-arrow" href="#" aria-expanded="false">
                   <span class="educate-icon educate-student icon-wrap"></span> 
                   <span class="mini-click-non">Data Pelamar</span>
                 </a>
@@ -279,7 +279,7 @@
                   <span class="mini-click-non">Home</span>
                 </a>
               </li>
-              <li><a title="Data Diri" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
+              <li><a title="Cetak" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
               <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
             <?php } elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '0') {?>
                 <li>
@@ -294,7 +294,7 @@
                   <span class="educate-icon educate-home icon-wrap"></span>
                   <span class="mini-click-non">Home</span></a>
               </li>
-              <li><a title="Data Diri" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
+              <li><a title="Cetak" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
               <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
             </li>
             <?php } elseif ($levelku == "Karyawan" && $aktifku == '0')  { ?>
