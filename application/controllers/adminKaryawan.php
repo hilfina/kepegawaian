@@ -15,6 +15,11 @@ class AdminKaryawan extends CI_Controller {
 		$this->load->library('form_validation','image_lib');
         $this->load->helper(array('url','download'));
         $this->load->library('email');
+
+        if($this->mdl_admin->logged_id() == null)
+        {
+            redirect("login");
+        }
 	}
     
 	public function index(){//MENAMPILKAN DATA TABEL BERISI DATA KARYAWAN
@@ -115,6 +120,19 @@ class AdminKaryawan extends CI_Controller {
             $paket['datDir']=$this->mdl_admin->getTempat($id);
             $paket['datSta']=$this->mdl_admin->getJenStatus();
             $paket['datNil']=$this->mdl_admin->getPenilaian($id);
+            if ($this->mdl_admin->getAgama($id)) { //jika sudah punya nilai agama
+                $paket['agama']=$this->mdl_admin->getAgama($id);
+            }else{
+                $paket['agama'] = null;
+            }
+            $paket['cuti']=$this->mdl_admin->getKC($id); $thn = date('Y');
+            if ($this->mdl_admin->getTC($id,$thn)) { //jika ada data cuti di tahun ini
+                $beda = $this->mdl_admin->getTC($id,$thn);
+                $paket['Dcuti'] = $this->mdl_admin->getDC($id);
+                $paket['selisih']=abs($beda->selisih);
+            }else{
+                $paket['selisih']= 0;
+            }
             $paket['id']=$id;
             $paket['log']=$this->mdl_admin->getData('login',$where);
             $this->load->view('admin/Karyawan/detailKaryawan',$paket);
@@ -549,6 +567,129 @@ class AdminKaryawan extends CI_Controller {
         $where = array('id' => $id);
         $this->mdl_pelamar->hapusdata($where);
         redirect("adminKaryawan/karyawanDetail/$idk");
+    }
+    public function editAgama($id,$idk){
+        $this->form_validation->set_rules('id','Id Nilai','trim|required');
+
+        if($this->form_validation->run()==FALSE){
+            $data['array']=$this->mdl_admin->getAgamaa($id);
+            $this->load->view('admin/karyawan/penilaian/editAgama', $data);
+        }else{
+
+            $tanggal = date('Y-m-d',strtotime($this->input->post('tanggal')));
+            $hasil = $this->input->post('hasil');
+            $data4 = array(
+                'tanggal'=> $tanggal, 
+                'hasil'=> $hasil
+            );
+
+            $where = array(
+                'id' => $id
+            );
+
+            $update = $this->mdl_pelamar->updatedata($where,$data4,'riwayat_seleksi');
+            $this->session->set_flashdata('msg','Data Sukses di Update');
+            redirect("adminKaryawan/karyawanDetail/$idk");
+        }
+    }
+    public function addCuti($id_karyawan){
+        $tgl_awal=$this->input->post('tgl_awal');
+        $tgl_akhir=$this->input->post('tgl_akhir');
+
+        $dataCuti = array(
+            'id_karyawan'=> $id_karyawan, 
+            'tgl_awal'=> $tgl_awal,
+            'tgl_akhir'=> $tgl_akhir
+        );
+        $this->mdl_admin->addData('data_cuti',$dataCuti);
+        redirect("adminKaryawan/karyawanDetail/$id_karyawan");
+    }
+    public function editCuti($id,$idk){
+        $this->form_validation->set_rules('id','Id Data Cuti','trim|required');
+
+        if($this->form_validation->run()==FALSE){
+            $data['array']=$this->mdl_admin->getEC($id);
+            $this->load->view('admin/karyawan/riwayat/Cuti/edit', $data);
+        }else{
+
+            $tgl_awal = date('Y-m-d',strtotime($this->input->post('tgl_awal')));
+            $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
+
+            $dataCuti = array(
+                'tgl_awal'=> $tgl_awal,
+                'tgl_akhir'=> $tgl_akhir
+            );
+
+            $where = array(
+                'id' => $id
+            );
+
+            $update = $this->mdl_pelamar->updatedata($where,$dataCuti,'data_cuti');
+            $this->session->set_flashdata('msg','Data Sukses di Update');
+            redirect("adminKaryawan/karyawanDetail/$idk");
+        }
+    }
+    public function addAgama($id_karyawan){
+
+        $seleksi = array(
+            'id_karyawan' => $id_karyawan,
+            'tgl_seleksi' => "-",
+            'nilai_agama' => "-",
+            'nilai_kompetensi' => "-",
+            'tes_ppa' => "-",
+            'tes_psikologi' => "-",
+            'tes_kesehatan' => "-",
+            'nilai_wawancara' => "-"
+        );
+
+        $this->mdl_admin->addData('seleksi',$seleksi);
+
+        $konek =mysqli_connect("localhost","root","","kepegawaian");
+        $b=mysqli_fetch_array(mysqli_query($konek, "select * from seleksi where id_karyawan = '$id_karyawan'"));
+        $id_seleksi = $b['id_seleksi'];
+
+        $tanggal_agama= date('Y-m-d', strtotime($this->input->post('tanggal_agama')));
+        $hasil_agama=$this->input->post('hasil_agama');
+
+        $tanggal_doa=date('Y-m-d', strtotime($this->input->post('tanggal_doa')));
+        $hasil_doa=$this->input->post('hasil_doa');
+
+        $tanggal_bimbing=date('Y-m-d', strtotime($this->input->post('tanggal_bimbing')));
+        $hasil_bimbing=$this->input->post('hasil_bimbing');
+
+        $tanggal_baca=date('Y-m-d', strtotime($this->input->post('tanggal_baca')));
+        $hasil_baca=$this->input->post('hasil_baca');
+
+        $agama = array(
+            'id_seleksi' => $id_seleksi,
+            'nama_tes' => "Tes Agama",
+            'tanggal'=> $tanggal_agama,
+            'hasil'=> $hasil_agama
+        );
+        $doa = array(
+            'id_seleksi' => $id_seleksi,
+            'nama_tes' => "Doa Sehari-hari",
+            'tanggal'=> $tanggal_doa,
+            'hasil'=> $hasil_doa
+        );
+        $bimbing = array(
+            'id_seleksi' => $id_seleksi,
+            'nama_tes' => "Tes Membimbing Pasien",
+            'tanggal'=> $tanggal_bimbing,
+            'hasil'=> $hasil_bimbing
+        );
+        $baca = array(
+            'id_seleksi' => $id_seleksi,
+            'nama_tes' => "Baca Al-Quran",
+            'tanggal'=> $tanggal_baca,
+            'hasil'=> $hasil_baca
+        );
+
+        $this->mdl_admin->addData('riwayat_seleksi',$agama);
+        $this->mdl_admin->addData('riwayat_seleksi',$doa);
+        $this->mdl_admin->addData('riwayat_seleksi',$bimbing);
+        $this->mdl_admin->addData('riwayat_seleksi',$baca);
+        redirect("adminKaryawan/karyawanDetail/$id_karyawan");
     }
 }
 

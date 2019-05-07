@@ -83,6 +83,20 @@ class AdminNotifikasi extends CI_Controller {
         $this->mdl_pelamar->updatedata($where,$data,'mou_hutang');
         redirect("adminHutang/edit/$id");
     }
+    public function Nkew($id)
+    {
+        $where = array('id_kewenangan' => $id);
+        $data = array('notif' => 1 );
+        $this->mdl_pelamar->updatedata($where,$data,'kewenangan_klinis');
+        redirect("adminKew/edit/$id");
+    }
+    public function NStatus($id,$idk)
+    {
+        $where = array('id' => $id);
+        $data = array('notif' => 1 );
+        $this->mdl_pelamar->updatedata($where,$data,'status');
+        redirect("adminKaryawan/karyawanDetail/$idk");
+    }
 }
 
 /* End of file admin.php */

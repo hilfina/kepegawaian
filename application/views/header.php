@@ -220,6 +220,20 @@
                   <li><a title="Loker" href="<?php echo site_url('adminLoker') ?>">Lowongan Pekerjaan</a></li>
                 </ul>
               </li>
+              <li>
+                <a class="has-arrow" href="#" aria-expanded="false">
+                  <span class="educate-icon educate-student icon-wrap"></span> 
+                  <span class="mini-click-non">Format Email</span>
+                </a>
+                <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
+                  <li><a title="Pelamar Daftar" href="<?php echo site_url('admin/report') ?>">Pelamar Daftar</a></li>
+                  <li><a title="Pelamar Dipilih" href="<?php echo site_url('admin/report') ?>">Pelamar Dipilih</a></li>
+                  <li><a title="Pelamar Ditolak" href="<?php echo site_url('admin/report') ?>">Pelamar Ditolak</a></li>
+                  <li><a title="Calon Karyawan Ditolak" href="<?php echo site_url('admin/report') ?>">Seleksi Ditolak</a></li>
+                  <li><a title="Calon Karyawan Diterima" href="<?php echo site_url('admin/report') ?>">Seleksi Diterima</a></li>
+                  <li><a title="Surat Kadaluarsa" href="<?php echo site_url('admin/report') ?>">Surat Kadaluarsa</a></li>
+                </ul>
+              </li>
             <?php }elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '0') { ?>
               <li>
                 <?php if ($profesiku == "Belum") {?>
@@ -466,6 +480,40 @@
                                             <div class="notification-content">
                                               <h2><?php echo $mou_k->nama; ?></h2>
                                               <p><?php echo "MOU Kontrak akan berakhir pada tangal ".date('d M Y', strtotime($mou_k->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }
+                                    }
+                                  }if ($this->db->get('kewenangan_klinis')) {
+                                    $this->db->select('*');
+                                    $this->db->from('karyawan');
+                                    $this->db->join('kewenangan_klinis', 'karyawan.id_karyawan = kewenangan_klinis.id_karyawan');
+                                    $kew = $this->db->get()->result();
+                                    foreach ($kew as $key => $kew) {
+                                      if ($kew->tgl_akhir <= $tanggal3 && $kew->notif != 1) { ?>
+                                        <li>
+                                          <a href="<?php echo site_url('adminNotifikasi/NKew/');echo $kew->id_kewenangan?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $kew->nama; ?></h2>
+                                              <p><?php echo "Kredensial akan berakhir pada tangal ".date('d M Y', strtotime($kew->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }
+                                    }
+                                  }if ($this->db->get('status')) {
+                                    $this->db->select('*');
+                                    $this->db->from('karyawan');
+                                    $this->db->join('status', 'karyawan.id_karyawan = status.id_karyawan');
+                                    $status = $this->db->get()->result();
+                                    foreach ($status as $key => $status) {
+                                      if ($status->akhir <= $tanggal3 && $status->notif != 1) { ?>
+                                        <li>
+                                          <a href="<?php echo site_url('adminNotifikasi/NStatus/');echo $status->id."/".$status->id_karyawan; ?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $status->nama; ?></h2>
+                                              <p><?php echo "Akan berakhir status sebagai ".$status->id_status." pada tangal ".date('d M Y', strtotime($status->akhir)) ;?></p>
                                             </div>
                                           </a>
                                         </li>

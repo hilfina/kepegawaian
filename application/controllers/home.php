@@ -124,16 +124,18 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		if($this->mdl_home->logged_id()){
-			$tanggal = date('Y-m-d');
+			$tanggal = date('Y-m-d'); 
+	        $tanggal2 = date('Y-m-d', strtotime('+6 month',strtotime($tanggal))); 
+	        $tanggal3 = date('Y-m-d', strtotime('+3 month',strtotime($tanggal))); 
 			$data['karyawan'] = $this->mdl_home->karyawan();
 			$data['pelamar'] = $this->mdl_home->pelamar();
 			$data['calon'] = $this->mdl_home->calon();
 			$data['seleksi'] = $this->mdl_home->seleksi();
-			$data['sipstr'] = $this->mdl_home->sipstr($tanggal);
-			$data['mou_h'] = $this->mdl_home->mou_h($tanggal);
-			$data['mou_s'] = $this->mdl_home->mou_s($tanggal);
-			$data['mou_k'] = $this->mdl_home->mou_k($tanggal);
-			$data['mou_kl'] = $this->mdl_home->mou_kl($tanggal);
+			$data['sipstr'] = $this->mdl_home->sipstr($tanggal2);
+			$data['mou_h'] = $this->mdl_home->mou_h($tanggal3);
+			$data['mou_s'] = $this->mdl_home->mou_s($tanggal3);
+			$data['mou_k'] = $this->mdl_home->mou_k($tanggal3);
+			$data['mou_kl'] = $this->mdl_home->mou_kl($tanggal3);
 			$data['kreden'] = $this->mdl_home->kreden($tanggal);
 			$data['loker'] = $this->mdl_home->loker($tanggal);
 			$this->load->view("home",$data);
