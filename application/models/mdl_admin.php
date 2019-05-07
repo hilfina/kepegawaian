@@ -273,5 +273,11 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
+    public function impor($table, $data)
+    {
+        $this->db->insert_batch($table, $data);
+        return $this->db->insert_id();
+    }
+
 }
  

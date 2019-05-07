@@ -350,8 +350,6 @@ class Admin extends CI_Controller {
         }else{ redirect("login"); } 
     }
 
-    
-    //Add pendidikan pada karyawan
     public function addPend(){
        if($this->mdl_admin->logged_id()){
 

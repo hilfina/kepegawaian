@@ -71,10 +71,10 @@
                     <td><?php echo $key->id_status; ?></td>
                     <td><?php echo $key->kuota_cuti; ?></td>
                     <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminJenStatus/edit/";  echo $key->id; ?>">
+                      <a href="<?php echo site_url(); echo "/adminJenStatus/edit/";  echo $key->id_status; ?>">
                         <button class="btn btn-success" title="TERIMA">edit</button>
                       </a>
-                      <a href="<?php echo site_url(); echo "/adminJenStatus/del/";  echo $key->id; ?>">
+                      <a href="<?php echo site_url(); echo "/adminJenStatus/del/";  echo $key->id_status; ?>">
                         <button class="btn btn-danger" title="TERIMA">delete</button>
                       </a>
                     </td>

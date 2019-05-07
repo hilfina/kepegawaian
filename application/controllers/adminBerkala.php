@@ -207,7 +207,10 @@ class AdminBerkala extends CI_Controller {
 
     public function laporan($id){
         $this->load->library('Mypdf');
+        $where = array('id_karyawan'=>$id);
+        $data['array']=$this->mdl_admin->getData('karyawan',$where);
         $data['data'] = $this->mdl_admin->getBerkala($id);
+        $data['datDir']=$this->mdl_admin->getTempat($id);
         $this->mypdf->generate('Laporan/berkala', $data, 'laporan-riwayat-berkala', 'A4', 'portrait');
     }
 }

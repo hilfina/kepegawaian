@@ -235,6 +235,7 @@ class AdminStatus extends CI_Controller {
         $where = array('id_karyawan'=>$id);
         $data['array']=$this->mdl_admin->getData('karyawan',$where);
         $data['data']=$this->mdl_admin->getAllStatus($id);
+        $data['datDir']=$this->mdl_admin->getTempat($id);
         $this->mypdf->generate('Laporan/status', $data, 'laporan-riwayat-status', 'A4', 'portrait');
     }
 }

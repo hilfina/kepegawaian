@@ -50,7 +50,7 @@ class AdminNotifikasi extends CI_Controller {
         $this->email->from($config['smtp_user']);
         $this->email->to($dataK->email);
         $this->email->subject("Notifikasi");
-        $this->email->message("Maaf, anda gagal dalam seleksi tahap $jenisTes di RSIA, silahkan mencoba pada peluang karir selanjutnya");
+        $this->email->message("Surat anda akan segera berakhir dalam jangka waktu 6 bulan.");
         $this->email->send();
 
         redirect("adminKaryawan/editsurat/$id");

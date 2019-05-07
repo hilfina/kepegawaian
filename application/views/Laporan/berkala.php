@@ -51,6 +51,13 @@
       <td>:</td>
       <td><?php echo $key->id_profesi;?></td>
     </tr>
+    <?php foreach ($datDir as $key2): ?>
+    <tr>
+      <td>TEMPAT</td>
+      <td>:</td>
+      <td><?php echo $key2->ruangan;?></td>
+    </tr>
+    <?php break; endforeach ?>
      <?php break; endforeach ?>
   </table>
 

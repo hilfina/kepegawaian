@@ -163,6 +163,7 @@ class AdminGol extends CI_Controller {
         $where = array('id_karyawan'=>$id);
         $data['array']=$this->mdl_admin->getData('karyawan',$where);
         $data['data']=$this->mdl_admin->getGol($id);
+        $data['datDir']=$this->mdl_admin->getTempat($id);
         $this->mypdf->generate('Laporan/golongan', $data, 'laporan-riwayat-golongan', 'A4', 'portrait');
     }
 }
