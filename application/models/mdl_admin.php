@@ -272,6 +272,29 @@ class Mdl_admin extends CI_Model
         GROUP BY mulai order by mulai");
         return $query->result();
     }
-
+    public function getAgama($id){
+        $query = $this->db->query("SELECT * from riwayat_seleksi as r inner join seleksi as s on r.id_seleksi = s.id_seleksi where s.id_karyawan = $id AND nama_tes != 'Tes Psikologi' AND nama_tes != 'Tes Tulis' and nama_tes != 'Wawancara' ");
+        return $query->result();
+    }
+    public function getAgamaa($id){
+        $query = $this->db->query("SELECT * from riwayat_seleksi as r inner join seleksi as s on r.id_seleksi = s.id_seleksi where id = $id");
+        return $query->row();
+    }
+    public function getKC($id){ //Kuota cuti
+        $query = $this->db->query("SELECT kuota_cuti from jenis_status as r inner join karyawan as s on r.id_status = s.id_status where id_karyawan = $id");
+        return $query->row();
+    }
+    public function getTC($id,$thn){ //Total cuti
+        $query = $this->db->query("SELECT sum(datediff(tgl_awal, tgl_akhir)) as selisih from data_cuti where id_karyawan = $id AND tgl_awal Like '$thn%'");
+        return $query->row();
+    }
+    public function getDC($id){ //Data cuti
+        $query = $this->db->query("SELECT datediff(tgl_awal, tgl_akhir) as selisih, tgl_awal, tgl_akhir, id, id_karyawan from data_cuti where id_karyawan = $id ORDER BY tgl_awal DESC");
+        return $query->result();
+    }
+    public function getEC($id){ //Edit cuti
+        $query = $this->db->query("SELECT * from data_cuti where id = $id ");
+        return $query->result();
+    }
 }
  

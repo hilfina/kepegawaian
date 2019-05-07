@@ -257,14 +257,14 @@
                       <div class="static-table-list">
                         <table class="table">
                           <thead>
-                              <tr>
-                                <th>No</th>
-                                <th>Tanggal Penilaian</th>
-                                <th>Penilai</th>
-                                <th>Hasil Penilaian</th>
-                                <th>File Penilaian</th>
-                                <th>Pilihan</th>
-                              </tr>
+                            <tr>
+                              <th>No</th>
+                              <th>Tanggal Penilaian</th>
+                              <th>Penilai</th>
+                              <th>Hasil Penilaian</th>
+                              <th>File Penilaian</th>
+                              <th>Pilihan</th>
+                            </tr>
                           </thead>
                           <?php $no=1;?>
                           <?php foreach ($datNil as $nilai){ ?>
@@ -277,13 +277,13 @@
                               <td><?php echo $x['nama'];?></td>
                               <td><?php echo $nilai->hasil;?></td>
                               <td>
-                                  <?php if(($nilai->file) != NULL){ ?>
-                                    <a href="<?php echo base_url().'/Assets/dokumen/'.$nilai->file; ?>" download>
-                                      <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
-                                    </a>
-                                  <?php }else{ ?>
-                                    <font style="color: red">Tidak Ada file</font>
-                                  <?php } ?>
+                                <?php if(($nilai->file) != NULL){ ?>
+                                  <a href="<?php echo base_url().'/Assets/dokumen/'.$nilai->file; ?>" download>
+                                    <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                  </a>
+                                <?php }else{ ?>
+                                  <font style="color: red">Tidak Ada file</font>
+                                <?php } ?>
                               </td>
                               <td>
                                 <a href="<?php echo site_url('adminKaryawan/editnilai/').$nilai->id; echo "/";echo $nilai->id_karyawan;?>">
@@ -303,24 +303,139 @@
                 </div>
                 <div class="row mg-b-15">
                   <div class="col-lg-12">
-                      <div class="row">
-                          <div class="col-lg-12">
-                              <div class="skill-title">
-                              <br>
-                                  <h2>Penilaian Agama</h2>
-                                  <hr />
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="skill-title"> <br>
+                          <h2>Penilaian Agama</h2> <hr />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="sparkline8-graph">
+
+                      <?php if ($agama != null) { 
+                        $no = 1;?>
+                        <div class="static-table-list">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <td>No</td>
+                              <td>Tanggal</td>
+                              <td>Jenis Tes</td>
+                              <td>Hasil</td>
+                              <td>Pilihan</td>           
+                            </tr>
+                          </thead>
+                          <?php foreach ($agama as $key){ ?>
+                            <tbody>
+                              <tr>
+                                <td><?php echo $no++; ?></td>
+                              <td><?php echo $key->tanggal; ?></td>
+                              <td><?php echo $key->nama_tes; ?></td>
+                              <td><?php echo $key->hasil; ?></td>
+                              <td>
+                                <a href="<?php echo site_url('adminKaryawan/editagama/').$key->id."/".$key->id_karyawan;?>">
+                                  <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                </a>
+                              </td>
+                              </tr>
+                            </tbody>
+                          <?php } ?>
+                        </table>
+                      </div>
+                      <?php }else{ ?>
+                        <form action="<?php echo site_url();?>/adminKaryawan/addAgama/<?php echo $id; ?>" enctype="multipart/form-data" method="POST">
+                          <table width="100%">
+                          <tr><td colspan=2><h4 align="center"> Nilai Tes Shalat</h4></td></tr>
+                          <tr>
+                            <td><label form-control-label>Tanggal Tes</label></td>
+                            <td style="height: 50px; width: 80%">
+                              <div class="col-lg-12">
+                                <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                  <div class="input-daterange input-group" id="datepicker">
+                                    <input name="tanggal_agama" type="text" class="form-control">
+                                  </div>
+                                </div>
                               </div>
-                          </div>
-                      </div>
-                      <div class="ex-pro">
-                          <ul>
-                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                              <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                          </ul>
-                      </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><label form-control-label>Hasil Tes</label></td>
+                            <td style="height: 50px; width: 80%">
+                              <div class="col-lg-12">
+                                <input name="hasil_agama" type="text" class="form-control">
+                              </div>
+                            </td>
+                          </tr>
+                          <tr><td colspan=2><h4 align="center"> Nilai Tes Doa Sehari-hari</h4></td></tr>
+                          <tr>
+                            <td><label form-control-label>Tanggal Tes</label></td>
+                            <td style="height: 50px; width: 80%">
+                              <div class="col-lg-12">
+                                <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                  <div class="input-daterange input-group" id="datepicker">
+                                    <input name="tanggal_doa" type="text" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><label form-control-label>Hasil Tes</label></td>
+                            <td style="height: 50px; width: 80%">
+                              <div class="col-lg-12">
+                                <input name="hasil_doa" type="text" class="form-control">
+                              </div>
+                            </td>
+                          </tr>
+                          <tr><td colspan=2><h4 align="center"> Nilai Tes Membimbing Pasien</h4></td></tr>
+                          <tr>
+                            <td><label form-control-label>Tanggal Tes</label></td>
+                            <td style="height: 50px; width: 80%">
+                              <div class="col-lg-12">
+                                <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                  <div class="input-daterange input-group" id="datepicker">
+                                    <input name="tanggal_bimbing" type="text" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><label form-control-label>Hasil Tes</label></td>
+                            <td style="height: 50px; width: 80%">
+                              <div class="col-lg-12">
+                                <input name="hasil_bimbing" type="text" class="form-control">
+                              </div>
+                            </td>
+                          </tr>
+                          <tr><td colspan=2><h4 align="center"> Nilai Tes Baca Al-Quran</h4></td></tr>
+                          <tr>
+                            <td><label form-control-label>Tanggal Tes</label></td>
+                            <td style="height: 50px; width: 80%">
+                              <div class="col-lg-12">
+                                <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                  <div class="input-daterange input-group" id="datepicker">
+                                    <input name="tanggal_baca" type="text" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><label form-control-label>Hasil Tes</label></td>
+                            <td style="height: 50px; width: 80%">
+                              <div class="col-lg-12">
+                                <input name="hasil_baca" type="text" class="form-control">
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                        <div align="center">
+                          <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
+                        </div>
+                      </form>
+                    <?php } ?>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -348,7 +463,7 @@
                           </thead>
                           
                           <tbody>
-                          
+                            
                           </tbody>
                         </table>
                       </div>
@@ -357,8 +472,78 @@
                 </div>
               </div>
             </div>
-            
+            <div class="product-tab-list tab-pane fade" id="absensi">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="review-content-section">
+                    <div class="col-lg-12">
+                      <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="sparkline8-graph">
+                      <div class="static-table-list">
+                        <h3>Sisa Cuti : <?php echo $cuti->kuota_cuti-$selisih." Hari."; ?></h3><hr style="width: 40%">
+                      </div>
+                    </div>
+                    <div class="sparkline8-graph">
+                      <div class="static-table-list">
+                        <table class="table">
+                          <thead>
+                              <tr>
+                                <th>Tanggal Mulai Cuti</th>
+                                <th>Tanggal Berakhir Cuti</th>
+                                <th>Total</th>
+                                <th>Pilihan</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <?php foreach ($Dcuti as $Dcuti) { ?>
+                              <tr>
+                                <td><?php echo date('d M Y', strtotime($Dcuti->tgl_awal)); ?> </td>
+                                <td><?php echo date('d M Y', strtotime($Dcuti->tgl_akhir)); ?> </td>
+                                <td><?php echo abs($Dcuti->selisih)." Hari"; ?> </td>
+                                <td>
+                                  <a href="<?php echo site_url('adminKaryawan/editCuti/').$Dcuti->id; echo "/";echo $Dcuti->id_karyawan;?>">
+                                  <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                </a>
+                                </td>
+                              </tr>
+                            <?php } ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="sparkline8-graph">
+                      <div class="static-table-list">
+                        <br>
+                        <form action="<?php echo site_url();?><?php echo "/adminKaryawan/addCuti/".$id ?>" enctype="multipart/form-data" method="POST">
+                          <table width="100%">
+                            <tr>
+                              <td><label form-control-label>Tambah Data Cuti</label></td>
+                              <td style="height: 50px">
+                                <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                  <div class="input-daterange input-group" id="datepicker">
+                                      <input type="text" class="form-control" name="tgl_awal" />
+                                      <span class="input-group-addon">hingga</span>
+                                      <input type="text" class="form-control" name="tgl_akhir" />
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </table><br>
+                        <div align="center">
+                          <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
+                        </div>
+                      </form><br>
+                      </div>
+                    </div>
 
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
