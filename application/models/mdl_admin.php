@@ -296,5 +296,12 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from data_cuti where id = $id ");
         return $query->result();
     }
+
+    public function impor($table, $data)
+    {
+        $this->db->insert_batch($table, $data);
+        return $this->db->insert_id();
+    }
+
 }
  
