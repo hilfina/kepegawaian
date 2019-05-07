@@ -171,6 +171,14 @@
                                         </td>
                                       </tr>
                                       <tr>
+                                        <td><label form-control-label">Jabatan</label></td>
+                                        <td style="height: 50px">
+                                          <div class="col-lg-12">
+                                            <input readonly style="background-color: white " name="jabatan" type="text" class="form-control" value="<?php echo $key->jabatan; ?>">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
                                         <td><label form-control-label">Golongan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">

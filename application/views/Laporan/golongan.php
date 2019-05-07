@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Laporan</title>
   <link rel="stylesheet" href="">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="<?php echo base_url()?>Assets/template/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <style>
     .line-title{
       border: 0;
@@ -18,7 +18,7 @@
   <img src="Assets/gambar/kopsurat.jpg" style="position: absolute; width: 700px; height: auto;">
   <br><br><br>
   <br><br><br>
-  <br>
+  <br><br><br>
   <p align="center" style="size: 13px">
     LAPORAN DATA RIWAYAT <br>
     <b>Golongan Pegawai</b>
@@ -40,6 +40,11 @@
       <td>STATUS  </td>
       <td>:</td>
       <td><?php echo $key->id_status;?></td>
+    </tr>
+    <tr>
+      <td>JABATAN  </td>
+      <td>:</td>
+      <td><?php echo $key->jabatan;?></td>
     </tr>
     <tr>
       <td>GOLONGAN  </td>

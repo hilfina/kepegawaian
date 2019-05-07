@@ -85,7 +85,7 @@ class AdminKaryawan extends CI_Controller {
                 $config['smtp_port']= "465";
                 $config['smtp_timeout']= "400";
                 $config['smtp_user']= "hilfinaamaris09@gmail.com";
-                $config['smtp_pass']= "hilfina090798";
+                $config['smtp_pass']= "hilfano090798";
                 $config['crlf']="\r\n"; 
                 $config['newline']="\r\n"; 
                 $config['wordwrap'] = TRUE;
@@ -154,6 +154,7 @@ class AdminKaryawan extends CI_Controller {
             $username=$this->input->post('username');
             $password=md5($this->input->post('password'));
             $id_status=$this->input->post('id_status');
+            $jabatan=$this->input->post('jabatan');
             $id_profesi=$this->input->post('id_profesi');
             $id_golongan=$this->input->post('id_golongan');
             $ruangan=$this->input->post('ruangan');
@@ -189,6 +190,7 @@ class AdminKaryawan extends CI_Controller {
                 'no_telp' => $no_telp,
                 'email' => $email,
                 'id_status' => $id_status,
+                'jabatan' => $jabatan,
                 'id_profesi' => $idPro['id_profesi'],
                 'id_golongan' => $id_golongan
                 );
