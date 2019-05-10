@@ -219,10 +219,7 @@ class Login extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('mdl_login');
 		$this->mdl_login->changeActiveState($key);
-		echo '<script type="text/javascript">';
-		echo 'alert("Selamat kamu telah memverifikasi akun kamu")';
-		echo '</script>';
-		redirect(site_url('Login/index'));
+		echo "<script>alert('Selamat Kamu telah memverifikasi akun kamu! Login untuk masuk kedalam sistem.'); document.location.href = '" . site_url('login') . "';</script>";
 	}
 
 

@@ -140,11 +140,13 @@ class AdminPendidikan extends CI_Controller {
     }
 
     public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
         $this->load->view('admin/pendidikan/impor');
+        }else{ redirect("login"); }
     }
     public function impor()
     {
-        include APPPATH."/libraries/PHPExcel.php";
+    include APPPATH."/libraries/PHPExcel.php";
     if(isset($_FILES["file"]["name"]))
         {
             $path = $_FILES["file"]["tmp_name"];
@@ -165,6 +167,7 @@ class AdminPendidikan extends CI_Controller {
                     $akhir = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                     $nomor_ijazah= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
                     $nilai= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $file= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
                     $data[] = array(
                         'id_karyawan'       =>    $id,
                         'pendidikan'        =>    $pendidikan,
@@ -173,7 +176,7 @@ class AdminPendidikan extends CI_Controller {
                         'akhir'             =>    $akhir,
                         'nomor_ijazah'      =>    $nomor_ijazah,
                         'nilai'             =>    $nilai,
-                        
+                        'file'              =>    $file,
                     );
                 }
             }

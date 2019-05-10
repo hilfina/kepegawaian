@@ -46,7 +46,7 @@
                 <ul class="nav navbar-nav navbar-right main-nav">
                     <li><a href="#intro">Home</a></li>
                     <li><a href="#dua">Peluang Karir</a></li>
-                    <li><a href="#tiga">Contact</a></li>
+                    <li><a href="#tiga">Bantuan</a></li>
                     <li><a href="#satu">Login/Daftar</a></li>
                 </ul>
             </div>
@@ -160,23 +160,23 @@
     <footer id="tiga">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 text-center-mobile">
-                    <h3 class="white">Reserve a Free Trial Class!</h3>
-                    <h5 class="light regular light-white">Shape your body and improve your health.</h5>
-                    <a href="#" class="btn btn-blue ripple trial-button">Start Free Trial</a>
+                <div class="col-sm-4 text-center-mobile">
+                    <h3 class="white"><i class="fa fa-map-marker"></i>   Alamat</h3><hr/>
+                    <h5 class="light regular light-white">Jl. Sulawesi No.16, Kasin, Klojen, Kota Malang, Jawa Timur 65117</h5>
+                    <!-- <a href="#" class="btn btn-blue ripple trial-button">Start Free Trial</a> -->
                 </div>
-                <div class="col-sm-6 text-center-mobile">
-                    <h3 class="white">Opening Hours <span class="open-blink"></span></h3>
-                    <div class="row opening-hours">
-                        <div class="col-sm-6 text-center-mobile">
-                            <h5 class="light-white light">Mon - Fri</h5>
-                            <h3 class="regular white">9:00 - 22:00</h3>
-                        </div>
-                        <div class="col-sm-6 text-center-mobile">
-                            <h5 class="light-white light">Sat - Sun</h5>
-                            <h3 class="regular white">10:00 - 18:00</h3>
-                        </div>
-                    </div>
+                <div class="col-sm-4 text-center-mobile">
+                    <h3 class="white"><i class="fa fa-question-circle"></i>  Bantuan</h3><hr/>
+                    <!-- <div class="row opening-hours">
+                        <div class="col-sm-6 text-center-mobile"> -->
+                           <h5 class="light regular light-white">Lupa kata sandi mohon hubungi admin SDI untuk reset kata sandi</h5>
+                        <!-- </div>
+                    </div> -->
+                </div>
+                <div class="col-sm-4 text-center-mobile">
+                    <h3 class="white"><i class="fa fa-envelope-o"></i> Kontak </h3><hr/>
+                    <h5 class="light regular light-white">sdirsiamalang@gmail.com</h5>
+                    <!-- <a href="#" class="btn btn-blue ripple trial-button">Start Free Trial</a> -->
                 </div>
             </div>
         </div>

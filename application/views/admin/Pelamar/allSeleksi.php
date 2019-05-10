@@ -31,10 +31,22 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="sparkline13-list">
-          <div class="sparkline13-hd">
-            <div class="main-sparkline13-hd">
-              <h1><span class="table-project-n">Data</span>Seleksi</h1>
-              <!-- <font color="red" size="2">*klik (v) jika nilai tes seleksi telah penuh agar pelamar dapat ditindak lanjut</font> -->
+          <div class="col-lg-6">
+            <div class="sparkline13-hd">
+              <div class="main-sparkline13-hd">
+                <h1>Data <span class="table-project-n">Seleksi</span></h1>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="sparkline13-hd">
+              <div class="main-sparkline13-hd">
+                <div align="right">
+                <a href="<?php echo site_url('adminPelamar/report') ?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Print Report Data Seleksi</button>
+                </a>
+                </div>
+              </div>
             </div>
           </div>
           <div class="sparkline13-graph">

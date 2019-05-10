@@ -151,7 +151,6 @@ class pelamar extends CI_Controller {
 		$this->load->library('upload', $config);
 
 			$id=$this->session->userdata('myId');
-			$nik = $this->input->post('nik');
 			$no_ktp = $this->input->post('no_ktp');
 			$no_bpjs = $this->input->post('no_bpjs');
 			$nama = $this->input->post('nama');
@@ -168,7 +167,6 @@ class pelamar extends CI_Controller {
 				$fotosaya = $this->input->post('gambar_old');
 			}
 			$data = array(
-				'nik' => $nik,
 				'no_ktp' => $no_ktp,
 				'no_bpjs' => $no_bpjs,
 				'nama' => $nama,
@@ -562,36 +560,20 @@ class pelamar extends CI_Controller {
 	}
 
 	public function cetak(){
-		$this->load->view('pelamar/cetak');;
+		$id=$this->session->userdata('myId');
+		$paket['datasaya']=$this->mdl_pelamar->getPelamar($id);
+		$paket['datsel']=$this->mdl_pelamar->getCetak($id);
+		$this->load->view('pelamar/cetak', $paket);
 	}
 
-	public function cetak2($id){
-        $pdf = new FPDF('l','mm','A5');
-        // membuat halaman baru
-        $pdf->AddPage();
-        // setting jenis font yang akan digunakan
-        $pdf->SetFont('Arial','B',16);
-        // mencetak string 
-        $pdf->Cell(190,7,'RUMAH SAKIT ISLAM AISYIYAH MALANG',0,1,'C');
-        $pdf->SetFont('Arial','B',12);
-        $pdf->Cell(190,7,'KARTU PESERTA SELEKSI PELAMAR',0,1,'C');
-        // Memberikan space kebawah agar tidak terlalu rapat
-        $pdf->Cell(10,7,'',0,1);
-        $pdf->SetFont('Arial','B',10);
-        $pdf->Cell(20,6,'NIM',1,0);
-        $pdf->Cell(85,6,'Nama ',1,0);
-        $pdf->Cell(27,6,'No Seleksi',1,0);
-        $pdf->Cell(25,6,'TANGGAL LHR',1,1);
-        $pdf->SetFont('Arial','',10);
-        $mahasiswa = $this->db->get('mahasiswa')->result();
-        foreach ($mahasiswa as $row){
-            $pdf->Cell(20,6,$row->nim,1,0);
-            $pdf->Cell(85,6,$row->nama_lengkap,1,0);
-            $pdf->Cell(27,6,$row->no_hp,1,0);
-            $pdf->Cell(25,6,$row->tanggal_lahir,1,1); 
-        }
-        $pdf->Output();
+	public function Laporan($id){
+        $this->load->library('Mypdf');
+        $where = array('id_karyawan'=>$id);
+        $paket['datasaya']=$this->mdl_pelamar->getPelamar($id);
+		$paket['datsel']=$this->mdl_pelamar->getCetak($id);
+        $this->mypdf->generate('Laporan/seleksi', $paket, 'cetak-kartu-seleksi', 'A6', 'landscape');
     }
+
 }
 
 /* End of file pelamar.php */

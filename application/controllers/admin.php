@@ -507,6 +507,52 @@ class Admin extends CI_Controller {
         $this->mdl_pelamar->hapusdata('sip_str',$where);
         redirect("admin/datasurat");
     }
+
+    public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/surat/impor');
+        }else{ redirect("login"); }
+    }
+    public function impor()
+    {
+    include APPPATH."/libraries/PHPExcel.php";
+    if(isset($_FILES["file"]["name"]))
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
+                {   
+                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $konek = mysqli_connect("localhost","root","","kepegawaian");
+                    $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+                    $id=$data2['id_karyawan'];
+                    $surat = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $konek = mysqli_connect("localhost","root","","kepegawaian");
+                    $data3=mysqli_fetch_array(mysqli_query($konek,"select id_surat from sip_str where jenis_surat = '$surat' "));
+                    $id_surat=$data3['id_surat'];
+                    $tgl_mulai= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $tgl_akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $no_surat = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $file= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $data[] = array(
+                        'id_karyawan'       =>    $id,
+                        'id_surat'        =>    $id_surat,
+                        'tgl_mulai'           =>    $tgl_mulai,
+                        'tgl_akhir'             =>    $tgl_akhir,
+                        'no_surat'             =>    $no_surat,
+                        'file'              =>    $file,
+                    );
+                }
+            }
+
+            $this->mdl_admin->impor('sip_str',$data);
+            redirect('Admin/datasurat');
+        }        
+    }
 }
 
 /* End of file admin.php */

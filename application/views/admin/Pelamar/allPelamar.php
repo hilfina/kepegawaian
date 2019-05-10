@@ -40,9 +40,14 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <div align="right"><a href="<?php echo site_url('adminPelamar/addPelamar')?>">
-                  <button class="btn btn-primary waves-effect waves-light">Tambah Data</button>
-                </a></div>
+                <div align="right">
+                <a href="<?php echo site_url('adminPelamar/loadimpor') ?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
+                </a>
+                <a href="<?php echo site_url('adminPelamar/addPelamar')?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                </a>
+                </div>
               </div>
             </div>
           </div>

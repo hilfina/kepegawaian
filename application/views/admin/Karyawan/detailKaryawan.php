@@ -157,6 +157,7 @@
                             <td style="height: 50px">
                               <font color="red" size="2">*data profesi, status kepegawaian, golongan dan penempatan dapat diubah sesuai kehendak HRD</font>
                               <div class="col-lg-12">
+                              <input name="profesi_old" type="hidden" value="<?php echo $key->nama_profesi; ?>">
                                 <select  class="form-control" name="id_profesi">
                                   <option><?php echo $key->nama_profesi; ?></option>
                                   <option><strong>Pilihan Lainnya:</strong></option>
@@ -227,32 +228,32 @@
                 </div>
               </div>
             </div>
+
             <div class="product-tab-list tab-pane fade" id="penilaian">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="review-content-section">
                   <div class="row mg-b-15">
                     <div class="col-lg-12">
-                      <div class="row">
-                          <div class="col-lg-12">
-                              <div class="skill-title">
-                                  <h2>Penilaian Karyawan</h2>
-                                  <hr />
-                                  <br>
-                              </div>
+                      <div class="col-lg-6">
+                        <div class="sparkline13-hd">
+                          <div class="main-sparkline13-hd">
+                            <h1>Data <span class="table-project-n">Seleksi</span></h1>
                           </div>
-                      </div>
-                    <div class="col-lg-12">
-                      <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                        <div align="right">
-                        <a href="<?php echo site_url(); echo "/adminKaryawan/addnilai/";  echo $id ; ?>">
-                            <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                          </a>
-                        </div>
                         </div>
                       </div>
-                    </div>
+                      <div class="col-lg-6">
+                        <div class="sparkline13-hd">
+                          <div class="main-sparkline13-hd">
+                            <div align="right">
+                            <a href="<?php echo site_url(); echo "/adminKaryawan/addnilai/";  echo $id ; ?>">
+                              <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data Penilaian</button>
+                            </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+                    <br><br><hr/>
                     <div class="sparkline8-graph">
                       <div class="static-table-list">
                         <table class="table">
@@ -484,7 +485,7 @@
                     </div>
                     <div class="sparkline8-graph">
                       <div class="static-table-list">
-                        <h3>Sisa Cuti : <?php echo $cuti->kuota_cuti-$selisih." Hari."; ?></h3><hr style="width: 40%">
+                        <h3>Sisa Cuti : <?php echo $cuti->kuota_cuti-$selisih." Hari."; ?></h3><hr/>
                       </div>
                     </div>
                     <div class="sparkline8-graph">

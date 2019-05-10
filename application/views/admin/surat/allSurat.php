@@ -41,7 +41,7 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right">
-                <a href="#">
+                <a href="<?php echo site_url(); echo "/admin/loadimpor/";?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
                 </a>
                 <a href="<?php echo site_url(); echo "/admin/addsurat/";?>">
