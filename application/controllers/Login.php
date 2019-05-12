@@ -67,8 +67,10 @@ class Login extends CI_Controller {
 	                   foreach ($checking as $key) {
 	                   	if ($key->level == "Pelamar" && $cariData['id_profesi'] == "Belum") {
 	                    	redirect('pelamar/datasaya');
+	                    }elseif ($key->level == "admin") {
+	                    redirect("home");
 	                    }else{
-	                    redirect("home");}
+	                    redirect("home/bukanAdmin");}
 	                   }
 	                    
 	                }
@@ -196,8 +198,8 @@ class Login extends CI_Controller {
 		$this->email->to($email);
 		$this->email->subject("Verifikasi Akun");
 		$this->email->message(
-			"terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
-			"<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
+			"Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Terima kasih sudah melamar di perusahaan kami. Untuk proses berikutnya, data-data anda akan kami verifikasi terlebih dahulu. Pengumuman selanjutnya akan kami informasikan pada akun dan email anda. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini <br><br>".
+			"<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
 		);
 		
 		if($this->email->send())
@@ -224,6 +226,5 @@ class Login extends CI_Controller {
 		echo '</script>';
 		redirect(site_url('Login/index'));
 	}
-
 
 }

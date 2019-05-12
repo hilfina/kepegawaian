@@ -146,13 +146,12 @@
                               <?php } ?>
                               </div>
                             </td>
-                          </tr>
-                        
+                          </tr>                        
                           <tr>
                             <td><label form-control-label>Profesi</label></td>
-                            <td style="height: 50px">
-                              <font color="red" size="2">*data profesi, status kepegawaian, golongan dan penempatan dapat diubah sesuai kehendak HRD</font>
+                            <td style="height: 50px">                              
                               <div class="col-lg-12">
+                                <font color="red" size="2">*data profesi, status kepegawaian, golongan dan penempatan dapat diubah sesuai kehendak HRD</font>
                                 <select  class="form-control" name="id_profesi">
                                   <option><?php echo $key->nama_profesi; ?></option>
                                   <option><strong>Pilihan Lainnya:</strong></option>

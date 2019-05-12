@@ -10,6 +10,9 @@ class Home extends CI_Controller {
         $this->load->model('mdl_home');
     }
 
+    function bukanAdmin(){
+    	$this->load->view("homee");
+    }
     public function cariKadaluarsa(){ 
     //fungsi untuk cari kadaluarsa surat tanpa notif email
 		$tgl_sekarang = date('Y-m-d', time());	
