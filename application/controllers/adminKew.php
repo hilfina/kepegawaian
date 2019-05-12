@@ -129,6 +129,51 @@ class AdminKew extends CI_Controller {
         $this->mdl_pelamar->hapusdata('kewenangan_klinis',$where);
         redirect("adminKew");
     }
+
+    public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/Karyawan/Kredensial/impor');
+        }else{ redirect("login"); }
+    }
+    public function impor()
+    {
+    include APPPATH."/libraries/PHPExcel.php";
+    if(isset($_FILES["file"]["name"]))
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
+                {   
+                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $konek = mysqli_connect("localhost","root","","kepegawaian");
+                    $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+                    $id=$data2['id_karyawan'];
+                    $tgl_pengajuan= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $doku_pengajuan= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $penilaian = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $tgl_mulai = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $tgl_akhir= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $doku_penilaian= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $data[] = array(
+                        'id_karyawan'       =>    $id,
+                        'tgl_pengajuan'        =>    $tgl_pengajuan,
+                        'doku_pengajuan'           =>    $doku_pengajuan,
+                        'penilaian'             =>    $penilaian,
+                        'tgl_mulai'             =>    $tgl_mulai,
+                        'tgl_akhir'      =>    $tgl_akhir,
+                        'doku_penilaian'              =>    $doku_penilaian,
+                    );
+                }
+            }
+
+            $this->mdl_admin->impor('kewenangan_klinis',$data);
+            redirect('AdminKew');
+        }        
+    }
 }
 
 /* End of file admin.php */

@@ -105,6 +105,45 @@ class AdminOri extends CI_Controller {
         $this->mdl_pelamar->hapusdata('orientasi',$id);
         redirect("adminOri");
     }
+
+    public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/Karyawan/Orientasi/impor');
+        }else{ redirect("login"); }
+    }
+    public function impor()
+    {
+    include APPPATH."/libraries/PHPExcel.php";
+    if(isset($_FILES["file"]["name"]))
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
+                {   
+                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $konek = mysqli_connect("localhost","root","","kepegawaian");
+                    $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+                    $id=$data2['id_karyawan'];
+                    $tgl_mulai= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $tgl_akhir= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $doku_hadir= $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $data[] = array(
+                        'id_karyawan'       =>    $id,
+                        'tgl_mulai'             =>    $tgl_mulai,
+                        'tgl_akhir'             =>    $tgl_akhir,
+                        'doku_hadir'        =>    $doku_hadir,
+                    );
+                }
+            }
+
+            $this->mdl_admin->impor('orientasi',$data);
+            redirect('AdminOri');
+        }        
+    }
 }
 
 /* End of file admin.php */

@@ -116,7 +116,11 @@
                           <td><label form-control-label>TTL</label></td>
                           <td style="height: 50px">
                             <div class="col-lg-12">
+                            <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                            <div class="input-daterange input-group" id="datepicker">
                               <input name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>">
+                            </div>
+                            </div>
                             </div>
                           </td>
                         </tr>

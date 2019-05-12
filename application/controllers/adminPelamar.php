@@ -39,7 +39,6 @@ class AdminPelamar extends CI_Controller {
                 $email=$this->input->post('email');
                 $ttl=$this->input->post('ttl');
                 $jenkel=$this->input->post('jenkel');
-                $id_status=$this->input->post('id_status');
                 $id_profesi=$this->input->post('id_profesi');
                 $pendidikan=$this->input->post('pendidikan');
              
@@ -689,6 +688,121 @@ class AdminPelamar extends CI_Controller {
         }
 
         else{ redirect("login"); } 
+    }
+
+    public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/Pelamar/impor');
+        }else{ redirect("login"); }
+    }
+
+    public function impor()
+    {
+    include APPPATH."/libraries/PHPExcel.php";
+    if(isset($_FILES["file"]["name"]))
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
+                {   
+                    $no_ktp= $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $nama= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $alamat = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $no_telp = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $email= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $jenkel= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $ttl= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $id_profesi= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                    $konek =mysqli_connect("localhost","root","","kepegawaian");
+                    $cip=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
+                    
+                    $data1[]= array(
+                        'nik' => "-",
+                        'no_ktp' => $no_ktp,
+                        'no_bpjs' => '-',
+                        'nama' => $nama,
+                        'alamat' => $alamat,
+                        'no_telp' => $no_telp,
+                        'email' => $email,
+                        'ttl' => $ttl,
+                        'jenkel ' => $jenkel,
+                        'foto' => 'profile.png',
+                        'id_status' => 'Pelamar',
+                        'id_profesi' => $cip['id_profesi'],
+                        'id_golongan' => 'Tidak Ada'
+                    );
+
+                    $this->mdl_admin->impor('karyawan',$data1);
+                    $xxx=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from karyawan where no_ktp = $no_ktp"));
+
+                    $Lowongan[] = array(
+                    'id_karyawan' => $xxx['id_karyawan'],
+                    'pend_akhir' => '-',
+                    'nilai_akhir' => '-'
+                    );
+
+                    $Login[] = array(
+                    'id_karyawan' => $xxx['id_karyawan'],
+                    'username' => $xxx['no_ktp'],
+                    'password' => md5($xxx['no_ktp']),
+                    'level' => 'Pelamar',
+                    'aktif' => 0
+                    );
+
+                    $Pend[] = array(
+                    'id_karyawan' => $xxx['id_karyawan'],
+                    'pendidikan' => '-',
+                    'mulai' => 0,
+                    'akhir' => 0,
+                    'nomor_ijazah' => '-',
+                    'verifikasi' => 0
+                    );
+
+                    $config = array();
+                    $config['charset'] = 'utf-8';
+                    $config['useragent'] = 'CodeIgniter';
+                    $config['protocol']= "smtp";
+                    $config['mailtype']= "html";
+                    $config['smtp_host']= "ssl://smtp.gmail.com";
+                    $config['smtp_port']= "465";
+                    $config['smtp_timeout']= "400";
+                    $config['smtp_user']= "hilfinaamaris09@gmail.com";
+                    $config['smtp_pass']= "hilfano090798";
+                    $config['crlf']="\r\n"; 
+                    $config['newline']="\r\n"; 
+                    $config['wordwrap'] = TRUE;
+                    $this->email->initialize($config);
+                    $encrypted_id = $cariId['id_karyawan'];
+                    $this->email->from($config['smtp_user']);
+                    $this->email->to($email);
+                    $this->email->subject("Verifikasi Akun");
+                    $this->email->message(
+                        "terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
+                        "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
+                    );
+                    if($this->email->send()){
+                        $this->mdl_admin->impor('lowongan',$Lowongan);
+                        $this->mdl_admin->impor('login',$Login);
+                        $this->mdl_admin->impor('pendidikan',$Pend);
+                    }else{
+
+                    }
+                }
+            }
+
+            
+            echo "<script>alert('Berhasil Menambahkan data'); document.location.href = '" . site_url('AdminPelamar') . "';</script>";
+        }        
+    }
+
+    public function report(){
+        $this->load->library('Mypdf');
+        $data['array']=$this->mdl_admin->getreport();
+        $this->mypdf->generate('Laporan/seleksi', $data, 'laporan-hasil-seleksi', 'A4', 'portrait');
     }
 }
 

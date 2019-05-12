@@ -93,8 +93,43 @@ class adminUrgas extends CI_Controller {
     }
     public function del($id){
         $where = array('id_uraian' => $id);
-        $this->mdl_pelamar->hapusdata('orientasi',$where);
+        $this->mdl_pelamar->hapusdata('uraian_tugas',$where);
         redirect("adminUrgas");
+    }
+
+    public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/Karyawan/Urgas/impor');
+        }else{ redirect("login"); }
+    }
+    public function impor()
+    {
+    include APPPATH."/libraries/PHPExcel.php";
+    if(isset($_FILES["file"]["name"]))
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
+                {   
+                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $konek = mysqli_connect("localhost","root","","kepegawaian");
+                    $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+                    $id=$data2['id_karyawan'];
+                    $file_urgas= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $data[] = array(
+                        'id_karyawan'       =>    $id,
+                        'file_urgas'        =>    $file_urgas,
+                    );
+                }
+            }
+
+            $this->mdl_admin->impor('uraian_tugas',$data);
+            redirect('adminUrgas');
+        }        
     }
 }
 

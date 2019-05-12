@@ -300,5 +300,17 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi where k.id_karyawan = $id order by r.mulai desc ");
         return $query->row();
     }
+
+    public function impor($table, $data)
+    {
+        $this->db->insert_batch($table, $data);
+        return $this->db->insert_id();
+    }
+
+    public function getreport(){ //cetak pelamar yang fix 
+        $query = $this->db->query("SELECT k.nama, k.id_profesi, s.nilai_wawancara, s.nilai_kompetensi, s.tes_kesehatan, s.tes_psikologi, s.nilai_agama from seleksi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where k.id_status = 'Calon Karyawan' ");
+        return $query->result();
+    }
+
 }
  

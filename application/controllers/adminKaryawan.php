@@ -70,7 +70,7 @@ class AdminKaryawan extends CI_Controller {
                 );
 
                 $this->mdl_admin->addData('karyawan',$dataKaryawan);
-                 $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where no_ktp = '$no_ktp'"));
+                $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where no_ktp = '$no_ktp'"));
                 $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=>'Karyawan', 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
                 $dataRiwayat=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
                 $dataStatus=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
@@ -105,6 +105,7 @@ class AdminKaryawan extends CI_Controller {
                     $this->mdl_admin->addData('status',$dataStatus);
                     $this->mdl_admin->addData('golongan',$dataGolongan);
                     $this->mdl_admin->addData('riwayat',$dataRiwayat);
+                    echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('login') . "';</script>";
                 }else{}
                 redirect("adminKaryawan");
             }
@@ -655,6 +656,98 @@ class AdminKaryawan extends CI_Controller {
         $this->mdl_admin->addData('riwayat_seleksi',$bimbing);
         $this->mdl_admin->addData('riwayat_seleksi',$baca);
         redirect("adminKaryawan/karyawanDetail/$id_karyawan");
+    }
+
+    public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/Karyawan/impor');
+        }else{ redirect("login"); }
+    }
+    public function impor()
+    {
+    include APPPATH."/libraries/PHPExcel.php";
+    if(isset($_FILES["file"]["name"]))
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
+                {   
+                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $no_ktp= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $nama= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $alamat = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $no_telp = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $email= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $jenkel= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $id_status = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                    $jabatan = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                    $id_profesi= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                    $id_golongan= $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                    $konek =mysqli_connect("localhost","root","","kepegawaian");
+                    $cip=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
+                    
+                    $data1[]= array(
+                        'id_profesi' => $cip['id_profesi'],
+                        'id_status' => $id_status,
+                        'id_golongan' => $id_golongan,
+                        'nik' => $nik,
+                        'nama' => $nama,
+                        'no_ktp' => $no_ktp,
+                        'no_telp' => $no_telp,
+                        'foto' => 'profile.png',
+                        'jenkel' => $jenkel,
+                        'email' => $email,
+                        'jabatan' => $jabatan,
+                        'alamat' => $alamat
+                    );
+
+                    $this->mdl_admin->impor('karyawan',$data1);
+                    $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_karyawan from karyawan where nik = '$nik'"));
+                    $data2[]=array(
+                        'username'=>$nik, 
+                        'password'=>md5($no_ktp), 
+                        'level'=>'Karyawan', 
+                        'aktif'=>0, 
+                        'id_karyawan'=>$cariId['id_karyawan']
+                    );
+
+                    $config = array();
+                    $config['charset'] = 'utf-8';
+                    $config['useragent'] = 'CodeIgniter';
+                    $config['protocol']= "smtp";
+                    $config['mailtype']= "html";
+                    $config['smtp_host']= "ssl://smtp.gmail.com";
+                    $config['smtp_port']= "465";
+                    $config['smtp_timeout']= "400";
+                    $config['smtp_user']= "hilfinaamaris09@gmail.com";
+                    $config['smtp_pass']= "hilfano090798";
+                    $config['crlf']="\r\n"; 
+                    $config['newline']="\r\n"; 
+                    $config['wordwrap'] = TRUE;
+                    $this->email->initialize($config);
+                    $encrypted_id = $cariId['id_karyawan'];
+                    $this->email->from($config['smtp_user']);
+                    $this->email->to($email);
+                    $this->email->subject("Verifikasi Akun");
+                    $this->email->message(
+                        "terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
+                        "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
+                    );
+                    if($this->email->send()){
+                        $this->mdl_admin->impor('login',$data2);
+                    }else{
+
+                    }
+                }
+            }
+
+            
+            echo "<script>alert('Berhasil Menambahkan Data'); document.location.href = '" . site_url('Adminkaryawan') . "';</script>";
+        }        
     }
 }
 

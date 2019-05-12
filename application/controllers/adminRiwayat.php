@@ -133,6 +133,49 @@ class AdminRiwayat extends CI_Controller {
         $data['data'] = $this->mdl_admin->getRiwayat($id);
         $this->mypdf->generate('Laporan/penempatan', $data, 'laporan-riwayat-penempatan', 'A4', 'portrait');
     }
+
+    public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/Karyawan/Riwayat/penempatan/impor');
+        }else{ redirect("login"); }
+    }
+    public function impor()
+    {
+    include APPPATH."/libraries/PHPExcel.php";
+    if(isset($_FILES["file"]["name"]))
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
+                {   
+                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $konek = mysqli_connect("localhost","root","","kepegawaian");
+                    $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+                    $id=$data2['id_karyawan'];
+                    $ruangan= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $mulai = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $idp= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $data3=mysqli_fetch_array(mysqli_query($konek,"select id_profesi from jenis_profesi where nama_profesi = '$idp' "));
+                    $id_profesi=$data3['id_profesi'];
+                    $data[] = array(
+                        'id_karyawan'       =>    $id,
+                        'ruangan'        =>    $ruangan,
+                        'mulai'             =>    $mulai,
+                        'akhir'             =>    $akhir,
+                        'id_profesi'      =>    $id_profesi,
+                    );
+                }
+            }
+
+            $this->mdl_admin->impor('riwayat',$data);
+            redirect('AdminRiwayat');
+        }        
+    }
 }
 
 /* End of file admin.php */

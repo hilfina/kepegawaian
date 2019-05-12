@@ -163,7 +163,51 @@ class AdminGol extends CI_Controller {
         $where = array('id_karyawan'=>$id);
         $data['array']=$this->mdl_admin->getData('karyawan',$where);
         $data['data']=$this->mdl_admin->getGol($id);
+        $data['datDir']=$this->mdl_admin->getTempat($id);
         $this->mypdf->generate('Laporan/golongan', $data, 'laporan-riwayat-golongan', 'A4', 'portrait');
+    }
+
+    public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/Karyawan/Riwayat/Golongan/impor');
+        }else{ redirect("login"); }
+    }
+    public function impor()
+    {
+    include APPPATH."/libraries/PHPExcel.php";
+    if(isset($_FILES["file"]["name"]))
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
+                {   
+                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $konek = mysqli_connect("localhost","root","","kepegawaian");
+                    $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+                    $id=$data2['id_karyawan'];
+                    $id_golongan= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $mulai = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $alamat_sk= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $nomor_sk= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $data[] = array(
+                        'id_karyawan'       =>    $id,
+                        'id_golongan'        =>    $id_golongan,
+                        'nomor_sk'        =>    $nomor_sk,
+                        'mulai'             =>    $mulai,
+                        'akhir'             =>    $akhir,
+                        'alamat_sk'      =>    $alamat_sk,
+                    );
+                }
+            }
+
+            $this->mdl_admin->impor('golongan',$data);
+            redirect('Admingolongan');
+        }        
     }
 }
 

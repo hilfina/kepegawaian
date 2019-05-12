@@ -51,6 +51,11 @@
       <td>:</td>
       <td><?php echo $key->id_profesi;?></td>
     </tr>
+    <tr>
+      <td>TEMPAT</td>
+      <td>:</td>
+      <td><?php echo $key->ruangan;?></td>
+    </tr>
      <?php break; endforeach ?>
   </table>
 

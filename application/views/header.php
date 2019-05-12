@@ -216,22 +216,7 @@
                 <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
                   <li><a title="Semua Pelamar" href="<?php echo site_url('adminPelamar') ?>">Pelamar</a></li>
                   <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/dataSeleksi') ?>">Seleksi Pelamar</a></li>
-                  <li><a title="Report" href="<?php echo site_url('admin/report') ?>">Data Report</a></li>
                   <li><a title="Loker" href="<?php echo site_url('adminLoker') ?>">Lowongan Pekerjaan</a></li>
-                </ul>
-              </li>
-              <li>
-                <a class="has-arrow" href="#" aria-expanded="false">
-                  <span class="educate-icon educate-student icon-wrap"></span> 
-                  <span class="mini-click-non">Format Email</span>
-                </a>
-                <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
-                  <li><a title="Pelamar Daftar" href="<?php echo site_url('admin/report') ?>">Pelamar Daftar</a></li>
-                  <li><a title="Pelamar Dipilih" href="<?php echo site_url('admin/report') ?>">Pelamar Dipilih</a></li>
-                  <li><a title="Pelamar Ditolak" href="<?php echo site_url('admin/report') ?>">Pelamar Ditolak</a></li>
-                  <li><a title="Calon Karyawan Ditolak" href="<?php echo site_url('admin/report') ?>">Seleksi Ditolak</a></li>
-                  <li><a title="Calon Karyawan Diterima" href="<?php echo site_url('admin/report') ?>">Seleksi Diterima</a></li>
-                  <li><a title="Surat Kadaluarsa" href="<?php echo site_url('admin/report') ?>">Surat Kadaluarsa</a></li>
                 </ul>
               </li>
             <?php }elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '0') { ?>

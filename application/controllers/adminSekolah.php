@@ -130,6 +130,51 @@ class AdminSekolah extends CI_Controller {
         $this->mdl_pelamar->hapusdata('mou_sekolah',$where);
         redirect("AdminSekolah");
     }
+
+    public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/Karyawan/MOU/Sekolah/impor');
+        }else{ redirect("login"); }
+    }
+    public function impor()
+    {
+    include APPPATH."/libraries/PHPExcel.php";
+    if(isset($_FILES["file"]["name"]))
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
+                {   
+                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $konek = mysqli_connect("localhost","root","","kepegawaian");
+                    $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+                    $id=$data2['id_karyawan'];
+                    $no_mou= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $tgl_mulai = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $tgl_akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $beasiswa= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $ket= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $file= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $data[] = array(
+                        'id_karyawan'       =>    $id,
+                        'no_mou'        =>    $no_mou,
+                        'tgl_mulai'             =>    $tgl_mulai,
+                        'tgl_akhir'             =>    $tgl_akhir,
+                        'beasiswa'      =>    $beasiswa,
+                        'ket'             =>    $ket,
+                        'file'              =>    $file,
+                    );
+                }
+            }
+
+            $this->mdl_admin->impor('mou_sekolah',$data);
+            redirect('AdminSekolah');
+        }        
+    }
 }
 
 /* End of file admin.php */
