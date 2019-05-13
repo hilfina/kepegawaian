@@ -48,10 +48,8 @@ class AdminStatus extends CI_Controller {
                 $this->load->view('admin/Karyawan/riwayat/status/addStatus',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx}png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
                 
@@ -117,10 +115,8 @@ class AdminStatus extends CI_Controller {
                 $this->load->view('admin/Karyawan/riwayat/status/addStatus2',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx}png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
 
@@ -173,7 +169,7 @@ class AdminStatus extends CI_Controller {
     public function edit($id, $idk){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
+            $this->form_validation->set_rules('id_karyawan','Id Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getStatus($id);
@@ -181,10 +177,9 @@ class AdminStatus extends CI_Controller {
                 $this->load->view('admin/Karyawan/riwayat/status/editStatus',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
+
 
                 $this->load->library('upload', $config);
                 
