@@ -294,7 +294,9 @@ class Admin extends CI_Controller {
                 $this->email->from($config['smtp_user']);
                 $this->email->to($semua->email);
                 $this->email->subject("Notifikasi");
-                $this->email->message("Maaf, anda gagal dalam seleksi tahap $jenisTes di RSIA, silahkan mencoba pada peluang karir selanjutnya");
+                $this->email->message(
+                    "Kepada<br>Yth. Sdr. <b>".$semua->nama."</b><br> Ditempat,<br><br><br>Berdasarkan hasil Seleksi ".$jenisTes.", anda dinyatakan TIDAK LULUS pada tahap seleksi ".$jenisTes." Rumah Sakit Islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih."
+                );
                 $this->email->send();
                 redirect("adminPelamar/pelamarDetail/$semua->id_karyawan");
             }

@@ -296,6 +296,10 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from data_cuti where id = $id ");
         return $query->result();
     }
+    public function dataDiri($id){
+        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi where k.id_karyawan = $id order by r.mulai desc ");
+        return $query->row();
+    }
 
     public function impor($table, $data)
     {

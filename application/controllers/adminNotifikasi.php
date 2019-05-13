@@ -50,6 +50,7 @@ class AdminNotifikasi extends CI_Controller {
         $this->email->from($config['smtp_user']);
         $this->email->to($dataK->email);
         $this->email->subject("Notifikasi");
+        $this->email->message("Kepada<br>Yth. Sdr. <b>".$dataK->nama."</b><br> Ditempat,<br><br><br>Kemi memberitahukan bahwa data kepegawaian anda akan segera habis masa berlaku. Dimohon untuk segera mengurus data tersebut.<br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih.");
         $this->email->message("Surat anda akan segera berakhir dalam jangka waktu 6 bulan.");
         $this->email->send();
 

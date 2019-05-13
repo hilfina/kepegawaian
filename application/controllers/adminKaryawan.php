@@ -95,11 +95,12 @@ class AdminKaryawan extends CI_Controller {
                 $this->email->to($email);
                 $this->email->subject("Verifikasi Akun");
                 $this->email->message(
-                    "Terimakasih telah melakukan registrasi pada Sistem Infromasi Kepegawaian RSIA,<br>
-                    username: nomor induk karyawan. <br>
-                    password: nomor ktp anda.<br>
-                    untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
-                    "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
+
+                    "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Anda telah didaftarkan di Rumah Sakit islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini menggunakan <br><br>
+	                    username: nomor induk karyawan. <br>
+	                    password: nomor ktp anda.<br>".
+                    "<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
+
                 );
                 
                 if($this->email->send())
@@ -165,25 +166,16 @@ class AdminKaryawan extends CI_Controller {
 
             $where = array('id_karyawan' => $id);
 
+            $tdy=date('Y-m-d');
+           
             $xxx =mysqli_connect("localhost","root","","kepegawaian");
             $idPro=mysqli_fetch_array(mysqli_query($xxx,"select * from jenis_profesi where nama_profesi = '$id_profesi'"));
-            $riwayatm=mysqli_fetch_array(mysqli_query($xxx,"select * from riwayat where id_karyawan = $id order by mulai desc limit 1"));
-            $statusm=mysqli_fetch_array(mysqli_query($xxx,"select * from status where id_karyawan = $id and aktif = 1 "));
-            $golonganm=mysqli_fetch_array(mysqli_query($xxx,"select * from golongan where id_karyawan = $id and aktif = 1 "));
-            $tdy=date('y-m-d');
 
-            $tdy=date('Y-m-d');
-            $dtPro = date('Y-m-d', strtotime($riwayatm['mulai']));
-            $dtSta = date('Y-m-d', strtotime($statusm['mulai']));
-            $dtGol = date('Y-m-d', strtotime($golonganm['mulai']));
-           
             $dataProfesi = array('id_karyawan' => $id, 'ruangan' => $ruangan, 'id_profesi' => $idPro['id_profesi'], 'mulai' => $tdy );
-            $addStatus = array('id_karyawan' => $id, 'id_status' => $id_status, 'mulai' => $tdy, 'aktif' => 1 );
-            $editStatus = array('akhir' => $tdy, 'aktif' => 0 );
-            $addGolongan = array('id_karyawan' => $id, 'id_golongan' => $id_golongan, 'mulai' => $tdy, 'aktif' => 1 );
-            $editGolongan = array('akhir' => $tdy, 'aktif' => 0 );
+            $dataStatus = array('id_karyawan' => $id, 'id_status' => $id_status, 'mulai' => $tdy);
+            $dataGolongan = array('id_karyawan' => $id, 'id_golongan' => $id_golongan, 'mulai' => $tdy);
 
-             $dataKaryawan = array(
+            $dataKaryawan = array(
                 'nik' => $nik,
                 'no_ktp' => $no_ktp,
                 'no_bpjs' => $no_bpjs,
@@ -197,53 +189,25 @@ class AdminKaryawan extends CI_Controller {
                 'jabatan' => $jabatan,
                 'id_profesi' => $idPro['id_profesi'],
                 'id_golongan' => $id_golongan
-                );
-             $datalogin = array(
+            );
+            $datalogin = array(
                 'username' => $username,
                 'password' => $password
-                );
-             //jika profesi yg dipilih berubah atau ruangan penempatannya berubah
-            if ($riwayatm['id_profesi'] != $idPro['id_profesi'] || $riwayatm['ruangan'] != $ruangan) {
-                //jika tanggal di riwayat berbeda dengan hari waktu perubahab
-                if ($dtPro != $tdy) {
-                    // tambah data riwayat penempatan terbaru
-                    // karena berarti karyawan tersebut ganti profesi atau ganti penempatan, maka harus dibuat riwayat baru
-                    $this->mdl_admin->addData('riwayat',$dataProfesi);
-                }else{ //jika tanggalnya tetap
-                    //data riwayat yang sudah ada diupdate saja.
-                    $this->mdl_admin->updateProf($ruangan,$idPro['id_profesi'],$riwayatm['id_riwayat']);
-                }
+            );
+
+            //DATA KARYAWAN SEKARANG SEBELUM DI EDIT
+            $dataSkg = $this->mdl_admin->dataDiri($id);
+
+            if ($dataSkg->ruangan != $ruangan || $dataSkg->id_profesi != $idPro['id_profesi'] ) {
+               $this->mdl_admin->addData('riwayat',$dataProfesi);
             }else{}
-            // jika id status yang dipilih berubah
-            if ($statusm['id_status'] != $id_status) {
-                // jika tanggal di riwayat status beda dg hari ini
-                if ($dtSta != $tdy) {
-                    $where1 = array('id' => $statusm['id']);
-                    //untuk edit riwayat status jika data mau diganti 
-                    // karena pada tanggal yang berbeda terdapat pergantian status pada karyawan
-                    $this->mdl_admin->updateData($where1,$editStatus,'Status');
-                    //tambah riwayat status baru.
-                    $this->mdl_admin->addData('status',$addStatus);
-                }else{// jika waktu merubah id status pada hari yang sama berulang
-                    // isi dari riwayat tersbt hanya di edit id_statusnya saja
-                    $this->mdl_admin->updateStat($id_status,$id);
-                }
+            if ($dataSkg->id_golongan != $id_golongan) {
+                $this->mdl_admin->addData('golongan',$dataGolongan);
             }else{}
-            // jika id golongan yang dipilih berubah
-            if ($golonganm['id_golongan'] != $id_golongan) {
-                // jika tanggal di riwayat golongan beda dg hari ini
-                if ($dtGol != $tdy) {
-                    $where1 = array('id' => $golonganm['id']);
-                    //untuk edit riwayat golongan jika data mau diganti 
-                    // karena pada tanggal yang berbeda terdapat pergantian golongan pada karyawan
-                    $this->mdl_admin->updateData($where1,$editGolongan,'golongan');
-                    //tambah riwayat golongan baru.
-                    $this->mdl_admin->addData('golongan',$addGolongan);
-                }else{// jika waktu merubah id golongan pada hari yang sama berulang
-                    // isi dari riwayat tersbt hanya di edit id_golongannya saja
-                    $this->mdl_admin->updateGol($id_golongan,$id);
-                }
+            if ($dataSkg->id_status != $id_status) {
+                $this->mdl_admin->addData('status',$dataStatus);
             }else{}
+
             // update data karyawan
             $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
             $this->mdl_admin->updateData($where,$datalogin,'login');
