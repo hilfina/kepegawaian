@@ -2,7 +2,7 @@
 $this->load->view("header.php");
 ?>
 <br>
-  <div class="breadcome-area">
+    <div class="breadcome-area">
       <br>
         <div class="container-fluid">
             <div class="row">
@@ -25,9 +25,8 @@ $this->load->view("header.php");
             </div>
           </div>
       </div>
-    </div>
-     <div class="product-status mg-b-15">
-            <div class="container-fluid">
+<div class="product-status mg-b-15">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="sparkline12-list mt-b-30">
@@ -38,9 +37,17 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
-                    <form action="<?php echo site_url();?>/adminKew/addKew/" enctype="multipart/form-data" method="post">
+                    <div class="container-fluid" role="alert">
+                    <?php if ($this->session->flashdata('msg_error')) :?>
+                      <div class="alert alert-danger alert-mg-b"> 
+                      <?php echo $this->session->flashdata('msg_error')?>
+                      </div>
+                    <?php endif; ?>
+                </div>
+                <form action="<?php echo site_url();?>/adminKew/addKew/" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
+                            
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
@@ -89,91 +96,18 @@ $this->load->view("header.php");
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected">
                                           </div>
                                         </div>
-                                        <font size="2">Format dokumen harus dalam bentuk docx/pdf. Ukuran file maksimal adalah 2 mb </font>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <div class="input-mask-title">
-                                        <label>Kredensial</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <div class="input-mark-inner">
-                                        <Select type="text" class="form-control" name="penilaian">
-                                            <option>---Pilih---</option>
-                                            <option>Belum</option>
-                                            <option>Proses</option>
-                                            <option>Selesai</option>
-                                        </Select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                              <div class="date-picker-inner">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                  <div class="input-mask-title">
-                                    <label>Tanggal Berlaku</label>
-                                  </div>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                  <div class="form-group data-custon-pick data-custom-mg" id="data_5">
-                                    <div class="input-daterange input-group" id="datepicker">
-                                      <input type="text" class="form-control" name="tgl_mulai" />
-                                      <span class="input-group-addon">hingga</span>
-                                      <input type="text" class="form-control" name="tgl_akhir" />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <div class="input-mask-title">
-                                        <label>Upload Dokumen Kredensial</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <div class="input-mark-inner">
-                                        <div class="file-upload-inner ts-forms">
-                                          <div class="input prepend-big-btn">
-                                              <label class="icon-right" for="prepend-big-btn">
-                                                <i class="fa fa-download"></i>
-                                              </label>
-                                              <div class="file-button">
-                                                  Browse
-                                                  <input type="file" name="file2" value="" onchange="document.getElementById('prepend-big-btn2').value = this.value;">
-                                              </div>
-                                              <input type="text" id="prepend-big-btn2" placeholder="no file selected">
-                                          </div>
-                                        </div>
-                                        <font size="2">Format dokumen harus dalam bentuk docx/pdf. Ukuran file maksimal adalah 2 mb </font>
-                                        <br>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <div class="input-mask-title">
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <div class="input-mark-inner">
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
+                                        <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
                                 </div>
                             </div>
 
-                            </div>
                         </div>
                     </div>
-                    </form>
+                </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <?php $this->load->view("footer.php"); ?>
  

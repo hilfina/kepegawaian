@@ -175,13 +175,13 @@
                 </a>
                 <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
                   <li><a title="Karyawan" href="<?php echo site_url('adminKaryawan/') ?>">Karyawan</a></li>
-                  <li><a title="Karyawan" href="<?php echo site_url('admin/datapend') ?>">Pendidikan</a></li>
+                  <li><a title="Pendidikan" href="<?php echo site_url('admin/datapend') ?>">Pendidikan</a></li>
                   <li><a title="Diklat" href="<?php echo site_url('adminDiklat/') ?>">Diklat</a></li>
                   <li><a title="Orientasi" href="<?php echo site_url('adminOri/') ?>">Orientasi</a></li>
                   <li><a title="Uraian Tugas" href="<?php echo site_url('adminUrgas/') ?>">Uraian Tugas</a></li>
                   <li><a title="Proses Kredensial" href="<?php echo site_url('adminKew/') ?>">Proses Kredensial</a></li>
                   <li><a title="Data Profesi" href="<?php echo site_url('adminProfesi/') ?>">Data profesi</a></li>
-                  <li><a title="Data Profesi" href="<?php echo site_url('adminJenStatus/') ?>">Data Status</a></li>
+                  <li><a title="Data Status" href="<?php echo site_url('adminJenStatus/') ?>">Data Status</a></li>
                 </ul>
               </li>
               <li>
@@ -190,8 +190,8 @@
                   <span class="mini-click-non">File Kepegawaian</span>
                 </a>
                 <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
-                  <li><a title="MOU Hutang" href="<?php echo site_url('adminJenSurat/') ?>">Data Jenis Surat</a></li>
-                  <li><a title="MOU Hutang" href="<?php echo site_url('admin/datasurat') ?>">Data Surat</a></li>
+                  <li><a title="Data Jenis Surat" href="<?php echo site_url('adminJenSurat/') ?>">Data Jenis Surat</a></li>
+                  <li><a title="Data Surat" href="<?php echo site_url('admin/datasurat') ?>">Data Surat</a></li>
                   <li><a title="MOU Hutang" href="<?php echo site_url('adminHutang/') ?>">MOU Hutang</a></li>
                   <li><a title="MOU Kontrak" href="<?php echo site_url('adminKontrak') ?>">MOU Kontrak</a></li>
                   <li><a title="MOU Sekolah" href="<?php echo site_url('adminSekolah') ?>">MOU Sekolah</a></li>

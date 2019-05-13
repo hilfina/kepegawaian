@@ -28,9 +28,16 @@ $this->load->view("header.php");
         <div class="sparkline12-list mt-b-30">
           <div class="sparkline12-hd"><br>
             <div class="main-sparkline12-hd">
-              <span><h4 align="center">DATA PENDIDIKAN</h4></span>
+              <span><h4 align="center">EDIT DATA PENDIDIKAN</h4></span>
             </div>
           </div><br>
+          <div class="container-fluid" role="alert">
+              <?php if ($this->session->flashdata('msg_error')) :?>
+                <div class="alert alert-danger alert-mg-b"> 
+                <?php echo $this->session->flashdata('msg_error')?>
+                </div>
+              <?php endif; ?>
+          </div>
           <?php foreach ($array as $key){ ?>
             <form action="<?php echo site_url(); ?>/adminPendidikan/editpend/<?php echo $key->id?>" enctype="multipart/form-data" method="post">
               <div class="sparkline12-graph">

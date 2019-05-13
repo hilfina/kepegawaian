@@ -43,10 +43,8 @@ class AdminDiklat extends CI_Controller {
                 $this->load->view('admin/Karyawan/Diklat/addDiklat',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx}png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
 
@@ -59,8 +57,16 @@ class AdminDiklat extends CI_Controller {
                 $tgl_akhir=date('Y-m-d', strtotime($this->input->post('tgl_akhir')));
                 $nomor_sertif=$this->input->post('nomor_sertif');
 
-                $this->upload->do_upload('file');
-                $file =$this->upload->data('file_name');
+                if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus diisi dengan format pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("adminDiklat/addDiklat/$id");
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+
                
                 $dataDiklat= array(
                     'id_karyawan' => $id_karyawan,
@@ -92,10 +98,8 @@ class AdminDiklat extends CI_Controller {
                 $this->load->view('admin/Karyawan/Diklat/editDiklat',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
 
@@ -107,11 +111,20 @@ class AdminDiklat extends CI_Controller {
                 $tgl_akhir=date('Y-m-d', strtotime($this->input->post('tgl_akhir')));
                 $nomor_sertif=$this->input->post('nomor_sertif');
 
-                if ($this->upload->do_upload('file')) {
-                    $file = $this->upload->data('file_name');
-                }else {
+                if($_FILES['file']['name'] != '') {
+                    if(!$this->upload->do_upload('file')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("adminDiklat/editDiklat/$id/$idk");
+                    } else {
+                        $file = $this->upload->data('file_name');
+                    }
+                } else {
                     $file = $this->input->post('file_old');
                 }
+
 
                 $dataDiklat= array(
                     'nama_diklat' => $nama_diklat,

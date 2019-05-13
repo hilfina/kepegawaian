@@ -29,6 +29,14 @@
               <span><h4 align="center">TAMBAH DATA ORIENTASI KARYAWAN</h4></span>
             </div>
           </div><br>
+          <div class="container-fluid" role="alert">
+            <?php if ($this->session->flashdata('msg_error')) :?>
+              <div class="alert alert-danger alert-mg-b"> 
+              <?php echo $this->session->flashdata('msg_error')?>
+              </div>
+            <?php endif; ?>
+        </div>
+
           <form action="<?php echo site_url(); ?>/adminOri/addori/" enctype="multipart/form-data" method="post">
             <div class="sparkline12-graph">
               <div class="input-knob-dial-wrap">
@@ -67,7 +75,7 @@
                     </div>
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                    <font size="2" color="red"> *Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 MB </font>
+                    <font size="2" color="red"> *Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 MB </font>
                     <div class="input-mark-inner">
                       <div class="file-upload-inner ts-forms">
                         <div class="input prepend-big-btn">

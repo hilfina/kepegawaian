@@ -95,7 +95,10 @@ class AdminKaryawan extends CI_Controller {
                 $this->email->to($email);
                 $this->email->subject("Verifikasi Akun");
                 $this->email->message(
-                    "terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
+                    "Terimakasih telah melakukan registrasi pada Sistem Infromasi Kepegawaian RSIA,<br>
+                    username: nomor induk karyawan. <br>
+                    password: nomor ktp anda.<br>
+                    untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
                     "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
                 );
                 
@@ -493,7 +496,7 @@ class AdminKaryawan extends CI_Controller {
                 $tanggal = date('Y-m-d',strtotime($this->input->post('tanggal')));
                 $hasil = $this->input->post('hasil');
                 if(!$this->upload->do_upload('file')) {
-                    $error = $this->upload->display_errors();
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
                     $this->session->set_flashdata('msg_error', $error);
 
@@ -537,7 +540,7 @@ class AdminKaryawan extends CI_Controller {
                 $hasil = $this->input->post('hasil');
                 if($_FILES['file']['name'] != '') {
                     if(!$this->upload->do_upload('file')) {
-                        $error = $this->upload->display_errors();
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
                         $this->session->set_flashdata('msg_error', $error);
 
@@ -771,7 +774,10 @@ class AdminKaryawan extends CI_Controller {
                     $this->email->to($email);
                     $this->email->subject("Verifikasi Akun");
                     $this->email->message(
-                        "terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
+                        "Terimakasih telah melakukan registrasi pada Sistem Infromasi Kepegawaian RSIA,<br>
+                        username: nomor induk karyawan. <br>
+                        password: nomor ktp anda.<br>
+                        untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
                         "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
                     );
                     if($this->email->send()){

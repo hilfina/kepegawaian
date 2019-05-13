@@ -33,15 +33,14 @@ class AdminPendidikan extends CI_Controller {
         else{ redirect("login"); } 
     }
 
-    //Add pendidikan pada karyawan
-    public function addPend($id){
+    
+    public function addPend(){
        if($this->mdl_admin->logged_id()){
         
-            $this->form_validation->set_rules('id_karyawan','Id Karyawan','trim|required');
+            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $data['id']=$id;
-                $this->load->view('admin/pelamar/addPend',$data);
+                $this->load->view('admin/pendidikan/addPendidikan');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
@@ -50,27 +49,38 @@ class AdminPendidikan extends CI_Controller {
                 $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
+                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $a=$this->input->post('nik');
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
-                $id=$this->input->post('id_karyawan');
+                $id=$data2['id_karyawan'];
                 $pendidikan = $this->input->post('pendidikan');
                 $nilai = $this->input->post('nilai');
                 $mulai = $this->input->post('mulai');
                 $akhir = $this->input->post('akhir');
                 $nomor_ijazah = $this->input->post('nomor_ijazah');
-                $this->upload->do_upload('file');
-                $a = $this->upload->data('file_name');
+                if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('AdminPendidikan/addPend');
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+
                 $data3 = array(
                         'pendidikan'=>$pendidikan,
                         'mulai'=>$mulai,
-                        'akhir'=>$akhir,
+                        'akhir'=>$filekhir,
                         'nomor_ijazah'=>$nomor_ijazah,
                         'id_karyawan' => $id,
-                        'file'=>$a,
+                        'file'=>$file,
                         'verifikasi'=> 0,
                         'nilai' => $nilai,
                     );
                 $this->mdl_admin->addData('pendidikan',$data3);
-                redirect("admin/pelamarDetail/$id");
+                redirect("AdminPendidikan");
                 
                 }
         }else{ redirect("login"); } 
@@ -89,10 +99,8 @@ class AdminPendidikan extends CI_Controller {
             }
             else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'jpg|png|pdf|docx';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
                 $pendidikan = $this->input->post('pendidikan');
@@ -103,14 +111,20 @@ class AdminPendidikan extends CI_Controller {
                 $akhir = $this->input->post('akhir');
                 $nomor_ijazah = $this->input->post('nomor_ijazah');
 
-                $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from pendidikan where id = $id"));
-                $datax=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_karyawan from karyawan where nik = '$nik'"));
-                $id_karyawan = $datax['id_karyawan'];
-                if ($this->upload->do_upload('file')) {
-                    $file = $this->upload->data('file_name');
-                }else {
-                    $file = $s['file'];
+                if($_FILES['file']['name'] != '') {
+                    if(!$this->upload->do_upload('file')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("AdminPendidikan/editpend/$id");
+                    } else {
+                        $file = $this->upload->data('file_name');
+                    }
+                } else {
+                    $file = $this->input->post('file_old');
                 }
+
                 $data3 = array(
                         'pendidikan'=>$pendidikan,
                         'jurusan' => $jurusan,

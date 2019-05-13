@@ -143,7 +143,7 @@ class AdminPelamar extends CI_Controller {
         $this->email->from($config['smtp_user']);
         $this->email->to($data['email']);
         $this->email->subject("Notifikasi");
-        $this->email->message("Selamat, anda mendapat panggilan untuk melakukan seleksi di RSIA tahap ");
+        $this->email->message("Selamat, anda mendapat panggilan untuk melakukan seleksi di RSIA. Silakan pantau terus sistem informasi kepegawaian RSIA untuk mendapatkan jadwal seleksi. ");
         $this->email->send();
         
         $where = array( 'id_karyawan' => $id ); 
@@ -781,7 +781,9 @@ class AdminPelamar extends CI_Controller {
                     $this->email->to($email);
                     $this->email->subject("Verifikasi Akun");
                     $this->email->message(
-                        "terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
+                        "Mohon lengkapi data lamaran anda di RSI Aisyiyah Malang, karena penseleksian akan segera dilakukan.<br>
+                        Klik tombol dibawah ini untuk aktifikasi akun anda.<br>
+                        Masukkan username dan password dengan nomor KTP sesuai data lamaran yang telah anda kirim.<br><br>".
                         "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
                     );
                     if($this->email->send()){

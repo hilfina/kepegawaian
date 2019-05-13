@@ -35,6 +35,14 @@
               <h1> Edit Data Surat Karyawan</h1><br>
             </div>
           </div>
+          <div class="container-fluid" role="alert">
+              <?php if ($this->session->flashdata('msg_error')) :?>
+                <div class="alert alert-danger alert-mg-b"> 
+                <?php echo $this->session->flashdata('msg_error')?>
+                </div>
+              <?php endif; ?>
+          </div>
+
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
         <?php foreach ($data as $key) { ?>
           <form action="<?php echo site_url();?>/admin/editSurat/<?php echo $key->id_sipstr?>" enctype="multipart/form-data" method="POST">
@@ -110,7 +118,7 @@
                       </div>
                       <input type="text" id="prepend-big-btn" placeholder="no file selected">
                     </div>
-                    <font size="2" color="red">*Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2 mb </font>
+                    <font size="2" color="red">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                   </div>
                 </div>
               </div>

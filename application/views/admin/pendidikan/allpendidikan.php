@@ -44,7 +44,7 @@
                 <a href="<?php echo site_url(); echo "/adminPendidikan/loadimpor/";?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
                 </a>
-                <a href="<?php echo site_url(); echo "/admin/addPend/";?>">
+                <a href="<?php echo site_url(); echo "/adminPendidikan/addPend/";?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a>
                 </div>

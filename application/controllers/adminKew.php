@@ -46,24 +46,25 @@ class AdminKew extends CI_Controller {
 
                 $id_karyawan=$data2['id_karyawan'];
                 $tgl_pengajuan=date('Y-m-d',strtotime($this->input->post('tgl_pengajuan')));
-                $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
-                $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
-                $penilaian=$this->input->post('penilaian');
+                if(!$this->upload->do_upload('doku_pengajuan')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
-                $this->upload->do_upload('doku_pengajuan');
-                $doku_pengajuan=$this->upload->data('file_name');
+                    $this->session->set_flashdata('msg_error', $error);
 
-                $this->upload->do_upload('file2');
-                $file2=$this->upload->data('file_name');
+                    redirect("adminKew/addKew");
+                } else {
+                    $doku_pengajuan = $this->upload->data('file_name');
+                }
+
                
                 $data= array(
                 'id_karyawan' => $id_karyawan,
                 'tgl_pengajuan' => $tgl_pengajuan,
-                'penilaian' => $penilaian,
-                'tgl_mulai' => $tgl_mulai,
-                'tgl_akhir' => $tgl_akhir,
                 'doku_pengajuan' => $doku_pengajuan,
-                'doku_penilaian' => $file2,
+                'penilaian' => '-',
+                'tgl_mulai' => '-',
+                'tgl_akhir' => '-',
+                'doku_penilaian' => '-',
                 );
 
                 $this->mdl_admin->addData('kewenangan_klinis',$data);
@@ -88,31 +89,28 @@ class AdminKew extends CI_Controller {
 
                 $this->load->library('upload', $config);
 
-                if($_FILES['doku_pengajuan']['name'] != '') {
-                    $this->upload->do_upload('doku_pengajuan');
-                    $doku_pengajuan = $this->upload->data('file_name');
-                } else {
-                    $doku_pengajuan = $this->input->post('file_old');
-                }
-
                 if($_FILES['doku_penilaian']['name'] != '') {
-                    $this->upload->do_upload('doku_penilaian');
-                    $doku_penilaian = $this->upload->data('file_name');
+                    if(!$this->upload->do_upload('doku_penilaian')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("adminKew/edit/$id");
+                    } else {
+                        $doku_penilaian = $this->upload->data('file_name');
+                    }
                 } else {
-                    $doku_penilaian = $this->input->post('file_old2');
+                    $doku_penilaian = $this->input->post('file_old');
                 }
 
-                $tgl_pengajuan=date('Y-m-d',strtotime($this->input->post('tgl_pengajuan')));
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $penilaian=$this->input->post('penilaian');
                
                 $data= array(
                 'penilaian' => $penilaian,
-                'tgl_pengajuan' => $tgl_pengajuan,
                 'tgl_mulai' => $tgl_mulai,
                 'tgl_akhir' => $tgl_akhir,
-                'doku_pengajuan' => $doku_pengajuan,
                 'doku_penilaian' => $doku_penilaian,
                 );
 

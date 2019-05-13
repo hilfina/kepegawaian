@@ -32,10 +32,8 @@ class AdminOri extends CI_Controller {
                 $this->load->view('admin/Karyawan/Orientasi/addOri');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
                 
@@ -46,8 +44,16 @@ class AdminOri extends CI_Controller {
                 $id_karyawan=$data2['id_karyawan'];
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
-                $this->upload->do_upload('doku_hadir');
-                $doku_hadir=$this->upload->data('file_name');
+                if(!$this->upload->do_upload('doku_hadir')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('adminOri/addOri');
+                } else {
+                    $doku_hadir = $this->upload->data('file_name');
+                }
+
                
                 $data= array(
                 'id_karyawan' => $id_karyawan,
@@ -74,18 +80,26 @@ class AdminOri extends CI_Controller {
                 $this->load->view('admin/Karyawan/Orientasi/editOri',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
 
                 $this->load->library('upload', $config);
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 if($_FILES['doku_hadir']['name'] != '') {
-                    $this->upload->do_upload('doku_hadir');
-                    $doku_hadir = $this->upload->data('file_name');
+                    if(!$this->upload->do_upload('doku_hadir')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("adminOri/edit/$id");
+                    } else {
+                        $doku_hadir = $this->upload->data('file_name');
+                    }
                 } else {
                     $doku_hadir = $this->input->post('file_old');
                 }
+
 
                 $data= array(
                 'tgl_mulai' => $tgl_mulai,

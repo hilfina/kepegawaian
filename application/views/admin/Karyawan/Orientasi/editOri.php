@@ -28,6 +28,14 @@
               <span><h4 align="center">EDIT DATA ORIENTASI KARYAWAN</h4></span>
             </div>
           </div><br>
+          <div class="container-fluid" role="alert">
+              <?php if ($this->session->flashdata('msg_error')) :?>
+                <div class="alert alert-danger alert-mg-b"> 
+                <?php echo $this->session->flashdata('msg_error')?>
+                </div>
+              <?php endif; ?>
+          </div>
+
           <?php foreach ($array as $key) { ?>
             <form action="<?php echo site_url(); ?>/adminOri/edit/<?php echo $key->id_orientasi?>" enctype="multipart/form-data" method="post">
               <div class="sparkline12-graph">
@@ -88,7 +96,7 @@
                               <input type="file" name="doku_hadir" value="<?php echo $key->doku_hadir; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                             </div>
                             <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->doku_hadir; ?>">
-                            <font size="2" color="red"> *Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 MB </font>
+                            <font size="2" color="red"> *Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 MB </font>
                           </div>
                         </div>
                       </div>

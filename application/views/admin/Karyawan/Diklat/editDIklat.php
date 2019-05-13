@@ -34,6 +34,13 @@
                 <h1> Edit Data Diklat Karyawan</h1><br>
               </div>
           </div>
+          <div class="container-fluid" role="alert">
+              <?php if ($this->session->flashdata('msg_error')) :?>
+                <div class="alert alert-danger alert-mg-b"> 
+                <?php echo $this->session->flashdata('msg_error')?>
+                </div>
+              <?php endif; ?>
+          </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <?php foreach ($array as $key) { ?>
           <form action="<?php echo site_url();?>/adminDiklat/editdiklat/<?php echo $key->id_diklat; ?>/<?php echo $key->id_karyawan; ?>" enctype="multipart/form-data" method="POST">
@@ -106,7 +113,7 @@
             <td><label form-control-label>Upload Scan Serftifikat</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-              <font size="2" color="red">*Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 MB </font>
+              <font size="2" color="red">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 MB </font>
               <input name="file_old" type="hidden" class="form-control" value="<?php echo $key->file; ?>">
                 <div class="input-mark-inner">
                   <div class="file-upload-inner ts-forms">

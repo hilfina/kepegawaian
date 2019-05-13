@@ -42,8 +42,16 @@ class adminUrgas extends CI_Controller {
                 $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
                 $id_karyawan=$data2['id_karyawan'];
-                $this->upload->do_upload('file_urgas');
-                $file_urgas=$this->upload->data('file_name');
+                if(!$this->upload->do_upload('file_urgas')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('adminUrgas/addUrgas');
+                } else {
+                    $file_urgas = $this->upload->data('file_name');
+                }
+
                
                 $data= array(
                 'id_karyawan' => $id_karyawan,
@@ -71,10 +79,16 @@ class adminUrgas extends CI_Controller {
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
                 $config['max_size']         = 2000;
 
-                $this->load->library('upload', $config);
                 if($_FILES['file_urgas']['name'] != '') {
-                    $this->upload->do_upload('file_urgas');
-                    $file_urgas = $this->upload->data('file_name');
+                    if(!$this->upload->do_upload('file_urgas')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("adminUrgas/edit/$id");
+                    } else {
+                        $file_urgas = $this->upload->data('file_name');
+                    }
                 } else {
                     $file_urgas = $this->input->post('file_old');
                 }

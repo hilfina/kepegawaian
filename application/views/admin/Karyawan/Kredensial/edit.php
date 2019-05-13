@@ -38,6 +38,13 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
+                    <div class="container-fluid" role="alert">
+                                <?php if ($this->session->flashdata('msg_error')) :?>
+                                  <div class="alert alert-danger alert-mg-b"> 
+                                  <?php echo $this->session->flashdata('msg_error')?>
+                                  </div>
+                                <?php endif; ?>
+                            </div>
                     <?php foreach($array as $key){?>
                     <form action="<?php echo site_url();?>/adminKew/edit/<?php echo $key->id_kewenangan;?>" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
@@ -62,36 +69,19 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                    <div class="form-group data-custon-pick data-custom-mg" id="data_5">
-                                        <div class="input-daterange input-group" id="datepicker">
-                                            <input type="text" class="form-control" name="tgl_pengajuan" value="<?php echo date('m/d/Y', strtotime($key->tgl_pengajuan)); ?>" />
-                                        </div>
-                                    </div>
+                                        <input type="text" value="<?php echo date('Y/d/m', strtotime($key->tgl_pengajuan)); ?>" class="form-control" disabled>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
-                                        <label>Upload Dokumen Pengajuan</label>
+                                        <label>Dokumen Pengajuan</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <div class="file-upload-inner ts-forms">
-                                          <div class="input prepend-big-btn">
-                                              <label class="icon-right" for="prepend-big-btn">
-                                                <i class="fa fa-download"></i>
-                                              </label>
-                                              <div class="file-button">
-                                              <input type="file" name="file_old" value="<?php echo $key->doku_pengajuan?>" hidden>
-                                                  Browse
-                                                  <input type="file" name="doku_pengajuan" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
-                                              </div>
-                                              <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->doku_pengajuan;?>">
-                                          </div>
-                                        </div>
-                                        <font size="2">Format dokumen harus dalam bentuk docx/pdf. Ukuran file maksimal adalah 2 mb </font>
+                                        <input type="text" value="<?php echo $key->doku_pengajuan;?>" class="form-control" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -146,13 +136,13 @@ $this->load->view("header.php");
                                               </label>
                                               <div class="file-button">
                                                   Browse
-                                                  <input type="file" name="file_old2" value="<?php echo $key->doku_penilaian?>" hidden>
+                                                  <input type="file" name="file_old" value="<?php echo $key->doku_penilaian?>" hidden>
                                                   <input type="file" name="doku_penilaian" value="" onchange="document.getElementById('prepend-big-btn2').value = this.value;">
                                               </div>
                                               <input type="text" id="prepend-big-btn2" placeholder="no file selected" value="<?php echo $key->doku_penilaian;?>">
                                           </div>
                                         </div>
-                                        <font size="2">Format dokumen harus dalam bentuk docx/pdf. Ukuran file maksimal adalah 2 mb </font>
+                                        <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                         <br>
                                     </div>
                                 </div>

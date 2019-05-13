@@ -28,6 +28,13 @@
               <span><h4 align="center">EDIT DATA URAIAN TUGAS KARYAWAN</h4></span>
             </div>
           </div><br>
+          <div class="container-fluid" role="alert">
+              <?php if ($this->session->flashdata('msg_error')) :?>
+                <div class="alert alert-danger alert-mg-b"> 
+                <?php echo $this->session->flashdata('msg_error')?>
+                </div>
+              <?php endif; ?>
+          </div>
           <?php foreach ($array as $key) { ?>
             <form action="<?php echo site_url(); ?>/adminUrgas/edit/<?php echo $key->id_uraian?>" enctype="multipart/form-data" method="post">
               <div class="sparkline12-graph">
@@ -60,7 +67,7 @@
                               <input type="file" name="file_urgas" value="<?php echo $key->file_urgas; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                             </div>
                             <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->file_urgas; ?>">
-                            <font size="2" color="red"> *Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 MB </font>
+                            <font size="2" color="red"> *Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 MB </font>
                           </div>
                         </div>
                       </div>
@@ -69,7 +76,7 @@
                   <br><br>
                   <div class="row"align="center">
                     <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Simpan</button>
-                  <div>
+                  </div>
                 </div>
               </div>
             </form>

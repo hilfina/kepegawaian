@@ -28,7 +28,14 @@
               <span><h4 align="center">DATA PENILAIAN KARYAWAN</h4></span>
             </div>
           </div> <br>
-          <form action="<?php echo site_url(); ?>/adminKaryawan/addNilai/<?php echo "$id"; ?>" enctype="multipart/form-data" method="post">
+        <div class="container-fluid" role="alert">
+                <?php if ($this->session->flashdata('msg_error')) :?>
+                  <div class="alert alert-danger alert-mg-b"> 
+                  <?php echo $this->session->flashdata('msg_error')?>
+                  </div>
+                <?php endif; ?>
+            </div>
+          <form action="<?php echo site_url(); ?>/adminKaryawan/addNilai/<?php echo $id; ?>" enctype="multipart/form-data" method="post">
             <div class="sparkline12-graph">
               <div class="input-knob-dial-wrap" style="margin-right: 15%;">
               <input type="hidden" class="form-control" name="id_karyawan" value="<?php echo $id?>">
@@ -40,7 +47,7 @@
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="input-mark-inner">
-                      <input type="text" class="form-control" name="id_penilai" placeholder="Nomor Induk Karyawan">
+                      <input type="text" class="form-control" name="id_penilai" placeholder="Nomor Induk Karyawan Penilai">
                       
                     </div>
                   </div>
@@ -92,7 +99,7 @@
                             <input type="text" id="prepend-big-btn" placeholder="no file selected">
                           </div>
                         </div>
-                        <font size="2">Format dokumen harus dalam bentuk pdf/docx. Ukuran file maksimal adalah 2 mb </font>
+                        <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                       </div>
                     </div>
                 </div> <br>

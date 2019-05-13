@@ -41,6 +41,14 @@
               <span><h4 align="center">DATA RIWAYAT PENDIDIKAN</h4></span>
             </div>
           </div><br>
+          <div class="container-fluid" role="alert">
+              <?php if ($this->session->flashdata('msg_error')) :?>
+                <div class="alert alert-danger alert-mg-b"> 
+                <?php echo $this->session->flashdata('msg_error')?>
+                </div>
+              <?php endif; ?>
+          </div>
+
           <form action="<?php echo site_url(); ?>/admin/addSurat/" enctype="multipart/form-data" method="post">
             <div class="sparkline12-graph">
               <div class="input-knob-dial-wrap">
@@ -121,6 +129,7 @@
                           </div>
                           <input type="text" id="prepend-big-btn" placeholder="no file selected">
                         </div>
+                        <font size="2" color="red"> *Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 MB </font>
                       </div>
                     </div>
                   </div>

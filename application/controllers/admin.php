@@ -350,48 +350,6 @@ class Admin extends CI_Controller {
         }else{ redirect("login"); } 
     }
 
-    public function addPend(){
-       if($this->mdl_admin->logged_id()){
-
-            $this->form_validation->set_rules('id_karyawan','Id Karyawan','trim|required');
-
-            if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/pendidikan/addPendidikan');
-            }else{
-                $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
-                $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
-
-                $this->load->library('upload', $config);
-
-                $id=$this->input->post('id_karyawan');
-                $pendidikan = $this->input->post('pendidikan');
-                $nilai = $this->input->post('nilai');
-                $mulai = $this->input->post('mulai');
-                $akhir = $this->input->post('akhir');
-                $nomor_ijazah = $this->input->post('nomor_ijazah');
-                $this->upload->do_upload('file');
-                $a = $this->upload->data('file_name');
-                $data3 = array(
-                        'pendidikan'=>$pendidikan,
-                        'mulai'=>$mulai,
-                        'akhir'=>$akhir,
-                        'nomor_ijazah'=>$nomor_ijazah,
-                        'id_karyawan' => $id,
-                        'file'=>$a,
-                        'verifikasi'=> 0,
-                        'nilai' => $nilai,
-                    );
-                $this->mdl_admin->addData('pendidikan',$data3);
-                redirect("admin/pelamarDetail/$id");
-                
-                }
-        }else{ redirect("login"); } 
-    }
-
-
     public function datasurat(){
         $paket['array']=$this->mdl_admin->getSurat();
         $this->load->view('admin/surat/allSurat',$paket);
@@ -407,10 +365,8 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/surat/addSurat',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'jpg|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
                 $konek = mysqli_connect("localhost","root","","kepegawaian");
@@ -424,15 +380,23 @@ class Admin extends CI_Controller {
                 $tgl_mulai = $this->input->post('tgl_mulai');
                 $tgl_akhir = $this->input->post('tgl_akhir');
                 $no_surat = $this->input->post('no_surat');
-                $this->upload->do_upload('file');
-                $b = $this->upload->data('file_name');
+                if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('admin/addSurat');
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+
                 $data4 = array(
                     'id_karyawan' => $id,
                     'id_surat'=>$id_surat,
                     'tgl_mulai'=>$tgl_mulai,
                     'tgl_akhir'=>$tgl_akhir, 
                     'no_surat'=>$no_surat,  
-                    'file'=>$b,
+                    'file'=>$file,
                     'aktif'=> 0,
                 );
 
@@ -456,10 +420,9 @@ class Admin extends CI_Controller {
             }
             else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'jpg|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
+                
                 $this->load->library('upload', $config);
 
                 $konek =mysqli_connect("localhost","root","","kepegawaian");
@@ -479,11 +442,20 @@ class Admin extends CI_Controller {
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $no_surat = $this->input->post('no_surat');
 
-                if ($this->upload->do_upload('file')) {
-                    $file = $this->upload->data('file_name');
-                }else {
-                    $file=$c['file'];
+                if($_FILES['file']['name'] != '') {
+                    if(!$this->upload->do_upload('file')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("admin/editsurat/$id");
+                    } else {
+                        $file = $this->upload->data('file_name');
+                    }
+                } else {
+                    $file = $this->input->post('file_old');
                 }
+
                 $data4 = array(
                     'id_surat'=>$id_surat,
                     'tgl_mulai'=>$tgl_mulai,
