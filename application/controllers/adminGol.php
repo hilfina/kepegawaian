@@ -58,7 +58,7 @@ class AdminGol extends CI_Controller {
                 $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
                 $nomor_sk=$this->input->post('nomor_sk');
                 if(!$this->upload->do_upload('alamat_sk')) {
-                    $error = $this->upload->display_errors();
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
                     $this->session->set_flashdata('msg_error', $error);
 
@@ -118,7 +118,7 @@ class AdminGol extends CI_Controller {
                 $nomor_sk=$this->input->post('nomor_sk');
                 if($_FILES['alamat_sk']['name'] != '') {
                     if(!$this->upload->do_upload('alamat_sk')) {
-                        $error = $this->upload->display_errors();
+                        $error =  ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
                         $this->session->set_flashdata('msg_error', $error);
 

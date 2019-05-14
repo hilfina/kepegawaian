@@ -31,7 +31,7 @@ class AdminStatus extends CI_Controller {
 
     public function detailStatus($id)
     {
-        $paket['id']=$id;
+        $paket['idkk']=$id;
         $paket['array']=$this->mdl_admin->getAllStatus($id);
         $this->load->view('admin/Karyawan/riwayat/status/detailStatus',$paket);
 
@@ -128,7 +128,7 @@ class AdminStatus extends CI_Controller {
                 // $this->upload->do_upload('alamat_sk');
 
                 if(!$this->upload->do_upload('alamat_sk')) {
-                    $error = $this->upload->display_errors();
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
                     $this->session->set_flashdata('msg_error', $error);
 
@@ -169,7 +169,7 @@ class AdminStatus extends CI_Controller {
     public function edit($id, $idk){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('id_karyawan','Id Karyawan','trim|required');
+            $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getStatus($id);
@@ -189,7 +189,7 @@ class AdminStatus extends CI_Controller {
                 $nomor_sk=$this->input->post('nomor_sk');
                 if($_FILES['alamat_sk']['name'] != '') {
                     if(!$this->upload->do_upload('alamat_sk')) {
-                        $error = $this->upload->display_errors();
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
                         $this->session->set_flashdata('msg_error', $error);
 
@@ -219,8 +219,8 @@ class AdminStatus extends CI_Controller {
     }
     public function del($id, $idk){
         if($this->mdl_admin->logged_id()){
-            $where = array('id'=>$id);
-           $this->mdl_pelamar->hapusdata('status',$where);
+            $where = array('id'=>$id); 
+            $this->mdl_pelamar->hapusdata('status',$where);
             redirect("adminStatus/detailStatus/$idk");
         }else{ redirect("login"); } 
     }

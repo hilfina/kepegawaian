@@ -106,7 +106,7 @@
                             <input type="file" name="alamat_sk" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                           </div>
                           <input type="text" id="prepend-big-btn" placeholder="no file selected">
-                          <font size="2">Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 mb </font>
+                          <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                         </div>
                       </div>
                     </div>

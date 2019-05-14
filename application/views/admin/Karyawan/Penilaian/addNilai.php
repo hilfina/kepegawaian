@@ -47,8 +47,17 @@
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="input-mark-inner">
-                      <input type="text" class="form-control" name="id_penilai" placeholder="Nomor Induk Karyawan Penilai">
-                      
+                      <select type="text" class="chosen-select" name="id_penilai">
+                      <option>--Pilih---</option>
+                       <?php
+                          $konek = mysqli_connect("localhost","root","","kepegawaian");
+                          $query = "select k.nik, k.nama from karyawan as k inner join login as l on k.id_karyawan =  l.id_karyawan where l.level = 'Karyawan';";
+                          $hasil = mysqli_query($konek, $query);
+                          while ($data=mysqli_fetch_array($hasil)) {?>
+                          ?>
+                          <option> <?php echo $data['nik']; echo " - "; echo $data['nama'];?> </option>
+                        <?php }?>
+                      </select>
                     </div>
                   </div>
                 </div>

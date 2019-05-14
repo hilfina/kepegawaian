@@ -53,8 +53,16 @@ class AdminHutang extends CI_Controller {
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $no_mou=$this->input->post('no_mou');
-                $this->upload->do_upload('file');
-                $file=$this->upload->data('file_name');
+                if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('adminHutang/addhutang');
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+
                
                 $data= array(
                 'id_karyawan' => $id_karyawan,
@@ -98,11 +106,18 @@ class AdminHutang extends CI_Controller {
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $no_mou=$this->input->post('no_mou');
                 if($_FILES['file']['name'] != '') {
-                    $this->upload->do_upload('file');
-                    $file = $this->upload->data('file_name');
+                    if(!$this->upload->do_upload('file')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("adminHutang/edit/$id");
+                    } else {
+                        $file = $this->upload->data('file_name');
+                    }
                 } else {
                     $file = $this->input->post('file_old');
                 }
+
                 // $s = $tgl_akhir;
                 // $date = strtotime($s);
                 // $exp = date('d/m/Y', strtotime('+1 day', $date));

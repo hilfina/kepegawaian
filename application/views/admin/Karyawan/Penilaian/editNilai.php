@@ -50,7 +50,7 @@
             <td><label form-control-label>NIK Penilai</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="id_penilai" type="text" class="form-control" value="<?php echo $array->id_penilai ?>">
+                <input name="id_penilai" type="text" class="form-control" value="<?php echo $array->id_penilai ?>" disabled>
               </div>
             </td>
           </tr>

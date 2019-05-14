@@ -36,7 +36,7 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right">
-                <a href="<?php echo site_url(); ?>/adminStatus/addStatus/<?php echo $id?>">
+                <a href="<?php echo site_url(); ?>/adminStatus/addStatus/<?php echo $idkk?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a>
                 </div>
@@ -105,7 +105,7 @@
                       <a href="<?php echo site_url(); echo "/adminStatus/edit/"; echo $key->id ;  echo "/"; echo $key->id_karyawan; ?>">
                         <button class="btn btn-warning waves-effect">edit</button>
                       </a>
-                      <a href="<?php echo site_url(); echo "/adminStatus/del/"; echo $key->id;  echo "/"; echo $key->id_karyawan; ?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                      <a href="<?php echo site_url(); echo "/adminStatus/del/"; echo $key->id ;  echo "/"; echo $key->id_karyawan; ?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                         <button class="btn btn-danger waves-effect">hapus</button>
                       </a>
 
