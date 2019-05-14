@@ -463,7 +463,24 @@
                           </thead>
                           
                           <tbody>
-                            
+                            <?php foreach ($rPenempatan as $key) { ?>
+                              <tr>
+                                <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
+                                <td><?php echo $key->ruangan ?></td>
+                              </tr>
+                            <?php } ?>
+                            <?php foreach ($rGolongan as $key) { ?>
+                              <tr>
+                                <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
+                                <td><?php echo $key->id_golongan ?></td>
+                              </tr>
+                            <?php } ?>
+                            <?php foreach ($rStatus as $key) { ?>
+                              <tr>
+                                <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
+                                <td><?php echo $key->id_status ?></td>
+                              </tr>
+                            <?php } ?>
                           </tbody>
                         </table>
                       </div>
