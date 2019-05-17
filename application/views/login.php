@@ -39,10 +39,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img src="<?=base_url()?>assets/login/images/logo.png" style="width: 60px" data-active-url="<?=base_url()?>assets/login/images/logo.png" alt=""></a>
+                
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+            <a class="navbar-brand" href="#"><img src="<?=base_url()?>assets/login/images/logo.png" style="width: 60px" data-active-url="<?=base_url()?>assets/login/images/logo.png" alt=""></a>
                 <ul class="nav navbar-nav navbar-right main-nav">
                     <li><a href="#intro">Home</a></li>
                     <li><a href="#dua">Peluang Karir</a></li>
@@ -62,8 +63,7 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <h3 class="light white">Sistem Informasi Kepegawaian</h3>
-                            <h1 class="white typed">Rumah Sakit Islam Aisyiyah</h1>
-                            <span class="typed-cursor">|</span>
+                            <h1 class="white typed">Rumah Sakit Islam Aisyiyah Malang</h1>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         <hr style="border: solid 2px; width: 250px">
                     </div><br>
                 
-                <form class="login100-form validate-form"method="POST" action="<?php echo base_url() ?>index.php/login">
+                <form class="login100-form validate-form" method="POST" action="<?php echo base_url() ?>index.php/login">
                     <?php if(isset($error)) { echo $error; }; ?>
                     <strong>
                         <div class="wrap-input100 validate-input" data-validate = "Enter Username">

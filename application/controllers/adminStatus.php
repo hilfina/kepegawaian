@@ -202,7 +202,6 @@ class AdminStatus extends CI_Controller {
                 }
 
                 $dataStatus= array(
-                'id_status' => $id_status,
                 'mulai' => $mulai,
                 'akhir' => $akhir,
                 'alamat_sk' => $alamat_sk,

@@ -21,6 +21,11 @@
               </ul>
             </div>
           </div>
+          <br>
+            <div class="alert alert-info"><b>Perhatian !</b><br>
+                Pada data pribadi, karyawan hanya dapat mengubah foto profil saja.<br>
+                ukuran foto profil berupa 300x400 dan berformat jpg/png.
+            </div>
         </div>
       </div>
     </div>
@@ -30,11 +35,18 @@
   <!-- Single pro tab review Start-->
   <div class="single-pro-review-area mt-t-30 mg-b-15">
     <div class="container-fluid">
+    <div class="container-fluid" role="alert">
+        <?php if ($this->session->flashdata('msg_error')) :?>
+          <div class="alert alert-danger alert-mg-b"> 
+          <?php echo $this->session->flashdata('msg_error')?>
+          </div>
+        <?php endif; ?>
+    </div>
       <form action="<?php echo site_url();?>/karyawan/updatedatasaya/" enctype="multipart/form-data"  method="POST">
         <div class="row">
             <?php foreach ($datDir as $key){ ?>
             <input type="hidden" name="gambar_old" value="<?php echo $key->foto; ?>">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="profile-info-inner">
                         <div class="profile-img">
                             <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt="" width="120"/>
@@ -65,7 +77,7 @@
                     </div>
                 </div>
               <?php } ?>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
               <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                 <ul id="myTabedu1" class="tab-review-design">
                   <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>

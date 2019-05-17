@@ -70,7 +70,7 @@ class pelamar extends CI_Controller {
 				$config['smtp_port']= "465";
 				$config['smtp_timeout']= "400";
 				$config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
-				$config['smtp_pass']= "hilfina090798"; // isi dengan password kamu
+				$config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
 				$config['crlf']="\r\n"; 
 				$config['newline']="\r\n"; 
 				$config['wordwrap'] = TRUE;
@@ -82,26 +82,23 @@ class pelamar extends CI_Controller {
 				$this->email->to($email);
 				$this->email->subject("Verifikasi Akun");
 				$this->email->message(
-					"untuk memverifikasi silahkan klik tautan dibawah ini<br><br>".
-					site_url("login/verification/$encrypted_id")
+					"untuk memverifikasi akun Sistem Informasi Kepegawaian RSIA silahkan klik tautan dibawah ini<br><br>".
+					"<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
 				);
 				
 				if($this->email->send())
 				{
-					echo '<script type="text/javascript">';
-					echo 'alert("Link Aktivasi sudah terkirim! Silahkan cek email kamu~")';
-					echo '</script>';
+					echo "<script>alert('Email berhasil terkirim. Cek email anda untuk verifikasi akun!'); document.location.href = '" . site_url('login') . "';</script>";
 			
 				}
 				else
 
 				{
-					echo '<script type="text/javascript">';
-					echo 'alert("Gagal mengirim link aktivasi!!!")';
-					echo '</script>';		
+					echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('login') . "';</script>";		
 				}
 
-				redirect(site_url('pelamar/aktivasi'));
+				echo "<script>alert('Email verifikasi terkirim'); document.location.href = '" . site_url('login') . "';</script>";
+				redirect("login");
 			}
 		}else{redirect("login");}		
  	}
@@ -161,11 +158,16 @@ class pelamar extends CI_Controller {
 			$jenkel = $this->input->post('jenkel');
 			
 			if($_FILES['fotosaya']['name'] != '') {
-				$this->upload->do_upload('fotosaya');
-				$fotosaya = $this->upload->data('file_name');
-			} else {
-				$fotosaya = $this->input->post('gambar_old');
-			}
+		        if(!$this->upload->do_upload('fotosaya')) {
+		            $error = ("<b>Error!</b> foto profil harus berbentuk jpg/png dan berukuran 300x400");
+		            redirect("pelamar/datasaya");
+		            
+		        } else {
+		            $fotosaya = $this->upload->data('file_name');
+		        }
+		    } else {
+		        $fotosaya = $this->input->post('gambar_old');
+		    }
 			$data = array(
 				'no_ktp' => $no_ktp,
 				'no_bpjs' => $no_bpjs,

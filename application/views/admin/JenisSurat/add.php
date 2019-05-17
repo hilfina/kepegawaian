@@ -36,7 +36,7 @@
           <br>
           <div class="sparkline13-hd">
               <div class="main-sparkline13-hd" align="center">
-                <h1> Edit Data <span class="table-project-n">Jenis Surat</span></h1><br>
+                <h1> Tambah Data <span class="table-project-n">Jenis Surat</span></h1><br>
               </div>
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">

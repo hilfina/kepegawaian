@@ -47,16 +47,20 @@
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="input-mark-inner">
-                      <select type="text" class="chosen-select" name="id_penilai">
-                      <option>--Pilih---</option>
-                       <?php
-                          $konek = mysqli_connect("localhost","root","","kepegawaian");
-                          $query = "select k.nik, k.nama from karyawan as k inner join login as l on k.id_karyawan =  l.id_karyawan where l.level = 'Karyawan';";
-                          $hasil = mysqli_query($konek, $query);
-                          while ($data=mysqli_fetch_array($hasil)) {?>
-                          ?>
-                          <option> <?php echo $data['nik']; echo " - "; echo $data['nama'];?> </option>
-                        <?php }?>
+                      <input type="text" class="form-control" name="id_penilai" >
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="input-mask-title">
+                      <label>Jenis Penilaian</label>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="input-mark-inner">
+                      <select type="text" class="form-control" name="jenis_nilai">
+                      <option>---Pilih---</option>
                       </select>
                     </div>
                   </div>

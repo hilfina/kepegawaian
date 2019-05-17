@@ -23,6 +23,16 @@
               </ul>
             </div>
           </div>
+          <div class="alert alert-info"><b>Perhatian !</b><br>
+                Ukuran foto profil yang diupload berupa 300x400 dan berformat jpg/png.
+            </div>
+          <div class="container-fluid" role="alert">
+              <?php if ($this->session->flashdata('msg_error')) :?>
+                <div class="alert alert-danger alert-mg-b"> 
+                <?php echo $this->session->flashdata('msg_error')?>
+                </div>
+              <?php endif; ?>
+          </div>
         </div>
       </div>
     </div>
@@ -106,8 +116,11 @@
                             <tr>
                             <td><label form-control-label>TTL</label></td>
                             <td style="height: 50px">
-                              <div class="col-lg-12">
-                                <input name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>" placeholder="Kota, Tanggal Bulan Tahun" >
+                              <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                  <div class="input-daterange input-group" id="datepicker">
+                                      <input type="text" class="form-control" name="ttl" value="<?php echo $key->ttl;?>" />
+                                  </div>
+                                </div>
                               </div>
                             </td>
                           </tr>

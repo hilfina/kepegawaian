@@ -93,8 +93,6 @@ class Login extends CI_Controller {
 	public function ubahpass(){
 
 		$this->form_validation->set_rules('pw_baru','Kata Sandi Baru','required');
-        $this->form_validation->set_rules('cpw_baru','Konfirmasi Kata Sandi Baru','required|matches[pw_baru]');
-        $this->form_validation->set_message('required','%s wajib diisi');
 
         
 		if ($this->form_validation->run()==FALSE) {
@@ -102,7 +100,20 @@ class Login extends CI_Controller {
 		}
 		else {
 			$id=$this->session->userdata('myId');
-			$password = md5($this->input->post('pw_baru'));
+
+			$a = $this->input->post('pw_baru');
+			$b = $this->input->post('cpw_baru');
+			if($b != $a) {
+                $error = ("<b>Error!</b> Konfirmasi kata sandi baru tidak sesuai");
+
+                $this->session->set_flashdata('msg_error', $error);
+
+                redirect('login/ubahpass');
+            } else {
+                $password = md5($this->input->post('pw_baru'));
+            }
+
+			
 		    $data = array(
 		        'password' => $password,
 

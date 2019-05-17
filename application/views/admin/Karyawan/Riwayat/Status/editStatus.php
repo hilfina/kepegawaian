@@ -43,7 +43,7 @@
 
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
         <?php foreach ($array as $key) { ?>
-          <form action="<?php echo site_url();?>/adminStatus/edit/<?php echo $key->id;  ?>/<?php echo $key->id_karyawan; ?>" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminStatus/edit/<?php echo $key->id;?>/<?php echo $key->id_karyawan; ?>" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
             <td><label form-control-label>NIK</label></td>

@@ -105,10 +105,8 @@ class AdminGol extends CI_Controller {
                 $this->load->view('admin/Karyawan/riwayat/golongan/editGol',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
-                $config['max_width']        = 10240;
-                $config['max_height']       = 7680;
 
                 $this->load->library('upload', $config);
                 

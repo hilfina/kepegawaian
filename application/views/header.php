@@ -194,8 +194,10 @@
                   <li><a title="Data Surat" href="<?php echo site_url('admin/datasurat') ?>">Data Surat</a></li>
                   <li><a title="MOU Hutang" href="<?php echo site_url('adminHutang/') ?>">MOU Hutang</a></li>
                   <li><a title="MOU Kontrak" href="<?php echo site_url('adminKontrak') ?>">MOU Kontrak</a></li>
-                  <li><a title="MOU Sekolah" href="<?php echo site_url('adminSekolah') ?>">MOU Sekolah</a></li>
+                  <li><a title="MOU Pendidikan" href="<?php echo site_url('adminSekolah') ?>">MOU Pendidikan</a></li>
                   <li><a title="MOU Klinis" href="<?php echo site_url('adminKlinis') ?>">MOU Klinis</a></li>
+                  <li><a title="MOU Pelatihan" href="<?php echo site_url('adminSekolah') ?>">MOU Pelatihan</a></li>
+                  <li><a title="MOU instansi" href="<?php echo site_url('adminKlinis') ?>">MOU Instansi</a></li>
                 </ul>
               </li>
               <li><a class="has-arrow" href="#" aria-expanded="false">
@@ -315,10 +317,6 @@
               <a title="Data Pendidikan" href="<?php echo site_url('karyawan/datapend') ?>">
                 <span class="educate-icon educate-library icon-wrap"></span>
                 <span class="mini-click-non">Data Pendidikan</span>
-              </a>
-              <a title="Data Orientasi" href="<?php echo site_url('karyawan/dataori') ?>">
-                <span class="educate-icon educate-course icon-wrap"></span>
-                <span class="mini-click-non">Data Orientasi</span>
               </a>
               <a title="Data Diklat" href="<?php echo site_url('karyawan/datadiklat') ?>">
                 <span class="educate-icon educate-department icon-wrap"></span>
@@ -620,7 +618,7 @@
                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                           </a>
                           <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                            <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Ubah Sandi</a>
+                            <li><a href="<?php echo site_url('Login/ubahpass')?>"><span class="edu-icon edu-settings author-log-ic"></span>Ubah Sandi</a>
                             </li>
                             <li><a href="<?php echo site_url('admin/logout')?>"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                             </li>

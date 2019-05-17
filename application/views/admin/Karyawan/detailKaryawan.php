@@ -237,7 +237,7 @@
                       <div class="col-lg-6">
                         <div class="sparkline13-hd">
                           <div class="main-sparkline13-hd">
-                            <h1>Data <span class="table-project-n">Seleksi</span></h1>
+                            <h1>Data <span class="table-project-n">Penilaian</span></h1>
                           </div>
                         </div>
                       </div>
@@ -466,19 +466,19 @@
                             <?php foreach ($rPenempatan as $key) { ?>
                               <tr>
                                 <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
-                                <td><?php echo $key->ruangan ?></td>
+                                <td>Dilakukan rotasi, dan ditempatkan di <?php echo $key->ruangan ?></td>
                               </tr>
                             <?php } ?>
                             <?php foreach ($rGolongan as $key) { ?>
                               <tr>
                                 <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
-                                <td><?php echo $key->id_golongan ?></td>
+                                <td>Lulus Tes Kenaikan Golongan, dan Golongan menjadi <?php echo $key->id_golongan ?></td>
                               </tr>
                             <?php } ?>
                             <?php foreach ($rStatus as $key) { ?>
                               <tr>
                                 <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
-                                <td><?php echo $key->id_status ?></td>
+                                <td>Status Karyawan Berubah, dan Menjadi Karyawan <?php echo $key->id_status ?></td>
                               </tr>
                             <?php } ?>
                           </tbody>
@@ -501,7 +501,9 @@
                     </div>
                     <div class="sparkline8-graph">
                       <div class="static-table-list">
+                      <?php if ($cuti->kuota_cuti != NULL){?>
                         <h3>Sisa Cuti : <?php echo $cuti->kuota_cuti-$selisih." Hari."; ?></h3><hr/>
+                        
                       </div>
                     </div>
                     <div class="sparkline8-graph">
@@ -556,7 +558,9 @@
                       </form><br>
                       </div>
                     </div>
-
+                  <?php } else { ?>
+                    <h3>Karyawan Tidak Memiliki Jatah Cuti</h3>
+                  <?php  }?>
                   </div>
                 </div>
               </div>

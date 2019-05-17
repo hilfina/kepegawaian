@@ -67,6 +67,7 @@
                     <th>Nama Karyawan</th>
                     <th>Profesi</th>
                     <th>Status</th>
+                    <th>Unit</th>
                     <th>Total Waktu</th>
                     <th>Aksi</th>
                   </tr>
@@ -80,6 +81,7 @@
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->id_profesi; ?></td>
                     <td><?php echo $key->id_status; ?></td>
+                    <td><?php echo $key->ruangan?></td>
                     <td><?php echo substr($key->jam, 0,2)."/20 Jam"; ?></td>
                     <td>
                       <a href="<?php echo site_url('adminDiklat/detailDiklat/').$key->id_karyawan ?>">

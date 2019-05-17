@@ -38,6 +38,13 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
+                    <div class="container-fluid" role="alert">
+                        <?php if ($this->session->flashdata('msg_error')) :?>
+                          <div class="alert alert-danger alert-mg-b"> 
+                          <?php echo $this->session->flashdata('msg_error')?>
+                          </div>
+                        <?php endif; ?>
+                    </div>
                     <?php foreach ($array as $kei){?>
                     <form action="<?php echo site_url();?>/karyawan/editdiklat/<?php echo $kei->id_diklat?>" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
@@ -147,7 +154,7 @@ $this->load->view("header.php");
                                               <!-- <font size="2"><a href="#">unduh dokumen</a></font> -->
                                           </div>
                                         </div>
-                                        <font size="2">Format dokumen harus dalam bentuk jpg/png/docx/pdf. Ukuran file maksimal adalah 2 mb </font>
+                                        <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
                                 </div>
                             </div>

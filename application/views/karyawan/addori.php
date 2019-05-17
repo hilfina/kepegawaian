@@ -38,6 +38,13 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
+                    <div class="container-fluid" role="alert">
+                        <?php if ($this->session->flashdata('msg_error')) :?>
+                          <div class="alert alert-danger alert-mg-b"> 
+                          <?php echo $this->session->flashdata('msg_error')?>
+                          </div>
+                        <?php endif; ?>
+                    </div>
                     <form action="<?php echo site_url(); ?>/karyawan/addori/" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
@@ -79,7 +86,7 @@ $this->load->view("header.php");
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected">
                                           </div>
                                         </div>
-                                        <font size="2">Format dokumen harus dalam bentuk docx / pdf / jpg. Ukuran file maksimal adalah 2 mb </font>
+                                        <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
                                 </div>
                             </div>

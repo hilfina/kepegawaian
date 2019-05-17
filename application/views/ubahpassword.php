@@ -38,7 +38,14 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
-                    
+                    <div class="container-fluid" role="alert">
+                        <?php if ($this->session->flashdata('msg_error')) :?>
+                          <div class="alert alert-danger alert-mg-b"> 
+                          <?php echo $this->session->flashdata('msg_error')?>
+                          </div>
+                        <?php endif; ?>
+                    </div>
+
                     <form action="<?php echo site_url(); ?>/login/ubahpass/" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
@@ -50,7 +57,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <input type="password" class="form-control" name="pw_baru" ><?= form_error('pw_baru'); ?>
+                                        <input type="password" class="form-control" name="pw_baru" >
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +69,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <input type="password" class="form-control" name="cpw_baru" ><?= form_error('cpw_baru'); ?>
+                                        <input type="password" class="form-control" name="cpw_baru" >
                                     </div>
                                 </div>
                             </div>

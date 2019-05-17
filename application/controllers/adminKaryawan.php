@@ -119,7 +119,7 @@ class AdminKaryawan extends CI_Controller {
     public function karyawanDetail($id){//LIHAT DETAIL KARYAWAN
         if($this->mdl_admin->logged_id()){
             $where = array( 'id_karyawan' => $id ); 
-            $paket['rGolongan']=$this->mdl_admin->getData('golongan',$where);
+            $paket['rGolongan']=$this->mdl_admin->getGol($id);
             $paket['rPenempatan']=$this->mdl_admin->getData('riwayat',$where);
             $paket['rStatus']=$this->mdl_admin->getData('status',$where);
 

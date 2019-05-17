@@ -17,7 +17,7 @@
                 <li><a href="<?php echo site_url('admin/pelamar') ?>">Home</a> 
                   <span class="bread-slash">/</span>
                 </li>
-                <li><a href="<?php echo site_url('admin/pelamar') ?>">Tambah Data Lowongan Pekerjaan</a> 
+                <li><a href="<?php echo site_url('admin/pelamar') ?>">Tambah Data Jenis Status Karyawan</a> 
                 </li>
               </ul>
             </div>
@@ -36,7 +36,7 @@
           <br>
           <div class="sparkline13-hd">
               <div class="main-sparkline13-hd" align="center">
-                <h1> Edit Data <span class="table-project-n">Lowongan Pekerjaan</span></h1><br>
+                <h1> Tambah Data <span class="table-project-n">Jenis Status Karyawan</span></h1><br>
               </div>
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">

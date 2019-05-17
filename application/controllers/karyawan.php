@@ -75,12 +75,18 @@ class Karyawan extends CI_Controller {
 	// $no_telp = $this->input->post('no_telp');
 	// $email = $this->input->post('email');
 
+
 	if($_FILES['fotosaya']['name'] != '') {
-		$this->upload->do_upload('fotosaya');
-		$fotosaya = $this->upload->data('file_name');
-	} else {
-		$fotosaya = $this->input->post('gambar_old');
-	}
+        if(!$this->upload->do_upload('fotosaya')) {
+            $error = ("<b>Error!</b> foto profil harus berbentuk jpg/png dan berukuran 300x400");
+		    redirect("karyawan/datasaya");
+        } else {
+            $fotosaya = $this->upload->data('file_name');
+        }
+    } else {
+        $fotosaya = $this->input->post('gambar_old');
+    }
+
 
 	
 	$data = array(
@@ -134,8 +140,16 @@ class Karyawan extends CI_Controller {
 		    $mulai = $this->input->post('mulai');
 		    $akhir = $this->input->post('akhir');
 		    $nomor_ijazah = $this->input->post('nomor_ijazah');
-		    $this->upload->do_upload('file');
-			$a = $this->upload->data('file_name');
+		    if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('karyawan/addpend');
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+
 		    $data3 = array(
 		            'pendidikan'=>$pendidikan,
 		            'jurusan' => $jurusan,
@@ -144,7 +158,7 @@ class Karyawan extends CI_Controller {
 			        'akhir'=>$akhir,
 			        'nomor_ijazah'=>$nomor_ijazah,
 		            'id_karyawan' => $id,
-		            'file'=>$a,
+		            'file'=>$file,
 		            'verifikasi'=> 0,
 		        );
 		    $insert3 = $this->mdl_pelamar->tambahdata('pendidikan',$data3);
@@ -184,11 +198,18 @@ class Karyawan extends CI_Controller {
 		    $akhir = $this->input->post('akhir');
 		    $nomor_ijazah = $this->input->post('nomor_ijazah');
 		    if($_FILES['file']['name'] != '') {
-				$this->upload->do_upload('file');
-				$file = $this->upload->data('file_name');
-			} else {
-				$file = $this->input->post('file_old');
-			}
+                if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("karyawan/editpend/$id");
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+            } else {
+                $file = $this->input->post('file_old');
+            }
+
 		    $data3 = array(
 		            'pendidikan'=>$pendidikan,
 		            'jurusan' => $jurusan,
@@ -197,7 +218,6 @@ class Karyawan extends CI_Controller {
 			        'akhir'=>$akhir,
 			        'nomor_ijazah'=>$nomor_ijazah,
 		            'file'=>$file,
-		            'verifikasi'=> 0,
 		        );
 		    $where = array(
 				'id' => $id
@@ -236,10 +256,8 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|png';
+			$config['allowed_types']	= 'pdf';
 			$config['max_size']			= 2000;
-			$config['max_width']		= 10240;
-			$config['max_height']		= 7680;
 
 			$this->load->library('upload', $config);
 
@@ -253,15 +271,23 @@ class Karyawan extends CI_Controller {
 		    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
 			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $no_surat = $this->input->post('no_surat');
-		    $this->upload->do_upload('file');
-			$b = $this->upload->data('file_name');
+		    if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('karyawan/addsurat');
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+
 		    $data4 = array(
 			    	'id_karyawan' => $id,
 			        'id_surat'=>$id_surat,
 			        'tgl_mulai'=>$tgl_mulai,
 			        'tgl_akhir'=>$tgl_akhir, 
 			        'no_surat'=>$no_surat,  
-			        'file'=>$b,
+			        'file'=>$file,
 			        'aktif'=> 0,
 		        );
 
@@ -303,11 +329,17 @@ class Karyawan extends CI_Controller {
 			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $no_surat = $this->input->post('no_surat');
 		    if($_FILES['file']['name'] != '') {
-				$this->upload->do_upload('file');
-				$file = $this->upload->data('file_name');
-			} else {
-				$file = $this->input->post('file_old');
-			}
+                if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("karyawan/editsurat/$id");
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+            } else {
+                $file = $this->input->post('file_old');
+            }
 		    $data = array(
 			        'id_surat'=>$id_surat,
 			        'tgl_mulai'=>$tgl_mulai,
@@ -365,8 +397,16 @@ class Karyawan extends CI_Controller {
 		    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
 			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $no_surat = $this->input->post('no_surat');
-		    $this->upload->do_upload('doku_hadir');
-			$doku_hadir = $this->upload->data('file_name');
+		    if(!$this->upload->do_upload('doku_hadir')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('karyawan/addori');
+                } else {
+                    $doku_hadir = $this->upload->data('file_name');
+                }
+
 		    $data = array(
 			    	'id_karyawan' => $id,
 			        'tgl_mulai'=>$tgl_mulai,
@@ -403,11 +443,17 @@ class Karyawan extends CI_Controller {
 			$tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 		    $no_surat = $this->input->post('no_surat');
 		    if($_FILES['doku_hadir']['name'] != '') {
-				$this->upload->do_upload('doku_hadir');
-				$doku_hadir = $this->upload->data('file_name');
-			} else {
-				$doku_hadir = $this->input->post('file_old');
-			}
+                if(!$this->upload->do_upload('doku_hadir')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("karyawan/editori/$id");
+                } else {
+                    $doku_hadir = $this->upload->data('file_name');
+                }
+            } else {
+                $doku_hadir = $this->input->post('file_old');
+            }
 		    $data = array(
 			        'tgl_mulai'=>$tgl_mulai,
 			        'tgl_akhir'=>$tgl_akhir,  
@@ -463,8 +509,16 @@ class Karyawan extends CI_Controller {
 		    $jenis_diklat = $this->input->post('jenis_diklat');
 		    $jam = $this->input->post('jam');
 		    $tahun = $this->input->post('tahun');
-		    $this->upload->do_upload('file');
-			$file = $this->upload->data('file_name');
+		    if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('karyawan/adddiklat');
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+
 		    $data = array(
 			    	'id_karyawan' => $id,
 			    	'nomor_sertif'=>$nomor_sertif,
@@ -510,11 +564,17 @@ class Karyawan extends CI_Controller {
 		    $jam = $this->input->post('jam');
 		    $tahun = $this->input->post('tahun');
 		    if($_FILES['file']['name'] != '') {
-				$this->upload->do_upload('file');
-				$file = $this->upload->data('file_name');
-			} else {
-				$file = $this->input->post('file_old');
-			}
+                if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("karyawan/editdiklat/$id");
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+            } else {
+                $file = $this->input->post('file_old');
+            }
 		    $data = array(
 			    	'nomor_sertif'=>$nomor_sertif,
 			    	'nama_diklat'=>$nama_diklat,
@@ -564,9 +624,17 @@ class Karyawan extends CI_Controller {
 
 		    $id=$this->session->userdata('myId');
 		    
-		    $tgl_pengajuan = $this->input->post('tgl_pengajuan');
-		    $this->upload->do_upload('doku_pengajuan');
-			$doku_pengajuan = $this->upload->data('file_name');
+		    $tgl_pengajuan = date('Y-m-d',strtotime($this->input->post('tgl_pengajuan')));
+		    if(!$this->upload->do_upload('doku_pengajuan')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('karyawan/addkew');
+                } else {
+                    $doku_pengajuan = $this->upload->data('file_name');
+                }
+
 		    $data = array(
 			    	'id_karyawan' => $id,
 			    	'tgl_pengajuan'=>$tgl_pengajuan,
@@ -598,13 +666,19 @@ class Karyawan extends CI_Controller {
 
 			$this->load->library('upload', $config);
 		    
-		    $tgl_pengajuan = $this->input->post('tgl_pengajuan');
+		    $tgl_pengajuan = date('Y-m-d',strtotime($this->input->post('tgl_pengajuan')));
 		    if($_FILES['doku_pengajuan']['name'] != '') {
-				$this->upload->do_upload('doku_pengajuan');
-				$doku_pengajuan = $this->upload->data('file_name');
-			} else {
-				$doku_pengajuan = $this->input->post('file_old');
-			}
+                if(!$this->upload->do_upload('doku_pengajuan')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("karyawan/editkew/$id");
+                } else {
+                    $doku_pengajuan = $this->upload->data('file_name');
+                }
+            } else {
+                $doku_pengajuan = $this->input->post('file_old');
+            }
 		    $data = array(
 			    	'tgl_pengajuan'=>$tgl_pengajuan,
 			    	'doku_pengajuan'=>$doku_pengajuan,

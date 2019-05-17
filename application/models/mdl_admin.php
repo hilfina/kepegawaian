@@ -136,7 +136,7 @@ class Mdl_admin extends CI_Model
     }
 
     public function getStatus($id){
-        $query = $this->db->query("SELECT * from karyawan as k inner join status as r on k.id_karyawan = r.id_karyawan inner join jenis_status as j on r.id_status = j.id_status where r.id = $id");
+        $query = $this->db->query("SELECT r.id_status, k.nik, k.nama, r.id_karyawan, r.mulai, r.akhir, r.alamat_sk, r.nomor_sk, r.id from karyawan as k inner join status as r on k.id_karyawan = r.id_karyawan inner join jenis_status as j on r.id_status = j.id_status where r.id = $id");
         return $query->result();
     }
 
@@ -151,7 +151,7 @@ class Mdl_admin extends CI_Model
     }
 
     public function getGoledit($id){
-        $query = $this->db->query("SELECT * from golongan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        $query = $this->db->query("SELECT s.id_karyawan, k.nik, k.nama, s.id, s.nomor_sk, s.id_golongan, s.mulai, s.akhir, s.alamat_sk from golongan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
         return $query->result();
     }
 
