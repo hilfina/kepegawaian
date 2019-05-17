@@ -78,8 +78,8 @@
                     <th>Nama Institusi</th>
                     <th>Jurusan</th>
                     <th>Periode</th>
-                    <th>Nilai</th>
-                    <th>File</th>
+                    <th>Nilai IPK</th>
+                    <th>File Ijasah</th>
                     <th>Status</th>
                     <th>Pilihan</th>
                   </tr>

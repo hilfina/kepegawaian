@@ -61,8 +61,8 @@
                     <th>NIK</th>
                     <th>Foto</th>
                     <th>Nama</th>
-                    <th>TTL</th>
-                    <th>Gender</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Jenis Kelamin</th>
                     <th>E-Mail</th>
                     <th>Profesi</th>
                     <th>Status</th>

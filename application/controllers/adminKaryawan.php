@@ -184,7 +184,7 @@ class AdminKaryawan extends CI_Controller {
                 'no_ktp' => $no_ktp,
                 'no_bpjs' => $no_bpjs,
                 'nama' => $nama,
-                'ttl' => $ttl,
+                'ttl' => date('Y-m-d',strtotime($ttl)),
                 'jenkel' => $jenkel,
                 'alamat' => $alamat,
                 'no_telp' => $no_telp,

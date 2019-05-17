@@ -82,12 +82,20 @@
                             </td>
                           </tr>
                           <tr>
-                            <td><label form-control-label>TTL</label></td>
+                            <td><label form-control-label>Tanggal Lahir</label></td>
                             <td style="height: 50px">
                               <div class="col-lg-12">
                               <div class="form-group data-custon-pick data-custom-mg" id="data_5">
                               <div class="input-daterange input-group" id="datepicker">
-                                <input name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>">
+                                <?php if ($key->ttl != "0000-00-00") { ?>
+                                 <input name="ttl" type="text" class="form-control" value="<?php echo date('Y/m/d', strtotime($key->ttl));?>">
+                                <?php }else{ ?>
+                                  <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                    <div class="input-daterange input-group" id="datepicker">
+                                      <input type="text" class="form-control" name="ttl" />
+                                    </div>
+                                  </div>
+                                <?php }?>
                               </div>
                               </div>
                               </div>
