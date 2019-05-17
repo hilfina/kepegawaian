@@ -49,7 +49,7 @@ $this->load->view("header.php");
                                         <th>Nomor Ijazah</th>
                                         <th>Nama Pendidikan</th>
                                         <th>Jurusan</th>
-                                        <th>Nilai</th>
+                                        <th>Nilai IPK</th>
                                         <th>Tahun Masuk</th>
                                         <th>Tahun Lulus</th>
                                         <th>Verifikasi</th>

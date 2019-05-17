@@ -29,7 +29,7 @@
 <div class="preloader">
 <img src="<?=base_url()?>Asset/img/loader.gif" alt="Preloader image">    
 </div>
-    <nav class="navbar">
+    <nav class="navbar" >
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -63,7 +63,6 @@
                         <div class="col-md-12 text-center">
                             <h3 class="light white">Sistem Informasi Kepegawaian</h3>
                             <h1 class="white typed">Rumah Sakit Islam Aisyiyah</h1>
-                            <span class="typed-cursor">|</span>
                         </div>
                     </div>
                 </div>

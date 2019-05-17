@@ -107,7 +107,7 @@
                             <td><label form-control-label>TTL</label></td>
                             <td style="height: 50px">
                               <div class="col-lg-12">
-                                <input name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>" placeholder="Kota, Tanggal Bulan Tahun" >
+                                <input name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>" placeholder="yyyy-mm-dd / tahun-bulan-hari" >
                               </div>
                             </td>
                           </tr>
