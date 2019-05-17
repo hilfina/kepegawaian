@@ -131,7 +131,7 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
     public function getAllStatus($id){
-        $query = $this->db->query("SELECT * from karyawan as k inner join status as r on k.id_karyawan = r.id_karyawan inner join jenis_status as j on r.id_status = j.id_status where r.id_karyawan = '$id'");
+        $query = $this->db->query("SELECT s.id, j.id_status, s.mulai, s.akhir, s.nomor_sk, s.alamat_sk, s.id_karyawan from status as s inner join karyawan as k on k.id_karyawan = s.id_karyawan inner join jenis_status as j on s.id_status = j.id_status where s.id_karyawan = '$id'");
         return $query->result();
     }
 

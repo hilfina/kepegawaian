@@ -33,6 +33,15 @@
                 <h1> Edit Data Golongan Karyawan</h1><br>
               </div>
           </div>
+
+        <div class="container-fluid" role="alert">
+            <?php if ($this->session->flashdata('msg_error')) :?>
+              <div class="alert alert-danger alert-mg-b"> 
+              <?php echo $this->session->flashdata('msg_error')?>
+              </div>
+            <?php endif; ?>
+        </div>
+
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
         <?php foreach ($array as $key) { ?>
           <form action="<?php echo site_url();?>/adminGol/edit/<?php echo $key->id?>/<?php echo $key->id_karyawan?>" enctype="multipart/form-data" method="POST">
@@ -114,7 +123,7 @@
                             <input type="file" name="alamat_sk" value="<?php echo $key->alamat_sk; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                           </div>
                           <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->alamat_sk; ?>">
-                          <font size="2">Format dokumen harus dalam bentuk pdf/jpg. Ukuran file maksimal adalah 2 mb </font>
+                          <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                         </div>
                       </div>
                     </div>

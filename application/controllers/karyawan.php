@@ -59,10 +59,10 @@ class Karyawan extends CI_Controller {
 
     public function updatedatasaya(){
 	$config['upload_path']		= './Assets/gambar/';
-	$config['allowed_types']	= 'jpg|pdf|docx';
+	$config['allowed_types']	= 'jpg|png';
 	$config['max_size']			= 2000;
-	$config['max_width']		= 10240;
-	$config['max_height']		= 7680;
+	$config['max_width']		= 300;
+	$config['max_height']		= 400;
 
 	$this->load->library('upload', $config);
 
