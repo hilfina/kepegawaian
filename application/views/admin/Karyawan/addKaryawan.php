@@ -35,7 +35,12 @@
               <?php echo validation_errors('<div class="alert alert-danger fade-show">','</div>'); ?>
             </div>
           </div>
+
           <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
+          <div class="alert alert-info"><b>Perhatian !</b><br>
+                Dengan menambahkan data pada form dibawah, <br>
+                Username yang akan didapat adalah nomor NIK dan Password berupa nomor ktp.
+            </div>
           <form action="<?php echo site_url();?>/adminKaryawan/addKaryawan/" enctype="multipart/form-data" method="POST">
           <table width="100%">
             <tr>
@@ -121,6 +126,19 @@
                   <?php foreach ($golongan as $key) { ?>
                     <option><?php echo $key->id_golongan; ?></option>
                   <?php } ?>
+                </select>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><label form-control-label>Hak Akses Karyawan</label></td>
+            <td style="height: 50px">
+              <div class="col-lg-12">
+                <select  class="form-control" name="level">
+                  <option>-- Pilihan --</option>
+                  <option>Super Admin</option>
+                  <option>admin </option>
+                  <option>Karyawan </option>
                 </select>
               </div>
             </td>

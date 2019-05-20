@@ -53,7 +53,8 @@ class AdminKaryawan extends CI_Controller {
                 $no_ktp=$this->input->post('no_ktp');
                 $no_telp=$this->input->post('no_telp');
                 $email=$this->input->post('email');
-                $alamat=$this->input->post('alamat');   
+                $alamat=$this->input->post('alamat');  
+                $level=$this->input->post('level'); 
                 $tgl = date('d/m/Y');
                 $cip=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
                 $dataKaryawan= array(
@@ -66,51 +67,56 @@ class AdminKaryawan extends CI_Controller {
                 'no_telp' => $no_telp,
                 'foto' => 'profile.png',
                 'email' => $email,
+                'jabatan' => 1,
                 'alamat' => $alamat
                 );
 
                 $this->mdl_admin->addData('karyawan',$dataKaryawan);
                 $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where no_ktp = '$no_ktp'"));
-                $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=>'Karyawan', 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
-                $dataRiwayat=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
-                $dataStatus=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
-                $dataGolongan=array('id_karyawan'=>$cariId['id_karyawan'], 'id_golongan'=>$id_golongan, 'mulai' => $tgl);
-                
-                $config = array();
-                $config['charset'] = 'utf-8';
-                $config['useragent'] = 'CodeIgniter';
-                $config['protocol']= "smtp";
-                $config['mailtype']= "html";
-                $config['smtp_host']= "ssl://smtp.gmail.com";
-                $config['smtp_port']= "465";
-                $config['smtp_timeout']= "400";
-                $config['smtp_user']= "hilfinaamaris09@gmail.com";
-                $config['smtp_pass']= "hilfano090798";
-                $config['crlf']="\r\n"; 
-                $config['newline']="\r\n"; 
-                $config['wordwrap'] = TRUE;
-                $this->email->initialize($config);
-                $encrypted_id = $cariId['id_karyawan'];
-                $this->email->from($config['smtp_user']);
-                $this->email->to($email);
-                $this->email->subject("Verifikasi Akun");
-                $this->email->message(
+                $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
 
-                    "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Anda telah didaftarkan di Rumah Sakit islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini menggunakan <br><br>
-	                    username: nomor induk karyawan. <br>
-	                    password: nomor ktp anda.<br>".
-                    "<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
+                if ($level != 'admin' || 'Super Admin'){
+                    
+                    $dataRiwayat=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
+                    $dataStatus=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
+                    $dataGolongan=array('id_karyawan'=>$cariId['id_karyawan'], 'id_golongan'=>$id_golongan, 'mulai' => $tgl);
+                    
+                    $config = array();
+                    $config['charset'] = 'utf-8';
+                    $config['useragent'] = 'CodeIgniter';
+                    $config['protocol']= "smtp";
+                    $config['mailtype']= "html";
+                    $config['smtp_host']= "ssl://smtp.gmail.com";
+                    $config['smtp_port']= "465";
+                    $config['smtp_timeout']= "400";
+                    $config['smtp_user']= "hilfinaamaris09@gmail.com";
+                    $config['smtp_pass']= "hilfano090798";
+                    $config['crlf']="\r\n"; 
+                    $config['newline']="\r\n"; 
+                    $config['wordwrap'] = TRUE;
+                    $this->email->initialize($config);
+                    $encrypted_id = $cariId['id_karyawan'];
+                    $this->email->from($config['smtp_user']);
+                    $this->email->to($email);
+                    $this->email->subject("Verifikasi Akun");
+                    $this->email->message(
 
-                );
-                
-                if($this->email->send())
-                {
-                    $this->mdl_admin->addData('login',$dataLogin);
-                    $this->mdl_admin->addData('status',$dataStatus);
-                    $this->mdl_admin->addData('golongan',$dataGolongan);
-                    $this->mdl_admin->addData('riwayat',$dataRiwayat);
-                    echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('login') . "';</script>";
-                }else{}
+                        "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Anda telah didaftarkan di Rumah Sakit islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini menggunakan <br><br>
+    	                    username: nomor induk karyawan. <br>
+    	                    password: nomor ktp anda.<br>".
+                        "<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
+
+                    );
+                    
+                    if($this->email->send())
+                    {
+                        $this->mdl_admin->addData('login',$dataLogin);
+                        $this->mdl_admin->addData('status',$dataStatus);
+                        $this->mdl_admin->addData('golongan',$dataGolongan);
+                        // $this->mdl_admin->addData('riwayat',$dataRiwayat);
+                        echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('login') . "';</script>";
+                    }else{}
+                }
                 redirect("adminKaryawan");
             }
         }else{ redirect("login"); } 
@@ -126,6 +132,7 @@ class AdminKaryawan extends CI_Controller {
             $paket['array']=$this->mdl_admin->getProfesi();
             $paket['datSta']=$this->mdl_admin->getJenStatus();
             $paket['datGol']=$this->mdl_admin->getAlldata('jenis_golongan');
+            $paket['datJab']=$this->mdl_admin->getAlldata('jabatan');
             $paket['datDir']=$this->mdl_admin->getTempat($id);
             $paket['datSta']=$this->mdl_admin->getJenStatus();
             $paket['datNil']=$this->mdl_admin->getPenilaian($id);
@@ -161,7 +168,7 @@ class AdminKaryawan extends CI_Controller {
             $no_telp=$this->input->post('no_telp');
             $email=$this->input->post('email');
             $username=$this->input->post('username');
-            $password=md5($this->input->post('password'));
+            $password=$this->input->post('password');
             $id_status=$this->input->post('id_status');
             $jabatan=$this->input->post('jabatan');
             $id_profesi=$this->input->post('id_profesi');
@@ -174,7 +181,7 @@ class AdminKaryawan extends CI_Controller {
            
             $xxx =mysqli_connect("localhost","root","","kepegawaian");
             $idPro=mysqli_fetch_array(mysqli_query($xxx,"select * from jenis_profesi where nama_profesi = '$id_profesi'"));
-
+            $idjab=mysqli_fetch_array(mysqli_query($xxx,"select id from jabatan where jabatan = '$jabatan'"));
             $dataProfesi = array('id_karyawan' => $id, 'ruangan' => $ruangan, 'id_profesi' => $idPro['id_profesi'], 'mulai' => $tdy );
             $dataStatus = array('id_karyawan' => $id, 'id_status' => $id_status, 'mulai' => $tdy);
             $dataGolongan = array('id_karyawan' => $id, 'id_golongan' => $id_golongan, 'mulai' => $tdy);
@@ -190,14 +197,11 @@ class AdminKaryawan extends CI_Controller {
                 'no_telp' => $no_telp,
                 'email' => $email,
                 'id_status' => $id_status,
-                'jabatan' => $jabatan,
+                'jabatan' => $idjab,
                 'id_profesi' => $idPro['id_profesi'],
                 'id_golongan' => $id_golongan
             );
-            $datalogin = array(
-                'username' => $username,
-                'password' => $password
-            );
+            
 
             //DATA KARYAWAN SEKARANG SEBELUM DI EDIT
             $dataSkg = $this->mdl_admin->dataDiri($id);
@@ -211,10 +215,19 @@ class AdminKaryawan extends CI_Controller {
             if ($dataSkg->id_status != $id_status) {
                 $this->mdl_admin->addData('status',$dataStatus);
             }else{}
+            if ($dataSkg->password != $password) {
+                
+                $datalogin = array(
+                'username' => $username,
+                'password' => md5($password)
+                );
+
+                $this->mdl_admin->updateData($where,$datalogin,'login');
+            }else{}
 
             // update data karyawan
             $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
-            $this->mdl_admin->updateData($where,$datalogin,'login');
+            
             redirect("adminKaryawan/karyawanDetail/$id");
         }else{ redirect("login");} 
     }

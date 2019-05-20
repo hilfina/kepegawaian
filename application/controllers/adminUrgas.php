@@ -32,7 +32,7 @@ class adminUrgas extends CI_Controller {
                 $this->load->view('admin/Karyawan/Urgas/add');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
 
                 $this->load->library('upload', $config);
@@ -60,7 +60,7 @@ class adminUrgas extends CI_Controller {
 
                 $this->mdl_admin->addData('uraian_tugas',$data);
 
-                redirect("adminUrgas");
+                redirect("adminUrgas"); 
                 }
         }
         else{ redirect("login"); } 
@@ -69,38 +69,35 @@ class adminUrgas extends CI_Controller {
     public function edit($id){
          if($this->mdl_admin->logged_id()){
 
-            $this->form_validation->set_rules('file_urgas','File Uraian Tugas','trim|required');
+            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getUrgasedit($id);
                 $this->load->view('admin/Karyawan/Urgas/edit',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf|jpg|docx|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
+                $this->load->library('upload', $config);
 
-                if($_FILES['file_urgas']['name'] != '') {
-                    if(!$this->upload->do_upload('file_urgas')) {
-                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                if(!$this->upload->do_upload('file_urgas')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
-                        $this->session->set_flashdata('msg_error', $error);
+                    $this->session->set_flashdata('msg_error', $error);
 
-                        redirect("adminUrgas/edit/$id");
-                    } else {
-                        $file_urgas = $this->upload->data('file_name');
-                    }
+                    redirect("adminUrgas/edit/$id");
                 } else {
-                    $file_urgas = $this->input->post('file_old');
+                    $file_urgas = $this->upload->data('file_name');
                 }
 
                 $data= array(
-                'file_urgas' => $file_urgas,
+                'file_urgas' => $file_urgas
                 );
 
                 $where = array('id_uraian' => $id);
                 $this->mdl_admin->updateData($where,$data,'uraian_tugas');
                 redirect("adminUrgas");
-                }
+            }
         }
 
         else{ redirect("login"); } 

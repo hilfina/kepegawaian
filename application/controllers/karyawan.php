@@ -41,6 +41,7 @@ class Karyawan extends CI_Controller {
 	////////////////DATA PROFIL/////////////////////// 
     public function datasaya(){
         $id=$this->session->userdata('myId');
+        $where = array('id_karyawan'=> $id);
 		$paket['array']=$this->mdl_karyawan->getKaryawan($id);
 		$paket['array']=$this->mdl_admin->getProfesi();
         $paket['datDir']=$this->mdl_admin->getTempat($id);
@@ -51,8 +52,8 @@ class Karyawan extends CI_Controller {
         $paket['mous']=$this->mdl_karyawan->getMous($id);
         $paket['mouk']=$this->mdl_karyawan->getMouk($id);
         $paket['mouh']=$this->mdl_karyawan->getMouh($id);
-        $paket['moui']=$this->mdl_karyawan->getData('mou_klinis', $id);
-        $paket['urai']=$this->mdl_karyawan->getData('uraian_tugas',$id);
+        $paket['moui']=$this->mdl_karyawan->getData('mou_klinis', $where);
+        $paket['urai']=$this->mdl_karyawan->getData('uraian_tugas',$where);
 		$this->load->view('karyawan/profil',$paket);
         
     }
@@ -63,6 +64,8 @@ class Karyawan extends CI_Controller {
 	$config['max_size']			= 2000;
 	$config['max_width']		= 300;
 	$config['max_height']		= 400;
+	$config['min_width']		= 300;
+	$config['min_height']		= 400;
 
 	$this->load->library('upload', $config);
 

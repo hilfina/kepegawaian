@@ -39,6 +39,9 @@
                 <a href="<?php echo site_url(); echo "/adminDiklat/loadimpor/";?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
                 </a>
+                <a href="<?php echo site_url(); echo "/adminDiklat/add/";?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                </a>
                 <div class=" container-fluid" id="notif">
                     <?php if ($this->session->flashdata('msg')) :?>
                         <div class="alert alert-success"> 

@@ -23,16 +23,10 @@
               </ul>
             </div>
           </div>
+          <br>
           <div class="alert alert-info"><b>Perhatian !</b><br>
-                Ukuran foto profil yang diupload berupa 300x400 dan berformat jpg/png.
+                Ukuran foto profil yang diupload berupa 300x400, berformat jpg/png, maksimal berukuran 2mb.
             </div>
-          <div class="container-fluid" role="alert">
-              <?php if ($this->session->flashdata('msg_error')) :?>
-                <div class="alert alert-danger alert-mg-b"> 
-                <?php echo $this->session->flashdata('msg_error')?>
-                </div>
-              <?php endif; ?>
-          </div>
         </div>
       </div>
     </div>
@@ -60,6 +54,7 @@
                   <input type="file" name="fotosaya" value="<?php echo $key->foto; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                 </div>
                 <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                
               </div>
             </div>
             <div class="profile-details-hr">
@@ -114,10 +109,22 @@
                               </td>
                             </tr>
                             <tr>
-                            <td><label form-control-label>TTL</label></td>
+                            <td><label form-control-label>Tanggal Lahir</label></td>
                             <td style="height: 50px">
-                              <div class="col-lg-12">
-                                <input name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>" placeholder="yyyy-mm-dd / tahun-bulan-hari" >
+                            <div class="col-lg-12">
+                              <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                              <div class="input-daterange input-group" id="datepicker">
+                                <?php if ($key->ttl != "0000-00-00") { ?>
+                                 <input name="ttl" type="text" class="form-control" value="<?php echo date('Y/m/d', strtotime($key->ttl));?>">
+                                <?php }else{ ?>
+                                  <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                    <div class="input-daterange input-group" id="datepicker">
+                                      <input type="text" class="form-control" name="ttl" />
+                                    </div>
+                                  </div>
+                                <?php }?>
+                              </div>
+                              </div>
                               </div>
                             </td>
                           </tr>
@@ -215,9 +222,23 @@
                   <div class="pdf-viewer-area mg-b-15">
                     <div class="container-fluid">
                       <div class="row"> <br>
-                        <p style="color: red;">*File yang diupload berisi surat lamaran pekerjaan dan cv dalam bentuk pdf</p>
+                      <div class="container-fluid" role="alert">
+                          <?php if ($this->session->flashdata('msg_error')) :?>
+                            <div class="alert alert-danger alert-mg-b"> 
+                            <?php echo $this->session->flashdata('msg_error')?>
+                            </div>
+                          <?php endif; ?>
+                      </div>
+
+                      <div><b>Ketentuan !</b><br>
+                          File yang diupload berupa: <br>
+                          1. Surat Lamaran Pekerjaan<br>
+                          2. Curiculum Vitae<br>
+                          3. Sertifikat kompetensi(jika memiliki)<br>
+                          Dijadikan satu file berbentuk pdf berukuran maksimal 2 mb.<br>
+                      </div>
+                      <br>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
-                        <?php echo $this->session->flashdata('msg_error'); ?>
                         <?php foreach ($datasaya as $key) { ?>
                           <div class="file-upload-inner ts-forms">
                             <div class="input prepend-big-btn">

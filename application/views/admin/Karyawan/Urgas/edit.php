@@ -46,7 +46,17 @@
                       </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                      <input name="nik" type="text" class="form-control" value="<?php echo $key->nik ?>" disabled>
+                      <input name="nik" type="text" class="form-control" value="<?php echo $key->nik ?>" readonly>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="input-mask-title">
+                        <label>Nama Karyawan</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <input name="nik" type="text" class="form-control" value="<?php echo $key->nama ?>" readonly>
                     </div>
                   </div>
                   <div class="row">
@@ -63,7 +73,6 @@
                               <i class="fa fa-download"></i>
                             </label>
                             <div class="file-button"> Browse
-                              <input type="hidden" name="file_old" value="<?php echo $key->file_urgas; ?>">
                               <input type="file" name="file_urgas" value="<?php echo $key->file_urgas; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                             </div>
                             <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->file_urgas; ?>">

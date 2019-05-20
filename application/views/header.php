@@ -193,11 +193,11 @@
                   <li><a title="Data Jenis Surat" href="<?php echo site_url('adminJenSurat/') ?>">Data Jenis Surat</a></li>
                   <li><a title="Data Surat" href="<?php echo site_url('admin/datasurat') ?>">Data Surat</a></li>
                   <li><a title="MOU Hutang" href="<?php echo site_url('adminHutang/') ?>">MOU Hutang</a></li>
+                  <li><a title="MOU instansi" href="<?php echo site_url('adminInstansi') ?>">MOU Instansi</a></li>
                   <li><a title="MOU Kontrak" href="<?php echo site_url('adminKontrak') ?>">MOU Kontrak</a></li>
+                  <li><a title="MOU Pelatihan" href="<?php echo site_url('adminPelatihan') ?>">MOU Pelatihan</a></li>
                   <li><a title="MOU Pendidikan" href="<?php echo site_url('adminSekolah') ?>">MOU Pendidikan</a></li>
                   <li><a title="MOU Klinis" href="<?php echo site_url('adminKlinis') ?>">MOU Klinis</a></li>
-                  <li><a title="MOU Pelatihan" href="<?php echo site_url('adminSekolah') ?>">MOU Pelatihan</a></li>
-                  <li><a title="MOU instansi" href="<?php echo site_url('adminKlinis') ?>">MOU Instansi</a></li>
                 </ul>
               </li>
               <li><a class="has-arrow" href="#" aria-expanded="false">
@@ -231,12 +231,6 @@
                   </a>
                 </li>
                 <?php } else {?>
-                  <li>
-                    <a title="Home" href="#">
-                      <span class="educate-icon educate-home icon-wrap"></span>
-                      <span class="mini-click-non">Home</span>
-                    </a>
-                  </li>
                   <li>
                     <a title="Home" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>">
                       <span class="educate-icon educate-home icon-wrap"></span>

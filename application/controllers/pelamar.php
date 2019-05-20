@@ -21,7 +21,7 @@ class pelamar extends CI_Controller {
 	public function index()
 	{
 		if($this->mdl_admin->logged_id()){
-			$this->load->view("dashboard");
+			$this->load->view("homee");
 		}else{redirect("login");}
 	}
 
@@ -56,7 +56,7 @@ class pelamar extends CI_Controller {
 		        $where = array(
 					'id_karyawan' => $id,
 				);
-				$this->mdl_pelamar->updatedata($where,$data,'karyawan');
+				
 
 				$encrypted_id = $id;
 			
@@ -88,7 +88,8 @@ class pelamar extends CI_Controller {
 				
 				if($this->email->send())
 				{
-					echo "<script>alert('Email berhasil terkirim. Cek email anda untuk verifikasi akun!'); document.location.href = '" . site_url('login') . "';</script>";
+					$this->mdl_pelamar->updatedata($where,$data,'karyawan');
+					echo "<script>alert('Verifikasi Email berhasil terkirim. Cek email anda untuk verifikasi akun!'); document.location.href = '" . $this->session->sess_destroy(); redirect('login') . "';</script>";
 			
 				}
 				else
@@ -96,9 +97,6 @@ class pelamar extends CI_Controller {
 				{
 					echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('login') . "';</script>";		
 				}
-
-				echo "<script>alert('Email verifikasi terkirim'); document.location.href = '" . site_url('login') . "';</script>";
-				redirect("login");
 			}
 		}else{redirect("login");}		
  	}
@@ -119,13 +117,14 @@ class pelamar extends CI_Controller {
 			$config['upload_path']		= './Assets/dokumen/';
 			$config['allowed_types']	= 'pdf';
 			$config['max_size']			= 2000;
-		$this->load->library('upload', $config);
+		    $this->load->library('upload', $config);
 
 			$id=$this->session->userdata('myId');
 
 			if(!$this->upload->do_upload('cvsaya')) {
-			    $error = $this->upload->display_errors();
-			    $this->session->set_flashdata('msg_error', $error);
+			    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran kurang dari 2mb");
+
+		        $this->session->set_flashdata('msg_error', $error);
 			    redirect('pelamar/datasaya');
 			} else {
 			    $cvsaya = $this->upload->data('file_name');
@@ -141,11 +140,13 @@ class pelamar extends CI_Controller {
 	{
 		if($this->mdl_admin->logged_id()){
 			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'jpg|docx|pdf|png';
+			$config['allowed_types']	= 'jpg|png';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 300;
 			$config['max_height']		= 400;
-		$this->load->library('upload', $config);
+			$config['min_width']		= 300;
+			$config['min_height']		= 400;
+			$this->load->library('upload', $config);
 
 			$id=$this->session->userdata('myId');
 			$no_ktp = $this->input->post('no_ktp');
@@ -159,9 +160,7 @@ class pelamar extends CI_Controller {
 			
 			if($_FILES['fotosaya']['name'] != '') {
 		        if(!$this->upload->do_upload('fotosaya')) {
-		            $error = ("<b>Error!</b> foto profil harus berbentuk jpg/png dan berukuran 300x400");
-		            redirect("pelamar/datasaya");
-		            
+		           echo "<script>alert('<b>Error!</b> foto profil harus berbentuk jpg/png dan berukuran 300x400'); </script>";  
 		        } else {
 		            $fotosaya = $this->upload->data('file_name');
 		        }
@@ -183,17 +182,12 @@ class pelamar extends CI_Controller {
 			$pend_akhir = $this->input->post('pend_akhir');
 		    $nilai_akhir = $this->input->post('nilai_akhir');
 
-		    if($_FILES['cvsaya']['name'] != '') {
-				$this->upload->do_upload('cvsaya');
-				$cvsaya = $this->upload->data('file_name');
-			} else {
-				$cvsaya = $this->input->post('cv_old');
-			}
+
+		   
 		    $data2 = array(
 		            'pend_akhir'=>$pend_akhir,
 		            'nilai_akhir'=>$nilai_akhir,
 		            'id_karyawan' => $id,
-		            'cv' => $cvsaya
 		        );
 
 		 	$update2 = $this->mdl_pelamar->updatedata($where,$data2,'lowongan');
@@ -225,11 +219,9 @@ class pelamar extends CI_Controller {
 			}
 			else{
 				$config['upload_path']		= './Assets/dokumen/';
-				$config['allowed_types']	= 'jpg|docx|pdf|png';
+				$config['allowed_types']	= 'pdf';
 				$config['max_size']			= 2000;
-				$config['max_width']		= 10240;
-				$config['max_height']		= 7680;
-		$this->load->library('upload', $config);
+				$this->load->library('upload', $config);
 
 
 			    $id=$this->session->userdata('myId');
@@ -239,8 +231,16 @@ class pelamar extends CI_Controller {
 			    $mulai = $this->input->post('mulai');
 			    $akhir = $this->input->post('akhir');
 			    $nomor_ijazah = $this->input->post('nomor_ijazah');
-			    $this->upload->do_upload('file');
-				$a = $this->upload->data('file_name');
+			    if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('pelamar/addpend');
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+
 			    $data3 = array(
 			            'pendidikan'=>$pendidikan,
 			            'jurusan' => $jurusan,
@@ -249,7 +249,7 @@ class pelamar extends CI_Controller {
 				        'akhir'=>$akhir,
 				        'nomor_ijazah'=>$nomor_ijazah,
 			            'id_karyawan' => $id,
-			            'file'=>$a,
+			            'file'=>$file,
 			            'verifikasi'=> 0,
 			        );
 			    $insert3 = $this->mdl_pelamar->tambahdata('pendidikan',$data3);
@@ -283,11 +283,11 @@ class pelamar extends CI_Controller {
 			}
 			else{
 				$config['upload_path']		= './Assets/dokumen/';
-				$config['allowed_types']	= 'jpg|docx|pdf|png';
+				$config['allowed_types']	= 'pdf';
 				$config['max_size']			= 2000;
 				$config['max_width']		= 10240;
 				$config['max_height']		= 7680;
-		$this->load->library('upload', $config);
+				$this->load->library('upload', $config);
 
 				$pendidikan = $this->input->post('pendidikan');
 				$jurusan  = $this->input->post('jurusan');
@@ -295,8 +295,19 @@ class pelamar extends CI_Controller {
 			    $mulai = $this->input->post('mulai');
 			    $akhir = $this->input->post('akhir');
 			    $nomor_ijazah = $this->input->post('nomor_ijazah');
-			    $this->upload->do_upload('file');
-				$a = $this->upload->data('file_name');
+			    if($_FILES['file']['name'] != '') {
+                    if(!$this->upload->do_upload('file')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("pelamar/editpend/$id");
+                    } else {
+                        $file = $this->upload->data('file_name');
+                    }
+                } else {
+                    $file = $this->input->post('file_old');
+                }
+
 			    $data3 = array(
 			            'pendidikan'=>$pendidikan,
 			            'jurusan' => $jurusan,
@@ -304,7 +315,7 @@ class pelamar extends CI_Controller {
 			            'mulai'=>$mulai,
 				        'akhir'=>$akhir,
 				        'nomor_ijazah'=>$nomor_ijazah,
-			            'file'=>$a,
+			            'file'=>$file,
 			            'verifikasi'=> 0,
 			        );
 			    $where = array(
@@ -351,7 +362,7 @@ class pelamar extends CI_Controller {
 			}
 			else{
 				$config['upload_path']		= './Assets/dokumen/';
-				$config['allowed_types']	= 'jpg|docx|pdf|png';
+				$config['allowed_types']	= 'pdf';
 				$config['max_size']			= 2000;
 				$config['max_width']		= 10240;
 				$config['max_height']		= 7680;
@@ -368,15 +379,22 @@ class pelamar extends CI_Controller {
 			    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
 			    $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 			    $no_surat = $this->input->post('no_surat');
-			    $this->upload->do_upload('file');
-				$b = $this->upload->data('file_name');
+			    if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect('pelamar/addsurat');
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
 			    $data4 = array(
 			    	'id_karyawan' => $id,
 			        'id_surat'=>$id_surat,
 			        'tgl_mulai'=>$tgl_mulai,
 			        'tgl_akhir'=>$tgl_akhir, 
 			        'no_surat'=>$no_surat,  
-			        'file'=>$b,
+			        'file'=>$file,
 			        'aktif'=> 0,
 		        );
 
@@ -410,7 +428,7 @@ class pelamar extends CI_Controller {
 			}
 			else{
 				$config['upload_path']		= './Assets/dokumen/';
-				$config['allowed_types']	= 'jpg|docx|pdf|png';
+				$config['allowed_types']	= 'pdf';
 				$config['max_size']			= 2000;
 				$config['max_width']		= 10240;
 				$config['max_height']		= 7680;
@@ -425,14 +443,24 @@ class pelamar extends CI_Controller {
 			    $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
 			    $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 			    $no_surat = $this->input->post('no_surat');
-			    $this->upload->do_upload('file');
-				$b = $this->upload->data('file_name');
+			    if($_FILES['file']['name'] != '') {
+                    if(!$this->upload->do_upload('file')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("pelamar/editsurat/$id");
+                    } else {
+                        $file = $this->upload->data('file_name');
+                    }
+                } else {
+                    $file = $this->input->post('file_old');
+                }
 			    $data = array(
 			        'id_surat'=>$id_surat,
 			        'tgl_mulai'=>$tgl_mulai,
 			        'tgl_akhir'=>$tgl_akhir, 
 			        'no_surat'=>$no_surat,  
-			        'file'=>$b,
+			        'file'=>$file,
 			        'aktif'=> 0,
 		        );
 			    $where = array(

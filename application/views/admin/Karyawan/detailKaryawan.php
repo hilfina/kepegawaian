@@ -137,33 +137,12 @@
                                 <input name="email" type="text" class="form-control" value="<?php echo $key->email; ?>">
                               </div>
                             </td>
-                          </tr>
-                          
-                          <tr>
-                            <td><label form-control-label>Username</label></td>
-                            <td style="height: 50px">
-                              <div class="col-lg-12">
-                              <?php foreach ($log as $key123) {?>
-                                <input name="username" type="text" class="form-control" value="<?php echo $key123->username; ?>">
-                              <?php } ?>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td><label form-control-label>Password</label></td>
-                            <td style="height: 50px">
-                              <div class="col-lg-12">
-                              <?php foreach ($log as $key123) {?>
-                                <input name="password" type="password" class="form-control" value="<?php echo $key123->password; ?>">
-                              <?php } ?>
-                              </div>
-                            </td>
-                          </tr>                        
+                          </tr>                     
                           <tr>
                             <td><label form-control-label>Profesi</label></td>
                             <td style="height: 50px">                              
                               <div class="col-lg-12">
-                                <font color="red" size="2">*data profesi, status kepegawaian, golongan dan penempatan dapat diubah sesuai kehendak HRD</font>
+                                <font color="red" size="2">*data profesi, jabatan, status kepegawaian, golongan dan penempatan dapat diubah sesuai kehendak HRD</font>
                               <input name="profesi_old" type="hidden" value="<?php echo $key->nama_profesi; ?>">
                                 <select  class="form-control" name="id_profesi">
                                   <option><?php echo $key->nama_profesi; ?></option>
@@ -194,11 +173,17 @@
                             <td style="height: 50px">
                               <div class="col-lg-12">
                               <select  class="form-control" name="jabatan">
-                              <option><?php echo $key->jabatan;?></option>
+                              <?php
+                                $a = $key->jabatan;
+                                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                                $query = "select j.jabatan from jabatan as j inner join karyawan as k on k.jabatan=j.id where k.jabatan=$a limit 1; ";
+                                $data=mysqli_fetch_array(mysqli_query($konek, $query));
+                              ?>
+                              <option><?php echo $data['jabatan'];?></option>
                                 <option>---Pilih: -----</option>
-                                <option>Koordinator</option>
-                                <option>Kepala Ruangan</option>
-                                <option>Kepala Bidang</option>
+                                <?php foreach ($datJab as $jab) { ?>
+                                  <option><?php echo $jab->jabatan; ?></option>
+                                  <?php } ?>
                               </select>
                               </div>
                             </td>
@@ -226,7 +211,34 @@
                             </td>
                           </tr>
                         </table><br>
-                        <div align="center">
+
+                        <div class="skill-title"> <br>
+                          <h2>Data login</h2> <hr />
+                        </div>
+                        <table width="100%">
+                          <tr>
+                            <td width="20%"><label form-control-label>Username</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                              <?php foreach ($log as $key123) {?>
+                                <input name="username" type="text" class="form-control" value="<?php echo $key123->username; ?>">
+                              <?php } ?>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><label form-control-label>Password</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                              <?php foreach ($log as $key123) {?>
+                                <input name="password" type="text" class="form-control" value="<?php echo $key123->password; ?>">
+                              <?php } ?>
+                              </div>
+                            </td>
+                          </tr>   
+                        </table>
+                        <br>
+                        <div align="left">
                           <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
                         </div>
                       </form>

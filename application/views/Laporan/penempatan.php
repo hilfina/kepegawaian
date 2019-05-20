@@ -15,8 +15,6 @@
   </style>
 </head>
 <body>
-  <img src="Assets/gambar/kopsurat.jpg" style="position: absolute; width: 700px; height: auto;">
-  <br><br><br>
   <br><br><br>
   <br><br><br>
   <p align="center" style="size: 13px">
@@ -76,8 +74,5 @@
       </tr>
     <?php endforeach ?>
   </table>
-
-<br><br>
-<img src="Assets/gambar/footsurat.jpg" style="position: absolute; width: 800px; height: auto;">
 </body>
 </html>

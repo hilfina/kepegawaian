@@ -1,200 +1,286 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title></title>
-    <link rel="icon" type="image/png" href="<?=base_url()?>Assets/login/images/logo.png"/>
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>asset/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>asset/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>asset/css/owl.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>asset/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>asset/fonts/font-awesome-4.1.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>asset/fonts/eleganticons/et-icons.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>asset/css/cardio.css">
+  <meta charset="utf-8">
+  <title>Sistem Informasi Kepegawaian RSIA</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
 
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/animate/animate.css">
-<!--===============================================================================================-->  
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/select2/select2.min.css">
-<!--===============================================================================================-->  
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/css/util.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>Assets/login/css/main.css">
+  <!-- Favicons -->
+  <link href="<?php echo base_url()?>Assets/login/images/logo.png" rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="<?php echo base_url()?>login/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="<?php echo base_url()?>login/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="<?php echo base_url()?>login/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="<?php echo base_url()?>login/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="<?php echo base_url()?>login/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="<?php echo base_url()?>login/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="<?php echo base_url()?>login/css/style.css" rel="stylesheet">
+
+  <style type="text/css">
+      .main-nav{
+        font-size: 18px;
+      }
+  </style>
 </head>
+
 <body>
-<div class="preloader">
-<img src="<?=base_url()?>Asset/img/loader.gif" alt="Preloader image">    
-</div>
-    <nav class="navbar" >
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
-            <a class="navbar-brand" href="#"><img src="<?=base_url()?>assets/login/images/logo.png" style="width: 60px" data-active-url="<?=base_url()?>assets/login/images/logo.png" alt=""></a>
-                <ul class="nav navbar-nav navbar-right main-nav">
-                    <li><a href="#intro">Home</a></li>
-                    <li><a href="#dua">Peluang Karir</a></li>
-                    <li><a href="#tiga">Bantuan</a></li>
-                    <li><a href="#satu">Login/Daftar</a></li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-    
-    <header id="intro">
-        <div class="container">
-            <div class="table">
-                <div class="header-text">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h3 class="light white">Sistem Informasi Kepegawaian</h3>
-                            <h1 class="white typed">Rumah Sakit Islam Aisyiyah Malang</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <section class="section" id="satu" style="background-color: white">
-        <div class="container-login100"  style="background-color: white">
-                <div class="container" style="width: 500px; background-color: white" >
-                    <div align="center">
-                        <span><h3 align="center"><b>LOGIN</b></h3></span>
-                        <hr style="border: solid 2px; width: 250px">
-                    </div><br>
-                
-                <form class="login100-form validate-form" method="POST" action="<?php echo base_url() ?>index.php/login">
-                    <?php if(isset($error)) { echo $error; }; ?>
-                    <strong>
-                        <div class="wrap-input100 validate-input" data-validate = "Enter Username">
-                        <input class="input100" type="text" name="username">
-                        <span class="focus-input100" data-placeholder="Username"></span>
-                    </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <span class="btn-show-pass">
-                            <i class="zmdi zmdi-eye"></i>
-                        </span>
-                        <input class="input100" type="password" name="password">
-                        <span class="focus-input100" data-placeholder="Password"></span>
-                    </div>
-                    </strong>
+  <!--==========================
+  Header
+  ============================-->
+  <header id="header" class="fixed-top">
+    <div class="container">
 
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">
-                                Login
-                            </button>
-                        </div>
-                    </div>
-                <br>
-                </form>
-                <div align="center">
-                    <a href="<?=base_url()?>index.php/login/viewdaftar" >
-                       <div class="container-login100-form-btn" style="width: 250px">
-                            <div class="wrap-login100-form-btn">
-                                <div class="login100-form-bgbtn"></div>
-                                <button class="login100-form-btn">
-                                    Daftar
-                                </button>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    <section id="dua" class="section section-padded" >
-        <div class="container">
-            <div class="row text-center title">
-                <div align="center"><span><h3 align="center"><b>PELUANG KARIR</b></h3></span>
-                <hr style="border: solid 2px; width: 250px">
-            </div>
-                <?php foreach ($loker as $key) {?>
-                    <div class="col-md-4" >
-                    <div class="service" style="height: 400px">
-                        <div class="icon-holder">
-                            <img src="<?=base_url()?>asset/img/icons/heart-blue.png" alt="" class="icon">
-                        </div>
-                        <h4 class="heading"><?php echo $key->nama_profesi;?></h4>
-                        <p class="description">
-                            <strong>Mulai :</strong> <?php echo date('d - M - Y', strtotime($key->mulai));?> <br>
-                            <strong>Sampai :</strong> <?php echo date('d - M - Y', strtotime($key->akhir));?> <br><br>
-                            <strong>Jurusan :</strong> <?php echo $key->jurusan;?><br>
-                            <strong>IPK Min :</strong> <?php echo $key->ipkmin;?><br>
-                            <?php echo $key->jenkel;?> <br><strong> dengan usia maks </strong> <?php echo $key->usia;?> tahun<br> 
+      <div class="logo float-left">
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <h1 class="text-light"><a href="#header"><span>NewBiz</span></a></h1> -->
+        <a href="#intro" class="scrollto"></a>
+      </div>
 
-                        <br>
-                        <font color="red">
-                            <?php if ( date('y-m-d') <= date('y-m-d', strtotime($key->akhir))) {
-                                echo "Sedang Dibuka";
-                            }else{
-                                echo "Sudah Ditutup";
-                            }
-                            ?></font>
-                        </p>
-                    </div>
-                </div>
-                <?php } ?>
-        </div>
-        <!-- <div class="cut cut-bottom"></div> -->
-    </section>
-
-    <footer id="tiga">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4 text-center-mobile">
-                    <h3 class="white"><i class="fa fa-map-marker"></i>   Alamat</h3><hr/>
-                    <h5 class="light regular light-white">Jl. Sulawesi No.16, Kasin, Klojen, Kota Malang, Jawa Timur 65117</h5>
-                    <!-- <a href="#" class="btn btn-blue ripple trial-button">Start Free Trial</a> -->
-                </div>
-                <div class="col-sm-4 text-center-mobile">
-                    <h3 class="white"><i class="fa fa-question-circle"></i>  Bantuan</h3><hr/>
-                    <!-- <div class="row opening-hours">
-                        <div class="col-sm-6 text-center-mobile"> -->
-                           <h5 class="light regular light-white">Lupa kata sandi mohon hubungi admin SDI untuk reset kata sandi</h5>
-                        <!-- </div>
-                    </div> -->
-                </div>
-                <div class="col-sm-4 text-center-mobile">
-                    <h3 class="white"><i class="fa fa-envelope-o"></i> Kontak </h3><hr/>
-                    <h5 class="light regular light-white">sdirsiamalang@gmail.com</h5>
-                    <!-- <a href="#" class="btn btn-blue ripple trial-button">Start Free Trial</a> -->
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Holder for mobile navigation -->
-    <div class="mobile-nav">
+      <nav class="main-nav float-right d-none d-lg-block">
         <ul>
+          <li class="active"><a href="#intro">Home</a></li>
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#services">Peluang Karir</a></li>
+          <li><a href="#contact">Login/Daftar</a></li>
         </ul>
-        <a href="#" class="close-link"><i class="arrow_up"></i></a>
+      </nav><!-- .main-nav -->
+      
     </div>
-    <!-- Scripts -->
-    <script src="<?=base_url()?>asset/js/jquery-1.11.1.min.js"></script>
-    <script src="<?=base_url()?>asset/js/owl.carousel.min.js"></script>
-    <script src="<?=base_url()?>asset/js/bootstrap.min.js"></script>
-    <script src="<?=base_url()?>asset/js/wow.min.js"></script>
-    <script src="<?=base_url()?>asset/js/typewriter.js"></script>
-    <script src="<?=base_url()?>asset/js/jquery.onepagenav.js"></script>
-    <script src="<?=base_url()?>asset/js/main.js"></script>
-</body>
+  </header><!-- #header -->
 
+  <!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro" class="clearfix">
+    <div class="container">
+
+      <div class="intro-info" >
+        <h2>Sistem Informasi Kepegawaian</h2><h3 style="color: white" >Rumah Sakit Islam Aisyiyah Malang</h3 >
+      </div>
+
+      <div class="intro-info" align="center">
+      <img src="<?=base_url()?>assets/login/images/logo.png" style="width: 200px; height: 200px" alt="" class="img-fluid">
+        
+      </div>
+
+    </div>
+  </section><!-- #intro -->
+
+  <main id="main">
+
+    <!--==========================
+      About Us Section
+    ============================-->
+    <section id="about">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>About Us</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </header>
+
+          <div class="col-lg-6 background order-lg-2 order-1 wow fadeInUp">
+            <img src="img/about-img.svg" class="img-fluid" alt="">
+          </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- #about -->
+
+    <!--==========================
+      Services Section
+    ============================-->
+    <section id="services" class="section-bg">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>Peluang Karir</h3>
+          <p>Berikut daftar lowongan pekerjaan yang dibuka pada Rumah Sakit Islam Aisyiyah Malang</p>
+        </header>
+
+        <div class="row">
+          <div class="col-md-12 col-lg-12 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+            <div class="row">
+            <?php foreach ($loker as $key) {?>
+            <div class="col-md-6 col-lg-6 ">
+                <div class="box">
+              <div class="icon"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
+                <h4 class="title"><a href=""><?php echo $key->nama_profesi;?></a></h4>
+                <p class="description">
+                    <strong>Mulai :</strong> 
+                    <?php echo date('d - M - Y', strtotime($key->mulai));?> <br>
+                    <strong>Sampai :</strong> <?php echo date('d - M - Y', strtotime($key->akhir));?> <br><br>
+                    <strong>Jurusan :</strong> <?php echo $key->jurusan;?><br>
+                    <strong>IPK Min :</strong> <?php echo $key->ipkmin;?><br>
+                    <?php echo $key->jenkel;?> <br><strong> dengan usia maks </strong> <?php echo $key->usia;?> tahun<br> 
+
+                    <br>
+                    <font color="red">
+                        <?php if ( date('y-m-d') <= date('y-m-d', strtotime($key->akhir))) {
+                            echo "Sedang Dibuka";
+                        }else{
+                            echo "Sudah Ditutup";
+                        }
+                        ?>
+                    
+                    </font>
+                </p>
+            </div>
+            </div>
+            
+            <?php } ?>
+            </div>
+          </div>         
+
+        </div>
+
+      </div>
+    </section><!-- #services -->
+
+    <!--==========================
+      Contact Section
+    ============================-->
+    <section id="contact">
+      <div class="container-fluid">
+
+        <div class="section-header">
+          <h3>LOGIN</h3>
+        </div>
+
+        <div class="row wow fadeInUp">
+
+          <div class="col-lg-3">
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="form">
+              
+                <form action="<?php echo base_url()?>index.php/login" method="post">
+                <?php if(isset($error)) { echo $error; }; ?>
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="username" id="subject" placeholder="Username" />
+                      <div class="validation"></div>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="password" id="subject" placeholder="Password" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject" />
+                      <div class="validation"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9"><font size="3" align="left" >belum memiliki akun? Daftar <a href="<?=base_url()?>index.php/login/daftar"> disini.</a></font> </div>
+                        <div class="col-sm-3"><button type="submit">Masuk</button> </div>  
+
+                    </div>   
+                </form>
+                
+            </div>
+          </div>
+
+        <div class="col-lg-3">
+        </div>
+
+        </div>
+
+      </div>
+    </section><!-- #contact -->
+
+  </main>
+
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 footer-info">
+            <h3>NewBiz</h3>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+              A108 Adam Street <br>
+              New York, NY 535022<br>
+              United States <br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+
+            <div class="social-links">
+              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit"  value="Subscribe">
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Polinema</strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <!-- Uncomment below i you want to use a preloader -->
+  <!-- <div id="preloader"></div> -->
+
+  <!-- JavaScript Libraries -->
+  <script src="<?php echo base_url()?>login/lib/jquery/jquery.min.js"></script>
+  <script src="<?php echo base_url()?>login/lib/jquery/jquery-migrate.min.js"></script>
+  <script src="<?php echo base_url()?>login/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo base_url()?>login/lib/easing/easing.min.js"></script>
+  <script src="<?php echo base_url()?>login/lib/mobile-nav/mobile-nav.js"></script>
+  <script src="<?php echo base_url()?>login/lib/wow/wow.min.js"></script>
+  <script src="<?php echo base_url()?>login/lib/waypoints/waypoints.min.js"></script>
+  <script src="<?php echo base_url()?>login/lib/counterup/counterup.min.js"></script>
+  <script src="<?php echo base_url()?>login/lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="<?php echo base_url()?>login/lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="<?php echo base_url()?>login/lib/lightbox/js/lightbox.min.js"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="<?php echo base_url()?>login/contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="<?php echo base_url()?>login/js/main.js"></script>
+
+</body>
 </html>

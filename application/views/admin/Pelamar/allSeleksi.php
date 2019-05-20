@@ -42,9 +42,13 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right">
-                <a href="<?php echo site_url('adminPelamar/report') ?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Print Report Data Seleksi</button>
-                </a>
+                <?php foreach ($array as $key){ ?>
+                  <?php if($key->id_seleksi == NULL): ?>
+                  <a href="<?php echo site_url('adminPelamar/report') ?>">
+                    <button class="btn btn-primary waves-effect waves-light mg-b-15">Print Report Data Seleksi</button>
+                  </a>
+                <?php endif; ?>
+                <?php } ?>
                 </div>
               </div>
             </div>
@@ -52,13 +56,9 @@
           <div class="sparkline13-graph">
             <div class="datatable-dashv1-list custom-datatable-overright">
               <div id="toolbar">
-                <select class="form-control dt-tb">
-                  <option value="">Export Basic</option>
-                  <option value="all">Export All</option>
-                  <option value="selected">Export Selected</option>
-                </select>
+                
               </div>
-              <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true"data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+              <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-refresh="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
                     <th>Id Seleksi</th>

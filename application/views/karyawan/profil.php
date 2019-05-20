@@ -186,7 +186,13 @@
                                         <td><label form-control-label">Jabatan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input readonly style="background-color: white " name="jabatan" type="text" class="form-control" value="<?php echo $key->jabatan; ?>">
+                                            <?php
+                                              $a = $key->jabatan;
+                                              $konek = mysqli_connect("localhost","root","","kepegawaian");
+                                              $query = "select j.jabatan from jabatan as j inner join karyawan as k on k.jabatan=j.id where k.jabatan=$a limit 1; ";
+                                              $data=mysqli_fetch_array(mysqli_query($konek, $query));
+                                            ?>
+                                            <input readonly style="background-color: white " name="jabatan" type="text" class="form-control" value="<?php echo $data['jabatan']; ?>">
                                           </div>
                                         </td>
                                       </tr>
@@ -594,36 +600,49 @@
                                         </div>
                                     </div>
                                 </div> 
-                                </div>   
-                                </div>
-                            </div>
-                        </div>
-                    </div>   
-                    <div class="product-tab-list tab-pane fade" id="dataUraian">
-                        <div class="pdf-viewer-area mg-b-15">
-                            <div class="container-fluid">
-                                <div class="row">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                </div>
-                                <?php foreach($urai as $uraii){?>
-                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                                        <div class="pdf-single-pro">
-                                            <a class="media" href="<?php echo base_url()?>Assets/pdf/<?php echo $uraii->file_urgas ?>"></a>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                                </div>
-                            </div>
+                            </div>   
                         </div>
                     </div>
-
                 </div>
-            </div>
-        </div>              
-      </div>
-    </form>
-  </div>
-  </div>
+            </div>   
+                 <div class="product-tab-list tab-pane fade" id="dataUraian">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="review-content-section">
+                          <h4>Data Uraian Tugas</h4><br>
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th width="100">Nomor</th>
+                                    <th>Download File Uraian Tugas</th>
+                                  </tr>
+                                </thead>
+                                <?php $no=1;?>
+                                <?php foreach($urai as $abc){?>
+                                <tbody>
+                                  <tr>
+                                    <td><?php echo $no++ ?></td>
+                                    <td>
+                                      <a href="<?php echo base_url().'/Assets/dokumen/'.$abc->file_urgas; ?>" download>
+                                          <?php echo $abc->file_urgas;?>
+                                      </a>              
+                                    </td>
+                                  </tr>
+                                </tbody>
+                                <?php } ?>
+                              </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>              
+    </div>
+  </form>
+</div>
+</div>
 <br>
 
 

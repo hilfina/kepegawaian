@@ -10,7 +10,7 @@
               <ul class="breadcome-menu">
                 <li><a href="#">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Sekolah Karyawan</span>
+                <li><span class="bread-blod">Data MOU Pendidikan Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -28,7 +28,7 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Sekolah Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">MOU Pendidikan Karyawan</span></h1>
               </div>
             </div>
           </div>

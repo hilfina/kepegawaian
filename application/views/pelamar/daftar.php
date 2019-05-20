@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,48 +27,98 @@
           <?php foreach ($last as $key) { ?>
             <input type="hidden" name="id_karyawan" value="<?php echo $key['id_karyawan']+1?>">
           <?php } ?>
-          <table width="100%" style="margin-top: -100px">
-            <tr style="height: 50px"><div class="form-group row">
-              <td style="width: 30%"><strong>Nama Lengkap :</strong></td>
-              <td><input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" required></td>
-            </tr></div>
-            <tr style="height: 50px"><div class="form-group row">
-              <td><strong>Nomor KTP :</strong></td>
-              <td><input type="text" class="form-control" name="no_ktp" placeholder="Nomor KTP" required></td>
-            </tr></div>
-            <tr style="height: 50px"><div class="form-group row">
-              <td><strong>Email :</strong></td>
-              <td><input type="text" class="form-control" name="email"  placeholder="Email" required></td>
-            </tr></div>
-            <tr style="height: 50px"><div class="form-group row">
-              <td> <strong>Username :</strong> </td>
-              <td><input class="form-control" type="text" name="username"  placeholder="username" required></td>
-            </tr></div>
-            <tr style="height: 50px"><div class="form-group row">
-              <td><strong>Password :</strong></td>
-              <td><input class="form-control" type="password" name="password"  placeholder="password" required minlength="8"></td>
-            </tr></div>
-            <tr style="height: 50px"><div class="form-group row">
-              <td><strong>Jenjang Pendidikan :</strong></td>
-              <td><select class="form-control" name="pend_akhir">
-                <option>-- Pilihan --</option>
-                <option>SMA/SMK</option>
-                <option>D-III</option>
-                <option>D-IV</option>
-                <option>S1</option>
-                <option>S2</option>
-                <option>S3</option>
-              </select></td>
-            </tr></div>
-            <tr style="height: 50px"><div class="form-group row">
-              <td><strong>NEM/IPK :</strong></td>
-              <td><input class="form-control" type="text" name="ipk"  placeholder="NEM/IPK" required></td>
-            </tr></div>
-          </table><br>
-          <div class="text-center">
-              <button class="btn btn-primary loginbtn">Daftar</button>
-              <button class="btn btn-default"><a href="<?=base_url()?>index.php/login/">Batal</a></button>
           </div>
+          <div class="sparkline12-graph">
+              <div class="input-knob-dial-wrap">
+              <br>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="input-mask-title">
+                        <label>No. KTP</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <input name="no_ktp" type="text" class="form-control" required>
+                      <?php echo form_error('no_ktp','<div style="color:red">', '</div>'); ?>
+                      
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" >
+                      <div class="input-mask-title">
+                        <label>Nama Lengkap</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <input name="nama" type="text" class="form-control" required >
+                      <?php echo form_error('nama','<div style="color:red">', '</div>'); ?>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="input-mask-title">
+                        <label>No. Telepon</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <input name="no_telp" type="text" class="form-control" required>
+                      <?php echo form_error('no_telp','<div style="color:red">', '</div>'); ?>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="input-mask-title">
+                        <label>Email</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <input name="email" type="text" class="form-control" required>
+                      <?php if ($this->session->flashdata('msg_error')) :?>
+                        <div style="color: red"> 
+                        <?php echo $this->session->flashdata('msg_error')?>
+                        </div>
+                      <?php endif; ?>
+
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="input-mask-title">
+                        <label>Username</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <input name="username" type="text" class="form-control" required>
+                      <?php echo form_error('username','<div style="color:red">', '</div>'); ?>
+                      <font size="2"> *Minimal 6 karakter gabungan huruf dan angka </font>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="input-mask-title">
+                        <label>Password</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <input name="password" type="password" class="form-control" required minlength="8">
+                      <?php echo form_error('password','<div style="color:red">', '</div>'); ?>
+                      <font size="2"> *Minimal 8 karakter </font>
+                    </div>
+
+                  </div>
+                  <br>
+                  <div class="text-center">
+                      <button class="btn btn-primary loginbtn">Daftar</button>
+                      <button class="btn btn-default"><a href="<?=base_url()?>index.php/login/">Batal</a></button>
+                  </div>
+                </div>
+             </div>   
+          
 </form>
 </div>
 </div>

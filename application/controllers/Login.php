@@ -66,7 +66,7 @@ class Login extends CI_Controller {
 	                    $this->session->set_userdata($session_data);
 	                   foreach ($checking as $key) {
 	                   	if ($key->level == "Pelamar" && $cariData['id_profesi'] == "Belum") {
-	                    	redirect('pelamar/datasaya');
+	                    	redirect('pelamar/index');
 	                    }elseif ($key->level == "admin") {
 	                    redirect("home");
 	                    }else{
@@ -128,102 +128,115 @@ class Login extends CI_Controller {
 		
 	}
 
-	public function pilihdaftar()
-	{
-		$paket['array'] = $this->mdl_login->getLoker();
-        $this->load->view('pelamar/pilihdaftar', $paket);
-	}
-
-	public function viewdaftar()
-	{
-
-		$this->load->model('mdl_login');
-		$data['last'] = $this->mdl_login->getlast();
-		$this->load->view('pelamar/daftar',$data);
-	}
-
 	public function daftar()
 	{				
-	    $nama = $this->input->post('nama');
-	    $pend_akhir = $this->input->post('pend_akhir');
-	    $no_ktp = $this->input->post('no_ktp');
-	    $email = $this->input->post('email');
-	    $jurusan = $this->input->post('jurusan');
-	    $id_karyawan = $this->input->post('id_karyawan');
-		$username = $this->input->post('username');
-	    $password = md5($this->input->post('password'));
-	    $ipk = $this->input->post('ipk');
+		$this->form_validation->set_rules('no_ktp','Nomor KTP','required|min_length[16]');
+		$this->form_validation->set_rules('nama','Nama Lengkap','required');
+		$this->form_validation->set_rules('email','Email','required');
+		$this->form_validation->set_rules('no_telp','Nomor Telepon','required|min_length[10]');
+		$this->form_validation->
+		set_rules('username','User name','required|alpha_numeric|min_length[6]|max_length[50]|is_unique[login.username]');
+		$this->form_validation->set_rules('password','Password','required|min_length[8]');
 
-	    //DATA KARYAWAN	
-	    $data1 = array(
-	    		'id_karyawan'=>$id_karyawan,
-	            'nama'=>$nama,
-	            'no_ktp'=>$no_ktp,
-	            'email'=>$email,
-	            'id_status'=>'Pelamar',
-	            'id_profesi' => 'Belum',
-	            'id_golongan' => 'Tidak Ada',   
-	        );	
-
-	    // DATA LOWONGAN
-	    $data2 = array(
-	            'pend_akhir'=>$pend_akhir,
-	            'nilai_akhir'=>$ipk,
-	            'id_karyawan' => $id_karyawan,
-	        );
-
-	    // DATA LOGIN		
-	    $data5 = array(
-	            'username'=>$username,
-	            'password'=>$password,
-	            'level'=>'Pelamar',
-	            'aktif'=>0,
-	            'id_karyawan' => $id_karyawan,
-	        );
-
-	    $insert1 = $this->mdl_login->daftar('karyawan',$data1);
-	    $insert2 = $this->mdl_login->daftar('lowongan',$data2);
-   		$insert5 = $this->mdl_login->daftar('login',$data5);
-
-	    //enkripsi id
-		$encrypted_id = $id_karyawan;
 		
-		$this->load->library('email');
-		$config = array();
-		$config['charset'] = 'utf-8';
-		$config['useragent'] = 'CodeIgniter';
-		$config['protocol']= "smtp";
-		$config['mailtype']= "html";
-		$config['smtp_host']= "ssl://smtp.gmail.com";
-		$config['smtp_port']= "465";
-		$config['smtp_timeout']= "400";
-		$config['smtp_user']= "hilfinaamaris09@gmail.com";
-		$config['smtp_pass']= "hilfano090798";
-		$config['crlf']="\r\n"; 
-		$config['newline']="\r\n"; 
-		$config['wordwrap'] = TRUE;
-		
-		$this->email->initialize($config);
-		//konfigurasi pengiriman
-		$this->email->from($config['smtp_user']);
-		$this->email->to($email);
-		$this->email->subject("Verifikasi Akun");
-		$this->email->message(
-			"Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Terima kasih sudah melamar di perusahaan kami. Untuk proses berikutnya, data-data anda akan kami verifikasi terlebih dahulu. Pengumuman selanjutnya akan kami informasikan pada akun dan email anda. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini <br><br>".
-			"<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
-		);
-		
-		if($this->email->send())
-		{
-			echo "<script>alert('Email berhasil terkirim. Cek email anda untuk verifikasi akun!'); document.location.href = '" . site_url('login') . "';</script>";
+		if($this->form_validation->run()==FALSE){
+			$this->load->model('mdl_login');
+			$data['last'] = $this->mdl_login->getlast();
+			$this->load->view('pelamar/daftar',$data);
+		}else{
+		    $nama = $this->input->post('nama');
+		    $no_ktp = $this->input->post('no_ktp');
+		    $email = $this->input->post('email');
+		    $no_telp = $this->input->post('no_telp');
+		    $jurusan = $this->input->post('jurusan');
+		    $id_karyawan = $this->input->post('id_karyawan');
+			$username = $this->input->post('username');
+		    $password = md5($this->input->post('password'));
+            $konek = mysqli_connect("localhost","root","","kepegawaian");
+          	$cari=mysqli_fetch_array(mysqli_query($konek, "select email from karyawan where email = '$email'"));
+          	$hasilcari =$cari['email'];
+
+          	if($hasilcari != NULL){
+          		$error = ("<b>Error!</b> terdapat email yang telah terdaftar");
+
+                $this->session->set_flashdata('msg_error', $error);
+
+                redirect('login/daftar');
+
+          	}else {
+			    //DATA KARYAWAN	
+			    $data1 = array(
+			    		'id_karyawan'=>$id_karyawan,
+			            'nama'=>$nama,
+			            'no_ktp'=>$no_ktp,
+			            'email'=>$email,
+			            'no_telp'=>$no_telp,
+			            'id_status'=>'Pelamar',
+			            'id_profesi' => 'Belum',
+			            'id_golongan' => 'Tidak Ada', 
+			            'jabatan'  =>1,
+			            'foto' => 'profile.png'
+			        );	
+
+			    
+			    // DATA LOWONGAN
+			    $data2 = array(
+			            'pend_akhir'=>'-',
+			            'nilai_akhir'=>'-',
+			            'id_karyawan' => $id_karyawan,
+			        );
+
+			    // DATA LOGIN		
+			    $data5 = array(
+			            'username'=>$username,
+			            'password'=>$password,
+			            'level'=>'Pelamar',
+			            'aktif'=>0,
+			            'id_karyawan' => $id_karyawan,
+			        );
+
+			}
+		    //enkripsi id
+			$encrypted_id = $id_karyawan;
 			
-		}else
-		{
-			echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('login') . "';</script>";
+			$this->load->library('email');
+			$config = array();
+			$config['charset'] = 'utf-8';
+			$config['useragent'] = 'CodeIgniter';
+			$config['protocol']= "smtp";
+			$config['mailtype']= "html";
+			$config['smtp_host']= "ssl://smtp.gmail.com";
+			$config['smtp_port']= "465";
+			$config['smtp_timeout']= "400";
+			$config['smtp_user']= "hilfinaamaris09@gmail.com";
+			$config['smtp_pass']= "hilfano090798";
+			$config['crlf']="\r\n"; 
+			$config['newline']="\r\n"; 
+			$config['wordwrap'] = TRUE;
 			
+			$this->email->initialize($config);
+			//konfigurasi pengiriman
+			$this->email->from($config['smtp_user']);
+			$this->email->to($email);
+			$this->email->subject("Verifikasi Akun");
+			$this->email->message(
+				"Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Terima kasih sudah melamar di Rumah Sakit Islam Aisyiyah Malang. Untuk proses berikutnya, data-data anda akan kami verifikasi terlebih dahulu. Pengumuman selanjutnya akan kami informasikan pada akun dan email anda. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini <br><br>".
+				"<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
+			);
+			
+			if($this->email->send())
+			{
+				$insert1 = $this->mdl_login->daftar('karyawan',$data1);
+			    $insert2 = $this->mdl_login->daftar('lowongan',$data2);
+		   		$insert5 = $this->mdl_login->daftar('login',$data5);
+				echo "<script>alert('Verifikasi Email berhasil terkirim. Cek email anda untuk verifikasi akun!'); document.location.href = '" . site_url('login') . "';</script>";
+				
+			}else
+			{
+				echo "<script>alert('Verifikasi Email gagal terkirim'); document.location.href = '" . site_url('login') . "';</script>";
+				
+			}
 		}
-		
-
 		
 	}
 

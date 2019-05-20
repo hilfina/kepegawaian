@@ -239,13 +239,33 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
+    public function getPelatihan(){
+        $query = $this->db->query("SELECT * from mou_pelatihan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getPelatihanedit($id){
+        $query = $this->db->query("SELECT * from mou_pelatihan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
+    public function getinstansi(){
+        $query = $this->db->query("SELECT * from mou_instansi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
+        return $query->result();
+    }
+
+    public function getinstansiedit($id){
+        $query = $this->db->query("SELECT * from mou_instansi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
+        return $query->result();
+    }
+
     public function getUrgas(){
         $query = $this->db->query("SELECT * from uraian_tugas as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
         return $query->result();
     }
 
     public function getUrgasedit($id){
-        $query = $this->db->query("SELECT * from uraian_tugas as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_uraian = $id");
+        $query = $this->db->query("SELECT s.id_uraian, s.file_urgas, s.id_karyawan, k.nik, k.nama from uraian_tugas as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_uraian = $id");
         return $query->result();
     }
 
@@ -297,7 +317,7 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
     public function dataDiri($id){
-        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi where k.id_karyawan = $id order by r.mulai desc ");
+        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi inner join login as l on k.id_karyawan=l.id_karyawan where k.id_karyawan = $id order by r.mulai desc ");
         return $query->row();
     }
 

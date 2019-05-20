@@ -14,7 +14,7 @@ $this->load->view("header.php");
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <ul class="breadcome-menu">
-                                    <li><a href="#">Data Sekolah</a> <span class="bread-slash">/</span>
+                                    <li><a href="#">Data Pendidikan</a> <span class="bread-slash">/</span>
                                     </li>
                                     <li><span class="bread-blod">Tambah Dokumen</span>
                                     </li>
@@ -35,7 +35,7 @@ $this->load->view("header.php");
                     <div class="sparkline12-hd">
                     <br>
                         <div class="main-sparkline12-hd">
-                            <span><h4 align="center">Upload Data Sekolah </h4></span>
+                            <span><h4 align="center">Upload Data Pendidikan </h4></span>
                         </div>
                     </div>
                     <br>

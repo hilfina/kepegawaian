@@ -32,6 +32,63 @@ class AdminDiklat extends CI_Controller {
 
     }
 
+        public function add(){
+       if($this->mdl_admin->logged_id()){
+
+            $this->form_validation->set_rules('nomor_sertif','Nomor Sertifikat','trim|required');
+
+            if($this->form_validation->run()==FALSE){
+                $this->load->view('admin/Karyawan/Diklat/add');
+            }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'pdf';
+                $config['max_size']         = 2000;
+
+                $this->load->library('upload', $config);
+                $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $a=$this->input->post('nik');
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
+
+                $id_karyawan=$data2['id_karyawan'];
+                $nama_diklat=$this->input->post('nama_diklat');
+                $jenis_diklat=$this->input->post('jenis_diklat');
+                $tahun=$this->input->post('tahun');
+                $jam=$this->input->post('jam');
+                $tgl_mulai=date('Y-m-d', strtotime($this->input->post('tgl_mulai')));
+                $tgl_akhir=date('Y-m-d', strtotime($this->input->post('tgl_akhir')));
+                $nomor_sertif=$this->input->post('nomor_sertif');
+
+                if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus diisi dengan format pdf dan berukuran lebih dari 2 mb");
+
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("adminDiklat/add");
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+
+               
+                $dataDiklat= array(
+                    'id_karyawan' => $id_karyawan,
+                    'nama_diklat' => $nama_diklat,
+                    'jenis_diklat' => $jenis_diklat,
+                    'tgl_mulai' => $tgl_mulai,
+                    'tgl_akhir' => $tgl_akhir,
+                    'jam' => $jam,
+                    'tahun'=>$tahun,
+                    'nomor_sertif' => $nomor_sertif,
+                    'file ' => $file
+                );
+
+                $this->mdl_admin->addData('Diklat',$dataDiklat);
+
+                redirect("adminDiklat");
+                }
+        }
+        else{ redirect("login"); } 
+    }
+
     public function addDiklat($id){
        if($this->mdl_admin->logged_id()){
 

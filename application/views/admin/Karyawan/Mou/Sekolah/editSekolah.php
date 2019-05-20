@@ -8,10 +8,10 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="#">Data Sekolah</a> 
+                <li><a href="#">Data MOU Pendidikan</a> 
                   <span class="bread-slash">/</span>
                 </li>
-                <li><a href="#">Edit Data Sekolah</a> 
+                <li><a href="#">Edit Data MOU Pendidikan</a> 
                 </li>
               </ul>
             </div>
@@ -30,7 +30,7 @@
           <br>
           <div class="sparkline13-hd">
               <div class="main-sparkline13-hd" align="center">
-                <h1> Edit Data Sekolah Karyawan</h1><br>
+                <h1> Edit Data MOU Pendidikan Karyawan</h1><br>
               </div>
           </div>
         <div class="container-fluid" role="alert">

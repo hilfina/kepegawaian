@@ -38,6 +38,13 @@ $this->load->view("header.php");
                         </div>
                     </div>
                     <br>
+                    <div class="container-fluid" role="alert">
+                        <?php if ($this->session->flashdata('msg_error')) :?>
+                          <div class="alert alert-danger alert-mg-b"> 
+                          <?php echo $this->session->flashdata('msg_error')?>
+                          </div>
+                        <?php endif; ?>
+                    </div>
                     <form action="<?php echo site_url(); ?>/pelamar/addpend/" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">
@@ -61,7 +68,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <input type="text" class="form-control" name="jurusan" placeholder="Cth:Teknik Kimia">
+                                        <input type="text" class="form-control" name="jurusan" placeholder="Cth:S1 Teknik Kimia">
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +115,7 @@ $this->load->view("header.php");
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
-                                        <label>Foto Scan Dokumen</label>
+                                        <label>Scan Ijazah</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
@@ -125,7 +132,7 @@ $this->load->view("header.php");
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected">
                                           </div>
                                         </div>
-                                        <font size="2">Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2 mb </font>
+                                        <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
                                 </div>
                             </div>
