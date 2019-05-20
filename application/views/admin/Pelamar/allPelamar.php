@@ -89,6 +89,7 @@
                           <button class="btn btn-primary waves-effect waves-light">Detail</button>
                         </a>
                          <?php } else{ ?>
+                         <?php if($levelku == "Super Admin"){ ?>
                           <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
                           <button class="btn btn-success waves-effect" title="TERIMA"><i class="fa fa-check"></i></button>
                         </a>
@@ -98,6 +99,11 @@
                         <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
                           <button class="btn btn-primary waves-effect waves-light">Detail</button>
                         </a>
+                        <?php } else {?>
+                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
+                        </a>
+                        <?php }?>
                         <?php } ?>
                         
                       <?php }else if ($key->id_status == "Calon Karyawan") { ?>

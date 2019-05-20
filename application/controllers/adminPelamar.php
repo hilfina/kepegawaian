@@ -274,7 +274,7 @@ class AdminPelamar extends CI_Controller {
         }
         else{
             $config['upload_path']      = './Assets/dokumen/';
-            $config['allowed_types']    = 'jpg|png';
+            $config['allowed_types']    = 'pdf';
             $config['max_size']         = 2000;
             $config['max_width']        = 10240;
             $config['max_height']       = 7680;
@@ -322,7 +322,7 @@ class AdminPelamar extends CI_Controller {
             }
             else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'jpg|png';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
@@ -392,7 +392,7 @@ class AdminPelamar extends CI_Controller {
                 $this->load->view('admin/pelamar/addSurat',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;
@@ -429,16 +429,16 @@ class AdminPelamar extends CI_Controller {
 
     //EDIT DATA SELEKSI
     public function editDataSel(){
-        if($this->mdl_admin->logged_id()) {   
+        if($this->mdl_admin->logged_id()) { 
             $idk=$this->input->post('idKSel');
             $config['upload_path']      = './Assets/dokumen/';
-            $config['allowed_types']    = 'jpg|png';
+            $config['allowed_types']    = 'pdf';
             $config['max_size']         = 2000;
-            $config['max_width']        = 10240;
-            $config['max_height']       = 7680;
+
             
             $this->load->library('upload', $config);
             $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from seleksi where id_karyawan = $idk"));
+
             if ($this->upload->do_upload('file')) {
                 $a = $this->upload->data('file_name');
             }else {

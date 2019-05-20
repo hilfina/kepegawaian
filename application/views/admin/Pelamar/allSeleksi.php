@@ -43,7 +43,7 @@
               <div class="main-sparkline13-hd">
                 <div align="right">
                 <?php foreach ($array as $key){ ?>
-                  <?php if($key->id_seleksi == NULL): ?>
+                  <?php if($key->id_seleksi != NULL): ?>
                   <a href="<?php echo site_url('adminPelamar/report') ?>">
                     <button class="btn btn-primary waves-effect waves-light mg-b-15">Print Report Data Seleksi</button>
                   </a>
@@ -78,7 +78,7 @@
                       <td><?php echo $key->nama_tes;?></td>
                       <td><?php echo $key->hasil;?></td>
                       <td>                        
-                        <a href="<?php echo site_url(); echo "/admin/detSeleksi/"; echo $key->id_karyawan ;?>"><button class="btn btn-primary ">Detail</button></i></a>
+                        <a href="<?php echo site_url(); echo "/admin/detSeleksi/"; echo $key->id_karyawan ;?>"><button class="btn btn-primary waves-effect waves-light">Detail</button></i></a>
                       </td>
                     </tr>
                   <?php }?>

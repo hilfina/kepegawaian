@@ -93,12 +93,14 @@
             <div align="center">
               <?php foreach ($datSel as $a){ ?>
               <?php if ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-") { ?>
+                <?php if ($levelku == "Super Admin") {?>
                 <a href="<?php echo site_url(); echo "/adminPelamar/editMagang/";  echo $key->id_karyawan ; ?>">
-                  <button class="btn btn-success waves-effect mg-b-15" title="Lulus tahap finalisasi"><i class="fa fa-check"> Lulus Tahap Finalisasi</i></button>
+                  <button class="btn btn-success waves-effect mg-b-15" title="Lulus tahap finalisasi"><i class="fa fa-check"></i>Lulus Tahap Finalisasi</button>
                 </a>
                 <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                  <button class="btn btn-danger waves-effect mg-b-15" title="Gagal tahap finalisasi"><i class="fa fa-times">Tidak Lulus Tahap Finalisasi</i></button>
+                  <button class="btn btn-danger waves-effect mg-b-15" title="Gagal tahap finalisasi"><i class="fa fa-times"></i> Tidak Lulus Tahap Finalisasi</button>
                 </a>
+                <?php } ?>
               <?php } else{}?>
               <?php } ?>
             </div>
@@ -289,7 +291,7 @@
                               <td><label form-control-label>Dokumen ppa</label></td>
                               <td style="height: 50px">
                                 <div class="col-lg-12">
-                                  <font color="red" size="2">*Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2MB </font>
+                                  <font color="red" size="2">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2MB </font>
                                   <div class="input-mark-inner">
                                     <div class="file-upload-inner ts-forms">
                                       <div class="input prepend-big-btn">

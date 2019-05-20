@@ -67,7 +67,7 @@ class Login extends CI_Controller {
 	                   foreach ($checking as $key) {
 	                   	if ($key->level == "Pelamar" && $cariData['id_profesi'] == "Belum") {
 	                    	redirect('pelamar/index');
-	                    }elseif ($key->level == "admin") {
+	                    }elseif ($key->level == "admin" || $key->level == "Super Admin") {
 	                    redirect("home");
 	                    }else{
 	                    redirect("home/bukanAdmin");}

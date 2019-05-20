@@ -161,7 +161,7 @@
       <div class="left-custom-menu-adp-wrap comment-scrollbar">
         <nav class="sidebar-nav left-sidebar-menu-pro">
           <ul class="metismenu" id="menu1">
-            <?php if($levelku == "admin"){?>
+            <?php if($levelku == "admin" || $levelku == "Super Admin"){?>
               <li>
                 <a title="Home" href="<?php echo site_url('home/') ?>">
                   <span class="educate-icon educate-home icon-wrap"></span>
