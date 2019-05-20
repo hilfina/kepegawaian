@@ -182,6 +182,8 @@
                   <li><a title="Proses Kredensial" href="<?php echo site_url('adminKew/') ?>">Proses Kredensial</a></li>
                   <li><a title="Data Profesi" href="<?php echo site_url('adminProfesi/') ?>">Data profesi</a></li>
                   <li><a title="Data Status" href="<?php echo site_url('adminJenStatus/') ?>">Data Status</a></li>
+                  <li><a title="Data Status" href="<?php echo site_url('adminJabatan/') ?>">Data Jabatan</a></li>
+                  <li><a title="Data Status" href="<?php echo site_url('adminJP/') ?>">Jenis Penilaian</a></li>
                 </ul>
               </li>
               <li>
@@ -383,7 +385,7 @@
                                     $surat = $this->db->get()->result();
                                     foreach ($surat as $key => $surat) {
                                       if ($surat->tgl_akhir <= $tanggal2 && $surat->mail != 1) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
                                           <a href="<?php echo site_url('adminNotifikasi/Nsurat/');echo $surat->id_sipstr?>" title="Kirim Email Notifikasi">
                                             <div class="notification-content">
                                               <h2><?php echo $surat->nama; ?></h2>
@@ -391,7 +393,16 @@
                                             </div>
                                           </a>
                                         </li>
-                              <?php   }
+                                      <?php }elseif ($surat->tgl_akhir <= $tanggal2 && $surat->mail != 0) {?>
+                                        <li style="background-color: #e6f5ff">
+                                          <a href="<?php echo site_url('adminNotifikasi/Nsurat/');echo $surat->id_sipstr?>" title="Kirim Email Notifikasi">
+                                            <div class="notification-content">
+                                              <h2><?php echo $surat->nama; ?></h2>
+                                              <p><?php echo "File ".$surat->nama_surat." akan berakhir pada tangal ".date('d M Y', strtotime($surat->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                                      <?php  }
                                     }
                                   }
                                   if ($this->db->get('mou_hutang')) {
@@ -401,7 +412,7 @@
                                     $mou_h = $this->db->get()->result();
                                     foreach ($mou_h as $key => $mou_h) {
                                       if ($mou_h->tgl_akhir <= $tanggal3 && $mou_h->notif != 1) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
                                           <a href="<?php echo site_url('adminNotifikasi/Nhutang/');echo $mou_h->id?>" title="Lihat Data">
                                             <div class="notification-content">
                                               <h2><?php echo $mou_h->nama; ?></h2>
@@ -409,7 +420,16 @@
                                             </div>
                                           </a>
                                         </li>
-                              <?php   }
+                              <?php }elseif ($mou_h->tgl_akhir <= $tanggal3 && $mou_h->notif != 0) {?>
+                                        <li style="background-color: #e6f5ff">
+                                          <a href="<?php echo site_url('adminNotifikasi/Nhutang/');echo $mou_h->id?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $mou_h->nama; ?></h2>
+                                              <p><?php echo "MOU Hutang akan berakhir pada tangal ".date('d M Y', strtotime($mou_h->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                                      <?php  }
                                     }
                                   }if ($this->db->get('mou_klinis')) {
                                     $this->db->select('*');
@@ -418,7 +438,7 @@
                                     $mou_kl = $this->db->get()->result();
                                     foreach ($mou_kl as $key => $mou_kl) {
                                       if ($mou_kl->tgl_akhir <= $tanggal3 && $mou_kl->notif != 1) { ?>
-                                        <li>
+                                        <li style="background-color: yellow" >
                                           <a href="<?php echo site_url('adminNotifikasi/Nklinis/');echo $mou_kl->id?>" title="Lihat Data">
                                             <div class="notification-content">
                                               <h2><?php echo $mou_kl->nama; ?></h2>
@@ -426,7 +446,16 @@
                                             </div>
                                           </a>
                                         </li>
-                              <?php   }
+                              <?php   }elseif ($mou_kl->tgl_akhir <= $tanggal3 && $mou_kl->notif != 0) { ?>
+                                        <li style="background-color: #e6f5ff">
+                                          <a href="<?php echo site_url('adminNotifikasi/Nklinis/');echo $mou_kl->id?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $mou_kl->nama; ?></h2>
+                                              <p><?php echo "MOU Klinis akan berakhir pada tangal ".date('d M Y', strtotime($mou_kl->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   } 
                                     }
                                   }if ($this->db->get('mou_sekolah')) {
                                     $this->db->select('*');
@@ -435,7 +464,16 @@
                                     $mou_s = $this->db->get()->result();
                                     foreach ($mou_s as $key => $mou_s) {
                                       if ($mou_s->tgl_akhir <= $tanggal3 && $mou_s->notif != 1) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
+                                          <a href="<?php echo site_url('adminNotifikasi/Nsekolah/');echo $mou_s->id?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $mou_s->nama; ?></h2>
+                                              <p><?php echo "MOU Sekolah akan berakhir pada tangal ".date('d M Y', strtotime($mou_s->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($mou_s->tgl_akhir <= $tanggal3 && $mou_s->notif != 0) { ?>
+                                        <li style="background-color: #e6f5ff">
                                           <a href="<?php echo site_url('adminNotifikasi/Nsekolah/');echo $mou_s->id?>" title="Lihat Data">
                                             <div class="notification-content">
                                               <h2><?php echo $mou_s->nama; ?></h2>
@@ -452,7 +490,16 @@
                                     $mou_k = $this->db->get()->result();
                                     foreach ($mou_k as $key => $mou_k) {
                                       if ($mou_k->tgl_akhir <= $tanggal3 && $mou_k->notif != 1) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
+                                          <a href="<?php echo site_url('adminNotifikasi/Nkontrak/');echo $mou_k->id?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $mou_k->nama; ?></h2>
+                                              <p><?php echo "MOU Kontrak akan berakhir pada tangal ".date('d M Y', strtotime($mou_k->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($mou_k->tgl_akhir <= $tanggal3 && $mou_k->notif != 0) { ?>
+                                        <li style="background-color: #e6f5ff">
                                           <a href="<?php echo site_url('adminNotifikasi/Nkontrak/');echo $mou_k->id?>" title="Lihat Data">
                                             <div class="notification-content">
                                               <h2><?php echo $mou_k->nama; ?></h2>
@@ -469,7 +516,16 @@
                                     $kew = $this->db->get()->result();
                                     foreach ($kew as $key => $kew) {
                                       if ($kew->tgl_akhir <= $tanggal3 && $kew->notif != 1) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
+                                          <a href="<?php echo site_url('adminNotifikasi/NKew/');echo $kew->id_kewenangan?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $kew->nama; ?></h2>
+                                              <p><?php echo "Kredensial akan berakhir pada tangal ".date('d M Y', strtotime($kew->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($kew->tgl_akhir <= $tanggal3 && $kew->notif != 0) { ?>
+                                        <li style="background-color: #e6f5ff">
                                           <a href="<?php echo site_url('adminNotifikasi/NKew/');echo $kew->id_kewenangan?>" title="Lihat Data">
                                             <div class="notification-content">
                                               <h2><?php echo $kew->nama; ?></h2>
@@ -486,7 +542,16 @@
                                     $status = $this->db->get()->result();
                                     foreach ($status as $key => $status) {
                                       if ($status->akhir <= $tanggal3 && $status->notif != 1) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
+                                          <a href="<?php echo site_url('adminNotifikasi/NStatus/');echo $status->id."/".$status->id_karyawan; ?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $status->nama; ?></h2>
+                                              <p><?php echo "Akan berakhir status sebagai ".$status->id_status." pada tangal ".date('d M Y', strtotime($status->akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($status->akhir <= $tanggal3 && $status->notif != 0) { ?>
+                                        <li style="background-color: #e6f5ff">
                                           <a href="<?php echo site_url('adminNotifikasi/NStatus/');echo $status->id."/".$status->id_karyawan; ?>" title="Lihat Data">
                                             <div class="notification-content">
                                               <h2><?php echo $status->nama; ?></h2>
@@ -520,7 +585,16 @@
                                     $surat = $this->db->get()->result();
                                     foreach ($surat as $key => $surat) {
                                       if ($surat->tgl_akhir <= $tanggal2 && $surat->notif_k != 1 && $surat->id_karyawan == $idku) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
+                                          <a href="<?php echo site_url('karyawan/Nsurat/');echo $surat->id_sipstr?>" >
+                                            <div class="notification-content">
+                                              <h2><?php echo $surat->nama_surat; ?></h2>
+                                              <p><?php echo "File ".$surat->jenis_surat." anda akan berakhir pada tangal ".date('d M Y', strtotime($surat->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($surat->tgl_akhir <= $tanggal2 && $surat->notif_k != 0 && $surat->id_karyawan == $idku) { ?>
+                                        <li style="background-color: #e6f5ff">
                                           <a href="<?php echo site_url('karyawan/Nsurat/');echo $surat->id_sipstr?>" >
                                             <div class="notification-content">
                                               <h2><?php echo $surat->nama_surat; ?></h2>
@@ -538,7 +612,16 @@
                                     $mou_h = $this->db->get()->result();
                                     foreach ($mou_h as $key => $mou_h) {
                                       if ($mou_h->tgl_akhir <= $tanggal3 && $mou_h->notif_k != 1 && $mou_h->id_karyawan == $idku) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
+                                          <a href="<?php echo site_url('karyawan/Nhutang/');echo $mou_h->id; ?>" >
+                                            <div class="notification-content">
+                                              <h2>MOU Hutang</h2>
+                                              <p><?php echo "MOU Hutang anda akan berakhir pada tangal ".date('d M Y', strtotime($mou_h->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($mou_h->tgl_akhir <= $tanggal3 && $mou_h->notif_k != 0 && $mou_h->id_karyawan == $idku) { ?>
+                                        <li style="background-color: #e6f5ff">
                                           <a href="<?php echo site_url('karyawan/Nhutang/');echo $mou_h->id; ?>" >
                                             <div class="notification-content">
                                               <h2>MOU Hutang</h2>
@@ -555,7 +638,16 @@
                                     $mou_kl = $this->db->get()->result();
                                     foreach ($mou_kl as $key => $mou_kl) {
                                       if ($mou_kl->tgl_akhir <= $tanggal3 && $mou_kl->notif_k != 1 && $mou_kl->id_karyawan == $idku) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
+                                          <a href="<?php echo site_url('karyawan/Nklinis/');echo $mou_kl->id; ?>" >
+                                            <div class="notification-content">
+                                              <h2>MOU Klinis</h2>
+                                              <p><?php echo "MOU Klinis anda akan berakhir pada tangal ".date('d M Y', strtotime($mou_kl->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($mou_kl->tgl_akhir <= $tanggal3 && $mou_kl->notif_k != 0 && $mou_kl->id_karyawan == $idku) { ?>
+                                        <li style="background-color: #e6f5ff">
                                           <a href="<?php echo site_url('karyawan/Nklinis/');echo $mou_kl->id; ?>" >
                                             <div class="notification-content">
                                               <h2>MOU Klinis</h2>
@@ -572,7 +664,16 @@
                                     $mou_s = $this->db->get()->result();
                                     foreach ($mou_s as $key => $mou_s) {
                                       if ($mou_s->tgl_akhir <= $tanggal3 && $mou_s->notif_k != 1 && $mou_s->id_karyawan == $idku) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
+                                          <a href="<?php echo site_url('karyawan/Nsekolah/');echo $mou_s->id; ?>" >
+                                            <div class="notification-content">
+                                              <h2>MOU Sekolah</h2>
+                                              <p><?php echo "MOU Sekolah anda akan berakhir pada tangal ".date('d M Y', strtotime($mou_s->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($mou_s->tgl_akhir <= $tanggal3 && $mou_s->notif_k != 0 && $mou_s->id_karyawan == $idku) { ?>
+                                        <li style="background-color: #e6f5ff">
                                           <a href="<?php echo site_url('karyawan/Nsekolah/');echo $mou_s->id; ?>" >
                                             <div class="notification-content">
                                               <h2>MOU Sekolah</h2>
@@ -589,7 +690,16 @@
                                     $mou_k = $this->db->get()->result();
                                     foreach ($mou_k as $key => $mou_k) {
                                       if ($mou_k->tgl_akhir <= $tanggal3 && $mou_k->notif_k != 1 && $mou_k->id_karyawan == $idku) { ?>
-                                        <li>
+                                        <li style="background-color: yellow">
+                                          <a href="<?php echo site_url('karyawan/Nkontrak/');echo $mou_k->id; ?>" >
+                                            <div class="notification-content">
+                                              <h2>MOU Kontrak</h2>
+                                              <p><?php echo "MOU Kontrak anda akan berakhir pada tangal ".date('d M Y', strtotime($mou_k->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($mou_k->tgl_akhir <= $tanggal3 && $mou_k->notif_k != 0 && $mou_k->id_karyawan == $idku) { ?>
+                                        <li style="background-color: #e6f5ff">
                                           <a href="<?php echo site_url('karyawan/Nkontrak/');echo $mou_k->id; ?>" >
                                             <div class="notification-content">
                                               <h2>MOU Kontrak</h2>

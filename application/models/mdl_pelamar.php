@@ -101,6 +101,10 @@ class Mdl_pelamar extends CI_Model
         $query= $this->db->query("SELECT * from seleksi  where id_seleksi='$id'");
         return $query->row();
     }
+    public function semuadata($id){
+        $query= $this->db->query("SELECT * from karyawan  where id_karyawan='$id'");
+        return $query->row();
+    }
     public function getCetak($id){
         $query= $this->db->query("SELECT * from seleksi  where id_karyawan='$id'");
         return $query->row();

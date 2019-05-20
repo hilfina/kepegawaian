@@ -87,23 +87,21 @@
                       </div>
                     </div>
                   </div><br><br>
-                  <div class="row" align="center">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <?php foreach ($datSel as $a){ ?>
-                        <?php if ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-") { ?>
-                          <a href="<?php echo site_url(); echo "/adminPelamar/editMagang/";  echo $key->id_karyawan ; ?>">
-                            <button class="btn btn-success waves-effect mg-b-15" title="Lulus tahap finalisasi"><i class="fa fa-check"> Lulus Tahap Finalisasi</i></button>
-                          </a>
-                          <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                            <button class="btn btn-danger waves-effect mg-b-15" title="Gagal tahap finalisasi"><i class="fa fa-times">Tidak Lulus Tahap Finalisasi</i></button>
-                          </a>
-                        <?php } else{}?>
-                        <?php } ?>
-                    </div>
-                  </div>
                 </div>
               </div>
             </form><br>
+            <div align="center">
+              <?php foreach ($datSel as $a){ ?>
+              <?php if ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-") { ?>
+                <a href="<?php echo site_url(); echo "/adminPelamar/editMagang/";  echo $key->id_karyawan ; ?>">
+                  <button class="btn btn-success waves-effect mg-b-15" title="Lulus tahap finalisasi"><i class="fa fa-check"> Lulus Tahap Finalisasi</i></button>
+                </a>
+                <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
+                  <button class="btn btn-danger waves-effect mg-b-15" title="Gagal tahap finalisasi"><i class="fa fa-times">Tidak Lulus Tahap Finalisasi</i></button>
+                </a>
+              <?php } else{}?>
+              <?php } ?>
+            </div>
           <?php } ?>
         </div>
       </div>
@@ -129,12 +127,12 @@
                             <div class="col-lg-12">
                               <?php if ($key->tgl_seleksi == "0000-00-00"){ ?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes tulis dan wawancara</font>
-                              <?php } elseif (($key->nilai_wawancara >=60 && $key->nilai_kompetensi >=60) && $wawa->tanggal == $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
+                              <?php } elseif (($key->nilai_wawancara >=10 && $key->nilai_kompetensi >=10) && $wawa->tanggal == $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes psikologi</font>
-                              <?php } elseif (($key->nilai_wawancara >=60 && $key->nilai_kompetensi >= 60) && $wawa->tanggal != $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
-                              <?php } elseif ($key->tes_psikologi >=60 && $psiko->tanggal == $key->tgl_seleksi) {?>
+                              <?php } elseif (($key->nilai_wawancara >=10 && $key->nilai_kompetensi >= 60) && $wawa->tanggal != $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
+                              <?php } elseif ($key->tes_psikologi == "Lulus" && $psiko->tanggal == $key->tgl_seleksi) {?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes agama</font>
-                              <?php } elseif ($key->nilai_agama >=60 && $baca->tanggal == $key->tgl_seleksi) {?>
+                              <?php } elseif ($key->nilai_agama >=10 && $baca->tanggal == $key->tgl_seleksi) {?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes kesehatan</font>
                               <?php } ?>
                               <input name="tgl" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
@@ -182,7 +180,11 @@
                               <td style="height: 50px">
                                 <div class="col-lg-12">
                                   <?php if ($psiko->hasil == "-") { ?>
-                                    <input name="psikologi" type="text" class="form-control" placeholder="Persentase hasil tes Psikologi" >
+                                    <select name="psikologi" class="form-control">
+                                      <option>-- Pilihan --</option>
+                                      <option>Lulus</option>
+                                      <option>Tidak Lulus</option>
+                                    </select>
                                   <?php } else { ?>
                                     <input name="psikologi" type="text" class="form-control" value="<?php echo $psiko->hasil;?>" >
                                   <?php } ?>
@@ -195,11 +197,11 @@
 
                           <?php if (isset($shalat->hasil)) { ?>
                             <tr>
-                              <td><label form-control-label>Tes Shalat</label></td>
+                              <td><label form-control-label>Tes Toharoh dan Shalat</label></td>
                               <td style="height: 50px">
                                 <div class="col-lg-12">
                                   <?php if ($shalat->hasil == "-") { ?>
-                                    <input name="shalat" type="text" class="form-control" placeholder="Persentase hasil tes Shalat" >
+                                    <input name="shalat" type="text" class="form-control" placeholder="Persentase hasil tes Toharoh dan Shalat" >
                                   <?php } else { ?>
                                     <input name="shalat" type="text" class="form-control" value="<?php echo $shalat->hasil;?>" >
                                   <?php } ?>
@@ -246,11 +248,11 @@
 
                           <?php if (isset($bimbing->hasil)) { ?>
                             <tr>
-                              <td><label form-control-label>Tes Membimbing Pasien</label></td>
+                              <td><label form-control-label>Tes Ibadah Praktis</label></td>
                               <td style="height: 50px">
                                 <div class="col-lg-12">
                                   <?php if ($bimbing->hasil == "-") { ?>
-                                    <input name="bimbing" type="text" class="form-control" placeholder="Persentase hasil tes Membimbing Pasien" >
+                                    <input name="bimbing" type="text" class="form-control" placeholder="Persentase hasil tes Ibadah Praktis" >
                                   <?php } else { ?>
                                     <input name="bimbing" type="text" class="form-control" value="<?php echo $bimbing->hasil;?>" >
                                   <?php } ?>
@@ -267,7 +269,11 @@
                               <td style="height: 50px">
                                 <div class="col-lg-12">
                                   <?php if ($sehat->hasil == "-") { ?>
-                                    <input name="kesehatan" type="text" class="form-control" placeholder="Persentase hasil tes Kesehatan" >
+                                    <select name="kesehatan" class="form-control">
+                                      <option>-- Pilihan --</option>
+                                      <option>Lulus</option>
+                                      <option>Tidak Lulus</option>
+                                    </select>
                                   <?php } else { ?>
                                     <input name="kesehatan" type="text" class="form-control" value="<?php echo $sehat->hasil;?>" >
                                   <?php } ?>

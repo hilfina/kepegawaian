@@ -36,7 +36,7 @@
           <input name="idKSel" type="hidden" class="form-control" value="<?php echo $key->id_karyawan; ?>">
           <table width="100%">
             <tr>
-              <td width="20%"><label form-control-label">ID Seleksi</label></td>
+              <td width="20%"><label form-control-label>ID Seleksi</label></td>
               <td style="height: 50px" width="80%">
                 <div class="col-lg-12">
                   <input name="idSel" type="text" class="form-control" value="<?php echo $key->id_seleksi; ?>" style="width:100%" disabled>
@@ -44,7 +44,7 @@
               </td>
             </tr>
           <tr>
-            <td><label form-control-label">Tanggal Seleksi</label></td>
+            <td><label form-control-label>Tanggal Seleksi</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="tglSel" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
@@ -52,7 +52,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Nilai Wawancara</label></td>
+            <td><label form-control-label>Nilai Wawancara</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="nwSel" type="text" class="form-control" value="<?php echo $key->nilai_wawancara;?>" >
@@ -60,7 +60,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Nilai Agama</label></td>
+            <td><label form-control-label>Nilai Agama</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="naSel" type="text" class="form-control" value="<?php echo $key->nilai_agama;?>">
@@ -68,7 +68,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Nilai Kompetensi</label></td>
+            <td><label form-control-label>Nilai Kompetensi</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="nkSel" type="text" class="form-control" value="<?php echo $key->nilai_kompetensi;?>" >
@@ -76,7 +76,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Tes PPA</label></td>
+            <td><label form-control-label>Tes PPA</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="tpSel" type="text" class="form-control" value="<?php echo $key->tes_ppa; ?>" >
@@ -84,7 +84,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Tes Psikologi</label></td>
+            <td><label form-control-label>Tes Psikologi</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="tpsSel" type="text" class="form-control" value="<?php echo $key->tes_psikologi; ?>" >
@@ -92,7 +92,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label">Tes Kesehatan</label></td>
+            <td><label form-control-label>Tes Kesehatan</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
                 <input name="tkSel" type="text" class="form-control" value="<?php echo $key->tes_kesehatan?>">

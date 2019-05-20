@@ -65,9 +65,9 @@ class Admin extends CI_Controller {
                 $paket['psiko']=$this->mdl_pelamar->carii('Tes Psikologi',$s['id_seleksi']);
                 $paket['tulis']=$this->mdl_pelamar->carii('Tes Tulis',$s['id_seleksi']);
                 $paket['sehat']=$this->mdl_pelamar->carii('Tes Kesehatan',$s['id_seleksi']);
-                $paket['shalat']=$this->mdl_pelamar->carii('Tes Shalat',$s['id_seleksi']);
+                $paket['shalat']=$this->mdl_pelamar->carii('Tes Toharoh dan Shalat',$s['id_seleksi']);
                 $paket['doa']=$this->mdl_pelamar->carii('Doa Sehari-hari',$s['id_seleksi']);
-                $paket['bimbing']=$this->mdl_pelamar->carii('Tes Membimbing Pasien',$s['id_seleksi']);
+                $paket['bimbing']=$this->mdl_pelamar->carii('Tes Ibadah Praktis',$s['id_seleksi']);
                 $paket['baca']=$this->mdl_pelamar->carii('Baca Al-Quran',$s['id_seleksi']);
                 $paket['semua']=$this->mdl_pelamar->semuaSeleksi($s['id_seleksi']);
                 $where2 = array( 'id_seleksi' => $s['id_seleksi']);
@@ -146,7 +146,7 @@ class Admin extends CI_Controller {
             if ($this->mdl_pelamar->caricari('Tes Psikologi',$idSel)) {
                 $this->mdl_admin->editRSel($idSel,'Tes Psikologi', $psikologi);
             }
-            elseif ($tgl != $b['tanggal'] && $wawancara >= 60 && $psikologi == "-") {
+            elseif ($tgl != $b['tanggal'] && $wawancara >= 10 && $psikologi == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
@@ -160,26 +160,26 @@ class Admin extends CI_Controller {
             }
             $c = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $idSel && nama_tes = 'Tes Psikologi'"));
 
-            if ($this->mdl_pelamar->caricari('Tes Shalat',$idSel)) {
-                $this->mdl_admin->editRSel($idSel,'Tes Shalat', $shalat);
+            if ($this->mdl_pelamar->caricari('Tes Toharoh dan Shalat',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Tes Toharoh dan Shalat', $shalat);
             }
-            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $shalat == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] == "Lulus" && $shalat == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
-                    'nama_tes' => 'Tes Shalat',
+                    'nama_tes' => 'Tes Toharoh dan Shalat',
                     'hasil' => $shalat,
                     'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
             }elseif ($shalat != "-") {
-                $this->mdl_admin->editRSel($idSel,'Tes Shalat', $shalat);
+                $this->mdl_admin->editRSel($idSel,'Tes Toharoh dan Shalat', $shalat);
             } 
 
             if ($this->mdl_pelamar->caricari('Doa Sehari-hari',$idSel)) {
                 $this->mdl_admin->editRSel($idSel,'Doa Sehari-hari', $doa);
             }
-            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $doa == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] == "Lulus" && $doa == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
@@ -192,26 +192,26 @@ class Admin extends CI_Controller {
                 $this->mdl_admin->editRSel($idSel,'Doa Sehari-hari', $doa);
             }
 
-            if ($this->mdl_pelamar->caricari('Tes Membimbing Pasien',$idSel)) {
-                $this->mdl_admin->editRSel($idSel,'Tes Membimbing Pasien', $bimbing);
+            if ($this->mdl_pelamar->caricari('Tes Ibadah Praktis',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Tes Ibadah Praktis', $bimbing);
             }
-            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $bimbing == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] == "Lulus" && $bimbing == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
-                    'nama_tes' => 'Tes Membimbing Pasien',
+                    'nama_tes' => 'Tes Ibadah Praktis',
                     'hasil' => $bimbing,
                     'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
             }elseif ($bimbing != "-") {
-                $this->mdl_admin->editRSel($idSel,'Tes Membimbing Pasien', $bimbing);
+                $this->mdl_admin->editRSel($idSel,'Tes Ibadah Praktis', $bimbing);
             }
 
             if ($this->mdl_pelamar->caricari('Baca Al-Quran',$idSel)) {
-                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $baca);
+                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $shalat);
             }
-            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $baca == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] == "Lulus" && $baca == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
@@ -220,14 +220,14 @@ class Admin extends CI_Controller {
                     'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
-            }elseif ($baca != "-") {
-                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $baca);
+            }elseif ($shalat != "-") {
+                $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $shalat);
             }
             $d = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $idSel && nama_tes = 'Baca Al-Quran'"));
             if ($this->mdl_pelamar->caricari('Tes Kesehatan',$idSel)) {
                 $this->mdl_admin->editRSel($idSel,'Tes Kesehatan', $kesehatan);
             }
-            elseif ($tgl != $d['tanggal'] && $d['hasil'] >= 60 && $kesehatan == "-") {
+            elseif ($tgl != $d['tanggal'] && $d['hasil'] >= 10 && $kesehatan == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
