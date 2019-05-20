@@ -356,12 +356,12 @@
                             <div class="col-lg-12">
                               <?php if ($key->tgl_seleksi == "0000-00-00"){ ?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes tulis dan wawancara</font>
-                              <?php } elseif (($key->nilai_wawancara >=60 && $key->nilai_kompetensi >=60) && $wawa->tanggal == $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
+                              <?php } elseif (($key->nilai_wawancara >=10 && $key->nilai_kompetensi >=10) && $wawa->tanggal == $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes psikologi</font>
-                              <?php } elseif (($key->nilai_wawancara >=60 && $key->nilai_kompetensi >= 60) && $wawa->tanggal != $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
-                              <?php } elseif ($key->tes_psikologi >=60 && $psiko->tanggal == $key->tgl_seleksi) {?>
+                              <?php } elseif (($key->nilai_wawancara >=10 && $key->nilai_kompetensi >= 10) && $wawa->tanggal != $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
+                              <?php } elseif ($key->tes_psikologi == "Lulus" && $psiko->tanggal == $key->tgl_seleksi) {?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes agama</font>
-                              <?php } elseif ($key->nilai_agama >=60 && $baca->tanggal == $key->tgl_seleksi) {?>
+                              <?php } elseif ($key->nilai_agama >=10 && $baca->tanggal == $key->tgl_seleksi) {?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes kesehatan</font>
                               <?php } ?>
                               <input name="tgl" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
@@ -387,7 +387,7 @@
                         <?php }else{?>
                           <input name="tulis" type="hidden" class="form-control" value="<?php echo $semua->nilai_kompetensi;?>" >
                         <?php }?>
-                        <?php if ($key->nilai_kompetensi >= 60) { ?>
+                        <?php if ($key->nilai_kompetensi >= 10) { ?>
                           <tr>
                             <td><label form-control-label>Nilai Wawancara</label></td>
                             <td style="height: 50px">
@@ -409,7 +409,11 @@
                               <td style="height: 50px">
                                 <div class="col-lg-12">
                                   <?php if ($psiko->hasil == "-") { ?>
-                                    <input name="psikologi" type="text" class="form-control" placeholder="Persentase hasil tes Psikologi" >
+                                    <select name="psikologi" class="form-control">
+                                      <option>-- Pilihan --</option>
+                                      <option>Lulus</option>
+                                      <option>Tidak Lulus</option>
+                                    </select>
                                   <?php } else { ?>
                                     <input name="psikologi" type="text" class="form-control" value="<?php echo $psiko->hasil;?>" >
                                   <?php } ?>
@@ -422,7 +426,7 @@
 
                           <?php if (isset($shalat->hasil)) { ?>
                             <tr>
-                              <td><label form-control-label>Tes Shalat</label></td>
+                              <td><label form-control-label>Tes Toharoh dan Shalat</label></td>
                               <td style="height: 50px">
                                 <div class="col-lg-12">
                                   <?php if ($shalat->hasil == "-") { ?>
@@ -473,11 +477,11 @@
 
                           <?php if (isset($bimbing->hasil)) { ?>
                             <tr>
-                              <td><label form-control-label>Tes Membimbing Pasien</label></td>
+                              <td><label form-control-label>Tes Ibadah Praktis</label></td>
                               <td style="height: 50px">
                                 <div class="col-lg-12">
                                   <?php if ($bimbing->hasil == "-") { ?>
-                                    <input name="bimbing" type="text" class="form-control" placeholder="Persentase hasil tes Membimbing Pasien" >
+                                    <input name="bimbing" type="text" class="form-control" placeholder="Persentase hasil tes Ibadah Praktis" >
                                   <?php } else { ?>
                                     <input name="bimbing" type="text" class="form-control" value="<?php echo $bimbing->hasil;?>" >
                                   <?php } ?>
@@ -494,7 +498,11 @@
                               <td style="height: 50px">
                                 <div class="col-lg-12">
                                   <?php if ($sehat->hasil == "-") { ?>
-                                    <input name="kesehatan" type="text" class="form-control" placeholder="Persentase hasil tes Kesehatan" >
+                                    <select name="kesehatan" class="form-control">
+                                      <option>-- Pilihan --</option>
+                                      <option>Lulus</option>
+                                      <option>Tidak Lulus</option>
+                                    </select>
                                   <?php } else { ?>
                                     <input name="kesehatan" type="text" class="form-control" value="<?php echo $sehat->hasil;?>" >
                                   <?php } ?>
@@ -505,7 +513,7 @@
                             <input name="kesehatan" type="hidden" class="form-control" value="<?php echo $key->tes_kesehatan;?>" >
                           <?php } ?>
                           
-                          <?php if ($key->nilai_agama >= 60 || $key->tes_kesehatan >= 60) { ?>                                                  
+                          <?php if ($key->nilai_agama >= 10 || $key->tes_kesehatan >= 10) { ?>                                                  
                             <tr>
                               <td><label form-control-label>Dokumen ppa</label></td>
                               <td style="height: 50px">

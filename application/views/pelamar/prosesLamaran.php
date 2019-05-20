@@ -55,11 +55,11 @@ $idku=$this->session->userdata("myId");
                 <br><b><font size="2">TES TULIS</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { 
                 if ($a->tgl_seleksi == "0000-00-00") {echo "Belum Ditentukan";}else{echo date('d M Y', strtotime($key->tgl_seleksi));}} ?>
               </div>
-            <?php }elseif ($a->nilai_kompetensi == "Lulus") { ?>
+            <?php }elseif ($a->nilai_kompetensi >= 30 ){ ?>
               <div class="lulus container-fluid" align="center">
                 <br><b><font size="2">TES TULIS</font></b><hr style="width: 90%">LULUS
               </div>
-            <?php }elseif ($a->nilai_kompetensi == "Tidak Lulus") { ?>
+            <?php }elseif ($a->nilai_kompetensi < 30) { ?>
               <div class="gagal container-fluid" align="center">
                 <br><b><font size="2">TES TULIS</font></b><hr style="width: 90%">TIDAK LULUS
               </div>
@@ -71,15 +71,15 @@ $idku=$this->session->userdata("myId");
           } ?>          
           <br>
           <?php foreach ($lengkap as $a) { 
-            if ($a->nilai_wawancara == "-" && $a->nilai_kompetensi == "Lulus") { ?>
+            if ($a->nilai_wawancara == "-" && $a->nilai_kompetensi >= 30) { ?>
               <div class="masih container-fluid" align="center">
                 <br><b><font size="2">TES WAWANCARA</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { echo date('d M Y', strtotime($key->tgl_seleksi));  } ?>
               </div>
-            <?php }elseif ($a->nilai_wawancara == "Lulus") { ?>
+            <?php }elseif ($a->nilai_wawancara >= 30) { ?>
               <div class="lulus container-fluid" align="center">
                 <br><b><font size="2">TES WAWANCARA</font></b><hr style="width: 90%">LULUS
               </div>
-            <?php }elseif ($a->nilai_wawancara == "Tidak Lulus") { ?>
+            <?php }elseif ($a->nilai_wawancara < 30) { ?>
               <div class="gagal container-fluid" align="center">
                 <br><b><font size="2">TES WAWANCARA</font></b><hr style="width: 90%">TIDAK LULUS
               </div>
@@ -115,7 +115,7 @@ $idku=$this->session->userdata("myId");
               <div class="masih container-fluid" align="center">
                 <br><b><font size="2">TES AGAMA DAN KESEHATAN</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { echo date('d M Y', strtotime($key->tgl_seleksi));  } ?>
               </div>
-            <?php }elseif ($a->nilai_agama == "Lulus" || $a->tes_kesehatan == "Lulus") { ?>
+            <?php }elseif ($a->nilai_agama >= 30 || $a->tes_kesehatan == "Lulus") { ?>
               <div class="lulus container-fluid" align="center">
                 <br><b><font size="2">TES AGAMA DAN KESEHATAN</font></b><hr style="width: 90%">LULUS
               </div>

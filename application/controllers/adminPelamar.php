@@ -120,7 +120,7 @@ class AdminPelamar extends CI_Controller {
 
     public function pelamarDiterima($id){
         if($this->mdl_admin->logged_id()) {
-        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select email from karyawan where id_karyawan ='$id'")); 
+        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where id_karyawan ='$id'")); 
 
         $this->load->library('email');
         $config = array();
@@ -144,7 +144,7 @@ class AdminPelamar extends CI_Controller {
         $this->email->to($data['email']);
         $this->email->subject("Notifikasi");
 
-        $this->email->message("Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Selamat, anda mendapat panggilan untuk melakukan seleksi diRumah Sakit Islam Kota Malang. untuk informasi tanggal seleksi, silakan untuk cek website RSIA");
+        $this->email->message("Kepada<br>Yth. Sdr. <b>".$data['nama']."</b><br> Ditempat,<br><br><br> Selamat, anda mendapat panggilan untuk melakukan seleksi diRumah Sakit Islam Kota Malang. untuk informasi tanggal seleksi, silakan untuk cek website RSIA ");
         $this->email->send();
         
         $where = array( 'id_karyawan' => $id ); 
@@ -168,7 +168,7 @@ class AdminPelamar extends CI_Controller {
 
     public function pelamarDitolak($id){
         if($this->mdl_admin->logged_id()) {
-        $dataa=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select email from karyawan where id_karyawan ='$id'")); 
+        $dataa=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where id_karyawan ='$id'")); 
 
         $this->load->library('email');
         $config = array();
@@ -191,7 +191,8 @@ class AdminPelamar extends CI_Controller {
         $this->email->from($config['smtp_user']);
         $this->email->to($dataa['email']);
         $this->email->subject("Notifikasi");
-        $this->email->message("Maaf, anda gagal dalam seleksi di RSIA, silahkan mencoba pada peluang karir selanjutnya");
+        $this->email->message("Kepada<br>Yth. Sdr. <b>".$dataa['nama']."</b><br> Ditempat,<br><br><br>
+            Berdasarkan hasil Seleksi Administrasi, anda dinyatakan TIDAK LULUS pada tahap seleksi Administrasidi RSI Aisyiyah Malang. <br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. ");
         $this->email->send();
         
         $where = array( 'id_karyawan' => $id ); 
@@ -219,9 +220,9 @@ class AdminPelamar extends CI_Controller {
                 $paket['psiko']=$this->mdl_pelamar->carii('Tes Psikologi',$s['id_seleksi']);
                 $paket['tulis']=$this->mdl_pelamar->carii('Tes Tulis',$s['id_seleksi']);
                 $paket['sehat']=$this->mdl_pelamar->carii('Tes Kesehatan',$s['id_seleksi']);
-                $paket['shalat']=$this->mdl_pelamar->carii('Tes Shalat',$s['id_seleksi']);
+                $paket['shalat']=$this->mdl_pelamar->carii('Tes Toharoh dan Shalat',$s['id_seleksi']);
                 $paket['doa']=$this->mdl_pelamar->carii('Doa Sehari-hari',$s['id_seleksi']);
-                $paket['bimbing']=$this->mdl_pelamar->carii('Tes Membimbing Pasien',$s['id_seleksi']);
+                $paket['bimbing']=$this->mdl_pelamar->carii('Tes Ibadah Praktis',$s['id_seleksi']);
                 $paket['baca']=$this->mdl_pelamar->carii('Baca Al-Quran',$s['id_seleksi']);
                 $paket['semua']=$this->mdl_pelamar->semuaSeleksi($s['id_seleksi']);
 
@@ -493,7 +494,7 @@ class AdminPelamar extends CI_Controller {
             if ($this->mdl_pelamar->caricari('Tes Psikologi',$idSel)) {
                 $this->mdl_admin->editRSel($idSel,'Tes Psikologi', $psikologi);
             }
-            elseif ($tgl != $b['tanggal'] && $wawancara >= 60 && $psikologi == "-") {
+            elseif ($tgl != $b['tanggal'] && $wawancara >= 10 && $psikologi == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
@@ -507,26 +508,26 @@ class AdminPelamar extends CI_Controller {
             }
             $c = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $idSel && nama_tes = 'Tes Psikologi'"));
 
-            if ($this->mdl_pelamar->caricari('Tes Shalat',$idSel)) {
-                $this->mdl_admin->editRSel($idSel,'Tes Shalat', $shalat);
+            if ($this->mdl_pelamar->caricari('Tes Toharoh dan Shalat',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Tes Toharoh dan Shalat', $shalat);
             }
-            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $shalat == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] == "Lulus" && $shalat == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
-                    'nama_tes' => 'Tes Shalat',
+                    'nama_tes' => 'Tes Toharoh dan Shalat',
                     'hasil' => $shalat,
                     'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
             }elseif ($shalat != "-") {
-                $this->mdl_admin->editRSel($idSel,'Tes Shalat', $shalat);
+                $this->mdl_admin->editRSel($idSel,'Tes Toharoh dan Shalat', $shalat);
             } 
 
             if ($this->mdl_pelamar->caricari('Doa Sehari-hari',$idSel)) {
                 $this->mdl_admin->editRSel($idSel,'Doa Sehari-hari', $doa);
             }
-            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $doa == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] == "Lulus" && $doa == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
@@ -539,26 +540,26 @@ class AdminPelamar extends CI_Controller {
                 $this->mdl_admin->editRSel($idSel,'Doa Sehari-hari', $doa);
             }
 
-            if ($this->mdl_pelamar->caricari('Tes Membimbing Pasien',$idSel)) {
-                $this->mdl_admin->editRSel($idSel,'Tes Membimbing Pasien', $bimbing);
+            if ($this->mdl_pelamar->caricari('Tes Ibadah Praktis',$idSel)) {
+                $this->mdl_admin->editRSel($idSel,'Tes Ibadah Praktis', $bimbing);
             }
-            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $bimbing == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] == "Lulus" && $bimbing == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
-                    'nama_tes' => 'Tes Membimbing Pasien',
+                    'nama_tes' => 'Tes Ibadah Praktis',
                     'hasil' => $bimbing,
                     'tanggal' => $tgl
                 );
                 $this->mdl_admin->addData('riwayat_seleksi',$dataRSel);
             }elseif ($bimbing != "-") {
-                $this->mdl_admin->editRSel($idSel,'Tes Membimbing Pasien', $bimbing);
+                $this->mdl_admin->editRSel($idSel,'Tes Ibadah Praktis', $bimbing);
             }
 
             if ($this->mdl_pelamar->caricari('Baca Al-Quran',$idSel)) {
                 $this->mdl_admin->editRSel($idSel,'Baca Al-Quran', $shalat);
             }
-            elseif ($tgl != $c['tanggal'] && $c['hasil'] >= 60 && $baca == "-") {
+            elseif ($tgl != $c['tanggal'] && $c['hasil'] == "Lulus" && $baca == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
@@ -574,7 +575,7 @@ class AdminPelamar extends CI_Controller {
             if ($this->mdl_pelamar->caricari('Tes Kesehatan',$idSel)) {
                 $this->mdl_admin->editRSel($idSel,'Tes Kesehatan', $kesehatan);
             }
-            elseif ($tgl != $d['tanggal'] && $d['hasil'] >= 60 && $kesehatan == "-") {
+            elseif ($tgl != $d['tanggal'] && $d['hasil'] >= 10 && $kesehatan == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
@@ -597,6 +598,7 @@ class AdminPelamar extends CI_Controller {
     public function lanjutt($jenisTes,$ket,$hasil,$idSel){
         if($this->mdl_admin->logged_id()){ 
                 $semua = $this->mdl_pelamar->semuaSeleksi($idSel);
+                $dataku=  $this->mdl_pelamar->semuadata( $semua->id_karyawan);
 
             if ($ket =="lulus") {
                 if($jenisTes == "Tulis") {
@@ -613,6 +615,17 @@ class AdminPelamar extends CI_Controller {
                 $where = array('id_seleksi' => $idSel);
                 $this->mdl_admin->updateData($where,$dataSel,'seleksi');
             }else{
+                if($jenisTes == "Tulis") {
+                    $dataSel = array('nilai_kompetensi' => $hasil);
+                }elseif ($jenisTes == "Wawancara") {
+                    $dataSel = array('nilai_wawancara' => $hasil);
+                }elseif ($jenisTes == "Psikologi") {
+                    $dataSel = array('tes_psikologi' => $hasil);
+                }elseif ($jenisTes == "Kesehatan") {
+                    $dataSel = array('tes_kesehatan' => $hasil);
+                }elseif ($jenisTes == "Baca") {
+                    $dataSel = array('nilai_agama' => $hasil);
+                }
                 $dataPel = array('id_profesi' => "Belum", id_status => "Pelamar");
                 $where2 = array( 'id_karyawan' => $semua->id_karyawan);
                 $this->mdl_admin->updateData($where2,$dataPel,'karyawan');
@@ -639,9 +652,9 @@ class AdminPelamar extends CI_Controller {
                 $this->email->initialize($config);
                 //konfigurasi pengiriman
                 $this->email->from($config['smtp_user']);
-                $this->email->to($semua->email);
+                $this->email->to($dataku->email);
                 $this->email->subject("Notifikasi");
-                $this->email->message("Maaf, anda gagal dalam seleksi tahap $jenisTes di RSIA, silahkan mencoba pada peluang karir selanjutnya");
+                $this->email->message("Kepada<br>Yth. Sdr. <b>".$dataku->nama."</b><br> Ditempat,<br><br><br>Maaf, anda gagal dalam seleksi tahap $jenisTes di RSIA, silahkan mencoba pada peluang karir selanjutnya");
                 $this->email->send();
             }
 
@@ -782,7 +795,7 @@ class AdminPelamar extends CI_Controller {
                     $this->email->to($email);
                     $this->email->subject("Verifikasi Akun");
                     $this->email->message(
-                        "Mohon lengkapi data lamaran anda di RSI Aisyiyah Malang, karena penseleksian akan segera dilakukan.<br>
+                        "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br>Mohon lengkapi data lamaran anda di RSI Aisyiyah Malang, karena penseleksian akan segera dilakukan.<br>
                         Klik tombol dibawah ini untuk aktifikasi akun anda.<br>
                         Masukkan username dan password dengan nomor KTP sesuai data lamaran yang telah anda kirim.<br><br>".
                         "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"

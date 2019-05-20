@@ -126,9 +126,11 @@ class AdminKaryawan extends CI_Controller {
             $paket['array']=$this->mdl_admin->getProfesi();
             $paket['datSta']=$this->mdl_admin->getJenStatus();
             $paket['datGol']=$this->mdl_admin->getAlldata('jenis_golongan');
+            $paket['datJab']=$this->mdl_admin->getAlldata('jabatan');
             $paket['datDir']=$this->mdl_admin->getTempat($id);
             $paket['datSta']=$this->mdl_admin->getJenStatus();
             $paket['datNil']=$this->mdl_admin->getPenilaian($id);
+
             if ($this->mdl_admin->getAgama($id)) { //jika sudah punya nilai agama
                 $paket['agama']=$this->mdl_admin->getAgama($id);
             }else{
@@ -151,6 +153,8 @@ class AdminKaryawan extends CI_Controller {
     public function editData($id){// SIMPAN DATA YANG DIUBAH DI DETAIL KARYAWAN
         if($this->mdl_admin->logged_id()){
 
+            $xxx =mysqli_connect("localhost","root","","kepegawaian");
+
             $nik=$this->input->post('nik');
             $no_ktp=$this->input->post('no_ktp');
             $no_bpjs=$this->input->post('no_bpjs');
@@ -160,10 +164,11 @@ class AdminKaryawan extends CI_Controller {
             $alamat=$this->input->post('alamat');
             $no_telp=$this->input->post('no_telp');
             $email=$this->input->post('email');
-            $username=$this->input->post('username');
-            $password=md5($this->input->post('password'));
             $id_status=$this->input->post('id_status');
-            $jabatan=$this->input->post('jabatan');
+            $jabatan = $this->input->post('jabatan');
+            //cari Jabatan
+            $cJab=mysqli_fetch_array(mysqli_query($xxx,"select * from jabatan where jabatan = '$jabatan' "));
+            $id_jab=$cJab['id'];
             $id_profesi=$this->input->post('id_profesi');
             $id_golongan=$this->input->post('id_golongan');
             $ruangan=$this->input->post('ruangan');
@@ -172,7 +177,6 @@ class AdminKaryawan extends CI_Controller {
 
             $tdy=date('Y-m-d');
            
-            $xxx =mysqli_connect("localhost","root","","kepegawaian");
             $idPro=mysqli_fetch_array(mysqli_query($xxx,"select * from jenis_profesi where nama_profesi = '$id_profesi'"));
 
             $dataProfesi = array('id_karyawan' => $id, 'ruangan' => $ruangan, 'id_profesi' => $idPro['id_profesi'], 'mulai' => $tdy );
@@ -190,19 +194,15 @@ class AdminKaryawan extends CI_Controller {
                 'no_telp' => $no_telp,
                 'email' => $email,
                 'id_status' => $id_status,
-                'jabatan' => $jabatan,
+                'jabatan' => $id_jab,
                 'id_profesi' => $idPro['id_profesi'],
                 'id_golongan' => $id_golongan
-            );
-            $datalogin = array(
-                'username' => $username,
-                'password' => $password
             );
 
             //DATA KARYAWAN SEKARANG SEBELUM DI EDIT
             $dataSkg = $this->mdl_admin->dataDiri($id);
 
-            if ($dataSkg->ruangan != $ruangan || $dataSkg->id_profesi != $idPro['id_profesi'] ) {
+            if ($dataSkg->ruangan != $ruangan) {
                $this->mdl_admin->addData('riwayat',$dataProfesi);
             }else{}
             if ($dataSkg->id_golongan != $id_golongan) {
@@ -214,7 +214,6 @@ class AdminKaryawan extends CI_Controller {
 
             // update data karyawan
             $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
-            $this->mdl_admin->updateData($where,$datalogin,'login');
             redirect("adminKaryawan/karyawanDetail/$id");
         }else{ redirect("login");} 
     }
@@ -449,6 +448,7 @@ class AdminKaryawan extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['id']=$id;
+                $data['jeNil']=$this->mdl_admin->getAlldata('jenis_penilaian');
                 $this->load->view('admin/karyawan/penilaian/addNilai', $data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
@@ -463,6 +463,7 @@ class AdminKaryawan extends CI_Controller {
                 $id_penilai = $b['id_karyawan'];
                 $tanggal = date('Y-m-d',strtotime($this->input->post('tanggal')));
                 $hasil = $this->input->post('hasil');
+                $jenis = $this->input->post('jenis');
                 if(!$this->upload->do_upload('file')) {
                     $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
@@ -476,8 +477,9 @@ class AdminKaryawan extends CI_Controller {
                     'id_karyawan' => $id,
                     'id_penilai'=>$id_penilai,
                     'tanggal'=>$tanggal, 
+                    'jenis'=>$jenis,  
                     'hasil'=>$hasil,  
-                    'file'=>$file,
+                    'file'=>$file
                 );
 
                 $this->mdl_admin->addData('penilaian_karyawan',$data4);
@@ -492,7 +494,9 @@ class AdminKaryawan extends CI_Controller {
             $this->form_validation->set_rules('id_penilai','Id Penilai','trim|required');
 
             if($this->form_validation->run()==FALSE){
+                $data['idk']=$idk;
                 $data['array']=$this->mdl_admin->getPenilaianedit($id);
+                $data['jeNil']=$this->mdl_admin->getAlldata('jenis_penilaian');
                 $this->load->view('admin/karyawan/penilaian/editNilai', $data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
@@ -506,6 +510,7 @@ class AdminKaryawan extends CI_Controller {
                 $id_penilai = $b['id_karyawan'];
                 $tanggal = date('Y-m-d',strtotime($this->input->post('tanggal')));
                 $hasil = $this->input->post('hasil');
+                $jenis = $this->input->post('jenis');
                 if($_FILES['file']['name'] != '') {
                     if(!$this->upload->do_upload('file')) {
                         $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
@@ -519,11 +524,13 @@ class AdminKaryawan extends CI_Controller {
                 } else {
                     $file = $this->input->post('file_old');
                 }
+
                 $data4 = array(
                     'id_penilai'=>$id_penilai,
                     'tanggal'=> $tanggal, 
+                    'jenis'=> $jenis,  
                     'hasil'=> $hasil,  
-                    'file'=> $file,
+                    'file'=> $file
                 );
 
                 $where = array(
@@ -567,16 +574,49 @@ class AdminKaryawan extends CI_Controller {
         }
     }
     public function addCuti($id_karyawan){
-        $tgl_awal=$this->input->post('tgl_awal');
-        $tgl_akhir=$this->input->post('tgl_akhir');
+        $this->form_validation->set_rules('ket','Id Data Cuti','trim|required');
 
-        $dataCuti = array(
-            'id_karyawan'=> $id_karyawan, 
-            'tgl_awal'=> $tgl_awal,
-            'tgl_akhir'=> $tgl_akhir
-        );
-        $this->mdl_admin->addData('data_cuti',$dataCuti);
-        redirect("adminKaryawan/karyawanDetail/$id_karyawan");
+        if($this->form_validation->run()==FALSE){
+            $data['id_karyawan']=$id_karyawan;
+            $this->load->view('admin/karyawan/riwayat/Cuti/add', $data);
+        }else{
+            $config['upload_path']      = './Assets/dokumen/';
+            $config['allowed_types']    = 'jpg|png|docx|pdf';
+            $config['max_size']         = 2000;
+            $this->load->library('upload', $config);
+
+            $ket = $this->input->post('ket');
+            $tgl_awal = date('Y-m-d',strtotime($this->input->post('tgl_awal')));
+            $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
+
+            if(!$this->upload->do_upload('file')) {
+                $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+
+                $this->session->set_flashdata('msg_error', $error);
+
+                redirect("adminKaryawan/addNilai/$id_karyawan");
+            } else {
+                $file = $this->upload->data('file_name');
+            }
+
+            $dataCuti = array(
+                'id_karyawan'=> $id_karyawan,
+                'file'=> $file,
+                'ket'=> $ket,
+                'tgl_awal'=> $tgl_awal,
+                'tgl_akhir'=> $tgl_akhir
+            );
+
+            $where = array(
+                'id' => $id
+            );
+
+            $update = $this->mdl_pelamar->updatedata($where,$dataCuti,'data_cuti');
+            $this->session->set_flashdata('msg','Data Sukses di Update');
+
+            $this->mdl_admin->addData('data_cuti',$dataCuti);
+            redirect("adminKaryawan/karyawanDetail/$id_karyawan");
+        }
     }
     public function editCuti($id,$idk){
         $this->form_validation->set_rules('id','Id Data Cuti','trim|required');
@@ -585,11 +625,31 @@ class AdminKaryawan extends CI_Controller {
             $data['array']=$this->mdl_admin->getEC($id);
             $this->load->view('admin/karyawan/riwayat/Cuti/edit', $data);
         }else{
+            $config['upload_path']      = './Assets/dokumen/';
+            $config['allowed_types']    = 'jpg|png|docx|pdf';
+            $config['max_size']         = 2000;
+            $this->load->library('upload', $config);
+            if($_FILES['file']['name'] != '') {
+                if(!$this->upload->do_upload('file')) {
+                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
 
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("adminKaryawan/editNilai/$idk");
+                } else {
+                    $file = $this->upload->data('file_name');
+                }
+            } else {
+                $file = $this->input->post('file_old');
+            }
+
+            $ket = $this->input->post('ket');
             $tgl_awal = date('Y-m-d',strtotime($this->input->post('tgl_awal')));
             $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
 
             $dataCuti = array(
+                'file'=> $file,
+                'ket'=> $ket,
                 'tgl_awal'=> $tgl_awal,
                 'tgl_akhir'=> $tgl_akhir
             );
@@ -671,94 +731,104 @@ class AdminKaryawan extends CI_Controller {
         $this->load->view('admin/Karyawan/impor');
         }else{ redirect("login"); }
     }
-    public function impor()
-    {
+    public function impor(){
     include APPPATH."/libraries/PHPExcel.php";
-    if(isset($_FILES["file"]["name"]))
-        {
-            $path = $_FILES["file"]["tmp_name"];
-            $object = PHPExcel_IOFactory::load($path);
-            foreach($object->getWorksheetIterator() as $worksheet)
-            {
-                $highestRow = $worksheet->getHighestRow();
-                $highestColumn = $worksheet->getHighestColumn();
-                for($row=2; $row<=$highestRow; $row++)
-                {   
-                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-                    $no_ktp= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                    $nama= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                    $alamat = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-                    $no_telp = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-                    $email= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-                    $jenkel= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-                    $id_status = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-                    $jabatan = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-                    $id_profesi= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-                    $id_golongan= $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-                    $konek =mysqli_connect("localhost","root","","kepegawaian");
-                    $cip=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
+    if(isset($_FILES["file"]["name"])){
+        $path = $_FILES["file"]["tmp_name"];
+        $object = PHPExcel_IOFactory::load($path);
+
+        foreach($object->getWorksheetIterator() as $worksheet){
+            $highestRow = $worksheet->getHighestRow();
+            $highestColumn = $worksheet->getHighestColumn();
+
+            for($row=2; $row<=$highestRow; $row++){   
+                $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                $no_ktp= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                $nama= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                $alamat = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                $no_telp = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                $email= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                $jenkel= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                $id_status = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                $jabatan = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                $id_profesi= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                $id_golongan= $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+
+
+                $konek =mysqli_connect("localhost","root","","kepegawaian");
+                $cip=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
                     
-                    $data1[]= array(
-                        'id_profesi' => $cip['id_profesi'],
-                        'id_status' => $id_status,
-                        'id_golongan' => $id_golongan,
-                        'nik' => $nik,
-                        'nama' => $nama,
-                        'no_ktp' => $no_ktp,
-                        'no_telp' => $no_telp,
-                        'foto' => 'profile.png',
-                        'jenkel' => $jenkel,
-                        'email' => $email,
-                        'jabatan' => $jabatan,
-                        'alamat' => $alamat
-                    );
+                $data1[]= array(
+                    'id_profesi' => $cip['id_profesi'],
+                    'id_status' => $id_status,
+                    'id_golongan' => $id_golongan,
+                    'nik' => $nik,
+                    'nama' => $nama,
+                    'no_ktp' => $no_ktp,
+                    'no_telp' => $no_telp,
+                    'foto' => 'profile.png',
+                    'jenkel' => $jenkel,
+                    'email' => $email,
+                    'jabatan' => $jabatan,
+                    'alamat' => $alamat
+                );
 
-                    $this->mdl_admin->impor('karyawan',$data1);
-                    $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_karyawan from karyawan where nik = '$nik'"));
-                    $data2[]=array(
-                        'username'=>$nik, 
-                        'password'=>md5($no_ktp), 
-                        'level'=>'Karyawan', 
-                        'aktif'=>0, 
-                        'id_karyawan'=>$cariId['id_karyawan']
-                    );
+                $this->mdl_admin->impor('karyawan',$data1);
+                $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_karyawan from karyawan where nik = '$nik'"));
+                $data2[]=array(
+                    'username'=>$nik, 
+                    'password'=>md5($no_ktp), 
+                    'level'=>'Karyawan', 
+                    'aktif'=>0, 
+                    'id_karyawan'=>$cariId['id_karyawan']
+                );
 
-                    $config = array();
-                    $config['charset'] = 'utf-8';
-                    $config['useragent'] = 'CodeIgniter';
-                    $config['protocol']= "smtp";
-                    $config['mailtype']= "html";
-                    $config['smtp_host']= "ssl://smtp.gmail.com";
-                    $config['smtp_port']= "465";
-                    $config['smtp_timeout']= "400";
-                    $config['smtp_user']= "hilfinaamaris09@gmail.com";
-                    $config['smtp_pass']= "hilfano090798";
-                    $config['crlf']="\r\n"; 
-                    $config['newline']="\r\n"; 
-                    $config['wordwrap'] = TRUE;
-                    $this->email->initialize($config);
-                    $encrypted_id = $cariId['id_karyawan'];
-                    $this->email->from($config['smtp_user']);
-                    $this->email->to($email);
-                    $this->email->subject("Verifikasi Akun");
-                    $this->email->message(
-                        "Terimakasih telah melakukan registrasi pada Sistem Infromasi Kepegawaian RSIA,<br>
-                        username: nomor induk karyawan. <br>
-                        password: nomor ktp anda.<br>
-                        untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
-                        "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
-                    );
-                    if($this->email->send()){
-                        $this->mdl_admin->impor('login',$data2);
-                    }else{
-
-                    }
-                }
+                $config = array();
+                $config['charset'] = 'utf-8';
+                $config['useragent'] = 'CodeIgniter';
+                $config['protocol']= "smtp";
+                $config['mailtype']= "html";
+                $config['smtp_host']= "ssl://smtp.gmail.com";
+                $config['smtp_port']= "465";
+                $config['smtp_timeout']= "400";
+                $config['smtp_user']= "hilfinaamaris09@gmail.com";
+                $config['smtp_pass']= "hilfano090798";
+                $config['crlf']="\r\n"; 
+                $config['newline']="\r\n"; 
+                $config['wordwrap'] = TRUE;
+                $this->email->initialize($config);
+                $encrypted_id = $cariId['id_karyawan'];
+                $this->email->from($config['smtp_user']);
+                $this->email->to($email);
+                $this->email->subject("Verifikasi Akun");
+                $this->email->message(
+                    "Terimakasih telah melakukan registrasi pada Sistem Infromasi Kepegawaian RSIA,<br>
+                    username: nomor induk karyawan. <br>
+                    password: nomor ktp anda.<br>
+                    untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
+                    "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
+                );
+                if($this->email->send()){
+                    $this->mdl_admin->impor('login',$data2);
+                }else{}
             }
+        }echo "<script>alert('Berhasil Menambahkan Data'); document.location.href = '" . site_url('Adminkaryawan') . "';</script>";
+    }}
 
-            
-            echo "<script>alert('Berhasil Menambahkan Data'); document.location.href = '" . site_url('Adminkaryawan') . "';</script>";
-        }        
+    public function editAkun($id){
+        $username = $this->input->post('username');
+        $password = md5( $this->input->post('password'));
+
+        $where = array('id_karyawan' => $id);
+
+        $data = array(
+            'username' => $username,
+            'password' => $password
+        );
+
+        $this->mdl_admin->updateData($where,$data,'login');
+         redirect("adminKaryawan/karyawanDetail/$id");
+
     }
 }
 

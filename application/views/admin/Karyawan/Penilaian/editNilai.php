@@ -44,13 +44,36 @@
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
       
-          <form action="<?php echo site_url();?>/adminKaryawan/editNilai/<?php echo $array->id; ?>/<?php echo $array->id_karyawan; ?>" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminKaryawan/editNilai/<?php echo $array->id; ?>/<?php echo $idk; ?>" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
             <td><label form-control-label>NIK Penilai</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="id_penilai" type="text" class="form-control" value="<?php echo $array->id_penilai ?>" disabled>
+                <input name="id_penilai" type="text" class="form-control" value="<?php echo $array->nik ?>" >
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><label form-control-label>Nama Penilai</label></td>
+            <td style="height: 50px">
+              <div class="col-lg-12">
+                <input name="nama_penilai" type="text" class="form-control" value="<?php echo $array->nama ?>" readonly >
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><label form-control-label>Jenis Penilaian</label></td>
+            <td style="height: 50px">
+              <div class="col-lg-12">
+                <font color="red" size="2">*Tambahkan data jenis penilaian jika ada jenis penilaian baru. </font>
+                <select type="text" class="form-control" name="jenis">
+                  <option><?php echo $array->jenis; ?></option>
+                  <option>Pilihan Lainnya:</option>
+                  <?php foreach ($jeNil as $key) { ?>
+                    <option><?php echo $key->jenis; ?></option>
+                  <?php } ?>
+                </select>
               </div>
             </td>
           </tr>
@@ -63,7 +86,7 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label>Tanggal Mulai</label></td>
+            <td><label form-control-label>Tanggal Penilaian</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
               <div class="form-group data-custon-pick data-custom-mg" id="data_5">

@@ -29,12 +29,12 @@
             </div>
           </div> <br>
         <div class="container-fluid" role="alert">
-                <?php if ($this->session->flashdata('msg_error')) :?>
-                  <div class="alert alert-danger alert-mg-b"> 
-                  <?php echo $this->session->flashdata('msg_error')?>
-                  </div>
-                <?php endif; ?>
+          <?php if ($this->session->flashdata('msg_error')) :?>
+            <div class="alert alert-danger alert-mg-b"> 
+            <?php echo $this->session->flashdata('msg_error')?>
             </div>
+          <?php endif; ?>
+        </div>
           <form action="<?php echo site_url(); ?>/adminKaryawan/addNilai/<?php echo $id; ?>" enctype="multipart/form-data" method="post">
             <div class="sparkline12-graph">
               <div class="input-knob-dial-wrap" style="margin-right: 15%;">
@@ -59,8 +59,12 @@
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="input-mark-inner">
-                      <select type="text" class="form-control" name="jenis_nilai">
-                      <option>---Pilih---</option>
+                      <font color="red" size="2">*Tambahkan data jenis penilaian jika ada jenis penilaian baru. </font>
+                      <select type="text" class="form-control" name="jenis">
+                      <option>-- Pilihan --</option>
+                      <?php foreach ($jeNil as $key) { ?>
+                        <option><?php echo $key->jenis; ?></option>
+                      <?php } ?>
                       </select>
                     </div>
                   </div>

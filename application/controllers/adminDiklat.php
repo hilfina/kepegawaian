@@ -185,10 +185,10 @@ class AdminDiklat extends CI_Controller {
                             'id_karyawan'       =>    $id,
                             'nama_diklat'        =>    $nama_diklat,
                             'jenis_diklat'           =>    $jenis_diklat,
-                            'tgl_mulai'             =>    $tgl_mulai,
-                            'tgl_akhir'             =>    $tgl_akhir,
+                            'tgl_mulai'             =>    strtotime($tgl_mulai),
+                            'tgl_akhir'             =>    strtotime($tgl_akhir),
                             'tahun'      =>    $tahun,
-                            'jam'             =>    $jam,
+                            'jam'             =>    time($jam),
                             'nomor_sertif'              =>    $nomor_sertif,
                             'file'              =>    $file,
                         );

@@ -115,4 +115,13 @@ class Mdl_home extends CI_Model
         $query= $this->db->query("SELECT id, no_mou, tgl_mulai,tgl_akhir,ket, nominal as jumlah, file from mou_hutang where id = $id");
         return $query->result();
     }
+
+    function dataJP(){ //DATA JENIS PENILAIAN
+        $query= $this->db->query("SELECT * FROM jenis_penilaian");
+        return $query->result();
+    }
+    function dataJab(){ // DATA JENIS JABATAN KARYAWAN
+        $query= $this->db->query("SELECT * FROM jabatan");
+        return $query->result();
+    }
 }

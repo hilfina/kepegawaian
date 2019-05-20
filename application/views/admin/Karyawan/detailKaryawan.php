@@ -40,6 +40,7 @@
             <li><a href="#penilaian">Penilaian</a></li>
             <li><a href="#karir">Jenjang Karir</a></li>
             <li><a href="#absensi">Absensi</a></li>
+            <li><a href="#akun">Username dan password</a></li>
           </ul>
           <div id="myTabContent" class="tab-content custom-product-edit">
             <div class="product-tab-list tab-pane fade active in" id="dataPribadi">
@@ -137,37 +138,15 @@
                                 <input name="email" type="text" class="form-control" value="<?php echo $key->email; ?>">
                               </div>
                             </td>
-                          </tr>
-                          
-                          <tr>
-                            <td><label form-control-label>Username</label></td>
-                            <td style="height: 50px">
-                              <div class="col-lg-12">
-                              <?php foreach ($log as $key123) {?>
-                                <input name="username" type="text" class="form-control" value="<?php echo $key123->username; ?>">
-                              <?php } ?>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td><label form-control-label>Password</label></td>
-                            <td style="height: 50px">
-                              <div class="col-lg-12">
-                              <?php foreach ($log as $key123) {?>
-                                <input name="password" type="password" class="form-control" value="<?php echo $key123->password; ?>">
-                              <?php } ?>
-                              </div>
-                            </td>
-                          </tr>                        
+                          </tr>                  
                           <tr>
                             <td><label form-control-label>Profesi</label></td>
                             <td style="height: 50px">                              
                               <div class="col-lg-12">
                                 <font color="red" size="2">*data profesi, status kepegawaian, golongan dan penempatan dapat diubah sesuai kehendak HRD</font>
-                              <input name="profesi_old" type="hidden" value="<?php echo $key->nama_profesi; ?>">
                                 <select  class="form-control" name="id_profesi">
                                   <option><?php echo $key->nama_profesi; ?></option>
-                                  <option><strong>Pilihan Lainnya:</strong></option>
+                                  <option>Pilihan Lainnya:</option>
                                   <?php foreach ($array as $key2) { ?>
                                     <option><?php echo $key2->nama_profesi; ?></option>
                                   <?php } ?>
@@ -181,7 +160,7 @@
                               <div class="col-lg-12">
                                 <select  class="form-control" name="id_status">
                                   <option><?php echo $key->id_status; ?></option>
-                                  <option><strong>Pilihan Lainnya:</strong></option>
+                                  <option>Pilihan Lainnya:</option>
                                   <?php foreach ($datSta as $key3) { ?>
                                     <option><?php echo $key3->id_status; ?></option>
                                   <?php } ?>
@@ -195,10 +174,10 @@
                               <div class="col-lg-12">
                               <select  class="form-control" name="jabatan">
                               <option><?php echo $key->jabatan;?></option>
-                                <option>---Pilih: -----</option>
-                                <option>Koordinator</option>
-                                <option>Kepala Ruangan</option>
-                                <option>Kepala Bidang</option>
+                                <option>Pilihan Lainnya:</option>
+                                <?php foreach ($datJab as $jabatan) { ?>
+                                  <option><?php echo $jabatan->jabatan; ?></option>
+                              <?php } ?>
                               </select>
                               </div>
                             </td>
@@ -209,7 +188,7 @@
                               <div class="col-lg-12">
                                 <select  class="form-control" name="id_golongan">
                                   <option><?php echo $key->id_golongan; ?></option>
-                                  <option><strong>Pilihan Lainnya:</strong></option>
+                                  <option>Pilihan Lainnya:</option>
                                   <?php foreach ($datGol as $key4) { ?>
                                     <option><?php echo $key4->id_golongan; ?></option>
                                   <?php } ?>
@@ -245,7 +224,7 @@
                       <div class="col-lg-6">
                         <div class="sparkline13-hd">
                           <div class="main-sparkline13-hd">
-                            <h1>Data <span class="table-project-n">Penilaian</span></h1>
+                            <h1>Penilaian<span class="table-project-n"> Karyawan</span></h1>
                           </div>
                         </div>
                       </div>
@@ -255,6 +234,9 @@
                             <div align="right">
                             <a href="<?php echo site_url(); echo "/adminKaryawan/addnilai/";  echo $id ; ?>">
                               <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data Penilaian</button>
+                            </a>
+                            <a href="<?php echo site_url(); echo "/adminJP/laporan/";  echo $id ; ?>">
+                              <button class="btn btn-primary waves-effect waves-light mg-b-15">Report Data</button>
                             </a>
                             </div>
                           </div>
@@ -269,7 +251,8 @@
                               <th>No</th>
                               <th>Tanggal Penilaian</th>
                               <th>Penilai</th>
-                              <th>Hasil Penilaian</th>
+                              <th>Jenis Penilaian</th>
+                              <th>Hasil</th>
                               <th>File Penilaian</th>
                               <th>Pilihan</th>
                             </tr>
@@ -283,6 +266,7 @@
                               <?php $konek=mysqli_connect("localhost","root","","kepegawaian");
                               $x=mysqli_fetch_array(mysqli_query($konek, "select nama from karyawan where id_karyawan = $nilai->id_penilai")); ?>
                               <td><?php echo $x['nama'];?></td>
+                              <td><?php echo $nilai->jenis;?></td>
                               <td><?php echo $nilai->hasil;?></td>
                               <td>
                                 <?php if(($nilai->file) != NULL){ ?>
@@ -509,28 +493,61 @@
                     </div>
                     <div class="sparkline8-graph">
                       <div class="static-table-list">
-                      <?php if ($cuti->kuota_cuti != NULL){?>
+                      <?php if ($tgl = $this->mdl_admin->aKon($id)) {
+                        $sekarang = date('Y-m-d');
+                        $dulu = date('Y-m-d', strtotime($tgl->tgl));
+                        //1 + (selisih tahun) * 12 -> karena 1 tahun = 12 bulan
+                        $numBulan = 1 + (date("Y",strtotime($sekarang)) - date("Y",strtotime($dulu))) *12;
+                        //total diatas + 
+                        $numBulan += date("m",strtotime($sekarang)) - date("m",strtotime($dulu));
+                        if ($numBulan <= 18) {
+                          echo "Belum dapat melakukan cuti karena belum 1,5 tahun dimasa kontrak.<hr><br>
+                          <font size='2' color='red'>*hanya bisa menambahkan data surat ijin</font>";
+                        }else{?>
+                          <?php if ($cuti->kuota_cuti != NULL){?>
                         <h3>Sisa Cuti : <?php echo $cuti->kuota_cuti-$selisih." Hari."; ?></h3><hr/>
-                        
                       </div>
                     </div>
+                  <?php } else { ?>
+                    <h3>Karyawan Tidak Memiliki Jatah Cuti</h3>
+                  <?php  }?>
+                        <?php }
+                      } ?>
+                      
                     <div class="sparkline8-graph">
-                      <div class="static-table-list">
+                      <div class="static-table-list"><br>
+                        <a href="<?php echo site_url('adminKaryawan/addCuti/').$id;?>">
+                          <button class="btn btn-primary waves-effect waves-light mg-b-15" >Tambah Data Ijin</button>
+                        </a>
                         <table class="table">
                           <thead>
                               <tr>
-                                <th>Tanggal Mulai Cuti</th>
-                                <th>Tanggal Berakhir Cuti</th>
+                                <th>Tanggal Absen</th>
                                 <th>Total</th>
+                                <th>Keterangan</th>
+                                <th>Surat Ijin</th>
                                 <th>Pilihan</th>
                               </tr>
                           </thead>
                           <tbody>
                             <?php foreach ($Dcuti as $Dcuti) { ?>
                               <tr>
-                                <td><?php echo date('d M Y', strtotime($Dcuti->tgl_awal)); ?> </td>
-                                <td><?php echo date('d M Y', strtotime($Dcuti->tgl_akhir)); ?> </td>
+                                <td><?php echo date('d M Y', strtotime($Dcuti->tgl_awal))." sampai ".date('d M Y', strtotime($Dcuti->tgl_akhir)); ?> </td>
                                 <td><?php echo abs($Dcuti->selisih)." Hari"; ?> </td>
+                                <td><?php echo $Dcuti->ket; ?> </td>
+                                <td>
+                                <?php if(($Dcuti->file) != NULL) {?>
+                                  <font style="color: blue">
+                                    <a href="<?php echo base_url().'/Assets/dokumen/'.$Dcuti->file; ?>" download>
+                                      <button class="btn btn-default waves-effect" class='submit'>
+                                        <i class="fa fa-download" aria-hidden="true"> Unduh File</i>
+                                      </button>
+                                    </a>
+                                  </font>
+                                  <?php }else{ ?>
+                                    <font style="color: red">Tidak Ada file</font>
+                                  <?php } ?>
+                                </td>
                                 <td>
                                   <a href="<?php echo site_url('adminKaryawan/editCuti/').$Dcuti->id; echo "/";echo $Dcuti->id_karyawan;?>">
                                   <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
@@ -542,33 +559,48 @@
                         </table>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="product-tab-list tab-pane fade" id="akun">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="review-content-section">
+                    <div class="col-lg-12">
+                      <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                        </div>
+                      </div>
+                    </div>
                     <div class="sparkline8-graph">
                       <div class="static-table-list">
-                        <br>
-                        <form action="<?php echo site_url();?><?php echo "/adminKaryawan/addCuti/".$id ?>" enctype="multipart/form-data" method="POST">
-                          <table width="100%">
+                        <?php foreach ($log as $log) { ?>
+                        <form action="<?php echo site_url();?><?php echo "/adminKaryawan/editAkun/".$id ?>" enctype="multipart/form-data" method="POST">
+                          <table width="90%" align="center">    
                             <tr>
-                              <td><label form-control-label>Tambah Data Cuti</label></td>
+                              <td colspan="2"><font color="red">*Hanya digunakkan jika karyawan ingin mengubah username dan password</font></td>
+                            </tr>                   
+                            <tr>
+                              <td><label form-control-label>Username</label></td>
                               <td style="height: 50px">
-                                <div class="form-group data-custon-pick data-custom-mg" id="data_5">
-                                  <div class="input-daterange input-group" id="datepicker">
-                                      <input type="text" class="form-control" name="tgl_awal" />
-                                      <span class="input-group-addon">hingga</span>
-                                      <input type="text" class="form-control" name="tgl_akhir" />
-                                  </div>
-                                </div>
+                                <input type="text" class="form-control" name="username" value="<?php echo $log->username; ?>">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><label form-control-label>Password</label></td>
+                              <td style="height: 50px">
+                                <input type="text" class="form-control" name="password" placeholder="Masukkan password baru">
                               </td>
                             </tr>
                           </table><br>
-                        <div align="center">
-                          <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
-                        </div>
-                      </form><br>
+                          <div align="center">
+                            <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
+                          </div>
+                        </form>
+                        <?php } ?>
                       </div>
                     </div>
-                  <?php } else { ?>
-                    <h3>Karyawan Tidak Memiliki Jatah Cuti</h3>
-                  <?php  }?>
                   </div>
                 </div>
               </div>
