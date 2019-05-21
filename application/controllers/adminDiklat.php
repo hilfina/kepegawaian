@@ -54,6 +54,19 @@ class AdminDiklat extends CI_Controller {
                 $jenis_diklat=$this->input->post('jenis_diklat');
                 $tahun=$this->input->post('tahun');
                 $jam=$this->input->post('jam');
+                $wjam = abs(substr($jam, 0,2)) * 60; //waktu jam x 60
+                $tjam = 0; //total jam
+                while($wjam >= 50) { // jika waktu jam >= 50
+                    $wjam-=50; // wktu jam - 50
+                    $tjam++; //total jam +1
+                }
+                $wmnt = abs(substr($jam, 3,2)) + $wjam;
+                while($wmnt >= 50) { // jika waktu menit >= 50
+                    $wmnt-=50; // wktu menit - 50
+                    $tjam++; //total jam +1
+                }
+                $wdtk = substr($jam, 6,2);
+                $waktu = $tjam.":".$wmnt.":".$wdtk;
                 $tgl_mulai=date('Y-m-d', strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir=date('Y-m-d', strtotime($this->input->post('tgl_akhir')));
                 $nomor_sertif=$this->input->post('nomor_sertif');
@@ -75,7 +88,7 @@ class AdminDiklat extends CI_Controller {
                     'jenis_diklat' => $jenis_diklat,
                     'tgl_mulai' => $tgl_mulai,
                     'tgl_akhir' => $tgl_akhir,
-                    'jam' => $jam,
+                    'jam' => $waktu,
                     'tahun'=>$tahun,
                     'nomor_sertif' => $nomor_sertif,
                     'file ' => $file
@@ -124,14 +137,26 @@ class AdminDiklat extends CI_Controller {
                     $file = $this->upload->data('file_name');
                 }
 
-               
+               $wjam = abs(substr($jam, 0,2)) * 60; //waktu jam x 60
+                $tjam = 0; //total jam
+                while($wjam >= 50) { // jika waktu jam >= 50
+                    $wjam-=50; // wktu jam - 50
+                    $tjam++; //total jam +1
+                }
+                $wmnt = abs(substr($jam, 3,2)) + $wjam;
+                while($wmnt >= 50) { // jika waktu menit >= 50
+                    $wmnt-=50; // wktu menit - 50
+                    $tjam++; //total jam +1
+                }
+                $wdtk = substr($jam, 6,2);
+                $waktu = $tjam.":".$wmnt.":".$wdtk;
                 $dataDiklat= array(
                     'id_karyawan' => $id_karyawan,
                     'nama_diklat' => $nama_diklat,
                     'jenis_diklat' => $jenis_diklat,
                     'tgl_mulai' => $tgl_mulai,
                     'tgl_akhir' => $tgl_akhir,
-                    'jam' => $jam,
+                    'jam' => $waktu,
                     'tahun'=>$tahun,
                     'nomor_sertif' => $nomor_sertif,
                     'file ' => $file

@@ -125,17 +125,18 @@ class AdminKaryawan extends CI_Controller {
     public function karyawanDetail($id){//LIHAT DETAIL KARYAWAN
         if($this->mdl_admin->logged_id()){
             $where = array( 'id_karyawan' => $id ); 
+            // data riwayat untuk di jenjang karir
             $paket['rGolongan']=$this->mdl_admin->getGol($id);
             $paket['rPenempatan']=$this->mdl_admin->getData('riwayat',$where);
             $paket['rStatus']=$this->mdl_admin->getData('status',$where);
 
-            $paket['array']=$this->mdl_admin->getProfesi();
-            $paket['datSta']=$this->mdl_admin->getJenStatus();
-            $paket['datGol']=$this->mdl_admin->getAlldata('jenis_golongan');
-            $paket['datJab']=$this->mdl_admin->getAlldata('jabatan');
-            $paket['datDir']=$this->mdl_admin->getTempat($id);
-            $paket['datSta']=$this->mdl_admin->getJenStatus();
-            $paket['datNil']=$this->mdl_admin->getPenilaian($id);
+            $paket['array']=$this->mdl_admin->getProfesi(); //cari data profesi untuk pilihan di select
+            $paket['datSta']=$this->mdl_admin->getJenStatus(); //cari data jenis status untuk pilihan di select
+            $paket['datGol']=$this->mdl_admin->getAlldata('jenis_golongan'); //cari data jenis golongan untuk pilihan di select
+            $paket['datJab']=$this->mdl_admin->getAlldata('jabatan'); //cari data jenis jabatan untuk pilihan di select
+
+            $paket['datDir']=$this->mdl_admin->getTempat($id); //cari data karyawan beserta penempatannya
+            $paket['datNil']=$this->mdl_admin->getPenilaian($id); //cari data penilaian karyawan
 
             if ($this->mdl_admin->getAgama($id)) { //jika sudah punya nilai agama
                 $paket['agama']=$this->mdl_admin->getAgama($id);
@@ -150,8 +151,8 @@ class AdminKaryawan extends CI_Controller {
             }else{
                 $paket['selisih']= 0;
             }
-            $paket['id']=$id;
-            $paket['log']=$this->mdl_admin->getData('login',$where);
+            $paket['id']=$id; //mengirim id karyawan
+            $paket['log']=$this->mdl_admin->getData('login',$where); // data login karyawan
             $this->load->view('admin/Karyawan/detailKaryawan',$paket);
         }else{ redirect("login"); } 
     }
@@ -204,8 +205,7 @@ class AdminKaryawan extends CI_Controller {
                 'no_telp' => $no_telp,
                 'email' => $email,
                 'id_status' => $id_status,
-
-                'jabatan' => $idjab,
+                'jabatan' => $idjab['id'],
                 'id_profesi' => $idPro['id_profesi'],
                 'id_golongan' => $id_golongan
             );
@@ -836,21 +836,21 @@ class AdminKaryawan extends CI_Controller {
         }echo "<script>alert('Berhasil Menambahkan Data'); document.location.href = '" . site_url('Adminkaryawan') . "';</script>";
     }}
 
-    // public function editAkun($id){
-    //     $username = $this->input->post('username');
-    //     $password = md5( $this->input->post('password'));
+    public function editAkun($id){
+        $username = $this->input->post('username');
+        $password = md5( $this->input->post('password'));
 
-    //     $where = array('id_karyawan' => $id);
+        $where = array('id_karyawan' => $id);
 
-    //     $data = array(
-    //         'username' => $username,
-    //         'password' => $password
-    //     );
+        $data = array(
+            'username' => $username,
+            'password' => $password
+        );
 
-    //     $this->mdl_admin->updateData($where,$data,'login');
-    //      redirect("adminKaryawan/karyawanDetail/$id");
+        $this->mdl_admin->updateData($where,$data,'login');
+         redirect("adminKaryawan/karyawanDetail/$id");
 
-    // }
+    }
 }
 
 /* End of file admin.php */

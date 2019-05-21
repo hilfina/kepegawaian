@@ -86,7 +86,8 @@ class Mdl_karyawan extends CI_Model
         return $query->result();
     }
     public function getaDiklat(){//untuk menampilkan data diklat di admin
-        $query = $this->db->query("SELECT k.id_karyawan, k.nik, k.nama, k.id_profesi, r.ruangan, k.id_status, sum(d.jam) as jam from diklat as d INNER JOIN karyawan as k on k.id_karyawan=d.id_karyawan inner join riwayat as r on k.id_karyawan=r.id_karyawan GROUP by d.id_karyawan");
+        $tdy = date('Y-m-d');
+        $query = $this->db->query("SELECT k.id_karyawan, k.nik, k.nama, k.id_profesi, r.ruangan, k.id_status, sum(d.jam) as jam from diklat as d INNER JOIN karyawan as k on k.id_karyawan=d.id_karyawan inner join riwayat as r on k.id_karyawan=r.id_karyawan where akhir >= '$tdy' AND mulai <= '$tdy' GROUP by d.id_karyawan");
         return $query->result();
     }
     public function detDiklat($id){//untuk menampilkan data detail diklat di admin

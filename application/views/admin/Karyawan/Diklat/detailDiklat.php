@@ -86,8 +86,13 @@
                     <td><?php echo $key->jenis_diklat; ?></td>
                     <td><?php echo date('d M Y', strtotime($key->tgl_mulai))." - ".date('d M Y', strtotime($key->tgl_akhir)); ?></td>
                     <td><?php echo $key->tahun; ?></td>
-                    <td><?php echo substr($key->jam, 0,2)." Jam"; ?></td>
-                    <td>
+                    <td><?php if (substr($key->jam, 0,2) != "00") {
+                     echo substr($key->jam, 0,2)." Jam ";
+                    }if (substr($key->jam, 3,2) != "00") {
+                      echo substr($key->jam, 3,2)." Menit";
+                    } ?>
+                  </td>
+                  <td>
                       <?php if(($key->file) != NULL) {?>
                        <font style="color: blue"><a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
                         <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>

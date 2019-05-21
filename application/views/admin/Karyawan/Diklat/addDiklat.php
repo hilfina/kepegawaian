@@ -104,9 +104,10 @@
           </tr>
           <tr>
             <td><label form-control-label>Jumlah Jam</label></td>
-            <td style="height: 50px">
+            <td style="height: 70px">
               <div class="col-lg-12">
-                <input name="jam" type="text" class="form-control" placeholder="Jumlah Jam">
+                <font size="2" color="red"> *Format (Jam:Menit:Detik) 1 jam = 60 menit</font>
+                <input name="jam" type="text" class="form-control" value="00:00:00">
               </div>
             </td>
           </tr>

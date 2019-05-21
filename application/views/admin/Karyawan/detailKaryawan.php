@@ -40,7 +40,6 @@
             <li><a href="#penilaian">Penilaian</a></li>
             <li><a href="#karir">Jenjang Karir</a></li>
             <li><a href="#absensi">Absensi</a></li>
-            <li><a href="#akun">Username dan password</a></li>
           </ul>
           <div id="myTabContent" class="tab-content custom-product-edit">
             <div class="product-tab-list tab-pane fade active in" id="dataPribadi">
@@ -174,14 +173,7 @@
                             <td style="height: 50px">
                               <div class="col-lg-12">
                               <select  class="form-control" name="jabatan">
-
-                              <?php
-                                $a = $key->jabatan;
-                                $konek = mysqli_connect("localhost","root","","kepegawaian");
-                                $query = "select j.jabatan from jabatan as j inner join karyawan as k on k.jabatan=j.id where k.jabatan=$a limit 1; ";
-                                $data=mysqli_fetch_array(mysqli_query($konek, $query));
-                              ?>
-                              <option><?php echo $data['jabatan'];?></option>
+                              <option><?php echo $key->jabatan;?></option>
                                 <option>---Pilih: -----</option>
                                 <?php foreach ($datJab as $jab) { ?>
                                   <option><?php echo $jab->jabatan; ?></option>
@@ -528,7 +520,9 @@
                     </div>
                     <div class="sparkline8-graph">
                       <div class="static-table-list">
-                      <?php if ($tgl = $this->mdl_admin->aKon($id)) {
+                      <?php $tgl = $this->mdl_admin->aKon($id);
+                      if ($tgl->tgl != null) {
+                        
                         $sekarang = date('Y-m-d');
                         $dulu = date('Y-m-d', strtotime($tgl->tgl));
                         //1 + (selisih tahun) * 12 -> karena 1 tahun = 12 bulan
@@ -547,7 +541,9 @@
                     <h3>Karyawan Tidak Memiliki Jatah Cuti</h3>
                   <?php  }?>
                         <?php }
-                      } ?>
+                      }else {echo "Belum dapat melakukan cuti karena belum 1,5 tahun dimasa kontrak.<hr><br>
+                          <font size='2' color='red'>*hanya bisa menambahkan data surat ijin</font>"; 
+                        }?>
                       
                     <div class="sparkline8-graph">
                       <div class="static-table-list"><br>
@@ -592,48 +588,6 @@
                             <?php } ?>
                           </tbody>
                         </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="product-tab-list tab-pane fade" id="akun">
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <div class="review-content-section">
-                    <div class="col-lg-12">
-                      <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="sparkline8-graph">
-                      <div class="static-table-list">
-                        <?php foreach ($log as $log) { ?>
-                        <form action="<?php echo site_url();?><?php echo "/adminKaryawan/editAkun/".$id ?>" enctype="multipart/form-data" method="POST">
-                          <table width="90%" align="center">    
-                            <tr>
-                              <td colspan="2"><font color="red">*Hanya digunakkan jika karyawan ingin mengubah username dan password</font></td>
-                            </tr>                   
-                            <tr>
-                              <td><label form-control-label>Username</label></td>
-                              <td style="height: 50px">
-                                <input type="text" class="form-control" name="username" value="<?php echo $log->username; ?>">
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><label form-control-label>Password</label></td>
-                              <td style="height: 50px">
-                                <input type="text" class="form-control" name="password" placeholder="Masukkan password baru">
-                              </td>
-                            </tr>
-                          </table><br>
-                          <div align="center">
-                            <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
-                          </div>
-                        </form>
-                        <?php } ?>
                       </div>
                     </div>
                   </div>
