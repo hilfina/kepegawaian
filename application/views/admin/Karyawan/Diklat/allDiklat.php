@@ -85,7 +85,7 @@
                     <td><?php echo $key->id_profesi; ?></td>
                     <td><?php echo $key->id_status; ?></td>
                     <td><?php echo $key->ruangan?></td>
-                    <td><?php echo substr($key->jam, 0,2)."/20 Jam"; ?></td>
+                    <td><?php echo substr($key->jam, 0,2)." jam ".substr($key->jam, 2,2)." menit /20 Jam"; ?></td>
                     <td>
                       <a href="<?php echo site_url('adminDiklat/detailDiklat/').$key->id_karyawan ?>">
                       <button class="btn btn-primary waves-effect waves-light mg-b-15">Detail</button>
