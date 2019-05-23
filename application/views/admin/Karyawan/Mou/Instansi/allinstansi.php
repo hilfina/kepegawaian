@@ -65,9 +65,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>NIK</th>
-                    <th>Nama Karyawan</th>
-                    <th>Profesi</th>
+                    <th>Nama Instansi</th>
                     <th>Nomor MOU</th>
                     <th>Masa Berlaku</th>
                     <th>Keterangan</th>
@@ -81,9 +79,7 @@
                 <?php foreach ($array as $key) { ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
-                    <td><?php echo $key->nik;?></td>
-                    <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_profesi; ?></td>
+                    <td><?php echo $key->instansi;?></td>
                     <td><?php echo $key->no_mou; ?></td>
                     <td><?php echo date('d M Y', strtotime($key->tgl_mulai))." - ".date('d M Y', strtotime($key->tgl_akhir)); ?></td>
                     <td><?php echo $key->ket; ?></td>

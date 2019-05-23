@@ -457,6 +457,31 @@
                                         </li>
                               <?php   } 
                                     }
+                                  }if ($this->db->get('mou_instansi')) {
+                                    $this->db->select('*');
+                                    $this->db->from('mou_instansi');
+                                    $mou_i = $this->db->get()->result();
+                                    foreach ($mou_i as $key => $mou_i) {
+                                      if ($mou_i->tgl_akhir <= $tanggal3 && $mou_i->notif != 1) { ?>
+                                        <li style="background-color: yellow" >
+                                          <a href="<?php echo site_url('adminNotifikasi/NIns/');echo $mou_i->id?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $mou_i->instansi; ?></h2>
+                                              <p><?php echo "MOU Instansi dengan <b>".$mou_i->instansi."</b> akan berakhir pada tangal ".date('d M Y', strtotime($mou_i->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   }elseif ($mou_i->tgl_akhir <= $tanggal3 && $mou_i->notif != 0) { ?>
+                                        <li style="background-color: #e6f5ff">
+                                          <a href="<?php echo site_url('adminNotifikasi/NIns/');echo $mou_i->id?>" title="Lihat Data">
+                                            <div class="notification-content">
+                                              <h2><?php echo $mou_i->instansi; ?></h2>
+                                              <p><?php echo "MOU Instansi dengan .$mou_i->instansi. akan berakhir pada tangal ".date('d M Y', strtotime($mou_i->tgl_akhir)) ;?></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                              <?php   } 
+                                    }
                                   }if ($this->db->get('mou_sekolah')) {
                                     $this->db->select('*');
                                     $this->db->from('karyawan');

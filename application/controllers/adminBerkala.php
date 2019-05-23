@@ -240,11 +240,13 @@ class AdminBerkala extends CI_Controller {
                     $akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
                     $alamat_sk= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                     $nomor_sk= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $tgl_mulai = substr($mulai, 0,4)."-".substr($mulai, 5,2)."-".substr($mulai, 8,4);
+                    $tgl_akhir = substr($akhir, 0,4)."-".substr($akhir, 5,2)."-".substr($akhir, 8,4);
                     $data[] = array(
                         'id_karyawan'       =>    $id,
                         'berkala'        =>    $berkala,
-                        'mulai'             =>    $mulai,
-                        'akhir'             =>    $akhir,
+                        'mulai'             =>    $tgl_mulai,
+                        'akhir'             =>    $tgl_akhir,
                         'nomor_sk'      =>    $nomor_sk,
                         'alamat_sk'      =>    $alamat_sk,
                     );

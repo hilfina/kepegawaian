@@ -153,9 +153,11 @@ class AdminKew extends CI_Controller {
                     $tgl_pengajuan= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                     $doku_pengajuan= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                     $penilaian = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-                    $tgl_mulai = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-                    $tgl_akhir= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $mulai = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $akhir= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
                     $doku_penilaian= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $tgl_mulai = substr($mulai, 0,4)."-".substr($mulai, 5,2)."-".substr($mulai, 8,4);
+                    $tgl_akhir = substr($akhir, 0,4)."-".substr($akhir, 5,2)."-".substr($akhir, 8,4);
                     $data[] = array(
                         'id_karyawan'       =>    $id,
                         'tgl_pengajuan'        =>    $tgl_pengajuan,

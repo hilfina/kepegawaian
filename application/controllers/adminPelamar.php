@@ -730,6 +730,7 @@ class AdminPelamar extends CI_Controller {
                     $email= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                     $jenkel= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
                     $ttl= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $tgl_lahir = substr($ttl, 0,4)."-".substr($ttl, 5,2)."-".substr($ttl, 8,4);
                     $id_profesi= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
                     $konek =mysqli_connect("localhost","root","","kepegawaian");
                     $cip=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
@@ -742,7 +743,7 @@ class AdminPelamar extends CI_Controller {
                         'alamat' => $alamat,
                         'no_telp' => $no_telp,
                         'email' => $email,
-                        'ttl' => $ttl,
+                        'ttl' => $tgl_lahir,
                         'jenkel ' => $jenkel,
                         'foto' => 'profile.png',
                         'id_status' => 'Pelamar',

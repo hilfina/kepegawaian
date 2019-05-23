@@ -56,6 +56,13 @@ class AdminNotifikasi extends CI_Controller {
 
         redirect("adminKaryawan/editsurat/$id");
     }
+     public function NIns($id)
+    {
+        $where = array('id' => $id);
+        $data = array('notif' => 1 );
+        $this->mdl_pelamar->updatedata($where,$data,'mou_instansi');
+        redirect("adminInstansi/edit/$id");
+    }
     public function Nkontrak($id)
     {
         $where = array('id' => $id);

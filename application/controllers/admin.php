@@ -508,10 +508,12 @@ class Admin extends CI_Controller {
                     $konek = mysqli_connect("localhost","root","","kepegawaian");
                     $data3=mysqli_fetch_array(mysqli_query($konek,"select id_surat from sip_str where jenis_surat = '$surat' "));
                     $id_surat=$data3['id_surat'];
-                    $tgl_mulai= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                    $tgl_akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $mulai= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
                     $no_surat = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                     $file= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $tgl_mulai = substr($mulai, 0,4)."-".substr($mulai, 5,2)."-".substr($mulai, 8,4);
+                    $tgl_akhir = substr($akhir, 0,4)."-".substr($akhir, 5,2)."-".substr($akhir, 8,4);
                     $data[] = array(
                         'id_karyawan'       =>    $id,
                         'id_surat'        =>    $id_surat,

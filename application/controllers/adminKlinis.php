@@ -160,8 +160,10 @@ class AdminKlinis extends CI_Controller {
                     $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
                     $id=$data2['id_karyawan'];
                     $no_mou= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                    $tgl_mulai = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                    $tgl_akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $mulai = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $tgl_mulai = substr($mulai, 0,4)."-".substr($mulai, 5,2)."-".substr($mulai, 8,4);
+                    $tgl_akhir = substr($akhir, 0,4)."-".substr($akhir, 5,2)."-".substr($akhir, 8,4);
                     $ket= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                     $file= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
                     $data[] = array(
