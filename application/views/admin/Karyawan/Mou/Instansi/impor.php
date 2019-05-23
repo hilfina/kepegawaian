@@ -39,17 +39,17 @@ $this->load->view("header.php");
                     </div>
                     <br>
                     <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <div class="input-mask-title">
-                                      <label>Download Format Excel :</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <a href="<?php echo base_url().'Assets/format/klinis.xlsx' ?>" download>
-                                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh Format</button>
-                                    </a>
-                                </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="input-mask-title">
+                              <label>Download Format Excel :</label>
                             </div>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <a href="<?php echo base_url().'Assets/format/instansi.xlsx' ?>" download>
+                                <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh Format</button>
+                            </a>
+                        </div>
+                    </div>
                     <form action="<?=site_url(); ?>/adminInstansi/impor/" enctype="multipart/form-data" method="post">
                     <div class="sparkline12-graph">
                         <div class="input-knob-dial-wrap">

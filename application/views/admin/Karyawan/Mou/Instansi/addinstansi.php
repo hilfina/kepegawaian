@@ -45,10 +45,10 @@
           <form action="<?php echo site_url();?>/admininstansi/add/" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
-            <td><label form-control-label>NIK</label></td>
+            <td><label form-control-label>Nama Instansi</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="nik" type="text" class="form-control" placeholder="Nomor Induk Karyawan">
+                <input name="instansi" type="text" class="form-control" placeholder="Nama Instansi">
               </div>
             </td>
           </tr>
@@ -97,19 +97,19 @@
             <td style="height: 50px">
               <div class="col-lg-12">
                 <div class="input-mark-inner">
-                      <div class="file-upload-inner ts-forms">
-                        <div class="input prepend-big-btn">
-                          <label class="icon-right" for="prepend-big-btn">
-                            <i class="fa fa-download"></i>
-                          </label>
-                          <div class="file-button"> Browse
-                            <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
-                          </div>
-                          <input type="text" id="prepend-big-btn" placeholder="no file selected">
-                          <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
-                        </div>
+                  <div class="file-upload-inner ts-forms">
+                    <div class="input prepend-big-btn">
+                      <label class="icon-right" for="prepend-big-btn">
+                        <i class="fa fa-download"></i>
+                      </label>
+                      <div class="file-button"> Browse
+                        <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                       </div>
+                      <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                      <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                     </div>
+                  </div>
+                </div>
               </div>
             </td>
           </tr>

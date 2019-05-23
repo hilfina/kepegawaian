@@ -249,11 +249,6 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
-    public function getinstansi(){
-        $query = $this->db->query("SELECT * from mou_instansi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan");
-        return $query->result();
-    }
-
     public function getinstansiedit($id){
         $query = $this->db->query("SELECT * from mou_instansi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id = $id");
         return $query->result();

@@ -19,7 +19,7 @@ class adminInstansi extends CI_Controller {
     {
         if($this->mdl_admin->logged_id())
         {
-            $paket['array']=$this->mdl_admin->getinstansi();
+            $paket['array']=$this->mdl_admin->getAlldata("mou_instansi");
             $this->load->view('admin/Karyawan/mou/instansi/allinstansi',$paket);
         }else{
             //jika session belum terdaftar, maka redirect ke halaman login
@@ -41,11 +41,7 @@ class adminInstansi extends CI_Controller {
 
                 $this->load->library('upload', $config);
                 
-                $konek = mysqli_connect("localhost","root","","kepegawaian");
-                $a=$this->input->post('nik');
-                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
-
-                $id_karyawan=$data2['id_karyawan'];
+                $instansi=$this->input->post('instansi');
                 $ket=$this->input->post('ket');
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
@@ -62,7 +58,7 @@ class adminInstansi extends CI_Controller {
 
                
                 $data= array(
-                'id_karyawan' => $id_karyawan,
+                'instansi' => $instansi,
                 'tgl_mulai' => $tgl_mulai,
                 'tgl_akhir' => $tgl_akhir,
                 'ket' => $ket,
@@ -81,10 +77,11 @@ class adminInstansi extends CI_Controller {
     public function edit($id){
          if($this->mdl_admin->logged_id()){
 
+                $where = array('id' => $id);
             $this->form_validation->set_rules('no_mou','Nomor Surat Keputusan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $data['array']=$this->mdl_admin->getinstansiedit($id);
+                $data['array']=$this->mdl_admin->getData("mou_instansi",$where);
                 $this->load->view('admin/Karyawan/mou/instansi/editinstansi',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
@@ -93,6 +90,7 @@ class adminInstansi extends CI_Controller {
 
                 $this->load->library('upload', $config);
                 $ket=$this->input->post('ket');
+                $instansi=$this->input->post('instansi');
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
                 $no_mou=$this->input->post('no_mou');
@@ -112,12 +110,12 @@ class adminInstansi extends CI_Controller {
                 $data= array(
                 'tgl_mulai' => $tgl_mulai,
                 'tgl_akhir' => $tgl_akhir,
+                'instansi' => $instansi,
                 'ket' => $ket,
                 'file' => $file,
                 'no_mou' => $no_mou
                 );
 
-                $where = array('id' => $id);
                 $this->mdl_admin->updateData($where,$data,'mou_instansi');
                 redirect("adminInstansi");
                 }
@@ -149,17 +147,16 @@ class adminInstansi extends CI_Controller {
                 $highestColumn = $worksheet->getHighestColumn();
                 for($row=2; $row<=$highestRow; $row++)
                 {   
-                    $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-                    $konek = mysqli_connect("localhost","root","","kepegawaian");
-                    $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
-                    $id=$data2['id_karyawan'];
+                    $instansi = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
                     $no_mou= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                    $tgl_mulai = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                    $tgl_akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $mulai = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
                     $ket= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                     $file= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $tgl_mulai = substr($mulai, 0,4)."-".substr($mulai, 5,2)."-".substr($mulai, 8,4);
+                    $tgl_akhir = substr($akhir, 0,4)."-".substr($akhir, 5,2)."-".substr($akhir, 8,4);
                     $data[] = array(
-                        'id_karyawan'       =>    $id,
+                        'instansi'       =>    $instansi,
                         'no_mou'        =>    $no_mou,
                         'tgl_mulai'             =>    $tgl_mulai,
                         'tgl_akhir'             =>    $tgl_akhir,
@@ -168,7 +165,6 @@ class adminInstansi extends CI_Controller {
                     );
                 }
             }
-
             $this->mdl_admin->impor('mou_instansi',$data);
             redirect('adminInstansi');
         }        
