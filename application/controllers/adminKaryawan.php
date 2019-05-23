@@ -73,9 +73,14 @@ class AdminKaryawan extends CI_Controller {
 
                 $this->mdl_admin->addData('karyawan',$dataKaryawan);
                 $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where no_ktp = '$no_ktp'"));
-                $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                if ($level == 'Karyawan') {
+                    $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                }else{
+                    $dataLogin2=array('username'=>$nik, 'password'=>md5($nik), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                }
+                
 
-                if ($level != 'admin' || 'Super Admin'){
+                if ($level != 'admin' || $level != 'Super Admin'){
                     
                     $dataRiwayat=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
                     $dataStatus=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
@@ -114,8 +119,13 @@ class AdminKaryawan extends CI_Controller {
                         $this->mdl_admin->addData('status',$dataStatus);
                         $this->mdl_admin->addData('golongan',$dataGolongan);
                         // $this->mdl_admin->addData('riwayat',$dataRiwayat);
-                        echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('login') . "';</script>";
-                    }else{}
+                        echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
+                    }else{
+                        echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
+                    }
+                    
+                }else {
+                    $this->mdl_admin->addData('login',$dataLogin2);
                 }
                 redirect("adminKaryawan");
             }
