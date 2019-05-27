@@ -159,7 +159,8 @@ class AdminKew extends CI_Controller {
                     $penilaian = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
                     $mulai = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                     $akhir= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-                    $doku_penilaian= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $pk = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $doku_penilaian= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
                     $tgl_mulai = substr($mulai, 0,4)."-".substr($mulai, 5,2)."-".substr($mulai, 8,4);
                     $tgl_akhir = substr($akhir, 0,4)."-".substr($akhir, 5,2)."-".substr($akhir, 8,4);
                     $data[] = array(
@@ -169,6 +170,7 @@ class AdminKew extends CI_Controller {
                         'penilaian'             =>    $penilaian,
                         'tgl_mulai'             =>    $tgl_mulai,
                         'tgl_akhir'      =>    $tgl_akhir,
+                        'pk' => $pk,
                         'doku_penilaian'              =>    $doku_penilaian,
                     );
                 }
