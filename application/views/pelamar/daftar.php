@@ -94,7 +94,7 @@
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                       <input name="username" type="text" class="form-control" required>
                       <?php echo form_error('username','<div style="color:red">', '</div>'); ?>
-                      <font size="2"> *Minimal 6 karakter gabungan huruf dan angka </font>
+                      <font size="2"> *Minimal 6 karakter </font>
                     </div>
                   </div>
                   <br>

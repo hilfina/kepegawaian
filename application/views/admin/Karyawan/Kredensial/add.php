@@ -100,6 +100,18 @@ $this->load->view("header.php");
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <div class="input-mask-title">
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <div class="input-mark-inner">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>

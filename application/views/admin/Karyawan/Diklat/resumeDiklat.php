@@ -1,4 +1,4 @@
-<?php  $this->load->view('./header'); ?><br>
+<?php $this->load->view('./header'); ?><br>
  <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">
@@ -10,7 +10,7 @@
               <ul class="breadcome-menu">
                 <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data Berkala Karyawan</span>
+                <li><span class="bread-blod">Data Diklat Karyawan</span>
                 </li>
               </ul>
             </div>
@@ -28,7 +28,7 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Berkala Karyawan</span></h1>
+                <h1>Detail Data <span class="table-project-n">Diklat Karyawan</span></h1>
               </div>
             </div>
           </div>
@@ -36,9 +36,12 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right">
-                <a href="<?php echo site_url(); ?>/adminBerkala/addBerkala/<?php echo $id?>">
+                 <?php foreach ($array as $key) { ?>
+                 <a href="<?php echo site_url()?>/adminDiklat/addDiklat/<?php echo $key->id_karyawan;?>">
+                 <?php }?>
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
                 </a>
+                
                 </div>
                 <div class=" container-fluid" id="notif">
                     <?php if ($this->session->flashdata('msg')) :?>
@@ -63,12 +66,15 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Nomor SK</th>
-                    <th>Berkala</th>
-                    <th>Masa Berlaku</th>
-                    <th>File</th>
-                    <th>Aktif</th>
-                    <th>Pilihan</th>
+                    <th>NIK</th>
+                    <th>Nama</th>
+                    <th>Nama Diklat</th>
+                    <th>Jenis Diklat</th>
+                    <th>Tanggal</th>
+                    <th>Tahun</th>
+                    <th>Waktu</th>
+                    <th>Sertifikat</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -76,32 +82,32 @@
                 <?php foreach ($array as $key) { ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
-                    <td><?php echo $key->nomor_sk; ?></td>
-                    <td><?php echo $key->berkala; ?></td>
-                    <td><?php echo date('d M Y', strtotime($key->mulai))." - ".date('d M Y', strtotime($key->akhir)); ?></td>
-                    <td>
-                    <?php if(($key->alamat_sk) != NULL){ ?>
-                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
+                    <td><?php echo $key->nik ?></td>
+                    <td><?php echo $key->nama ?></td>
+                    <td><?php echo $key->nama_diklat; ?></td>
+                    <td><?php echo $key->jenis_diklat; ?></td>
+                    <td><?php echo date('d M Y', strtotime($key->tgl_mulai))." - ".date('d M Y', strtotime($key->tgl_akhir)); ?></td>
+                    <td><?php echo $key->tahun; ?></td>
+                    <td><?php if (substr($key->jam, 0,2) != "00") {
+                     echo substr($key->jam, 0,2)." Jam ";
+                    }if (substr($key->jam, 3,2) != "00") {
+                      echo substr($key->jam, 3,2)." Menit";
+                    } ?>
+                  </td>
+                  <td>
+                      <?php if(($key->file) != NULL) {?>
+                       <font style="color: blue"><a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
                         <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
-                      </a>
-                    <?php }else{ ?>
-                      <font style="color: red">Tidak Ada file</font>
-                    <?php } ?>
+                      </a></font>
+                      <?php }else{ ?>
+                        <font style="color: red">Tidak Ada file</font>
+                      <?php } ?>
                     </td>
                     <td>
-                    <?php if(($key->aktif) == 1){ ?>
-                      <i class="fa fa-check"></i> Surat Aktif 
-                    <?php }else{ ?>
-                       Kadaluarsa 
-                    <?php } ?>
-                    </td>
-                    <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminBerkala/edit/"; echo $key->id ; echo "/"; echo $key->id_karyawan; ?>">
-                        <button class="btn btn-default waves-effect">edit</button>
-                      </a>
-                      <a href="<?php echo site_url(); echo "/adminBerkala/del/"; echo $key->id; echo "/"; echo $key->id_karyawan; ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button class="btn btn-default waves-effect">hapus</button>
-                      </a>
+                    <a href="<?php echo site_url('adminDiklat/editdiklat/').$key->id_diklat; echo "/"; echo $key->id_karyawan; ?>">
+                    <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                    <a href="<?php echo site_url('adminDiklat/hapusdiklat/').$key->id_diklat; echo "/"; echo $key->id_karyawan; ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?');">
+                    <button data-toggle="tooltip" title="Hapus" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</button></a>
                     </td>
                   </tr>
                 <?php }?>
@@ -114,6 +120,5 @@
     </div>
   </div>
 </div>
-
 
 <?php $this->load->view('./footer'); ?>

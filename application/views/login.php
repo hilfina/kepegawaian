@@ -174,7 +174,7 @@
                       <div class="validation"></div>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" name="password" id="subject" placeholder="Password" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject" />
+                      <input type="password" class="form-control" name="password" id="subject" placeholder="Password" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject" />
                       <div class="validation"></div>
                     </div>
                     <div class="row">

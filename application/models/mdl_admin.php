@@ -16,7 +16,10 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("select * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $hasil");
         return $query->result();
     }
-
+    function resumeDiklat(){
+         $query = $this->db->query("SELECT * FROM karyawan as k INNER JOIN diklat as p on k.id_karyawan=p.id_karyawan");
+        return $query->result();
+    }
     function updateData($where,$data,$table){
         $this->db->where($where);
         $this->db->update($table,$data);
@@ -110,7 +113,7 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
     public function getKaryawan(){
-        $query = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan=l.id_karyawan inner join jenis_profesi as j on k.id_profesi = j.id_profesi where k.id_status != 'Pelamar' AND k.id_status!='Calon Karyawan' AND k.id_status != 'Pelamar Ditolak' AND l.level != 'admin' AND l.level != 'Super Admin'  order by k.nama asc");
+        $query = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan=l.id_karyawan inner join jenis_profesi as j on k.id_profesi = j.id_profesi where k.id_status != 'Pelamar' AND k.id_status !='Calon Karyawan' AND k.id_status != 'Pelamar Ditolak' AND l.level != 'admin' AND l.level != 'Super Admin' AND k.id_status != 'Pensiun'  AND k.id_status != 'Keluar'  order by k.nama asc");
         return $query->result();
     }
 
@@ -211,7 +214,7 @@ class Mdl_admin extends CI_Model
     }
 
     public function getGolongan(){
-        $query = $this->db->query("SELECT * from jenis_golongan where id_golongan != 'Tidak Ada'");
+        $query = $this->db->query("SELECT * from jenis_golongan");
         return $query->result();
     }
 

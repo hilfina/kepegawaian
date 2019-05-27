@@ -70,10 +70,10 @@
                     <td><?php echo date('d M Y', strtotime($key->akhir)); ?></td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminRiwayat/edit/"; echo $key->id_riwayat ; echo "/"; echo $key->id_karyawan; ?>">
-                          <button class="btn btn-warning waves-effect">Edit</button>
+                          <button class="btn btn-default waves-effect">Edit</button>
                         </a>
                         <a href="<?php echo site_url(); echo "/adminRiwayat/del/"; echo $key->id_riwayat ; echo "/"; echo $key->id_karyawan; ?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                          <button class="btn btn-danger waves-effect">Hapus</button>
+                          <button class="btn btn-default waves-effect">Hapus</button>
                         </a>
                     </td>
                   </tr>

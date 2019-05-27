@@ -45,6 +45,7 @@ class AdminKew extends CI_Controller {
                 $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
 
                 $id_karyawan=$data2['id_karyawan'];
+               
                 $tgl_pengajuan=date('Y-m-d',strtotime($this->input->post('tgl_pengajuan')));
                 if(!$this->upload->do_upload('doku_pengajuan')) {
                     $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
@@ -65,6 +66,7 @@ class AdminKew extends CI_Controller {
                 'tgl_mulai' => '-',
                 'tgl_akhir' => '-',
                 'doku_penilaian' => '-',
+                
                 );
 
                 $this->mdl_admin->addData('kewenangan_klinis',$data);
@@ -105,6 +107,7 @@ class AdminKew extends CI_Controller {
 
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
                 $tgl_akhir = date('Y-m-d',strtotime($this->input->post('tgl_akhir')));
+                $pk=$this->input->post('pk');
                 $penilaian=$this->input->post('penilaian');
                
                 $data= array(
@@ -112,6 +115,7 @@ class AdminKew extends CI_Controller {
                 'tgl_mulai' => $tgl_mulai,
                 'tgl_akhir' => $tgl_akhir,
                 'doku_penilaian' => $doku_penilaian,
+                'pk' => $pk,
                 );
 
                 $where = array('id_kewenangan' => $id);

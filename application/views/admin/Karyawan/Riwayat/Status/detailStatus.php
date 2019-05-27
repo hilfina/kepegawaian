@@ -103,10 +103,10 @@
                         </td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminStatus/edit/"; echo $key->id ;  echo "/"; echo $key->id_karyawan; ?>">
-                        <button class="btn btn-warning waves-effect">edit</button>
+                        <button class="btn btn-default waves-effect">edit</button>
                       </a>
                       <a href="<?php echo site_url(); echo "/adminStatus/del/"; echo $key->id ;  echo "/"; echo $key->id_karyawan; ?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                        <button class="btn btn-danger waves-effect">hapus</button>
+                        <button class="btn btn-default waves-effect">hapus</button>
                       </a>
 
                     </td>

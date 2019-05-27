@@ -31,6 +31,12 @@ class AdminDiklat extends CI_Controller {
         $this->load->view('admin/Karyawan/Diklat/detailDiklat',$paket);
 
     }
+    public function resume()
+    {
+        $paket['array']=$this->mdl_admin->resumeDiklat();
+        $this->load->view('admin/Karyawan/Diklat/resumeDiklat',$paket);
+
+    }
 
         public function add(){
        if($this->mdl_admin->logged_id()){

@@ -33,7 +33,7 @@ class Mdl_home extends CI_Model
         return $query->result();
     }
     function karyawan(){
-        $query= $this->db->query("SELECT count(k.id_karyawan) as banyak from karyawan as k inner join login as l on k.id_karyawan = l.id_karyawan where id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND level != 'admin'");
+        $query= $this->db->query("SELECT count(k.id_karyawan) as banyak from karyawan as k inner join login as l on k.id_karyawan = l.id_karyawan where id_status != 'Calon Karyawan' AND id_status != 'Keluar' AND id_status != 'Pensiun' AND id_status != 'Pelamar' AND level != 'admin' AND level != 'Super Admin'");
         return $query->row();
     }
     function pelamar(){
