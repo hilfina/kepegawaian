@@ -77,6 +77,7 @@ $this->load->view("header.php");
                     <th>File Pengajuan</th>
                     <th>Kredensial</th>
                     <th>Masa Berlaku</th>
+                    <th>Jenjang Klinik</th>
                     <th>File Kredensial</th>
                     <th>Aktif</th>
                     <th>Aksi</th>
@@ -101,6 +102,7 @@ $this->load->view("header.php");
                     </td>
                     <td><?php echo $key->penilaian; ?></td>
                     <td><?php echo date('d M Y', strtotime($key->tgl_mulai))." - ".date('d M Y', strtotime($key->tgl_akhir)); ?></td>
+                    <td><?php echo $key->pk; ?></td>
                     <td>
                       <?php if(($key->doku_penilaian) != NULL) {?>
                        <font style="color: blue"><a href="<?php echo base_url().'/Assets/dokumen/'.$key->doku_penilaian; ?>" download>
@@ -124,9 +126,9 @@ $this->load->view("header.php");
                     </td>
                     <td>
                     <a href="<?php echo site_url('adminKew/edit/').$key->id_kewenangan ?>">
-                    <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                    <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                     <a href="<?php echo site_url('adminKew/del/').$key->id_kewenangan ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?');">
-                    <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</button></a>
+                    <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
                     </td>
                   </tr>
                 <?php }?>

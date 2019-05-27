@@ -135,7 +135,7 @@ class Login extends CI_Controller {
 		$this->form_validation->set_rules('email','Email','required');
 		$this->form_validation->set_rules('no_telp','Nomor Telepon','required|min_length[10]');
 		$this->form_validation->
-		set_rules('username','User name','required|alpha_numeric|min_length[6]|max_length[50]|is_unique[login.username]');
+		set_rules('username','User name','required|min_length[6]|max_length[50]|is_unique[login.username]');
 		$this->form_validation->set_rules('password','Password','required|min_length[8]');
 
 		
@@ -220,7 +220,7 @@ class Login extends CI_Controller {
 			$this->email->to($email);
 			$this->email->subject("Verifikasi Akun");
 			$this->email->message(
-				"Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Terima kasih sudah melamar di Rumah Sakit Islam Aisyiyah Malang. Untuk proses berikutnya, data-data anda akan kami verifikasi terlebih dahulu. Pengumuman selanjutnya akan kami informasikan pada akun dan email anda. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini <br><br>".
+				"Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Terima kasih sudah mendaftar pada Sistem Kepegawaian Rumah Sakit Islam Aisyiyah Malang. Untuk proses berikutnya, silahkan masukkan data-data lamaran anda. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini <br><br>".
 				"<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
 			);
 			

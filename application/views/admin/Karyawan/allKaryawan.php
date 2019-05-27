@@ -62,11 +62,13 @@
                     <th>Foto</th>
                     <th>Nama</th>
                     <th>Tanggal Lahir</th>
-                    <th>Jenis Kelamin</th>
+                    <th>Umur</th>
+                    <th>Gender</th>
                     <th>E-Mail</th>
                     <th>Profesi</th>
                     <th>Status</th>
                     <th>Golongan</th>
+                    <th>Level</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -79,11 +81,13 @@
                     <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='100'>"; ?></td>
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->ttl; ?></td>
+                    <td><?php $tdy = date('Y'); $lhr = substr($key->ttl, 0,4); echo $tdy-$lhr; ?></td>
                     <td><?php echo $key->jenkel; ?></td>
                     <td><?php echo $key->email; ?></td>
                     <td><?php echo $key->nama_profesi; ?></td>
                     <td><?php echo $key->id_status; ?></td>
                     <td><?php echo $key->id_golongan; ?></td>
+                    <td><?php echo $key->level; ?></td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminKaryawan/karyawanDetail/"; echo $key->id_karyawan ;?>">
                         <button class="btn btn-warning waves-effect waves-light mg-b-15">Detail</button>

@@ -86,8 +86,8 @@
       <div class="container">
 
         <header class="section-header">
-          <h3>About Us</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <h3>Tentang</h3>
+          <p>Sistem Informasi Kepegawaian Rumah Sakit Islam Aisyiyah Malang berguna untuk pelamar apabila ingin mendaftar pada peluang karir dan juga sebagai pusat informasi data kepegawaian karyawan rumah sakit islam aisyiyah malang</p>
         </header>
 
           <div class="col-lg-6 background order-lg-2 order-1 wow fadeInUp">
@@ -116,7 +116,7 @@
             <div class="col-md-6 col-lg-6 ">
                 <div class="box">
               <div class="icon"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
-                <h4 class="title"><a href=""><?php echo $key->nama_profesi;?></a></h4>
+                <h4 class="title" ><a href="#contact" class="scrollto"><?php echo $key->nama_profesi;?></a></h4>
                 <p class="description">
                     <strong>Mulai :</strong> 
                     <?php echo date('d - M - Y', strtotime($key->mulai));?> <br>
@@ -174,11 +174,11 @@
                       <div class="validation"></div>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" name="password" id="subject" placeholder="Password" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject" />
+                      <input type="password" class="form-control" name="password" id="subject" placeholder="Password" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject" />
                       <div class="validation"></div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-9"><font size="3" align="left" >belum memiliki akun? Daftar <a href="<?=base_url()?>index.php/login/daftar"> disini.</a></font> </div>
+                        <div class="col-sm-9"><font size="3" align="left" >Ingin melamar pekerjaan? Klik <a href="<?=base_url()?>index.php/login/daftar"> disini.</a></font> </div>
                         <div class="col-sm-3"><button type="submit">Masuk</button> </div>  
 
                     </div>   
@@ -205,48 +205,33 @@
       <div class="container">
         <div class="row">
 
-          <div class="col-lg-4 col-md-6 footer-info">
-            <h3>NewBiz</h3>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Terms of service</a></li>
-              <li><a href="#">Privacy policy</a></li>
-            </ul>
+          <div class="col-lg-6 col-md-6 footer-info">
+            <h3>Sistem Informasi Kepegawaian RSIA </h3>
+            <p>Sistem informasi kepegawaian hanya dapat digunakan apabila tersambung pada wifi Rumah Sakit Islam Aisyiyah Malang </p>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h4>Contact Us</h4>
+            <h4>Kontak</h4>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              Jl. Sulawesi No.16<br>
+              Kasin, Klojen 65117 <br>
+              Kota Malang, Jawa Timur <br>
+              <strong>Email:</strong> sdirsiamalang@gmail.com<br>
             </p>
 
             <div class="social-links">
-              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+              <a href="https://www.instagram.com/rsiaisyiyahmalang/" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="https://rsiaisyiyah-malang.or.id/" class="google-plus"><i class="fa fa-globe"></i></a>
             </div>
 
           </div>
 
           <div class="col-lg-3 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
-            <form action="" method="post">
+            <h4>Bantuan</h4>
+            <p>Apabila anda lupa kata sandi login, silahkan menghubungi bagian SDI untuk reset password.</p>
+           <!--  <form action="" method="post">
               <input type="email" name="email"><input type="submit"  value="Subscribe">
-            </form>
+            </form> -->
           </div>
 
         </div>

@@ -54,6 +54,7 @@ class Karyawan extends CI_Controller {
         $paket['mouh']=$this->mdl_karyawan->getMouh($id);
         $paket['moui']=$this->mdl_karyawan->getData('mou_klinis', $where);
         $paket['urai']=$this->mdl_karyawan->getData('uraian_tugas',$where);
+
 		$this->load->view('karyawan/profil',$paket);
         
     }
@@ -70,14 +71,16 @@ class Karyawan extends CI_Controller {
 	$this->load->library('upload', $config);
 
 	$id=$this->session->userdata('myId');
-	// $nik = $this->input->post('nik');
-	// $no_ktp = $this->input->post('no_ktp');
-	// $no_bpjs = $this->input->post('no_bpjs');
-	// $nama = $this->input->post('nama');
-	// $alamat = $this->input->post('alamat');
-	// $no_telp = $this->input->post('no_telp');
-	// $email = $this->input->post('email');
+	$nik = $this->input->post('nik');
+	$no_ktp = $this->input->post('no_ktp');
+	$no_bpjs = $this->input->post('no_bpjs');
+	$nama = $this->input->post('nama');
+	$alamat = $this->input->post('alamat');
+	$no_telp = $this->input->post('no_telp');
+	$email = $this->input->post('email');
 
+$jenkel = $this->input->post('jenkel');
+	$ttl = $this->input->post('ttl');
 
 	if($_FILES['fotosaya']['name'] != '') {
         if(!$this->upload->do_upload('fotosaya')) {
@@ -93,13 +96,15 @@ class Karyawan extends CI_Controller {
 
 	
 	$data = array(
-		// 'nik' => $nik,
-		// 'no_ktp' => $no_ktp,
-		// 'no_bpjs' => $no_bpjs,
-		// 'nama' => $nama,
-		// 'alamat' => $alamat,
-		// 'no_telp' => $no_telp,
-		// 'email' => $email,
+		'nik' => $nik,
+		'no_ktp' => $no_ktp,
+		'no_bpjs' => $no_bpjs,
+		'nama' => $nama,
+		'alamat' => $alamat,
+		'no_telp' => $no_telp,
+		'email' => $email,
+		'ttl' => $ttl,
+		'jenkel' => $jenkel,
 		'foto' => $fotosaya
 	);
  
@@ -129,7 +134,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'pdf/docx';
+			$config['allowed_types']	= 'pdf|docx';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;

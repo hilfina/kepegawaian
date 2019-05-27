@@ -177,6 +177,7 @@
                   <li><a title="Karyawan" href="<?php echo site_url('adminKaryawan/') ?>">Karyawan</a></li>
                   <li><a title="Pendidikan" href="<?php echo site_url('admin/datapend') ?>">Pendidikan</a></li>
                   <li><a title="Diklat" href="<?php echo site_url('adminDiklat/') ?>">Diklat</a></li>
+                        <li><a href="<?php echo site_url('adminDiklat/resume') ?>">Resume Diklat</a></li>
                   <li><a title="Orientasi" href="<?php echo site_url('adminOri/') ?>">Orientasi</a></li>
                   <li><a title="Uraian Tugas" href="<?php echo site_url('adminUrgas/') ?>">Uraian Tugas</a></li>
                   <li><a title="Proses Kredensial" href="<?php echo site_url('adminKew/') ?>">Proses Kredensial</a></li>
@@ -778,6 +779,7 @@
                       <ul id="karyawan" class="collapse dropdown-header-top">
                         <li><a href="<?php echo site_url('adminKaryawan/') ?>">Karyawan</a></li>
                         <li><a href="<?php echo site_url('adminDiklat/') ?>">Diklat</a></li>
+                        <li><a href="<?php echo site_url('adminDiklat/resume') ?>">Resume Diklat</a></li>
                         <li><a href="<?php echo site_url('adminOri/') ?>">Orientasi</a></li>
                         <li><a href="<?php echo site_url('adminUraianTugas/') ?>">Uraian Tugas</a></li>
                       </ul>

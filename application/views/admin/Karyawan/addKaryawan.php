@@ -39,7 +39,8 @@
           <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <div class="alert alert-info"><b>Perhatian !</b><br>
                 Dengan menambahkan data pada form dibawah, <br>
-                Username yang akan didapat adalah nomor NIK dan Password berupa nomor ktp.
+                
+                User tersebut akan mendapat username nomor NIK dan Password berupa nomor ktp.
             </div>
           <form action="<?php echo site_url();?>/adminKaryawan/addKaryawan/" enctype="multipart/form-data" method="POST">
           <table width="100%">

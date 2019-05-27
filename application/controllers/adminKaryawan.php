@@ -72,10 +72,13 @@ class AdminKaryawan extends CI_Controller {
                 );
 
                 $this->mdl_admin->addData('karyawan',$dataKaryawan);
-                $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where no_ktp = '$no_ktp'"));
-                $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where nik = '$nik'"));
+                
+                    $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                
+                
 
-                if ($level != 'admin' || 'Super Admin'){
+                if ($level != 'admin' || $level != 'Super Admin'){
                     
                     $dataRiwayat=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
                     $dataStatus=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
@@ -113,9 +116,14 @@ class AdminKaryawan extends CI_Controller {
                         $this->mdl_admin->addData('login',$dataLogin);
                         $this->mdl_admin->addData('status',$dataStatus);
                         $this->mdl_admin->addData('golongan',$dataGolongan);
-                        // $this->mdl_admin->addData('riwayat',$dataRiwayat);
-                        echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('login') . "';</script>";
-                    }else{}
+                        $this->mdl_admin->addData('riwayat',$dataRiwayat);
+                        echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
+                    }else{
+                        echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
+                    }
+                    
+                }else {
+                    
                 }
                 redirect("adminKaryawan");
             }
@@ -209,7 +217,12 @@ class AdminKaryawan extends CI_Controller {
                 'id_profesi' => $idPro['id_profesi'],
                 'id_golongan' => $id_golongan
             );
-            
+
+            $datalogin1 = array(
+                'username' => $username,
+            );
+
+                
 
             //DATA KARYAWAN SEKARANG SEBELUM DI EDIT
             $dataSkg = $this->mdl_admin->dataDiri($id);
@@ -225,16 +238,17 @@ class AdminKaryawan extends CI_Controller {
             }else{}
             if ($dataSkg->password != $password) {
                 
-                $datalogin = array(
+                $datalogin2 = array(
                 'username' => $username,
                 'password' => md5($password)
                 );
 
-                $this->mdl_admin->updateData($where,$datalogin,'login');
+                $this->mdl_admin->updateData($where,$datalogin2,'login');
             }else{}
 
             // update data karyawan
             $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+            $this->mdl_admin->updateData($where,$datalogin1,'login');
             redirect("adminKaryawan/karyawanDetail/$id");
         }else{ redirect("login");} 
     }
