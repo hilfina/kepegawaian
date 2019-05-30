@@ -22,7 +22,7 @@ class Karyawan extends CI_Controller {
 	{
 		if($this->admin_model->logged_id())
 		{
-			$this->load->view("dashboard");
+			$this->load->view("homee");
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -63,10 +63,8 @@ class Karyawan extends CI_Controller {
 	$config['upload_path']		= './Assets/gambar/';
 	$config['allowed_types']	= 'jpg|png';
 	$config['max_size']			= 2000;
-	$config['max_width']		= 300;
+	$config['max_width']		= 400;
 	$config['max_height']		= 400;
-	$config['min_width']		= 300;
-	$config['min_height']		= 400;
 
 	$this->load->library('upload', $config);
 
@@ -78,8 +76,9 @@ class Karyawan extends CI_Controller {
 	$alamat = $this->input->post('alamat');
 	$no_telp = $this->input->post('no_telp');
 	$email = $this->input->post('email');
-
-$jenkel = $this->input->post('jenkel');
+	$status = $this->input->post('status');
+	$anak = $this->input->post('anak');
+	$jenkel = $this->input->post('jenkel');
 	$ttl = $this->input->post('ttl');
 
 	if($_FILES['fotosaya']['name'] != '') {
@@ -105,7 +104,9 @@ $jenkel = $this->input->post('jenkel');
 		'email' => $email,
 		'ttl' => $ttl,
 		'jenkel' => $jenkel,
-		'foto' => $fotosaya
+		'foto' => $fotosaya,
+		'status' => $status,
+		'anak' => $anak
 	);
  
 	$where = array(

@@ -31,12 +31,7 @@ class AdminKaryawan extends CI_Controller {
     
     public function addKaryawan(){//MENAMPILKAN FORM TAMBAH KARYAWAN DAN PROSES PENYIMPANANNYA
         if($this->mdl_admin->logged_id()){
-            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
-            $this->form_validation->set_rules('nama','Nama Karyawan','trim|required');
-            $this->form_validation->set_rules('no_ktp','Nomor KTP','trim|required');
-            $this->form_validation->set_rules('no_telp','Nomor Telepon','trim|required');
-            $this->form_validation->set_rules('email','Alamat Email','trim|required');
-            $this->form_validation->set_rules('alamat','Alamat','trim|required');
+            $this->form_validation->set_rules('no_ktp','Nomor KTP','required|min_length[16]');
             if($this->form_validation->run()==FALSE){
 
                 $data['status']=$this->mdl_admin->getJenStatus();
@@ -73,10 +68,11 @@ class AdminKaryawan extends CI_Controller {
 
                 $this->mdl_admin->addData('karyawan',$dataKaryawan);
                 $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where nik = '$nik'"));
-                
-                    $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
-                
-                
+                if ($level == 'Karyawan'){
+                    $dataLogin=array('username'=>$no_ktp, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                }else{
+                    $dataLogin=array('username'=>$nik, 'password'=>md5($nik), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                }
 
                 if ($level != 'admin' || $level != 'Super Admin'){
                     
@@ -105,8 +101,7 @@ class AdminKaryawan extends CI_Controller {
                     $this->email->message(
 
                         "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Anda telah didaftarkan di Rumah Sakit islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini menggunakan <br><br>
-    	                    username: nomor induk karyawan. <br>
-    	                    password: nomor ktp anda.<br>".
+    	                    username dan password menggunakan nomor ktp anda.<br>".
                         "<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
 
                     );
@@ -180,6 +175,7 @@ class AdminKaryawan extends CI_Controller {
             $no_telp=$this->input->post('no_telp');
             $email=$this->input->post('email');
             $status=$this->input->post('status');
+            $anak=$this->input->post('anak');
 
             $username=$this->input->post('username');
             $password=$this->input->post('password');
@@ -209,6 +205,7 @@ class AdminKaryawan extends CI_Controller {
                 'no_bpjs' => $no_bpjs,
                 'nama' => $nama,
                 'status' => $status,
+                'anak' => $anak,
                 'ttl' => date('Y-m-d',strtotime($ttl)),
                 'jenkel' => $jenkel,
                 'alamat' => $alamat,
@@ -220,12 +217,7 @@ class AdminKaryawan extends CI_Controller {
                 'id_golongan' => $id_golongan
             );
 
-            $datalogin1 = array(
-                'username' => $username,
-            );
-
-                
-
+        
             //DATA KARYAWAN SEKARANG SEBELUM DI EDIT
             $dataSkg = $this->mdl_admin->dataDiri($id);
 
@@ -238,19 +230,27 @@ class AdminKaryawan extends CI_Controller {
             if ($dataSkg->id_status != $id_status) {
                 $this->mdl_admin->addData('status',$dataStatus);
             }else{}
-            if ($dataSkg->password != $password) {
+            if ($dataSkg->password != $password ) {
                 
                 $datalogin2 = array(
-                'username' => $username,
                 'password' => md5($password)
                 );
 
-                $this->mdl_admin->updateData($where,$datalogin2,'login');
+                $this->mdl_admin->updatelogin($datalogin2,$id);
+            }else{}
+
+            if ($dataSkg->username != $username ) {
+                
+                $datalogin3 = array(
+                'username' => $username
+                );
+
+                $this->mdl_admin->updatelogin($datalogin3,$id);
             }else{}
 
             // update data karyawan
             $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
-            $this->mdl_admin->updateData($where,$datalogin1,'login');
+            
             redirect("adminKaryawan/karyawanDetail/$id");
         }else{ redirect("login");} 
     }

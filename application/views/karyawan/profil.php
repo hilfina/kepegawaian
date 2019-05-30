@@ -24,7 +24,7 @@
           <br>
             <div class="alert alert-info"><b>Perhatian !</b><br>
                 Pada data pribadi, karyawan hanya dapat mengubah foto profil saja.<br>
-                ukuran foto profil berupa 300x400 dan berformat jpg/png.
+                ukuran foto profil maksimal 400x400, berformat jpg/png, tidak lebih dari 2 mb.
             </div>
         </div>
       </div>
@@ -128,18 +128,35 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Tempat Tanggal Lahir</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input style="background-color: white " name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>">
-                                          </div>
-                                        </td>
-                                      </tr>
+                                      <td><label form-control-label>Tanggal Lahir</label></td>
+                                      <td style="height: 50px">
+                                        <div class="col-lg-12">
+                                        <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                        <div class="input-daterange input-group" id="datepicker">
+                                          <?php if ($key->ttl != "0000-00-00") { ?>
+                                           <input name="ttl" type="text" class="form-control" value="<?php echo date('Y/m/d', strtotime($key->ttl));?>">
+                                          <?php }else{ ?>
+                                            <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                              <div class="input-daterange input-group" id="datepicker">
+                                                <input type="text" class="form-control" name="ttl" />
+                                              </div>
+                                            </div>
+                                          <?php }?>
+                                        </div>
+                                        </div>
+                                        </div>
+                                      </td>
+                                    </tr>
                                       <tr>
                                         <td><label form-control-label">Jenis kelamin</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="jenkel" type="text" class="form-control" value="<?php echo $key->jenkel;?>">
+                                            <select  class="form-control" name="jenkel">
+                                              <option><?php echo $key->jenkel;?></option>
+                                              <option>---Pilih: -----</option>
+                                              <option>Laki-laki</option>
+                                              <option>Perempuan</option>
+                                            </select>
                                           </div>
                                         </td>
                                       </tr>
@@ -168,10 +185,49 @@
                                         </td>
                                       </tr>
                                       <tr>
+                                      <td><label form-control-label>Status Perkawinan</label></td>
+                                      <td style="height: 50px">
+                                        <div class="col-lg-12">
+                                        <select  class="form-control" name="status">
+                                          <?php if ($key->status == "") {
+                                            echo "<option> -- Pilihan -- </option>";
+                                          }else{ ?>
+                                            <option><?php echo $key->status;?></option>
+                                          <?php } ?>
+                                          <option>Sudah Menikah</option>
+                                          <option>Belum Menikah</option>
+                                          <option>Janda</option>
+                                          <option>Duda</option>
+                                        </select>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td><label form-control-label>Jumlah Anak</label></td>
+                                      <td style="height: 50px">
+                                        <div class="col-lg-12">
+                                        <select  class="form-control" name="anak">
+                                          <?php if ($key->anak == "") {
+                                            echo "<option> -- Pilihan -- </option>";
+                                          }else{ ?>
+                                            <option><?php echo $key->anak;?></option>
+                                          <?php } ?>
+                                          <option>Tidak Ada</option>
+                                          <option>1</option>
+                                          <option>2</option>
+                                          <option>3</option>
+                                          <option>Lebih dari 3</option>
+                                        </select>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <br>
+                                      <tr>
                                         <td><label form-control-label">Profesi</label></td>
                                         <td style="height: 50px">
+                                         <font color="red" size="2">*profesi, status kepegawaian, golongan dan penempatan hanya dapat diubah sesuai kehendak HRD</font>
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="email" type="text" class="form-control" value="<?php echo $key->id_profesi; ?>">
+                                            <input style="background-color: white " name="email" type="text" class="form-control" value="<?php echo $key->id_profesi; ?>" disabled>
                                           </div>
                                         </td>
                                       </tr>
@@ -179,7 +235,7 @@
                                         <td><label form-control-label">Status Kepegawaian</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="id_status" type="text" class="form-control" value="<?php echo $key->id_status; ?>">
+                                            <input style="background-color: white " name="id_status" type="text" class="form-control" value="<?php echo $key->id_status; ?>"  disabled>
                                           </div>
                                         </td>
                                       </tr>
@@ -187,7 +243,7 @@
                                         <td><label form-control-label">Jabatan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="jabatan" type="text" class="form-control" value="<?php echo $key->jabatan; ?>">
+                                            <input style="background-color: white " name="jabatan" type="text" class="form-control" value="<?php echo $key->jabatan; ?>"  disabled>
                                           </div>
                                         </td>
                                       </tr>
@@ -195,7 +251,7 @@
                                         <td><label form-control-label">Golongan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="id_golongan" type="text" class="form-control" value="<?php echo $key->id_golongan; ?>">
+                                            <input style="background-color: white " name="id_golongan" type="text" class="form-control" value="<?php echo $key->id_golongan; ?>" disabled>
                                           </div>
                                         </td>
                                       </tr>
@@ -203,7 +259,7 @@
                                         <td><label form-control-label">Penempatan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="ruangan" type="text" class="form-control" value="<?php echo $key->ruangan; ?>">
+                                            <input style="background-color: white " name="ruangan" type="text" class="form-control" value="<?php echo $key->ruangan; ?>" disabled>
                                           </div>
                                         </td>
                                       </tr>
