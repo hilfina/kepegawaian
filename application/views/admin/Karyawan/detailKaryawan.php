@@ -115,6 +115,22 @@
                             </td>
                           </tr>
                           <tr>
+                            <td><label form-control-label>Status</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                              <select  class="form-control" name="status">
+                                <?php if ($key->status == "") {
+                                  echo "<option> -- Pilihan -- </option>";
+                                }else{ ?>
+                                  <option><?php echo $key->status;?></option>
+                                <?php } ?>
+                                <option>Sudah Menikah</option>
+                                <option>Belum Menikah</option>
+                              </select>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
                             <td><label form-control-label>Alamat</label></td>
                             <td style="height: 50px">
                               <div class="col-lg-12">
@@ -521,30 +537,35 @@
                     <div class="sparkline8-graph">
                       <div class="static-table-list">
                       <?php $tgl = $this->mdl_admin->aKon($id);
-                      if ($tgl->tgl != null) {
-                        
+                      if ($tgl->tgl != null) { //jika punya data kontrak
                         $sekarang = date('Y-m-d');
                         $dulu = date('Y-m-d', strtotime($tgl->tgl));
                         //1 + (selisih tahun) * 12 -> karena 1 tahun = 12 bulan
                         $numBulan = 1 + (date("Y",strtotime($sekarang)) - date("Y",strtotime($dulu))) *12;
                         //total diatas + 
                         $numBulan += date("m",strtotime($sekarang)) - date("m",strtotime($dulu));
+
                         if ($numBulan <= 18) {
                           echo "Belum dapat melakukan cuti karena belum 1,5 tahun dimasa kontrak.<hr><br>
                           <font size='2' color='red'>*hanya bisa menambahkan data surat ijin</font>";
-                        }else{?>
-                          <?php if ($cuti->kuota_cuti != NULL){?>
-                        <h3>Sisa Cuti : <?php echo $cuti->kuota_cuti-$selisih." Hari."; ?></h3><hr/>
+                        }else{
+                          if ($cuti->kuota_cuti != NULL){
+                            echo "<h3>Sisa Cuti : "; echo $cuti->kuota_cuti-$selisih." Hari</h3><hr>";
+                          }else{
+                            echo "<h3>Karyawan Tidak Memiliki Jatah Cuti</h3>";
+                          }
+                        }
+                      }else{
+                        if ($cuti->kuota_cuti != NULL){
+                          echo "<h3>Sisa Cuti : "; echo $cuti->kuota_cuti-$selisih." Hari</h3><hr>";
+                        }else{
+                          echo "<h3>Karyawan Tidak Memiliki Jatah Cuti</h3>";
+                        }
+                      }
+                      ?>
+                      
                       </div>
                     </div>
-                  <?php } else { ?>
-                    <h3>Karyawan Tidak Memiliki Jatah Cuti</h3>
-                  <?php  }?>
-                        <?php }
-                      }else {echo "Belum dapat melakukan cuti karena belum 1,5 tahun dimasa kontrak.<hr><br>
-                          <font size='2' color='red'>*hanya bisa menambahkan data surat ijin</font>"; 
-                        }?>
-                      
                     <div class="sparkline8-graph">
                       <div class="static-table-list"><br>
                         <a href="<?php echo site_url('adminKaryawan/addCuti/').$id;?>">

@@ -59,8 +59,8 @@ $this->load->view("header.php");
                                         <td><?php echo $no++ ?></td>
                                         <td><?php echo $key->no_surat; ?></td>
                                         <td><?php echo $key->jenis_surat; ?></td>
-                                        <td><?php echo $key->tgl_mulai; ?></td>
-                                        <td><?php echo $key->tgl_akhir; ?></td>
+                                        <td><?php echo date('d M Y', strtotime($key->tgl_mulai)); ?></td>
+                                        <td><?php echo date('d M Y', strtotime($key->tgl_akhir)); ?></td>
                                         <td>
                                         <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
                                           <i class="fa fa-check"></i> Surat Aktif 

@@ -37,7 +37,7 @@ class Mdl_home extends CI_Model
         return $query->row();
     }
     function pelamar(){
-        $query= $this->db->query("SELECT count(id_karyawan) as banyak from karyawan where id_status = 'Pelamar'");
+        $query= $this->db->query("SELECT count(id_karyawan) as banyak from karyawan where id_status = 'Pelamar' and id_profesi != 'Belum'");
         return $query->row();
     }
     function calon(){
@@ -53,47 +53,47 @@ class Mdl_home extends CI_Model
         return $query->row();
     }
     function sipstr($tanggal){
-        $query= $this->db->query("SELECT count(id_sipstr) as banyak from sip_str where tgl_akhir >= $tanggal and notif_k != 1 and mail != 1");
+        $query= $this->db->query("SELECT count(id_sipstr) as banyak from sip_str where tgl_akhir <= '$tanggal'");
         return $query->row();
     }
     function mou_h($tanggal){
-        $query= $this->db->query("SELECT count(id) as banyak from mou_hutang where tgl_akhir <= $tanggal and notif_k != 1 and notif != 1");
+        $query= $this->db->query("SELECT count(id) as banyak from mou_hutang where tgl_akhir <= '$tanggal' and notif_k != 1 and notif != 1");
         return $query->row();
     }
     function mou_s($tanggal){
-        $query= $this->db->query("SELECT count(id) as banyak from mou_sekolah where tgl_akhir <= $tanggal and notif_k != 1 and notif != 1");
+        $query= $this->db->query("SELECT count(id) as banyak from mou_sekolah where tgl_akhir <= '$tanggal' and notif_k != 1 and notif != 1");
         return $query->row();
     }
     function mou_k($tanggal){
-        $query= $this->db->query("SELECT count(id) as banyak from mou_kontrak where tgl_akhir <= $tanggal and notif_k != 1 and notif != 1");
+        $query= $this->db->query("SELECT count(id) as banyak from mou_kontrak where tgl_akhir <= '$tanggal' and notif_k != 1 and notif != 1");
         return $query->row();
     }function mou_kl($tanggal){
-        $query= $this->db->query("SELECT count(id) as banyak from mou_klinis where tgl_akhir <= $tanggal and notif_k != 1 and notif != 1");
+        $query= $this->db->query("SELECT count(id) as banyak from mou_klinis where tgl_akhir <= '$tanggal' and notif_k != 1 and notif != 1");
         return $query->row();
     }
     function kreden($tanggal){
-        $query= $this->db->query("SELECT count(id_kewenangan) as banyak from kewenangan_klinis where tgl_akhir <= $tanggal");
+        $query= $this->db->query("SELECT count(id_kewenangan) as banyak from kewenangan_klinis where tgl_akhir <= '$tanggal'");
         return $query->row();
     }
 
     function surat($tanggal){
-        $query= $this->db->query("SELECT * from sip_str as s inner join jenis_surat as j on s.id_surat  j.id_surat where tgl_akhir >= $tanggal");
+        $query= $this->db->query("SELECT * from sip_str as s inner join jenis_surat as j on s.id_surat  j.id_surat where tgl_akhir >= '$tanggal'");
         return $query->row();
     }
     function hutang($tanggal){
-        $query= $this->db->query("SELECT * from mou_hutang where tgl_akhir <= $tanggal");
+        $query= $this->db->query("SELECT * from mou_hutang where tgl_akhir <= '$tanggal'");
         return $query->row();
     }
     function sekolah($tanggal){
-        $query= $this->db->query("SELECT * from mou_sekolah where tgl_akhir <= $tanggal");
+        $query= $this->db->query("SELECT * from mou_sekolah where tgl_akhir <= '$tanggal'");
         return $query->row();
     }
     function kontrak($tanggal){
-        $query= $this->db->query("SELECT * from mou_kontrak where tgl_akhir <= $tanggal");
+        $query= $this->db->query("SELECT * from mou_kontrak where tgl_akhir <= '$tanggal'");
         return $query->row();
     }
     function sial($tanggal){
-        $query= $this->db->query("SELECT * from kewenangan_klinis where tgl_akhir <= $tanggal");
+        $query= $this->db->query("SELECT * from kewenangan_klinis where tgl_akhir <= '$tanggal'");
         return $query->row();
     }
     //========== CARI DETAIL DATA MOU UNTUK DITAMPILKAN DI DETAIL MOU KARYAWAN PADA SAAT KLIK NOTIFIKASI======//

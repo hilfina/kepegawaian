@@ -25,8 +25,8 @@
           </div>
           <br>
           <div class="alert alert-info"><b>Perhatian !</b><br>
-                Ukuran foto profil yang diupload berupa 300x400, berformat jpg/png, maksimal berukuran 2mb.
-            </div>
+            Ukuran foto profil yang diupload berupa 3x4, berformat jpg/png, maksimal berukuran 2mb.
+          </div>
         </div>
       </div>
     </div>
@@ -133,8 +133,11 @@
                             <td style="height: 50px">
                               <div class="col-lg-12">
                               <select  class="form-control" name="jenkel">
-                              <option><?php echo $key->jenkel;?></option>
-                                <option>---Pilih: -----</option>
+                                <?php if ($key->jenkel == "") {
+                                  echo "<option> -- Pilihan --</option>";
+                                }else{
+                                  echo "<option>".$key->jenkel."</option>";
+                                }?>
                                 <option>Laki-laki</option>
                                 <option>Perempuan</option>
                               </select>

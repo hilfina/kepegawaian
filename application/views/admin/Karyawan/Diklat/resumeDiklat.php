@@ -28,7 +28,7 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Detail Data <span class="table-project-n">Diklat Karyawan</span></h1>
+                <h1>Resume Data <span class="table-project-n">Diklat Karyawan</span></h1>
               </div>
             </div>
           </div>
@@ -36,11 +36,12 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right">
-                 <?php foreach ($array as $key) { ?>
-                 <a href="<?php echo site_url()?>/adminDiklat/addDiklat/<?php echo $key->id_karyawan;?>">
-                 <?php }?>
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                </a>
+                  <a href="<?php echo site_url(); echo "/adminDiklat/loadimpor2/";?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
+                  </a>
+                  <a href="<?php echo site_url()?>/adminDiklat/add/">
+                    <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                  </a>
                 
                 </div>
                 <div class=" container-fluid" id="notif">

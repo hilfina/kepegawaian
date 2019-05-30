@@ -38,7 +38,7 @@ class AdminDiklat extends CI_Controller {
 
     }
 
-        public function add(){
+    public function add(){
        if($this->mdl_admin->logged_id()){
 
             $this->form_validation->set_rules('nomor_sertif','Nomor Sertifikat','trim|required');
@@ -102,7 +102,7 @@ class AdminDiklat extends CI_Controller {
 
                 $this->mdl_admin->addData('Diklat',$dataDiklat);
 
-                redirect("adminDiklat");
+                redirect("adminDiklat/resume");
                 }
         }
         else{ redirect("login"); } 
@@ -238,8 +238,12 @@ class AdminDiklat extends CI_Controller {
             redirect("adminDiklat/detailDiklat/$idk");
         }else{ redirect("login"); } 
     }
-
     public function loadimpor(){
+        if($this->mdl_admin->logged_id()){
+        $this->load->view('admin/karyawan/Diklat/impor2');
+        }else{ redirect("login"); }
+    }
+    public function loadimpor2(){
         if($this->mdl_admin->logged_id()){
         $this->load->view('admin/karyawan/Diklat/impor');
         }else{ redirect("login"); }
@@ -289,7 +293,52 @@ class AdminDiklat extends CI_Controller {
                 redirect('AdminDiklat');
             }
     }
+    public function impor2(){
+    include APPPATH."/libraries/PHPExcel.php";
+        if(isset($_FILES["file"]["name"]))
+            {
+                $path = $_FILES["file"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach($object->getWorksheetIterator() as $worksheet)
+                {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for($row=2; $row<=$highestRow; $row++)
+                    {   
+                        $nik = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $konek = mysqli_connect("localhost","root","","kepegawaian");
+                        $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$nik' "));
+                        $id=$data2['id_karyawan'];
+                        $nama_diklat= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $jenis_diklat= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $mulai = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $akhir = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $tahun= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $jam= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $nomor_sertif= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $file= $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $tgl_mulai = substr($mulai, 0,4)."-".substr($mulai, 5,2)."-".substr($mulai, 8,4);
+                        $tgl_akhir = substr($akhir, 0,4)."-".substr($akhir, 5,2)."-".substr($akhir, 8,4);
+                        $data[] = array(
+                            'id_karyawan'       =>    $id,
+                            'nama_diklat'        =>    $nama_diklat,
+                            'jenis_diklat'           =>    $jenis_diklat,
+                            'tgl_mulai'             =>    $tgl_mulai,
+                            'tgl_akhir'             =>    $tgl_akhir,
+                            'tahun'      =>    $tahun,
+                            'jam'             =>    time($jam),
+                            'nomor_sertif'              =>    $nomor_sertif,
+                            'file'              =>    $file,
+                        );
+                    }
+                }
+
+                $this->mdl_admin->impor('diklat',$data);
+                redirect('AdminDiklat/resume');
+            }
+    }
 }
+
 
 /* End of file admin.php */
 /* Location: ./application/controllers/admin.php */

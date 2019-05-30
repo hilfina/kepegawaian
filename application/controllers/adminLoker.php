@@ -11,6 +11,7 @@ class AdminLoker extends CI_Controller {
 		$this->load->model('mdl_home');
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
+        if($this->mdl_admin->logged_id() == null){ redirect("login");}
 	}
 	public function index()
 	{
@@ -23,6 +24,10 @@ class AdminLoker extends CI_Controller {
 			redirect("login");
 		}
 	}
+    public function lokerbuka(){
+        $paket['array']=$this->mdl_admin->getLoker2();
+        $this->load->view('admin/loker/allLoker2',$paket);
+    }
 
         public function addLoker(){
        if($this->mdl_admin->logged_id()){

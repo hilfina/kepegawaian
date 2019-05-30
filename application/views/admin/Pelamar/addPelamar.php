@@ -116,7 +116,7 @@
                 <select  class="form-control" name="id_profesi">
                   <option>-- Pilihan --</option>
                   <?php foreach ($array as $key) { ?>
-                    <option><?php echo $key->id_profesi; ?></option>
+                    <option><?php echo $key->nama_profesi; ?></option>
                   <?php } ?>
                 </select>
               </div>

@@ -271,20 +271,14 @@
                 <?php } ?>
               </li>
             <?php } elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '1') { ?>
-              <li>
-                <a title="Home" href="#">
-                  <span class="educate-icon educate-home icon-wrap"></span>
-                  <span class="mini-click-non">Home</span>
-                </a>
-              </li>
-              <li><a title="Cetak" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
+              <li><a title="Cetak" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li>
               <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
             <?php } elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '0') {?>
-                <li>
-                  <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>">
-                    <span class="mini-click-non">Aktivasi Akun</span>
-                  </a>
-                </li>
+              <li>
+                <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>">
+                  <span class="mini-click-non">Aktivasi Akun</span>
+                </a>
+              </li>
             <?php } elseif ($levelku == "Pelamar" && $statusku == "Calon Karyawan") { ?>
             <li>
               <li>

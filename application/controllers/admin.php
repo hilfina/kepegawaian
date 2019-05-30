@@ -356,6 +356,10 @@ class Admin extends CI_Controller {
         $paket['array']=$this->mdl_admin->getSurat();
         $this->load->view('admin/surat/allSurat',$paket);
     }
+     public function dataSurat2(){
+        $paket['array']=$this->mdl_admin->getSurat2();
+        $this->load->view('admin/surat/allSurat2',$paket);
+    }
 
     public function addSurat(){
        if($this->mdl_admin->logged_id()){

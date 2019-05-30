@@ -179,6 +179,7 @@ class AdminKaryawan extends CI_Controller {
             $alamat=$this->input->post('alamat');
             $no_telp=$this->input->post('no_telp');
             $email=$this->input->post('email');
+            $status=$this->input->post('status');
 
             $username=$this->input->post('username');
             $password=$this->input->post('password');
@@ -207,6 +208,7 @@ class AdminKaryawan extends CI_Controller {
                 'no_ktp' => $no_ktp,
                 'no_bpjs' => $no_bpjs,
                 'nama' => $nama,
+                'status' => $status,
                 'ttl' => date('Y-m-d',strtotime($ttl)),
                 'jenkel' => $jenkel,
                 'alamat' => $alamat,

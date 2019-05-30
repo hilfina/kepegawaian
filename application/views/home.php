@@ -19,7 +19,7 @@ $idku=$this->session->userdata("myId");
                 <div class="container-fluid">    
                   <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px;">                        
+                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">                        
                         <div class="student-dtl">                          
                           <h2>Karyawan</h2><hr>
                           <br>
@@ -35,7 +35,7 @@ $idku=$this->session->userdata("myId");
                       </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px;">                        
+                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">                        
                         <div class="student-dtl">                          
                           <h2>Pelamar</h2><hr>
                           <br>
@@ -44,14 +44,14 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $pelamar->banyak." Orang"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminPelamar/datapelamar') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>
                       </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px;">                        
+                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">                        
                         <div class="student-dtl">                          
                           <h2>Calon Karyawan</h2><hr>
                           <br>                          
@@ -60,7 +60,7 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $calon->banyak." Orang"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminLoker/dataCakar') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>
@@ -77,23 +77,23 @@ $idku=$this->session->userdata("myId");
                 <div class="container-fluid">    
                   <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px;">                        
+                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">                        
                         <div class="student-dtl">                          
-                          <h2>File Kadaluarsa</h2><hr>
+                          <h2>File SIP/STR Kadaluarsa</h2><hr>
                           <br>                         
-                          <?php if ($sipstr->banyak+$mou_h->banyak+$mou_s->banyak+$mou_k->banyak+$kreden->banyak+$mou_kl->banyak == 0) {
+                          <?php if ($sipstr->banyak == 0) {
                             echo "Tidak ada calon karyawan.";
                           }else{
-                            echo $sipstr->banyak+$mou_h->banyak+$mou_s->banyak+$mou_k->banyak+$kreden->banyak+$mou_kl->banyak." File"; ?>
+                            echo $sipstr->banyak." File"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminPelamar/') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
+                              <a href="<?php echo site_url('admin/dataSurat2') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>
                       </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px;">                        
+                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">                        
                         <div class="student-dtl">                          
                           <h2>Jadwal Seleksi</h2><hr>
                           <br>                         
@@ -109,7 +109,7 @@ $idku=$this->session->userdata("myId");
                       </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px;">                        
+                      <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">                        
                         <div class="student-dtl">                          
                           <h2>Lowongan Tersedia</h2><hr>
                           <br>                         
@@ -118,7 +118,7 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $loker->banyak." Lowongan"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminLoker/') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminLoker/lokerbuka') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>

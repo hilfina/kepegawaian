@@ -123,18 +123,14 @@
                     <strong>Sampai :</strong> <?php echo date('d - M - Y', strtotime($key->akhir));?> <br><br>
                     <strong>Jurusan :</strong> <?php echo $key->jurusan;?><br>
                     <strong>IPK Min :</strong> <?php echo $key->ipkmin;?><br>
-                    <?php echo $key->jenkel;?> <br><strong> dengan usia maks </strong> <?php echo $key->usia;?> tahun<br> 
-
-                    <br>
-                    <font color="red">
-                        <?php if ( date('y-m-d') <= date('y-m-d', strtotime($key->akhir))) {
-                            echo "Sedang Dibuka";
-                        }else{
-                            echo "Sudah Ditutup";
-                        }
-                        ?>
+                    <?php echo $key->jenkel;?> <br><strong> dengan usia maks </strong> <?php echo $key->usia;?> tahun<br> <br>
                     
-                    </font>
+                    <?php if ( date('y-m-d') <= date('y-m-d', strtotime($key->akhir))) {
+                        echo "<font color='green'>Sedang Dibuka</font>";
+                    }else{
+                        echo "<font color='red'>Sudah Ditutup</font>";
+                    }
+                    ?>
                 </p>
             </div>
             </div>

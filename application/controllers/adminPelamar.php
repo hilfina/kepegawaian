@@ -14,6 +14,7 @@ class AdminPelamar extends CI_Controller {
 		$this->load->library('form_validation','image_lib');
         $this->load->helper(array('url','download'));
         $this->load->library('email');
+        if($this->mdl_admin->logged_id() == null){ redirect("login");}
 	}
 
     //MENAMPILKAN DATA TABEL BERISI DATA PELAMAR
@@ -23,6 +24,14 @@ class AdminPelamar extends CI_Controller {
             $this->load->view('admin/pelamar/allPelamar',$paket);
 		}else{redirect("login");}
 	}
+    public function datapelamar(){
+        $paket['array']=$this->mdl_admin->getPelamar2();
+        $this->load->view('admin/pelamar/allPelamar2',$paket);
+    }
+    public function dataCakar(){
+        $paket['array']=$this->mdl_admin->getCakar();
+        $this->load->view('admin/pelamar/allCakar',$paket);
+    }
 
     //TAMBAH PELAMAR
     public function addPelamar(){
@@ -39,7 +48,8 @@ class AdminPelamar extends CI_Controller {
                 $email=$this->input->post('email');
                 $ttl=$this->input->post('ttl');
                 $jenkel=$this->input->post('jenkel');
-                $id_profesi=$this->input->post('id_profesi');
+                $nama_profesi=$this->input->post('id_profesi');
+                $npr=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT id_profesi from jenis_profesi where nama_profesi = '$nama_profesi'"));
                 $pendidikan=$this->input->post('pendidikan');
              
                 $dataKaryawan = array(
@@ -54,7 +64,7 @@ class AdminPelamar extends CI_Controller {
                 'jenkel ' => $jenkel ,
                 'foto' => 'profile.png',
                 'id_status' => 'Pelamar',
-                'id_profesi' => $id_profesi,
+                'id_profesi' => $npr['id_profesi'],
                 'id_golongan' => 'Tidak Ada'
                 );
 

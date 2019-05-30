@@ -9,11 +9,25 @@ class Mdl_admin extends CI_Model
         return $this->session->userdata('myId');
     }
 
-    //SEMUA DATA PELAMAR
+    //SEMUA DATA PELAMAR DAN CALON KARYAWAN
     public function getPelamar(){
-        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'"));
+        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'"));
         $hasil=$data['hsl'];
-        $query = $this->db->query("select * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $hasil");
+        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $hasil");
+        return $query->result();
+    }
+    //SEMUA DATA PELAMAR SAJA
+    public function getPelamar2(){
+        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'"));
+        $hasil=$data['hsl'];
+        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Pelamar' and id_profesi != 'Belum' group by k.id_karyawan order by mulai desc limit $hasil");
+        return $query->result();
+    }
+    //SEMUA DATA CALON KARYAWAN SAJA
+    public function getCakar(){
+        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'"));
+        $hasil=$data['hsl'];
+        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $hasil");
         return $query->result();
     }
     function resumeDiklat(){
@@ -39,14 +53,14 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("UPDATE golongan SET id_golongan = '$id_golongan' where id_karyawan = $id_karyawan AND aktif = 1 ");
     }
     function getData($table,$where){
-        $this->db->select("*");
+        $this->db->SELECT("*");
         $this->db->from($table);
         $this->db->where($where);
         $query = $this->db->get();
         return $query->result();
     }
      function getData2($table,$where){
-        $this->db->select("*");
+        $this->db->SELECT("*");
         $this->db->from($table);
         $this->db->where($where);
         $query = $this->db->get();
@@ -54,7 +68,7 @@ class Mdl_admin extends CI_Model
     }
 
     function getAlldata($table){
-        $this->db->select("*");
+        $this->db->SELECT("*");
         $this->db->from($table);
         $query = $this->db->get();
         return $query->result();
@@ -67,6 +81,11 @@ class Mdl_admin extends CI_Model
 
     function getSurat(){
         $query = $this->db->query("SELECT * FROM karyawan as k INNER JOIN sip_str as p on k.id_karyawan=p.id_karyawan inner join jenis_surat as s ON p.id_surat=s.id_surat ORDER by p.tgl_akhir asc ");
+        return $query->result();
+    }
+    function getSurat2(){
+        $tanggal = date('Y-m-d');
+        $query = $this->db->query("SELECT * FROM karyawan as k INNER JOIN sip_str as p on k.id_karyawan=p.id_karyawan inner join jenis_surat as s ON p.id_surat=s.id_surat where tgl_akhir < '$tanggal' ORDER by p.tgl_akhir asc ");
         return $query->result();
     }
 
@@ -105,7 +124,7 @@ class Mdl_admin extends CI_Model
     }
 
     public function getProfesi(){
-        $query = $this->db->query("SELECT * from jenis_profesi  where id_profesi != 'Belum'");
+        $query = $this->db->query("SELECT * from jenis_profesi as j where id_profesi != 'Belum'");
         return $query->result();
     }
     public function getRiwayat($id){
@@ -118,7 +137,12 @@ class Mdl_admin extends CI_Model
     }
 
     public function getLoker(){
-        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi");
+        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi order by akhir desc");
+        return $query->result();
+    }
+    public function getLoker2(){
+        $tdy = date('Y-m-d');
+        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' order by akhir desc");
         return $query->result();
     }
     public function getJenSur(){
