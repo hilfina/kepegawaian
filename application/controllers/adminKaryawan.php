@@ -31,7 +31,12 @@ class AdminKaryawan extends CI_Controller {
     
     public function addKaryawan(){//MENAMPILKAN FORM TAMBAH KARYAWAN DAN PROSES PENYIMPANANNYA
         if($this->mdl_admin->logged_id()){
-            $this->form_validation->set_rules('no_ktp','Nomor KTP','required|min_length[16]');
+            $this->form_validation->set_rules('nik','Nomor Induk Karyawan','trim|required');
+            $this->form_validation->set_rules('nama','Nama Karyawan','trim|required');
+            $this->form_validation->set_rules('no_ktp','Nomor KTP','trim|required');
+            $this->form_validation->set_rules('no_telp','Nomor Telepon','trim|required');
+            $this->form_validation->set_rules('email','Alamat Email','trim|required');
+            $this->form_validation->set_rules('alamat','Alamat','trim|required');
             if($this->form_validation->run()==FALSE){
 
                 $data['status']=$this->mdl_admin->getJenStatus();
@@ -50,7 +55,7 @@ class AdminKaryawan extends CI_Controller {
                 $email=$this->input->post('email');
                 $alamat=$this->input->post('alamat');  
                 $level=$this->input->post('level'); 
-                $tgl = date('d/m/Y');
+                $tgl = date('Y-d-m');
                 $cip=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
                 $dataKaryawan= array(
                 'id_profesi' => $cip['id_profesi'],
@@ -71,7 +76,8 @@ class AdminKaryawan extends CI_Controller {
                 if ($level == 'Karyawan'){
                     $dataLogin=array('username'=>$no_ktp, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
                 }else{
-                    $dataLogin=array('username'=>$nik, 'password'=>md5($nik), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                    $dataLogin1=array('username'=>$nik, 'password'=>md5($nik), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                    $this->mdl_admin->addData('login',$dataLogin1);
                 }
 
                 if ($level != 'admin' || $level != 'Super Admin'){
@@ -88,8 +94,8 @@ class AdminKaryawan extends CI_Controller {
                     $config['smtp_host']= "ssl://smtp.gmail.com";
                     $config['smtp_port']= "465";
                     $config['smtp_timeout']= "400";
-                    $config['smtp_user']= "sdirsiamalang@gmail.com";
-                    $config['smtp_pass']= "bismillah1!";
+                    $config['smtp_user']= "hilfinaamaris09@gmail.com";
+                    $config['smtp_pass']= "hilfano090798";
                     $config['crlf']="\r\n"; 
                     $config['newline']="\r\n"; 
                     $config['wordwrap'] = TRUE;
@@ -787,11 +793,10 @@ class AdminKaryawan extends CI_Controller {
                 $email= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
                 $jenkel= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
                 $id_status = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-                $jabatan = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-                $id_profesi= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-                $id_golongan= $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                $id_profesi= $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                $id_golongan= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
 
-
+                $tgl = date('Y-d-m');
                 $konek =mysqli_connect("localhost","root","","kepegawaian");
                 $cip=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
                     
@@ -806,20 +811,25 @@ class AdminKaryawan extends CI_Controller {
                     'foto' => 'profile.png',
                     'jenkel' => $jenkel,
                     'email' => $email,
-                    'jabatan' => $jabatan,
+                    'jabatan' =>1,
                     'alamat' => $alamat
                 );
 
                 $this->mdl_admin->impor('karyawan',$data1);
                 $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_karyawan from karyawan where nik = '$nik'"));
+                $cip=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select id_profesi from jenis_profesi where nama_profesi ='$id_profesi'"));
                 $data2[]=array(
-                    'username'=>$nik, 
+                    'username'=>$no_ktp, 
                     'password'=>md5($no_ktp), 
                     'level'=>'Karyawan', 
                     'aktif'=>0, 
                     'id_karyawan'=>$cariId['id_karyawan']
                 );
 
+                $data3[]=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
+                $data4[]=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
+                $data5[]=array('id_karyawan'=>$cariId['id_karyawan'], 'id_golongan'=>$id_golongan, 'mulai' => $tgl);
+               
                 $config = array();
                 $config['charset'] = 'utf-8';
                 $config['useragent'] = 'CodeIgniter';
@@ -828,8 +838,8 @@ class AdminKaryawan extends CI_Controller {
                 $config['smtp_host']= "ssl://smtp.gmail.com";
                 $config['smtp_port']= "465";
                 $config['smtp_timeout']= "400";
-                $config['smtp_user']= "sdirsiamalang@gmail.com";
-                $config['smtp_pass']= "bismillah1!";
+                $config['smtp_user']= "hilfinaamaris09@gmail.com";
+                $config['smtp_pass']= "hilfano090798";
                 $config['crlf']="\r\n"; 
                 $config['newline']="\r\n"; 
                 $config['wordwrap'] = TRUE;
@@ -840,13 +850,16 @@ class AdminKaryawan extends CI_Controller {
                 $this->email->subject("Verifikasi Akun");
                 $this->email->message(
                     "Terimakasih telah melakukan registrasi pada Sistem Infromasi Kepegawaian RSIA,<br>
-                    username: nomor induk karyawan. <br>
+                    username: nomor ktp anda. <br>
                     password: nomor ktp anda.<br>
                     untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
                     "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
                 );
                 if($this->email->send()){
                     $this->mdl_admin->impor('login',$data2);
+                    $this->mdl_admin->impor('riwayat',$data3);
+                    $this->mdl_admin->impor('status',$data4);
+                    $this->mdl_admin->impor('golongan',$data5);
                 }else{}
             }
         }echo "<script>alert('Berhasil Menambahkan Data'); document.location.href = '" . site_url('Adminkaryawan') . "';</script>";

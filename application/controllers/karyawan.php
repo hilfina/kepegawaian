@@ -135,7 +135,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'pdf|docx';
+			$config['allowed_types']	= 'pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -194,7 +194,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'pdf/docx';
+			$config['allowed_types']	= 'pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -322,7 +322,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx';
+			$config['allowed_types']	= 'pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -394,7 +394,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'jpg|pdf|docx';
+			$config['allowed_types']	= 'jpg|pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -441,7 +441,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx';
+			$config['allowed_types']	= 'jpg|pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -502,7 +502,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx|png';
+			$config['allowed_types']	= 'jpg|pdf|png';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -558,7 +558,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx|png';
+			$config['allowed_types']	= 'jpg|pdf|png';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -627,7 +627,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx|png';
+			$config['allowed_types']	= 'jpg|pdf|png';
 
 			$this->load->library('upload', $config);
 
@@ -668,7 +668,7 @@ class Karyawan extends CI_Controller {
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx|png';
+			$config['allowed_types']	= 'jpg|pdf|png';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;

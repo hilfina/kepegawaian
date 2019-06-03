@@ -177,7 +177,7 @@
 
                           </tr> 
                           </table>
-                          <table>
+                          <table width="100%">
                           <div class="skill-title"> <br>
                           <h2>Data Profesi</h2> <hr />
                           </div>                    

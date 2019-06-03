@@ -149,7 +149,7 @@ $this->load->view("header.php");
                             </div>
                             <input type="text" id="prepend-big-btn" placeholder="no file selected">
                           </div>
-                          <font size="2" color="red">*Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2 mb </font><br><br><br>
+                          <font size="2" color="red">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font><br><br><br>
                           
                         </div>
                       </div>
