@@ -109,12 +109,16 @@ $this->load->view("header.php");
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
-                                        <label>Foto Scan Dokumen</label>
+                                        <label>Unduh Scan Dokumen</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->file?>" width="400"/>   
+                                        <?php if(($key->file) != NULL){?>
+                                            <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                                <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                            </a>   
+                                        <?php }?>   
                                     </div>
                                 </div>
                             </div>

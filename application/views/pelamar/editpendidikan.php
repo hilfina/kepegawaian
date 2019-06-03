@@ -127,10 +127,12 @@ $this->load->view("header.php");
                                                     <label class="icon-right" for="prepend-big-btn">
                                                         <i class="fa fa-download"></i>
                                                     </label>
+
                                                     <div class="file-button">
                                                     Browse
-                                                        <input type="text" value="<?php echo $key->file_old;?>">
-                                                        <input type="file" name="file" value="<?php echo $key->file;?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                                         
+                                                  <input type="file" name="file_old" value="<?php echo $key->file?>" hidden>
+                                                  <input type="file" name="file" value="<?php echo $key->file?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                                                     </div>
                                                     <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->file;?>">
                                               </div>

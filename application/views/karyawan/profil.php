@@ -24,7 +24,7 @@
           <br>
             <div class="alert alert-info"><b>Perhatian !</b><br>
                 Pada data pribadi, karyawan hanya dapat mengubah foto profil saja.<br>
-                ukuran foto profil berupa 300x400 dan berformat jpg/png.
+                ukuran foto profil maksimal 400x400, berformat jpg/png, tidak lebih dari 2 mb.
             </div>
         </div>
       </div>
@@ -128,18 +128,35 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Tempat Tanggal Lahir</label></td>
-                                        <td style="height: 50px">
-                                          <div class="col-lg-12">
-                                            <input style="background-color: white " name="ttl" type="text" class="form-control" value="<?php echo $key->ttl;?>">
-                                          </div>
-                                        </td>
-                                      </tr>
+                                      <td><label form-control-label>Tanggal Lahir</label></td>
+                                      <td style="height: 50px">
+                                        <div class="col-lg-12">
+                                        <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                        <div class="input-daterange input-group" id="datepicker">
+                                          <?php if ($key->ttl != "0000-00-00") { ?>
+                                           <input name="ttl" type="text" class="form-control" value="<?php echo date('Y/m/d', strtotime($key->ttl));?>">
+                                          <?php }else{ ?>
+                                            <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                                              <div class="input-daterange input-group" id="datepicker">
+                                                <input type="text" class="form-control" name="ttl" />
+                                              </div>
+                                            </div>
+                                          <?php }?>
+                                        </div>
+                                        </div>
+                                        </div>
+                                      </td>
+                                    </tr>
                                       <tr>
                                         <td><label form-control-label">Jenis kelamin</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="jenkel" type="text" class="form-control" value="<?php echo $key->jenkel;?>">
+                                            <select  class="form-control" name="jenkel">
+                                              <option><?php echo $key->jenkel;?></option>
+                                              <option>---Pilih: -----</option>
+                                              <option>Laki-laki</option>
+                                              <option>Perempuan</option>
+                                            </select>
                                           </div>
                                         </td>
                                       </tr>
@@ -168,10 +185,49 @@
                                         </td>
                                       </tr>
                                       <tr>
+                                      <td><label form-control-label>Status Perkawinan</label></td>
+                                      <td style="height: 50px">
+                                        <div class="col-lg-12">
+                                        <select  class="form-control" name="status">
+                                          <?php if ($key->status == "") {
+                                            echo "<option> -- Pilihan -- </option>";
+                                          }else{ ?>
+                                            <option><?php echo $key->status;?></option>
+                                          <?php } ?>
+                                          <option>Sudah Menikah</option>
+                                          <option>Belum Menikah</option>
+                                          <option>Janda</option>
+                                          <option>Duda</option>
+                                        </select>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td><label form-control-label>Jumlah Anak</label></td>
+                                      <td style="height: 50px">
+                                        <div class="col-lg-12">
+                                        <select  class="form-control" name="anak">
+                                          <?php if ($key->anak == "") {
+                                            echo "<option> -- Pilihan -- </option>";
+                                          }else{ ?>
+                                            <option><?php echo $key->anak;?></option>
+                                          <?php } ?>
+                                          <option>Tidak Ada</option>
+                                          <option>1</option>
+                                          <option>2</option>
+                                          <option>3</option>
+                                          <option>Lebih dari 3</option>
+                                        </select>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <br>
+                                      <tr>
                                         <td><label form-control-label">Profesi</label></td>
                                         <td style="height: 50px">
+                                         <font color="red" size="2">*profesi, status kepegawaian, golongan dan penempatan hanya dapat diubah sesuai kehendak HRD</font>
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="email" type="text" class="form-control" value="<?php echo $key->id_profesi; ?>">
+                                            <input style="background-color: white " name="email" type="text" class="form-control" value="<?php echo $key->id_profesi; ?>" disabled>
                                           </div>
                                         </td>
                                       </tr>
@@ -179,7 +235,7 @@
                                         <td><label form-control-label">Status Kepegawaian</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="id_status" type="text" class="form-control" value="<?php echo $key->id_status; ?>">
+                                            <input style="background-color: white " name="id_status" type="text" class="form-control" value="<?php echo $key->id_status; ?>"  disabled>
                                           </div>
                                         </td>
                                       </tr>
@@ -187,7 +243,7 @@
                                         <td><label form-control-label">Jabatan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="jabatan" type="text" class="form-control" value="<?php echo $key->jabatan; ?>">
+                                            <input style="background-color: white " name="jabatan" type="text" class="form-control" value="<?php echo $key->jabatan; ?>"  disabled>
                                           </div>
                                         </td>
                                       </tr>
@@ -195,7 +251,7 @@
                                         <td><label form-control-label">Golongan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="id_golongan" type="text" class="form-control" value="<?php echo $key->id_golongan; ?>">
+                                            <input style="background-color: white " name="id_golongan" type="text" class="form-control" value="<?php echo $key->id_golongan; ?>" disabled>
                                           </div>
                                         </td>
                                       </tr>
@@ -203,7 +259,7 @@
                                         <td><label form-control-label">Penempatan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
-                                            <input style="background-color: white " name="ruangan" type="text" class="form-control" value="<?php echo $key->ruangan; ?>">
+                                            <input style="background-color: white " name="ruangan" type="text" class="form-control" value="<?php echo $key->ruangan; ?>" disabled>
                                           </div>
                                         </td>
                                       </tr>
@@ -224,11 +280,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Riwayat Penempatan
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#11">Riwayat Penempatan
                                           </a>
                                         </h4>
                                     </div>
-                                    <div id="collapse1" class="panel-collapse panel-ic collapse in">
+                                    <div id="11" class="panel-collapse panel-ic collapse in">
                                         <div class="panel-body admin-panel-content ">
                                         <p>Berisi daftar riwayat unit yang pernah anda tempati.</p>
                                             <div class="static-table-list">
@@ -260,11 +316,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#22">
                                             Riwayat Status</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse2" class="panel-collapse panel-ic collapse">
+                                    <div id="22" class="panel-collapse panel-ic collapse">
                                         <div class="panel-body admin-panel-content ">
                                         <p>Berisi daftar riwayat status pekerjaan anda</p>
                                             <div class="static-table-list">
@@ -306,11 +362,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#33">
                                          Riwayat Golongan</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse3" class="panel-collapse panel-ic collapse">
+                                    <div id="33" class="panel-collapse panel-ic collapse">
                                         <div class="panel-body admin-panel-content ">
                                         <p>Berisi daftar riwayat golongan karyawan anda.</p>
                                             <div class="static-table-list">
@@ -352,11 +408,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#44">
                                          Riwayat Berkala</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse4" class="panel-collapse panel-ic collapse">
+                                    <div id="44" class="panel-collapse panel-ic collapse">
                                         <div class="panel-body admin-panel-content ">
                                         <p>Berisi daftar riwayat berkala karyawan anda.</p>
                                             <div class="static-table-list">
@@ -408,13 +464,13 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#1">MOU Sekolah
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#1">MOU Pendidikan
                                           </a>
                                         </h4>
                                     </div>
                                     <div id="1" class="panel-collapse panel-ic collapse in">
                                         <div class="panel-body admin-panel-content ">
-                                        <p>Berisi daftar MOU Sekolah anda.</p>
+                                        <p>Berisi daftar MOU Pendidikan anda.</p>
                                             <div class="static-table-list">
                                                   <table class="table">
                                                       <thead>
@@ -587,6 +643,45 @@
                                                                 <b style="color: red">Belum Aktif</b>
                                                               <?php } ?>  
                                                               </td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#5">
+                                            MOU Pelatihan</a>
+                                        </h4>
+                                    </div>
+                                    <div id="5" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Pelatihan anda</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Keterangan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($moup as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->ket?></td>
+
                                                           </tr>
                                                       </tbody>
                                                       <?php } ?>

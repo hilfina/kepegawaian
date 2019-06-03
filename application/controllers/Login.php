@@ -110,19 +110,18 @@ class Login extends CI_Controller {
 
                 redirect('login/ubahpass');
             } else {
-                $password = md5($this->input->post('pw_baru'));
+                $password = $this->input->post('pw_baru');
             }
 
 			
 		    $data = array(
-		        'password' => $password,
+		        'password' => md5($password)
 
 		    );
 		    $where = array(
 			'id_karyawan' => $id
 			);
-
-		    $update = $this->mdl_pelamar->updatedata($where,$data,'login');
+			$this->mdl_admin->updatelogin($data,$id);
 			redirect('home');
 		}
 		

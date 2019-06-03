@@ -22,7 +22,7 @@ class Karyawan extends CI_Controller {
 	{
 		if($this->admin_model->logged_id())
 		{
-			$this->load->view("dashboard");
+			$this->load->view("homee");
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -53,6 +53,7 @@ class Karyawan extends CI_Controller {
         $paket['mouk']=$this->mdl_karyawan->getMouk($id);
         $paket['mouh']=$this->mdl_karyawan->getMouh($id);
         $paket['moui']=$this->mdl_karyawan->getData('mou_klinis', $where);
+        $paket['moup']=$this->mdl_karyawan->getData('mou_pelatihan', $where);
         $paket['urai']=$this->mdl_karyawan->getData('uraian_tugas',$where);
 
 		$this->load->view('karyawan/profil',$paket);
@@ -63,10 +64,8 @@ class Karyawan extends CI_Controller {
 	$config['upload_path']		= './Assets/gambar/';
 	$config['allowed_types']	= 'jpg|png';
 	$config['max_size']			= 2000;
-	$config['max_width']		= 300;
+	$config['max_width']		= 400;
 	$config['max_height']		= 400;
-	$config['min_width']		= 300;
-	$config['min_height']		= 400;
 
 	$this->load->library('upload', $config);
 
@@ -78,8 +77,9 @@ class Karyawan extends CI_Controller {
 	$alamat = $this->input->post('alamat');
 	$no_telp = $this->input->post('no_telp');
 	$email = $this->input->post('email');
-
-$jenkel = $this->input->post('jenkel');
+	$status = $this->input->post('status');
+	$anak = $this->input->post('anak');
+	$jenkel = $this->input->post('jenkel');
 	$ttl = $this->input->post('ttl');
 
 	if($_FILES['fotosaya']['name'] != '') {
@@ -105,7 +105,9 @@ $jenkel = $this->input->post('jenkel');
 		'email' => $email,
 		'ttl' => $ttl,
 		'jenkel' => $jenkel,
-		'foto' => $fotosaya
+		'foto' => $fotosaya,
+		'status' => $status,
+		'anak' => $anak
 	);
  
 	$where = array(
@@ -134,7 +136,7 @@ $jenkel = $this->input->post('jenkel');
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'pdf|docx';
+			$config['allowed_types']	= 'pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -193,7 +195,7 @@ $jenkel = $this->input->post('jenkel');
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'pdf/docx';
+			$config['allowed_types']	= 'pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -321,7 +323,7 @@ $jenkel = $this->input->post('jenkel');
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx';
+			$config['allowed_types']	= 'pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -393,7 +395,7 @@ $jenkel = $this->input->post('jenkel');
 		}
 		else{
 			$config['upload_path']		= './Assets/gambar/';
-			$config['allowed_types']	= 'jpg|pdf|docx';
+			$config['allowed_types']	= 'jpg|pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -440,7 +442,7 @@ $jenkel = $this->input->post('jenkel');
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx';
+			$config['allowed_types']	= 'jpg|pdf';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -501,7 +503,7 @@ $jenkel = $this->input->post('jenkel');
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx|png';
+			$config['allowed_types']	= 'jpg|pdf|png';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -557,7 +559,7 @@ $jenkel = $this->input->post('jenkel');
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx|png';
+			$config['allowed_types']	= 'jpg|pdf|png';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;
@@ -626,7 +628,7 @@ $jenkel = $this->input->post('jenkel');
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx|png';
+			$config['allowed_types']	= 'jpg|pdf|png';
 
 			$this->load->library('upload', $config);
 
@@ -667,7 +669,7 @@ $jenkel = $this->input->post('jenkel');
 		}
 		else{
 			$config['upload_path']		= './Assets/dokumen/';
-			$config['allowed_types']	= 'jpg|pdf|docx|png';
+			$config['allowed_types']	= 'jpg|pdf|png';
 			$config['max_size']			= 2000;
 			$config['max_width']		= 10240;
 			$config['max_height']		= 7680;

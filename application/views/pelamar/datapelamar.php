@@ -25,7 +25,7 @@
           </div>
           <br>
           <div class="alert alert-info"><b>Perhatian !</b><br>
-            Ukuran foto profil yang diupload berupa 3x4, berformat jpg/png, maksimal berukuran 2mb.
+            Ukuran foto profil yang diupload maksimal 400x400, berformat jpg/png, dan tidak lebih dari 2mb.
           </div>
         </div>
       </div>
@@ -165,6 +165,24 @@
                               <td style="height: 50px; width: 80%">
                                 <div class="col-lg-12">
                                   <input name="email" type="text" class="form-control" value="<?php echo $key->email; ?>">
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><label form-control-label>Status Perkawinan</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                <select  class="form-control" name="status">
+                                  <?php if ($key->status == "") {
+                                  echo "<option> -- Pilihan --</option>";
+                                  }else{
+                                    echo "<option>".$key->status."</option>";
+                                  }?>
+                                  <option>Sudah Menikah</option>
+                                  <option>Belum Menikah</option>
+                                  <option>Janda</option>
+                                  <option>Duda</option>
+                                </select>
                                 </div>
                               </td>
                             </tr>

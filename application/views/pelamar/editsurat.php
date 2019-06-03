@@ -117,13 +117,13 @@ $this->load->view("header.php");
                                               </label>
                                               <div class="file-button">
                                                   Browse
-                                                  <input type="text" value="<?php echo $key->file_old;?>">
+                                                  <input type="file" name="file_old" value="<?php echo $key->file?>" hidden>
                                                   <input type="file" name="file" value="<?php echo $key->file?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                                               </div>
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->file?>">
                                           </div>
                                         </div>
-                                    <font size="2">Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2 mb </font>
+                                    <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
                                 </div>
                             </div>

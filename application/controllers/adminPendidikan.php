@@ -129,7 +129,6 @@ class AdminPendidikan extends CI_Controller {
                         'pendidikan'=>$pendidikan,
                         'jurusan' => $jurusan,
                         'nilai' => $nilai,
-                        'id_karyawan' => $id_karyawan,
                         'mulai'=>$mulai,
                         'akhir'=>$akhir,
                         'nomor_ijazah'=>$nomor_ijazah,

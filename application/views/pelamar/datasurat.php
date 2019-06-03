@@ -20,6 +20,10 @@ $this->load->view("header.php");
                                 </ul>
                             </div>
                         </div>
+                        <br>
+                        <div class="alert alert-info"><b>Perhatian !</b><br>
+                        Menu data surat hanya di penuhi apabila anda mendaftar pada lowongan medis.
+                      </div>
                     </div>
                 </div>
             </div>
@@ -73,15 +77,11 @@ $this->load->view("header.php");
                                         <?php } ?>
                                         </td>
                                         <td>
-                                        <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) && $key->file != NULL){ ?>
-                                        <a href="<?php echo site_url('pelamar/detailsurat/').$key->id_sipstr ?>">   
-                                        <button data-toggle="tooltip" title="detail" class="pd-setting-ed"><i class="fa fa-eye"></i>   Detail</button> </a>
-                                        <?php }else{ ?>
                                         <a href="<?php echo site_url('pelamar/editsurat/').$key->id_sipstr ?>">
                                         <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                         <a href="<?php echo site_url('pelamar/hapussurat/').$key->id_sipstr ?>" onclick="return confirm('Are you sure you want to delete this item?');">
                                         <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
-                                        <?php } ?>
+                                        
                                         </td>
                                     </tr>
                                     <?php }  ?>

@@ -110,6 +110,7 @@ $this->load->view("header.php");
                                         <label>Jam Diklat</label>
                                     </div>
                                 </div>
+                                
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-daterange input-group" id="datepicker">
                                         <input type="text" class="form-control" name="jam" value="<?php echo $kei->jam?>"><p></p>

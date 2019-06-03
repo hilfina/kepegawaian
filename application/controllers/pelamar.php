@@ -142,10 +142,8 @@ class pelamar extends CI_Controller {
 			$config['upload_path']		= './Assets/gambar/';
 			$config['allowed_types']	= 'jpg|png';
 			$config['max_size']			= 2000;
-			$config['max_width']		= 300;
+			$config['max_width']		= 400;
 			$config['max_height']		= 400;
-			$config['min_width']		= 300;
-			$config['min_height']		= 400;
 			$this->load->library('upload', $config);
 
 			$id=$this->session->userdata('myId');
@@ -157,6 +155,7 @@ class pelamar extends CI_Controller {
 			$email = $this->input->post('email');
 			$ttl = $this->input->post('ttl');
 			$jenkel = $this->input->post('jenkel');
+			$status = $this->input->post('status');
 			
 			if($_FILES['fotosaya']['name'] != '') {
 		        if(!$this->upload->do_upload('fotosaya')) {
@@ -176,6 +175,7 @@ class pelamar extends CI_Controller {
 				'email' => $email,
 				'ttl' => $ttl,
 				'jenkel' => $jenkel,
+				'status' => $status,
 				'foto' => $fotosaya
 			);
 			$where = array( 'id_karyawan' => $id );

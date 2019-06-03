@@ -358,6 +358,13 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT MIN(mulai) as tgl FROM status WHERE id_karyawan = '$id' AND id_status = 'Kontrak'");
         return $query->row();
     }
+    public function updatelogin($array, $id)
+    {
+        $this->db->where('id_karyawan', $id);
+        $this->db->where('level', 'Karyawan');
+        $query = $this->db->update('login',$array);
+
+    }
 
 }
  

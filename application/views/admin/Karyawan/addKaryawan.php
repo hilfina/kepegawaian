@@ -39,8 +39,8 @@
           <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <div class="alert alert-info"><b>Perhatian !</b><br>
                 Dengan menambahkan data pada form dibawah, <br>
-                
-                User tersebut akan mendapat username nomor NIK dan Password berupa nomor ktp.
+                User dengan hak akses Karyawan akan mendapat username dan password berupa nomor ktp.<br>
+                Sedangkan user dengan hak akses Admin atau Super Admin akan mendapat username dan password berupa nomor NIK.
             </div>
           <form action="<?php echo site_url();?>/adminKaryawan/addKaryawan/" enctype="multipart/form-data" method="POST">
           <table width="100%">
@@ -48,7 +48,7 @@
               <td width="30%"><label form-control-label>Nomor Induk Karyawan</label></td>
               <td style="height: 50px" width="70%">
                 <div class="col-lg-12">
-                  <input name="nik" type="text" class="form-control" placeholder="Nomor Induk Karyawan" style="width:100%">
+                  <input name="nik" type="text" class="form-control" placeholder="Nomor Induk Karyawan" style="width:100%" >
                 </div>
               </td>
             </tr>
@@ -56,7 +56,8 @@
             <td><label form-control-label>Nomor KTP</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="no_ktp" type="text" class="form-control" placeholder="Nomor KTP (Kartu Tanda Penduduk)">
+                <input name="no_ktp" type="text" class="form-control" placeholder="Nomor KTP (Kartu Tanda Penduduk)" data-msg="Angka pada nomor ktp harus 16 huruf" data-rule="minlen:16">
+                <div class="validation_errors"></div>
               </div>
             </td>
           </tr>

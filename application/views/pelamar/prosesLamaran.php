@@ -9,7 +9,10 @@ $idku=$this->session->userdata("myId");
         <div class="breadcome-list single-page-breadcome">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
-              <h3 align="center"><b>Proses Seleksi Anda Sebagai <?php foreach ($datDir as $k) {echo $k->id_profesi; } ?></b></h3>
+              <h3 align="center"><b>Proses Seleksi Anda Sebagai <?php foreach ($datDir as $k) { $nama=$k->id_profesi; } 
+              $konek = mysqli_connect("localhost","root","","kepegawaian");
+                $data2=mysqli_fetch_array(mysqli_query($konek,"select nama_profesi from jenis_profesi as j inner join karyawan as k on k.id_profesi=j.id_profesi where k.id_profesi = '$nama' "));
+                echo $data2['nama_profesi'];;?></b></h3>
               <hr style="border: solid 2px; width: 250px; background-color: black">
               <hr style="border: solid 1px; width: 200px; background-color: black">
             </div>            

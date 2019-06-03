@@ -31,7 +31,7 @@
       </tr>
       
           <tr>
-              <td rowspan="3" width="40%" style="padding: 2px;" > <img src="Assets/gambar/<?php echo $key->foto;?>" alt="" width="160"/></td>
+              <td rowspan="3" width="40%" style="padding: 2px;" > <img src="Assets/gambar/<?php echo $key->foto;?>" alt="" width="130"/></td>
               <td align="center"> <b style="
               font-size: 19px; 
               font-family:  merriweather, serif;"> Kartu Peserta Seleksi </b> </td>

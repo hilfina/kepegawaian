@@ -115,7 +115,7 @@
                             </td>
                           </tr>
                           <tr>
-                            <td><label form-control-label>Status</label></td>
+                            <td><label form-control-label>Status Perkawinan</label></td>
                             <td style="height: 50px">
                               <div class="col-lg-12">
                               <select  class="form-control" name="status">
@@ -126,6 +126,27 @@
                                 <?php } ?>
                                 <option>Sudah Menikah</option>
                                 <option>Belum Menikah</option>
+                                <option>Janda</option>
+                                <option>Duda</option>
+                              </select>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><label form-control-label>Jumlah Anak</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                              <select  class="form-control" name="anak">
+                                <?php if ($key->anak == "") {
+                                  echo "<option> -- Pilihan -- </option>";
+                                }else{ ?>
+                                  <option><?php echo $key->anak;?></option>
+                                <?php } ?>
+                                <option>Tidak Ada</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>Lebih dari 3</option>
                               </select>
                               </div>
                             </td>
@@ -154,12 +175,17 @@
                               </div>
                             </td>
 
-                          </tr>                     
+                          </tr> 
+                          </table>
+                          <table width="100%">
+                          <div class="skill-title"> <br>
+                          <h2>Data Profesi</h2> <hr />
+                          </div>                    
                           <tr>
                             <td><label form-control-label>Profesi</label></td>
                             <td style="height: 50px">                              
                               <div class="col-lg-12">
-                                <font color="red" size="2">*data profesi, status kepegawaian, golongan dan penempatan dapat diubah sesuai kehendak HRD</font>
+                                <font color="red" size="2">*profesi, status kepegawaian, golongan dan penempatan dapat diubah sesuai kehendak HRD</font>
                                 <select  class="form-control" name="id_profesi">
                                   <option><?php echo $key->nama_profesi; ?></option>
                                   <option>Pilihan Lainnya:</option>
@@ -232,7 +258,7 @@
                               <div class="col-lg-12">
                               <?php foreach ($log as $key123) {?>
                                 <input name="username" type="text" class="form-control" value="<?php echo $key123->username; ?>">
-                              <?php } ?>
+                              <?php break; } ?>
                               </div>
                             </td>
                           </tr>
@@ -242,7 +268,7 @@
                               <div class="col-lg-12">
                               <?php foreach ($log as $key123) {?>
                                 <input name="password" type="text" class="form-control" value="<?php echo $key123->password; ?>">
-                              <?php } ?>
+                              <?php break; } ?>
                               </div>
                             </td>
                           </tr>   

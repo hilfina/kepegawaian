@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/notifications/notifications.css">
     <!-- favicon
         ============================================ -->
-    <link rel="shortcut icon" type="template/image/x-icon" href="<?php echo base_url()?>Assets/img/favicon.ico">
+    <link rel="icon" type="image/png" href="<?=base_url()?>Assets/login/images/logo.png"/>
     <!-- Google Fonts
         ============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -282,7 +282,7 @@
             <?php } elseif ($levelku == "Pelamar" && $statusku == "Calon Karyawan") { ?>
             <li>
               <li>
-                <a title="Home" href="#">
+                <a title="Home" href="<?php echo site_url('home/bukanAdmin') ?>">
                   <span class="educate-icon educate-home icon-wrap"></span>
                   <span class="mini-click-non">Home</span></a>
               </li>
@@ -297,7 +297,7 @@
             </li>
             <?php } elseif ($levelku == "Karyawan" && $aktifku == '1')  { ?>
             <li>
-              <a title="Home" href="#">
+              <a title="Home" href="<?php echo site_url('home/bukanAdmin') ?>">
                 <span class="educate-icon educate-home icon-wrap"></span>
                 <span class="mini-click-non">Home</span>
               </a>
@@ -361,7 +361,7 @@
                   <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <div class="header-right-info">
                       <ul class="nav navbar-nav mai-top-nav header-right-menu">
-                        <?php if($levelku == "admin"){ ?>
+                        <?php if($levelku == "admin" || $levelku == "Super Admin"){ ?>
                           <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-bell" aria-hidden="true"></i><span class="indicator-nt"></span></a>
                           <div role="menu" class="notification-author dropdown-menu animated zoomIn">
                             <div class="notification-single-top">
@@ -742,8 +742,10 @@
                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                           </a>
                           <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                          <?php if($levelku == "Karyawan"){?> 
                             <li><a href="<?php echo site_url('Login/ubahpass')?>"><span class="edu-icon edu-settings author-log-ic"></span>Ubah Sandi</a>
                             </li>
+                            <?php } else {}?>
                             <li><a href="<?php echo site_url('admin/logout')?>"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                             </li>
                           </ul>
