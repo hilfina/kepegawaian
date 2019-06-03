@@ -74,11 +74,12 @@ class AdminKaryawan extends CI_Controller {
                 $this->mdl_admin->addData('karyawan',$dataKaryawan);
                 $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where nik = '$nik'"));
                 
-                    $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
+                $dataLogin2=array('username'=>$nik, 'password'=>md5($nik), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
                 
                 
 
-                if ($level != 'admin' || $level != 'Super Admin'){
+                if ($level != "admin" && $level != "Super Admin"){
                     
                     $dataRiwayat=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
                     $dataStatus=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
@@ -123,7 +124,7 @@ class AdminKaryawan extends CI_Controller {
                     }
                     
                 }else {
-                    
+                    $this->mdl_admin->addData('login',$dataLogin2);
                 }
                 redirect("adminKaryawan");
             }
