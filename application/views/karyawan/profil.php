@@ -280,11 +280,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Riwayat Penempatan
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#11">Riwayat Penempatan
                                           </a>
                                         </h4>
                                     </div>
-                                    <div id="collapse1" class="panel-collapse panel-ic collapse in">
+                                    <div id="11" class="panel-collapse panel-ic collapse in">
                                         <div class="panel-body admin-panel-content ">
                                         <p>Berisi daftar riwayat unit yang pernah anda tempati.</p>
                                             <div class="static-table-list">
@@ -316,11 +316,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#22">
                                             Riwayat Status</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse2" class="panel-collapse panel-ic collapse">
+                                    <div id="22" class="panel-collapse panel-ic collapse">
                                         <div class="panel-body admin-panel-content ">
                                         <p>Berisi daftar riwayat status pekerjaan anda</p>
                                             <div class="static-table-list">
@@ -362,11 +362,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#33">
                                          Riwayat Golongan</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse3" class="panel-collapse panel-ic collapse">
+                                    <div id="33" class="panel-collapse panel-ic collapse">
                                         <div class="panel-body admin-panel-content ">
                                         <p>Berisi daftar riwayat golongan karyawan anda.</p>
                                             <div class="static-table-list">
@@ -408,11 +408,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#44">
                                          Riwayat Berkala</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse4" class="panel-collapse panel-ic collapse">
+                                    <div id="44" class="panel-collapse panel-ic collapse">
                                         <div class="panel-body admin-panel-content ">
                                         <p>Berisi daftar riwayat berkala karyawan anda.</p>
                                             <div class="static-table-list">
@@ -464,13 +464,13 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#1">MOU Sekolah
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#1">MOU Pendidikan
                                           </a>
                                         </h4>
                                     </div>
                                     <div id="1" class="panel-collapse panel-ic collapse in">
                                         <div class="panel-body admin-panel-content ">
-                                        <p>Berisi daftar MOU Sekolah anda.</p>
+                                        <p>Berisi daftar MOU Pendidikan anda.</p>
                                             <div class="static-table-list">
                                                   <table class="table">
                                                       <thead>
@@ -643,6 +643,45 @@
                                                                 <b style="color: red">Belum Aktif</b>
                                                               <?php } ?>  
                                                               </td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#5">
+                                            MOU Pelatihan</a>
+                                        </h4>
+                                    </div>
+                                    <div id="5" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Pelatihan anda</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Keterangan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($moup as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->ket?></td>
+
                                                           </tr>
                                                       </tbody>
                                                       <?php } ?>

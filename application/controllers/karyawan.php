@@ -53,6 +53,7 @@ class Karyawan extends CI_Controller {
         $paket['mouk']=$this->mdl_karyawan->getMouk($id);
         $paket['mouh']=$this->mdl_karyawan->getMouh($id);
         $paket['moui']=$this->mdl_karyawan->getData('mou_klinis', $where);
+        $paket['moup']=$this->mdl_karyawan->getData('mou_pelatihan', $where);
         $paket['urai']=$this->mdl_karyawan->getData('uraian_tugas',$where);
 
 		$this->load->view('karyawan/profil',$paket);
