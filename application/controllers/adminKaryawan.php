@@ -2,17 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminKaryawan extends CI_Controller {
-	private $filename = "import_data";
-	public function __construct()
-	{
-		parent::__construct();
+    private $filename = "import_data";
+    public function __construct()
+    {
+        parent::__construct();
         $this->load->model('mdl_login');
         $this->load->model('mdl_pelamar');
         $this->load->model('mdl_karyawan');
-		$this->load->model('mdl_admin');
-		$this->load->model('mdl_home');
-		$this->load->helper('url','form','file');
-		$this->load->library('form_validation','image_lib');
+        $this->load->model('mdl_admin');
+        $this->load->model('mdl_home');
+        $this->load->helper('url','form','file');
+        $this->load->library('form_validation','image_lib');
         $this->load->helper(array('url','download'));
         $this->load->library('email');
 
@@ -20,14 +20,14 @@ class AdminKaryawan extends CI_Controller {
         {
             redirect("login");
         }
-	}
+    }
     
-	public function index(){//MENAMPILKAN DATA TABEL BERISI DATA KARYAWAN
-		if($this->mdl_admin->logged_id()){            
-			$paket['array']=$this->mdl_admin->getKaryawan();
+    public function index(){//MENAMPILKAN DATA TABEL BERISI DATA KARYAWAN
+        if($this->mdl_admin->logged_id()){            
+            $paket['array']=$this->mdl_admin->getKaryawan();
             $this->load->view('admin/Karyawan/allKaryawan',$paket);
-		}else{redirect("login");}
-	}
+        }else{redirect("login");}
+    }
     
     public function addKaryawan(){//MENAMPILKAN FORM TAMBAH KARYAWAN DAN PROSES PENYIMPANANNYA
         if($this->mdl_admin->logged_id()){
@@ -73,22 +73,14 @@ class AdminKaryawan extends CI_Controller {
 
                 $this->mdl_admin->addData('karyawan',$dataKaryawan);
                 $cariId=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where nik = '$nik'"));
-<<<<<<< HEAD
-                
-                $dataLogin=array('username'=>$nik, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
-                $dataLogin2=array('username'=>$nik, 'password'=>md5($nik), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
-                
-                
-=======
                 if ($level == 'Karyawan'){
                     $dataLogin=array('username'=>$no_ktp, 'password'=>md5($no_ktp), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
                 }else{
                     $dataLogin1=array('username'=>$nik, 'password'=>md5($nik), 'level'=> $level, 'aktif'=>0, 'id_karyawan'=>$cariId['id_karyawan']);
                     $this->mdl_admin->addData('login',$dataLogin1);
                 }
->>>>>>> a2218b07cc7cb18aa9b3d5e791e4c9d24b1ec386
 
-                if ($level != "admin" && $level != "Super Admin"){
+                if ($level != 'admin' || $level != 'Super Admin'){
                     
                     $dataRiwayat=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
                     $dataStatus=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
@@ -115,7 +107,7 @@ class AdminKaryawan extends CI_Controller {
                     $this->email->message(
 
                         "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Anda telah didaftarkan di Rumah Sakit islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini menggunakan <br><br>
-    	                    username dan password menggunakan nomor ktp anda.<br>".
+                            username dan password menggunakan nomor ktp anda.<br>".
                         "<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
 
                     );
@@ -132,7 +124,7 @@ class AdminKaryawan extends CI_Controller {
                     }
                     
                 }else {
-                    $this->mdl_admin->addData('login',$dataLogin2);
+                    
                 }
                 redirect("adminKaryawan");
             }

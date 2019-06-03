@@ -564,25 +564,30 @@
                       <div class="static-table-list">
                       <?php $tgl = $this->mdl_admin->aKon($id);
                       if ($tgl->tgl != null) { //jika punya data kontrak
-                        $sekarang = date('Y-m-d');
-                        $dulu = date('Y-m-d', strtotime($tgl->tgl));
+                        $sekarang = date('Y-m-d'); //tanggal sekarang
+                        $dulu = date('Y-m-d', strtotime($tgl->tgl)); //tanggal karyawan mulai kontrak
                         //1 + (selisih tahun) * 12 -> karena 1 tahun = 12 bulan
                         $numBulan = 1 + (date("Y",strtotime($sekarang)) - date("Y",strtotime($dulu))) *12;
                         //total diatas + 
                         $numBulan += date("m",strtotime($sekarang)) - date("m",strtotime($dulu));
 
-                        if ($numBulan <= 18) {
+                        if ($dulu != "1970-01-01") {
+                          
+                        if ($numBulan <= 18) { //jika jarak bulan antara tanggal sekarang dengan awal karyawan tersebut mulai kontrak belum 18 bulan
                           echo "Belum dapat melakukan cuti karena belum 1,5 tahun dimasa kontrak.<hr><br>
                           <font size='2' color='red'>*hanya bisa menambahkan data surat ijin</font>";
-                        }else{
-                          if ($cuti->kuota_cuti != NULL){
-                            echo "<h3>Sisa Cuti : "; echo $cuti->kuota_cuti-$selisih." Hari</h3><hr>";
-                          }else{
+                        }else{ //jika sudah 18 bulan
+                          if ($cuti->kuota_cuti != NULL){ //berdasarkan profesi karyawan. jika profesi karyawan punya jatah cuti
+                            echo "<h3>Sisa Cuti : "; echo $cuti->kuota_cuti-$selisih." Hari </h3><hr>";
+                          }else{ //jika profesi tersebut tidak berhak cuti maka
                             echo "<h3>Karyawan Tidak Memiliki Jatah Cuti</h3>";
                           }
                         }
-                      }else{
-                        if ($cuti->kuota_cuti != NULL){
+                        }else{
+                          echo "<h3>Tanggal SK Kontrak Karyawan Belum ditentukan</h3>";
+                        }
+                      }else{ //jika tidak punya data kontrak berarti dia diinputkan langsung jadi magang/ yg lain
+                        if ($cuti->kuota_cuti != NULL){ //jika karyawan 
                           echo "<h3>Sisa Cuti : "; echo $cuti->kuota_cuti-$selisih." Hari</h3><hr>";
                         }else{
                           echo "<h3>Karyawan Tidak Memiliki Jatah Cuti</h3>";
