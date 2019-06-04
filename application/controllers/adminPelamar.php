@@ -829,7 +829,7 @@ class AdminPelamar extends CI_Controller {
     public function report(){
         $this->load->library('Mypdf');
         $data['array']=$this->mdl_admin->getreport();
-        $this->mypdf->generate('Laporan/seleksi', $data, 'laporan-hasil-seleksi', 'A4', 'portrait');
+        $this->mypdf->generate('Laporan/pelamar', $data, 'laporan-hasil-seleksi', 'A4', 'portrait');
     }
 }
 

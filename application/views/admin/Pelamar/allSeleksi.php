@@ -48,7 +48,7 @@
                     <button class="btn btn-primary waves-effect waves-light mg-b-15">Print Report Data Seleksi</button>
                   </a>
                 <?php endif; ?>
-                <?php } ?>
+                <?php break; } ?>
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
               <div id="toolbar">
                 
               </div>
-              <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-refresh="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+              <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
                     <th>Id Seleksi</th>

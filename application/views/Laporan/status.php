@@ -49,7 +49,7 @@
     <tr>
       <td>PROFESI</td>
       <td>:</td>
-      <td><?php echo $key->id_profesi;?></td>
+      <td><?php echo $key->nama_profesi;?></td>
     </tr>
     <?php foreach ($datDir as $key2): ?>
     <tr>

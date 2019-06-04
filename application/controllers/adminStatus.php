@@ -227,7 +227,12 @@ class AdminStatus extends CI_Controller {
     public function laporan($id){
         $this->load->library('Mypdf');
         $where = array('id_karyawan'=>$id);
-        $data['array']=$this->mdl_admin->getData('karyawan',$where);
+        $this->db->select('karyawan.nik, karyawan.nama, karyawan.id_status, jenis_profesi.nama_profesi, jabatan.jabatan, karyawan.id_karyawan');
+        $this->db->from('karyawan');
+        $this->db->join('jenis_profesi', 'karyawan.id_profesi = jenis_profesi.id_profesi');
+        $this->db->join('jabatan', 'karyawan.jabatan = jabatan.id');
+        $this->db->where('id_karyawan', $id);
+        $data['array'] = $this->db->get()->result();
         $data['data']=$this->mdl_admin->getAllStatus($id);
         $data['datDir']=$this->mdl_admin->getTempat($id);
         $this->mypdf->generate('Laporan/status', $data, 'laporan-riwayat-status', 'A4', 'portrait');

@@ -350,7 +350,7 @@ class Mdl_admin extends CI_Model
     }
 
     public function getreport(){ //cetak pelamar yang fix 
-        $query = $this->db->query("SELECT k.nama, k.id_profesi, s.nilai_wawancara, s.nilai_kompetensi, s.tes_kesehatan, s.tes_psikologi, s.nilai_agama from seleksi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where k.id_status = 'Calon Karyawan' ");
+        $query = $this->db->query("SELECT k.nama, j.nama_profesi, s.nilai_wawancara, s.nilai_kompetensi, s.tes_kesehatan, s.tes_psikologi, s.nilai_agama from seleksi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan inner join jenis_profesi as j on k.id_profesi=j.id_profesi where k.id_status = 'Calon Karyawan' ");
         return $query->result();
     }
 
