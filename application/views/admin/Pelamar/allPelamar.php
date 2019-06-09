@@ -78,7 +78,7 @@
                   <tr>
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_profesi; ?></td>
+                    <td><?php echo $key->nama_profesi; ?></td>
                     <td><?php echo $key->pendidikan;   echo " - "; echo $key->jurusan ?></td>
                     <td><?php echo $key->nilai; ?></td>
                     <td><?php echo $key->id_status; ?></td>

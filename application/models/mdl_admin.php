@@ -13,14 +13,14 @@ class Mdl_admin extends CI_Model
     public function getPelamar(){
         $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'"));
         $hasil=$data['hsl'];
-        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $hasil");
+        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $hasil");
         return $query->result();
     }
     //SEMUA DATA PELAMAR SAJA
     public function getPelamar2(){
         $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'"));
         $hasil=$data['hsl'];
-        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Pelamar' and id_profesi != 'Belum' group by k.id_karyawan order by mulai desc limit $hasil");
+        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' and k.id_profesi != 'Belum' group by k.id_karyawan order by mulai desc limit $hasil");
         return $query->result();
     }
     //SEMUA DATA CALON KARYAWAN SAJA
@@ -122,7 +122,10 @@ class Mdl_admin extends CI_Model
          $query = $this->db->query("SELECT k.id_karyawan as id_karyawan, k.foto as foto, k.id_status as id_status, k.id_profesi as id_profesi, k.id_golongan as id_golongan, x.id_seleksi as id_seleksi, x.tgl_seleksi as tgl_seleksi, x.nilai_agama as nilai_agama, x.nilai_kompetensi as nilai_kompetensi, x.tes_ppa as tes_ppa, x.tes_psikologi as tes_psikologi, x.tes_kesehatan as tes_kesehatan, x.nilai_wawancara as nilai_wawancara from seleksi as x inner join karyawan as k on x.id_karyawan = k.id_karyawan where k.id_karyawan = '$id'");
         return $query->result();
     }
-
+    public function getProfesi2($id){
+        $query = $this->db->query("SELECT j.nama_profesi as nama_profesi from karyawan as k inner join jenis_profesi as j on k.id_profesi = j.id_profesi where id_karyawan = '$id'");
+        return $query->row();
+    }
     public function getProfesi(){
         $query = $this->db->query("SELECT * from jenis_profesi as j where id_profesi != 'Belum'");
         return $query->result();
@@ -175,6 +178,10 @@ class Mdl_admin extends CI_Model
     public function getGol($id){
         $query = $this->db->query("SELECT s.id_karyawan, k.nik, k.nama, k.id_profesi, s.id_golongan, s.nomor_sk, s.alamat_sk, s.mulai, s.akhir, s.id from golongan as s inner join karyawan as k on k.id_karyawan = s.id_karyawan where s.id_golongan != 'Tidak Ada' && s.id_karyawan = '$id'");
         return $query->result();
+    }
+    public function getJab($id){
+        $query = $this->db->query("SELECT j.jabatan as jabatan from jabatan as j inner join karyawan as k on k.jabatan = j.id where k.id_karyawan = '$id'");
+        return $query->row();
     }
 
     public function getGoledit($id){

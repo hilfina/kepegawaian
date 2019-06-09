@@ -131,6 +131,7 @@ class AdminRiwayat extends CI_Controller {
     public function laporan($id){
         $this->load->library('Mypdf');
         $data['data'] = $this->mdl_admin->getRiwayat($id);
+        $data['jabatan']=$this->mdl_admin->getJab($id);
         $this->mypdf->generate('Laporan/penempatan', $data, 'laporan-riwayat-penempatan', 'A4', 'portrait');
     }
 

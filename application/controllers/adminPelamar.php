@@ -215,7 +215,8 @@ class AdminPelamar extends CI_Controller {
     public function pelamarDetail($id){
         if($this->mdl_admin->logged_id()){
             $where = array( 'id_karyawan' => $id ); 
-            $paket['array']=$this->mdl_admin->getProfesi();
+            $paket['array']=$this->mdl_admin->getProfesi(); 
+            $paket['prof']=$this->mdl_admin->getProfesi2($id); 
             $paket['datDir']=$this->mdl_admin->getData('karyawan',$where);
             $paket['datPen']=$this->mdl_admin->getData('pendidikan',$where);
             $paket['datSel']=$this->mdl_admin->detSeleksi($id);
@@ -252,7 +253,8 @@ class AdminPelamar extends CI_Controller {
             $email=$this->input->post('email');
             $jenkel=$this->input->post('jenkel');
             $ttl=$this->input->post('ttl');
-            $id_profesi=$this->input->post('id_profesi');
+            $nama_profesi=$this->input->post('nama_profesi');
+            $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_profesi from jenis_profesi where nama_profesi = '$nama_profesi'"));
 
              $dataKaryawan = array(
                 'no_ktp' => $no_ktp,
@@ -262,7 +264,7 @@ class AdminPelamar extends CI_Controller {
                 'email' => $email,
                 'ttl' => $ttl,
                 'jenkel' => $jenkel,
-                'id_profesi' => $id_profesi
+                'id_profesi' => $s['id_profesi']
                 );
              $where = array('id_karyawan' => $id);
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');

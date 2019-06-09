@@ -165,7 +165,13 @@
                           <td><label form-control-label>Posisi Lamaran</label></td>
                           <td style="height: 50px">
                             <div class="col-lg-12">
-                              <input name="id_profesi" type="text" class="form-control" value="<?php echo $key->id_profesi; ?>">
+                              <select name="nama_profesi" class="form-control">
+                                <option><?php echo $prof->nama_profesi; ?></option>
+                                <option>-- Pilihan --</option>
+                                <?php foreach ($array as $key ){?>
+                                  <option><?php echo $key->nama_profesi; ?></option>
+                                <?php } ?>
+                              </select>
                             </div>
                           </td>
                         </tr>

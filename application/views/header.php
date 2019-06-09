@@ -769,47 +769,172 @@
             <div class="mobile-menu">
               <nav id="dropdown">
                 <ul class="mobile-menu-nav">
-                  <?php if ($levelku == "admin") {?>
-                    <li><a href="<?php echo site_url('home/') ?>">HOME</a></li>
-                    <li><a data-toggle="collapse" data-target="#karyawan">data karyawan<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                      <ul id="karyawan" class="collapse dropdown-header-top">
-                        <li><a href="<?php echo site_url('adminKaryawan/') ?>">Karyawan</a></li>
-                        <li><a href="<?php echo site_url('adminDiklat/') ?>">Diklat</a></li>
+                  <?php if($levelku == "admin" || $levelku == "Super Admin"){?>
+              <li>
+                <a title="Home" href="<?php echo site_url('home/') ?>">
+                  <span class="educate-icon educate-home icon-wrap"></span>
+                  <span class="mini-click-non">Home</span>
+                </a>
+              </li>
+              <li>
+                <a class="has-arrow" href="#" aria-expanded="false">
+                  <span class="educate-icon educate-professor icon-wrap"></span> 
+                  <span class="mini-click-non">Data Karyawan</span>
+                </a>
+                <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
+                  <li><a title="Karyawan" href="<?php echo site_url('adminKaryawan/') ?>">Karyawan</a></li>
+                  <li><a title="Pendidikan" href="<?php echo site_url('admin/datapend') ?>">Pendidikan</a></li>
+                  <li><a title="Diklat" href="<?php echo site_url('adminDiklat/') ?>">Diklat</a></li>
                         <li><a href="<?php echo site_url('adminDiklat/resume') ?>">Resume Diklat</a></li>
-                        <li><a href="<?php echo site_url('adminOri/') ?>">Orientasi</a></li>
-                        <li><a href="<?php echo site_url('adminUraianTugas/') ?>">Uraian Tugas</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="<?php echo site_url('admin/dataPend') ?>">Data pendidikan</a></li>
-                    <li><a href="<?php echo site_url('admin/dataSurat') ?>">data surat</a></li>
-                    <li><a href="<?php echo site_url('adminKew/') ?>">kewenangan klinis</a></li>
-                    <li><a data-toggle="collapse" data-target="#riwayat">data riwayat<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                      <ul id="riwayat" class="collapse dropdown-header-top">
-                        <li><a href="<?php echo site_url('adminRiwayat/') ?>">Penempatan</a></li>
-                        <li><a href="<?php echo site_url('adminStatus') ?>">Status</a></li>
-                        <li><a href="<?php echo site_url('adminGol') ?>">Golongan</a></li>
-                        <li><a href="<?php echo site_url('adminBerkala') ?>">Berkala</a></li>
-                      </ul>
-                    </li>
-                    <li><a data-toggle="collapse" data-target="#mou">data M O U<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                      <ul id="mou" class="collapse dropdown-header-top">
-                        <li><a href="<?php echo site_url('adminHutang/') ?>">Hutang</a></li>
-                        <li><a href="<?php echo site_url('adminKontrak') ?>">Kontrak</a></li>
-                        <li><a href="<?php echo site_url('adminSekolah') ?>">Sekolah</a></li>
-                      </ul>
-                    </li>
-                    <li><a data-toggle="collapse" data-target="#pelamar">data pelamar<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                      <ul id="pelamar" class="collapse dropdown-header-top">
-                        <li><a href="<?php echo site_url('adminPelamar/') ?>">pelamar</a></li>
-                        <li><a href="<?php echo site_url('admin/dataSeleksi') ?>">seleksi</a></li>
-                        <li><a href="<?php echo site_url('admin/report/') ?>">data report</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="<?php echo site_url('adminLoker/') ?>">data lowongan</a></li>
-                    <li><a href="<?php echo site_url('adminProfesi/') ?>">data profesi</a></li>
-                  <?php } ?>
+                  <li><a title="Orientasi" href="<?php echo site_url('adminOri/') ?>">Orientasi</a></li>
+                  <li><a title="Uraian Tugas" href="<?php echo site_url('adminUrgas/') ?>">Uraian Tugas</a></li>
+                  <li><a title="Proses Kredensial" href="<?php echo site_url('adminKew/') ?>">Proses Kredensial</a></li>
+                  <li><a title="Data Profesi" href="<?php echo site_url('adminProfesi/') ?>">Data profesi</a></li>
+                  <li><a title="Data Status" href="<?php echo site_url('adminJenStatus/') ?>">Data Status</a></li>
+                  <li><a title="Data Status" href="<?php echo site_url('adminJabatan/') ?>">Data Jabatan</a></li>
+                  <li><a title="Data Status" href="<?php echo site_url('adminJP/') ?>">Jenis Penilaian</a></li>
+                </ul>
+              </li>
+              <li>
+                <a class="has-arrow" href="#" aria-expanded="false">
+                  <span class="educate-icon educate-library icon-wrap"></span>
+                  <span class="mini-click-non">File Kepegawaian</span>
+                </a>
+                <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
+                  <li><a title="Data Jenis Surat" href="<?php echo site_url('adminJenSurat/') ?>">Data Jenis Surat</a></li>
+                  <li><a title="Data Surat" href="<?php echo site_url('admin/datasurat') ?>">Data Surat</a></li>
+                  <li><a title="MOU Hutang" href="<?php echo site_url('adminHutang/') ?>">MOU Hutang</a></li>
+                  <li><a title="MOU instansi" href="<?php echo site_url('adminInstansi') ?>">MOU Instansi</a></li>
+                  <li><a title="MOU Kontrak" href="<?php echo site_url('adminKontrak') ?>">MOU Kontrak</a></li>
+                  <li><a title="MOU Pelatihan" href="<?php echo site_url('adminPelatihan') ?>">MOU Pelatihan</a></li>
+                  <li><a title="MOU Pendidikan" href="<?php echo site_url('adminSekolah') ?>">MOU Pendidikan</a></li>
+                  <li><a title="MOU Klinis" href="<?php echo site_url('adminKlinis') ?>">MOU Klinis</a></li>
+                </ul>
+              </li>
+              <li><a class="has-arrow" href="#" aria-expanded="false">
+                <span class="educate-icon educate-library icon-wrap"></span> 
+                <span class="mini-click-non">Data Riwayat</span></a>
+                <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
+                  <li><a title="Penempatan" href="<?php echo site_url('adminRiwayat/') ?>">Penempatan</a></li>
+                  <li><a title="Status" href="<?php echo site_url('adminStatus') ?>">Status</a></li>
+                  <li><a title="Golongan" href="<?php echo site_url('adminGol') ?>">Golongan</a></li>
+                  <li><a title="Berkala" href="<?php echo site_url('adminBerkala') ?>">Berkala</a></li>
+                </ul>
+              </li>
+              <li>
+                <a class="has-arrow" href="#" aria-expanded="false">
+                  <span class="educate-icon educate-student icon-wrap"></span> 
+                  <span class="mini-click-non">Data Pelamar</span>
+                </a>
+                <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
+                  <li><a title="Semua Pelamar" href="<?php echo site_url('adminPelamar') ?>">Pelamar</a></li>
+                  <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/dataSeleksi') ?>">Seleksi Pelamar</a></li>
+                  <li><a title="Loker" href="<?php echo site_url('adminLoker') ?>">Lowongan Pekerjaan</a></li>
+                </ul>
+              </li>
+            <?php }elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '0') { ?>
+              <li>
+                <?php if ($profesiku == "Belum") {?>
+                <li>
+                  <a title="Home" href="<?php echo site_url('pelamar/home') ?>">
+                    <span class="educate-icon educate-home icon-wrap"></span>
+                    <span class="mini-click-non">Peluang Karir</span>
+                  </a>
+                </li>
+                <?php } else {?>
+                  <li>
+                    <a title="Home" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>">
+                      <span class="educate-icon educate-home icon-wrap"></span>
+                      <span class="mini-click-non">Proses Pelamaran</span>
+                    </a>
+                  </li>
+                <?php } ?>
+                <li>
+                  <a title="Data Diri" href="<?php echo site_url('pelamar/datasaya') ?>">
+                    <span class="educate-icon educate-professor icon-wrap"></span>
+                    <span class="mini-click-non">Profil Saya</span>
+                  </a>
+                </li>
+                <li>
+                  <a title="Data Pendidikan" href="<?php echo site_url('pelamar/datapend') ?>">
+                    <span class="educate-icon educate-library icon-wrap"></span>
+                    <span class="mini-click-non">Data Pendidikan</span>
+                  </a>
+                </li>
+                <?php if($profesiku != "Kasir" || $profesiku != "Administrasi" || $profesiku != "Pekarya" ){?>
+                  <li>
+                    <a title="Data Surat" href="<?php echo site_url('pelamar/datasurat') ?>">
+                      <span class="educate-icon educate-message icon-wrap"></span>
+                      <span class="mini-click-non">Data Surat</span>
+                    </a>
+                  </li>
+                <?php } ?>
+                <?php if ($profesiku != "Belum" ) {?>
+                  <li>
+                    <a title="Finalisasi" href="<?php echo site_url('pelamar/finalisasi')?>"
+                      ><span class="fa fa-check-square-o" ></span>
+                      <span class="mini-click-non"> Finalisasi Data</span>
+                    </a>
+                  </li>
+                <?php } ?>
+              </li>
+            <?php } elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '1') { ?>
+              <li><a title="Cetak" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li>
+              <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
+            <?php } elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '0') {?>
+              <li>
+                <a title="Kirim Ulang" href="<?php echo site_url('pelamar/aktivasi') ?>">
+                  <span class="mini-click-non">Aktivasi Akun</span>
+                </a>
+              </li>
+            <?php } elseif ($levelku == "Pelamar" && $statusku == "Calon Karyawan") { ?>
+            <li>
+              <li>
+                <a title="Home" href="<?php echo site_url('home/bukanAdmin') ?>">
+                  <span class="educate-icon educate-home icon-wrap"></span>
+                  <span class="mini-click-non">Home</span></a>
+              </li>
+              <li><a title="Cetak" href="<?php echo site_url('pelamar/Cetak') ?>"><span class="mini-click-non">Cetak Kartu Seleksi</span></a></li> 
+              <li><a title="Data Diri" href="<?php echo site_url('pelamar/prosesLamar/')?><?php echo $idku ?>"><span class="mini-click-non">Proses Lamaran</span></a></li>
+            </li>
+            <?php } elseif ($levelku == "Karyawan" && $aktifku == '0')  { ?>
+            <li>
+              <a title="Aktivasi Akun" href="<?php echo site_url('pelamar/aktivasi') ?>">
+                <span class="mini-click-non">Aktivasi Akun</span>
+              </a>
+            </li>
+            <?php } elseif ($levelku == "Karyawan" && $aktifku == '1')  { ?>
+            <li>
+              <a title="Home" href="<?php echo site_url('home/bukanAdmin') ?>">
+                <span class="educate-icon educate-home icon-wrap"></span>
+                <span class="mini-click-non">Home</span>
+              </a>
+              <a title="Data Karyawan" href="<?php echo site_url('karyawan/datasaya') ?>">
+                <span class="educate-icon educate-professor icon-wrap"></span> 
+                <span class="mini-click-non">Profil Saya</span>
+              </a>
+              <a title="Data Pendidikan" href="<?php echo site_url('karyawan/datapend') ?>">
+                <span class="educate-icon educate-library icon-wrap"></span>
+                <span class="mini-click-non">Data Pendidikan</span>
+              </a>
+              <a title="Data Diklat" href="<?php echo site_url('karyawan/datadiklat') ?>">
+                <span class="educate-icon educate-department icon-wrap"></span>
+                <span class="mini-click-non">Data Diklat</span>
+              </a>
+              <a title="Data Kredensial Klinis" href="<?php echo site_url('karyawan/datakew') ?>">
+                <span class="educate-icon educate-course icon-wrap"></span>
+                <span class="mini-click-non">Proses Kredensial</span>
+              </a>
+                <?php if($profesiku != "Kasir" || $profesiku != "Administrasi" || $profesiku != "Pekarya"){?>
+                  <a title="Data Surat" href="<?php echo site_url('karyawan/datasurat') ?>">
+                    <span class="educate-icon educate-message icon-wrap"></span>
+                    <span class="mini-click-non">Data Surat</span>
+                  </a>
+                <?php }?>
+              <?php }?>
                 </ul>
               </nav>
+              <br>
             </div>
           </div>
         </div>

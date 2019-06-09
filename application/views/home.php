@@ -60,7 +60,7 @@ $idku=$this->session->userdata("myId");
                           }else{
                             echo $calon->banyak." Orang"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('adminLoker/dataCakar') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminPelamar/dataCakar') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>
