@@ -345,7 +345,7 @@
                                                               <td><?php echo $key->mulai?></td>  
                                                               <td><?php echo $key->akhir?></td>
                                                               <td>
-                                                              <?php if(($key->aktif) != 1){ ?>
+                                                              <?php if(($key->aktif) == 1){ ?>
                                                                 <b><i class="fa fa-check"></i> Aktif</b> 
                                                               <?php }else{ ?>
                                                                 <b style="color: red">Belum Aktif</b>
@@ -391,7 +391,7 @@
                                                               <td><?php echo $key->mulai?></td>  
                                                               <td><?php echo $key->akhir?></td>
                                                               <td>
-                                                              <?php if(($key->aktif) != 1){ ?>
+                                                              <?php if(($key->aktif) == 1){ ?>
                                                                 <b><i class="fa fa-check"></i> Aktif</b> 
                                                               <?php }else{ ?>
                                                                 <b style="color: red">Belum Aktif</b>
@@ -437,7 +437,7 @@
                                                               <td><?php echo $key->mulai?></td>  
                                                               <td><?php echo $key->akhir?></td>
                                                               <td>
-                                                                <?php if(($key->aktif) != 1){ ?>
+                                                                <?php if(($key->aktif) == 1){ ?>
                                                                 <b><i class="fa fa-check"></i> Aktif</b> 
                                                                 <?php }else{ ?>
                                                                   <b style="color: red">Belum Aktif</b>
@@ -495,7 +495,7 @@
                                                               <td><?php echo $key->beasiswa;?></td>
                                                               <td><?php echo $key->ket?></td>
                                                               <td> 
-                                                              <?php if(($key->aktif) != 1){ ?>
+                                                              <?php if(($key->aktif) == 1){ ?>
                                                                 <b><i class="fa fa-check"></i> Aktif</b> 
                                                               <?php }else{ ?>
                                                                 <b style="color: red">Belum Aktif</b>
@@ -543,7 +543,7 @@
                                                               <td><?php echo $key->gaji;?></td>
                                                               <td><?php echo $key->ket?></td>
                                                               <td> 
-                                                              <?php if(($key->aktif) != 1){ ?>
+                                                              <?php if(($key->aktif) == 1){ ?>
                                                                 <b><i class="fa fa-check"></i> Aktif</b> 
                                                               <?php }else{ ?>
                                                                 <b style="color: red">Belum Aktif</b>
@@ -591,7 +591,7 @@
                                                               <td><?php echo $key->nominal;?></td>
                                                               <td><?php echo $key->ket?></td>
                                                               <td> 
-                                                              <?php if(($key->aktif) != 1){ ?>
+                                                              <?php if(($key->aktif) == 1){ ?>
                                                                 <b><i class="fa fa-check"></i> Aktif</b> 
                                                               <?php }else{ ?>
                                                                 <b style="color: red">Belum Aktif</b>
@@ -637,7 +637,7 @@
                                                               <td><?php echo $key->tgl_akhir?></td>
                                                               <td><?php echo $key->ket?></td>
                                                               <td> 
-                                                              <?php if(($key->aktif) != 1){ ?>
+                                                              <?php if(($key->aktif) == 1){ ?>
                                                                 <b><i class="fa fa-check"></i> Aktif</b> 
                                                               <?php }else{ ?>
                                                                 <b style="color: red">Belum Aktif</b>
