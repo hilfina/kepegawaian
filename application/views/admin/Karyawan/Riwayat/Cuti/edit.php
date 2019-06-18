@@ -39,6 +39,9 @@
                 <h1> Edit Data <span class="table-project-n">Cuti Karyawan</span></h1><br>
               </div>
           </div>
+          <div class="container-fluid" style="color: red; padding-left: 10%"" >
+            <?php echo $this->session->flashdata('msg_error'); ?>
+          </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <?php foreach ($array as $key) { ?>
           <form action="<?php echo site_url();?>/adminKaryawan/editCuti/<?php echo $key->id."/".$key->id_karyawan;?>" enctype="multipart/form-data" method="POST">
@@ -90,6 +93,7 @@
                           <input type="text" id="prepend-big-btn" value="<?php echo $key->file ?>">
                         </div>
                       </div>
+                      <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                     </div>
                   </div>
                   </div>

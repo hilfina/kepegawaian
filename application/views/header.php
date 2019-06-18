@@ -155,8 +155,8 @@
   <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
       <div class="sidebar-header">
-        <a href="index.html"><img class="main-logo" src="<?php echo base_url()?>Assets/template/img/logo.png" alt="" width="180px" /></a>
-        <strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong>
+        <a href="#"><img class="main-logo" src="<?php echo base_url()?>Assets/template/img/logo.png" alt="" width="180px" /></a>
+        <strong><a href="#"><img src="img/logo/logosn.png" alt="" /></a></strong>
       </div>
       <div class="left-custom-menu-adp-wrap comment-scrollbar">
         <nav class="sidebar-nav left-sidebar-menu-pro">
@@ -737,7 +737,6 @@
                         <?php }else{} ?>
                         <li class="nav-item">
                           <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                            <img src="img/product/pro4.jpg" alt="" />
                             <span class="admin-name"><?php echo $namaku?></span>
                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                           </a>

@@ -109,13 +109,22 @@ $this->load->view("header.php");
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">
-                                        <label>Foto Scan Dokumen</label>
+                                        <label>Foto Scan Ijasah</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <div class="input-mark-inner">
-                                        <img src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file?>" width="400"/>   
-                                    </div>
+                                    <div class="pdf-viewer-area mg-b-15">
+                                        <div class="container-fluid">
+                                          <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                              <div class="pdf-single-pro">
+                                                <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file; ?>"></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                 </div>
                             </div>
                             <br>

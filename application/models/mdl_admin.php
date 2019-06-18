@@ -11,23 +11,24 @@ class Mdl_admin extends CI_Model
 
     //SEMUA DATA PELAMAR DAN CALON KARYAWAN
     public function getPelamar(){
-        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'"));
-        $hasil=$data['hsl'];
-        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $hasil");
+       $cariL = $this->db->query("select count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'");
+        $cariLimit = $cariL->row();
+       
+        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $cariLimit->hsl");
         return $query->result();
     }
     //SEMUA DATA PELAMAR SAJA
     public function getPelamar2(){
-        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'"));
-        $hasil=$data['hsl'];
-        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' and k.id_profesi != 'Belum' group by k.id_karyawan order by mulai desc limit $hasil");
+        $cariL = $this->db->query("select count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'");
+        $cariLimit = $cariL->row();
+        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' and k.id_profesi != 'Belum' group by k.id_karyawan order by mulai desc limit $cariLimit->hsl");
         return $query->result();
     }
     //SEMUA DATA CALON KARYAWAN SAJA
     public function getCakar(){
-        $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'"));
-        $hasil=$data['hsl'];
-        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $hasil");
+       $cariL = $this->db->query("select count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'");
+        $cariLimit = $cariL->row();
+        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan where id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $cariLimit->hsl");
         return $query->result();
     }
     function resumeDiklat(){

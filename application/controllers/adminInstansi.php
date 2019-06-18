@@ -96,7 +96,7 @@ class adminInstansi extends CI_Controller {
                 $no_mou=$this->input->post('no_mou');
                 if($_FILES['file']['name'] != '') {
                     if(!$this->upload->do_upload('file')) {
-                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 MB");
                         $this->session->set_flashdata('msg_error', $error);
 
                         redirect("adminInstansi/edit/$id");

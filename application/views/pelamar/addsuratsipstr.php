@@ -108,7 +108,7 @@ $this->load->view("header.php");
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <font size="2" color="red">*Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2 mb </font>
+                                        <font size="2" color="red">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                         <div class="file-upload-inner ts-forms">
                                           <div class="input prepend-big-btn">
                                               <label class="icon-right" for="prepend-big-btn">
