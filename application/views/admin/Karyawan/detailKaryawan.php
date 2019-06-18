@@ -578,7 +578,12 @@
                           <font size='2' color='red'>*hanya bisa menambahkan data surat ijin</font>";
                         }else{ //jika sudah 18 bulan
                           if ($cuti->kuota_cuti != NULL){ //berdasarkan profesi karyawan. jika profesi karyawan punya jatah cuti
-                            echo "<h3>Sisa Cuti : "; echo $cuti->kuota_cuti-$selisih." Hari </h3><hr>";
+                            if($cuti->kuota_cuti-$selisih < 0){
+                              echo "<h3>Sisa Cuti Tidak Mencukupi </h3><hr>";
+                            }else{
+                              echo "<h3>Sisa Cuti : "; echo $cuti->kuota_cuti-$selisih." Hari</h3><hr>";
+                            }
+                          
                           }else{ //jika profesi tersebut tidak berhak cuti maka
                             echo "<h3>Karyawan Tidak Memiliki Jatah Cuti</h3>";
                           }
@@ -588,7 +593,12 @@
                         }
                       }else{ //jika tidak punya data kontrak berarti dia diinputkan langsung jadi magang/ yg lain
                         if ($cuti->kuota_cuti != NULL){ //jika karyawan 
-                          echo "<h3>Sisa Cuti : "; echo $cuti->kuota_cuti-$selisih." Hari</h3><hr>";
+                          if($cuti->kuota_cuti-$selisih < 0){
+                              echo "<h3>Sisa Cuti Tidak Mencukupi </h3><hr>";
+                            }else{
+                              echo "<h3>Sisa Cuti : "; echo $cuti->kuota_cuti-$selisih." Hari</h3><hr>";
+                            }
+                          
                         }else{
                           echo "<h3>Karyawan Tidak Memiliki Jatah Cuti</h3>";
                         }

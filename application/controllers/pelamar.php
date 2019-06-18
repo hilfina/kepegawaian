@@ -69,8 +69,8 @@ class pelamar extends CI_Controller {
 				$config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
 				$config['smtp_port']= "465";
 				$config['smtp_timeout']= "400";
-				$config['smtp_user']= "sdirsiamalang@gmail.com"; // isi dengan email kamu
-				$config['smtp_pass']= "bismillah1!"; // isi dengan password kamu
+				$config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
+                $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
 				$config['crlf']="\r\n"; 
 				$config['newline']="\r\n"; 
 				$config['wordwrap'] = TRUE;

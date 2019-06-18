@@ -94,8 +94,8 @@ class AdminKaryawan extends CI_Controller {
                     $config['smtp_host']= "ssl://smtp.gmail.com";
                     $config['smtp_port']= "465";
                     $config['smtp_timeout']= "400";
-                    $config['smtp_user']= "sdirsiamalang@gmail.com";
-                    $config['smtp_pass']= "bismillah1!";
+                    $config['smtp_user']= "sdiitrsia@gmail.com";
+                    $config['smtp_pass']= "A1hamdulillah";
                     $config['crlf']="\r\n"; 
                     $config['newline']="\r\n"; 
                     $config['wordwrap'] = TRUE;
@@ -624,7 +624,7 @@ class AdminKaryawan extends CI_Controller {
             $this->load->view('admin/karyawan/riwayat/Cuti/add', $data);
         }else{
             $config['upload_path']      = './Assets/dokumen/';
-            $config['allowed_types']    = 'jpg|png|docx|pdf';
+            $config['allowed_types']    = 'pdf';
             $config['max_size']         = 2000;
             $this->load->library('upload', $config);
 
@@ -637,7 +637,7 @@ class AdminKaryawan extends CI_Controller {
 
                 $this->session->set_flashdata('msg_error', $error);
 
-                redirect("adminKaryawan/addNilai/$id_karyawan");
+                redirect("adminKaryawan/addCuti/$id_karyawan");
             } else {
                 $file = $this->upload->data('file_name');
             }
@@ -669,7 +669,7 @@ class AdminKaryawan extends CI_Controller {
             $this->load->view('admin/karyawan/riwayat/Cuti/edit', $data);
         }else{
             $config['upload_path']      = './Assets/dokumen/';
-            $config['allowed_types']    = 'jpg|png|docx|pdf';
+            $config['allowed_types']    = 'pdf';
             $config['max_size']         = 2000;
             $this->load->library('upload', $config);
             if($_FILES['file']['name'] != '') {
@@ -678,7 +678,7 @@ class AdminKaryawan extends CI_Controller {
 
                     $this->session->set_flashdata('msg_error', $error);
 
-                    redirect("adminKaryawan/editNilai/$idk");
+                    redirect("adminKaryawan/editCuti/$id/$idk");
                 } else {
                     $file = $this->upload->data('file_name');
                 }
@@ -838,8 +838,8 @@ class AdminKaryawan extends CI_Controller {
                 $config['smtp_host']= "ssl://smtp.gmail.com";
                 $config['smtp_port']= "465";
                 $config['smtp_timeout']= "400";
-                $config['smtp_user']= "sdirsiamalang@gmail.com"; // isi dengan email kamu
-                $config['smtp_pass']= "bismillah1!";
+                $config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
+                $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
                 $config['crlf']="\r\n"; 
                 $config['newline']="\r\n"; 
                 $config['wordwrap'] = TRUE;

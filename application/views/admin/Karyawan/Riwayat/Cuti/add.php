@@ -38,6 +38,9 @@
               <h1> Tambah Data <span class="table-project-n">Absensi Karyawan</span></h1><br>
             </div>
           </div>
+          <div class="container-fluid" style="color: red; padding-left: 10%"" >
+            <?php echo $this->session->flashdata('msg_error'); ?>
+          </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <form action="<?php echo site_url();?>/adminKaryawan/addCuti/<?php echo $id_karyawan ?>" enctype="multipart/form-data" method="POST">
           
@@ -80,6 +83,7 @@
                           <input type="text" id="prepend-big-btn" placeholder="no file selected">
                         </div>
                       </div>
+                      <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                     </div>
                   </div>
                   </div>

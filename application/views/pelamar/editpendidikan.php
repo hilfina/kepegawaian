@@ -121,6 +121,7 @@ $this->load->view("header.php");
                                     </div>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <font size="2" color="red">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                     <div class="input-mark-inner">
                                         <div class="file-upload-inner ts-forms">
                                               <div class="input prepend-big-btn">
@@ -138,9 +139,21 @@ $this->load->view("header.php");
                                               </div>
                                             </div>
                                         
-                                    </div>
+                                    </div> <br>
+                                    <div class="pdf-viewer-area mg-b-15">
+                                        <div class="container-fluid">
+                                          <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                              <div class="pdf-single-pro">
+                                                <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file; ?>"></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                 </div>
-                                <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
+                                
                             </div>
                             <br>
                             <div class="row">
