@@ -57,6 +57,7 @@
                     <th>Ruangan</th>
                     <th>Tanggal Mulai Bertugas</th>
                     <th>Tanggal Berakhir</th>
+                    <th>File</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -68,6 +69,13 @@
                     <td><?php echo $key->ruangan; ?></td>
                     <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
                     <td><?php echo date('d M Y', strtotime($key->akhir)); ?></td>
+                    <td><?php if(($key->alamat_sk) != NULL){ ?>
+                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
+                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                      </a>
+                    <?php }else{ ?>
+                      <font style="color: red">Tidak Ada file</font>
+                    <?php } ?></td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminRiwayat/edit/"; echo $key->id_riwayat ; echo "/"; echo $key->id_karyawan; ?>">
                           <button class="btn btn-default waves-effect">Edit</button>

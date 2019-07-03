@@ -497,7 +497,7 @@ class AdminKaryawan extends CI_Controller {
                 $this->load->view('admin/karyawan/penilaian/addNilai', $data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'jpg|png|docx|pdf';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
                 $this->load->library('upload', $config);
 
@@ -545,7 +545,7 @@ class AdminKaryawan extends CI_Controller {
                 $this->load->view('admin/karyawan/penilaian/editNilai', $data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'jpg|png|docx|pdf';
+                $config['allowed_types']    = 'pdf|xls';
                 $config['max_size']         = 2000;
                 $this->load->library('upload', $config);
 
@@ -591,10 +591,10 @@ class AdminKaryawan extends CI_Controller {
 
     public function delNilai($id,$idk){
         $where = array('id' => $id);
-        $this->mdl_pelamar->hapusdata($where);
+        $this->mdl_pelamar->hapusdata('penilaian_karyawan', $where);
         redirect("adminKaryawan/karyawanDetail/$idk");
     }
-    public function editAgama($id,$idk){
+    public function editAgama($id,$idk,$ids){
         $this->form_validation->set_rules('id','Id Nilai','trim|required');
 
         if($this->form_validation->run()==FALSE){
@@ -604,19 +604,23 @@ class AdminKaryawan extends CI_Controller {
 
             $tanggal = date('Y-m-d',strtotime($this->input->post('tanggal')));
             $hasil = $this->input->post('hasil');
+            $nama_tes = $this->input->post('nama_tes');
             $data4 = array(
+                'id_seleksi' => $ids,
+                'nama_tes' => $nama_tes,
                 'tanggal'=> $tanggal, 
                 'hasil'=> $hasil
             );
 
-            $where = array(
-                'id' => $id
-            );
-
-            $update = $this->mdl_pelamar->updatedata($where,$data4,'riwayat_seleksi');
+            $update = $this->mdl_admin->addData('riwayat_seleksi', $data4);
             $this->session->set_flashdata('msg','Data Sukses di Update');
             redirect("adminKaryawan/karyawanDetail/$idk");
         }
+    }
+    public function delAgama($id,$idk){
+        $where = array('id' => $id);
+        $this->mdl_pelamar->hapusdata('riwayat_seleksi', $where);
+        redirect("adminKaryawan/karyawanDetail/$idk");
     }
     public function addCuti($id_karyawan){
         $this->form_validation->set_rules('ket','Id Data Cuti','trim|required');
@@ -741,7 +745,7 @@ class AdminKaryawan extends CI_Controller {
 
         $agama = array(
             'id_seleksi' => $id_seleksi,
-            'nama_tes' => "Tes Agama",
+            'nama_tes' => "Tes Solat",
             'tanggal'=> $tanggal_agama,
             'hasil'=> $hasil_agama
         );

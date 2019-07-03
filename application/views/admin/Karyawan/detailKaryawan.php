@@ -389,13 +389,22 @@
                           <?php foreach ($agama as $key){ ?>
                             <tbody>
                               <tr>
-                                <td><?php echo $no++; ?></td>
-                              <td><?php echo $key->tanggal; ?></td>
+                              <td><?php echo $no++; ?></td>
+                              <td>
+                              <?php if($key->tanggal != '1970-01-01'){
+                                  echo $key->tanggal; 
+                              }else{?>
+                                  <?php echo '0000-00-00' ?>
+                              <?php } ?>
+                              </td>
                               <td><?php echo $key->nama_tes; ?></td>
                               <td><?php echo $key->hasil; ?></td>
                               <td>
-                                <a href="<?php echo site_url('adminKaryawan/editagama/').$key->id."/".$key->id_karyawan;?>">
+                                <a href="<?php echo site_url('adminKaryawan/editagama/').$key->id."/".$key->id_karyawan."/".$key->id_seleksi;?>">
                                   <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                </a>
+                                <a href="<?php echo site_url('adminKaryawan/delagama/').$key->id; echo "/";echo $key->id_karyawan; ?>" onclick="return confirm('Are you sure you want to delete this item?');">
+                                  <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                 </a>
                               </td>
                               </tr>

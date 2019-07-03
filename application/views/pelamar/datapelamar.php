@@ -207,7 +207,7 @@
                                         <option>SMA/SMK</option>
                                         <option>D1</option>
                                         <option>D3</option>
-                                        <option>D4/S1</option>
+                                        <option>S1</option>
                                         <option>S2</option>
                                         <option>S3</option>
                                       </select>

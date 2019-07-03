@@ -72,10 +72,9 @@
             <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>
             <li><a href="#cv"> Curiculum Vitae</a></li>
             <li><a href="#dataPendidikan"> Data Pendidikan</a></li>
+            <li><a href="#dataSurat">Data Surat</a></li>
             <?php foreach ($datDir as $dd) {
-              if ($dd->id_profesi == "Dokter" || $dd->id_profesi == "Fisioterapis" || $dd->id_profesi == "Apoteker" || $dd->id_profesi == "Perawat") {
-               echo "<li><a href='#dataSurat'>Data Surat</a></li>";
-              }if ($dd->id_status == "Calon Karyawan") {
+              if ($dd->id_status == "Calon Karyawan") {
                 echo "<li><a href='#dataSeleksi'>Data Seleksi</a></li>";
               }
             } ?>
@@ -162,6 +161,51 @@
                           </td>
                         </tr>
                         <tr>
+                              <td><label form-control-label>Status Perkawinan</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                <select  class="form-control" name="status">
+                                  <?php if ($key->status == "") {
+                                  echo "<option> -- Pilihan --</option>";
+                                  }else{
+                                    echo "<option>".$key->status."</option>";
+                                  }?>
+                                  <option>Sudah Menikah</option>
+                                  <option>Belum Menikah</option>
+                                  <option>Janda</option>
+                                  <option>Duda</option>
+                                </select>
+                                </div>
+                              </td>
+                            </tr>
+                            <?php foreach ($datLo as $key2){ ?>
+                                <tr>
+                                  <td><label form-control-label>Pendidikan Terakhir</label></td>
+                                  <td style="height: 50px; width: 80%">
+                                    <div class="col-lg-12">
+                                      <select class="form-control" name="pend_akhir">
+                                        <option><?php echo $key2->pend_akhir; ?></option>
+                                        <option>Opsi Pilihan :</option>
+                                        <option>SMA/SMK</option>
+                                        <option>D1</option>
+                                        <option>D3</option>
+                                        <option>S1</option>
+                                        <option>S2</option>
+                                        <option>S3</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><label form-control-label>Nilai Akhir</label></td>
+                                  <td style="height: 50px; width: 80%">
+                                    <div class="col-lg-12">
+                                      <input name="nilai_akhir" type="text" class="form-control" value="<?php echo $key2->nilai_akhir; ?>">
+                                    </div>
+                                  </td>
+                                </tr>
+                                <?php } ?>
+                        <tr>
                           <td><label form-control-label>Posisi Lamaran</label></td>
                           <td style="height: 50px">
                             <div class="col-lg-12">
@@ -186,20 +230,52 @@
               </div>
             </div>    
             <div class="product-tab-list tab-pane fade" id="cv">
-              <div class="pdf-viewer-area mg-b-15">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> </div>
-                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                      <div class="pdf-single-pro">
-                        <?php foreach ($datLo as $key){?>
-                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->cv; ?>"></a>
-                        <?php }?>
+            <?php foreach ($datLo as $key) { ?>
+              <form action="<?php echo site_url(); ?>/adminPelamar/updatecv/<?php echo $key->id_karyawan ;?>" enctype="multipart/form-data" method="post">
+                  <div class="pdf-viewer-area mg-b-15">
+                    <div class="container-fluid">
+                      <div class="row"> <br>
+                      <div class="container-fluid" role="alert">
+                          <?php if ($this->session->flashdata('msg_error')) :?>
+                            <div class="alert alert-danger alert-mg-b"> 
+                            <?php echo $this->session->flashdata('msg_error')?>
+                            </div>
+                          <?php endif; ?>
+                      </div>
+                      <div><h4><b>Upload Curiculum Vitae</b></h4>
+                      <p>File berbentuk pdf berukuran maksimal 2 mb</p>
+                      </div>
+                      <br>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+                        
+                          <div class="file-upload-inner ts-forms">
+                            <div class="input prepend-big-btn">
+                              <label class="icon-right" for="prepend-big-btn">
+                                <i class="fa fa-download"></i>
+                              </label>
+                              <div class="file-button">Browse
+                                <input type="hidden" name="cv_old" value="<?php echo $key->cv; ?>">
+                                <input type="file" name="cvsaya" value="<?php echo $key->cv; ?>" onchange="document.getElementById('prepend-big-btn2').value = this.value;">
+                              </div>
+                              <input type="text" id="prepend-big-btn2" placeholder="no file selected">
+                            </div>
+                          </div><br>
+                          <div class="form-group row">
+                            <div class="col-sm-4 offset-sm-3">
+                              <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
+                            </div>
+                          </div><br>
+                          <div align="center">
+                            <div class="pdf-single-pro">
+                              <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->cv; ?>"></a>
+                            </div>
+                          </div>
+                        
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </form>
+              <?php } ?>
             </div>
             <div class="product-tab-list tab-pane fade" id="dataPendidikan">
               <div class="row">

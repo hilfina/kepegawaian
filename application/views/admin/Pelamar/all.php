@@ -1,4 +1,9 @@
-<?php  $this->load->view('./header'); ?><br>
+<?php 
+  $this->load->view('./header');
+  $levelku=$this->session->userdata("myLevel");
+  $namaku=$this->session->userdata("myLongName");
+  $emailku=$this->session->userdata("myEmail");
+?><br>
  <div class="breadcome-area"><br>
   <div class="container-fluid">
     <div class="row">
@@ -8,9 +13,9 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <ul class="breadcome-menu">
-                <li><a href="<?php echo site_url('admin/') ?>">Home</a> <span class="bread-slash">/</span>
+                <li><a href="<?php echo site_url('adminPelamar/') ?>">Home</a> <span class="bread-slash">/</span>
                 </li>
-                <li><span class="bread-blod">Data karyawan</span>
+                <li><span class="bread-blod">Data Pelamar</span>
                 </li>
               </ul>
             </div>
@@ -20,7 +25,7 @@
     </div>
   </div>
 </div>
-<div class="data-table-area mg-b-15">
+<div class="data-table-area">
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -28,7 +33,7 @@
           <div class="col-lg-6">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
-                <h1>Data <span class="table-project-n">Karyawan</span></h1>
+                <h1>Data <span class="table-project-n">Pelamar Setiap Lowongan</td></span></h1>
               </div>
             </div>
           </div>
@@ -36,12 +41,13 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right">
-                <a href="<?php echo site_url('adminKaryawan/loadimpor')?>">
+                <a href="<?php echo site_url('adminPelamar/loadimpor') ?>">
                   <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
                 </a>
-                <a href="<?php echo site_url('adminKaryawan/addKaryawan')?>">
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah karyawan</button>
-                </a></div>
+                <a href="<?php echo site_url('adminPelamar/addPelamar')?>">
+                  <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -57,37 +63,31 @@
               <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                 <thead>
                   <tr>
-                    <th>NIK</th>
-                    <th>Foto</th>
-                    <th>Nama</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Umur</th>
-                    <th>Gender</th>
-                    <th>E-Mail</th>
-                    <th>Profesi</th>
-                    <th>Status</th>
-                    <th>Golongan</th>
+                    <th>No</th>
+                    <th>Nama Profesi</th>
+                    <th>Jumlah Pelamar</th>
+                    <th>Status Lowongan</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
                 <tbody>
-                <?php $no=1;?>
+                <?php $no = 1;?>
                 <?php foreach ($array as $key) { ?>
                   <tr>
-                    <td><?php echo $key->nik; ?></td>
-                    <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='100'>"; ?></td>
-                    <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->ttl; ?></td>
-                    <td><?php $tdy = date('Y'); $lhr = substr($key->ttl, 0,4); echo $tdy-$lhr; ?></td>
-                    <td><?php echo $key->jenkel; ?></td>
-                    <td><?php echo $key->email; ?></td>
+                    <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nama_profesi; ?></td>
-                    <td><?php echo $key->id_status; ?></td>
-                    <td><?php echo $key->id_golongan; ?></td>
-                    <td align="center">
-                      <a href="<?php echo site_url(); echo "/adminKaryawan/karyawanDetail/"; echo $key->id_karyawan ;?>">
-                        <button class="btn btn-warning waves-effect waves-light mg-b-15">Detail</button>
-                      </a>
+                    <td><?php echo $key->jmlh; ?></td>
+                    <td>
+                      <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->akhir))) ){ ?>
+                          <i class="fa fa-check"></i> Lowongan Masih Dibuka
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->akhir))) <= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-times"></i> Lowongan Sudah Ditutup 
+                        <?php } ?>
+                    </td>
+                    <td>
+                      <a href="<?php echo site_url(); echo "/adminPelamar/index2/"; echo $key->id_profesi ;?>">
+                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
+                        </a>
                     </td>
                   </tr>
                 <?php }?>

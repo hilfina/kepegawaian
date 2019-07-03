@@ -42,37 +42,42 @@ class AdminRiwayat extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['id']=$id;
-                $data['array']=$this->mdl_admin->getProfesi();
                 $this->load->view('admin/Karyawan/Riwayat/Penempatan/addRiwayat',$data);
             }else{
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'pdf';
+                $config['max_size']         = 2000;
+
+                $this->load->library('upload', $config);
                 $konek = mysqli_connect("localhost","root","","kepegawaian");
-                $a=$this->input->post('nik');
-                $b =$this->input->post('id_profesi');
                 $data1=mysqli_fetch_array(mysqli_query($konek,"select max(id_riwayat) as last from riwayat"));
                 
-                $data3=mysqli_fetch_array(mysqli_query($konek,"select id_profesi from jenis_profesi where nama_profesi = '$b' "));
+                if(!$this->upload->do_upload('alamat_sk')) {
+                    $error = $this->upload->display_errors();
 
+                    $this->session->set_flashdata('msg_error', $error);
+
+                    redirect("adminRiwayat/addRiwayat/$id");
+                } else {
+                    $alamat_sk = $this->upload->data('file_name');
+                }
                 $id_riwayat = $data1['last']+1;
                 $ruangan=$this->input->post('ruangan');
-                $id_profesi= $data3['id_profesi'];
                 $id_karyawan=$id;
                 $mulai= date('Y-m-d');
+                $akhir = date('Y-m-d');
                
                 $dataRiwayat= array(
                 'id_riwayat' => $id_riwayat,
                 'ruangan' => $ruangan,
-                'id_profesi' => $id_profesi,
                 'id_karyawan' => $id_karyawan,
-                'mulai' => $mulai
+                'mulai' => $mulai,
+                'akhir' => $akhir,
+                'alamat_sk' => $alamat_sk
                 );
-
-                $dataKaryawan= array('id_profesi' => $id_profesi);
-                $where = array('id_karyawan' => $id_karyawan);
-
                 $this->mdl_admin->addData('Riwayat',$dataRiwayat);
-                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
 
-                redirect("adminRiwayat");
+                redirect("adminRiwayat/detailRiwayat/$id");
                 }
         }
         else{ redirect("login"); } 
@@ -85,32 +90,38 @@ class AdminRiwayat extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['datRi']=$this->mdl_admin->getEditRi($id);
-                $data['array']=$this->mdl_admin->getProfesi();
                 $this->load->view('admin/Karyawan/Riwayat/Penempatan/editRiwayat',$data);
             }else{
-                $konek = mysqli_connect("localhost","root","","kepegawaian");
-                $this->input->post('nik');
-                $b =$this->input->post('id_profesi');
-                $data2=mysqli_fetch_array(mysqli_query($konek,"select id_karyawan from karyawan where nik = '$a' "));
-                $data3=mysqli_fetch_array(mysqli_query($konek,"select id_profesi from jenis_profesi where nama_profesi = '$b' "));
+                $config['upload_path']      = './Assets/dokumen/';
+                $config['allowed_types']    = 'pdf';
+                $config['max_size']         = 2000;
 
+                $this->load->library('upload', $config);
                 $ruangan=$this->input->post('ruangan');
-                $id_profesi= $data3['id_profesi'];
                 $mulai = date('Y-m-d',strtotime($this->input->post('mulai')));
                 $akhir = date('Y-m-d',strtotime($this->input->post('akhir')));
-               
+                if($_FILES['alamat_sk']['name'] != '') {
+                    if(!$this->upload->do_upload('alamat_sk')) {
+                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
+                        $this->session->set_flashdata('msg_error', $error);
+
+                        redirect("adminRiwayat/edit/$id/$idk");
+                    } else {
+                        $alamat_sk = $this->upload->data('file_name');
+                    }
+                } else {
+                    $alamat_sk = $this->input->post('file_old');
+                }
+
                 $dataRiwayat= array(
                 'ruangan' => $ruangan,
-                'id_profesi' => $id_profesi,
+                'alamat_sk' => $alamat_sk,
                 'mulai' => $mulai,
                 'akhir' => $akhir,
                 );
 
-                $dataKaryawan= array('id_profesi' => $id_profesi);
-                $where = array('id_karyawan' => $id_karyawan);
                 $where2 = array('id_riwayat' => $id);
                 $this->mdl_admin->updateData($where2,$dataRiwayat,'Riwayat');
-                $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
 
                 redirect("adminRiwayat/detailRiwayat/$idk");
                 }

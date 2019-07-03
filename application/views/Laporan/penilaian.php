@@ -19,9 +19,9 @@
   <br><br><br>
   <br><br><br>
   <br><br><br>
-  <p align="center" style="size: 13px">
+  <H4 align="center" style="size: 13px">
     <b>LAPORAN DATA PENILAIAN PEGAWAI</b> <br>
-  </p>
+  </H4>
   <br>
  <table style="width: 70%;">
   <?php foreach ($array as $key): ?>
@@ -43,7 +43,7 @@
     <tr>
       <td>JABATAN  </td>
       <td>:</td>
-      <td><?php echo $key->jabatan;?></td>
+      <td><?php echo $jabatan->jabatan;?></td>
     </tr>
     <tr>
       <td>PROFESI</td>
@@ -64,11 +64,11 @@
   <br>
   <table class="table table-bordered">
     <tr>
-      <th>No</th>
-      <th>Tanggal Penilaian</th>
-      <th>Penilai</th>
-      <th>Jenis Penilaian</th>
-      <th>Hasil</th>
+      <th><h5><b>NO</b></h5></th>
+      <th><h5><b>TANGGAL PENILAIAN</b></h5></th>
+      <th><h5><b>PENILAI</b></h5></th>
+      <th><h5><b>JENIS PENILAIAN</b></h5></th>
+      <th><h5><b>HASIL</b></h5></th>
     </tr>
     <?php $no = 1; foreach ($data as $key): ?>
       <tr>

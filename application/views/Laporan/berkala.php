@@ -42,7 +42,7 @@
     <tr>
       <td>JABATAN  </td>
       <td>:</td>
-      <td><?php echo $key->jabatan;?></td>
+      <td><?php echo $jabatan->jabatan;?></td>
     </tr>
     <tr>
       <td>PROFESI</td>

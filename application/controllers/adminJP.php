@@ -87,6 +87,7 @@ class AdminJP extends CI_Controller {
         $data['array']=$this->mdl_admin->getData('karyawan',$where);
         $data['data']=$this->mdl_admin->getData('penilaian_karyawan',$where);
         $data['datDir']=$this->mdl_admin->getTempat($id);
+        $data['jabatan']=$this->mdl_admin->getJab($id);
         $this->mypdf->generate('Laporan/penilaian', $data, 'laporan-riwayat-penilaian', 'A4', 'portrait');
     }
 }

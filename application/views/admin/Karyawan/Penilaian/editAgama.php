@@ -37,13 +37,13 @@
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
       
-          <form action="<?php echo site_url();?>/adminKaryawan/editAgama/<?php echo $array->id; ?>/<?php echo $array->id_karyawan; ?>" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminKaryawan/editAgama/<?php echo $array->id; ?>/<?php echo $array->id_karyawan; ?>/<?php echo $array->id_seleksi; ?>" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
             <td><label form-control-label>Nama Tes</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="nama_tes" type="text" class="form-control" value="<?php echo $array->nama_tes ?>">
+                <input name="nama_tes" type="text" class="form-control" value="<?php echo $array->nama_tes ?>" >
                 <input name="id" type="hidden" class="form-control" value="<?php echo $array->id ?>">
               </div>
             </td>

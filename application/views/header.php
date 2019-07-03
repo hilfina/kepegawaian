@@ -220,7 +220,7 @@
                 </a>
                 <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
                   <li><a title="Semua Pelamar" href="<?php echo site_url('adminPelamar') ?>">Pelamar</a></li>
-                  <li><a title="Sedang Seleksi" href="<?php echo site_url('admin/dataSeleksi') ?>">Seleksi Pelamar</a></li>
+                  
                   <li><a title="Loker" href="<?php echo site_url('adminLoker') ?>">Lowongan Pekerjaan</a></li>
                 </ul>
               </li>

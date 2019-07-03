@@ -112,7 +112,7 @@
                             <input type="file" name="file" value="<?php echo $array->file; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                           </div>
                           <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $array->file; ?>">
-                          <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
+                          <font size="2">Format dokumen harus dalam bentuk pdf/excel. Ukuran file maksimal adalah 2 mb </font>
                         </div>
                       </div>
                     </div>

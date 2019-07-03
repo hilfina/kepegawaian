@@ -18,9 +18,17 @@ class AdminPelamar extends CI_Controller {
 	}
 
     //MENAMPILKAN DATA TABEL BERISI DATA PELAMAR
-	public function index(){
+    public function index(){
+        if($this->mdl_admin->logged_id()){            
+            $paket['array']=$this->mdl_admin->getLamar();
+            $this->load->view('admin/pelamar/all',$paket);
+        }else{redirect("login");}
+    }
+	public function index2($idp){
 		if($this->mdl_admin->logged_id()){            
-			$paket['array']=$this->mdl_admin->getPelamar();
+			$paket['array']=$this->mdl_admin->getPelamar($idp);
+            $paket['judul']=$this->mdl_admin->cariprofesi($idp);
+            $paket['np']=$idp;
             $this->load->view('admin/pelamar/allPelamar',$paket);
 		}else{redirect("login");}
 	}
@@ -223,7 +231,6 @@ class AdminPelamar extends CI_Controller {
             $paket['datDir']=$this->mdl_admin->getData('karyawan',$where);
             $paket['datPen']=$this->mdl_admin->getData('pendidikan',$where);
             $paket['datSel']=$this->mdl_admin->detSeleksi($id);
-
             $paket['datSur']=$this->mdl_admin->cariJenisSurat($id);
             $paket['datLo']=$this->mdl_admin->getData('Lowongan',$where);
             if ($this->mdl_admin->detSeleksi($id)) {
@@ -256,6 +263,9 @@ class AdminPelamar extends CI_Controller {
             $email=$this->input->post('email');
             $jenkel=$this->input->post('jenkel');
             $ttl=$this->input->post('ttl');
+            $status=$this->input->post('status');
+            $pend_akhir=$this->input->post('pend_akhir');
+            $nilai_akhir=$this->input->post('nilai_akhir');
             $nama_profesi=$this->input->post('nama_profesi');
             $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_profesi from jenis_profesi where nama_profesi = '$nama_profesi'"));
 
@@ -266,15 +276,46 @@ class AdminPelamar extends CI_Controller {
                 'no_telp' => $no_telp,
                 'email' => $email,
                 'ttl' => $ttl,
+                'status' => $status,
                 'jenkel' => $jenkel,
                 'id_profesi' => $s['id_profesi']
                 );
+
+             $dataLowongan = array(
+                'pend_akhir' => $pend_akhir,
+                'nilai_akhir' => $nilai_akhir,
+                
+             );
              $where = array('id_karyawan' => $id);
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
+             $this->mdl_admin->updateData($where,$dataLowongan,'lowongan');
              redirect("adminPelamar/pelamarDetail/$id");
         }
 
         else{ redirect("login"); } 
+    }
+
+    public function updatecv($id)
+    {
+        if($this->mdl_admin->logged_id()){
+            $config['upload_path']      = './Assets/dokumen/';
+            $config['allowed_types']    = 'pdf';
+            $config['max_size']         = 2000;
+            $this->load->library('upload', $config);
+
+            if(!$this->upload->do_upload('cvsaya')) {
+                $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran kurang dari 2mb");
+
+                $this->session->set_flashdata('msg_error', $error);
+                redirect("adminPelamar/pelamarDetail/$id");
+            } else {
+                $cvsaya = $this->upload->data('file_name');
+            }
+            $data2 = array( 'cv' => $cvsaya );
+            $where = array( 'id_karyawan' => $id );
+            $update = $this->mdl_pelamar->updatedata($where,$data2,'lowongan');
+            redirect('adminPelamar/pelamarDetail/$id');
+        }else{redirect("login");}
     }
     // MENAMPILKAN FORM TAMBAH PENDIDIKAN MELALUI HALAMAN DETAIL
    public function addpend($id){
@@ -831,6 +872,13 @@ class AdminPelamar extends CI_Controller {
             
             echo "<script>alert('Berhasil Menambahkan data'); document.location.href = '" . site_url('AdminPelamar') . "';</script>";
         }        
+    }
+
+    public function cetak($idp){
+        $this->load->library('Mypdf');
+        $data['array']=$this->mdl_admin->getPelamar($idp);
+        $data['judul']=$this->mdl_admin->cariprofesi($idp);
+        $this->mypdf->generate('Laporan/profesipelamar', $data, 'laporan-hasil-seleksi', 'A4', 'portrait');
     }
 
     public function report(){

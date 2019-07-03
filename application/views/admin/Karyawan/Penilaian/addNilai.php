@@ -116,7 +116,7 @@
                             <input type="text" id="prepend-big-btn" placeholder="no file selected">
                           </div>
                         </div>
-                        <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
+                        <font size="2">Format dokumen harus dalam bentuk pdf/excel. Ukuran file maksimal adalah 2 mb </font>
                       </div>
                     </div>
                 </div> <br>
