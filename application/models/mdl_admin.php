@@ -100,7 +100,8 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
     function getSurat2(){
-        $tanggal = date('Y-m-d');
+        $tanggal2 = date('Y-m-d');
+        $tanggal = date('Y-m-d', strtotime('+6 month',strtotime($tanggal2)));
         $query = $this->db->query("SELECT * FROM karyawan as k INNER JOIN sip_str as p on k.id_karyawan=p.id_karyawan inner join jenis_surat as s ON p.id_surat=s.id_surat where tgl_akhir < '$tanggal' ORDER by p.tgl_akhir asc ");
         return $query->result();
     }

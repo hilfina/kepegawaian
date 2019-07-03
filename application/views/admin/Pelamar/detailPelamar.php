@@ -619,7 +619,18 @@
                               <td colspan="2"><br>
                                 <?php if ($key->tes_ppa != "-") { ?>
                               <div align="center">
-                                <img width="80%" src="<?php echo base_url()?>Assets/dokumen/<?php echo $key->tes_ppa;?>" alt="" />
+                                <div class="pdf-viewer-area mg-b-15">
+                                        <div class="container-fluid">
+                                          <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                              <div class="pdf-single-pro">
+                                                <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->tes_ppa; ?>"></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                               </div>
                             <?php }?>
                               </td>

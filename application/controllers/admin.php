@@ -49,28 +49,31 @@ class Admin extends CI_Controller {
         else{ redirect("login"); } 
     }
     
-    public function detSeleksi($id_karyawan){   //detail dari data seleksi pelamat
+    public function detSeleksi($id_karyawan){ //detail dari data seleksi pelamat
        if($this->mdl_admin->logged_id())
         {       
             $where = array( 'id_karyawan' => $id_karyawan);
             $paket['datDir']=$this->mdl_admin->getData('karyawan',$where);//nama,id,profesi pelamar
             $paket['datSel']=$this->mdl_admin->detSeleksi($id_karyawan);
-            
-            $konek = mysqli_connect("localhost","root","","kepegawaian");
+
             if ($this->mdl_admin->detSeleksi($id_karyawan)) {
-                $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from seleksi where id_karyawan = $id_karyawan"));
-                
+                $this->db->select('*');
+                $this->db->from('seleksi');
+                $this->db->where('id_karyawan', $id_karyawan);
+                $s = $this->db->get()->row();
+
                 //DATA SELEKSI YANG ADA DI RIWAYAT SELEKSI
-                $paket['wawa']=$this->mdl_pelamar->carii('Wawancara',$s['id_seleksi']);
-                $paket['psiko']=$this->mdl_pelamar->carii('Tes Psikologi',$s['id_seleksi']);
-                $paket['tulis']=$this->mdl_pelamar->carii('Tes Tulis',$s['id_seleksi']);
-                $paket['sehat']=$this->mdl_pelamar->carii('Tes Kesehatan',$s['id_seleksi']);
-                $paket['shalat']=$this->mdl_pelamar->carii('Tes Toharoh dan Shalat',$s['id_seleksi']);
-                $paket['doa']=$this->mdl_pelamar->carii('Doa Sehari-hari',$s['id_seleksi']);
-                $paket['bimbing']=$this->mdl_pelamar->carii('Tes Ibadah Praktis',$s['id_seleksi']);
-                $paket['baca']=$this->mdl_pelamar->carii('Baca Al-Quran',$s['id_seleksi']);
-                $paket['semua']=$this->mdl_pelamar->semuaSeleksi($s['id_seleksi']);
-                $where2 = array( 'id_seleksi' => $s['id_seleksi']);
+                $paket['wawa']=$this->mdl_pelamar->carii('Wawancara',$s->id_seleksi);
+                $paket['psiko']=$this->mdl_pelamar->carii('Tes Psikologi',$s->id_seleksi);
+                $paket['tulis']=$this->mdl_pelamar->carii('Tes Tulis',$s->id_seleksi);
+                $paket['sehat']=$this->mdl_pelamar->carii('Tes Kesehatan',$s->id_seleksi);
+                $paket['shalat']=$this->mdl_pelamar->carii('Tes Toharoh dan Shalat',$s->id_seleksi);
+                $paket['doa']=$this->mdl_pelamar->carii('Doa Sehari-hari',$s->id_seleksi);
+                $paket['bimbing']=$this->mdl_pelamar->carii('Tes Ibadah Praktis',$s->id_seleksi);
+                $paket['baca']=$this->mdl_pelamar->carii('Baca Al-Quran',$s->id_seleksi);
+                $paket['semua']=$this->mdl_pelamar->semuaSeleksi($s->id_seleksi);
+
+                $where2 = array( 'id_seleksi' => $s->id_seleksi);
             }else{$where2 = array( 'id_seleksi' => '0');}
             
             $paket['datSel']=$this->mdl_admin->getData('seleksi',$where);
@@ -82,22 +85,28 @@ class Admin extends CI_Controller {
     //EDIT DATA SELEKSI
     public function editDataSel(){
         if($this->mdl_admin->logged_id()) {   
-            $idk=$this->input->post('idKSel');
             $config['upload_path']      = './Assets/dokumen/';
             $config['allowed_types']    = 'jpg|png';
             $config['max_size']         = 2000;
             $config['max_width']        = 10240;
-            $config['max_height']       = 7680;
-            
+            $config['max_height']       = 7680;            
             $this->load->library('upload', $config);
-            $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from seleksi where id_karyawan = $idk"));
-            if ($this->upload->do_upload('file')) {
-                $a = $this->upload->data('file_name');
-            }else {
-                $a = $s['tes_ppa'];
+
+            $id_karyawan=$this->input->post('idKSel');
+
+            //cari data seleksi karyawan yang dipilih
+            $this->db->select('tes_ppa');
+            $this->db->from('seleksi');
+            $this->db->where('id_karyawan', $id_karyawan);
+            $s = $this->db->get()->row();
+
+            if ($this->upload->do_upload('file')) { //jika upload file ppa
+                $data_ppa = $this->upload->data('file_name'); 
+            }else {//jika tidak
+                $data_ppa = $s->tes_ppa;
             }   
 
-            $tp_sel = $a;   
+            $tp_sel = $data_ppa;   
             $idSel = $this->input->post('idSel');     
             $tgl = $this->input->post('tgl');
             $wawancara = $this->input->post('wawancara');
@@ -141,12 +150,18 @@ class Admin extends CI_Controller {
             }
 
             $konek = mysqli_connect("localhost","root","","kepegawaian");
-            $b = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $idSel && nama_tes = 'Wawancara'")); 
+            //$b = mysqli_fetch_array(mysqli_query($konek,"select * from riwayat_seleksi where id_seleksi = $idSel && nama_tes = 'Wawancara'")); 
+
+            $this->db->select('*');
+            $this->db->from('riwayat_seleksi');
+            $this->db->where('id_seleksi', $idSel);
+            $this->db->where('nama_tes', 'wawancara');
+            $b = $this->db->get()->row();
 
             if ($this->mdl_pelamar->caricari('Tes Psikologi',$idSel)) {
                 $this->mdl_admin->editRSel($idSel,'Tes Psikologi', $psikologi);
             }
-            elseif ($tgl != $b['tanggal'] && $wawancara >= 10 && $psikologi == "-") {
+            elseif ($tgl != $b->tanggal && $wawancara >= 10 && $psikologi == "-") {
                 //data Riwayat Seleksi
                 $dataRSel = array(
                     'id_seleksi' => $idSel,
@@ -242,7 +257,7 @@ class Admin extends CI_Controller {
             $dataSel = array('tgl_seleksi' => $tgl, 'tes_ppa' => $a);
             $where = array( 'id_seleksi' => $idSel);
             $this->mdl_admin->updateData($where,$dataSel,'seleksi');
-            redirect("admin/detSeleksi/$idk");
+            redirect("admin/detSeleksi/$id_karyawan");
 
         }else{ redirect("login"); } 
     }

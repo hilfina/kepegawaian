@@ -752,6 +752,30 @@ class AdminPelamar extends CI_Controller {
                 'level' => 'Karyawan',
             );
 
+            $this->load->library('email');
+            $config = array();
+            $config['charset'] = 'utf-8';
+            $config['useragent'] = 'CodeIgniter';
+            $config['protocol']= "smtp";
+            $config['mailtype']= "html";
+            $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+            $config['smtp_port']= "465";
+            $config['smtp_timeout']= "400";
+            $config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
+            $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
+            $config['crlf']="\r\n"; 
+            $config['newline']="\r\n"; 
+            $config['wordwrap'] = TRUE;
+            //memanggil library email dan set konfigurasi untuk pengiriman email
+                
+            $this->email->initialize($config);
+            //konfigurasi pengiriman
+            $this->email->from($config['smtp_user']);
+            $this->email->to($data['email']);
+            $this->email->subject("Notifikasi");
+            $this->email->message("Kepada<br>Yth. Sdr. <b>".$data['nama']."</b><br> Ditempat,<br><br><br>Selamat, anda Telah Diterima di RSIA, silahkan melengkapi data diri anda kembali pada sistem. Informasi selanjutnya akan kami sampaikan melalui telfon.<br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih.");
+            $this->email->send();
+
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
              $this->mdl_admin->addData('riwayat',$dataRiwayat);
              $this->mdl_admin->addData('Status',$dataStatus);

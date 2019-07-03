@@ -862,12 +862,12 @@ class AdminKaryawan extends CI_Controller {
                     untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
                     "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
                 );
-                if($this->email->send()){
+                //if($this->email->send()){
                     $this->mdl_admin->impor('login',$data2);
                     $this->mdl_admin->impor('riwayat',$data3);
                     $this->mdl_admin->impor('status',$data4);
                     $this->mdl_admin->impor('golongan',$data5);
-                }else{}
+                //}else{}
             }
         }echo "<script>alert('Berhasil Menambahkan Data'); document.location.href = '" . site_url('Adminkaryawan') . "';</script>";
     }}
