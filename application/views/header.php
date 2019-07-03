@@ -741,7 +741,7 @@
                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                           </a>
                           <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                          <?php if($levelku == "Karyawan"){?> 
+                          <?php if($levelku == "Karyawan" || $levelku == "Pelamar"){?> 
                             <li><a href="<?php echo site_url('Login/ubahpass')?>"><span class="edu-icon edu-settings author-log-ic"></span>Ubah Sandi</a>
                             </li>
                             <?php } else {}?>
