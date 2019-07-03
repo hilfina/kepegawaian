@@ -82,7 +82,7 @@ $idku=$this->session->userdata("myId");
                           <h2>File SIP/STR Kadaluarsa</h2><hr>
                           <br>                         
                           <?php if ($sipstr->banyak == 0) {
-                            echo "Tidak ada calon karyawan.";
+                            echo "Tidak ada file kadaluarsa.";
                           }else{
                             echo $sipstr->banyak." File"; ?>
                             <div align="center"><br>

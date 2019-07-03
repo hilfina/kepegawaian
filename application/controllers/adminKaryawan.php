@@ -94,8 +94,8 @@ class AdminKaryawan extends CI_Controller {
                     $config['smtp_host']= "ssl://smtp.gmail.com";
                     $config['smtp_port']= "465";
                     $config['smtp_timeout']= "400";
-                    $config['smtp_user']= "sdiitrsia@gmail.com";
-                    $config['smtp_pass']= "A1hamdulillah";
+                    $config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
+                    $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
                     $config['crlf']="\r\n"; 
                     $config['newline']="\r\n"; 
                     $config['wordwrap'] = TRUE;
@@ -855,12 +855,12 @@ class AdminKaryawan extends CI_Controller {
                     untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
                     "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
                 );
-                if($this->email->send()){
+                //if($this->email->send()){
                     $this->mdl_admin->impor('login',$data2);
                     $this->mdl_admin->impor('riwayat',$data3);
                     $this->mdl_admin->impor('status',$data4);
                     $this->mdl_admin->impor('golongan',$data5);
-                }else{}
+                //}else{}
             }
         }echo "<script>alert('Berhasil Menambahkan Data'); document.location.href = '" . site_url('Adminkaryawan') . "';</script>";
     }}
