@@ -34,11 +34,11 @@
               </div>
           </div>
         <div class="container-fluid" role="alert">
-            <?php if ($this->session->flashdata('msg_error')) :?>
-              <div class="alert alert-danger alert-mg-b"> 
-              <?php echo $this->session->flashdata('msg_error')?>
-              </div>
-            <?php endif; ?>
+          <?php if ($this->session->flashdata('msg_error')) :?>
+            <div class="alert alert-danger alert-mg-b"> 
+            <?php echo $this->session->flashdata('msg_error')?>
+            </div>
+          <?php endif; ?>
         </div>
 
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
@@ -48,7 +48,15 @@
             <td><label form-control-label>NIK</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="nik" type="text" class="form-control" placeholder="Nomor Induk Karyawan">
+                <select type="text" class="chosen-select" name="nik">
+                  <option> -- Pilihan -- </option>
+                 <?php
+                    $cari = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan = l.id_karyawan where id_status != 'Pelamar' and id_status != 'Calon Karyawan' and level != 'admin' and level != 'Super Admin' group by nik ");
+                    $nik = $cari->result();
+                    foreach ($nik as $nik) { ?>
+                      <option> <?php echo $nik->nik; ?> </option>
+                  <?php }?>
+                </select>
               </div>
             </td>
           </tr>
@@ -105,19 +113,19 @@
             <td style="height: 50px">
               <div class="col-lg-12">
                 <div class="input-mark-inner">
-                      <div class="file-upload-inner ts-forms">
-                        <div class="input prepend-big-btn">
-                          <label class="icon-right" for="prepend-big-btn">
-                            <i class="fa fa-download"></i>
-                          </label>
-                          <div class="file-button"> Browse
-                            <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
-                          </div>
-                          <input type="text" id="prepend-big-btn" placeholder="no file selected">
-                          <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
-                        </div>
+                  <div class="file-upload-inner ts-forms">
+                      <font size="2" color="red">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
+                    <div class="input prepend-big-btn">
+                      <label class="icon-right" for="prepend-big-btn">
+                        <i class="fa fa-download"></i>
+                      </label>
+                      <div class="file-button"> Browse
+                        <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                       </div>
+                      <input type="text" id="prepend-big-btn" placeholder="no file selected">
                     </div>
+                  </div>
+                </div>
               </div>
             </td>
           </tr>

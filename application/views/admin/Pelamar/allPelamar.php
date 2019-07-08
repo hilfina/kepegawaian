@@ -41,8 +41,18 @@
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right">
+                <?php  $tdy = date('Y-m-d');
+                if ($judul->akhir <= $tdy && $karyawan->id_status != 'Calon Karyawan') { ?>
+                  <a href="<?php echo site_url(); echo"/adminPelamar/acc/"; echo $judul->id_profesi; ?>" >
+                    <button class="btn btn-success waves-effect"><i class="fa fa-check"></i> Telah disetujui</button>
+                  </a>
+                <?php }elseif ($karyawan->id_status == 'Calon Karyawan') { ?>
+                  <a href="<?php echo site_url(); echo"/adminPelamar/acc/"; echo $judul->id_profesi; ?>" >
+                    <button class="btn btn-success waves-effect"><i class="fa fa-check"></i> Belum TAUUUU</button>
+                  </a>
+                <?php } ?>
                 <a href="<?php echo site_url(); echo"/adminPelamar/cetak/"; echo $np; ?>" >
-                  <button class="btn btn-primary waves-effect waves-light mg-b-15"><i class="fa fa-print" aria-hidden="true"></i> Cetak Daftar Pelamar</button>
+                  <button class="btn btn-primary waves-effect"><i class="fa fa-print" aria-hidden="true"></i> Cetak Daftar Pelamar</button>
                 </a>
                 </div>
               </div>
@@ -82,21 +92,21 @@
                     <td><?php echo $key->nilai_akhir; ?></td>
                     <td><?php echo $key->akhir; ?></td>
                     <td align="center">
-                         <?php if($levelku == "Super Admin"){ ?>
-                          <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
-                          <button class="btn btn-success waves-effect" title="TERIMA"><i class="fa fa-check"></i></button>
-                        </a>
-                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-danger waves-effect" title="TOLAK"><i class="fa fa-times"></i></button>
-                        </a>
-                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
-                        </a>
-                        <?php } else {?>
-                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
-                        </a>
-                        <?php }?>
+                     <?php if($levelku == "Super Admin"){ ?>
+                      <!-- <a href="<?php //echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
+                      <button class="btn btn-success waves-effect" title="TERIMA"><i class="fa fa-check"></i></button>
+                    </a> -->
+                    <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
+                      <button class="btn btn-danger waves-effect" title="TOLAK"><i class="fa fa-times"></i></button>
+                    </a>
+                    <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                      <button class="btn btn-primary waves-effect waves-light">Detail</button>
+                    </a>
+                    <?php } else {?>
+                    <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                      <button class="btn btn-primary waves-effect waves-light">Detail</button>
+                    </a>
+                    <?php }?>
                     </td>
                   </tr>
                 <?php }?>

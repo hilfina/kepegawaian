@@ -1,4 +1,4 @@
-m<?php 
+<?php 
 $this->load->view("header.php");
 ?>
 <br>
@@ -79,7 +79,7 @@ $this->load->view("header.php");
                     <th>Masa Berlaku</th>
                     <th>Jenjang Klinik</th>
                     <th>File Kredensial</th>
-                    <th>Aktif</th>
+                    <!-- <th>Aktif</th> -->
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -112,7 +112,7 @@ $this->load->view("header.php");
                         <font style="color: red">Tidak Ada file</font>
                       <?php } ?>
                     </td>
-                    <td>
+                    <!-- <td>
                         <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
                           <i class="fa fa-check"></i> Surat Aktif 
                         <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
@@ -123,7 +123,7 @@ $this->load->view("header.php");
                           <font color="red">Edit tanggal akhir</font>
                         <?php } ?>
                         
-                    </td>
+                    </td> -->
                     <td>
                     <a href="<?php echo site_url('adminKew/edit/').$key->id_kewenangan ?>">
                     <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>

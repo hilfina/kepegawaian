@@ -7,7 +7,6 @@ class Mdl_karyawan extends CI_Model
         $this->db->where($where);
         $this->db->update($table,$data);
     }
-
     function getData($table,$where){
         $this->db->select("*");
         $this->db->from($table);
@@ -15,13 +14,23 @@ class Mdl_karyawan extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-
     function getAlldata($table){
         $this->db->select("*");
         $this->db->from($table);
         $query = $this->db->get();
         return $query->result();
     }
+    public function getGol($id){
+        $query = $this->db->query("SELECT * FROM golongan where id_golongan != 'Tidak Ada' && id_karyawan = '$id'  ");
+        return $query->result();
+    }
+    //menampilkan seluruh sipstr hanya 1 karyawan
+    function getSurat($id){
+        $query = $this->db->query("SELECT * FROM karyawan as k INNER JOIN sip_str as p on k.id_karyawan=p.id_karyawan inner join jenis_surat as s ON p.id_surat=s.id_surat where k.id_karyawan = '$id' ORDER by p.tgl_akhir asc ");
+        return $query->result();
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    
     function delSurat($id){
         $this->db->query("DELETE FROM sip_str where id_sipstr = '$id'");
     }
@@ -46,10 +55,7 @@ class Mdl_karyawan extends CI_Model
         return $query->result();
     }
 
-    public function getGol($id){
-        $query = $this->db->query("SELECT * FROM golongan where id_golongan != 'Tidak Ada' && id_karyawan = '$id'  ");
-        return $query->result();
-    }
+    
 
     public function getBerkala($id){
         $query = $this->db->query("SELECT * FROM berkala where id_karyawan = '$id'");
@@ -93,5 +99,11 @@ class Mdl_karyawan extends CI_Model
     public function detDiklat($id){//untuk menampilkan data detail diklat di admin
         $query = $this->db->query("SELECT * from diklat as d INNER JOIN karyawan as k on k.id_karyawan=d.id_karyawan WHERE id_diklat = '$id'");
         return $query->result();
+    }
+    public function lastStatus($id){
+        $last = $this->db->query("SELECT id FROM status order by mulai desc limit 1");
+        $getlast = $last->row();
+        $tdy = date('Y-m-d');
+        $this->db->query("UPDATE status SET notif = 1 , akhir = '$tdy' where id = '$getlast->id'");
     }
 }

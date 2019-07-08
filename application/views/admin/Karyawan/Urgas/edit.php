@@ -45,7 +45,7 @@
                         <label>NIK</label>
                       </div>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                       <input name="nik" type="text" class="form-control" value="<?php echo $key->nik ?>" readonly>
                     </div>
                   </div>
@@ -55,7 +55,7 @@
                         <label>Nama Karyawan</label>
                       </div>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                       <input name="nik" type="text" class="form-control" value="<?php echo $key->nama ?>" readonly>
                     </div>
                   </div>
@@ -63,11 +63,13 @@
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                       <div class="input-mask-title">
                         <label>Upload Dokumen Uraian Tugas</label>
+                        <input name="file_old" type="text" value="<?php echo $key->file_urgas ?>"hidden>
                       </div>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                       <div class="input-mark-inner">
                         <div class="file-upload-inner ts-forms">
+                          <font size="2" color="red"> *Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 MB </font>
                           <div class="input prepend-big-btn">
                             <label class="icon-right" for="prepend-big-btn">
                               <i class="fa fa-download"></i>
@@ -76,7 +78,6 @@
                               <input type="file" name="file_urgas" value="<?php echo $key->file_urgas; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                             </div>
                             <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->file_urgas; ?>">
-                            <font size="2" color="red"> *Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 MB </font>
                           </div>
                         </div>
                       </div>

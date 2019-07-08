@@ -132,7 +132,7 @@ $this->load->view("header.php");
                                                     <div class="file-button">
                                                     Browse
                                                          
-                                                  <input type="file" name="file_old" value="<?php echo $key->file?>" hidden>
+                                                  <input type="text" name="file_old" value="<?php echo $key->file?>" hidden>
                                                   <input type="file" name="file" value="<?php echo $key->file?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                                                     </div>
                                                     <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->file;?>">

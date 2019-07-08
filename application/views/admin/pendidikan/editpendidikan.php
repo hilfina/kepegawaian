@@ -135,11 +135,13 @@ $this->load->view("header.php");
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                       <div class="input-mask-title">
                         <label>Foto Scan Dokumen</label>
+                          <input type="text" name="file_old" value="<?php echo $key->file ?>" hidden >
                       </div>
                     </div>
                       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                       <div class="input-mark-inner">
                         <div class="file-upload-inner ts-forms">
+                          <font size="2" color="red">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                           <div class="input prepend-big-btn">
                             <label class="icon-right" for="prepend-big-btn">
                               <i class="fa fa-download"></i>
@@ -149,8 +151,6 @@ $this->load->view("header.php");
                             </div>
                             <input type="text" id="prepend-big-btn" placeholder="no file selected">
                           </div>
-                          <font size="2" color="red">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font><br><br><br>
-                          
                         </div>
                       </div>
                     </div>

@@ -49,24 +49,32 @@ $this->load->view("header.php");
                         <div class="input-knob-dial-wrap">
                             
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="input-mask-title">
                                         <label>NIK</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                                     <div class="input-mark-inner">
-                                        <input type="text" name="nik" placeholder="Nomor Induk Karyawan" class="form-control">
+                                        <select type="text" class="chosen-select" name="nik">
+                                          <option> -- Pilihan -- </option>
+                                         <?php
+                                            $cari = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan = l.id_karyawan where id_status != 'Pelamar' and id_status != 'Calon Karyawan' and level != 'admin' and level != 'Super Admin' group by nik ");
+                                            $nik = $cari->result();
+                                            foreach ($nik as $nik) { ?>
+                                              <option> <?php echo $nik->nik; ?> </option>
+                                          <?php }?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="input-mask-title">
                                         <label>Tanggal Pengajuan</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                                     <div class="input-mark-inner">
                                     <div class="form-group data-custon-pick data-custom-mg" id="data_5">
                                         <div class="input-daterange input-group" id="datepicker">
@@ -77,14 +85,15 @@ $this->load->view("header.php");
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="input-mask-title">
                                         <label>Upload Dokumen Pengajuan</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                                     <div class="input-mark-inner">
                                         <div class="file-upload-inner ts-forms">
+                                        <font size="2" color="red">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                           <div class="input prepend-big-btn">
                                               <label class="icon-right" for="prepend-big-btn">
                                                 <i class="fa fa-download"></i>
@@ -96,17 +105,14 @@ $this->load->view("header.php");
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected">
                                           </div>
                                         </div>
-                                        <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
                                 </div>
-                            </div>
+                            </div><br>
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <div class="input-mask-title">
-                                        
-                                    </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="input-mask-title"></div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                                     <div class="input-mark-inner">
                                             <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
                                     </div>

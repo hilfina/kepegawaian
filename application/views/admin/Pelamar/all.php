@@ -76,7 +76,7 @@
                   <tr>
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $key->nama_profesi; ?></td>
-                    <td><?php echo $key->jmlh; ?></td>
+                    <td><?php echo $key->jmlh." dari ".$key->kuota; ?></td>
                     <td>
                       <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->akhir))) ){ ?>
                           <i class="fa fa-check"></i> Lowongan Masih Dibuka

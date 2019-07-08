@@ -96,7 +96,7 @@
                                    
                                   <table width="100%">
                                       <tr>
-                                        <td width="20%"><label form-control-label">Nomor Induk</label></td>
+                                        <td width="20%"><label form-control-label>Nomor Induk</label></td>
                                         <td style="height: 50px" width="80%">
                                           <div class="col-lg-12">
                                             <input name="nik" type="text" class="form-control" value="<?php echo $key->nik; ?>" style="background-color: white ">
@@ -104,7 +104,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Nomor KTP</label></td>
+                                        <td><label form-control-label>Nomor KTP</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input name="no_ktp" type="text" class="form-control" value="<?php echo $key->no_ktp; ?>" style="background-color: white ">
@@ -112,7 +112,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Nomor BPJS</label></td>
+                                        <td><label form-control-label>Nomor BPJS</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input name="no_bpjs" type="text" class="form-control" value="<?php echo $key->no_bpjs; ?>" style="background-color: white ">
@@ -120,7 +120,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Nama Lengkap</label></td>
+                                        <td><label form-control-label>Nama Lengkap</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input style="background-color: white " name="nama" type="text" class="form-control" value="<?php echo $key->nama;?>">
@@ -148,7 +148,7 @@
                                       </td>
                                     </tr>
                                       <tr>
-                                        <td><label form-control-label">Jenis kelamin</label></td>
+                                        <td><label form-control-label>Jenis kelamin</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <select  class="form-control" name="jenkel">
@@ -161,7 +161,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Alamat</label></td>
+                                        <td><label form-control-label>Alamat</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input style="background-color: white " name="alamat" type="text" class="form-control" value="<?php echo $key->alamat;?>">
@@ -169,7 +169,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Nomor Telepon</label></td>
+                                        <td><label form-control-label>Nomor Telepon</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input style="background-color: white " name="no_telp" type="text" class="form-control" value="<?php echo $key->no_telp; ?>">
@@ -177,7 +177,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Email</label></td>
+                                        <td><label form-control-label>Email</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input style="background-color: white " name="email" type="text" class="form-control" value="<?php echo $key->email; ?>">
@@ -223,7 +223,7 @@
                                     </tr>
                                     <br>
                                       <tr>
-                                        <td><label form-control-label">Profesi</label></td>
+                                        <td><label form-control-label>Profesi</label></td>
                                         <td style="height: 50px">
                                          <font color="red" size="2">*profesi, status kepegawaian, golongan dan penempatan hanya dapat diubah sesuai kehendak HRD</font>
                                           <div class="col-lg-12">
@@ -232,7 +232,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Status Kepegawaian</label></td>
+                                        <td><label form-control-label>Status Kepegawaian</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input style="background-color: white " name="id_status" type="text" class="form-control" value="<?php echo $key->id_status; ?>"  disabled>
@@ -240,7 +240,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Jabatan</label></td>
+                                        <td><label form-control-label>Jabatan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input style="background-color: white " name="jabatan" type="text" class="form-control" value="<?php echo $key->jabatan; ?>"  disabled>
@@ -248,7 +248,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Golongan</label></td>
+                                        <td><label form-control-label>Golongan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input style="background-color: white " name="id_golongan" type="text" class="form-control" value="<?php echo $key->id_golongan; ?>" disabled>
@@ -256,7 +256,7 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                        <td><label form-control-label">Penempatan</label></td>
+                                        <td><label form-control-label>Penempatan</label></td>
                                         <td style="height: 50px">
                                           <div class="col-lg-12">
                                             <input style="background-color: white " name="ruangan" type="text" class="form-control" value="<?php echo $key->ruangan; ?>" disabled>

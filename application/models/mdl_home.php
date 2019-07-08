@@ -24,6 +24,25 @@ class Mdl_home extends CI_Model
             return $query->result();
         }
     }
+    function karyawan(){//cari data karyawan yg masih bekerja
+        $query= $this->db->query("SELECT count(k.id_karyawan) as banyak from karyawan as k inner join login as l on k.id_karyawan = l.id_karyawan where id_status != 'Calon Karyawan' AND id_status != 'Keluar' AND id_status != 'Pensiun' AND id_status != 'Pelamar' AND level != 'admin' AND level != 'Super Admin'");
+        return $query->row();
+    }
+    function pelamar(){//cari semua pelamar yang mendaftar
+        $query= $this->db->query("SELECT count(id_karyawan) as banyak from karyawan where id_status = 'Pelamar'");
+        return $query->row();
+    }
+    function calon(){//cari sua calon karyawan
+        $query= $this->db->query("SELECT count(id_karyawan) as banyak from karyawan where id_status = 'Calon Karyawan'");
+        return $query->row();
+    }
+    function sipstr($tanggal){//cari sipstr yang kadaluarsa dan belum diperbaruhi
+        $query= $this->db->query("SELECT count(id_sipstr) as banyak from sip_str where tgl_akhir <= '$tanggal' and mail = 0");
+        return $query->row();
+    }function seleksi($tanggal){//data loker yang sudah tutup / kuotanya sudah habis
+        $query= $this->db->query("SELECT COUNT(x) as banyak from (SELECT COUNT(id_loker) as x from loker as l inner join Karyawan as k on l.id_profesi = k.id_profesi where (k.id_status = 'Pelamar' OR k.id_status = 'Calon Karyawan') GROUP by l.id_profesi) as x");
+        return $query->row();
+    }
     function maxStatus(){
          $query= $this->db->query("SELECT max(id) as max FROM jenis_status");
         return $query->row();
@@ -32,30 +51,17 @@ class Mdl_home extends CI_Model
          $query= $this->db->query("SELECT * FROM jenis_status WHERE id_status != 'Pelamar' && id_status != 'Calon Karyawan'");
         return $query->result();
     }
-    function karyawan(){
-        $query= $this->db->query("SELECT count(k.id_karyawan) as banyak from karyawan as k inner join login as l on k.id_karyawan = l.id_karyawan where id_status != 'Calon Karyawan' AND id_status != 'Keluar' AND id_status != 'Pensiun' AND id_status != 'Pelamar' AND level != 'admin' AND level != 'Super Admin'");
-        return $query->row();
-    }
-    function pelamar(){
-        $query= $this->db->query("SELECT count(id_karyawan) as banyak from karyawan where id_status = 'Pelamar' and id_profesi != 'Belum'");
-        return $query->row();
-    }
-    function calon(){
-        $query= $this->db->query("SELECT count(id_karyawan) as banyak from karyawan where id_status = 'Calon Karyawan'");
-        return $query->row();
-    }
+    
     function loker($tanggal){
         $query= $this->db->query("SELECT count(id_loker) as banyak from loker where akhir >= '$tanggal' AND mulai <= '$tanggal'");
         return $query->row();
     }
-    function seleksi(){
-        $query= $this->db->query("select count(banyak) as banyak from (SELECT count(id_seleksi) as banyak from riwayat_seleksi where hasil = '-' group by id_seleksi) as jumblah");
-        return $query->row();
-    }
-    function sipstr($tanggal){
-        $query= $this->db->query("SELECT count(id_sipstr) as banyak from sip_str where tgl_akhir <= '$tanggal'");
-        return $query->row();
-    }
+    // function seleksi(){
+    //     $query= $this->db->query("select count(banyak) as banyak from (SELECT count(id_seleksi) as banyak from riwayat_seleksi where hasil = '-' group by id_seleksi) as jumblah");
+    //     return $query->row();
+    // }
+
+    
     function mou_h($tanggal){
         $query= $this->db->query("SELECT count(id) as banyak from mou_hutang where tgl_akhir <= '$tanggal' and notif_k != 1 and notif != 1");
         return $query->row();

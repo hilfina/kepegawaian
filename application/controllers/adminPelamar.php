@@ -16,7 +16,11 @@ class AdminPelamar extends CI_Controller {
         $this->load->library('email');
         if($this->mdl_admin->logged_id() == null){ redirect("login");}
 	}
-
+    //menampilkan semua pelamar yg sudah memili lowongan pekerjaan dari home
+    public function datapelamar(){
+        $paket['array']=$this->mdl_pelamar->getPelamar();
+        $this->load->view('admin/pelamar/allPelamar2',$paket);
+    }
     //MENAMPILKAN DATA TABEL BERISI DATA PELAMAR
     public function index(){
         if($this->mdl_admin->logged_id()){            
@@ -24,17 +28,62 @@ class AdminPelamar extends CI_Controller {
             $this->load->view('admin/pelamar/all',$paket);
         }else{redirect("login");}
     }
-	public function index2($idp){
-		if($this->mdl_admin->logged_id()){            
-			$paket['array']=$this->mdl_admin->getPelamar($idp);
-            $paket['judul']=$this->mdl_admin->cariprofesi($idp);
-            $paket['np']=$idp;
-            $this->load->view('admin/pelamar/allPelamar',$paket);
-		}else{redirect("login");}
+    //menampilkan data pelamar pada satu profesi tertentu
+	public function index2($idp){         
+		$paket['array']=$this->mdl_admin->getPelamar($idp);
+        $paket['judul']=$this->mdl_admin->cariprofesi($idp);
+        $paket['karyawan']=$this->mdl_admin->cariSatu($idp);
+        $paket['np']=$idp;
+        $this->load->view('admin/pelamar/allPelamar',$paket);
 	}
-    public function datapelamar(){
-        $paket['array']=$this->mdl_admin->getPelamar2();
-        $this->load->view('admin/pelamar/allPelamar2',$paket);
+    //acc semua pelamar telah diterima seleksi administrasi
+    public function acc($idp){
+        $cariKaryawan = $this->db->query("SELECT * FROM karyawan where id_profesi = '$idp' and id_status = 'Pelamar'");
+        $dataAllKaryawan = $cariKaryawan->result();
+
+        foreach ($dataAllKaryawan as $data) {
+            $cariSatuKaryawan = $this->db->query("SELECT * FROM karyawan where id_karyawan = '$data->id_karyawan'");
+            $dataKaryawan = $cariSatuKaryawan->row();
+            //echo $data->id_karyawan;
+            $config = array();
+            $config['charset'] = 'utf-8';
+            $config['useragent'] = 'CodeIgniter';
+            $config['protocol']= "smtp";
+            $config['mailtype']= "html";
+            $config['smtp_host']= "ssl://smtp.gmail.com";
+            $config['smtp_port']= "465";
+            $config['smtp_timeout']= "400";
+            $config['smtp_user']= "hilfinaamaris09@gmail.com";
+            $config['smtp_pass']= "hilfano090798";
+            $config['crlf']="\r\n"; 
+            $config['newline']="\r\n"; 
+            $config['wordwrap'] = TRUE;
+            $this->email->initialize($config);
+            $this->email->from($config['smtp_user']);
+            $this->email->to($dataKaryawan->email);
+            $this->email->subject("Notifikasi");
+
+            $this->email->message("Kepada<br>Yth. Sdr. <b>".$dataKaryawan->nama."</b><br> Ditempat,<br><br><br> Selamat, anda mendapat panggilan untuk melakukan seleksi diRumah Sakit Islam Kota Malang. untuk informasi tanggal seleksi, silakan untuk cek website RSIA ");
+            $this->email->send();
+            
+            $where = array( 'id_karyawan' => $dataKaryawan->id_karyawan ); 
+            $data = array( 'id_status' => 'Calon Karyawan' ); 
+
+            $dataSel = array(
+                'id_karyawan' => $dataKaryawan->id_karyawan,
+                'tgl_seleksi' => "-",
+                'nilai_agama' => "-",
+                'nilai_kompetensi' => "-",
+                'tes_ppa' => "-",
+                'tes_psikologi' => "-",
+                'tes_kesehatan' => "-",
+                'nilai_wawancara' => "-"
+            );
+
+            $this->mdl_admin->updateData($where,$data,'karyawan');
+            $this->mdl_admin->addData('seleksi',$dataSel);
+        }        
+        redirect("adminPelamar");
     }
     public function dataCakar(){
         $paket['array']=$this->mdl_admin->getCakar();
@@ -73,6 +122,7 @@ class AdminPelamar extends CI_Controller {
                 'foto' => 'profile.png',
                 'id_status' => 'Pelamar',
                 'id_profesi' => $npr['id_profesi'],
+                'jabatan' => 1,
                 'id_golongan' => 'Tidak Ada'
                 );
 
@@ -114,11 +164,11 @@ class AdminPelamar extends CI_Controller {
                 $config['useragent'] = 'CodeIgniter';
                 $config['protocol']= "smtp";
                 $config['mailtype']= "html";
-                $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+                $config['smtp_host']= "ssl://smtp.gmail.com";
                 $config['smtp_port']= "465";
                 $config['smtp_timeout']= "400";
-                $config['smtp_user']= "hilfinamaris09@gmail.com"; // isi dengan email kamu
-                $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
+                $config['smtp_user']= "hilfinaamaris09@gmail.com";
+                $config['smtp_pass']= "hilfano090798";
                 $config['crlf']="\r\n"; 
                 $config['newline']="\r\n"; 
                 $config['wordwrap'] = TRUE;
@@ -131,7 +181,7 @@ class AdminPelamar extends CI_Controller {
                 Masukkan username dan password dengan nomor KTP sesuai data lamaran yang telah anda kirim.<br><br>".
                 "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>");
                 $this->email->send();
-                redirect("adminPelamar");
+                redirect("adminPelamar/datapelamar");
             }
         }else{ redirect("login"); } 
     }
@@ -314,7 +364,7 @@ class AdminPelamar extends CI_Controller {
             $data2 = array( 'cv' => $cvsaya );
             $where = array( 'id_karyawan' => $id );
             $update = $this->mdl_pelamar->updatedata($where,$data2,'lowongan');
-            redirect('adminPelamar/pelamarDetail/$id');
+            redirect("adminPelamar/pelamarDetail/$id");
         }else{redirect("login");}
     }
     // MENAMPILKAN FORM TAMBAH PENDIDIKAN MELALUI HALAMAN DETAIL

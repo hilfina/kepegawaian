@@ -63,8 +63,8 @@ class AdminKew extends CI_Controller {
                 'tgl_pengajuan' => $tgl_pengajuan,
                 'doku_pengajuan' => $doku_pengajuan,
                 'penilaian' => '-',
-                'tgl_mulai' => '-',
-                'tgl_akhir' => '-',
+                'tgl_mulai' => date('Y-m-d'),
+                'tgl_akhir' => date('Y-m-d'),
                 'doku_penilaian' => '-',
                 
                 );
@@ -91,18 +91,10 @@ class AdminKew extends CI_Controller {
 
                 $this->load->library('upload', $config);
 
-                if($_FILES['doku_penilaian']['name'] != '') {
-                    if(!$this->upload->do_upload('doku_penilaian')) {
-                        $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
-
-                        $this->session->set_flashdata('msg_error', $error);
-
-                        redirect("adminKew/edit/$id");
-                    } else {
-                        $doku_penilaian = $this->upload->data('file_name');
-                    }
-                } else {
+                if(!$this->upload->do_upload('doku_penilaian')) {
                     $doku_penilaian = $this->input->post('file_old');
+                } else {
+                    $doku_penilaian = $this->upload->data('file_name');
                 }
 
                 $tgl_mulai = date('Y-m-d',strtotime($this->input->post('tgl_mulai')));
@@ -121,7 +113,7 @@ class AdminKew extends CI_Controller {
                 $where = array('id_kewenangan' => $id);
                 $this->mdl_admin->updateData($where,$data,'kewenangan_klinis');
                 redirect("AdminKew");
-                }
+            }
         }
 
         else{ redirect("login"); } 

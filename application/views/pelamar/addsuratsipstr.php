@@ -59,12 +59,10 @@ $this->load->view("header.php");
                                         <select type="text" class="chosen-select" name="nama_surat">
                                             <option> -- Pilihan -- </option>
                                          <?php
-                                            $konek = mysqli_connect("localhost","root","","kepegawaian");
-                                            $query = "select nama_surat from jenis_surat";
-                                            $hasil = mysqli_query($konek, $query);
-                                            while ($data=mysqli_fetch_array($hasil)) {?>
-                                            ?>
-                                              <option> <?php echo $data['nama_surat']?> </option>
+                                            $js = $this->db->query("SELECT * from jenis_surat");
+                                            $jenis = $js->result();
+                                            foreach ($jenis as $jenis) { ?>
+                                              <option> <?php echo $jenis->nama_surat; ?> </option>
                                           <?php }?>
                                         </select>
                                     </div>

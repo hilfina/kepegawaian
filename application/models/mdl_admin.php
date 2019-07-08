@@ -11,18 +11,14 @@ class Mdl_admin extends CI_Model
 
     //SEMUA DATA PELAMAR DAN CALON KARYAWAN
     public function getPelamar($id){
-       // $cariL = $this->db->query("select count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'");
-       //  $cariLimit = $cariL->row();
-       
-        // $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' group by k.id_karyawan order by mulai desc limit $cariLimit->hsl");
-        $query = $this->db->query("SELECT k.id_karyawan, k.nama, k.jenkel, k.ttl, p.pendidikan, l.pend_akhir, p.jurusan, l.nilai_akhir, p.akhir from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where k.id_status = 'Pelamar' && k.id_profesi = '$id' group by k.id_karyawan ");
+        $query = $this->db->query("SELECT k.id_karyawan, k.nama, k.jenkel, k.ttl, p.pendidikan, l.pend_akhir, p.jurusan, l.nilai_akhir, p.akhir from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where (k.id_status = 'Pelamar' or k.id_status = 'Calon Karyawan') && k.id_profesi = '$id' group by k.id_karyawan ");
         return $query->result();
     }
     //SEMUA DATA PELAMAR SAJA
     public function getPelamar2(){
         $cariL = $this->db->query("select count(k.id_karyawan) as hsl from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan where id_status = 'Pelamar' || id_status = 'Pelamar Ditolak' || id_status = 'Calon Karyawan' || id_profesi = 'Belum'");
         $cariLimit = $cariL->row();
-        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' and k.id_profesi != 'Belum' group by k.id_karyawan order by mulai desc limit $cariLimit->hsl");
+        $query = $this->db->query("SELECT * from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' AND k.id_profesi != 'Belum' group by k.id_karyawan order by mulai desc limit $cariLimit->hsl");
         return $query->result();
     }
     //SEMUA DATA CALON KARYAWAN SAJA
@@ -33,16 +29,70 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
-
-    //DATA PELAMAR SESUAI PROFESI
-    public function getLamar(){
-        $query = $this->db->query("SELECT l.id_profesi, p.nama_profesi, l.akhir, count(k.id_karyawan) as jmlh from karyawan as k inner join loker as l on k.id_profesi=l.id_profesi inner join jenis_profesi as p on p.id_profesi=l.id_profesi WHERE k.id_status = 'Pelamar' group by l.id_profesi
-            "); 
+    //untuk menambah data
+    function addData($table,$data) { $query = $this->db->insert($table, $data); }
+    public function getStatus($id){
+        $query = $this->db->query("SELECT r.id_status, k.nik, k.nama, r.id_karyawan, r.mulai, r.akhir, r.alamat_sk, r.nomor_sk, r.id from karyawan as k inner join status as r on k.id_karyawan = r.id_karyawan inner join jenis_status as j on r.id_status = j.id_status where r.id = $id");
         return $query->result();
     }
 
+    public function getJenStatus(){
+        $query = $this->db->query("SELECT * from jenis_status where id_status != 'Admin' AND id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND id_status != 'Pelamar Ditolak'");
+        return $query->result();
+    }
+    public function getTempat($id){
+        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on k.id_profesi = j.id_profesi inner join jabatan as jb on k.jabatan = jb.id where k.id_karyawan = $id order by r.mulai desc limit 1");
+        return $query->result();
+    }
+    public function getPenilaian($id){
+        $query = $this->db->query("SELECT * from penilaian_karyawan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_karyawan = $id");
+        return $query->result();
+    }
+
+    public function getAgama($id){
+        $query = $this->db->query("SELECT * from riwayat_seleksi as r inner join seleksi as s on r.id_seleksi = s.id_seleksi where s.id_karyawan = $id AND nama_tes != 'Tes Psikologi' AND nama_tes != 'Tes Tulis' and nama_tes != 'Wawancara' and nama_tes != 'Tes Kesehatan' ORDER BY tanggal DESC ");
+        return $query->result();
+    }
+    public function getKC($id){ //Kuota cuti
+        $query = $this->db->query("SELECT kuota_cuti from jenis_status as r inner join karyawan as s on r.id_status = s.id_status where id_karyawan = $id");
+        return $query->row();
+    }
+    public function getTC($id,$thn){ //Total cuti
+        $query = $this->db->query("SELECT sum(datediff(tgl_awal, tgl_akhir)) as selisih from data_cuti where id_karyawan = $id AND ket Like 'Cuti%' AND tgl_awal Like '$thn%'");
+        return $query->row();
+    }
+    public function getDC($id){ //Data cuti
+        $query = $this->db->query("SELECT datediff(tgl_awal, tgl_akhir) as selisih, tgl_awal, tgl_akhir, id, id_karyawan,file,ket from data_cuti where id_karyawan = $id ORDER BY tgl_awal DESC");
+        return $query->result();
+    }
+    public function getEC($id){ //Edit cuti
+        $query = $this->db->query("SELECT * from data_cuti where id = $id ");
+        return $query->result();
+    }
+    //---------------------------------------------------------------------------------------------------------------
+     public function getLoker3(){
+        $tdy = date('Y-m-d');
+        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' order by akhir desc limit 2");
+        return $query->result();
+    }
+    public function getLoker2(){
+        $tdy = date('Y-m-d');
+        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' order by akhir desc ");
+        return $query->result();
+    }
+    //DATA PELAMAR SESUAI PROFESI
+    public function getLamar(){
+        $query = $this->db->query("SELECT l.id_profesi, p.nama_profesi, l.akhir,l.kuota , count(k.id_karyawan) as jmlh from karyawan as k inner join loker as l on k.id_profesi=l.id_profesi inner join jenis_profesi as p on p.id_profesi=l.id_profesi WHERE k.id_status = 'Pelamar' or id_status = 'Calon Karyawan' group by l.id_profesi
+            "); 
+        return $query->result();
+    }
+    //cari satu pelamar / calon karyawan yg mempunyai profesi X sbg acuen seleksi
+    public function cariSatu($idp){
+        $query = $this->db->query("SELECT * from karyawan where id_profesi='$idp' and (id_status = 'Pelamar' or id_status = 'Calon Karyawan') limit 1");
+        return $query->row();
+    }
     public function cariprofesi($id){
-        $query = $this->db->query("SELECT nama_profesi FROM jenis_profesi where id_profesi='$id';");
+        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where l.id_profesi='$id';");
         return $query->row();
     }
 
@@ -89,20 +139,22 @@ class Mdl_admin extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-
+    //menampilkan seluruh pendidikan karyawan
     function getPendidikan(){
-        $query = $this->db->query("SELECT * FROM pendidikan as p INNER JOIN karyawan as k on k.id_karyawan=p.id_karyawan ORDER by verifikasi  ASC ");
+        $query = $this->db->query("SELECT * FROM pendidikan as p INNER JOIN karyawan as k on k.id_karyawan=p.id_karyawan where id_status != 'Pelamar' ORDER by verifikasi  ASC ");
         return $query->result();
     }
-
+    //menampilkan seluruh sipstr karyawan
     function getSurat(){
         $query = $this->db->query("SELECT * FROM karyawan as k INNER JOIN sip_str as p on k.id_karyawan=p.id_karyawan inner join jenis_surat as s ON p.id_surat=s.id_surat ORDER by p.tgl_akhir asc ");
         return $query->result();
     }
+    
+    //mencari sipstr kadaluarsa dan belum diperbarui
     function getSurat2(){
         $tanggal2 = date('Y-m-d');
         $tanggal = date('Y-m-d', strtotime('+6 month',strtotime($tanggal2)));
-        $query = $this->db->query("SELECT * FROM karyawan as k INNER JOIN sip_str as p on k.id_karyawan=p.id_karyawan inner join jenis_surat as s ON p.id_surat=s.id_surat where tgl_akhir < '$tanggal' ORDER by p.tgl_akhir asc ");
+        $query = $this->db->query("SELECT * FROM karyawan as k INNER JOIN sip_str as p on k.id_karyawan=p.id_karyawan inner join jenis_surat as s ON p.id_surat=s.id_surat where tgl_akhir < '$tanggal' and mail = 0 ORDER by p.tgl_akhir asc ");
         return $query->result();
     }
 
@@ -121,10 +173,7 @@ class Mdl_admin extends CI_Model
     function delProfesi($id){
         $query = $this->db->query("DELETE FROM jenis_profesi where id_profesi = $id");
     }
-    function addData($table,$data)
-    {
-        $query = $this->db->insert($table, $data);
-    }
+    
     // data detail pelamar
     public function cariJenisSurat($id)
     {
@@ -160,19 +209,11 @@ class Mdl_admin extends CI_Model
         $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi order by akhir desc");
         return $query->result();
     }
-    public function getLoker2(){
-        $tdy = date('Y-m-d');
-        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' order by akhir desc");
-        return $query->result();
-    }
     public function getJenSur(){
         $query = $this->db->query("SELECT nama_surat from jenis_Surat");
         return $query->result();
     }
-    public function getTempat($id){
-        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on k.id_profesi = j.id_profesi inner join jabatan as jb on k.jabatan = jb.id where k.id_karyawan = $id order by r.mulai desc limit 1");
-        return $query->result();
-    }
+    
     public function getEditRi($id){
         $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan where r.id_riwayat = $id");
         return $query->result();
@@ -182,15 +223,7 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
-    public function getStatus($id){
-        $query = $this->db->query("SELECT r.id_status, k.nik, k.nama, r.id_karyawan, r.mulai, r.akhir, r.alamat_sk, r.nomor_sk, r.id from karyawan as k inner join status as r on k.id_karyawan = r.id_karyawan inner join jenis_status as j on r.id_status = j.id_status where r.id = $id");
-        return $query->result();
-    }
-
-    public function getJenStatus(){
-        $query = $this->db->query("SELECT * from jenis_status where id_status != 'Admin' AND id_status != 'Calon Karyawan' AND id_status != 'Pelamar' AND id_status != 'Pelamar Ditolak'");
-        return $query->result();
-    }
+    
 
     public function getGol($id){
         $query = $this->db->query("SELECT s.id_karyawan, k.nik, k.nama, k.id_profesi, s.id_golongan, s.nomor_sk, s.alamat_sk, s.mulai, s.akhir, s.id from golongan as s inner join karyawan as k on k.id_karyawan = s.id_karyawan where s.id_golongan != 'Tidak Ada' && s.id_karyawan = '$id'");
@@ -320,10 +353,7 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
 
-    public function getPenilaian($id){
-        $query = $this->db->query("SELECT * from penilaian_karyawan as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where s.id_karyawan = $id");
-        return $query->result();
-    }
+    
 
     public function getPenilaianedit($id){
         $query = $this->db->query("SELECT * from penilaian_karyawan as s inner join karyawan as k on s.id_penilai = k.id_karyawan where s.id = $id");
@@ -338,32 +368,13 @@ class Mdl_admin extends CI_Model
         GROUP BY mulai order by mulai");
         return $query->result();
     }
-    public function getAgama($id){
-        $query = $this->db->query("SELECT * from riwayat_seleksi as r inner join seleksi as s on r.id_seleksi = s.id_seleksi where s.id_karyawan = $id AND nama_tes != 'Tes Psikologi' AND nama_tes != 'Tes Tulis' and nama_tes != 'Wawancara' and nama_tes != 'Tes Kesehatan' ORDER BY tanggal DESC ");
-        return $query->result();
-    }
     public function getAgamaa($id){
         $query = $this->db->query("SELECT * from riwayat_seleksi as r inner join seleksi as s on r.id_seleksi = s.id_seleksi where id = $id");
         return $query->row();
     }
-    public function getKC($id){ //Kuota cuti
-        $query = $this->db->query("SELECT kuota_cuti from jenis_status as r inner join karyawan as s on r.id_status = s.id_status where id_karyawan = $id");
-        return $query->row();
-    }
-    public function getTC($id,$thn){ //Total cuti
-        $query = $this->db->query("SELECT sum(datediff(tgl_awal, tgl_akhir)) as selisih from data_cuti where id_karyawan = $id AND ket Like 'Cuti%' AND tgl_awal Like '$thn%'");
-        return $query->row();
-    }
-    public function getDC($id){ //Data cuti
-        $query = $this->db->query("SELECT datediff(tgl_awal, tgl_akhir) as selisih, tgl_awal, tgl_akhir, id, id_karyawan,file,ket from data_cuti where id_karyawan = $id ORDER BY tgl_awal DESC");
-        return $query->result();
-    }
-    public function getEC($id){ //Edit cuti
-        $query = $this->db->query("SELECT * from data_cuti where id = $id ");
-        return $query->result();
-    }
+    
     public function dataDiri($id){
-        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join jenis_profesi as j on r.id_profesi = j.id_profesi inner join login as l on k.id_karyawan=l.id_karyawan where k.id_karyawan = $id order by r.mulai desc ");
+        $query = $this->db->query("SELECT * from karyawan as k inner join riwayat as r on k.id_karyawan = r.id_karyawan inner join login as l on k.id_karyawan=l.id_karyawan where k.id_karyawan = $id order by r.mulai desc ");
         return $query->row();
     }
 

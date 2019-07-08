@@ -111,20 +111,36 @@ $this->load->view("header.php");
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <div class="input-mark-inner">
                                         <div class="file-upload-inner ts-forms">
+
+                                        <font size="2" color="red">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                           <div class="input prepend-big-btn">
                                               <label class="icon-right" for="prepend-big-btn">
                                                 <i class="fa fa-download"></i>
                                               </label>
                                               <div class="file-button">
                                                   Browse
-                                                  <input type="file" name="file_old" value="<?php echo $key->file?>" hidden>
+                                                  <input type="text" name="file_old" value="<?php echo $key->file?>" hidden>
                                                   <input type="file" name="file" value="<?php echo $key->file?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                                               </div>
                                               <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->file?>">
                                           </div>
                                         </div>
-                                    <font size="2">Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
                                     </div>
+                                    <br>
+                                    <div class="pdf-viewer-area mg-b-15">
+                                        <div class="container-fluid">
+                                          <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                              <div class="pdf-single-pro">
+                                                <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file; ?>"></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                                
                                 </div>
                             </div>
                             <br>

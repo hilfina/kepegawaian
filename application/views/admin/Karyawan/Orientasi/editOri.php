@@ -46,7 +46,7 @@
                         <label>NIK</label>
                       </div>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                       <input name="nik" type="text" class="form-control" value="<?php echo $key->nik ?>" disabled>
                     </div>
                   </div>
@@ -56,7 +56,7 @@
                         <label>Nama Karyawan</label>
                       </div>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                       <input name="nama" type="text" class="form-control" value="<?php echo $key->nama ?>" disabled>
                     </div>
                   </div>
@@ -67,7 +67,7 @@
                           <label>Tanggal Orientasi</label>
                         </div>
                       </div>
-                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                         <div class="form-group data-custon-pick data-custom-mg" id="data_5">
                           <div class="input-daterange input-group" id="datepicker">
                             <input type="text" class="form-control" name="tgl_mulai" value="<?php echo $key->tgl_mulai; ?>" />
@@ -84,9 +84,10 @@
                         <label>Upload Dokumen Kehadiran</label>
                       </div>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                       <div class="input-mark-inner">
                         <div class="file-upload-inner ts-forms">
+                          <font size="2" color="red"> *Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 MB </font>
                           <div class="input prepend-big-btn">
                             <label class="icon-right" for="prepend-big-btn">
                               <i class="fa fa-download"></i>
@@ -96,7 +97,6 @@
                               <input type="file" name="doku_hadir" value="<?php echo $key->doku_hadir; ?>" onchange="document.getElementById('prepend-big-btn').value = this.value;">
                             </div>
                             <input type="text" id="prepend-big-btn" placeholder="no file selected" value="<?php echo $key->doku_hadir; ?>">
-                            <font size="2" color="red"> *Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 MB </font>
                           </div>
                         </div>
                       </div>

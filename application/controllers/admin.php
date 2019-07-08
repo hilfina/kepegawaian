@@ -13,6 +13,7 @@ class Admin extends CI_Controller {
 		$this->load->model('mdl_home');
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
+        if($this->mdl_admin->logged_id() == null) { redirect("login"); }
 	}
 	public function index()
 	{
@@ -35,7 +36,7 @@ class Admin extends CI_Controller {
             $where = array( 'id' => $id ); 
             $data = array( 'verifikasi' => 1 ); 
             $this->mdl_admin->updateData($where,$data,'pendidikan');
-            redirect("admin/dataPend");
+            redirect("adminPendidikan");
         }
         else{ redirect("login"); } 
     }
@@ -358,20 +359,13 @@ class Admin extends CI_Controller {
 
         else{ redirect("login"); } 
     }
-
-   public function datapend(){
-        if($this->mdl_admin->logged_id())
-        {
-            $paket['pen']=$this->mdl_admin->getPendidikan();
-            $this->load->view('admin/pendidikan/allpendidikan',$paket);
-        }else{ redirect("login"); } 
-    }
-
+    //menampilkan data surat keseluruhan
     public function datasurat(){
         $paket['array']=$this->mdl_admin->getSurat();
         $this->load->view('admin/surat/allSurat',$paket);
     }
-     public function dataSurat2(){
+    //untuk menampilkan data surat sip str yg kadaluarsa dan belum diperbarui dari home
+    public function dataSurat2(){
         $paket['array']=$this->mdl_admin->getSurat2();
         $this->load->view('admin/surat/allSurat2',$paket);
     }

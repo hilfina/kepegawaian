@@ -30,6 +30,7 @@
             <div class="profile-img">
               <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt=""/>
             </div>
+            <br> <?php echo $key->nama ?>
           </div>
         </div>
       <?php } ?>
@@ -40,6 +41,7 @@
             <li><a href="#penilaian">Penilaian</a></li>
             <li><a href="#karir">Jenjang Karir</a></li>
             <li><a href="#absensi">Absensi</a></li>
+            <li><a href="#file">File Kepegawaian</a></li>
           </ul>
           <div id="myTabContent" class="tab-content custom-product-edit">
             <div class="product-tab-list tab-pane fade active in" id="dataPribadi">
@@ -293,7 +295,7 @@
                       <div class="col-lg-6">
                         <div class="sparkline13-hd">
                           <div class="main-sparkline13-hd">
-                            <h1>Penilaian<span class="table-project-n"> Karyawan</span></h1>
+                            <h1>Penilaian Karyawan</h1>
                           </div>
                         </div>
                       </div>
@@ -304,14 +306,17 @@
                             <a href="<?php echo site_url(); echo "/adminKaryawan/addnilai/";  echo $id ; ?>">
                               <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data Penilaian</button>
                             </a>
+                            <?php if ($datNil != null) {?>
                             <a href="<?php echo site_url(); echo "/adminJP/laporan/";  echo $id ; ?>">
                               <button class="btn btn-primary waves-effect waves-light mg-b-15">Report Data</button>
                             </a>
+                          <?php } ?>
                             </div>
                           </div>
                         </div>
                       </div> 
                     <br><br><hr/>
+                    <?php if ($datNil != null) {?>
                     <div class="sparkline8-graph">
                       <div class="static-table-list">
                         <table class="table">
@@ -360,6 +365,7 @@
                         </table>
                       </div>
                     </div>
+                    <?php }else{echo "<font color ='red'>Karyawan belum punya data penilaian.</font>";} ?>
                   </div>
                 </div>
                 <div class="row mg-b-15">
@@ -523,36 +529,122 @@
                       </div>
                     </div>
                     <div class="sparkline8-graph">
-                      <div class="static-table-list">
-                        <table class="table">
-                          <thead>
-                              <tr>
-                                <th>Tanggal</th>
-                                <th>Aktivitas</th>
-                              </tr>
-                          </thead>
-                          
-                          <tbody>
-                            <?php foreach ($rPenempatan as $key) { ?>
-                              <tr>
-                                <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
-                                <td>Dilakukan rotasi, dan ditempatkan di <?php echo $key->ruangan ?></td>
-                              </tr>
-                            <?php } ?>
-                            <?php foreach ($rGolongan as $key) { ?>
-                              <tr>
-                                <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
-                                <td>Lulus Tes Kenaikan Golongan, dan Golongan menjadi <?php echo $key->id_golongan ?></td>
-                              </tr>
-                            <?php } ?>
-                            <?php foreach ($rStatus as $key) { ?>
-                              <tr>
-                                <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
-                                <td>Status Karyawan Berubah, dan Menjadi Karyawan <?php echo $key->id_status ?></td>
-                              </tr>
-                            <?php } ?>
-                          </tbody>
-                        </table>
+                      <div class="data-table-area">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <div class="sparkline13-list">
+                                <div class="col-lg-6">
+                                  <div class="sparkline13-hd">
+                                    <div class="main-sparkline13-hd">
+                                      <h1>Data Jenjang Karir</h1>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6">
+                                  <div class="sparkline13-hd">
+                                    <div class="main-sparkline13-hd">
+                                      <div align="right">
+                                      <a href="<?php echo site_url('adminPelamar/loadimpor') ?>">
+                                        <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
+                                      </a>
+                                      <a href="<?php echo site_url('adminPelamar/addPelamar')?>">
+                                        <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
+                                      </a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="sparkline13-graph">
+                                  <div class="datatable-dashv1-list custom-datatable-overright">
+                                    <div id="toolbar">
+                                      <select class="form-control dt-tb">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                      </select>
+                                    </div>
+                                    <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                      <thead>
+                                        <tr>
+                                          <th>Tanggal</th>
+                                          <th>Aktivitas</th>
+                                          <th>file</th>
+                                          <th>opsi</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <?php foreach ($rPenempatan as $key) { ?>
+                                          <tr>
+                                            <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
+                                            <td>Dilakukan rotasi, dan ditempatkan di <?php echo $key->ruangan ?></td>
+                                            <td><?php if(($key->alamat_sk) != NULL){ ?>
+                                              <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
+                                                <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                              </a>
+                                            <?php }else{ ?>
+                                              <font style="color: red">Tidak Ada file</font>
+                                            <?php } ?></td>
+                                            <td align="center">
+                                            <a href="<?php echo site_url(); echo "/adminRiwayat/edit/"; echo $key->id_riwayat ; echo "/"; echo $key->id_karyawan; ?>">
+                                                <button class="btn btn-default waves-effect">Edit</button>
+                                              </a>
+                                              <a href="<?php echo site_url(); echo "/adminRiwayat/del/"; echo $key->id_riwayat ; echo "/"; echo $key->id_karyawan; ?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                <button class="btn btn-default waves-effect">Hapus</button>
+                                              </a>
+                                          </td>
+                                          </tr>
+                                        <?php } ?>
+                                        <?php foreach ($rGolongan as $key) { ?>
+                                          <tr>
+                                            <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
+                                            <td>Lulus Tes Kenaikan Golongan, dan Golongan menjadi <?php echo $key->id_golongan ?></td>
+                                            <td><?php if(($key->alamat_sk) != NULL){ ?>
+                                              <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
+                                                <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                              </a>
+                                            <?php }else{ ?>
+                                              <font style="color: red">Tidak Ada file</font>
+                                            <?php } ?></td>
+                                           <td align="center">
+                                            <a href="<?php echo site_url(); echo "/adminGol/edit/"; echo $key->id ; echo "/" ; echo $key->id_karyawan ;?>">
+                                              <button class="btn btn-default waves-effect">edit</button>
+                                            </a>
+                                            <a href="<?php echo site_url(); echo "/adminGol/del/"; echo $key->id; echo "/" ; echo $key->id_karyawan ;?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                              <button class="btn btn-default waves-effect">hapus</button>
+                                            </a>
+                                          </td>
+                                          </tr>
+                                        <?php } ?>
+                                        <?php foreach ($rStatus as $key) { ?>
+                                          <tr>
+                                            <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
+                                            <td>Status Karyawan Berubah, dan Menjadi Karyawan <?php echo $key->id_status ?></td>
+                                            <td><?php if(($key->alamat_sk) != NULL){ ?>
+                                              <a href="<?php echo base_url().'/Assets/dokumen/'.$key->alamat_sk; ?>" download>
+                                                <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                              </a>
+                                            <?php }else{ ?>
+                                              <font style="color: red">Tidak Ada file</font>
+                                            <?php } ?></td>
+                                            <td align="center">
+                                              <a href="<?php echo site_url(); echo "/adminStatus/edit/"; echo $key->id ;  echo "/"; echo $key->id_karyawan; ?>">
+                                                <button class="btn btn-default waves-effect">edit</button>
+                                              </a>
+                                              <a href="<?php echo site_url(); echo "/adminStatus/del/"; echo $key->id ;  echo "/"; echo $key->id_karyawan; ?>"onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                <button class="btn btn-default waves-effect">hapus</button>
+                                              </a>
+                                            </td>
+                                          </tr>
+                                        <?php } ?>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -664,6 +756,421 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="product-tab-list tab-pane fade" id="file">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="review-content-section">
+                    <div class="panel-group edu-custon-design" id="accordion">
+                      <div class="panel panel-default">
+                        <div class="panel-heading accordion-head">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#surat">Data Surat Kepegawaian</a>
+                          </h4>
+                        </div>
+                        <div id="surat" class="panel-collapse panel-ic collapse in">
+                          <div class="panel-body admin-panel-content ">
+                            <div class="static-table-list">
+                              <table class="table">
+                               <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Nomor Surat</th>
+                                  <th>Jenis Surat</th>
+                                  <th>Tanggal Berlaku</th>
+                                  <th>File</th>
+                                  <th>Keaktifan</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              <?php $no = 1 ?>
+                              <?php foreach ($dataSurat as $key) { ?>
+                                <tr>
+                                  <td><?php echo $no++ ?></td>
+                                  <td><?php echo $key->no_surat; ?></td>
+                                  <td><?php echo $key->jenis_surat; ?></td>
+                                  <td><?php echo date('d M Y', strtotime($key->tgl_mulai)); echo " - "; echo date('d M Y', strtotime($key->tgl_akhir)); ?></td>
+                                  <td>
+                                    <?php if(($key->file) != NULL){ ?>
+                                      <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                        <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                      </a>
+                                    <?php }else{ ?>
+                                      <font style="color: red">Tidak Ada file</font>
+                                    <?php } ?>
+                                  </td>
+                                  <td>
+                                  <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                                    <i class="fa fa-check"></i> Surat Aktif 
+                                  <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                                    <i class="fa fa-check"></i> Belum Aktif
+                                  <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) <= strtotime(date('Y-m-d'))){ ?>
+                                    <i class="fa fa-times"></i> Kadaluarsa 
+                                  <?php } ?>
+                                  </td>
+                                </tr>
+                              <?php }?>
+                              </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading accordion-head">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#pend">Data Pendidikan</a>
+                          </h4>
+                        </div>
+                        <div id="pend" class="panel-collapse panel-ic collapse">
+                          <div class="panel-body admin-panel-content ">
+                            <div class="static-table-list">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>No</th>
+                                    <th>Nomor Ijazah</th>
+                                    <th>Nama Institusi</th>
+                                    <th>Jurusan</th>
+                                    <th>Periode</th>
+                                    <th>Nilai IPK</th>
+                                    <th>File Ijasah</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <?php $no = 1 ?>
+                                <?php foreach ($dataPend as $key) { ?>
+                                  <tr>
+                                      <td><?php echo $no++ ?></td>
+                                      <td><?php echo $key->nomor_ijazah; ?></td>
+                                      <td><?php echo $key->pendidikan; ?></td>
+                                      <td><?php echo $key->jurusan; ?></td>
+                                      <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
+                                      <td><?php echo $key->nilai; ?></td>
+                                      <td>
+                                        <?php if(($key->file) != NULL){ ?>
+                                          <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                            <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                          </a>
+                                        <?php }else{ ?>
+                                          <font style="color: red">Tidak Ada file</font>
+                                        <?php } ?>
+                                      </td>
+                                  </tr>
+                                </tbody>
+                                <?php } ?>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading accordion-head">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#1">MOU Pendidikan</a>
+                          </h4>
+                        </div>
+                        <div id="1" class="panel-collapse panel-ic collapse">
+                          <div class="panel-body admin-panel-content ">
+                            <p>Berisi daftar MOU Pendidikan anda.</p>
+                            <div class="static-table-list">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>No.</th>
+                                    <th>Nomor MOU</th>
+                                    <th>Tanggal Mulai</th>
+                                    <th>Tanggal Berakhir</th>
+                                    <th>Nominal</th>
+                                    <th>Keterangan</th>
+                                    <th>Status Keaktifan</th>
+                                  </tr>
+                                </thead>
+                                <?php $no=1; ?>
+                                <?php foreach($mous as $key){?>
+                                <tbody>
+                                  <tr>
+                                    <td><?php echo $no++;?></td>
+                                    <td><?php echo $key->no_mou; ?></td>
+                                    <td><?php echo $key->tgl_mulai?></td>  
+                                    <td><?php echo $key->tgl_akhir?></td>
+                                    <td><?php echo $key->beasiswa;?></td>
+                                    <td><?php echo $key->ket?></td>
+                                    <td> 
+                                      <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                                        <i class="fa fa-check"></i> Surat Aktif 
+                                      <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                                        <i class="fa fa-check"></i> Belum Aktif
+                                      <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                                        <i class="fa fa-times"></i> Kadaluarsa 
+                                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                                          <font color="red">Edit tanggal akhir</font>
+                                        <?php } ?>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                                <?php } ?>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading accordion-head">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#1">MOU Pendidikan</a>
+                          </h4>
+                        </div>
+                        <div id="1" class="panel-collapse panel-ic collapse">
+                          <div class="panel-body admin-panel-content ">
+                            <p>Berisi daftar MOU Pendidikan anda.</p>
+                            <div class="static-table-list">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>No.</th>
+                                    <th>Nomor MOU</th>
+                                    <th>Tanggal Mulai</th>
+                                    <th>Tanggal Berakhir</th>
+                                    <th>Nominal</th>
+                                    <th>Keterangan</th>
+                                    <th>Status Keaktifan</th>
+                                  </tr>
+                                </thead>
+                                <?php $no=1; ?>
+                                <?php foreach($mous as $key){?>
+                                <tbody>
+                                  <tr>
+                                    <td><?php echo $no++;?></td>
+                                    <td><?php echo $key->no_mou; ?></td>
+                                    <td><?php echo $key->tgl_mulai?></td>  
+                                    <td><?php echo $key->tgl_akhir?></td>
+                                    <td><?php echo $key->beasiswa;?></td>
+                                    <td><?php echo $key->ket?></td>
+                                    <td> 
+                                      <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                                        <i class="fa fa-check"></i> Surat Aktif 
+                                      <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                                        <i class="fa fa-check"></i> Belum Aktif
+                                      <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                                        <i class="fa fa-times"></i> Kadaluarsa 
+                                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                                          <font color="red">Edit tanggal akhir</font>
+                                        <?php } ?>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                                <?php } ?>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading accordion-head">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#2">MOU Kontrak</a>
+                          </h4>
+                        </div>
+                                    <div id="2" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Kontrak kerja anda</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Nominal</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Status Keaktifan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($mouk as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->gaji;?></td>
+                                                              <td><?php echo $key->ket?></td>
+                                                              <td> 
+                                                              <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-check"></i> Belum Aktif
+                        <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <font color="red">Edit tanggal akhir</font>
+                        <?php } ?>  
+                                                              </td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#3">
+                                         MOU Piutang</a>
+                                        </h4>
+                                    </div>
+                                    <div id="3" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Piutang anda.</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Nominal</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Status Keaktifan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($mouh as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->nominal;?></td>
+                                                              <td><?php echo $key->ket?></td>
+                                                              <td> 
+                                                              <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-check"></i> Belum Aktif
+                        <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <font color="red">Edit tanggal akhir</font>
+                        <?php } ?> 
+                                                              </td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#4">
+                                            MOU Klinis</a>
+                                        </h4>
+                                    </div>
+                                    <div id="4" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Klinis anda</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Status Keaktifan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($moui as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->ket?></td>
+                                                              <td> 
+                                                              <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-check"></i> Belum Aktif
+                        <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <font color="red">Edit tanggal akhir</font>
+                        <?php } ?>
+                                                              </td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#5">
+                                            MOU Pelatihan</a>
+                                        </h4>
+                                    </div>
+                                    <div id="5" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content ">
+                                        <p>Berisi daftar MOU Pelatihan anda</p>
+                                            <div class="static-table-list">
+                                                  <table class="table">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>No.</th>
+                                                            <th>Nomor MOU</th>
+                                                            <th>Tanggal Mulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Status keaktifan</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <?php $no=1; ?>
+                                                      <?php foreach($moup as $key){?>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><?php echo $no++;?></td>
+                                                              <td><?php echo $key->no_mou; ?></td>
+                                                              <td><?php echo $key->tgl_mulai?></td>  
+                                                              <td><?php echo $key->tgl_akhir?></td>
+                                                              <td><?php echo $key->ket?></td>
+                                                              <td><?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-check"></i> Belum Aktif
+                        <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <font color="red">Edit tanggal akhir</font>
+                        <?php } ?></td>
+                                                          </tr>
+                                                      </tbody>
+                                                      <?php } ?>
+                                                  </table>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>   
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>

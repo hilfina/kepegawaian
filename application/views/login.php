@@ -112,35 +112,37 @@
         <div class="row">
           <div class="col-md-12 col-lg-12 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
             <div class="row">
-            <?php foreach ($loker as $key) {?>
-            <div class="col-md-6 col-lg-6 ">
-                <div class="box">
-              <div class="icon"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
-                <h4 class="title" ><a href="#contact" class="scrollto"><?php echo $key->nama_profesi;?></a></h4>
-                <p class="description">
-                    <strong>Mulai :</strong> 
-                    <?php echo date('d - M - Y', strtotime($key->mulai));?> <br>
-                    <strong>Sampai :</strong> <?php echo date('d - M - Y', strtotime($key->akhir));?> <br><br>
-                    <strong>Jurusan :</strong> <?php echo $key->jurusan;?><br>
-                    <strong>IPK Min :</strong> <?php echo $key->ipkmin;?><br>
-                    <?php echo $key->jenkel;?> <br><strong> dengan usia maks </strong> <?php echo $key->usia;?> tahun<br> <br>
-                    
-                    <?php if ( date('y-m-d') <= date('y-m-d', strtotime($key->akhir))) {
-                        echo "<font color='green'>Sedang Dibuka</font>";
-                    }else{
-                        echo "<font color='red'>Sudah Ditutup</font>";
-                    }
-                    ?>
-                </p>
+              <?php  $n = 0;
+              foreach ($loker as $key) {
+                $maque = $this->db->query("SELECT count(id_karyawan) as slsh from karyawan where id_profesi = '$key->id_profesi' AND id_status = 'Pelamar'");//cari banyak orang yang milih
+                $selisih = $maque->row(); 
+                if ($key->kuota - $selisih->slsh != 0) {//jika kuota masih ada
+                $n++; ?> 
+                  <div class="col-md-6 col-lg-6 ">
+                    <div class="box">
+                    <div class="icon"><i class="ion-ios-paper-outline" style="color: #3fcdc8;"></i></div>
+                    <h4 class="title" ><a href="#contact" class="scrollto"><?php echo $key->nama_profesi;?></a></h4>
+                    <p class="description">
+                      <strong>Mulai :</strong> 
+                      <?php echo date('d - M - Y', strtotime($key->mulai));?> <br>
+                      <strong>Sampai :</strong> <?php echo date('d - M - Y', strtotime($key->akhir));?> <br><br>
+                      
+                      <strong>IPK Min :</strong> <?php echo $key->ipkmin;?><br>
+                      <?php echo $key->jenkel;?> <br><strong>Usia maksimal :</strong> <?php echo $key->usia;?> Tahun<br>
+                      <strong>Jurusan :</strong> <?php echo $key->jurusan;?><br>
+                    </p>
+                    </div>
+                  </div>
+                <?php }else{} ?>
+              <?php if ($n == 2) {
+                   break;
+                 } } ?>
             </div>
-            </div>
-            
-            <?php } ?>
-            </div>
-          </div>         
-
+          </div> 
         </div>
-
+        <div align="center">
+          <a href="<?=base_url()?>index.php/login/loker">Lihat lainnya</a>
+        </div>
       </div>
     </section><!-- #services -->
 

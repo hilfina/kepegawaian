@@ -64,10 +64,10 @@
                 <thead>
                   <tr>
                     <th>ID</th>
+                    <th>Foto</th>
                     <th>Nama</th>
+                    <th>No KTP</th>
                     <th>Pilihan Profesi</th>
-                    <th>Pendidikan Terakhir</th>
-                    <th>Nilai Akhir</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -76,43 +76,16 @@
                 <?php foreach ($array as $key) { ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
+                    <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='60'>"; ?></td>
                     <td><?php echo $key->nama; ?></td>
-                    <td><?php echo $key->id_profesi; ?></td>
-                    <td><?php echo $key->pendidikan;   echo " - "; echo $key->jurusan ?></td>
-                    <td><?php echo $key->nilai; ?></td>
+                    <td><?php echo $key->no_ktp; ?></td>
+                    <td><?php if ($key->id_profesi == "Belum") {
+                      echo " Belum memilih loker ";
+                    }else echo $key->id_profesi; ?></td>
                     <td align="center">
-                      <?php if ($key->id_status == "Pelamar") {
-                        if ($key->id_profesi == "Belum") { ?>
-                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
-                        </a>
-                         <?php } else{ ?>
-                         <?php if($levelku == "Super Admin"){ ?>
-                          <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
-                          <button class="btn btn-success waves-effect" title="TERIMA"><i class="fa fa-check"></i></button>
-                        </a>
-                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-danger waves-effect" title="TOLAK"><i class="fa fa-times"></i></button>
-                        </a>
-                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
-                        </a>
-                        <?php } else {?>
-                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
-                        </a>
-                        <?php }?>
-                        <?php } ?>
-                        
-                      <?php }else if ($key->id_status == "Calon Karyawan") { ?>
-                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-primary waves-effect waves-light">Detail</button>
-                        </a>
-                      <?php }else if ($key->id_status == "Pelamar Ditolak") { ?>
-                        <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
-                          <button class="btn btn-warning waves-effect waves-light">Detail</button>
-                        </a>
-                      <?php } ?>
+                      <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">
+                        <button class="btn btn-primary waves-effect waves-light">Detail</button>
+                      </a>
                     </td>
                   </tr>
                 <?php }?>

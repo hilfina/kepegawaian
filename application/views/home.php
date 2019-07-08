@@ -95,14 +95,14 @@ $idku=$this->session->userdata("myId");
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                       <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">                        
                         <div class="student-dtl">                          
-                          <h2>Jadwal Seleksi</h2><hr>
+                          <h2>Proses Rekuitmen</h2><hr>
                           <br>                         
                           <?php if ($seleksi->banyak == 0) {
                             echo "Tidak ada seleksi.";
                           }else{
-                            echo $seleksi->banyak." Orang"; ?>
+                            echo $seleksi->banyak." Profesi"; ?>
                             <div align="center"><br>
-                              <a href="<?php echo site_url('admin/dataSeleksi') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
+                              <a href="<?php echo site_url('adminPelamar') ?>"><button class="btn btn-primary waves-effect waves-light mg-b-15">Lihat Data</button></a>
                             </div>
                           <?php } ?>
                         </div>

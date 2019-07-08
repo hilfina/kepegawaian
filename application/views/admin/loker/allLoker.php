@@ -56,12 +56,12 @@
                     <th>No</th>
                     <th>Profesi</th>
                     <th>Kuota</th>
-                    <th>Buka</th>
-                    <th>Tutup</th>
+                    <th>Batas Waktu</th>
                     <th>IPK min</th>
                     <th>Usia max</th>
                     <th>Jenis Kelamin</th>
                     <th>Jurusan</th>
+                    <th>Keterangan</th>
                     <th>Pilihan</th>
                   </tr>
                 </thead>
@@ -72,12 +72,17 @@
                     <td><?php echo $no++; ?></td>
                     <td><?php echo $key->nama_profesi; ?></td>
                     <td><?php echo $key->kuota; ?></td>
-                    <td><?php echo date('d M Y', strtotime($key->mulai)); ?></td>
-                    <td><?php echo date('d M Y', strtotime($key->akhir)); ?></td>
+                    <td><?php echo date('d M Y', strtotime($key->mulai)); ?> <b>-</b> <?php echo date('d M Y', strtotime($key->akhir)); ?></td>
                     <td><?php echo $key->ipkmin; ?></td>
                     <td><?php echo $key->usia; ?></td>
                     <td><?php echo $key->jenkel; ?></td>
                     <td><?php echo $key->jurusan; ?></td>
+                    <?php if (strtotime(date('d M Y')) >= strtotime(date('d M Y', strtotime($key->akhir)))) {
+                      echo "<td> ditutup </td>";
+                    }else{
+                      echo "<td> dibuka </td>";
+                    } ?>
+                    
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminLoker/edit/";  echo $key->id_loker ; ?>">
                         <button title="EDIT DATA" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>

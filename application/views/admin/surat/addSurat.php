@@ -53,24 +53,32 @@
             <div class="sparkline12-graph">
               <div class="input-knob-dial-wrap">
               <div class="row">
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="input-mask-title">
                       <label>NIK</label>
                     </div>
                   </div>
-                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                     <div class="input-mark-inner">
-                      <input type="text" class="form-control" name="nik" placeholder="Nomor Induk Karyawan">
+                      <select type="text" class="chosen-select" name="nik">
+                        <option> -- Pilihan -- </option>
+                       <?php
+                          $cari = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan = l.id_karyawan where id_status != 'Pelamar' and id_status != 'Calon Karyawan' and level != 'admin' and level != 'Super Admin' group by nik ");
+                          $nik = $cari->result();
+                          foreach ($nik as $nik) { ?>
+                            <option> <?php echo $nik->nik; ?> </option>
+                        <?php }?>
+                      </select>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="input-mask-title">
                       <label>Jenis Surat</label>
                     </div>
                   </div>
-                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                     <div class="input-mark-inner">
                       <select  class="form-control" name="nama_surat">
                       <option>--Pilihan--</option>
@@ -82,12 +90,12 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="input-mask-title">
                       <label>Nomor Surat</label>
                     </div>
                   </div>
-                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                     <div class="input-mark-inner">
                       <input type="text" class="form-control" name="no_surat" placeholder="Cth:123">
                     </div>
@@ -95,12 +103,12 @@
                 </div>
                 <div class="row">
                   <div class="date-picker-inner">
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                       <div class="input-mask-title">
                         <label>Tanggal Surat</label>
                       </div>
                     </div>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                       <div class="form-group data-custon-pick data-custom-mg" id="data_5">
                         <div class="input-daterange input-group" id="datepicker">
                             <input type="text" class="form-control" name="tgl_mulai" />
@@ -112,12 +120,12 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="input-mask-title">
                       <label>Foto Scan Dokumen</label>
                     </div>
                   </div>
-                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                     <div class="input-mark-inner">
                       <div class="file-upload-inner ts-forms">
                         <div class="input prepend-big-btn">
@@ -136,10 +144,10 @@
                 </div>
                 <br>
                 <div class="row">
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="input-mask-title"></div>
                   </div>
-                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                     <div class="input-mark-inner">
                       <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Simpan File Kepegawaian</button>
                     </div>

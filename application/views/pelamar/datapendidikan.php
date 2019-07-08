@@ -31,7 +31,7 @@ $this->load->view("header.php");
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap">
-                            <h4>Daftar Pendidikan</h4>
+                            <h4>Data Pendidikan</h4>
                             <div class="add-product">
                                 <a href="<?php echo site_url('pelamar/addpend');?>">Tambah Dokumen</a>
                             </div>
@@ -43,6 +43,7 @@ $this->load->view("header.php");
                               <?php endif; ?>
                               </div>
                             <div class="asset-inner">
+                                <?php if ($array != null) { ?>
                                 <table>
                                     <tr>
                                         <th>No</th>
@@ -87,6 +88,7 @@ $this->load->view("header.php");
                                     </tr>
                                     <?php }  ?>
                                 </table>
+                                <?php }else{echo "Anda belum mempunyai data pendidikan.";} ?>
                             </div>
                         </div>
                     </div>

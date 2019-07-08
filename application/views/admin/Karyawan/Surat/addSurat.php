@@ -41,10 +41,34 @@
               <span><h4 align="center">TAMBAH DATA SURAT KARYAWAN</h4></span>
             </div>
           </div><br>
-          <form action="<?php echo site_url(); ?>/adminKaryawan/addSurat/<?php echo $id ?>" enctype="multipart/form-data" method="post">
-            <input type="hidden" name="id_karyawan" value="<?php echo $id ?>">
+          <form action="<?php echo site_url(); ?>/adminKaryawan/addSurat/<?php echo $karyawan->nik ?>" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="id_karyawan" value="<?php echo $karyawan->id_karyawan ?>">
             <div class="sparkline12-graph">
               <div class="input-knob-dial-wrap" style="margin-right: 15%;">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="input-mask-title">
+                      <label>Nomor Induk Karyawan</label>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="input-mark-inner">
+                      <input type="text" class="form-control" name="nik" value="<?php echo $karyawan->nik; ?> ">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="input-mask-title">
+                      <label>Nama Karyawan</label>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="input-mark-inner">
+                      <input type="text" class="form-control" name="nik" value="<?php echo $karyawan->nama; ?> ">
+                    </div>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="input-mask-title">
@@ -98,6 +122,7 @@
                     </div>
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <font size="2" color="red">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2MB </font>
                     <div class="input-mark-inner">
                       <div class="file-upload-inner ts-forms">
                         <div class="input prepend-big-btn">
@@ -120,7 +145,7 @@
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="input-mark-inner">
-                      <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>
+                      <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Simpan Data</button>
                     </div>
                   </div>
                 </div>

@@ -29,9 +29,9 @@
         <div class="sparkline13-list">
           <br>
           <div class="sparkline13-hd">
-              <div class="main-sparkline13-hd" align="center">
-                <h1> Tambah Data <span class="table-project-n">Pelamar</span></h1><br>
-              </div>
+            <div class="main-sparkline13-hd" align="center">
+              <h1> Tambah Data <span class="table-project-n">Pelamar</span></h1><br>
+            </div>
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
           <form action="<?php echo site_url();?>/adminPelamar/addPelamar/" enctype="multipart/form-data" method="POST">
@@ -113,11 +113,15 @@
             <td><label form-control-label>Profesi Yang Dipilih</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <select  class="form-control" name="id_profesi">
-                  <option>-- Pilihan --</option>
-                  <?php foreach ($array as $key) { ?>
-                    <option><?php echo $key->nama_profesi; ?></option>
-                  <?php } ?>
+                <select type="text" class="chosen-select" name="id_profesi">
+                  <option> -- Pilihan -- </option>
+                 <?php
+                 $tdy = date('Y-m-d');
+                    $cari = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' order by akhir desc ");
+                    $data = $cari->result();
+                    foreach ($data as $data) { ?>
+                      <option> <?php echo $data->nama_profesi; ?> </option>
+                  <?php }?>
                 </select>
               </div>
             </td>

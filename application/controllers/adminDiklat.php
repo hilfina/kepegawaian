@@ -13,15 +13,13 @@ class AdminDiklat extends CI_Controller {
         $this->load->model('mdl_home');
         $this->load->helper('url','form','file');
         $this->load->library('form_validation','image_lib');
+        if($this->mdl_admin->logged_id() == null){ redirect("login");}
     }
 
     public function index()
-    {
-        if($this->mdl_admin->logged_id())
-        {
-            $paket['array']=$this->mdl_karyawan->getaDiklat();
-            $this->load->view('admin/Karyawan/Diklat/allDiklat',$paket);
-        }else{ redirect("login"); }
+    { 
+        $paket['array']=$this->mdl_karyawan->getaDiklat();
+        $this->load->view('admin/Karyawan/Diklat/allDiklat',$paket); 
     }
 
     public function detailDiklat($id)

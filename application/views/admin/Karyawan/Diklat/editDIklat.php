@@ -133,7 +133,7 @@
           </tr>
         </table><br>
         <div align="center">
-          <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Tambahkan">
+          <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
         </div>
         </form>
         <?php } ?>

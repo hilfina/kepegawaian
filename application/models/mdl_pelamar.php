@@ -35,14 +35,18 @@ class Mdl_pelamar extends CI_Model
             return $query->result();
         }
     }
-
-    public function getPelamar($id)
+    //buat detail profil di halaman pelamar
+    public function getPelamarlagi($id)
     {
         
         $query = $this->db->query("SELECT k.nik, k.no_ktp, k.no_bpjs, k.nama, k.alamat, k.no_telp, k.email, k.status, k.ttl, k.jenkel, k.foto, j.nama_profesi, l.pend_akhir, l.nilai_akhir, l.cv from jenis_profesi as j inner join  karyawan as k on k.id_profesi=j.id_profesi inner join lowongan as l on l.id_karyawan=k.id_karyawan where k.id_karyawan='$id'");
         return $query->result();
     }
-
+ //mencari pelamar yang sudah memilih loker
+    public function getPelamar(){
+        $query = $this->db->query("SELECT * from karyawan as k inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where id_status = 'Pelamar' group by k.id_karyawan");
+        return $query->result();
+    }
     function updatedata($where,$data,$table){
         $this->db->where($where);
         $this->db->update($table,$data);
@@ -108,5 +112,17 @@ class Mdl_pelamar extends CI_Model
     public function getCetak($id){
         $query= $this->db->query("SELECT * from seleksi  where id_karyawan='$id'");
         return $query->row();
+    }
+    public function getLoker($id){
+        $tdy = date('Y-m-d');
+        $year = date('Y');
+
+        $c = $this->db->query("SELECT * from karyawan where id_karyawan = '$id'"); $dKaryawan=$c->row();
+        $d = $this->db->query("SELECT * from Pendidikan where id_karyawan = '$id' order by akhir desc limit 1"); $dPen=$d->row();
+        $lahir = substr($dKaryawan->ttl, 0, 4);
+        $umur = $year - $lahir;
+
+        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' AND l.jenkel LIKE '%$dKaryawan->jenkel%' and ipkmin <= '$dPen->nilai' and usia >= '$umur' order by akhir desc ");
+        return $query->result();
     }
 }

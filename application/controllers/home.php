@@ -123,7 +123,7 @@ class Home extends CI_Controller {
 		}
 
 	}
-
+	//digunakkan untuk tampilan awal admin dan super admin
 	public function index()
 	{
 		if($this->mdl_home->logged_id()){
@@ -133,7 +133,7 @@ class Home extends CI_Controller {
 			$data['karyawan'] = $this->mdl_home->karyawan();
 			$data['pelamar'] = $this->mdl_home->pelamar();
 			$data['calon'] = $this->mdl_home->calon();
-			$data['seleksi'] = $this->mdl_home->seleksi();
+			$data['seleksi'] = $this->mdl_home->seleksi($tanggal);
 			$data['sipstr'] = $this->mdl_home->sipstr($tanggal2);
 			$data['mou_h'] = $this->mdl_home->mou_h($tanggal3);
 			$data['mou_s'] = $this->mdl_home->mou_s($tanggal3);

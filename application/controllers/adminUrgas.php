@@ -81,11 +81,7 @@ class adminUrgas extends CI_Controller {
                 $this->load->library('upload', $config);
 
                 if(!$this->upload->do_upload('file_urgas')) {
-                    $error = ("<b>Error!</b> file harus berbentuk pdf dan berukuran lebih dari 2 mb");
-
-                    $this->session->set_flashdata('msg_error', $error);
-
-                    redirect("adminUrgas/edit/$id");
+                    $file_urgas = $this->input->post('file_old');
                 } else {
                     $file_urgas = $this->upload->data('file_name');
                 }

@@ -50,7 +50,15 @@
             <td><label form-control-label>Nomor Induk Karyawan</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="nik" type="text" class="form-control">
+                <select type="text" class="chosen-select" name="nik">
+                  <option> -- Pilihan -- </option>
+                 <?php
+                    $cari = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan = l.id_karyawan where id_status != 'Pelamar' and id_status != 'Calon Karyawan' and level != 'admin' and level != 'Super Admin' group by nik ");
+                    $nik = $cari->result();
+                    foreach ($nik as $nik) { ?>
+                      <option> <?php echo $nik->nik; ?> </option>
+                  <?php }?>
+                </select>
               </div>
             </td>
           </tr>

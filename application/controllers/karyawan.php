@@ -13,10 +13,7 @@ class Karyawan extends CI_Controller {
 		$this->load->helper('url','form','file');
 		$this->load->library('form_validation','image_lib');
 
-		if($this->mdl_admin->logged_id() == null)
-		{
-			redirect("login");
-		}
+		if($this->mdl_admin->logged_id() == null) { redirect("login"); }
 	}
 	public function index()
 	{

@@ -97,11 +97,15 @@
                     <?php } ?>
                     </td>
                     <td>
-                    <?php if(($key->aktif) == 1){ ?>
-                      <i class="fa fa-check"></i> Surat Aktif 
-                    <?php }else{ ?>
-                      </i> Kadaluarsa 
-                    <?php } ?>
+                    <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-check"></i> Belum Aktif
+                        <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <font color="red">Edit tanggal akhir</font>
+                        <?php } ?>
                     </td>
                     <td align="center">
                       <a href="<?php echo site_url(); echo "/adminKlinis/edit/"; echo $key->id ;?>">
