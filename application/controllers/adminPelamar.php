@@ -269,6 +269,7 @@ class AdminPelamar extends CI_Controller {
         $where = array( 'id_karyawan' => $id ); 
         $data = array( 'id_status' => 'Pelamar', 'id_profesi' => 'Belum' ); 
         $this->mdl_admin->updateData($where,$data,'karyawan');
+        $this->mdl_pelamar->ditolak($id);
         redirect("adminPelamar");
         }else{ redirect("login"); } 
     }
@@ -959,6 +960,16 @@ class AdminPelamar extends CI_Controller {
         $this->load->library('Mypdf');
         $data['array']=$this->mdl_admin->getreport();
         $this->mypdf->generate('Laporan/pelamar', $data, 'laporan-hasil-seleksi', 'A4', 'portrait');
+    }
+    //untuk menyimpan tanggal tes tulis dan wawancara
+    public function addtglsel($id_profesi){
+        $cariCaKar = $this->db->query("SELECT * from karyawan where id_status = 'Calon Karyawan' and id_profesi = '$id_profesi'");
+        $dataCakar = $cariCaKar->result();
+        $tgl = $this->input->post('tgl');
+        foreach ($dataCakar as $key) {
+            $this->db->query("UPDATE seleksi set tgl_seleksi = '$tgl' where id_karyawan = '$key->id_karyawan'");
+        }
+        redirect("adminPelamar/index2/$id_profesi");
     }
 }
 

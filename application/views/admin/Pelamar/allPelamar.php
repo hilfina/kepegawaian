@@ -30,30 +30,67 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="sparkline13-list">
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <h1>Data <span class="table-project-n">Pelamar <?php echo $judul->nama_profesi; ?></td></span></h1>
               </div>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-8">
             <div class="sparkline13-hd">
               <div class="main-sparkline13-hd">
                 <div align="right">
+                  
                 <?php  $tdy = date('Y-m-d');
                 if ($judul->akhir <= $tdy && $karyawan->id_status != 'Calon Karyawan') { ?>
                   <a href="<?php echo site_url(); echo"/adminPelamar/acc/"; echo $judul->id_profesi; ?>" >
                     <button class="btn btn-success waves-effect"><i class="fa fa-check"></i> Telah disetujui</button>
                   </a>
-                <?php }elseif ($karyawan->id_status == 'Calon Karyawan') { ?>
-                  <a href="<?php echo site_url(); echo"/adminPelamar/acc/"; echo $judul->id_profesi; ?>" >
-                    <button class="btn btn-success waves-effect"><i class="fa fa-check"></i> Belum TAUUUU</button>
+                  <a href="<?php echo site_url(); echo"/adminPelamar/cetak/"; echo $np; ?>" >
+                    <button class="btn btn-primary waves-effect"><i class="fa fa-print" aria-hidden="true"></i> Cetak Daftar Pelamar</button>
                   </a>
+                <?php }elseif ($karyawan->id_status == 'Calon Karyawan') { 
+                  $caridataseleksi = $this->db->query("SELECT * from seleksi where id_karyawan = '$karyawan->id_karyawan'");
+                  $dataseleksi = $caridataseleksi->row();
+                  if ($dataseleksi->tgl_seleksi == "0000-00-00") { //jika tanggal belum ditambahkan ?>
+                    <form action="<?php echo site_url();?>/adminPelamar/addtglsel/<?php echo $karyawan->id_profesi; ?>" method="POST">
+                      <table>
+                        <tr>
+                          <td colspan="2"><font color="red" size="2">Tanggal Tes Tulis dan wawancara</font></td>
+                        </tr>
+                        <tr>
+                          <td style="width: 70%"><input type="date" class="form-control" name="tgl" style="width: 100%"></td>
+                          <td><button class="btn btn-success waves-effect ">Simpan</button></td>
+                        </tr>
+                      </table>
+                    </form>
+                  <?php }elseif ($dataseleksi->tgl_seleksi != "0000-00-00" && $dataseleksi->nilai_kompetensi == "-" && $dataseleksi->nilai_wawancara == "-") {//jika belum ada nilai tes tulis dan wawancara ?>
+                    <form action="<?php echo site_url();?>/adminPelamar/addtglsel/<?php echo $karyawan->id_profesi; ?>" method="POST">
+                      <table>
+                        <tr>
+                          <td style="width: 70%">
+                            <div class="input-mark-inner">
+                              <div class="file-upload-inner ts-forms">
+                                <div class="input prepend-big-btn">
+                                  <label class="icon-right" for="prepend-big-btn">
+                                    <i class="fa fa-download"></i>
+                                  </label>
+                                  <div class="file-button"> Browse
+                                    <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                  </div>
+                                  <input type="text" id="prepend-big-btn" placeholder="Hasil Tes">
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td><button class="btn btn-primary waves-effect ">Simpan</button></td>
+                        </tr>
+                      </table>
+                    </form>
+                  <?php } ?>                  
                 <?php } ?>
-                <a href="<?php echo site_url(); echo"/adminPelamar/cetak/"; echo $np; ?>" >
-                  <button class="btn btn-primary waves-effect"><i class="fa fa-print" aria-hidden="true"></i> Cetak Daftar Pelamar</button>
-                </a>
+
                 </div>
               </div>
             </div>

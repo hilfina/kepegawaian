@@ -62,7 +62,12 @@ class Mdl_pelamar extends CI_Model
         $this->db->where($where);
         $this->db->delete($table);
     }
-
+    public function ditolak($id_karyawan){
+        $id = $this->db->query("SELECT * From seleksi where id_karyawan = '$id_karyawan'"); 
+        $dataSeleksi = $id->row();
+        $this->db->query("DELETE from riwayat_seleksi where id_seleksi = '$dataSeleksi->id_seleksi'");
+        $this->db->query("DELETE from seleksi where id_seleksi = '$dataSeleksi->id_seleksi'");
+    }
     public function getPend($id){
         $query= $this->db->query("SELECT * from pendidikan  where id_karyawan='$id'");
         return $query->result();
