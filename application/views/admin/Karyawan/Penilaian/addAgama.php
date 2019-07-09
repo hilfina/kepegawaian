@@ -37,13 +37,18 @@
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
       
-          <form action="<?php echo site_url();?>/adminKaryawan/editAgama/<?php echo $array->id; ?>/<?php echo $array->id_karyawan; ?>/<?php echo $array->id_seleksi; ?>" enctype="multipart/form-data" method="POST">
+          <form action="<?php echo site_url();?>/adminKaryawan/tambahAgama/<?php echo $array->id_karyawan; ?>/<?php echo $array->id_seleksi; ?>" enctype="multipart/form-data" method="POST">
           <table width="100%">
           <tr>
             <td><label form-control-label>Nama Tes</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="nama_tes" type="text" class="form-control" value="<?php echo $array->nama_tes ?>" >
+                <select name="nama_tes" type="text" class="chosen-select" >
+                <option>Baca Al-Quran</option>
+                <option>Tes Membimbing Pasien</option>
+                <option>Doa Sehari hari</option>
+                <option>Tes Solat</option>
+                </select>
                 <input name="id" type="hidden" class="form-control" value="<?php echo $array->id ?>">
               </div>
             </td>
@@ -54,7 +59,7 @@
               <div class="col-lg-12">
               <div class="form-group data-custon-pick data-custom-mg" id="data_5">
               <div class="input-daterange input-group" id="datepicker">
-                <input name="tanggal" type="text" class="form-control" value="<?php echo $array->tanggal; ?>">
+                <input name="tanggal" type="text" class="form-control">
               </div>
               </div>
               </div>
@@ -64,7 +69,7 @@
             <td><label form-control-label>Hasil Penilaian</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="hasil" type="text" class="form-control" value="<?php echo $array->hasil ?>">
+                <input name="hasil" type="text" class="form-control">
               </div>
             </td>
           </tr>

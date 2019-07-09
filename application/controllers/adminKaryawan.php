@@ -89,8 +89,8 @@ class AdminKaryawan extends CI_Controller {
                 $config['smtp_host']= "ssl://smtp.gmail.com";
                 $config['smtp_port']= "465";
                 $config['smtp_timeout']= "400";
-                $config['smtp_user']= "hilfinaamaris09@gmail.com";
-                $config['smtp_pass']= "hilfano090798";
+                $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
+                $config['smtp_pass']= "SUBHANALLAH";
                 $config['crlf']="\r\n"; 
                 $config['newline']="\r\n"; 
                 $config['wordwrap'] = TRUE;
@@ -109,15 +109,15 @@ class AdminKaryawan extends CI_Controller {
                 
                 if($this->email->send())
                 {
-                    $this->mdl_admin->addData('login',$dataLogin);
-                    $this->mdl_admin->addData('login',$dataPenempatan);
-                    $this->mdl_admin->addData('status',$dataStatus);
-                    $this->mdl_admin->addData('golongan',$dataGolongan);
+                    
                     echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
                 }else{
                     echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
                 }
-                
+                    $this->mdl_admin->addData('login',$dataLogin);
+                    $this->mdl_admin->addData('riwayat',$dataPenempatan);
+                    $this->mdl_admin->addData('status',$dataStatus);
+                    $this->mdl_admin->addData('golongan',$dataGolongan);
             }else {
                 
             }
@@ -145,8 +145,10 @@ class AdminKaryawan extends CI_Controller {
         $paket['moui']=$this->mdl_karyawan->getData('mou_klinis', $where);
         $paket['moup']=$this->mdl_karyawan->getData('mou_pelatihan', $where);
         $paket['urai']=$this->mdl_karyawan->getData('uraian_tugas',$where);
-
-
+        $paket['dik']=$this->mdl_karyawan->getData('diklat',$where);
+        $paket['kre']=$this->mdl_karyawan->getData('kewenangan_klinis', $where);
+        $paket['or']=$this->mdl_karyawan->getData('orientasi', $where);
+        
         $paket['datDir']=$this->mdl_admin->getTempat($id); //cari data karyawan beserta penempatannya
         if ($this->mdl_admin->getPenilaian($id)) {
             $paket['datNil']=$this->mdl_admin->getPenilaian($id); //cari data penilaian karyawan
@@ -496,15 +498,14 @@ class AdminKaryawan extends CI_Controller {
                 $this->load->view('admin/karyawan/penilaian/addNilai', $data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'pdf';
+                $config['allowed_types']    = 'pdf|xls|xlsx';
                 $config['max_size']         = 2000;
                 $this->load->library('upload', $config);
-
-                $konek =mysqli_connect("localhost","root","","kepegawaian");
+                
                 $nik=$this->input->post('id_penilai');
+                $cKar = $this->db->query("SELECT * from karyawan where nik = '$nik'"); $dKar=$cKar->row();
+                $id_penilai=$dKar->id_karyawan;
                 $id_karyawan=$this->input->post('id_karyawan');
-                $b=mysqli_fetch_array(mysqli_query($konek, "select * from karyawan where nik = '$nik'"));
-                $id_penilai = $b['id_karyawan'];
                 $tanggal = date('Y-m-d',strtotime($this->input->post('tanggal')));
                 $hasil = $this->input->post('hasil');
                 $jenis = $this->input->post('jenis');
@@ -593,12 +594,12 @@ class AdminKaryawan extends CI_Controller {
         $this->mdl_pelamar->hapusdata('penilaian_karyawan', $where);
         redirect("adminKaryawan/karyawanDetail/$idk");
     }
-    public function editAgama($id,$idk,$ids){
+    public function tambahAgama($ids, $idk){
         $this->form_validation->set_rules('id','Id Nilai','trim|required');
 
         if($this->form_validation->run()==FALSE){
-            $data['array']=$this->mdl_admin->getAgamaa($id);
-            $this->load->view('admin/karyawan/penilaian/editAgama', $data);
+            $data['array']=$this->mdl_admin->getAgamaa($idk);
+            $this->load->view('admin/karyawan/penilaian/addAgama', $data);
         }else{
 
             $tanggal = date('Y-m-d',strtotime($this->input->post('tanggal')));
@@ -843,8 +844,8 @@ class AdminKaryawan extends CI_Controller {
                 $config['smtp_host']= "ssl://smtp.gmail.com";
                 $config['smtp_port']= "465";
                 $config['smtp_timeout']= "400";
-                $config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
-                $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
+                $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com"; // isi dengan email kamu
+                $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
 
                 $config['crlf']="\r\n"; 
                 $config['newline']="\r\n"; 

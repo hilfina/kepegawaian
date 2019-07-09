@@ -30,7 +30,7 @@
             <div class="profile-img">
               <img src="<?php echo base_url()?>Assets/gambar/<?php echo $key->foto?>" alt=""/>
             </div>
-            <br> <?php echo $key->nama ?>
+            <br> <center><h3><b><?php echo $key->nama ?></b></h3></center>
           </div>
         </div>
       <?php } ?>
@@ -39,7 +39,7 @@
           <ul id="myTabedu1" class="tab-review-design">
             <li class="active"><a href="#dataPribadi">Data Pribadi</a></li>
             <li><a href="#penilaian">Penilaian</a></li>
-            <li><a href="#karir">Jenjang Karir</a></li>
+            <li><a href="#karir">Riwayat Pekerjaan</a></li>
             <li><a href="#absensi">Absensi</a></li>
             <li><a href="#file">File Kepegawaian</a></li>
           </ul>
@@ -373,7 +373,14 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="skill-title"> <br>
-                          <h2>Penilaian Agama</h2> <hr />
+                          <h2>Penilaian Agama</h2> 
+                          <right> <?php foreach ($agama as $key){ ?>
+                        <a href="<?php echo site_url('adminKaryawan/tambahAgama/').$key->id; echo "/";echo $key->id_karyawan; ?>">
+                      <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data Penilaian</button>
+                    </a>
+                    <?php break; } ?></right>
+
+                          <hr />
                         </div>
                       </div>
                     </div>
@@ -406,9 +413,6 @@
                               <td><?php echo $key->nama_tes; ?></td>
                               <td><?php echo $key->hasil; ?></td>
                               <td>
-                                <a href="<?php echo site_url('adminKaryawan/editagama/').$key->id."/".$key->id_karyawan."/".$key->id_seleksi;?>">
-                                  <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                </a>
                                 <a href="<?php echo site_url('adminKaryawan/delagama/').$key->id; echo "/";echo $key->id_karyawan; ?>" onclick="return confirm('Are you sure you want to delete this item?');">
                                   <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                 </a>
@@ -529,32 +533,18 @@
                       </div>
                     </div>
                     <div class="sparkline8-graph">
-                      <div class="data-table-area">
-                        <div class="container-fluid">
+                    <div class="data-table-area mg-b-15">
+                      <div class="container-fluid">
                           <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                              <div class="sparkline13-list">
-                                <div class="col-lg-6">
-                                  <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                      <h1>Data Jenjang Karir</h1>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-lg-6">
-                                  <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                      <div align="right">
-                                      <a href="<?php echo site_url('adminPelamar/loadimpor') ?>">
-                                        <button class="btn btn-primary waves-effect waves-light mg-b-15">Upload Data</button>
-                                      </a>
-                                      <a href="<?php echo site_url('adminPelamar/addPelamar')?>">
-                                        <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data</button>
-                                      </a>
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  <div class="sparkline13-list">
+                                      <div class="sparkline13-hd">
+                                          <div class="main-sparkline13-hd">
+                                              <h1>Data <span class="table-project-n">Riwayat</span> Pekerjaan</h1>
+                                          </div>
                                       </div>
-                                    </div>
-                                  </div>
-                                </div>
+
+                                
                                 <div class="sparkline13-graph">
                                   <div class="datatable-dashv1-list custom-datatable-overright">
                                     <div id="toolbar">
@@ -867,45 +857,28 @@
                       <div class="panel panel-default">
                         <div class="panel-heading accordion-head">
                           <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#1">MOU Pendidikan</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#urgas">Data Uraian Tugas</a>
                           </h4>
                         </div>
-                        <div id="1" class="panel-collapse panel-ic collapse">
+                        <div id="urgas" class="panel-collapse panel-ic collapse">
                           <div class="panel-body admin-panel-content ">
-                            <p>Berisi daftar MOU Pendidikan anda.</p>
                             <div class="static-table-list">
                               <table class="table">
                                 <thead>
                                   <tr>
-                                    <th>No.</th>
-                                    <th>Nomor MOU</th>
-                                    <th>Tanggal Mulai</th>
-                                    <th>Tanggal Berakhir</th>
-                                    <th>Nominal</th>
-                                    <th>Keterangan</th>
-                                    <th>Status Keaktifan</th>
+                                    <th width="100">Nomor</th>
+                                    <th>Download File Uraian Tugas</th>
                                   </tr>
                                 </thead>
-                                <?php $no=1; ?>
-                                <?php foreach($mous as $key){?>
+                                <?php $no=1;?>
+                                <?php foreach($urai as $abc){?>
                                 <tbody>
                                   <tr>
-                                    <td><?php echo $no++;?></td>
-                                    <td><?php echo $key->no_mou; ?></td>
-                                    <td><?php echo $key->tgl_mulai?></td>  
-                                    <td><?php echo $key->tgl_akhir?></td>
-                                    <td><?php echo $key->beasiswa;?></td>
-                                    <td><?php echo $key->ket?></td>
-                                    <td> 
-                                      <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
-                                        <i class="fa fa-check"></i> Surat Aktif 
-                                      <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
-                                        <i class="fa fa-check"></i> Belum Aktif
-                                      <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
-                                        <i class="fa fa-times"></i> Kadaluarsa 
-                                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
-                                          <font color="red">Edit tanggal akhir</font>
-                                        <?php } ?>
+                                    <td><?php echo $no++ ?></td>
+                                    <td>
+                                      <a href="<?php echo base_url().'/Assets/dokumen/'.$abc->file_urgas; ?>" download>
+                                          <?php echo $abc->file_urgas;?>
+                                      </a>              
                                     </td>
                                   </tr>
                                 </tbody>
@@ -935,6 +908,7 @@
                                     <th>Nominal</th>
                                     <th>Keterangan</th>
                                     <th>Status Keaktifan</th>
+                                    <th>File</th>
                                   </tr>
                                 </thead>
                                 <?php $no=1; ?>
@@ -957,6 +931,19 @@
                                       <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
                                           <font color="red">Edit tanggal akhir</font>
                                         <?php } ?>
+                                    </td>
+                                    <td>
+                                      <?php if(($key->file) != NULL) {?>
+                                      <font style="color: blue">
+                                        <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                          <button class="btn btn-default waves-effect" class='submit'>
+                                            <i class="fa fa-download" aria-hidden="true"> Unduh File</i>
+                                          </button>
+                                        </a>
+                                      </font>
+                                      <?php }else{ ?>
+                                        <font style="color: red">Tidak Ada file</font>
+                                      <?php } ?>
                                     </td>
                                   </tr>
                                 </tbody>
@@ -972,50 +959,64 @@
                             <a data-toggle="collapse" data-parent="#accordion" href="#2">MOU Kontrak</a>
                           </h4>
                         </div>
-                                    <div id="2" class="panel-collapse panel-ic collapse">
-                                        <div class="panel-body admin-panel-content ">
-                                        <p>Berisi daftar MOU Kontrak kerja anda</p>
-                                            <div class="static-table-list">
-                                                  <table class="table">
-                                                      <thead>
-                                                          <tr>
-                                                            <th>No.</th>
-                                                            <th>Nomor MOU</th>
-                                                            <th>Tanggal Mulai</th>
-                                                            <th>Tanggal Berakhir</th>
-                                                            <th>Nominal</th>
-                                                            <th>Keterangan</th>
-                                                            <th>Status Keaktifan</th>
-                                                          </tr>
-                                                      </thead>
-                                                      <?php $no=1; ?>
-                                                      <?php foreach($mouk as $key){?>
-                                                      <tbody>
-                                                          <tr>
-                                                              <td><?php echo $no++;?></td>
-                                                              <td><?php echo $key->no_mou; ?></td>
-                                                              <td><?php echo $key->tgl_mulai?></td>  
-                                                              <td><?php echo $key->tgl_akhir?></td>
-                                                              <td><?php echo $key->gaji;?></td>
-                                                              <td><?php echo $key->ket?></td>
-                                                              <td> 
-                                                              <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
-                          <i class="fa fa-check"></i> Surat Aktif 
-                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
-                          <i class="fa fa-check"></i> Belum Aktif
-                        <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
-                          <i class="fa fa-times"></i> Kadaluarsa 
-                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
-                          <font color="red">Edit tanggal akhir</font>
-                        <?php } ?>  
-                                                              </td>
-                                                          </tr>
-                                                      </tbody>
-                                                      <?php } ?>
-                                                  </table>
-                                              </div>
-                                        </div>
-                                    </div>
+                            <div id="2" class="panel-collapse panel-ic collapse">
+                                <div class="panel-body admin-panel-content ">
+                                <p>Berisi daftar MOU Kontrak kerja anda</p>
+                                    <div class="static-table-list">
+                                          <table class="table">
+                                              <thead>
+                                                  <tr>
+                                                    <th>No.</th>
+                                                    <th>Nomor MOU</th>
+                                                    <th>Tanggal Mulai</th>
+                                                    <th>Tanggal Berakhir</th>
+                                                    <th>Nominal</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Status Keaktifan</th>
+                                                    <th>File</th>
+                                                  </tr>
+                                              </thead>
+                                              <?php $no=1; ?>
+                                              <?php foreach($mouk as $key){?>
+                                              <tbody>
+                                                  <tr>
+                                                      <td><?php echo $no++;?></td>
+                                                      <td><?php echo $key->no_mou; ?></td>
+                                                      <td><?php echo $key->tgl_mulai?></td>  
+                                                      <td><?php echo $key->tgl_akhir?></td>
+                                                      <td><?php echo $key->gaji;?></td>
+                                                      <td><?php echo $key->ket?></td>
+                                                      <td> 
+                                                      <?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                  <i class="fa fa-check"></i> Surat Aktif 
+                <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                  <i class="fa fa-check"></i> Belum Aktif
+                <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                  <i class="fa fa-times"></i> Kadaluarsa 
+              <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                  <font color="red">Edit tanggal akhir</font>
+                <?php } ?>  
+                                                      </td>
+                                                      <td>
+                                                        <?php if(($key->file) != NULL) {?>
+                                                        <font style="color: blue">
+                                                          <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                                            <button class="btn btn-default waves-effect" class='submit'>
+                                                              <i class="fa fa-download" aria-hidden="true"> Unduh File</i>
+                                                            </button>
+                                                          </a>
+                                                        </font>
+                                                        <?php }else{ ?>
+                                                          <font style="color: red">Tidak Ada file</font>
+                                                        <?php } ?>
+                                                      </td>
+                                                  </tr>
+                                              </tbody>
+                                              <?php } ?>
+                                          </table>
+                                      </div>
+                                </div>
+                            </div>
                                 </div>
                                 <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
@@ -1038,6 +1039,7 @@
                                                             <th>Nominal</th>
                                                             <th>Keterangan</th>
                                                             <th>Status Keaktifan</th>
+                                                            <th>File</th>
                                                           </tr>
                                                       </thead>
                                                       <?php $no=1; ?>
@@ -1060,6 +1062,19 @@
                       <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
                           <font color="red">Edit tanggal akhir</font>
                         <?php } ?> 
+                                                              </td>
+                                                              <td>
+                                                                <?php if(($key->file) != NULL) {?>
+                                                                <font style="color: blue">
+                                                                  <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                                                    <button class="btn btn-default waves-effect" class='submit'>
+                                                                      <i class="fa fa-download" aria-hidden="true"> Unduh File</i>
+                                                                    </button>
+                                                                  </a>
+                                                                </font>
+                                                                <?php }else{ ?>
+                                                                  <font style="color: red">Tidak Ada file</font>
+                                                                <?php } ?>
                                                               </td>
                                                           </tr>
                                                       </tbody>
@@ -1089,6 +1104,7 @@
                                                             <th>Tanggal Berakhir</th>
                                                             <th>Keterangan</th>
                                                             <th>Status Keaktifan</th>
+                                                            <th>File</th>
                                                           </tr>
                                                       </thead>
                                                       <?php $no=1; ?>
@@ -1111,6 +1127,17 @@
                           <font color="red">Edit tanggal akhir</font>
                         <?php } ?>
                                                               </td>
+                                                              <td><?php if(($key->file) != NULL) {?>
+                                      <font style="color: blue">
+                                        <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                          <button class="btn btn-default waves-effect" class='submit'>
+                                            <i class="fa fa-download" aria-hidden="true"> Unduh File</i>
+                                          </button>
+                                        </a>
+                                      </font>
+                                      <?php }else{ ?>
+                                        <font style="color: red">Tidak Ada file</font>
+                                      <?php } ?></td>
                                                           </tr>
                                                       </tbody>
                                                       <?php } ?>
@@ -1139,6 +1166,7 @@
                                                             <th>Tanggal Berakhir</th>
                                                             <th>Keterangan</th>
                                                             <th>Status keaktifan</th>
+                                                            <th>File</th>
                                                           </tr>
                                                       </thead>
                                                       <?php $no=1; ?>
@@ -1159,6 +1187,19 @@
                       <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
                           <font color="red">Edit tanggal akhir</font>
                         <?php } ?></td>
+                                                          <td>
+                                                            <?php if(($key->file) != NULL) {?>
+                                      <font style="color: blue">
+                                        <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                          <button class="btn btn-default waves-effect" class='submit'>
+                                            <i class="fa fa-download" aria-hidden="true"> Unduh File</i>
+                                          </button>
+                                        </a>
+                                      </font>
+                                      <?php }else{ ?>
+                                        <font style="color: red">Tidak Ada file</font>
+                                      <?php } ?>
+                                                          </td>
                                                           </tr>
                                                       </tbody>
                                                       <?php } ?>
@@ -1167,6 +1208,148 @@
                                         </div>
                                     </div>
                                 </div> 
+                            <div class="panel panel-default">
+                            <div class="panel-heading accordion-head">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#6">Data Diklat</a>
+                              </h4>
+                            </div>
+                            <div id="6" class="panel-collapse panel-ic collapse">
+                              <div class="panel-body admin-panel-content ">
+                                <div class="static-table-list">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No</th>
+                                        <th>Nomor Sertifikat</th>
+                                        <th>Nama Diklat</th>
+                                        <th>Jenis Diklat</th>
+                                        <th>Periode</th>
+                                        <th>Jam</th>
+                                        <th>File</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $no = 1 ?>
+                                    <?php foreach ($dik as $key) { ?>
+                                      <tr>
+                                          <td><?php echo $no++ ?></td>
+                                          <td><?php echo $key->nomor_sertif; ?></td>
+                                          <td><?php echo $key->nama_diklat; ?></td>
+                                          <td><?php echo $key->jenis_diklat; ?></td>
+                                          <td><?php echo $key->tgl_mulai; echo " - "; echo $key->tgl_akhir; ?></td>
+                                          <td><?php echo $key->jam; ?></td>
+                                          <td>
+                                            <?php if(($key->file) != NULL){ ?>
+                                              <a href="<?php echo base_url().'/Assets/dokumen/'.$key->file; ?>" download>
+                                                <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                              </a>
+                                            <?php }else{ ?>
+                                              <font style="color: red">Tidak Ada file</font>
+                                            <?php } ?>
+                                          </td>
+                                      </tr>
+                                    </tbody>
+                                    <?php } ?>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="panel panel-default">
+                            <div class="panel-heading accordion-head">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#7">Data Kredensial</a>
+                              </h4>
+                            </div>
+                            <div id="7" class="panel-collapse panel-ic collapse">
+                              <div class="panel-body admin-panel-content ">
+                                <div class="static-table-list">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No</th>
+                                        <th>Tanggal Pengajuan</th>
+                                        <th>Jenjang Klinik</th>
+                                        <th>Masa Berlaku</th>
+                                        <th>File Kredensial</th>
+                                        <th>Status Keaktifan</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $no = 1 ?>
+                                    <?php foreach ($kre as $key) { ?>
+                                      <tr>
+                                          <td><?php echo $no++ ?></td>
+                                          <td><?php echo $key->tgl_pengajuan;?></td>
+                                          <td><?php echo $key->pk; ?></td>
+                                          <td><?php echo $key->tgl_mulai; echo " - "; echo $key->tgl_akhir; ?></td>
+                                          <td>
+                                            <?php if(($key->doku_penilaian) != NULL){ ?>
+                                              <a href="<?php echo base_url().'/Assets/dokumen/'.$key->doku_penilaian; ?>" download>
+                                                <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                              </a>
+                                            <?php }else{ ?>
+                                              <font style="color: red">Tidak Ada file</font>
+                                            <?php } ?>
+                                          </td>
+                                          <td><?php if(strtotime(date('Y-m-d')) < strtotime(date('Y-m-d', strtotime($key->tgl_akhir))) && strtotime(date('Y-m-d')) > strtotime(date('Y-m-d', strtotime($key->tgl_mulai)))){ ?>
+                          <i class="fa fa-check"></i> Surat Aktif 
+                        <?php }elseif(strtotime(date('Y-m-d', strtotime($key->tgl_mulai))) >= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-check"></i> Belum Aktif
+                        <?php }elseif($key->tgl_akhir != "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <i class="fa fa-times"></i> Kadaluarsa 
+                      <?php }elseif($key->tgl_akhir == "" && date('Y-m-d', strtotime($key->tgl_akhir)) <= strtotime(date('Y-m-d'))){ ?>
+                          <font color="red">Edit tanggal akhir</font>
+                        <?php } ?></td>
+                                      </tr>
+                                    </tbody>
+                                    <?php } ?>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="panel panel-default">
+                            <div class="panel-heading accordion-head">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#8">Orientasi</a>
+                              </h4>
+                            </div>
+                            <div id="8" class="panel-collapse panel-ic collapse">
+                              <div class="panel-body admin-panel-content ">
+                                <div class="static-table-list">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No</th>
+                                        <th>Masa Berlaku</th>
+                                        <th>Dokumen Kehadiran</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $no = 1 ?>
+                                    <?php foreach ($kre as $key) { ?>
+                                      <tr>
+                                          <td><?php echo $no++ ?></td>
+                                          <td><?php echo $key->tgl_mulai; echo " - "; echo $key->tgl_akhir; ?></td>
+                                          <td>
+                                            <?php if(($key->doku_hadir) != NULL){ ?>
+                                              <a href="<?php echo base_url().'/Assets/dokumen/'.$key->doku_hadir; ?>" download>
+                                                <button class="btn btn-default waves-effect" class='submit'><i class="fa fa-download" aria-hidden="true"></i> Unduh File</button>
+                                              </a>
+                                            <?php }else{ ?>
+                                              <font style="color: red">Tidak Ada file</font>
+                                            <?php } ?>
+                                          </td>
+                                      </tr>
+                                    </tbody>
+                                    <?php } ?>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                             </div>   
                         </div>
                     </div>

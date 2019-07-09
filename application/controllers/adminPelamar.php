@@ -53,8 +53,8 @@ class AdminPelamar extends CI_Controller {
             $config['smtp_host']= "ssl://smtp.gmail.com";
             $config['smtp_port']= "465";
             $config['smtp_timeout']= "400";
-            $config['smtp_user']= "hilfinaamaris09@gmail.com";
-            $config['smtp_pass']= "hilfano090798";
+            $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
+            $config['smtp_pass']= "SUBHANALLAH";
             $config['crlf']="\r\n"; 
             $config['newline']="\r\n"; 
             $config['wordwrap'] = TRUE;
@@ -167,8 +167,8 @@ class AdminPelamar extends CI_Controller {
                 $config['smtp_host']= "ssl://smtp.gmail.com";
                 $config['smtp_port']= "465";
                 $config['smtp_timeout']= "400";
-                $config['smtp_user']= "hilfinaamaris09@gmail.com";
-                $config['smtp_pass']= "hilfano090798";
+                $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
+                $config['smtp_pass']= "SUBHANALLAH";
                 $config['crlf']="\r\n"; 
                 $config['newline']="\r\n"; 
                 $config['wordwrap'] = TRUE;
@@ -201,7 +201,7 @@ class AdminPelamar extends CI_Controller {
         $config['smtp_timeout']= "400";
 
         $config['smtp_user']= "hilfinamaris09@gmail.com"; // isi dengan email kamu
-        $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
+        $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
 
         $config['crlf']="\r\n"; 
         $config['newline']="\r\n"; 
@@ -249,8 +249,8 @@ class AdminPelamar extends CI_Controller {
         $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
         $config['smtp_port']= "465";
         $config['smtp_timeout']= "400";
-        $config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
-                $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
+        $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com"; // isi dengan email kamu
+                $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
 
         $config['crlf']="\r\n"; 
         $config['newline']="\r\n"; 
@@ -751,7 +751,7 @@ class AdminPelamar extends CI_Controller {
                 $config['smtp_timeout']= "400";
                 $config['smtp_user']= "hilfinamaris09@gmail.com"; // isi dengan email kamu
 
-                $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
+                $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
                 $config['crlf']="\r\n"; 
                 $config['newline']="\r\n"; 
                 $config['wordwrap'] = TRUE;
@@ -811,8 +811,8 @@ class AdminPelamar extends CI_Controller {
             $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
             $config['smtp_port']= "465";
             $config['smtp_timeout']= "400";
-            $config['smtp_user']= "hilfinaamaris09@gmail.com"; // isi dengan email kamu
-            $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
+            $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com"; // isi dengan email kamu
+            $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
             $config['crlf']="\r\n"; 
             $config['newline']="\r\n"; 
             $config['wordwrap'] = TRUE;
@@ -918,7 +918,7 @@ class AdminPelamar extends CI_Controller {
                     $config['smtp_port']= "465";
                     $config['smtp_timeout']= "400";
                     $config['smtp_user']= "hilfinamaris09@gmail.com"; // isi dengan email kamu
-                    $config['smtp_pass']= "hilfano090798";
+                    $config['smtp_pass']= "SUBHANALLAH";
                     $config['crlf']="\r\n"; 
                     $config['newline']="\r\n"; 
                     $config['wordwrap'] = TRUE;
