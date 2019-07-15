@@ -11,7 +11,7 @@ class pelamar extends CI_Controller {
 		$this->load->model('mdl_home');
 		$this->load->model('mdl_login');
 		$this->load->model('mdl_pelamar');
-		$this->load->helper('url','form','file');
+		$this->load->helper('url','form','file', 'custom');
 		$this->load->library('form_validation','image_lib');
 		$this->load->library('session');
 		$this->load->library('pdf');
@@ -40,39 +40,36 @@ class pelamar extends CI_Controller {
 			$data = array( 'email'=>$email );
 	        $where = array( 'id_karyawan' => $id );				
 
-			$encrypted_id = $id;			
-			$this->load->library('email');
-			$config = array();
-			$config['charset'] = 'utf-8';
-			$config['useragent'] = 'CodeIgniter';
-			$config['protocol']= "smtp";
-			$config['mailtype']= "html";
-			$config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
-			$config['smtp_port']= "465";
-			$config['smtp_timeout']= "400";
-			$config['smtp_user']= "sdi.rsiaisyiyah@gmail.com"; // isi dengan email kamu
-            $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu                
-			$config['crlf']="\r\n"; 
-			$config['newline']="\r\n"; 
-			$config['wordwrap'] = TRUE;
-			//memanggil library email dan set konfigurasi untuk pengiriman email					
-			$this->email->initialize($config);
-			//konfigurasi pengiriman
-			$this->email->from($config['smtp_user']);
-			$this->email->to($email);
-			$this->email->subject("Verifikasi Akun");
-			$this->email->message(
+			// $encrypted_id = $id;			
+			// $this->load->library('email');
+			// $config = array();
+			// $config['charset'] = 'utf-8';
+			// $config['useragent'] = 'CodeIgniter';
+			// $config['protocol']= "smtp";
+			// $config['mailtype']= "html";
+			// $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+			// $config['smtp_port']= "465";
+			// $config['smtp_timeout']= "400";
+			// $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com"; // isi dengan email kamu
+   //          $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu                
+			// $config['crlf']="\r\n"; 
+			// $config['newline']="\r\n"; 
+			// $config['wordwrap'] = TRUE;
+			// //memanggil library email dan set konfigurasi untuk pengiriman email					
+			// $this->email->initialize($config);
+			// //konfigurasi pengiriman
+			// $this->email->from($config['smtp_user']);
+			// $this->email->to($email);
+			// $this->email->subject("Verifikasi Akun");
+			// $this->email->message(
+			$pesan =
 				"untuk memverifikasi akun Sistem Informasi Kepegawaian RSIA silahkan klik tautan dibawah ini<br><br>".
 				"<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
-			);
+			;
 			
-			if($this->email->send()){
+			send_email(array($email), 'Verifikasi Akun', $pesan);
 				$this->mdl_pelamar->updatedata($where,$data,'karyawan');
-				echo "<script>alert('Verifikasi Email berhasil terkirim. Cek email anda untuk verifikasi akun!'); document.location.href = '" . $this->session->sess_destroy(); redirect('login') . "';</script>";			
-			}
-			else{
-				echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('login') . "';</script>";		
-			}
+				
 		}	
  	}
 	//melihat dan edit data pribadi

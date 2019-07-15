@@ -8,6 +8,7 @@ class Login extends CI_Controller {
         parent::__construct();
         //load library form validasi
         $this->load->library('form_validation','image_lib');
+        $this->load->helper('url','form','file', 'custom');
         //load model mdl_login
         $this->load->model('mdl_login');
         $this->load->model('mdl_pelamar');
@@ -145,39 +146,36 @@ class Login extends CI_Controller {
 		        );
 			}
 			//configurasi untuk kirim email
-			$encrypted_id = $id_karyawan;	
-			$config = array();
-			$config['charset'] = 'utf-8';
-			$config['useragent'] = 'CodeIgniter';
-			$config['protocol']= "smtp";
-			$config['mailtype']= "html";
-			$config['smtp_host']= "ssl://smtp.gmail.com";
-			$config['smtp_port']= "465";
-			$config['smtp_timeout']= "400";
-			$config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
-			$config['smtp_pass']= "SUBHANALLAH";
-			$config['crlf']="\r\n"; 
-			$config['newline']="\r\n"; 
-			$config['wordwrap'] = TRUE;
+			// $encrypted_id = $id_karyawan;	
+			// $config = array();
+			// $config['charset'] = 'utf-8';
+			// $config['useragent'] = 'CodeIgniter';
+			// $config['protocol']= "smtp";
+			// $config['mailtype']= "html";
+			// $config['smtp_host']= "ssl://smtp.gmail.com";
+			// $config['smtp_port']= "465";
+			// $config['smtp_timeout']= "400";
+			// $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
+			// $config['smtp_pass']= "SUBHANALLAH";
+			// $config['crlf']="\r\n"; 
+			// $config['newline']="\r\n"; 
+			// $config['wordwrap'] = TRUE;
 			
-			$this->email->initialize($config);
-			//konfigurasi pengiriman
-			$this->email->from($config['smtp_user']);
-			$this->email->to($email);
-			$this->email->subject("Verifikasi Akun");
-			$this->email->message(
+			// $this->email->initialize($config);
+			// //konfigurasi pengiriman
+			// $this->email->from($config['smtp_user']);
+			// $this->email->to($email);
+			// $this->email->subject("Verifikasi Akun");
+			$pesan =
 				"Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Terima kasih sudah mendaftar pada Sistem Kepegawaian Rumah Sakit Islam Aisyiyah Malang. Untuk proses berikutnya, silahkan masukkan data-data lamaran anda. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini <br><br>".
 				"<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
-			);
+			;
 			
-			if($this->email->send()){
+			send_email(array($email), 'Verifikasi Akun', $pesan);
 				$insert1 = $this->mdl_login->daftar('karyawan',$data1);
 			    $insert2 = $this->mdl_login->daftar('lowongan',$data2);
 		   		$insert5 = $this->mdl_login->daftar('login',$data5);
-				echo "<script>alert('Verifikasi Email berhasil terkirim. Cek email anda untuk verifikasi akun!'); document.location.href = '" . site_url('login') . "';</script>";
-			}else{
-				echo "<script>alert('Verifikasi Email gagal terkirim'); document.location.href ='".site_url('login')."';</script>";
-			}
+				
 		}
 	}
 

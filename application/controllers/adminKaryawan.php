@@ -10,9 +10,9 @@ class AdminKaryawan extends CI_Controller {
         $this->load->model('mdl_karyawan');
         $this->load->model('mdl_admin');
         $this->load->model('mdl_home');
-        $this->load->helper('url','form','file');
+        $this->load->helper('url','form','file','custom');
         $this->load->library('form_validation','image_lib');
-        $this->load->helper(array('url','download'));
+        $this->load->helper(array('url','download', 'form', 'file','custom'));
         $this->load->library('email');
 
         if($this->mdl_admin->logged_id() == null){redirect("login");}
@@ -75,49 +75,49 @@ class AdminKaryawan extends CI_Controller {
                 $this->mdl_admin->addData('login',$dataLogin1);
             }
 
-            if ($level != 'admin' || $level != 'Super Admin'){
+            if ($level == 'Karyawan'){
                 //set data riwayat status dan golongan karyawan
                 $dataStatus=array('id_karyawan'=>$dIDK->id_karyawan, 'id_status'=>$id_status, 'mulai' => $tgl, 'akhir' => $tgl2);
                 $dataPenempatan=array('id_karyawan'=>$dIDK->id_karyawan, 'ruangan'=> '-', 'mulai' => $tgl, 'akhir' => $tgl2);
                 $dataGolongan=array('id_karyawan'=>$dIDK->id_karyawan, 'id_golongan'=>$id_golongan, 'mulai' => $tgl, 'akhir' => $tgl2);
                 
-                $config = array();
-                $config['charset'] = 'utf-8';
-                $config['useragent'] = 'CodeIgniter';
-                $config['protocol']= "smtp";
-                $config['mailtype']= "html";
-                $config['smtp_host']= "ssl://smtp.gmail.com";
-                $config['smtp_port']= "465";
-                $config['smtp_timeout']= "400";
-                $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
-                $config['smtp_pass']= "SUBHANALLAH";
-                $config['crlf']="\r\n"; 
-                $config['newline']="\r\n"; 
-                $config['wordwrap'] = TRUE;
-                $this->email->initialize($config);
+                // $config = array();
+                // $config['charset'] = 'utf-8';
+                // $config['useragent'] = 'CodeIgniter';
+                // $config['protocol']= "smtp";
+                // $config['mailtype']= "html";
+                // $config['smtp_host']= "ssl://smtp.gmail.com";
+                // $config['smtp_port']= "465";
+                // $config['smtp_timeout']= "400";
+                // $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
+                // $config['smtp_pass']= "SUBHANALLAH";
+                // $config['crlf']="\r\n"; 
+                // $config['newline']="\r\n"; 
+                // $config['wordwrap'] = TRUE;
+                // $this->email->initialize($config);
                 $encrypted_id = $dIDK->id_karyawan;
-                $this->email->from($config['smtp_user']);
-                $this->email->to($email);
-                $this->email->subject("Verifikasi Akun");
-                $this->email->message(
+                // $this->email->from($config['smtp_user']);
+                // $this->email->to($email);
+                // $this->email->subject("Verifikasi Akun");
+                // $this->email->message(
 
-                    "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Anda telah didaftarkan di Rumah Sakit islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini menggunakan <br><br>
+                $pesan = "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Anda telah didaftarkan di Rumah Sakit islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini menggunakan <br><br>
                         username dan password menggunakan nomor ktp anda.<br>".
-                    "<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
+                    "<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>";
 
-                );
+                send_email(array($email), 'Verifikasi', $pesan);
                 
-                if($this->email->send())
-                {
+                // if($this->email->send())
+                // {
                     
-                    echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
-                }else{
-                    echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
-                }
-                    $this->mdl_admin->addData('login',$dataLogin);
-                    $this->mdl_admin->addData('riwayat',$dataPenempatan);
-                    $this->mdl_admin->addData('status',$dataStatus);
-                    $this->mdl_admin->addData('golongan',$dataGolongan);
+                //     echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
+                // }else{
+                //     echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
+                // }
+                $this->mdl_admin->addData('login',$dataLogin);
+                $this->mdl_admin->addData('riwayat',$dataPenempatan);
+                $this->mdl_admin->addData('status',$dataStatus);
+                $this->mdl_admin->addData('golongan',$dataGolongan);
             }else {
                 
             }
@@ -832,7 +832,7 @@ class AdminKaryawan extends CI_Controller {
                     'id_karyawan'=>$cariId['id_karyawan']
                 );
 
-                $data3[]=array('id_karyawan'=>$cariId['id_karyawan'], 'id_profesi'=>$cip['id_profesi'], 'mulai' => $tgl);
+                $data3[]=array('id_karyawan'=>$cariId['id_karyawan'], 'mulai' => $tgl, 'akhir' => $tgl);
                 $data4[]=array('id_karyawan'=>$cariId['id_karyawan'], 'id_status'=>$id_status, 'mulai' => $tgl);
                 $data5[]=array('id_karyawan'=>$cariId['id_karyawan'], 'id_golongan'=>$id_golongan, 'mulai' => $tgl);
                
@@ -862,6 +862,13 @@ class AdminKaryawan extends CI_Controller {
                     untuk memverifikasi silahkan klik tombol dibawah ini<br><br>".
                     "<a href='".site_url("login/verification/$encrypted_id")."'><button>verifikasi</button</a>"
                 );
+                if($this->email->send())
+                {
+                    
+                    echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
+                }else{
+                    echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
+                }
                 //if($this->email->send()){
                     $this->mdl_admin->impor('login',$data2);
                     $this->mdl_admin->impor('riwayat',$data3);

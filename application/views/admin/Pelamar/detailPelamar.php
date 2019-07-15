@@ -40,28 +40,6 @@
             </div><br>
             <?php } ?>
             <div align="center">
-              <?php foreach ($datDir as $key){ ?>
-                <?php foreach ($datLo as $lo){ ?>
-                <?php if ($key->id_status == "Pelamar" && $key->id_profesi != "Belum" && $lo->finalisasi == '1' ) { ?>
-                  <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
-                    <button class="btn btn-success waves-effect mg-b-15" title="Panggil untuk maju ke tahap tes"><i class="fa fa-check"></i>  Panggil</button>
-                  </a>
-                  <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                    <button class="btn btn-danger waves-effect mg-b-15"><i class="fa fa-times"></i> Tolak</button>
-                  </a>
-                <?php }?>
-                <?php } ?>
-              <?php } ?>
-              <?php foreach ($datSel as $a){ ?>
-              <?php if ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-") { ?>
-                <a href="<?php echo site_url(); echo "/adminPelamar/editMagang/";  echo $key->id_karyawan ; ?>">
-                  <button class="btn btn-success waves-effect mg-b-15" title="Terima untuk menjadi karyawan magang"><i class="fa fa-check"></i> Terima</button>
-                </a>
-                <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
-                  <button class="btn btn-danger waves-effect mg-b-15"><i class="fa fa-times"></i> Gagal</button>
-                </a>
-              <?php } else{}?>
-              <?php } ?>
             </div>
           </div>
         </div>
@@ -439,12 +417,12 @@
                               <?php if ($key->tgl_seleksi == "0000-00-00"){ ?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes tulis dan wawancara</font>
                               <?php } elseif (($key->nilai_wawancara >=10 && $key->nilai_kompetensi >=10) && $wawa->tanggal == $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
-                                <font color="red" size="2">*Masukkan tanggal untuk tes psikologi</font>
+                                <font color="red" size="2">*Masukkan tanggal untuk tes kesehatan</font>
                               <?php } elseif (($key->nilai_wawancara >=10 && $key->nilai_kompetensi >= 10) && $wawa->tanggal != $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
                               <?php } elseif ($key->tes_psikologi == "Lulus" && $psiko->tanggal == $key->tgl_seleksi) {?>
                                 <font color="red" size="2">*Masukkan tanggal untuk tes agama</font>
                               <?php } elseif ($key->nilai_agama >=10 && $baca->tanggal == $key->tgl_seleksi) {?>
-                                <font color="red" size="2">*Masukkan tanggal untuk tes kesehatan</font>
+                                <font color="red" size="2">*Masukkan tanggal untuk tes psikologi</font>
                               <?php } ?>
                               <input name="tgl" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
                             </div>
@@ -469,7 +447,6 @@
                         <?php }else{?>
                           <input name="tulis" type="hidden" class="form-control" value="<?php echo $semua->nilai_kompetensi;?>" >
                         <?php }?>
-                        <?php if ($key->nilai_kompetensi >= 10) { ?>
                           <tr>
                             <td><label form-control-label>Nilai Wawancara</label></td>
                             <td style="height: 50px">
@@ -482,29 +459,6 @@
                               </div>
                             </td>
                           </tr>
-                          <?php } else {?>
-                            <input name="wawancara" type="hidden" class="form-control" value="<?php echo $semua->nilai_wawancara;?>" >
-                          <?php }?>
-                          <?php if (isset($psiko->hasil)) { ?>
-                            <tr>
-                              <td><label form-control-label>Tes Psikologi</label></td>
-                              <td style="height: 50px">
-                                <div class="col-lg-12">
-                                  <?php if ($psiko->hasil == "-") { ?>
-                                    <select name="psikologi" class="form-control">
-                                      <option>-- Pilihan --</option>
-                                      <option>Lulus</option>
-                                      <option>Tidak Lulus</option>
-                                    </select>
-                                  <?php } else { ?>
-                                    <input name="psikologi" type="text" class="form-control" value="<?php echo $psiko->hasil;?>" >
-                                  <?php } ?>
-                                </div>
-                              </td>
-                            </tr>
-                          <?php } else { ?>
-                            <input name="psikologi" type="hidden" class="form-control" value="<?php echo $key->tes_psikologi;?>" >
-                          <?php } ?>
 
                           <?php if (isset($shalat->hasil)) { ?>
                             <tr>
@@ -594,7 +548,26 @@
                           <?php } else { ?>
                             <input name="kesehatan" type="hidden" class="form-control" value="<?php echo $key->tes_kesehatan;?>" >
                           <?php } ?>
-                          
+                          <?php if (isset($psiko->hasil)) { ?>
+                            <tr>
+                              <td><label form-control-label>Tes Psikologi</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($psiko->hasil == "-") { ?>
+                                    <select name="psikologi" class="form-control">
+                                      <option>-- Pilihan --</option>
+                                      <option>Lulus</option>
+                                      <option>Tidak Lulus</option>
+                                    </select>
+                                  <?php } else { ?>
+                                    <input name="psikologi" type="text" class="form-control" value="<?php echo $psiko->hasil;?>" >
+                                  <?php } ?>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php } else { ?>
+                            <input name="psikologi" type="hidden" class="form-control" value="<?php echo $key->tes_psikologi;?>" >
+                          <?php } ?>
                           <?php if ($key->nilai_agama >= 10 || $key->tes_kesehatan >= 10) { ?>                                                  
                             <tr>
                               <td><label form-control-label>Dokumen ppa</label></td>
@@ -620,17 +593,17 @@
                                 <?php if ($key->tes_ppa != "-") { ?>
                               <div align="center">
                                 <div class="pdf-viewer-area mg-b-15">
-                                        <div class="container-fluid">
-                                          <div class="row">
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> </div>
-                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                                              <div class="pdf-single-pro">
-                                                <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->tes_ppa; ?>"></a>
-                                              </div>
-                                            </div>
-                                          </div>
+                                  <div class="container-fluid">
+                                    <div class="row">
+                                      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> </div>
+                                      <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                        <div class="pdf-single-pro">
+                                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->tes_ppa; ?>"></a>
                                         </div>
                                       </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             <?php }?>
                               </td>

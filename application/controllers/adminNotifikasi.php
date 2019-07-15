@@ -11,7 +11,7 @@ class AdminNotifikasi extends CI_Controller {
         $this->load->model('mdl_karyawan');
 		$this->load->model('mdl_admin');
 		$this->load->model('mdl_home');
-		$this->load->helper('url','form','file');
+		$this->load->helper('url','form','file', 'custom');
 		$this->load->library('form_validation','image_lib');
         $this->load->helper(array('url','download'));
 
@@ -28,29 +28,9 @@ class AdminNotifikasi extends CI_Controller {
         $dataK = $this->mdl_admin->getData2('karyawan',$where2);
 
         $this->load->library('email');
-        $config = array();
-        $config['charset'] = 'utf-8';
-        $config['useragent'] = 'CodeIgniter';
-        $config['protocol']= "smtp";
-        $config['mailtype']= "html";
-        $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
-        $config['smtp_port']= "465";
-        $config['smtp_timeout']= "400";
-        $config['smtp_user']= "hilfina090798@gmail.com"; // isi dengan email kamu
-        $config['smtp_pass']= "hilfano090798"; // isi dengan password kamu
-        $config['crlf']="\r\n"; 
-        $config['newline']="\r\n"; 
-        $config['wordwrap'] = TRUE;
-        //memanggil library email dan set konfigurasi untuk pengiriman email
-            
-        $this->email->initialize($config);
-        //konfigurasi pengiriman
-        $this->email->from($config['smtp_user']);
-        $this->email->to($dataK->email);
-        $this->email->subject("Notifikasi");
-        $this->email->message("Kepada<br>Yth. Sdr. <b>".$dataK->nama."</b><br> Ditempat,<br><br><br>Kemi memberitahukan bahwa data kepegawaian anda akan segera habis masa berlaku. Dimohon untuk segera mengurus data tersebut.<br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih.");
-        $this->email->message("Surat anda akan segera berakhir dalam jangka waktu 6 bulan.");
-        $this->email->send();
+        $pesan = "Kepada<br>Yth. Sdr. <b>".$dataK->nama."</b><br> Ditempat,<br><br><br>Kemi memberitahukan bahwa data kepegawaian anda akan segera habis masa berlaku. Dimohon untuk segera mengurus data tersebut.<br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih.";
+        
+        send_email(array($dataK->email), 'Notifikasi', $pesan);
 
         redirect("AdminNotifikasi/editsurat/$id");
     }
@@ -73,7 +53,7 @@ class AdminNotifikasi extends CI_Controller {
                 $this->load->view('admin/karyawan/surat/addSurat2',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
-                $config['allowed_types']    = 'gif|jpg|png|pdf|docx';
+                $config['allowed_types']    = 'pdf';
                 $config['max_size']         = 2000;
                 $config['max_width']        = 10240;
                 $config['max_height']       = 7680;

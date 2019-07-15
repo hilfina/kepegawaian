@@ -11,7 +11,7 @@ class Mdl_admin extends CI_Model
 
     //SEMUA DATA PELAMAR DAN CALON KARYAWAN
     public function getPelamar($id){
-        $query = $this->db->query("SELECT k.id_karyawan, k.nama, k.jenkel, k.ttl, p.pendidikan, l.pend_akhir, p.jurusan, l.nilai_akhir, p.akhir from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where (k.id_status = 'Pelamar' or k.id_status = 'Calon Karyawan') && k.id_profesi = '$id' group by k.id_karyawan ");
+        $query = $this->db->query("SELECT k.id_karyawan, k.nama, k.jenkel, k.ttl, p.pendidikan, l.pend_akhir, p.jurusan, l.nilai_akhir, p.akhir from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where (k.id_status = 'Pelamar' or k.id_status = 'Calon Karyawan') && k.id_profesi = '$id' group by k.id_karyawan order by p.akhir desc");
         return $query->result();
     }
     //SEMUA DATA PELAMAR SAJA
@@ -384,8 +384,8 @@ class Mdl_admin extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function getreport(){ //cetak pelamar yang fix 
-        $query = $this->db->query("SELECT k.nama, j.nama_profesi, s.nilai_wawancara, s.nilai_kompetensi, s.tes_kesehatan, s.tes_psikologi, s.nilai_agama from seleksi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan inner join jenis_profesi as j on k.id_profesi=j.id_profesi where k.id_status = 'Calon Karyawan' ");
+    public function getreport($id){ //cetak pelamar yang fix 
+        $query = $this->db->query("SELECT k.nama, s.nilai_wawancara, s.nilai_kompetensi, s.tes_kesehatan, s.tes_psikologi, s.nilai_agama from seleksi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan inner join jenis_profesi as j on k.id_profesi=j.id_profesi where k.id_status = 'Calon Karyawan' AND k.id_profesi = '$id' ");
         return $query->result();
     }
 
@@ -400,6 +400,14 @@ class Mdl_admin extends CI_Model
         $query = $this->db->update('login',$array);
 
     }
+    public function getSelek($id){
+        $query = $this->db->query("SELECT * from seleksi as s inner join karyawan as k on s.id_karyawan = k.id_karyawan where k.id_profesi = '$id' and id_status = 'Calon Karyawan'");
+        return $query->result();
+    }
 
+    public function getKosong($id){
+        $query = $this->db->query("SELECT count(id_seleksi) as x FROM seleksi as s inner join karyawan as k on k.id_karyawan=s.id_karyawan where k.id_status = 'Calon Karyawan' AND s.nilai_kompetensi='-' OR s.nilai_wawancara='-' AND k.id_profesi = '$id' ");
+        return $query->row();
+    }
 }
  

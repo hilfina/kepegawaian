@@ -11,7 +11,7 @@ class Admin extends CI_Controller {
         $this->load->model('mdl_pelamar');
 		$this->load->model('mdl_karyawan');
 		$this->load->model('mdl_home');
-		$this->load->helper('url','form','file');
+		$this->load->helper('url','form','file', 'custom');
 		$this->load->library('form_validation','image_lib');
         if($this->mdl_admin->logged_id() == null) { redirect("login"); }
 	}
@@ -290,29 +290,9 @@ class Admin extends CI_Controller {
                 $this->mdl_pelamar->hapusdata('seleksi',$where);
 
                 $this->load->library('email');
-                $config = array();
-                $config['charset'] = 'utf-8';
-                $config['useragent'] = 'CodeIgniter';
-                $config['protocol']= "smtp";
-                $config['mailtype']= "html";
-                $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
-                $config['smtp_port']= "465";
-                $config['smtp_timeout']= "400";
-                $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com"; // isi dengan email kamu
-                $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
-                $config['crlf']="\r\n"; 
-                $config['newline']="\r\n"; 
-                $config['wordwrap'] = TRUE;
-                //memanggil library email dan set konfigurasi untuk pengiriman email
-                    
-                $this->email->initialize($config);
-                //konfigurasi pengiriman
-                $this->email->from($config['smtp_user']);
-                $this->email->to($semua->email);
-                $this->email->subject("Notifikasi");
-                $this->email->message(
-                    "Kepada<br>Yth. Sdr. <b>".$semua->nama."</b><br> Ditempat,<br><br><br>Berdasarkan hasil Seleksi ".$jenisTes.", anda dinyatakan TIDAK LULUS pada tahap seleksi ".$jenisTes." Rumah Sakit Islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih."
-                );
+                $pesan =  "Kepada<br>Yth. Sdr. <b>".$semua->nama."</b><br> Ditempat,<br><br><br>Berdasarkan hasil Seleksi ".$jenisTes.", anda dinyatakan TIDAK LULUS pada tahap seleksi ".$jenisTes." Rumah Sakit Islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih.";
+
+                send_email(array($email), 'Pemberitahuan', $pesan);
                 $this->email->send();
                 redirect("adminPelamar/pelamarDetail/$semua->id_karyawan");
             }
