@@ -107,9 +107,7 @@ class AdminKaryawan extends CI_Controller {
 
                 );
                 
-                if($this->email->send())
-                {
-                    
+                if($this->email->send()){
                     echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
                 }else{
                     echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
