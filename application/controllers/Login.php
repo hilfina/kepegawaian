@@ -42,7 +42,7 @@ class Login extends CI_Controller {
 		            $caridata1 = $this->db->query("SELECT * from login where username = '$username'");
 		            $data1 = $caridata1->row();
 		          	$caridata2 = $this->db->query("SELECT * from lowongan where id_karyawan = '$data1->id_karyawan'");
-		        	$data2 = $caridata2->row();
+		        	$data2 = $caridata2->result();
 		        	$caridata3 = $this->db->query("SELECT * from karyawan where id_karyawan = '$data1->id_karyawan'");
 		        	$data3 = $caridata3->row();
 		        	//set session
@@ -57,7 +57,7 @@ class Login extends CI_Controller {
 	                        'myAktif' => $apps->aktif,
 	                        'myStatus' => $data3->id_status,
 	                        'myProfesi' => $data3->id_profesi,
-	                        'myFinalisasi' => $data2->finalisasi,
+	                        'myFinalisasi' => (count($data2) > 0 ? $data2[0]->finalisasi : '')
 	                    );
 	                    $this->session->set_userdata($session_data);
 
@@ -67,7 +67,7 @@ class Login extends CI_Controller {
 		                   	//jika admin
 		                   	elseif ($key->level == "admin" || $key->level == "Super Admin"){redirect("home");}
 		                   	//jika pelamar yang/akan seleksi
-		                    else{redirect("home/bukanAdmin");}
+		                    else{redirect("Home/bukanAdmin");}
 	                   }
 	                }
 	            }else{

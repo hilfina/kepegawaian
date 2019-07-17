@@ -20,7 +20,7 @@ class AdminBerkala extends CI_Controller {
 		if($this->mdl_admin->logged_id())
 		{
 			$paket['array']=$this->mdl_admin->getKaryawan();
-            $this->load->view('admin/Karyawan/riwayat/berkala/allBerkala',$paket);
+            $this->load->view('admin/Karyawan/Riwayat/Berkala/allBerkala',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -31,7 +31,7 @@ class AdminBerkala extends CI_Controller {
     {
         $paket['array']=$this->mdl_admin->getBerkala($id);
         $paket['id']=$id;
-        $this->load->view('admin/Karyawan/riwayat/berkala/detailBerkala',$paket);
+        $this->load->view('admin/Karyawan/Riwayat/Berkala/detailBerkala',$paket);
 
     }
 
@@ -41,7 +41,7 @@ class AdminBerkala extends CI_Controller {
             $this->form_validation->set_rules('nomor_sk','Nomor Surat Keputusan','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/riwayat/berkala/addBerkala');
+                $this->load->view('admin/Karyawan/Riwayat/Berkala/addBerkala');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx}png';
@@ -100,7 +100,7 @@ class AdminBerkala extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['id']=$id;
-                $this->load->view('admin/Karyawan/riwayat/berkala/addBerkala2', $data);
+                $this->load->view('admin/Karyawan/Riwayat/Berkala/addBerkala2', $data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx}png';
@@ -154,7 +154,7 @@ class AdminBerkala extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getBerkalaedit($id);
-                $this->load->view('admin/Karyawan/riwayat/berkala/editBerkala',$data);
+                $this->load->view('admin/Karyawan/Riwayat/Berkala/editBerkala',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -216,7 +216,7 @@ class AdminBerkala extends CI_Controller {
     }
     public function loadimpor(){
         if($this->mdl_admin->logged_id()){
-        $this->load->view('admin/Karyawan/Riwayat/berkala/impor');
+        $this->load->view('admin/Karyawan/Riwayat/Berkala/impor');
         }else{ redirect("login"); }
     }
     public function impor()

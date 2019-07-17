@@ -19,13 +19,13 @@ class AdminPelamar extends CI_Controller {
     //menampilkan semua pelamar yg sudah memili lowongan pekerjaan dari home
     public function datapelamar(){
         $paket['array']=$this->mdl_pelamar->getPelamar();
-        $this->load->view('admin/pelamar/allPelamar2',$paket);
+        $this->load->view('admin/Pelamar/allPelamar2',$paket);
     }
     //MENAMPILKAN DATA TABEL BERISI DATA PELAMAR
     public function index(){
         if($this->mdl_admin->logged_id()){            
             $paket['array']=$this->mdl_admin->getLamar();
-            $this->load->view('admin/pelamar/all',$paket);
+            $this->load->view('admin/Pelamar/all',$paket);
         }else{redirect("login");}
     }
     //menampilkan data pelamar pada satu profesi tertentu
@@ -55,7 +55,7 @@ class AdminPelamar extends CI_Controller {
             $paket['nol3']= null;
         }
         $paket['np']=$idp;
-        $this->load->view('admin/pelamar/allPelamar',$paket);
+        $this->load->view('admin/Pelamar/allPelamar',$paket);
 	}
     //acc semua pelamar telah diterima seleksi administrasi
     public function acc($idp){
@@ -108,7 +108,7 @@ class AdminPelamar extends CI_Controller {
     }
     public function dataCakar(){
         $paket['array']=$this->mdl_admin->getCakar();
-        $this->load->view('admin/pelamar/allCakar',$paket);
+        $this->load->view('admin/Pelamar/allCakar',$paket);
     }
 
     //TAMBAH PELAMAR
@@ -117,7 +117,7 @@ class AdminPelamar extends CI_Controller {
             $this->form_validation->set_rules('no_ktp','Nomor Kartu Penduduk','trim|required');
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getProfesi();
-                $this->load->view('admin/pelamar/addPelamar',$data);
+                $this->load->view('admin/Pelamar/addPelamar',$data);
             }else{
                 $no_ktp=$this->input->post('no_ktp');
                 $nama=$this->input->post('nama');
@@ -400,7 +400,7 @@ class AdminPelamar extends CI_Controller {
 
         if ($this->form_validation->run()==FALSE) {
             $idl['id']=$id;
-            $this->load->view('admin/pelamar/pendidikan/addpendidikan',$idl);
+            $this->load->view('admin/Pelamar/pendidikan/addpendidikan',$idl);
         }
         else{
             $config['upload_path']      = './Assets/dokumen/';
@@ -519,7 +519,7 @@ class AdminPelamar extends CI_Controller {
             if($this->form_validation->run()==FALSE){
                 $data['id']=$id;
                 $data['surat']=$this->mdl_admin->getJenSur();
-                $this->load->view('admin/pelamar/addSurat',$data);
+                $this->load->view('admin/Pelamar/addSurat',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf';

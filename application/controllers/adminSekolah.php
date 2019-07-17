@@ -20,7 +20,7 @@ class AdminSekolah extends CI_Controller {
 		if($this->mdl_admin->logged_id())
 		{
 			$paket['array']=$this->mdl_admin->getSekolah();
-            $this->load->view('admin/Karyawan/mou/Sekolah/allSekolah',$paket);
+            $this->load->view('admin/Karyawan/Mou/Sekolah/allSekolah',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -33,7 +33,7 @@ class AdminSekolah extends CI_Controller {
             $this->form_validation->set_rules('no_mou','Nomor Surat MOU','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/mou/Sekolah/addSekolah');
+                $this->load->view('admin/Karyawan/Mou/Sekolah/addSekolah');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx}png';
@@ -90,7 +90,7 @@ class AdminSekolah extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getSekolahedit($id);
-                $this->load->view('admin/Karyawan/mou/Sekolah/editSekolah',$data);
+                $this->load->view('admin/Karyawan/Mou/Sekolah/editSekolah',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -148,7 +148,7 @@ class AdminSekolah extends CI_Controller {
 
     public function loadimpor(){
         if($this->mdl_admin->logged_id()){
-        $this->load->view('admin/Karyawan/MOU/Sekolah/impor');
+        $this->load->view('admin/Karyawan/Mou/Sekolah/impor');
         }else{ redirect("login"); }
     }
     public function impor()
