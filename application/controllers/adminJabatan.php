@@ -18,7 +18,7 @@ class AdminJabatan extends CI_Controller {
 		if($this->mdl_admin->logged_id())
 		{
             $paket['array']=$this->mdl_home->dataJab();
-            $this->load->view('admin/jabatan/all',$paket);
+            $this->load->view('admin/Jabatan/all',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -32,7 +32,7 @@ class AdminJabatan extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['max'] = $this->mdl_home->maxStatus();
-                $this->load->view('admin/jabatan/add', $data);
+                $this->load->view('admin/Jabatan/add', $data);
             }else{
                 $jabatan=$this->input->post('jabatan');
              
@@ -57,7 +57,7 @@ class AdminJabatan extends CI_Controller {
             if($this->form_validation->run()==FALSE){
                 $where = array( 'id' => $id ); 
                 $data['array']=$this->mdl_admin->getdata('jabatan',$where);
-                $this->load->view('admin/jabatan/edit',$data);
+                $this->load->view('admin/Jabatan/edit',$data);
             }else{
                 $jabatan=$this->input->post('jabatan');
              

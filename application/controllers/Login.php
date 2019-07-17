@@ -8,6 +8,7 @@ class Login extends CI_Controller {
         parent::__construct();
         //load library form validasi
         $this->load->library('form_validation','image_lib');
+        $this->load->helper('url','form','file', 'custom');
         //load model mdl_login
         $this->load->model('mdl_login');
         $this->load->model('mdl_pelamar');
@@ -41,7 +42,7 @@ class Login extends CI_Controller {
 		            $caridata1 = $this->db->query("SELECT * from login where username = '$username'");
 		            $data1 = $caridata1->row();
 		          	$caridata2 = $this->db->query("SELECT * from lowongan where id_karyawan = '$data1->id_karyawan'");
-		        	$data2 = $caridata2->row();
+		        	$data2 = $caridata2->result();
 		        	$caridata3 = $this->db->query("SELECT * from karyawan where id_karyawan = '$data1->id_karyawan'");
 		        	$data3 = $caridata3->row();
 		        	//set session
@@ -56,7 +57,7 @@ class Login extends CI_Controller {
 	                        'myAktif' => $apps->aktif,
 	                        'myStatus' => $data3->id_status,
 	                        'myProfesi' => $data3->id_profesi,
-	                        'myFinalisasi' => $data2->finalisasi,
+	                        'myFinalisasi' => (count($data2) > 0 ? $data2[0]->finalisasi : '')
 	                    );
 	                    $this->session->set_userdata($session_data);
 
@@ -66,7 +67,7 @@ class Login extends CI_Controller {
 		                   	//jika admin
 		                   	elseif ($key->level == "admin" || $key->level == "Super Admin"){redirect("home");}
 		                   	//jika pelamar yang/akan seleksi
-		                    else{redirect("home/bukanAdmin");}
+		                    else{redirect("Home/bukanAdmin");}
 	                   }
 	                }
 	            }else{
@@ -145,39 +146,36 @@ class Login extends CI_Controller {
 		        );
 			}
 			//configurasi untuk kirim email
-			$encrypted_id = $id_karyawan;	
-			$config = array();
-			$config['charset'] = 'utf-8';
-			$config['useragent'] = 'CodeIgniter';
-			$config['protocol']= "smtp";
-			$config['mailtype']= "html";
-			$config['smtp_host']= "ssl://smtp.gmail.com";
-			$config['smtp_port']= "465";
-			$config['smtp_timeout']= "400";
-			$config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
-			$config['smtp_pass']= "SUBHANALLAH";
-			$config['crlf']="\r\n"; 
-			$config['newline']="\r\n"; 
-			$config['wordwrap'] = TRUE;
+			// $encrypted_id = $id_karyawan;	
+			// $config = array();
+			// $config['charset'] = 'utf-8';
+			// $config['useragent'] = 'CodeIgniter';
+			// $config['protocol']= "smtp";
+			// $config['mailtype']= "html";
+			// $config['smtp_host']= "ssl://smtp.gmail.com";
+			// $config['smtp_port']= "465";
+			// $config['smtp_timeout']= "400";
+			// $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
+			// $config['smtp_pass']= "SUBHANALLAH";
+			// $config['crlf']="\r\n"; 
+			// $config['newline']="\r\n"; 
+			// $config['wordwrap'] = TRUE;
 			
-			$this->email->initialize($config);
-			//konfigurasi pengiriman
-			$this->email->from($config['smtp_user']);
-			$this->email->to($email);
-			$this->email->subject("Verifikasi Akun");
-			$this->email->message(
+			// $this->email->initialize($config);
+			// //konfigurasi pengiriman
+			// $this->email->from($config['smtp_user']);
+			// $this->email->to($email);
+			// $this->email->subject("Verifikasi Akun");
+			$pesan =
 				"Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Terima kasih sudah mendaftar pada Sistem Kepegawaian Rumah Sakit Islam Aisyiyah Malang. Untuk proses berikutnya, silahkan masukkan data-data lamaran anda. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini <br><br>".
 				"<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>"
-			);
+			;
 			
-			if($this->email->send()){
+			send_email(array($email), 'Verifikasi Akun', $pesan);
 				$insert1 = $this->mdl_login->daftar('karyawan',$data1);
 			    $insert2 = $this->mdl_login->daftar('lowongan',$data2);
 		   		$insert5 = $this->mdl_login->daftar('login',$data5);
-				echo "<script>alert('Verifikasi Email berhasil terkirim. Cek email anda untuk verifikasi akun!'); document.location.href = '" . site_url('login') . "';</script>";
-			}else{
-				echo "<script>alert('Verifikasi Email gagal terkirim'); document.location.href ='".site_url('login')."';</script>";
-			}
+				
 		}
 	}
 

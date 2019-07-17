@@ -19,7 +19,7 @@
   <br><br><br>
   <br><br><br>
   <H4 align="center" style="size: 13px">
-    LAPORAN DATA SELEKSI PELAMAR <br>
+    <b>LAPORAN DATA SELEKSI  <?php echo strtoupper($judul->nama_profesi); ?></b><br>
     <b>TAHUN <?php echo date('Y');?></b>
   </H4>
 
@@ -29,9 +29,8 @@
     <tr>
       <th>No</th>
       <th>Nama Lengkap</th>
-      <th>Profesi yang dilamar</th>
       <th>Nilai Wawancara</th>
-      <th>Nilai Kompetensi</th>
+      <th>Nilai Tulis</th>
       <th>Hasil Kesehatan</th>
       <th>Hasil Psikologi</th>
       <th>Nilai Agama</th>
@@ -40,12 +39,11 @@
       <tr>
         <td><?php echo $no++ ; ?></td>
         <td><?php echo $key->nama;?></td>
-        <td><?php echo $key->nama_profesi;?></td>
         <td><?php echo $key->nilai_wawancara;?></td>
         <td><?php echo $key->nilai_kompetensi;?></td>
+        <td><?php echo $key->nilai_agama;?></td>
         <td><?php echo $key->tes_kesehatan;?></td>
         <td><?php echo $key->tes_psikologi;?></td>
-        <td><?php echo $key->nilai_agama;?></td>
       </tr>
     <?php endforeach ?>
   </table>

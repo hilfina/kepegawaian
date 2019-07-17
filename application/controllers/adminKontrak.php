@@ -20,7 +20,7 @@ class AdminKontrak extends CI_Controller {
 		if($this->mdl_admin->logged_id())
 		{
 			$paket['array']=$this->mdl_admin->getKontrak();
-            $this->load->view('admin/Karyawan/mou/Kontrak/allKontrak',$paket);
+            $this->load->view('admin/Karyawan/Mou/Kontrak/allKontrak',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -33,7 +33,7 @@ class AdminKontrak extends CI_Controller {
             $this->form_validation->set_rules('no_mou','Nomor Surat MOU','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/mou/Kontrak/addKontrak');
+                $this->load->view('admin/Karyawan/Mou/Kontrak/addKontrak');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -90,7 +90,7 @@ class AdminKontrak extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getKontrakedit($id);
-                $this->load->view('admin/Karyawan/mou/Kontrak/editKontrak',$data);
+                $this->load->view('admin/Karyawan/Mou/Kontrak/editKontrak',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -148,7 +148,7 @@ class AdminKontrak extends CI_Controller {
 
     public function loadimpor(){
         if($this->mdl_admin->logged_id()){
-        $this->load->view('admin/Karyawan/mou/Kontrak/impor');
+        $this->load->view('admin/Karyawan/Mou/Kontrak/impor');
         }else{ redirect("login"); }
     }
     public function impor()

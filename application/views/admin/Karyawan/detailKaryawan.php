@@ -374,12 +374,13 @@
                       <div class="col-lg-12">
                         <div class="skill-title"> <br>
                           <h2>Penilaian Agama</h2> 
+                          <?php if ($agama != null) {?>
                           <right> <?php foreach ($agama as $key){ ?>
                         <a href="<?php echo site_url('adminKaryawan/tambahAgama/').$key->id; echo "/";echo $key->id_karyawan; ?>">
                       <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data Penilaian</button>
                     </a>
                     <?php break; } ?></right>
-
+                    <?php } ?>
                           <hr />
                         </div>
                       </div>

@@ -171,17 +171,13 @@ class AdminRiwayat extends CI_Controller {
                     $ruangan= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                     $mulai = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                     $akhir = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-                    $idp= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-                    $data3=mysqli_fetch_array(mysqli_query($konek,"select id_profesi from jenis_profesi where nama_profesi = '$idp' "));
-                    $id_profesi=$data3['id_profesi'];
                     $tgl_mulai = substr($mulai, 0,4)."-".substr($mulai, 5,2)."-".substr($mulai, 8,4);
                     $tgl_akhir = substr($akhir, 0,4)."-".substr($akhir, 5,2)."-".substr($akhir, 8,4);
                     $data[] = array(
                         'id_karyawan'       =>    $id,
                         'ruangan'        =>    $ruangan,
                         'mulai'             =>    $tgl_mulai,
-                        'akhir'             =>    $tgl_akhir,
-                        'id_profesi'      =>    $id_profesi,
+                        'akhir'             =>    $tgl_akhir
                     );
                 }
             }

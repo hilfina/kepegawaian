@@ -20,7 +20,7 @@ class adminInstansi extends CI_Controller {
         if($this->mdl_admin->logged_id())
         {
             $paket['array']=$this->mdl_admin->getAlldata("mou_instansi");
-            $this->load->view('admin/Karyawan/mou/instansi/allinstansi',$paket);
+            $this->load->view('admin/Karyawan/Mou/Instansi/allinstansi',$paket);
         }else{
             //jika session belum terdaftar, maka redirect ke halaman login
             redirect("login");
@@ -33,7 +33,7 @@ class adminInstansi extends CI_Controller {
             $this->form_validation->set_rules('no_mou','Nomor Surat MOU','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/mou/instansi/addinstansi');
+                $this->load->view('admin/Karyawan/Mou/Instansi/addinstansi');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf';
@@ -82,7 +82,7 @@ class adminInstansi extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getData("mou_instansi",$where);
-                $this->load->view('admin/Karyawan/mou/instansi/editinstansi',$data);
+                $this->load->view('admin/Karyawan/Mou/Instansi/editinstansi',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -131,7 +131,7 @@ class adminInstansi extends CI_Controller {
 
     public function loadimpor(){
         if($this->mdl_admin->logged_id()){
-        $this->load->view('admin/Karyawan/mou/instansi/impor');
+        $this->load->view('admin/Karyawan/Mou/Instansi/impor');
         }else{ redirect("login"); }
     }
     public function impor()

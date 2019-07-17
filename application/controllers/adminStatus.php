@@ -22,7 +22,7 @@ class AdminStatus extends CI_Controller {
 		{
             
 			$paket['array']=$this->mdl_admin->getKaryawan();
-            $this->load->view('admin/Karyawan/riwayat/status/allStatus',$paket);
+            $this->load->view('admin/Karyawan/Riwayat/status/allStatus',$paket);
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
 			redirect("login");
@@ -33,7 +33,7 @@ class AdminStatus extends CI_Controller {
     {
         $paket['idkk']=$id;
         $paket['array']=$this->mdl_admin->getAllStatus($id);
-        $this->load->view('admin/Karyawan/riwayat/status/detailStatus',$paket);
+        $this->load->view('admin/Karyawan/Riwayat/status/detailStatus',$paket);
 
     }
 
@@ -45,7 +45,7 @@ class AdminStatus extends CI_Controller {
             if($this->form_validation->run()==FALSE){
 
                 $data['array']=$this->mdl_admin->getJenStatus();
-                $this->load->view('admin/Karyawan/riwayat/status/addStatus',$data);
+                $this->load->view('admin/Karyawan/Riwayat/status/addStatus',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf';
@@ -112,7 +112,7 @@ class AdminStatus extends CI_Controller {
                 $where=array('id_karyawan' => $id);
                 $data['array']=$this->mdl_admin->getJenStatus();
                 $data['array2']=$this->mdl_admin->getData('status', $where);
-                $this->load->view('admin/Karyawan/riwayat/status/addStatus2',$data);
+                $this->load->view('admin/Karyawan/Riwayat/status/addStatus2',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf';
@@ -174,7 +174,7 @@ class AdminStatus extends CI_Controller {
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getStatus($id);
                 $data['array2']=$this->mdl_admin->getJenStatus();
-                $this->load->view('admin/Karyawan/riwayat/status/editStatus',$data);
+                $this->load->view('admin/Karyawan/Riwayat/status/editStatus',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf';

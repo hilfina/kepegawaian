@@ -20,7 +20,7 @@ class AdminKlinis extends CI_Controller {
         if($this->mdl_admin->logged_id())
         {
             $paket['array']=$this->mdl_admin->getKlinis();
-            $this->load->view('admin/Karyawan/mou/Klinis/allKlinis',$paket);
+            $this->load->view('admin/Karyawan/Mou/Klinis/allKlinis',$paket);
         }else{
             //jika session belum terdaftar, maka redirect ke halaman login
             redirect("login");
@@ -33,7 +33,7 @@ class AdminKlinis extends CI_Controller {
             $this->form_validation->set_rules('no_mou','Nomor Surat MOU','trim|required');
 
             if($this->form_validation->run()==FALSE){
-                $this->load->view('admin/Karyawan/mou/Klinis/addKlinis');
+                $this->load->view('admin/Karyawan/Mou/Klinis/addKlinis');
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx}png';
@@ -88,7 +88,7 @@ class AdminKlinis extends CI_Controller {
 
             if($this->form_validation->run()==FALSE){
                 $data['array']=$this->mdl_admin->getklinisedit($id);
-                $this->load->view('admin/Karyawan/mou/Klinis/editKlinis',$data);
+                $this->load->view('admin/Karyawan/Mou/Klinis/editKlinis',$data);
             }else{
                 $config['upload_path']      = './Assets/dokumen/';
                 $config['allowed_types']    = 'pdf|jpg|docx|png';
@@ -139,7 +139,7 @@ class AdminKlinis extends CI_Controller {
 
     public function loadimpor(){
         if($this->mdl_admin->logged_id()){
-        $this->load->view('admin/Karyawan/MOU/Klinis/impor');
+        $this->load->view('admin/Karyawan/Mou/Klinis/impor');
         }else{ redirect("login"); }
     }
     public function impor()
