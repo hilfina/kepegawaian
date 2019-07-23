@@ -190,7 +190,7 @@
               <li>
                 <a class="has-arrow" href="#" aria-expanded="false">
                   <span class="educate-icon educate-library icon-wrap"></span>
-                  <span class="mini-click-non">File Kepegawaian</span>
+                  <span class="mini-click-non">Data Kepegawaian</span>
                 </a>
                 <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
                   <li><a title="Data Jenis Surat" href="<?php echo site_url('adminJenSurat/') ?>">Data Jenis Surat</a></li>
@@ -223,6 +223,12 @@
                   <li><a title="Semua Pelamar" href="<?php echo site_url('adminPelamar') ?>">Jadwal Seleksi</a></li>                  
                   <li><a title="Loker" href="<?php echo site_url('adminLoker') ?>">Lowongan Pekerjaan</a></li>
                 </ul>
+              </li>
+              <li>
+                <a href="<?php echo site_url('adminPengguna') ?>" aria-expanded="false">
+                  <span class="educate-icon educate-student icon-wrap"></span> 
+                  <span class="mini-click-non">Data Pengguna</span>
+                </a>
               </li>
             <?php }elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '0') { ?>
               <li>

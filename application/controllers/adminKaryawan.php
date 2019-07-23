@@ -104,35 +104,8 @@ class AdminKaryawan extends CI_Controller {
                 $pesan = "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Anda telah didaftarkan di Rumah Sakit islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini menggunakan <br><br>
                         username dan password menggunakan nomor ktp anda.<br>".
                     "<a href='".site_url("login/verification/$encrypted_id")."'>klik disini</a>";
-
                 send_email(array($email), 'Verifikasi', $pesan);
-                
-<<<<<<< HEAD
-                if($this->email->send()){
-                    echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
-                }else{
-                    echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
-                }
-                    $this->mdl_admin->addData('login',$dataLogin);
-                    $this->mdl_admin->addData('riwayat',$dataPenempatan);
-                    $this->mdl_admin->addData('status',$dataStatus);
-                    $this->mdl_admin->addData('golongan',$dataGolongan);
-=======
-                // if($this->email->send())
-                // {
-                    
-                //     echo "<script>alert('Email berhasil terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
-                // }else{
-                //     echo "<script>alert('Email gagal terkirim'); document.location.href = '" . site_url('adminKaryawan') . "';</script>";
-                // }
-                $this->mdl_admin->addData('login',$dataLogin);
-                $this->mdl_admin->addData('riwayat',$dataPenempatan);
-                $this->mdl_admin->addData('status',$dataStatus);
-                $this->mdl_admin->addData('golongan',$dataGolongan);
->>>>>>> 2a6aa91dac4143f3750c792d69d292f2000af328
-            }else {
-                
-            }
+            }else { }
             redirect("adminKaryawan");
         }
     }

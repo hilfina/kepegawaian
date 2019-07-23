@@ -210,9 +210,15 @@
                     <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key2->id_karyawan ;?>">
                       <button class="btn btn-primary waves-effect waves-light">Detail</button>
                     </a>
+                    <a href="<?php echo site_url(); echo "/admin/detSeleksi/"; echo $key2->id_karyawan ;?>">
+                      <button class="btn btn-primary waves-effect waves-light">Detail Selekssi</button>
+                    </a>
                     <?php } else {?>
                     <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key2->id_karyawan ;?>">
                       <button class="btn btn-primary waves-effect waves-light">Detail</button>
+                    </a>
+                    <a href="<?php echo site_url(); echo "/admin/detSeleksi/"; echo $key2->id_karyawan ;?>">
+                      <button class="btn btn-primary waves-effect waves-light">Detail Selekssi</button>
                     </a>
                     <?php }?>
                     </td>
