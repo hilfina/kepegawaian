@@ -53,7 +53,7 @@
             <td><label form-control-label>Kuota</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="kuota" type="text" class="form-control" placeholder="Banyak Maksimal Pelamar">
+                <input name="kuota" type="number" class="form-control" placeholder="Banyak Maksimal Pelamar">
               </div>
             </td>
           </tr>
@@ -85,7 +85,7 @@
             <td><label form-control-label>Usia Maksimal</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="usia" type="text" class="form-control" placeholder="Ketentuan maksimal usia pelamar">
+                <input name="usia" type="number" class="form-control" placeholder="Ketentuan maksimal usia pelamar">
               </div>
             </td>
           </tr>
@@ -103,10 +103,10 @@
             </td>
           </tr>
           <tr>
-            <td><label form-control-label>jurusan</label></td>
+            <td><label form-control-label>Pendidikan</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="jurusan" type="text" class="form-control" placeholder="Jurusan yang ditentukan">
+                <input name="jurusan" type="text" class="form-control" placeholder="Jenjang Pendidikan beserta jurusan">
               </div>
             </td>
           </tr>

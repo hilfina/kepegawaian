@@ -289,6 +289,31 @@ class pelamar extends CI_Controller {
         $this->session->set_userdata($session_data);
         redirect("pelamar/home/$id");
 	}	
+	public function ubah($id){
+        $this->db->query("UPDATE lowongan SET finalisasi = 0 where id_karyawan = $id");
+        //cari semua data untuk session
+	 	$a = $this->db->query("SELECT * from login where id_karyawan = '$id'"); $dLogin=$a->row();
+	 	$b = $this->db->query("SELECT * from lowongan where id_karyawan = '$id'"); $dLowongan=$b->row();
+	 	$c = $this->db->query("SELECT * from karyawan where id_karyawan = '$id'"); $dKaryawan=$c->row();
+	 	//unset session sebelum final diupdate tadi
+	    unset($session_data);
+	    //seting session baru
+		$session_data = array(
+            'myId'   => $id,
+            'myName' => $dLogin->username,
+            'myLongName' => $dKaryawan->nama,
+            'myEmail' => $dKaryawan->email,
+            'myPass' => $dLogin->password,
+            'myLevel'=> $dLogin->level,
+            'myAktif' => $dLogin->aktif,
+            'myStatus' => $dKaryawan->id_status,
+            'myProfesi' => $dKaryawan->id_profesi,
+            'myFinalisasi' => $dLowongan->finalisasi,
+        );  
+
+        $this->session->set_userdata($session_data);
+    	redirect("pelamar/index");
+	}
 	//memilih loker yang sesuai dengan pelamar
 	public function home($id){
 		$data['loker']=$this->mdl_pelamar->getLoker($id);//cari loker yang sesuai
@@ -439,7 +464,9 @@ class pelamar extends CI_Controller {
 
 	public function cetak(){
 		$id=$this->session->userdata('myId');
-		$paket['datasaya']=$this->mdl_pelamar->getPelamar($id);
+		$a = $this->db->query("SELECT nama, foto from karyawan where id_karyawan='$id'");
+		$datasy = $a->result();
+		$paket['datasaya']=$datasy;
 		$paket['datsel']=$this->mdl_pelamar->getCetak($id);
 		$this->load->view('pelamar/cetak', $paket);
 	}

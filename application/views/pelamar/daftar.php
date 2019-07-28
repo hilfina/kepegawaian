@@ -38,9 +38,9 @@
                       </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                      <input name="no_ktp" type="text" class="form-control" required>
+                      <input name="no_ktp" type="number" class="form-control" required>
                       <?php echo form_error('no_ktp','<div style="color:red">', '</div>'); ?>
-                      
+                      <font size="2"> *Minimal 16 karakter </font>
                     </div>
                   </div>
                   <br>
@@ -63,7 +63,7 @@
                       </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                      <input name="no_telp" type="text" class="form-control" required>
+                      <input name="no_telp" type="number" class="form-control" required>
                       <?php echo form_error('no_telp','<div style="color:red">', '</div>'); ?>
                     </div>
                   </div>
@@ -75,7 +75,7 @@
                       </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                      <input name="email" type="text" class="form-control" required>
+                      <input name="email" type="email" class="form-control" required>
                       <?php if ($this->session->flashdata('msg_error')) :?>
                         <div style="color: red"> 
                         <?php echo $this->session->flashdata('msg_error')?>
@@ -94,7 +94,7 @@
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                       <input name="username" type="text" class="form-control" required>
                       <?php echo form_error('username','<div style="color:red">', '</div>'); ?>
-                      <font size="2"> *Minimal 6 karakter.Disarankan menggunakan nomor ktp. </font>
+                      <font size="2"> *Minimal 6 karakter. Disarankan menggunakan nomor ktp. </font>
                     </div>
                   </div>
                   <br>

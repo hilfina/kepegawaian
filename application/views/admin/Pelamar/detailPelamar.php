@@ -414,23 +414,23 @@
                           <td><label form-control-label>Tanggal</label></td>
                           <td style="height: 50px">
                             <div class="col-lg-12">
-                              <?php if ($key->tgl_seleksi == "0000-00-00"){ ?>
-                                <font color="red" size="2">*Masukkan tanggal untuk tes tulis dan wawancara</font>
-                              <?php } elseif (($key->nilai_wawancara >=10 && $key->nilai_kompetensi >=10) && $wawa->tanggal == $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
-                                <font color="red" size="2">*Masukkan tanggal untuk tes kesehatan</font>
+                              <?php if ($key->tes_kesehatan == "-"){ ?>
+                                <font color="red" size="2">*Tanggal untuk tes tulis dan wawancara</font>
+                              <?php } elseif ($key->nilai_wawancara >=10 && $key->tes_psikologi == "-" ) {?>
+                                <font color="red" size="2">*Tanggal untuk tes kesehatan</font>
                               <?php } elseif (($key->nilai_wawancara >=10 && $key->nilai_kompetensi >= 10) && $wawa->tanggal != $key->tgl_seleksi && $key->tes_psikologi == "-" ) {?>
                               <?php } elseif ($key->tes_psikologi == "Lulus" && $psiko->tanggal == $key->tgl_seleksi) {?>
-                                <font color="red" size="2">*Masukkan tanggal untuk tes agama</font>
-                              <?php } elseif ($key->nilai_agama >=10 && $baca->tanggal == $key->tgl_seleksi) {?>
-                                <font color="red" size="2">*Masukkan tanggal untuk tes psikologi</font>
-                              <?php } ?>
-                              <input name="tgl" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>">
+                                <font color="red" size="2">*Tanggal untuk tes psikologi</font>
+                              <?php }  ?>
+                              <input name="tgl" type="date" class="form-control" value="<?php echo $key->tgl_seleksi; ?>" readonly>
                             </div>
                           </td>
                         </tr>
 
                         <input name="idKSel" type="hidden" class="form-control" value="<?php echo $key->id_karyawan; ?>">
+                      <?php if ( $key->tgl_seleksi == "0000-00-00"){?>
 
+                      <?php }else {?>
                         <?php if (isset($tulis->hasil)){ ?>
                           <tr>
                             <td><label form-control-label>Tes Tulis</label></td>
@@ -527,7 +527,24 @@
                           <?php } else { ?>
                             <input name="bimbing" type="hidden" class="form-control" value="<?php echo $key->nilai_agama;?>" >
                           <?php } ?>
-
+                            
+                          <tr>
+                              <td><label form-control-label>Tes PPA</label></td>
+                              <td style="height: 50px">
+                                <div class="col-lg-12">
+                                  <?php if ($key->tes_ppa == "-") { ?>
+                                    <select name="tes_ppa" class="form-control">
+                                      <option>-- Pilihan --</option>
+                                      <option>Positif</option>
+                                      <option>Negatif</option>
+                                    </select>
+                                  <?php } else { ?>
+                                    <input name="tes_ppa" type="text" class="form-control" value="<?php echo $key->tes_ppa;?>" >
+                                  <?php } ?>
+                                </div>
+                              </td>
+                            </tr>                                                
+                           <?php } ?>  
                           <?php if (isset($sehat->hasil)) { ?>
                             <tr>
                               <td><label form-control-label>Tes Kesehatan</label></td>
@@ -568,55 +585,11 @@
                           <?php } else { ?>
                             <input name="psikologi" type="hidden" class="form-control" value="<?php echo $key->tes_psikologi;?>" >
                           <?php } ?>
-                          <?php if ($key->nilai_agama >= 10 || $key->tes_kesehatan >= 10) { ?>                                                  
-                            <tr>
-                              <td><label form-control-label>Dokumen ppa</label></td>
-                              <td style="height: 50px">
-                                <div class="col-lg-12">
-                                  <font color="red" size="2">*Format dokumen harus dalam bentuk jpg/png. Ukuran file maksimal adalah 2MB </font>
-                                  <div class="input-mark-inner">
-                                    <div class="file-upload-inner ts-forms">
-                                      <div class="input prepend-big-btn">
-                                        <label class="icon-right" for="prepend-big-btn"> <i class="fa fa-download"></i> </label>
-                                          <div class="file-button">  Browse
-                                            <input type="file" name="file" value="" onchange="document.getElementById('prepend-big-btn').value = this.value;">
-                                          </div>
-                                        <input type="text" id="prepend-big-btn" placeholder="no file selected">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2"><br>
-                                <?php if ($key->tes_ppa != "-") { ?>
-                              <div align="center">
-                                <div class="pdf-viewer-area mg-b-15">
-                                  <div class="container-fluid">
-                                    <div class="row">
-                                      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> </div>
-                                      <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                                        <div class="pdf-single-pro">
-                                          <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->tes_ppa; ?>"></a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            <?php }?>
-                              </td>
-                            </tr>
-                          <?php }?>                          
+                                               
                       </table>
                     <?php }?><br>
-                    <?php if ($semua->tgl_seleksi == "0000-00-00") { ?>
-                      <div align="center">
-                      <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Update">
-                    </div>
-                  </form>
-                  <?php }if (isset($tulis->hasil)) {
+                    
+                  <?php if (isset($tulis->hasil)) {
                     if ($tulis->hasil != "-" && $semua->nilai_kompetensi == "-"){
                       $hasilnya = $tulis->hasil; ?>
                   </form>
@@ -635,17 +608,6 @@
                     <a href="<?php echo site_url('adminPelamar/lanjutt/Wawancara/stop/').$hasilnya."/".$tulis->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
                   </div>
 
-
-                  <?php }elseif (isset($psiko->hasil)) {
-                    if ($psiko->hasil != "-" && $semua->tes_psikologi == "-"){
-                      $hasilnya = $psiko->hasil; ?>
-                  </form>
-                  <div align="center">
-                    <a href="<?php echo site_url('adminPelamar/lanjutt/Psikologi/lulus/').$hasilnya."/".$psiko->id_seleksi ?>"><input type="submit" class="btn btn-success" value="Lanjut"></a>
-                    <a href="<?php echo site_url('adminPelamar/lanjutt/Psikologi/stop/').$hasilnya."/".$psiko->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
-                  </div>
-
-
                   <?php }elseif (isset($baca->hasil)) {
                     if ($baca->hasil != "-" && $semua->nilai_agama == "-"){
                       $hasilnya = $baca->hasil; ?>
@@ -663,6 +625,15 @@
                   <div align="center">
                     <a href="<?php echo site_url('adminPelamar/lanjutt/Kesehatan/lulus/').$hasilnya."/".$sehat->id_seleksi ?>"><input type="submit" class="btn btn-success" value="Lanjut"></a>
                     <a href="<?php echo site_url('adminPelamar/lanjutt/Kesehatan/stop/').$hasilnya."/".$sehat->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
+                  </div>
+
+                  <?php }elseif (isset($psiko->hasil)) {
+                    if ($psiko->hasil != "-" && $semua->tes_psikologi == "-"){
+                      $hasilnya = $psiko->hasil; ?>
+                  </form>
+                  <div align="center">
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Psikologi/lulus/').$hasilnya."/".$psiko->id_seleksi ?>"><input type="submit" class="btn btn-success" value="Lanjut"></a>
+                    <a href="<?php echo site_url('adminPelamar/lanjutt/Psikologi/stop/').$hasilnya."/".$psiko->id_seleksi ?>"><input type="submit" class="btn btn-danger" value="Eliminasi"></a>
                   </div>
                   <?php }else{ ?>
                     <div align="center">

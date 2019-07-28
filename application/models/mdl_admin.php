@@ -14,7 +14,7 @@ class Mdl_admin extends CI_Model
     }
     //SEMUA DATA PELAMAR DAN CALON KARYAWAN
     public function getPelamar($id){
-        $query = $this->db->query("SELECT k.id_karyawan, k.nama, k.jenkel, k.ttl, p.pendidikan, l.pend_akhir, p.jurusan, l.nilai_akhir, p.akhir from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where (k.id_status = 'Pelamar' or k.id_status = 'Calon Karyawan') && k.id_profesi = '$id' group by k.id_karyawan order by p.akhir desc");
+        $query = $this->db->query("SELECT k.id_karyawan, k.foto, k.nama, k.jenkel, k.ttl, p.pendidikan, l.pend_akhir, p.jurusan, p.nilai, p.akhir from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where (k.id_status = 'Pelamar' or k.id_status = 'Calon Karyawan') && k.id_profesi = '$id' group by k.id_karyawan order by l.nilai_akhir desc");
         return $query->result();
     }
     //SEMUA DATA PELAMAR SAJA

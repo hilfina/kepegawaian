@@ -43,7 +43,7 @@
                 <div align="right">
                   
                 <?php  $tdy = date('Y-m-d');
-                if ($judul->akhir <= $tdy && $karyawan->id_status != 'Calon Karyawan') { ?>
+                if ($judul->akhir <= $tdy && $karyawan->id_status != 'Calon Karyawan' && $levelku == 'Super Admin') { ?>
                   <a href="<?php echo site_url(); echo"/adminPelamar/acc/"; echo $judul->id_profesi; ?>" >
                     <button class="btn btn-success waves-effect"><i class="fa fa-check"></i> Telah disetujui</button>
                   </a>
@@ -69,7 +69,7 @@
                     <a href="<?php echo site_url(); echo"/adminPelamar/report/"; echo $np; ?>" >
                     <button class="btn btn-primary waves-effect waves-light mg-b-15"><i class="fa fa-print" aria-hidden="true"></i> Cetak Daftar Pelamar</button>
                   </a>
-                  <?php } elseif($nol == null && $dataseleksi->tes_kesehatan == "-" && $dataseleksi->tgl_seleksi != "0000-00-00"){?>
+                  <?php } elseif($nol == null && $dataseleksi->tes_kesehatan == "-" && $dataseleksi->tgl_seleksi != "0000-00-00" && $levelku == 'Super Admin'){?>
                    <a href="<?php echo site_url(); echo"/adminPelamar/acc2/"; echo $judul->id_profesi."/Tulis"; ?>" >
                       <button class="btn btn-success waves-effect waves-light mg-b-15"><i class="fa fa-check"></i> Telah disetujui</button>
                     </a>
@@ -88,7 +88,7 @@
                         </tr>
                       </table>
                     </form>
-                    <?php } elseif($nol2 == null && $dataseleksi->tes_kesehatan != "-" && $dataseleksi->tgl_seleksi != "0000-00-00" && $dataseleksi->tes_psikologi == "-"){?>
+                    <?php } elseif($nol2 == null && $dataseleksi->tes_kesehatan != "-" && $dataseleksi->tgl_seleksi != "0000-00-00" && $dataseleksi->tes_psikologi == "-" && $levelku == 'Super Admin'){?>
                    <a href="<?php echo site_url(); echo"/adminPelamar/acc2/"; echo $judul->id_profesi."/Kesehatan"; ?>" >
                       <button class="btn btn-success waves-effect waves-light mg-b-15"><i class="fa fa-check"></i> Telah disetujui</button>
                     </a>
@@ -107,7 +107,7 @@
                         </tr>
                       </table>
                     </form>
-                    <?php } elseif($nol3 == null && $dataseleksi->tes_psikologi != "-" && $dataseleksi->tgl_seleksi != "0000-00-00"){?>
+                    <?php } elseif($nol3 == null && $dataseleksi->tes_psikologi != "-" && $dataseleksi->tgl_seleksi != "0000-00-00" && $levelku == 'Super Admin'){?>
                    <a href="<?php echo site_url(); echo"/adminPelamar/acc3/"; echo $judul->id_profesi; ?>" >
                       <button class="btn btn-success waves-effect waves-light mg-b-15"><i class="fa fa-check"></i> Jadi Karyawan</button>
                     </a>
@@ -122,18 +122,13 @@
           </div>
           <div class="sparkline13-graph">
             <div class="datatable-dashv1-list custom-datatable-overright">
-              <div id="toolbar">
-                <select class="form-control dt-tb">
-                  <option value="">Export Basic</option>
-                  <option value="all">Export All</option>
-                  <option value="selected">Export Selected</option>
-                </select>
-              </div>
+              
               <table id="kepegawaian" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
               <?php if ($karyawan->id_status != 'Calon Karyawan') {?>
               <thead>
                   <tr>
                     <th>No</th>
+                    <th>Foto</th>
                     <th>Nama Lengkap</th>
                     <th>Jenis Kelamin</th>
                     <th>Umur</th> 
@@ -144,15 +139,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                <?php $no = 1;?>
+                <?php $no = 1;
+                $tdy = date('Y-m-d');?>
                 <?php foreach ($array as $key) { ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
+                    <td><?php echo "<img src='".base_url("./assets/gambar/".$key->foto)."' width='60'>"; ?></td>
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->jenkel;?></td>
                     <td><?php $tdy = date('Y'); $lhr = substr($key->ttl, 0,4); echo $tdy-$lhr; ?></td>
                     <td><?php echo $key->pendidikan;   echo " - "; echo $key->pend_akhir; echo " "; echo $key->jurusan ?></td>
-                    <td><?php echo $key->nilai_akhir; ?></td>
+                    <td><?php echo $key->nilai; ?></td>
                     <td><?php echo $key->akhir; ?></td>
                     <td align="center">
                      <?php if($levelku == "Super Admin"){ ?>

@@ -60,7 +60,7 @@
                     <th>IPK min</th>
                     <th>Usia max</th>
                     <th>Jenis Kelamin</th>
-                    <th>Jurusan</th>
+                    <th>Pendidikan</th>
                     <th>Keterangan</th>
                     <th>Pilihan</th>
                   </tr>

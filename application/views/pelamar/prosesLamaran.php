@@ -32,19 +32,19 @@ $idku=$this->session->userdata("myId");
                 <br><b><font size="2">SELEKSI ADMINISTRASI</font></b><hr style="width: 90%">MASIH DIPROSES
               </div><br>
               <div class="belom container-fluid" align="center">
-                <br><b><font size="2">TES TULIS</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
+                <br><b><font size="2">TES TULIS DAN WAWANCARA</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
               </div> 
               <br>
               <div class="belom container-fluid" align="center">
-                <br><b><font size="2">TES WAWANCARA</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
+                <br><b><font size="2">TES AGAMA</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
+              </div> 
+              <br>
+              <div class="belom container-fluid" align="center">
+                <br><b><font size="2">TES KESEHATAN</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
               </div> 
               <br>
               <div class="belom container-fluid" align="center">
                 <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
-              </div> 
-              <br>
-              <div class="belom container-fluid" align="center">
-                <br><b><font size="2">TES AGAMA DAN KESEHATAN</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
               </div> 
               <br>
               <div class="belom container-fluid" align="center">
@@ -92,26 +92,7 @@ $idku=$this->session->userdata("myId");
               </div> 
             <?php }
           } ?>          
-          <br>
-          <?php foreach ($lengkap as $a) { 
-            if ($a->tes_psikologi == "-" && $a->nilai_wawancara >= 30) { ?>
-              <div class="masih container-fluid" align="center">
-                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { echo date('d M Y', strtotime($key->tgl_seleksi));  } ?>
-              </div>
-            <?php }elseif ($a->tes_psikologi == "Lulus") { ?>
-              <div class="lulus container-fluid" align="center">
-                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">LULUS
-              </div>
-            <?php }elseif ($a->tes_psikologi == "Tidak Lulus") { ?>
-              <div class="gagal container-fluid" align="center">
-                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">TIDAK LULUS
-              </div>
-            <?php }else { ?>
-              <div class="belom container-fluid" align="center">
-                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
-              </div> 
-            <?php }
-          } ?>          
+                   
           <br>
           <?php foreach ($lengkap as $a) { 
             if ($a->nilai_agama == "-" && $a->tes_kesehatan == "-" && $a->tes_psikologi == "Lulus") { ?>
@@ -131,7 +112,27 @@ $idku=$this->session->userdata("myId");
                 <br><b><font size="2">TES AGAMA DAN KESEHATAN</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
               </div> 
             <?php }
-          } ?>          
+          } ?>  
+          <br>
+          <?php foreach ($lengkap as $a) { 
+            if ($a->tes_psikologi == "-" && $a->nilai_wawancara >= 30) { ?>
+              <div class="masih container-fluid" align="center">
+                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">Tanggal Seleksi : <?php foreach ($lengkap as $key) { echo date('d M Y', strtotime($key->tgl_seleksi));  } ?>
+              </div>
+            <?php }elseif ($a->tes_psikologi == "Lulus") { ?>
+              <div class="lulus container-fluid" align="center">
+                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">LULUS
+              </div>
+            <?php }elseif ($a->tes_psikologi == "Tidak Lulus") { ?>
+              <div class="gagal container-fluid" align="center">
+                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">TIDAK LULUS
+              </div>
+            <?php }else { ?>
+              <div class="belom container-fluid" align="center">
+                <br><b><font size="2">TES PSIKOLOGI</font></b><hr style="width: 90%">BELUM SAMPAI TAHAP INI
+              </div> 
+            <?php }
+          } ?>         
           <br> 
           <?php foreach ($lengkap as $a) { 
             if ($a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->nilai_agama != "-" && $a->id_status == "Calon Karyawan") { ?>

@@ -21,8 +21,8 @@ $idku=$this->session->userdata("myId");
                   <div class="row">
                     <?php foreach ($loker as $key) {
                       $maque = $this->db->query("SELECT count(id_karyawan) as slsh from karyawan where id_profesi = '$key->id_profesi' AND id_status = 'Pelamar'");//cari banyak orang yang milih
-                      $selisih = $maque->row(); 
-                      if ($key->kuota-$selisih->slsh != 0) {//jika kuota masih ada ?>
+                      $selisih = $maque->row(); ?>
+                      
                       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="student-inner-std res-mg-b-30"  style="background-color: #cce5ff; border-top-left-radius:10px; border-top-right-radius: 10px;">                        
                           <div class="student-dtl">                          
@@ -39,9 +39,13 @@ $idku=$this->session->userdata("myId");
                               <?php echo $key->jenkel;?> <br><strong> dengan usia maks </strong> <?php echo $key->usia;?> tahun<br><br><br>
                             </font>
                             <font color="red" size="2">
-                              <?php if ( date('y-m-d') <= date('y-m-d', strtotime($key->akhir))) { ?>
+                            <?php if ($key->kuota-$selisih->slsh != 0) { //jika kuota masih ada
+                              if ( date('y-m-d') <= date('y-m-d', strtotime($key->akhir))) { ?>
                                 <a href="<?php echo site_url(); echo "/pelamar/lamar/"; echo $idku ; echo "/"; echo $key->id_profesi; ?>"> <button class='btn-link'>Lamar Sekarang</button></a>
-                              <?php }else{ echo "<br> Sudah Ditutup"; } ?>
+                              <?php }else{ echo "<br> Sudah Ditutup"; } 
+                            } else {  echo "<br> Kuota Penuh"; ?> 
+                            <br><a href="<?php echo site_url(); echo "/pelamar/ubah/"; echo $idku ;  ?>"> <button class='btn-link'>Kembali</button></a>
+                            <?php }?>
                             </font>
                           </div>
                         </div>
@@ -50,7 +54,8 @@ $idku=$this->session->userdata("myId");
                           </div>
                         </div>
                       </div>     
-                    <?php }else{}} ?>
+                    <?php 
+                    } ?>
                   </div>
                 </div>
               </div>

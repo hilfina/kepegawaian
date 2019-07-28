@@ -152,7 +152,7 @@ class AdminPelamar extends CI_Controller {
 
                 $dataLowongan = array(
                 'id_karyawan' => $data['id_karyawan'],
-                'pend_akhir' => '-',
+                'pend_akhir' => $pendidikan,
                 'nilai_akhir' => '-'
                 );
 
@@ -166,7 +166,7 @@ class AdminPelamar extends CI_Controller {
 
                 $dataPend = array(
                 'id_karyawan' => $data['id_karyawan'],
-                'pendidikan' => $pendidikan,
+                'pendidikan' => '-',
                 'mulai' => 0,
                 'akhir' => 0,
                 'nomor_ijazah' => '-',
@@ -561,23 +561,13 @@ class AdminPelamar extends CI_Controller {
     public function editDataSel(){
         if($this->mdl_admin->logged_id()) { 
             $idk=$this->input->post('idKSel');
-            $config['upload_path']      = './Assets/dokumen/';
-            $config['allowed_types']    = 'pdf';
-            $config['max_size']         = 2000;
-
             
-            $this->load->library('upload', $config);
             $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select * from seleksi where id_karyawan = $idk"));
 
-            if ($this->upload->do_upload('file')) {
-                $a = $this->upload->data('file_name');
-            }else {
-                $a = $s['tes_ppa'];
-            }   
-
-            $tp_sel = $a;   
+              
             $idSel = $this->input->post('idSel');     
             $tgl = $this->input->post('tgl');
+            $tes_ppa = $this->input->post('tes_ppa');
             $wawancara = $this->input->post('wawancara');
             $tulis = $this->input->post('tulis');
             $psikologi = $this->input->post('psikologi');
@@ -586,7 +576,7 @@ class AdminPelamar extends CI_Controller {
             $shalat = $this->input->post('shalat');
             $bimbing = $this->input->post('bimbing');
             $baca = $this->input->post('baca');
-
+            $tp_sel = $tes_ppa; 
             if ($this->mdl_pelamar->caricari('Tes Tulis',$idSel)) {//jika di riwayat sudah ada tes tulis
                 $this->mdl_admin->editRSel($idSel,'Tes Tulis', $tulis);//maka edit hasil tes tulis
             }
@@ -719,7 +709,7 @@ class AdminPelamar extends CI_Controller {
                 $this->mdl_admin->editRSel($idSel,'Tes Psikologi', $psikologi);
             }
             $nilai_agama2 = ($doa + $shalat + $bimbing + $baca )/4;
-            $dataSel = array('nilai_kompetensi'=>$tulis, 'nilai_wawancara' => $wawancara, 'tgl_seleksi' => $tgl, 'tes_ppa' => $a, 'nilai_agama' => $nilai_agama2, 'tes_kesehatan' => $kesehatan, 'tes_psikologi' => $psikologi);
+            $dataSel = array('nilai_kompetensi'=>$tulis, 'nilai_wawancara' => $wawancara, 'tgl_seleksi' => $tgl, 'tes_ppa' => $tes_ppa, 'nilai_agama' => $nilai_agama2, 'tes_kesehatan' => $kesehatan, 'tes_psikologi' => $psikologi);
             $where = array( 'id_seleksi' => $idSel);
             $this->mdl_admin->updateData($where,$dataSel,'seleksi');
             redirect("adminPelamar/pelamarDetail/$idk");
@@ -758,7 +748,7 @@ class AdminPelamar extends CI_Controller {
                 }elseif ($jenisTes == "Baca") {
                     $dataSel = array('nilai_agama' => $hasil);
                 }
-                $dataPel = array('id_profesi' => "Belum", id_status => "Pelamar");
+                $dataPel = array('id_profesi' => "Belum", 'id_status' => "Pelamar");
                 $where2 = array( 'id_karyawan' => $semua->id_karyawan);
                 $this->mdl_admin->updateData($where2,$dataPel,'karyawan');
                 $where = array('id_seleksi' => $idSel);

@@ -97,7 +97,7 @@
             <td><label form-control-label>Email</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="email" type="text" class="form-control" placeholder="Email">
+                <input name="email" type="email" class="form-control" placeholder="Email">
               </div>
             </td>
           </tr>
@@ -105,7 +105,14 @@
             <td><label form-control-label>Pendidikan Akhir</label></td>
             <td style="height: 50px">
               <div class="col-lg-12">
-                <input name="pendidikan" type="text" class="form-control" placeholder="Nama Institusi">
+                <select name="pendidikan" type="text" class="form-control" >
+                <option> -- Pilihan -- </option>
+                <option>S3</option>
+                <option>S2</option>
+                <option>S1</option>
+                <option>D3</option>
+                <option>SMA/SMK</option>
+                </select>
               </div>
             </td>
           </tr>
@@ -118,12 +125,13 @@
                  <?php
                  $tdy = date('Y-m-d');
                     $cari = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' order by akhir desc ");
-                    $data = $cari->result();
-                    foreach ($data as $data) { ?>
+                    $data = $cari->result(); ?>
+                  <?php foreach ($data as $data) { ?>
                       <option> <?php echo $data->nama_profesi; ?> </option>
                   <?php }?>
                 </select>
               </div>
+              <font size="2" color="red"> *Apabila tidak ada pilihan profesi, maka lowongan profesi tidak ada yang aktif </font>
             </td>
           </tr>
         </table><br>

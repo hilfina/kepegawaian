@@ -145,8 +145,7 @@ class Login extends CI_Controller {
 		            'id_karyawan' => $id_karyawan,
 		        );
 			}
-			//configurasi untuk kirim email
-			// $encrypted_id = $id_karyawan;	
+			$encrypted_id = $id_karyawan;	
 			// $config = array();
 			// $config['charset'] = 'utf-8';
 			// $config['useragent'] = 'CodeIgniter';
@@ -175,7 +174,7 @@ class Login extends CI_Controller {
 				$insert1 = $this->mdl_login->daftar('karyawan',$data1);
 			    $insert2 = $this->mdl_login->daftar('lowongan',$data2);
 		   		$insert5 = $this->mdl_login->daftar('login',$data5);
-				
+			redirect('Login');
 		}
 	}
 

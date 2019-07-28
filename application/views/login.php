@@ -129,7 +129,7 @@
                       
                       <strong>IPK Min :</strong> <?php echo $key->ipkmin;?><br>
                       <?php echo $key->jenkel;?> <br><strong>Usia maksimal :</strong> <?php echo $key->usia;?> Tahun<br>
-                      <strong>Jurusan :</strong> <?php echo $key->jurusan;?><br>
+                      <strong>Pendidikan :</strong> <?php echo $key->jurusan;?><br>
                     </p>
                     </div>
                   </div>
@@ -205,7 +205,7 @@
 
           <div class="col-lg-6 col-md-6 footer-info">
             <h3>Sistem Informasi Kepegawaian RSIA </h3>
-            <p>Sistem informasi kepegawaian hanya dapat digunakan apabila tersambung pada wifi Rumah Sakit Islam Aisyiyah Malang </p>
+            
           </div>
 
           <div class="col-lg-3 col-md-6 footer-contact">

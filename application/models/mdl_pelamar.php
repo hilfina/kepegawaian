@@ -130,4 +130,7 @@ class Mdl_pelamar extends CI_Model
         $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' AND l.jenkel LIKE '%$dKaryawan->jenkel%' and ipkmin <= '$dPen->nilai' and usia >= '$umur' order by akhir desc ");
         return $query->result();
     }
+
+    
+
 }

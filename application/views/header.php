@@ -259,21 +259,14 @@
                       <span class="mini-click-non">Data Surat</span>
                     </a>
                   </li>
-                <?php } 
-                  $tb_krywn = $this->db->query("SELECT * from karyawan where id_karyawan = $idku");
-                  $krywn = $tb_krywn->row();
-                  $tb_lowong = $this->db->query("SELECT * from lowongan where id_karyawan = $idku");
-                  $lowong = $tb_lowong->row();
-                  $tb_pend = $this->db->query("SELECT * from pendidikan where id_karyawan = $idku");
-                ?>
-                <?php if ($krywn->ttl != "0000-00-00" && $krywn->jenkel != "" && $krywn->alamat != "" && $krywn->status != "" && $krywn->foto != "profile.png" && $lowong->nilai_akhir != "-" && $lowong->pend_akhir != "-"  && $lowong->cv != "" && $lowong->finalisasi == 0 && $tb_pend->result() != null) {?>
+                <?php } ?>
                   <li>
                     <a title="Finalisasi" href="<?php echo site_url('pelamar/finalisasi')?>"
-                      ><span class="fa fa-check-square-o" style="color: red"></span>
-                      <span class="mini-click-non"><font color="red"> Finalisasi Data </font></span>
+                      ><span class="fa fa-check-square-o" ></span>
+                      <span class="mini-click-non"> Pilih Lowongan </span>
                     </a>
                   </li>
-                <?php }else{} ?>
+                
               </li>
             <?php } elseif ($levelku == "Pelamar" && $statusku == "Pelamar" && $aktifku == '1' && $finalku == '1' && $profesiku == "Belum") { ?>
               <li><a title="Cetak" href="<?php echo site_url("pelamar/home/$idku") ?>"><span class="mini-click-non">Peluang Karir</span></a></li>
