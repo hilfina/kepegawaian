@@ -8,11 +8,13 @@ class AdminPelamar extends CI_Controller {
 		parent::__construct();
         $this->load->model('mdl_login');
         $this->load->model('mdl_pelamar');
-		$this->load->model('mdl_admin');
-		$this->load->model('mdl_home');
-		$this->load->helper('url','form','file', 'custom');
-		$this->load->library('form_validation','image_lib');
-        $this->load->helper(array('url','download'));
+        $this->load->model('mdl_karyawan');
+        $this->load->model('mdl_admin');
+        $this->load->model('mdl_home');
+        $this->load->model('mdl_user');
+        $this->load->helper('url','form','file','custom');
+        $this->load->library('form_validation','image_lib');
+        $this->load->helper(array('url','download', 'form', 'file','custom'));
         $this->load->library('email');
         if($this->mdl_admin->logged_id() == null){ redirect("login");}
 	}
@@ -65,24 +67,6 @@ class AdminPelamar extends CI_Controller {
         foreach ($dataAllKaryawan as $data) {
             $cariSatuKaryawan = $this->db->query("SELECT * FROM karyawan where id_karyawan = '$data->id_karyawan'");
             $dataKaryawan = $cariSatuKaryawan->row();
-            //echo $data->id_karyawan;
-            // $config = array();
-            // $config['charset'] = 'utf-8';
-            // $config['useragent'] = 'CodeIgniter';
-            // $config['protocol']= "smtp";
-            // $config['mailtype']= "html";
-            // $config['smtp_host']= "ssl://smtp.gmail.com";
-            // $config['smtp_port']= "465";
-            // $config['smtp_timeout']= "400";
-            // $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
-            // $config['smtp_pass']= "SUBHANALLAH";
-            // $config['crlf']="\r\n"; 
-            // $config['newline']="\r\n"; 
-            // $config['wordwrap'] = TRUE;
-            // $this->email->initialize($config);
-            // $this->email->from($config['smtp_user']);
-            // $this->email->to($dataKaryawan->email);
-            // $this->email->subject("Notifikasi");
 
             $pesan = "Kepada<br>Yth. Sdr. <b>".$dataKaryawan->nama."</b><br> Ditempat,<br><br><br> Selamat, anda mendapat panggilan untuk melakukan seleksi diRumah Sakit Islam Kota Malang. untuk informasi tanggal seleksi, silakan untuk cek website RSIA ";
             
@@ -180,23 +164,6 @@ class AdminPelamar extends CI_Controller {
                 $this->session->set_flashdata('msg','Success');
                 $encrypted_id = $data['id_karyawan'];
 
-                // $config = array();
-                // $config['charset'] = 'utf-8';
-                // $config['useragent'] = 'CodeIgniter';
-                // $config['protocol']= "smtp";
-                // $config['mailtype']= "html";
-                // $config['smtp_host']= "ssl://smtp.gmail.com";
-                // $config['smtp_port']= "465";
-                // $config['smtp_timeout']= "400";
-                // $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
-                // $config['smtp_pass']= "SUBHANALLAH";
-                // $config['crlf']="\r\n"; 
-                // $config['newline']="\r\n"; 
-                // $config['wordwrap'] = TRUE;
-                // $this->email->initialize($config);
-                // $this->email->from($config['smtp_user']);
-                // $this->email->to($email);
-                // $this->email->subject("Notifikasi");
                 $pesan = "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Mohon lengkapi data lamaran anda di RSI Aisyiyah Malang, karena penseleksian akan segera dilakukan.<br>
                 Klik tombol dibawah ini untuk aktifikasi akun anda.<br>
                 Masukkan username dan password dengan nomor KTP sesuai data lamaran yang telah anda kirim.<br><br>".
@@ -212,28 +179,6 @@ class AdminPelamar extends CI_Controller {
         $data=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where id_karyawan ='$id'")); 
 
         $this->load->library('email');
-        // $config = array();
-        // $config['charset'] = 'utf-8';
-        // $config['useragent'] = 'CodeIgniter';
-        // $config['protocol']= "smtp";
-        // $config['mailtype']= "html";
-        // $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
-        // $config['smtp_port']= "465";
-        // $config['smtp_timeout']= "400";
-
-        // $config['smtp_user']= "hilfinamaris09@gmail.com"; // isi dengan email kamu
-        // $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
-
-        // $config['crlf']="\r\n"; 
-        // $config['newline']="\r\n"; 
-        // $config['wordwrap'] = TRUE;
-        // //memanggil library email dan set konfigurasi untuk pengiriman email
-            
-        // $this->email->initialize($config);
-        // //konfigurasi pengiriman
-        // $this->email->from($config['smtp_user']);
-        // $this->email->to($data['email']);
-        // $this->email->subject("Notifikasi");
 
         $pesan = "Kepada<br>Yth. Sdr. <b>".$data['nama']."</b><br> Ditempat,<br><br><br> Selamat, anda mendapat panggilan untuk melakukan seleksi diRumah Sakit Islam Kota Malang. untuk informasi tanggal seleksi, silakan untuk cek website RSIA ";
         send_email(array($data['email']), 'Notifikasi', $pesan);
@@ -262,27 +207,6 @@ class AdminPelamar extends CI_Controller {
         $dataa=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where id_karyawan ='$id'")); 
 
         $this->load->library('email');
-        // $config = array();
-        // $config['charset'] = 'utf-8';
-        // $config['useragent'] = 'CodeIgniter';
-        // $config['protocol']= "smtp";
-        // $config['mailtype']= "html";
-        // $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
-        // $config['smtp_port']= "465";
-        // $config['smtp_timeout']= "400";
-        // $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com"; // isi dengan email kamu
-        //         $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
-
-        // $config['crlf']="\r\n"; 
-        // $config['newline']="\r\n"; 
-        // $config['wordwrap'] = TRUE;
-        // //memanggil library email dan set konfigurasi untuk pengiriman email
-            
-        // $this->email->initialize($config);
-        // //konfigurasi pengiriman
-        // $this->email->from($config['smtp_user']);
-        // $this->email->to($dataa['email']);
-        // $this->email->subject("Notifikasi");
         $pesan = "Kepada<br>Yth. Sdr. <b>".$dataa['nama']."</b><br> Ditempat,<br><br><br>
             Berdasarkan hasil Seleksi Administrasi, anda dinyatakan TIDAK LULUS pada tahap seleksi di RSI Aisyiyah Malang. <br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. ";
         send_email(array($dataa['email']), 'Notifikasi', $pesan);
@@ -757,27 +681,6 @@ class AdminPelamar extends CI_Controller {
                 $this->db->update('lowongan', array('finalisasi' => 0), array('id_karyawan' => $semua->id_karyawan));
 
                 $this->load->library('email');
-                // $config = array();
-                // $config['charset'] = 'utf-8';
-                // $config['useragent'] = 'CodeIgniter';
-                // $config['protocol']= "smtp";
-                // $config['mailtype']= "html";
-                // $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
-                // $config['smtp_port']= "465";
-                // $config['smtp_timeout']= "400";
-                // $config['smtp_user']= "hilfinamaris09@gmail.com"; // isi dengan email kamu
-
-                // $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
-                // $config['crlf']="\r\n"; 
-                // $config['newline']="\r\n"; 
-                // $config['wordwrap'] = TRUE;
-                //memanggil library email dan set konfigurasi untuk pengiriman email
-                    
-                // $this->email->initialize($config);
-                // //konfigurasi pengiriman
-                // $this->email->from($config['smtp_user']);
-                // $this->email->to($dataku->email);
-                // $this->email->subject("Notifikasi");
                 $pesan = "Kepada<br>Yth. Sdr. <b>".$dataku->nama."</b><br> Ditempat,<br><br><br>Maaf, anda gagal dalam seleksi tahap $jenisTes di RSIA, silahkan mencoba pada peluang karir selanjutnya";
                 send_email(array($dataku->email), 'Notifikasi', $pesan);
             }
@@ -859,25 +762,6 @@ class AdminPelamar extends CI_Controller {
                     'verifikasi' => 0
                     );
 
-                    // $config = array();
-                    // $config['charset'] = 'utf-8';
-                    // $config['useragent'] = 'CodeIgniter';
-                    // $config['protocol']= "smtp";
-                    // $config['mailtype']= "html";
-                    // $config['smtp_host']= "ssl://smtp.gmail.com";
-                    // $config['smtp_port']= "465";
-                    // $config['smtp_timeout']= "400";
-                    // $config['smtp_user']= "hilfinamaris09@gmail.com"; // isi dengan email kamu
-                    // $config['smtp_pass']= "SUBHANALLAH";
-                    // $config['crlf']="\r\n"; 
-                    // $config['newline']="\r\n"; 
-                    // $config['wordwrap'] = TRUE;
-                    // $this->email->initialize($config);
-                    // $encrypted_id = $cariId['id_karyawan'];
-                    // $this->email->from($config['smtp_user']);
-                    // $this->email->to($email);
-                    // $this->email->subject("Verifikasi Akun");
-                    // $this->email->message(
                     $pesan =
                         "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br>Mohon lengkapi data lamaran anda di RSI Aisyiyah Malang, karena penseleksian akan segera dilakukan.<br>
                         Klik tombol dibawah ini untuk aktifikasi akun anda.<br>
@@ -959,24 +843,6 @@ class AdminPelamar extends CI_Controller {
         foreach ($dataAllKaryawan as $data) {
             $cariSatuKaryawan = $this->db->query("SELECT * FROM karyawan where id_karyawan = '$data->id_karyawan'");
             $dataKaryawan = $cariSatuKaryawan->row();
-            //echo $data->id_karyawan;
-            // $config = array();
-            // $config['charset'] = 'utf-8';
-            // $config['useragent'] = 'CodeIgniter';
-            // $config['protocol']= "smtp";
-            // $config['mailtype']= "html";
-            // $config['smtp_host']= "ssl://smtp.gmail.com";
-            // $config['smtp_port']= "465";
-            // $config['smtp_timeout']= "400";
-            // $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
-            // $config['smtp_pass']= "SUBHANALLAH";
-            // $config['crlf']="\r\n"; 
-            // $config['newline']="\r\n"; 
-            // $config['wordwrap'] = TRUE;
-            // $this->email->initialize($config);
-            // $this->email->from($config['smtp_user']);
-            // $this->email->to($dataKaryawan->email);
-            // $this->email->subject("Notifikasi");
 
             $pesan = "Kepada<br>Yth. Sdr. <b>".$dataKaryawan->nama."</b><br> Ditempat,<br><br><br> Selamat, anda lulus dalam  ".$nama_tes." diRumah Sakit Islam Kota Malang. untuk informasi selanjutnya, silakan untuk cek website RSIA ";
             send_email(array($dataKaryawan->email), 'Notifikasi', $pesan);
@@ -1021,24 +887,6 @@ class AdminPelamar extends CI_Controller {
             );
 
             $this->load->library('email');
-            // $config = array();
-            // $config['charset'] = 'utf-8';
-            // $config['useragent'] = 'CodeIgniter';
-            // $config['protocol']= "smtp";
-            // $config['mailtype']= "html";
-            // $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
-            // $config['smtp_port']= "465";
-            // $config['smtp_timeout']= "400";
-            // $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com"; // isi dengan email kamu
-            // $config['smtp_pass']= "SUBHANALLAH"; // isi dengan password kamu
-            // $config['crlf']="\r\n"; 
-            // $config['newline']="\r\n"; 
-            // $config['wordwrap'] = TRUE;
-            // //memanggil library email dan set konfigurasi untuk pengiriman email
-                
-            // $this->email->initialize($config);
-            // //konfigurasi pengiriman
-            // $this->email->from($config['smtp_user']);
             
             $pesan = "Kepada<br>Yth. Sdr. <b>".$key->nama."</b><br> Ditempat,<br><br><br>Selamat, anda Telah Diterima di RSIA, silahkan melengkapi data diri anda kembali pada sistem. Informasi selanjutnya akan kami sampaikan melalui telfon.<br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih.";
             send_email(array($key->email), 'Notifikasi', $pesan);

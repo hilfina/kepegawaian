@@ -6,14 +6,17 @@ class AdminDiklat extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('mdl_login');
+         $this->load->model('mdl_login');
         $this->load->model('mdl_pelamar');
         $this->load->model('mdl_karyawan');
         $this->load->model('mdl_admin');
         $this->load->model('mdl_home');
-        $this->load->helper('url','form','file');
+        $this->load->model('mdl_user');
+        $this->load->helper('url','form','file','custom');
         $this->load->library('form_validation','image_lib');
-        if($this->mdl_admin->logged_id() == null){ redirect("login");}
+        $this->load->helper(array('url','download', 'form', 'file','custom'));
+        $this->load->library('email');
+        if($this->mdl_admin->logged_id() == null) { redirect("login"); }
     }
 
     public function index()

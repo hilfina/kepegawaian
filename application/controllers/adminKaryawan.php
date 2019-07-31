@@ -5,17 +5,17 @@ class AdminKaryawan extends CI_Controller {
     private $filename = "import_data";
     public function __construct(){
         parent::__construct();
-        $this->load->model('mdl_login');
+         $this->load->model('mdl_login');
         $this->load->model('mdl_pelamar');
         $this->load->model('mdl_karyawan');
         $this->load->model('mdl_admin');
         $this->load->model('mdl_home');
+        $this->load->model('mdl_user');
         $this->load->helper('url','form','file','custom');
         $this->load->library('form_validation','image_lib');
         $this->load->helper(array('url','download', 'form', 'file','custom'));
         $this->load->library('email');
-
-        if($this->mdl_admin->logged_id() == null){redirect("login");}
+        if($this->mdl_admin->logged_id() == null) { redirect("login"); }
     }
     //MENAMPILKAN DATA TABEL BERISI DATA KARYAWAN
     public function index(){            
@@ -86,25 +86,7 @@ class AdminKaryawan extends CI_Controller {
             $dataPenempatan=array('id_karyawan'=>$dIDK->id_karyawan, 'ruangan'=> '-', 'mulai' => $tgl, 'akhir' => $tgl2);
             $dataGolongan=array('id_karyawan'=>$dIDK->id_karyawan, 'id_golongan'=>$id_golongan, 'mulai' => $tgl, 'akhir' => $tgl2, 'nomor_sk'=>'-');
             
-            // $config = array();
-            // $config['charset'] = 'utf-8';
-            // $config['useragent'] = 'CodeIgniter';
-            // $config['protocol']= "smtp";
-            // $config['mailtype']= "html";
-            // $config['smtp_host']= "ssl://smtp.gmail.com";
-            // $config['smtp_port']= "465";
-            // $config['smtp_timeout']= "400";
-            // $config['smtp_user']= "sdi.rsiaisyiyah@gmail.com";
-            // $config['smtp_pass']= "SUBHANALLAH";
-            // $config['crlf']="\r\n"; 
-            // $config['newline']="\r\n"; 
-            // $config['wordwrap'] = TRUE;
-            // $this->email->initialize($config);
             $encrypted_id = $dIDK->id_karyawan;
-            // $this->email->from($config['smtp_user']);
-            // $this->email->to($email);
-            // $this->email->subject("Verifikasi Akun");
-            // $this->email->message(
 
             $pesan = "Kepada<br>Yth. Sdr. <b>".$nama."</b><br> Ditempat,<br><br><br> Anda telah didaftarkan di Rumah Sakit islam Aisyiyah Kota Malang. <br><br><br>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih. <br> Untuk memverifikasi silahkan klik tautan dibawah ini menggunakan <br><br>
                     username dan password menggunakan nomor ktp anda.<br>".
