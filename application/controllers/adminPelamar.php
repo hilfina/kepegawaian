@@ -227,6 +227,7 @@ class AdminPelamar extends CI_Controller {
             $paket['array']=$this->mdl_admin->getProfesi(); 
             $paket['prof']=$this->mdl_admin->getProfesi2($id); 
             $paket['datDir']=$this->mdl_admin->getData('karyawan',$where);
+            $paket['log']=$this->mdl_admin->getData('login',$where);
             $paket['datPen']=$this->mdl_admin->getData('pendidikan',$where);
             $paket['datSel']=$this->mdl_admin->detSeleksi($id);
             $paket['datSur']=$this->mdl_admin->cariJenisSurat($id);
@@ -265,6 +266,8 @@ class AdminPelamar extends CI_Controller {
             $pend_akhir=$this->input->post('pend_akhir');
             $nilai_akhir=$this->input->post('nilai_akhir');
             $nama_profesi=$this->input->post('nama_profesi');
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
             $s=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "select id_profesi from jenis_profesi where nama_profesi = '$nama_profesi'"));
 
              $dataKaryawan = array(
@@ -284,6 +287,24 @@ class AdminPelamar extends CI_Controller {
                 'nilai_akhir' => $nilai_akhir,
                 
              );
+             $dataSkg = $this->mdl_pelamar->dataPel($id);
+             if ($dataSkg->password != $password ) {
+                
+                $datalogin2 = array(
+                'password' => md5($password)
+                );
+
+                $this->mdl_pelamar->updatelogin($datalogin2,$id);
+            }else{}
+
+            if ($dataSkg->username != $username ) {
+                
+                $datalogin3 = array(
+                'username' => $username
+                );
+
+                $this->mdl_pelamar->updatelogin($datalogin3,$id);
+            }else{}
              $where = array('id_karyawan' => $id);
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
              $this->mdl_admin->updateData($where,$dataLowongan,'lowongan');
@@ -855,6 +876,7 @@ class AdminPelamar extends CI_Controller {
     public function acc3($idp){
         $cariKar = $this->db->query("SELECT * FROM karyawan where id_profesi = '$idp' and id_status = 'Calon Karyawan'");
         $dataKar = $cariKar->result();
+        $magang = date('Y-m-d', strtotime('+3 month',strtotime(date('Y-m-d'))));
         foreach ($dataKar as $key) {
             $where = array('id_karyawan' => $key->id_karyawan);
             $dataKaryawan = array(
@@ -869,13 +891,15 @@ class AdminPelamar extends CI_Controller {
                 'id_riwayat' => $data1['last']+1,
                 'id_karyawan' => $key->id_karyawan,
                 'ruangan' => '-',
-                'mulai' => date('d-m-y')
+                'mulai' => date('Y-m-d'),
+                'akhir' =>  $magang
             );
 
             $dataStatus = array(
                 'id_karyawan' => $key->id_karyawan,
                 'id_status' => 'Magang',
-                'mulai' => date('d-m-y'),
+                'mulai' => date('Y-m-d'),
+                'akhir' =>  $magang,
                 'akhir' => '-',
                 'nomor_sk' => '-',
                 'alamat_sk' => '-',

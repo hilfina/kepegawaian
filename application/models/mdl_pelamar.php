@@ -131,6 +131,17 @@ class Mdl_pelamar extends CI_Model
         return $query->result();
     }
 
+    public function dataPel($id){
+        $query = $this->db->query("SELECT * from karyawan as k inner join login as l on k.id_karyawan=l.id_karyawan where k.id_karyawan = $id ");
+        return $query->row();
+    }
+    public function updatelogin($array, $id)
+    {
+        $this->db->where('id_karyawan', $id);
+        $this->db->where('level', 'Pelamar');
+        $query = $this->db->update('login',$array);
+
+    }
     
 
 }

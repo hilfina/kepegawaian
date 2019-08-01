@@ -199,6 +199,31 @@
                         </tr>
                       </table><br>
                     <?php } ?>
+                    <div class="skill-title"> <br>
+                          <h2>Data login</h2> <hr />
+                        </div>
+                        <table width="100%">
+                          <tr>
+                            <td width="20%"><label form-control-label>Username</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                              <?php foreach ($log as $key123) {?>
+                                <input name="username" type="text" class="form-control" value="<?php echo $key123->username; ?>">
+                              <?php break; } ?>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><label form-control-label>Password</label></td>
+                            <td style="height: 50px">
+                              <div class="col-lg-12">
+                              <?php foreach ($log as $key123) {?>
+                                <input name="password" type="text" class="form-control" value="<?php echo $key123->password; ?>">
+                              <?php break; } ?>
+                              </div>
+                            </td>
+                          </tr>   
+                        </table>
                       <div align="center">
                         <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Simpan">
                       </div>

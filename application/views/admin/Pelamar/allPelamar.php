@@ -53,6 +53,10 @@
                 <?php }elseif ($karyawan->id_status == 'Calon Karyawan') { 
                   $caridataseleksi = $this->db->query("SELECT * from seleksi where id_karyawan = '$karyawan->id_karyawan'");
                   $dataseleksi = $caridataseleksi->row();
+                  $caridatarseleksi = $this->db->query("SELECT count(id_seleksi) as id from riwayat_seleksi where id_seleksi = '$dataseleksi->id_seleksi' AND nama_tes = 'Tes Kesehatan'");
+                  $datars = $caridatarseleksi->row();
+                  $caridatarseleksi2 = $this->db->query("SELECT count(id_seleksi) as id from riwayat_seleksi where id_seleksi = '$dataseleksi->id_seleksi' AND nama_tes = 'Tes Psikologi'");
+                  $datars2 = $caridatarseleksi2->row();
                   if ($dataseleksi->tgl_seleksi == "0000-00-00" && $dataseleksi->nilai_kompetensi == "-") { //jika tanggal belum ditambahkan ?>
                     <form action="<?php echo site_url();?>/adminPelamar/addtglsel/<?php echo $karyawan->id_profesi; ?>" method="POST">
                       <table>
@@ -69,7 +73,7 @@
                     <a href="<?php echo site_url(); echo"/adminPelamar/report/"; echo $np; ?>" >
                     <button class="btn btn-primary waves-effect waves-light mg-b-15"><i class="fa fa-print" aria-hidden="true"></i> Cetak Daftar Pelamar</button>
                   </a>
-                  <?php } elseif($nol == null && $dataseleksi->tes_kesehatan == "-" && $dataseleksi->tgl_seleksi != "0000-00-00" && $levelku == 'Super Admin'){?>
+                  <?php } elseif($nol == null && $dataseleksi->tes_kesehatan == "-" && $dataseleksi->tgl_seleksi != "0000-00-00" && $levelku == 'Super Admin' && $datars->id == 0 ){?>
                    <a href="<?php echo site_url(); echo"/adminPelamar/acc2/"; echo $judul->id_profesi."/Tulis"; ?>" >
                       <button class="btn btn-success waves-effect waves-light mg-b-15"><i class="fa fa-check"></i> Telah disetujui</button>
                     </a>
@@ -88,7 +92,7 @@
                         </tr>
                       </table>
                     </form>
-                    <?php } elseif($nol2 == null && $dataseleksi->tes_kesehatan != "-" && $dataseleksi->tgl_seleksi != "0000-00-00" && $dataseleksi->tes_psikologi == "-" && $levelku == 'Super Admin'){?>
+                    <?php } elseif($nol2 == null && $dataseleksi->tes_kesehatan != "-" && $dataseleksi->tgl_seleksi != "0000-00-00" && $dataseleksi->tes_psikologi == "-" && $levelku == 'Super Admin' && $datars2->id == 0){?>
                    <a href="<?php echo site_url(); echo"/adminPelamar/acc2/"; echo $judul->id_profesi."/Kesehatan"; ?>" >
                       <button class="btn btn-success waves-effect waves-light mg-b-15"><i class="fa fa-check"></i> Telah disetujui</button>
                     </a>
@@ -152,10 +156,8 @@
                     <td><?php echo $key->nilai; ?></td>
                     <td><?php echo $key->akhir; ?></td>
                     <td align="center">
-                     <?php if($levelku == "Super Admin"){ ?>
-                      <!-- <a href="<?php //echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
-                      <button class="btn btn-success waves-effect" title="TERIMA"><i class="fa fa-check"></i></button>
-                    </a> -->
+                     <?php if($levelku == "Super Admin" && $judul->akhir <= date('Y-m-d')){ ?>
+                      
                     <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
                       <button class="btn btn-danger waves-effect" title="TOLAK"><i class="fa fa-times"></i></button>
                     </a>
