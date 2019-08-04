@@ -116,6 +116,12 @@
           </tr>
         </table><br>
         <div align="center">
+          <div class="pdf-single-pro">
+            <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file; ?>"></a>
+          </div>
+        </div>
+        <br>
+        <div align="center">
           <input type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="Perbarui data">
         </div>
         </form>

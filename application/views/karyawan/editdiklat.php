@@ -170,6 +170,13 @@ $this->load->view("header.php");
                                 </div>
                             </div>
                             <br>
+
+                    <div align="center">
+                      <div class="pdf-single-pro">
+                        <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file; ?>"></a>
+                      </div>
+                    </div>
+                    <br>
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="input-mask-title">

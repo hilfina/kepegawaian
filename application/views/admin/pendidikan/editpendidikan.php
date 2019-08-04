@@ -138,7 +138,7 @@ $this->load->view("header.php");
                           <input type="text" name="file_old" value="<?php echo $key->file ?>" hidden >
                       </div>
                     </div>
-                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                       <div class="input-mark-inner">
                         <div class="file-upload-inner ts-forms">
                           <font size="2" color="red">*Format dokumen harus dalam bentuk pdf. Ukuran file maksimal adalah 2 mb </font>
@@ -155,6 +155,13 @@ $this->load->view("header.php");
                       </div>
                     </div>
                   </div> <br>
+
+                    <div align="center">
+                      <div class="pdf-single-pro">
+                        <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file; ?>"></a>
+                      </div>
+                    </div>
+                    <br>
                   <div class="row"align="center">
                     <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Simpan</button>
                   <div>

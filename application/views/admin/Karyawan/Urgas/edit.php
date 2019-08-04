@@ -83,7 +83,13 @@
                       </div>
                     </div>
                   </div>
-                  <br><br>
+                  <br>
+                  <div align="center">
+                    <div class="pdf-single-pro">
+                      <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->file_urgas; ?>"></a>
+                    </div>
+                  </div>
+                  <br>
                   <div class="row"align="center">
                     <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Simpan</button>
                   </div>

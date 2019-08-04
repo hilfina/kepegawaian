@@ -83,6 +83,12 @@ $this->load->view("header.php");
                                     <div class="input-mark-inner">
                                         <input type="text" value="<?php echo $key->doku_pengajuan;?>" class="form-control" disabled>
                                     </div>
+                                <br>
+                                    <div align="center">
+                                      <div class="pdf-single-pro">
+                                        <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $key->doku_pengajuan; ?>"></a>
+                                      </div>
+                                    </div><br>
                                 </div>
                             </div>
                             <div class="row">
