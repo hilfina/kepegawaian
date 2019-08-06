@@ -50,6 +50,8 @@ class AdminPendidikan extends CI_Controller {
             $cKar = $this->db->query("SELECT * from karyawan where nik = '$nik'"); $dKar=$cKar->row();
             $id_karyawan=$dKar->id_karyawan;
             $pendidikan = $this->input->post('pendidikan');
+            $jurusan = $this->input->post('jurusan');
+            $jenjang = $this->input->post('jenjang');
             $nilai = $this->input->post('nilai');
             $mulai = $this->input->post('mulai');
             $akhir = $this->input->post('akhir');
@@ -65,6 +67,8 @@ class AdminPendidikan extends CI_Controller {
 
             $data3 = array(
                 'pendidikan'=>$pendidikan,
+                'jenjang'=>$jenjang,
+                'jurusan'=>$jurusan,
                 'mulai'=>$mulai,
                 'akhir'=>$akhir,
                 'nomor_ijazah'=>$nomor_ijazah,
@@ -94,6 +98,7 @@ class AdminPendidikan extends CI_Controller {
 
                 $this->load->library('upload', $config);
                 $pendidikan = $this->input->post('pendidikan');
+                $jenjang = $this->input->post('jenjang');
                 $jurusan  = $this->input->post('jurusan');
                 $nik = $this->input->post('nik');
                 $nilai = $this->input->post('nilai');
@@ -109,6 +114,7 @@ class AdminPendidikan extends CI_Controller {
 
                 $data3 = array(
                         'pendidikan'=>$pendidikan,
+                        'jenjang'=>$jenjang,
                         'jurusan' => $jurusan,
                         'nilai' => $nilai,
                         'mulai'=>$mulai,

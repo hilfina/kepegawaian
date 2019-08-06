@@ -81,6 +81,26 @@ $this->load->view("header.php");
                   </div>
                   <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                      <div class="input-mask-title" style="align-self: left;">
+                        <label>Jenjang</label>
+                      </div>
+                    </div>
+                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                      <div class="input-mark-inner">
+                        <select type="text" class="form-control" name="jenjang">
+                        <option><?php echo $key->jenjang;?></option>
+                        <option>--- Pilih ---</option>
+                        <option>SMA/SMK</option>
+                        <option>D3</option>
+                        <option>S1</option>
+                        <option>S2</option>
+                        <option>S3</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                       <div class="input-mask-title">
                         <label>Jurusan Pendidikan</label>
                       </div>

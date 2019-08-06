@@ -127,7 +127,7 @@ class Mdl_pelamar extends CI_Model
         $lahir = substr($dKaryawan->ttl, 0, 4);
         $umur = $year - $lahir;
 
-        $query = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' AND l.jenkel LIKE '%$dKaryawan->jenkel%' and ipkmin <= '$dPen->nilai' and usia >= '$umur' order by akhir desc ");
+        $query = $this->db->query("SELECT COUNT(id_loker) as idl, l.id_profesi, j.nama_profesi, kuota, mulai, akhir,ipkmin,usia,jenkel,jurusan from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' AND l.jenkel LIKE '%$dKaryawan->jenkel%' and ipkmin <= '$dPen->nilai' and usia >= '$umur' order by akhir desc ");
         return $query->result();
     }
 

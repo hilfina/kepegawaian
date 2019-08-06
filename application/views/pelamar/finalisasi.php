@@ -46,7 +46,7 @@ $idku=$this->session->userdata('myId');
                         <div class="alert alert-info">
                             <h4>Pemberitahuan !</h4>
                             <br>
-                                Data lamaran yang anda masukkan akan disesuaikan dengan lowongan yang aktif dan data lamaran tidak dapat diubah kembali. Pastikan data anda telah terisi dan benar.
+                                Data lamaran yang anda masukkan akan disesuaikan dengan lowongan yang aktif. Pastikan data anda telah terisi dan benar.
                         </div>
                         <a href="<?php echo site_url('pelamar/finalisasi2')?>" onclick="return confirm('Apakah anda yakin untuk menuju halaman lowongan?');">
                         <button class="btn btn-primary waves-effect waves-light mg-b-15 btn-block" value="send" >HALAMAN LOWONGAN</button>

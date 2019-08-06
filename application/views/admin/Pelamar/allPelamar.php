@@ -152,13 +152,13 @@
                     <td><?php echo $key->nama; ?></td>
                     <td><?php echo $key->jenkel;?></td>
                     <td><?php $tdy = date('Y'); $lhr = substr($key->ttl, 0,4); echo $tdy-$lhr; ?></td>
-                    <td><?php echo $key->pendidikan;   echo " - "; echo $key->pend_akhir; echo " "; echo $key->jurusan ?></td>
+                    <td><?php echo $key->pendidikan;   echo " - "; echo $key->jenjang; echo " "; echo $key->jurusan ?></td>
                     <td><?php echo $key->nilai; ?></td>
                     <td><?php echo $key->akhir; ?></td>
                     <td align="center">
                      <?php if($levelku == "Super Admin" && $judul->akhir <= date('Y-m-d')){ ?>
                       
-                    <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key->id_karyawan ;?>">
+                    <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $judul->id_profesi ; echo "/"; echo $key->id_karyawan ;?>">
                       <button class="btn btn-danger waves-effect" title="TOLAK"><i class="fa fa-times"></i></button>
                     </a>
                     <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key->id_karyawan ;?>">

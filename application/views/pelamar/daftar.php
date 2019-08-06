@@ -30,19 +30,6 @@
           </div>
           <div class="sparkline12-graph">
               <div class="input-knob-dial-wrap">
-              <br>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                      <div class="input-mask-title">
-                        <label>No. KTP</label>
-                      </div>
-                    </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                      <input name="no_ktp" type="number" class="form-control" required>
-                      <?php echo form_error('no_ktp','<div style="color:red">', '</div>'); ?>
-                      <font size="2"> *Minimal 16 karakter </font>
-                    </div>
-                  </div>
                   <br>
                   <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" >

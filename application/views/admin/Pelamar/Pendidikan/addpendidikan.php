@@ -39,8 +39,27 @@
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="input-mark-inner">
-                      <input type="text" class="form-control" name="pendidikan" placeholder="Cth:Polinema">
+                      <input type="text" class="form-control" name="pendidikan" placeholder="Contoh:Politeknik Negeri Malang">
                       <input type="hidden" class="form-control" name="id_karyawan" value="<?php echo $id ?>">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="input-mask-title">
+                      <label>Jenjang</label>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="input-mark-inner">
+                      <select type="text" class="form-control" name="jenjang" >
+                        <option>--- Pilih ---</option>
+                        <option>SMA/SMK</option>
+                        <option>D3</option>
+                        <option>S1</option>
+                        <option>S2</option>
+                        <option>S3</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -52,7 +71,7 @@
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="input-mark-inner">
-                      <input type="text" class="form-control" name="jurusan" placeholder="Cth:Teknik Kimia">
+                      <input type="text" class="form-control" name="jurusan">
                     </div>
                   </div>
                 </div>
@@ -64,7 +83,7 @@
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="input-mark-inner">
-                      <input type="text" class="form-control" name="nilai" placeholder="Cth:4.00">
+                      <input type="text" class="form-control" name="nilai" placeholder="Contoh:4.00">
                     </div>
                   </div>
                 </div>

@@ -112,7 +112,6 @@ class AdminPelamar extends CI_Controller {
                 $jenkel=$this->input->post('jenkel');
                 $nama_profesi=$this->input->post('id_profesi');
                 $npr=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"), "SELECT id_profesi from jenis_profesi where nama_profesi = '$nama_profesi'"));
-                $pendidikan=$this->input->post('pendidikan');
              
                 $dataKaryawan = array(
                 'nik' => "-",
@@ -136,7 +135,7 @@ class AdminPelamar extends CI_Controller {
 
                 $dataLowongan = array(
                 'id_karyawan' => $data['id_karyawan'],
-                'pend_akhir' => $pendidikan,
+                'pend_akhir' => '-',
                 'nilai_akhir' => '-'
                 );
 
@@ -202,7 +201,7 @@ class AdminPelamar extends CI_Controller {
         } else{ redirect("login"); } 
     }
 
-    public function pelamarDitolak($id){
+    public function pelamarDitolak($idp,$id){
         if($this->mdl_admin->logged_id()) {
         $dataa=mysqli_fetch_array(mysqli_query(mysqli_connect("localhost","root","","kepegawaian"),"select * from karyawan where id_karyawan ='$id'")); 
 
@@ -217,7 +216,7 @@ class AdminPelamar extends CI_Controller {
         $this->mdl_admin->updateData($where,$data,'karyawan');
         $this->mdl_admin->updateData($where,$data2,'lowongan');
         $this->mdl_pelamar->ditolak($id);
-        redirect("adminPelamar");
+        redirect("adminPelamar/index2/$idp");
         }else{ redirect("login"); } 
     }
     //DATA DETAIL PELAMAR
@@ -282,11 +281,6 @@ class AdminPelamar extends CI_Controller {
                 'id_profesi' => $s['id_profesi']
                 );
 
-             $dataLowongan = array(
-                'pend_akhir' => $pend_akhir,
-                'nilai_akhir' => $nilai_akhir,
-                
-             );
              $dataSkg = $this->mdl_pelamar->dataPel($id);
              if ($dataSkg->password != $password ) {
                 
@@ -307,7 +301,6 @@ class AdminPelamar extends CI_Controller {
             }else{}
              $where = array('id_karyawan' => $id);
              $this->mdl_admin->updateData($where,$dataKaryawan,'Karyawan');
-             $this->mdl_admin->updateData($where,$dataLowongan,'lowongan');
              redirect("adminPelamar/pelamarDetail/$id");
         }
 
@@ -357,6 +350,7 @@ class AdminPelamar extends CI_Controller {
  
             $pendidikan = $this->input->post('pendidikan');
             $id_karyawan  = $this->input->post('id_karyawan');
+            $jejang = $this->input->post('jejang');
             $jurusan  = $this->input->post('jurusan');
             $nilai = $this->input->post('nilai');
             $mulai = $this->input->post('mulai');
@@ -368,6 +362,7 @@ class AdminPelamar extends CI_Controller {
             $data3 = array(
                     'pendidikan'=>$pendidikan,
                     'jurusan' => $jurusan,
+                    'jenjang' => $jenjang,
                     'nilai' => $nilai,
                     'mulai'=>$mulai,
                     'akhir'=>$akhir,
@@ -404,6 +399,7 @@ class AdminPelamar extends CI_Controller {
 
                 $this->load->library('upload', $config);
                 $pendidikan = $this->input->post('pendidikan');
+                $jenjang = $this->input->post('jenjang');
                 $jurusan  = $this->input->post('jurusan');
                 $id_karyawan = $this->input->post('id_karyawan');
                 $nilai = $this->input->post('nilai');
@@ -421,6 +417,7 @@ class AdminPelamar extends CI_Controller {
                 $data3 = array(
                         'pendidikan'=>$pendidikan,
                         'jurusan' => $jurusan,
+                        'jenjang' => $jenjang,
                         'nilai' => $nilai,
                         'id_karyawan' => $id_karyawan,
                         'mulai'=>$mulai,

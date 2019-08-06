@@ -156,43 +156,20 @@
                                 </div>
                               </td>
                             </tr>
-                            <?php foreach ($datLo as $key2){ ?>
-                                <tr>
-                                  <td><label form-control-label>Pendidikan Terakhir</label></td>
-                                  <td style="height: 50px; width: 80%">
-                                    <div class="col-lg-12">
-                                      <select class="form-control" name="pend_akhir">
-                                        <option><?php echo $key2->pend_akhir; ?></option>
-                                        <option>Opsi Pilihan :</option>
-                                        <option>SMA/SMK</option>
-                                        <option>D1</option>
-                                        <option>D3</option>
-                                        <option>S1</option>
-                                        <option>S2</option>
-                                        <option>S3</option>
-                                      </select>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td><label form-control-label>Nilai Akhir</label></td>
-                                  <td style="height: 50px; width: 80%">
-                                    <div class="col-lg-12">
-                                      <input name="nilai_akhir" type="text" class="form-control" value="<?php echo $key2->nilai_akhir; ?>">
-                                    </div>
-                                  </td>
-                                </tr>
-                                <?php } ?>
                         <tr>
                           <td><label form-control-label>Posisi Lamaran</label></td>
                           <td style="height: 50px">
                             <div class="col-lg-12">
-                              <select name="nama_profesi" class="form-control">
+                              <select name="nama_profesi" class="form-control" type="text" >
                                 <option><?php echo $prof->nama_profesi; ?></option>
                                 <option>-- Pilihan --</option>
-                                <?php foreach ($array as $key ){?>
-                                  <option><?php echo $key->nama_profesi; ?></option>
-                                <?php } ?>
+                                <?php
+                                $tdy = date('Y-m-d');
+                                  $cari = $this->db->query("SELECT * from loker as l inner join jenis_profesi as j on l.id_profesi = j.id_profesi where akhir >= '$tdy' AND mulai <= '$tdy' order by akhir desc ");
+                                  $data = $cari->result(); ?>
+                                <?php foreach ($data as $data) { ?>
+                                    <option> <?php echo $data->nama_profesi; ?> </option>
+                                <?php }?>
                               </select>
                             </div>
                           </td>
@@ -300,6 +277,7 @@
                             <thead>
                               <tr>
                                 <th>Institusi</th>
+                                <th>Jenjang</th>
                                 <th>Jurusan</th>
                                 <th>N A</th>
                                 <th>Tahun</th>
@@ -312,6 +290,7 @@
                             <tbody>
                               <tr>
                                 <td><?php echo $key->pendidikan; ?></td>
+                                <td><?php echo $key->jenjang; ?></td>
                                 <td><?php echo $key->jurusan; ?></td>
                                 <td><?php echo $key->nilai; ?></td>
                                 <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>

@@ -14,7 +14,7 @@ class Mdl_admin extends CI_Model
     }
     //SEMUA DATA PELAMAR DAN CALON KARYAWAN
     public function getPelamar($id){
-        $query = $this->db->query("SELECT k.id_karyawan, k.foto, k.nama, k.jenkel, k.ttl, p.pendidikan, l.pend_akhir, p.jurusan, p.nilai, p.akhir from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where (k.id_status = 'Pelamar' or k.id_status = 'Calon Karyawan') && k.id_profesi = '$id' group by k.id_karyawan order by l.nilai_akhir desc");
+        $query = $this->db->query("SELECT k.id_karyawan, k.foto, k.nama, k.jenkel, k.ttl, p.pendidikan, p.jenjang, l.pend_akhir, p.jurusan, p.nilai, p.akhir from karyawan as k inner join lowongan as l on k.id_karyawan = l.id_karyawan inner join pendidikan as p on l.id_karyawan = p.id_karyawan inner join jenis_profesi as jp on k.id_profesi = jp.id_profesi where (k.id_status = 'Pelamar' or k.id_status = 'Calon Karyawan') && k.id_profesi = '$id' group by k.id_karyawan order by l.nilai_akhir desc");
         return $query->result();
     }
     //SEMUA DATA PELAMAR SAJA
@@ -372,7 +372,7 @@ class Mdl_admin extends CI_Model
         return $query->result();
     }
     public function getAgamaa($id){
-        $query = $this->db->query("SELECT * from riwayat_seleksi as r inner join seleksi as s on r.id_seleksi = s.id_seleksi where id = $id");
+        $query = $this->db->query("SELECT * from riwayat_seleksi as r inner join seleksi as s on r.id_seleksi = s.id_seleksi where s.id_seleksi = '$id'");
         return $query->row();
     }
     

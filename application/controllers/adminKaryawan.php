@@ -732,7 +732,7 @@ class AdminKaryawan extends CI_Controller {
         );
         $bimbing = array(
             'id_seleksi' => $id_seleksi,
-            'nama_tes' => "Tes Membimbing Pasien",
+            'nama_tes' => "Tes Ibadah Praktis",
             'tanggal'=> $tanggal_bimbing,
             'hasil'=> $hasil_bimbing
         );

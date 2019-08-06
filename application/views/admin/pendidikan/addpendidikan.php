@@ -74,6 +74,25 @@
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                   <div class="input-mask-title">
+                    <label>Jenjang</label>
+                  </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                  <div class="input-mark-inner">
+                    <select type="text" class="form-control" name="jenjang">
+                    <option>--- Pilih ---</option>
+                    <option>SMA/SMK</option>
+                    <option>D3</option>
+                    <option>S1</option>
+                    <option>S2</option>
+                    <option>S3</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <div class="input-mask-title">
                     <label>Jurusan Pendidikan</label>
                   </div>
                 </div>

@@ -91,7 +91,7 @@ class Login extends CI_Controller {
 
 
 	public function daftar(){				
-		$this->form_validation->set_rules('no_ktp','Nomor KTP','required|min_length[16]');
+		
 		$this->form_validation->set_rules('nama','Nama Lengkap','required');
 		$this->form_validation->set_rules('email','Email','required');
 		$this->form_validation->set_rules('no_telp','Nomor Telepon','required|min_length[10]');
@@ -103,7 +103,7 @@ class Login extends CI_Controller {
 			$this->load->view('pelamar/daftar',$data);
 		}else{
 		    $nama = $this->input->post('nama');
-		    $no_ktp = $this->input->post('no_ktp');
+		   
 		    $email = $this->input->post('email');
 		    $no_telp = $this->input->post('no_telp');
 		    $jurusan = $this->input->post('jurusan');
@@ -122,7 +122,6 @@ class Login extends CI_Controller {
 			    $data1 = array(
 		    		'id_karyawan'=>$id_karyawan,
 		            'nama'=>$nama,
-		            'no_ktp'=>$no_ktp,
 		            'email'=>$email,
 		            'no_telp'=>$no_telp,
 		            'id_status'=>'Pelamar',

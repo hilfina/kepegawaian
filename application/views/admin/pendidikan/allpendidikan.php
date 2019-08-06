@@ -76,6 +76,7 @@
                     <th>Nama Karyawan</th>
                     <th>Nomor Ijazah</th>
                     <th>Nama Institusi</th>
+                    <th>Jenjang</th>
                     <th>Jurusan</th>
                     <th>Periode</th>
                     <th>Nilai IPK</th>
@@ -92,6 +93,7 @@
                       <td><?php echo $key->nama; ?></td>
                       <td><?php echo $key->nomor_ijazah; ?></td>
                       <td><?php echo $key->pendidikan; ?></td>
+                      <td><?php echo $key->jenjang; ?></td>
                       <td><?php echo $key->jurusan; ?></td>
                       <td><?php echo $key->mulai; echo " - "; echo $key->akhir; ?></td>
                       <td><?php echo $key->nilai; ?></td>

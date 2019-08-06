@@ -376,7 +376,7 @@
                           <h2>Penilaian Agama</h2> 
                           <?php if ($agama != null) {?>
                           <right> <?php foreach ($agama as $key){ ?>
-                        <a href="<?php echo site_url('adminKaryawan/tambahAgama/').$key->id; echo "/";echo $key->id_karyawan; ?>">
+                        <a href="<?php echo site_url('adminKaryawan/tambahAgama/').$key->id_seleksi; echo "/";echo $key->id_karyawan; ?>">
                       <button class="btn btn-primary waves-effect waves-light mg-b-15">Tambah Data Penilaian</button>
                     </a>
                     <?php break; } ?></right>
@@ -468,7 +468,7 @@
                               </div>
                             </td>
                           </tr>
-                          <tr><td colspan=2><h4 align="center"> Nilai Tes Membimbing Pasien</h4></td></tr>
+                          <tr><td colspan=2><h4 align="center"> Nilai Tes Ibadah Praktis</h4></td></tr>
                           <tr>
                             <td><label form-control-label>Tanggal Tes</label></td>
                             <td style="height: 50px; width: 80%">
@@ -885,6 +885,11 @@
                                 </tbody>
                                 <?php } ?>
                               </table>
+                              <div align="center">
+                            <div class="pdf-single-pro">
+                              <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $abc->file_urgas; ?>"></a>
+                            </div>
+                          </div>
                             </div>
                           </div>
                         </div>

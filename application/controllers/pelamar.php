@@ -122,16 +122,7 @@ class pelamar extends CI_Controller {
 			'foto' => $fotosaya
 		);
 		$where = array( 'id_karyawan' => $id );
-		$pend_akhir = $this->input->post('pend_akhir');
-	    $nilai_akhir = $this->input->post('nilai_akhir');
-	   
-	    $data2 = array(
-            'pend_akhir'=>$pend_akhir,
-            'nilai_akhir'=>$nilai_akhir,
-            'id_karyawan' => $id,
-        );
-
-	 	$this->mdl_pelamar->updatedata($where,$data2,'lowongan');
+		
 		$this->mdl_pelamar->updatedata($where,$data,'karyawan');
 		redirect('pelamar/datasaya');
 	}
@@ -156,6 +147,7 @@ class pelamar extends CI_Controller {
 
 		    $id=$this->session->userdata('myId');
 			$pendidikan = $this->input->post('pendidikan');
+			$jenjang = $this->input->post('jenjang');
 			$jurusan  = $this->input->post('jurusan');
 			$nilai = $this->input->post('nilai');
 		    $mulai = $this->input->post('mulai');
@@ -171,6 +163,7 @@ class pelamar extends CI_Controller {
 
 		    $data3 = array(
 	            'pendidikan'=>$pendidikan,
+	            'jenjang' => $jenjang,
 	            'jurusan' => $jurusan,
 	            'nilai' => $nilai,
 	            'mulai'=>$mulai,
@@ -204,6 +197,7 @@ class pelamar extends CI_Controller {
 
 			$pendidikan = $this->input->post('pendidikan');
 			$jurusan  = $this->input->post('jurusan');
+			$jenjang = $this->input->post('jenjang');
 			$nilai = $this->input->post('nilai');
 		    $mulai = $this->input->post('mulai');
 		    $akhir = $this->input->post('akhir');
@@ -217,6 +211,7 @@ class pelamar extends CI_Controller {
 
 		    $data3 = array(
 	            'pendidikan'=>$pendidikan,
+	            'jenjang' => $jenjang,
 	            'jurusan' => $jurusan,
 	            'nilai' => $nilai,
 	            'mulai'=>$mulai,

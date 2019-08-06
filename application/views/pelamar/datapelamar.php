@@ -189,40 +189,7 @@
                           </table><br>
                           <div class="row mg-b-15">
                             <div class="col-lg-12">
-                              <div class="row">
-                                <div class="col-lg-12">
-                                  <div class="skill-title">
-                                    <h2>Data Nilai</h2><hr>
-                                  </div>
-                                </div>
-                              </div>
-                              <table width="100%">
-                                <tr>
-                                  <td><label form-control-label>Pendidikan Terakhir</label></td>
-                                  <td style="height: 50px; width: 80%">
-                                    <div class="col-lg-12">
-                                      <select class="form-control" name="pend_akhir">
-                                        <option><?php echo $key->pend_akhir; ?></option>
-                                        <option>Opsi Pilihan :</option>
-                                        <option>SMA/SMK</option>
-                                        <option>D1</option>
-                                        <option>D3</option>
-                                        <option>S1</option>
-                                        <option>S2</option>
-                                        <option>S3</option>
-                                      </select>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td><label form-control-label>Nilai Akhir</label></td>
-                                  <td style="height: 50px; width: 80%">
-                                    <div class="col-lg-12">
-                                      <input name="nilai_akhir" type="text" class="form-control" value="<?php echo $key->nilai_akhir; ?>">
-                                    </div>
-                                  </td>
-                                </tr>
-                              </table>
+                              
                               <div class="form-group row">
                                 <div class="col-sm-4 offset-sm-3">
                                   <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" value="send" >Save changes</button>

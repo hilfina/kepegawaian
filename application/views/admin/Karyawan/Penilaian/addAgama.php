@@ -14,7 +14,7 @@
                 <li><a href="#">Data Penilaian</a> 
                   <span class="bread-slash">/</span>
                 </li>
-                <li><a href="#">Edit Data Penilaian</a> 
+                <li><a href="#">Tambah Data Penilaian</a> 
                 </li>
               </ul>
             </div>
@@ -32,7 +32,7 @@
           <br>
           <div class="sparkline13-hd">
             <div class="main-sparkline13-hd" align="center">
-              <h1> Edit Data Penilaian Karyawan</h1><br>
+              <h1> Tambah Data Penilaian Karyawan</h1><br>
             </div>
           </div>
         <div class="container-fluid" style="padding-right: 10%; padding-left: 10%">
@@ -45,7 +45,7 @@
               <div class="col-lg-12">
                 <select name="nama_tes" type="text" class="chosen-select" >
                 <option>Baca Al-Quran</option>
-                <option>Tes Membimbing Pasien</option>
+                <option>Tes Ibadah Praktis</option>
                 <option>Doa Sehari hari</option>
                 <option>Tes Solat</option>
                 </select>
