@@ -885,11 +885,6 @@
                                 </tbody>
                                 <?php } ?>
                               </table>
-                              <div align="center">
-                            <div class="pdf-single-pro">
-                              <a class="media" href="<?php echo base_url()?>Assets/dokumen/<?php echo $abc->file_urgas; ?>"></a>
-                            </div>
-                          </div>
                             </div>
                           </div>
                         </div>

@@ -203,7 +203,7 @@
                       <!-- <a href="<?php //echo site_url(); echo "/adminPelamar/pelamarDiterima/";  echo $key->id_karyawan ; ?>">
                       <button class="btn btn-success waves-effect" title="TERIMA"><i class="fa fa-check"></i></button>
                     </a> -->
-                    <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $key2->id_karyawan ;?>">
+                    <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDitolak/"; echo $judul->id_profesi ; echo "/"; echo $key2->id_karyawan ;?>">
                       <button class="btn btn-danger waves-effect" title="TOLAK"><i class="fa fa-times"></i></button>
                     </a>
                     <a href="<?php echo site_url(); echo "/adminPelamar/pelamarDetail/"; echo $key2->id_karyawan ;?>">
